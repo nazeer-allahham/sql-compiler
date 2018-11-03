@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/task_02.iml" filepath="$PROJECT_DIR$/task_02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sql_compiller.iml" filepath="$PROJECT_DIR$/sql_compiller.iml" />
     </modules>
   </component>
 </project>

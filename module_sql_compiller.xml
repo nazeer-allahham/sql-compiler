@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_sql_compiller" default="compile.module.sql_compiller">
+  <dirname property="module.sql_compiller.basedir" file="${ant.file.module_sql_compiller}"/>
+  
+  <property name="module.jdk.home.sql_compiller" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.sql_compiller" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.sql_compiller" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.sql_compiller" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="sql_compiller.output.dir" value="${module.sql_compiller.basedir}/out/production/sql_compiller"/>
+  <property name="sql_compiller.testoutput.dir" value="${module.sql_compiller.basedir}/out/test/sql_compiller"/>
+  
+  <path id="sql_compiller.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="sql_compiller.module.production.classpath">
+    <path refid="${module.jdk.classpath.sql_compiller}"/>
+    <path refid="library.antlr-4.7.1-complete.classpath"/>
+    <pathelement location="${path.variable.maven_repository}/org/jetbrains/annotations/16.0.2/annotations-16.0.2.jar"/>
+  </path>
+  
+  <path id="sql_compiller.runtime.production.module.classpath">
+    <pathelement location="${sql_compiller.output.dir}"/>
+    <path refid="library.antlr-4.7.1-complete.classpath"/>
+    <pathelement location="${path.variable.maven_repository}/org/jetbrains/annotations/16.0.2/annotations-16.0.2.jar"/>
+  </path>
+  
+  <path id="sql_compiller.module.classpath">
+    <path refid="${module.jdk.classpath.sql_compiller}"/>
+    <pathelement location="${sql_compiller.output.dir}"/>
+    <path refid="library.antlr-4.7.1-complete.classpath"/>
+    <pathelement location="${path.variable.maven_repository}/org/jetbrains/annotations/16.0.2/annotations-16.0.2.jar"/>
+  </path>
+  
+  <path id="sql_compiller.runtime.module.classpath">
+    <pathelement location="${sql_compiller.testoutput.dir}"/>
+    <pathelement location="${sql_compiller.output.dir}"/>
+    <path refid="library.antlr-4.7.1-complete.classpath"/>
+    <pathelement location="${path.variable.maven_repository}/org/jetbrains/annotations/16.0.2/annotations-16.0.2.jar"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.sql_compiller">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.sql_compiller">
+    <patternset refid="excluded.from.module.sql_compiller"/>
+  </patternset>
+  
+  <path id="sql_compiller.module.sourcepath">
+    <dirset dir="${module.sql_compiller.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.sql_compiller" depends="compile.module.sql_compiller.production,compile.module.sql_compiller.tests" description="Compile module sql_compiller"/>
+  
+  <target name="compile.module.sql_compiller.production" depends="register.custom.compilers" description="Compile module sql_compiller; production classes">
+    <mkdir dir="${sql_compiller.output.dir}"/>
+    <javac2 destdir="${sql_compiller.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.sql_compiller}/javac">
+      <compilerarg line="${compiler.args.sql_compiller}"/>
+      <bootclasspath refid="sql_compiller.module.bootclasspath"/>
+      <classpath refid="sql_compiller.module.production.classpath"/>
+      <src refid="sql_compiller.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.sql_compiller"/>
+    </javac2>
+    
+    <copy todir="${sql_compiller.output.dir}">
+      <fileset dir="${module.sql_compiller.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.sql_compiller.tests" depends="register.custom.compilers,compile.module.sql_compiller.production" description="compile module sql_compiller; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.sql_compiller" description="cleanup module">
+    <delete dir="${sql_compiller.output.dir}"/>
+    <delete dir="${sql_compiller.testoutput.dir}"/>
+  </target>
+</project>

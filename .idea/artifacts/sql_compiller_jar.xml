@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="sql_compiller:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/sql_compiller_jar</output-path>
+    <root id="archive" name="sql_compiller.jar">
+      <element id="module-output" name="sql_compiller" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jetbrains/annotations/16.0.2/annotations-16.0.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Javalib/antlr-4.7.1-complete.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
