@@ -547,7 +547,7 @@ fullselect_set_clause :
     ;
 
 subselect_stmt :
-        (T_SELECT | T_SEL) select_list into_clause? from_clause? where_clause? group_by_clause? (having_clause | qualify_clause)? order_by_clause? select_options?
+        (T_SELECT | T_SEL) select_list into_clause? from_clause? from_clause_exce? where_clause? group_by_clause? (having_clause | qualify_clause)? order_by_clause? select_options?
     ;
 
 select_list :
@@ -584,6 +584,9 @@ into_clause :
 from_clause :
         T_FROM from_table_clause (from_join_clause)*
     ;
+from_clause_exce :
+       T_WITHOUT_MEANING from_table_clause (from_join_clause)*
+     ;
 
 from_table_clause :
         from_table_name_clause
@@ -1168,6 +1171,7 @@ non_reserved_words :
     // T_WHERE reserved word
     |   T_WHILE
     |   T_WITH
+    |   T_WITHOUT_MEANING
     |   T_XML
     |   T_YES
     ;
@@ -1461,6 +1465,7 @@ T_STDEV                : S T D E V ;
 T_SYSDATE              : S Y S D A T E ;
 T_VARIANCE             : V A R I A N C E ;
 T_USER                 : U S E R;
+T_WITHOUT_MEANING      : [a-z]+;
 
 T_ADD          : '+' ;
 T_COLON        : ':' ;
