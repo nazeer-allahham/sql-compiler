@@ -547,7 +547,7 @@ fullselect_set_clause :
     ;
 
 subselect_stmt :
-        (T_SELECT | T_SEL) select_list into_clause? from_clause? from_clause_exce? where_clause? group_by_clause? (having_clause | qualify_clause)? order_by_clause? select_options?
+        (T_SELECT | T_SEL) select_list into_clause? from_clause? from_clause_exce? where_clause? where_clause_exce? group_by_clause? (having_clause | qualify_clause)? order_by_clause? select_options?
     ;
 
 select_list :
@@ -639,6 +639,10 @@ table_name :
 where_clause :
         T_WHERE bool_expr
     ;
+
+where_clause_exce:
+    T_WITHOUT_MEANING bool_expr
+;
 
 group_by_clause :
         T_GROUP T_BY expr (T_COMMA expr)*
