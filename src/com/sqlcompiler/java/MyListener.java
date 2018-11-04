@@ -3,6 +3,7 @@ package com.sqlcompiler.java;
 public class MyListener extends HplsqlBaseListener {
 
     private int numberOfLines = 1;
+    private int n=0;
 
     @Override
     public void enterSelect_stmt(HplsqlParser.Select_stmtContext ctx) {
@@ -19,8 +20,8 @@ public class MyListener extends HplsqlBaseListener {
     }
 
     @Override
-    public void enterNon_balanced_expr(HplsqlParser.Non_balanced_exprContext ctx) {
-        super.enterNon_balanced_expr(ctx);
+    public void enterNon_balanced_bool_expr(HplsqlParser.Non_balanced_bool_exprContext ctx) {
+        super.enterNon_balanced_bool_expr(ctx);
 
         System.out.printf("Syntax error at line %d: non balanced parenthesis", numberOfLines);
     }
@@ -30,5 +31,17 @@ public class MyListener extends HplsqlBaseListener {
         super.enterNew_line(ctx);
 
         this.numberOfLines ++;
+        if(this.n != 0)
+        {
+            System.out.printf("Syntax error at line %d: non balanced parenthesis", numberOfLines);
+            this.n = 0;
+        }
+    }
+
+    @Override
+    public void enterInvalid_variable_name(HplsqlParser.Invalid_variable_nameContext ctx) {
+        super.enterInvalid_variable_name(ctx);
+
+        System.out.printf("syntax error at line %d: invalid variable name.", numberOfLines);
     }
 }

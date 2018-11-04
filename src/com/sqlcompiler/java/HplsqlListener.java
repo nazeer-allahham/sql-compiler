@@ -78,16 +78,6 @@ public interface HplsqlListener extends ParseTreeListener {
 	 */
 	void exitStmt(HplsqlParser.StmtContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link HplsqlParser#semicolon_stmt}.
-	 * @param ctx the parse tree
-	 */
-	void enterSemicolon_stmt(HplsqlParser.Semicolon_stmtContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link HplsqlParser#semicolon_stmt}.
-	 * @param ctx the parse tree
-	 */
-	void exitSemicolon_stmt(HplsqlParser.Semicolon_stmtContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link HplsqlParser#exception_block}.
 	 * @param ctx the parse tree
 	 */
@@ -107,6 +97,16 @@ public interface HplsqlListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitException_block_item(HplsqlParser.Exception_block_itemContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HplsqlParser#semicolon_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterSemicolon_stmt(HplsqlParser.Semicolon_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HplsqlParser#semicolon_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitSemicolon_stmt(HplsqlParser.Semicolon_stmtContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link HplsqlParser#null_stmt}.
 	 * @param ctx the parse tree
@@ -277,36 +277,6 @@ public interface HplsqlListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDeclare_condition_item(HplsqlParser.Declare_condition_itemContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link HplsqlParser#declare_cursor_item}.
-	 * @param ctx the parse tree
-	 */
-	void enterDeclare_cursor_item(HplsqlParser.Declare_cursor_itemContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link HplsqlParser#declare_cursor_item}.
-	 * @param ctx the parse tree
-	 */
-	void exitDeclare_cursor_item(HplsqlParser.Declare_cursor_itemContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link HplsqlParser#cursor_with_return}.
-	 * @param ctx the parse tree
-	 */
-	void enterCursor_with_return(HplsqlParser.Cursor_with_returnContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link HplsqlParser#cursor_with_return}.
-	 * @param ctx the parse tree
-	 */
-	void exitCursor_with_return(HplsqlParser.Cursor_with_returnContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link HplsqlParser#cursor_without_return}.
-	 * @param ctx the parse tree
-	 */
-	void enterCursor_without_return(HplsqlParser.Cursor_without_returnContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link HplsqlParser#cursor_without_return}.
-	 * @param ctx the parse tree
-	 */
-	void exitCursor_without_return(HplsqlParser.Cursor_without_returnContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link HplsqlParser#declare_handler_item}.
 	 * @param ctx the parse tree
@@ -908,45 +878,15 @@ public interface HplsqlListener extends ParseTreeListener {
 	 */
 	void exitReturn_stmt(HplsqlParser.Return_stmtContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link HplsqlParser#set_session_option}.
+	 * Enter a parse tree produced by {@link HplsqlParser#while_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterSet_session_option(HplsqlParser.Set_session_optionContext ctx);
+	void enterWhile_stmt(HplsqlParser.While_stmtContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link HplsqlParser#set_session_option}.
+	 * Exit a parse tree produced by {@link HplsqlParser#while_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitSet_session_option(HplsqlParser.Set_session_optionContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link HplsqlParser#set_current_schema_option}.
-	 * @param ctx the parse tree
-	 */
-	void enterSet_current_schema_option(HplsqlParser.Set_current_schema_optionContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link HplsqlParser#set_current_schema_option}.
-	 * @param ctx the parse tree
-	 */
-	void exitSet_current_schema_option(HplsqlParser.Set_current_schema_optionContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link HplsqlParser#set_mssql_session_option}.
-	 * @param ctx the parse tree
-	 */
-	void enterSet_mssql_session_option(HplsqlParser.Set_mssql_session_optionContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link HplsqlParser#set_mssql_session_option}.
-	 * @param ctx the parse tree
-	 */
-	void exitSet_mssql_session_option(HplsqlParser.Set_mssql_session_optionContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link HplsqlParser#set_teradata_session_option}.
-	 * @param ctx the parse tree
-	 */
-	void enterSet_teradata_session_option(HplsqlParser.Set_teradata_session_optionContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link HplsqlParser#set_teradata_session_option}.
-	 * @param ctx the parse tree
-	 */
-	void exitSet_teradata_session_option(HplsqlParser.Set_teradata_session_optionContext ctx);
+	void exitWhile_stmt(HplsqlParser.While_stmtContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link HplsqlParser#for_range_stmt}.
 	 * @param ctx the parse tree
@@ -1298,16 +1238,6 @@ public interface HplsqlListener extends ParseTreeListener {
 	 */
 	void exitSelect_options_item(HplsqlParser.Select_options_itemContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link HplsqlParser#non_balanced_expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterNon_balanced_expr(HplsqlParser.Non_balanced_exprContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link HplsqlParser#non_balanced_expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitNon_balanced_expr(HplsqlParser.Non_balanced_exprContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link HplsqlParser#bool_expr}.
 	 * @param ctx the parse tree
 	 */
@@ -1317,6 +1247,16 @@ public interface HplsqlListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitBool_expr(HplsqlParser.Bool_exprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HplsqlParser#non_balanced_bool_expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterNon_balanced_bool_expr(HplsqlParser.Non_balanced_bool_exprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HplsqlParser#non_balanced_bool_expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitNon_balanced_bool_expr(HplsqlParser.Non_balanced_bool_exprContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link HplsqlParser#bool_expr_atom}.
 	 * @param ctx the parse tree
@@ -1671,6 +1611,16 @@ public interface HplsqlListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitNew_line(HplsqlParser.New_lineContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HplsqlParser#invalid_variable_name}.
+	 * @param ctx the parse tree
+	 */
+	void enterInvalid_variable_name(HplsqlParser.Invalid_variable_nameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HplsqlParser#invalid_variable_name}.
+	 * @param ctx the parse tree
+	 */
+	void exitInvalid_variable_name(HplsqlParser.Invalid_variable_nameContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link HplsqlParser#non_reserved_words}.
 	 * @param ctx the parse tree

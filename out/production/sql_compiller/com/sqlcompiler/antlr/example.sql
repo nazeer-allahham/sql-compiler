@@ -1,1 +1,1 @@
-select * from t where (id < 1
+create function f() return 1number is

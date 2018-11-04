@@ -33,7 +33,6 @@ public class Main {
     private Main()
     {
         try {
-
             CharStream input = CharStreams.fromFileName("E:\\ite-fourth-year\\compilers\\sql-compiler\\src\\com\\sqlcompiler\\antlr\\example.sql");
 
             HplsqlLexer lexer = new HplsqlLexer(input);
@@ -47,6 +46,7 @@ public class Main {
             MyListener listener = new MyListener();
             ParseTreeWalker walker = new ParseTreeWalker();
             walker.walk(listener, parser.program());
+
         }catch (FileNotFoundException ex) {
            System.out.println(ex.getMessage());
         } catch (IOException e) {

@@ -100,18 +100,6 @@ public class HplsqlBaseListener implements HplsqlListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSemicolon_stmt(HplsqlParser.Semicolon_stmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitSemicolon_stmt(HplsqlParser.Semicolon_stmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterException_block(HplsqlParser.Exception_blockContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -131,6 +119,18 @@ public class HplsqlBaseListener implements HplsqlListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitException_block_item(HplsqlParser.Exception_block_itemContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSemicolon_stmt(HplsqlParser.Semicolon_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSemicolon_stmt(HplsqlParser.Semicolon_stmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -335,42 +335,6 @@ public class HplsqlBaseListener implements HplsqlListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDeclare_condition_item(HplsqlParser.Declare_condition_itemContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterDeclare_cursor_item(HplsqlParser.Declare_cursor_itemContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitDeclare_cursor_item(HplsqlParser.Declare_cursor_itemContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterCursor_with_return(HplsqlParser.Cursor_with_returnContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitCursor_with_return(HplsqlParser.Cursor_with_returnContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterCursor_without_return(HplsqlParser.Cursor_without_returnContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitCursor_without_return(HplsqlParser.Cursor_without_returnContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1096,49 +1060,13 @@ public class HplsqlBaseListener implements HplsqlListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSet_session_option(HplsqlParser.Set_session_optionContext ctx) { }
+	@Override public void enterWhile_stmt(HplsqlParser.While_stmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSet_session_option(HplsqlParser.Set_session_optionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterSet_current_schema_option(HplsqlParser.Set_current_schema_optionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitSet_current_schema_option(HplsqlParser.Set_current_schema_optionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterSet_mssql_session_option(HplsqlParser.Set_mssql_session_optionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitSet_mssql_session_option(HplsqlParser.Set_mssql_session_optionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterSet_teradata_session_option(HplsqlParser.Set_teradata_session_optionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitSet_teradata_session_option(HplsqlParser.Set_teradata_session_optionContext ctx) { }
+	@Override public void exitWhile_stmt(HplsqlParser.While_stmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1564,18 +1492,6 @@ public class HplsqlBaseListener implements HplsqlListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNon_balanced_expr(HplsqlParser.Non_balanced_exprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitNon_balanced_expr(HplsqlParser.Non_balanced_exprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterBool_expr(HplsqlParser.Bool_exprContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1583,6 +1499,18 @@ public class HplsqlBaseListener implements HplsqlListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitBool_expr(HplsqlParser.Bool_exprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterNon_balanced_bool_expr(HplsqlParser.Non_balanced_bool_exprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNon_balanced_bool_expr(HplsqlParser.Non_balanced_bool_exprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -2003,6 +1931,18 @@ public class HplsqlBaseListener implements HplsqlListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitNew_line(HplsqlParser.New_lineContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterInvalid_variable_name(HplsqlParser.Invalid_variable_nameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInvalid_variable_name(HplsqlParser.Invalid_variable_nameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
