@@ -14,12 +14,11 @@ import java.io.IOException;
   *  2- expected 'from' found 'form'
   *  3- invalid variable name
   *  4- begin end
-  *  5- not defined variable
-  *  6- semi colon separate between each two statements in function
-  *  7- for syntax
-  *  8- min max ...
-  *  9- if syntax
-  * 10- aliases one word or one string
+  *  5- semi colon separate between each two statements in function
+  *  6- for syntax
+  *  7- min max ...
+  *  8- if syntax
+  *  9- aliases one word or one string
   **/
 
 public class Main {

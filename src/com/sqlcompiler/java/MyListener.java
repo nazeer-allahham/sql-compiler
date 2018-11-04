@@ -3,7 +3,6 @@ package com.sqlcompiler.java;
 public class MyListener extends HplsqlBaseListener {
 
     private int numberOfLines = 1;
-    private int n=0;
 
     @Override
     public void enterSelect_stmt(HplsqlParser.Select_stmtContext ctx) {
@@ -31,11 +30,6 @@ public class MyListener extends HplsqlBaseListener {
         super.enterNew_line(ctx);
 
         this.numberOfLines ++;
-        if(this.n != 0)
-        {
-            System.out.printf("Syntax error at line %d: non balanced parenthesis", numberOfLines);
-            this.n = 0;
-        }
     }
 
     @Override

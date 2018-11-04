@@ -65,9 +65,9 @@ exception_block_item :
 
 semicolon_stmt :
       T_SEMICOLON
-    | '@'
-    | '#'
-    | '/'
+    //| '@'
+    //| '#'
+    //| '/'
     ;
 
 // NULL statement (no operation)
@@ -875,7 +875,6 @@ ident :
         (L_ID) ('.' (L_ID | non_reserved_words))*
     ;
 
-
 // String literal (single or double quoted)
 string :
         L_S_STRING                          # single_quotedString
@@ -1532,7 +1531,13 @@ L_DIGIT     : [0-9]                                                    // Digit
             ;
 
 fragment
-L_INVALID_NAME_PART  : (L_DIGIT | '@' | ':' | '#' | '$' | '[' | ']' | '{' | '}' | '(' | ')') ([a-zA-Z] | L_DIGIT | '_')+
+L_INVALID_NAME_PART  :
+        (L_DIGIT | L_INVALID_SYMBOL)*  ([a-zA-Z] | L_DIGIT | L_INVALID_SYMBOL)+
+    ;
+
+fragment
+L_INVALID_SYMBOL :
+        '@' | ':' | '#' | '$' | '[' | ']' | '{' | '}' | '(' | ')'
     ;
 
 fragment

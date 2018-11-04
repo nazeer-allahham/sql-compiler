@@ -7,202 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cbd17289-3488-4531-bbea-02b9d1cfb778" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/sql_compiller_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/Dell.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/antlr_4_7_1_complete.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/Plsql.g4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/sqlcompiler/java/MyListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/Hplsql.tokens" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlBaseListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlBaseListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlLexer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlLexer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlLexer.tokens" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Alter_table_add_constraintContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Alter_table_add_constraint_itemContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Alter_table_itemContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Assignment_stmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Assignment_stmt_itemContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Assignment_stmt_multiple_itemContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Assignment_stmt_select_itemContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Assignment_stmt_single_itemContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Associate_locator_stmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Begin_end_blockContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$BlockContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Block_endContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Bool_exprContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Bool_expr_atomContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Bool_expr_binaryContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Bool_expr_binary_operatorContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Bool_expr_logical_operatorContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Bool_expr_multi_inContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Bool_expr_single_inContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Bool_expr_unaryContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Bool_literalContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Break_stmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Call_stmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Close_stmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Cmp_sourceContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Cmp_stmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Column_nameContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_database_optionContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_database_stmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_function_returnContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_function_stmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_index_colContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_index_stmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_local_temp_table_stmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_package_body_stmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_package_stmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_procedure_stmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_routine_optionContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_routine_optionsContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_routine_param_itemContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_routine_paramsContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_table_column_consContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_table_column_inline_consContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_table_columnsContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_table_columns_itemContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_table_definitionContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_table_fk_actionContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_table_hive_row_formatContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_table_hive_row_format_fieldsContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_table_optionsContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_table_options_db2_itemContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_table_options_hive_itemContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_table_options_itemContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_table_options_mssql_itemContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_table_options_mysql_itemContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_table_options_ora_itemContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_table_options_td_itemContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_table_preoptionsContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_table_preoptions_itemContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_table_preoptions_td_itemContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Create_table_stmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Cte_select_colsContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Cte_select_stmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Cte_select_stmt_itemContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Cursor_with_returnContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Cursor_without_returnContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Date_literalContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Dec_numberContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Declare_blockContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Declare_block_inplaceContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Declare_condition_itemContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Declare_cursor_itemContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Declare_handler_itemContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Declare_stmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Declare_stmt_itemContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Declare_temporary_table_itemContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Declare_var_itemContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Double_quotedStringContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$DtypeContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Dtype_attrContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Dtype_defaultContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Dtype_lenContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Else_blockContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Elseif_blockContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Exception_blockContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Exception_block_itemContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Exec_stmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Exit_stmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$ExprContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Expr_agg_window_funcContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Expr_atomContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Expr_caseContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Expr_case_searchedContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Expr_case_simpleContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Expr_concatContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Expr_concat_itemContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Expr_cursor_attributeContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Expr_funcContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Expr_func_all_distinctContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Expr_func_over_clauseContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Expr_func_paramsContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Expr_func_partition_by_clauseContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Expr_intervalContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Expr_selectContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Expr_spec_funcContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Expr_stmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$For_range_stmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$From_alias_clauseContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$From_clauseContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$From_join_clauseContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$From_join_type_clauseContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$From_subselect_clauseContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$From_table_clauseContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$From_table_name_clauseContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$From_table_values_clauseContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$From_table_values_rowContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Fullselect_set_clauseContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Fullselect_stmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Fullselect_stmt_itemContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Func_paramContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Group_by_clauseContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Having_clauseContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$HiveContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Hive_itemContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$IdentContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$If_bteq_stmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$If_plsql_stmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$If_stmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$If_tsql_stmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Index_mssql_storage_clauseContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Index_storage_clauseContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Int_numberContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Interval_itemContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Into_clauseContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$LabelContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Leave_stmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Non_reserved_wordsContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Null_constContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Null_stmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Order_by_clauseContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Package_bodyContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Package_body_itemContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Package_specContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Package_spec_itemContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Proc_blockContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$ProgramContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Qualify_clauseContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Quit_stmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Return_stmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Select_listContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Select_list_aliasContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Select_list_asteriskContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Select_list_itemContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Select_list_limitContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Select_list_setContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Select_optionsContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Select_options_itemContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Select_stmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Semicolon_stmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Set_current_schema_optionContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Set_mssql_session_optionContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Set_session_optionContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Set_teradata_session_optionContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Single_block_stmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Single_quotedStringContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$StmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$StringContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Subselect_stmtContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Table_nameContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Timestamp_literalContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Using_clauseContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser$Where_clauseContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/HplsqlParser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/main/antlr/ass.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/task_02/main/antlr/Hplsql.g4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr/Hplsql.g4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task_02.iml" beforeDir="false" afterPath="$PROJECT_DIR$/sql_compiller.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/Hplsql.g4" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/Hplsql.g4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/sqlcompiler/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sqlcompiler/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/sqlcompiler/java/MyListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sqlcompiler/java/MyListener.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -307,15 +114,15 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="g4" value="1680" />
-          <entry key="java" value="4167" />
+          <entry key="g4" value="1849" />
+          <entry key="java" value="4180" />
           <entry key="sql" value="55" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="ANTLR v4 grammar file" value="1680" />
-          <entry key="JAVA" value="4167" />
+          <entry key="ANTLR v4 grammar file" value="1849" />
+          <entry key="JAVA" value="4180" />
           <entry key="SQL" value="55" />
         </counts>
       </usages-collector>
@@ -342,20 +149,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/antlr/Hplsql.g4">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-23">
-              <caret line="867" column="5" lean-forward="true" selection-start-line="867" selection-start-column="5" selection-end-line="867" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="8" column="44" selection-start-line="8" selection-start-column="44" selection-end-line="8" selection-end-column="44" />
+            <state relative-caret-position="-441">
+              <caret line="1493" selection-start-line="1493" selection-end-line="1493" />
             </state>
           </provider>
         </entry>
@@ -372,8 +170,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="14" column="8" lean-forward="true" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
+            <state relative-caret-position="315">
+              <caret line="15" column="17" lean-forward="true" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -384,8 +182,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/java/MyListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
+            <state relative-caret-position="105">
+              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
             </state>
           </provider>
         </entry>
@@ -401,14 +199,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>T_PWD</find>
-      <find>T_QUERY_BAND</find>
-      <find>T_QUOTED_IDENTIFIER</find>
-      <find>T_RAISE</find>
-      <find>T_RR</find>
-      <find>T_RESIGNAL</find>
-      <find>T_SCHEMA</find>
-      <find>T_SESSIONS</find>
       <find>T_SESSION</find>
       <find>T_SHARE</find>
       <find>T_SETS</find>
@@ -431,6 +221,14 @@
       <find>call_stmt</find>
       <find>L_BLANK</find>
       <find>L_WS</find>
+      <find>L_INVALID_NAME_PART</find>
+      <find>invalid_name_part</find>
+      <find>ident</find>
+      <find>L_ID_PART</find>
+      <find>block_end</find>
+      <find>select_stmt</find>
+      <find>from_clause</find>
+      <find>T_FROM</find>
     </findStrings>
     <replaceStrings>
       <replace>|    T_</replace>
@@ -450,10 +248,10 @@
         <option value="$PROJECT_DIR$/src/main/java/Main.java" />
         <option value="$PROJECT_DIR$/src/com/sqlcompiler/java/Listener.java" />
         <option value="$PROJECT_DIR$/src/com/sqlcompiler/antlr/example.sql" />
-        <option value="$PROJECT_DIR$/src/com/sqlcompiler/antlr/Hplsql.g4" />
         <option value="$PROJECT_DIR$/src/com/sqlcompiler/antlr/Plsql.g4" />
-        <option value="$PROJECT_DIR$/src/com/sqlcompiler/java/MyListener.java" />
         <option value="$PROJECT_DIR$/src/com/sqlcompiler/java/Main.java" />
+        <option value="$PROJECT_DIR$/src/com/sqlcompiler/java/MyListener.java" />
+        <option value="$PROJECT_DIR$/src/com/sqlcompiler/antlr/Hplsql.g4" />
       </list>
     </option>
   </component>
@@ -547,7 +345,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541186657416" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541346633937" />
     <property name="last_opened_file_path" value="C:/Javalib/antlr-4.7.1-complete.jar!/" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -611,7 +409,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46887000" />
+    <option name="totallyTimeSpent" value="49618000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -624,9 +422,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16532798" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16532798" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -648,7 +445,7 @@
       <window_info anchor="bottom" id="Terminal" order="12" weight="0.32907802" />
       <window_info anchor="bottom" id="Event Log" order="13" side_tool="true" />
       <window_info anchor="bottom" id="Tool Output" order="14" weight="0.32722145" />
-      <window_info anchor="bottom" id="ANTLR Preview" order="15" weight="0.37658674" />
+      <window_info active="true" anchor="bottom" id="ANTLR Preview" order="15" visible="true" weight="0.38928068" />
       <window_info anchor="bottom" id="Messages" order="16" weight="0.32863188" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="1" weight="0.25" />
@@ -744,34 +541,41 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/java/HplsqlBaseVisitor.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/antlr/Hplsql.g4">
+    <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/antlr/Plsql.g4">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-23">
-          <caret line="867" column="5" lean-forward="true" selection-start-line="867" selection-start-column="5" selection-end-line="867" selection-end-column="5" />
+        <state relative-caret-position="105">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="248">
+          <caret line="854" column="13" lean-forward="true" selection-start-line="854" selection-start-column="13" selection-end-line="854" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/java/MyListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
+        <state relative-caret-position="105">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="14" column="8" lean-forward="true" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
+        <state relative-caret-position="315">
+          <caret line="15" column="17" lean-forward="true" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/antlr/Plsql.g4">
+    <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/antlr/Hplsql.g4">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        <state relative-caret-position="-441">
+          <caret line="1493" selection-start-line="1493" selection-end-line="1493" />
         </state>
       </provider>
     </entry>
