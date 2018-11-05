@@ -24,7 +24,8 @@ proc_block :
     ;
 
 stmt :
-      assignment_stmt
+      error_stmt
+    | assignment_stmt
     | associate_locator_stmt
     | break_stmt
     | call_stmt
@@ -54,6 +55,115 @@ stmt :
     | semicolon_stmt
     ;
 
+error_stmt:
+        invalid_select_stmt
+    ;
+
+invalid_select_stmt:
+        (invalid_select_word) select_list (from_clause | invalid_from_clause) (valid_select_clauses)* invalid_select_clauses (valid_select_clauses)*
+    ;
+
+valid_select_clauses:
+        where_clause
+    |   group_by_clause
+    |   having_clause
+    |   qualify_clause
+    |   order_by_clause
+    |   select_options
+    ;
+
+invalid_select_clauses:
+        invalid_where_clause
+    |   invalid_group_by_clause
+    |   invalid_having_clause
+    |   invalid_qualify_clause
+    |   invalid_order_by_clause
+    |   invalid_select_options
+    ;
+
+invalid_select_word:
+        's'
+    ;
+
+invalid_from_clause:
+        'f' invalid_from_table_clause (invalid_from_join_clause)*
+    ;
+
+invalid_from_table_clause :
+        invalid_from_table_name_clause
+    |   invalid_from_subselect_clause
+    |   invalid_from_table_values_clause
+    ;
+
+invalid_from_table_name_clause :
+        table_name //invalid_from_alias_clause?
+    ;
+
+invalid_from_subselect_clause :
+        T_OPEN_P (invalid_select_stmt | select_stmt) T_CLOSE_P invalid_from_alias_clause?
+    ;
+
+invalid_from_join_clause :
+        T_COMMA invalid_from_table_clause
+    |   invalid_from_join_type_clause invalid_from_table_clause T_ON bool_expr
+    ;
+
+invalid_from_join_type_clause :
+        T_INNER? T_JOIN
+    |   (T_LEFT | T_RIGHT | T_FULL) T_OUTER? T_JOIN
+    ;
+
+invalid_from_table_values_clause:
+        T_TABLE T_OPEN_P T_VALUES invalid_from_table_values_row (T_COMMA invalid_from_table_values_row)* T_CLOSE_P invalid_from_alias_clause?
+    ;
+
+invalid_from_table_values_row:
+        expr
+    |   T_OPEN_P expr (T_COMMA expr)* T_CLOSE_P
+    ;
+
+invalid_from_alias_clause :
+        {!_input.LT(1).getText().equalsIgnoreCase("EXEC") &&
+         !_input.LT(1).getText().equalsIgnoreCase("EXECUTE") &&
+         !_input.LT(1).getText().equalsIgnoreCase("INNER") &&
+         !_input.LT(1).getText().equalsIgnoreCase("LEFT") &&
+         !_input.LT(1).getText().equalsIgnoreCase("GROUP") &&
+         !_input.LT(1).getText().equalsIgnoreCase("ORDER") &&
+         !_input.LT(1).getText().equalsIgnoreCase("LIMIT") &&
+         !_input.LT(1).getText().equalsIgnoreCase("WITH")}? T_AS? ident (T_OPEN_P L_ID (T_COMMA L_ID)* T_CLOSE_P)?
+    ;
+
+invalid_where_clause :
+        'w' bool_expr
+    //|   T_WHERE bool_expr
+    ;
+
+invalid_group_by_clause :
+        T_GROUP T_BY expr (T_COMMA expr)*
+    ;
+
+invalid_having_clause :
+        T_HAVING bool_expr
+    ;
+
+invalid_qualify_clause :
+        T_QUALIFY bool_expr
+    ;
+
+invalid_order_by_clause :
+        T_ORDER T_BY expr (T_ASC | T_DESC)? (T_COMMA expr (T_ASC | T_DESC)?)*
+    ;
+
+invalid_select_options :
+        invalid_select_options_item+
+    ;
+
+invalid_select_options_item :
+        T_LIMIT expr
+    |   T_WITH (T_RR | T_RS | T_CS | T_UR) (T_USE T_AND T_KEEP (T_EXCLUSIVE | T_UPDATE | T_SHARE) T_LOCKS)?
+    ;
+
+
 // Exception block
 exception_block :
       T_EXCEPTION exception_block_item+
@@ -65,9 +175,9 @@ exception_block_item :
 
 semicolon_stmt :
       T_SEMICOLON
-    //| '@'
-    //| '#'
-    //| '/'
+    | '@'
+    | '#'
+    | '/'
     ;
 
 // NULL statement (no operation)
@@ -432,19 +542,19 @@ if_stmt :
     ;
 
 if_plsql_stmt :
-        T_IF (bool_expr | non_balanced_bool_expr) T_THEN block elseif_block* else_block? T_END T_IF
+        T_IF bool_expr T_THEN block elseif_block* else_block? T_END T_IF
     ;
 
 if_tsql_stmt :
-        T_IF (bool_expr | non_balanced_bool_expr) single_block_stmt (T_ELSE single_block_stmt)?
+        T_IF bool_expr single_block_stmt (T_ELSE single_block_stmt)?
     ;
 
 if_bteq_stmt :
-        '.' T_IF (bool_expr | non_balanced_bool_expr) T_THEN single_block_stmt
+        '.' T_IF bool_expr T_THEN single_block_stmt
     ;
 
 elseif_block :
-        (T_ELSIF | T_ELSEIF) (bool_expr | non_balanced_bool_expr) T_THEN block
+        (T_ELSIF | T_ELSEIF) bool_expr T_THEN block
     ;
 
 else_block :
@@ -452,7 +562,7 @@ else_block :
     ;
 
 exit_stmt :
-        T_EXIT L_ID? (T_WHEN (bool_expr | non_balanced_bool_expr))?
+        T_EXIT L_ID? (T_WHEN bool_expr)?
     ;
 
 leave_stmt :
@@ -496,7 +606,7 @@ return_stmt :
 
 // WHILE loop statement
 while_stmt :
-        T_WHILE (bool_expr | non_balanced_bool_expr) (T_DO | T_LOOP | T_THEN | T_BEGIN) block T_END (T_WHILE | T_LOOP)?
+        T_WHILE bool_expr (T_DO | T_LOOP | T_THEN | T_BEGIN) block T_END (T_WHILE | T_LOOP)?
     ;
 
 // FOR (Integer range) statement
@@ -516,19 +626,7 @@ using_clause :
 
 // SELECT statement
 select_stmt :
-        cte_select_stmt? fullselect_stmt
-    ;
-
-cte_select_stmt :
-        T_WITH cte_select_stmt_item (T_COMMA cte_select_stmt_item)*
-    ;
-
-cte_select_stmt_item :
-        ident cte_select_cols? T_AS T_OPEN_P fullselect_stmt T_CLOSE_P
-    ;
-
-cte_select_cols :
-        T_OPEN_P ident (T_COMMA ident)* T_CLOSE_P
+        fullselect_stmt
     ;
 
 fullselect_stmt :
@@ -601,7 +699,7 @@ from_subselect_clause :
 
 from_join_clause :
         T_COMMA from_table_clause
-    |   from_join_type_clause from_table_clause T_ON (bool_expr | non_balanced_bool_expr)
+    |   from_join_type_clause from_table_clause T_ON bool_expr
     ;
 
 from_join_type_clause :
@@ -634,7 +732,7 @@ table_name :
     ;
 
 where_clause :
-        T_WHERE (bool_expr | non_balanced_bool_expr)
+        T_WHERE bool_expr
     ;
 
 group_by_clause :
@@ -642,11 +740,11 @@ group_by_clause :
     ;
 
 having_clause :
-        T_HAVING (bool_expr | non_balanced_bool_expr)
+        T_HAVING bool_expr
     ;
 
 qualify_clause :
-        T_QUALIFY (bool_expr | non_balanced_bool_expr)
+        T_QUALIFY bool_expr
     ;
 
 order_by_clause :
@@ -662,16 +760,17 @@ select_options_item :
     |   T_WITH (T_RR | T_RS | T_CS | T_UR) (T_USE T_AND T_KEEP (T_EXCLUSIVE | T_UPDATE | T_SHARE) T_LOCKS)?
     ;
 
+non_balanced_expr :
+        T_OPEN_P bool_expr
+
+    ;
 
 // Boolean condition
 bool_expr :
-        T_NOT? T_OPEN_P bool_expr T_CLOSE_P
+        non_balanced_expr
+    |   T_NOT? T_OPEN_P bool_expr T_CLOSE_P
     |   bool_expr bool_expr_logical_operator bool_expr
     |   bool_expr_atom
-    ;
-
-non_balanced_bool_expr :
-        T_NOT? T_OPEN_P? bool_expr T_CLOSE_P?
     ;
 
 bool_expr_atom :
@@ -728,6 +827,7 @@ expr :
     |   expr_interval
     |   expr_concat
     |   expr_case
+    |   expr_cursor_attribute
     |   expr_agg_window_func
     |   expr_spec_func
     |   expr_func
@@ -736,7 +836,6 @@ expr :
 
 expr_atom :
         date_literal
-    |   invalid_variable_name
     |   timestamp_literal
     |   bool_literal
     |   ident
@@ -867,12 +966,8 @@ timestamp_literal :
         T_TIMESTAMP string
     ;
 
-invalid_variable_name :
-       L_INVALID_NAME
-    ;
-
 ident :
-        (L_ID) ('.' (L_ID | non_reserved_words))*
+        (L_ID | non_reserved_words) ('.' (L_ID | non_reserved_words))*
     ;
 
 // String literal (single or double quoted)
@@ -1173,6 +1268,7 @@ non_reserved_words :
     |   T_WITH
     |   T_XML
     |   T_YES
+    |   L_CHARS
     ;
 
 // Lexer rules
@@ -1491,10 +1587,6 @@ T_SUB          : '-' ;
 
 L_ID        : L_ID_PART                                                // Identifier
             ;
-
-L_INVALID_NAME : L_INVALID_NAME_PART
-            ;
-
 L_S_STRING  : '\'' (('\'' '\'') | ('\\' '\'') | ~('\''))* '\''         // Single quoted string literal
             ;
 L_D_STRING  : '"' (L_STR_ESC_D | .)*? '"'                              // Double quoted string literal
@@ -1511,6 +1603,8 @@ L_FILE      : ([a-zA-Z] ':' '\\'?)? L_ID ('\\' L_ID)*                  // File p
             ;
 
 L_LABEL     : ([a-zA-Z] | L_DIGIT | '_')* ':'
+            ;
+L_CHARS     : [a-zA-Z]+
             ;
 
 fragment
@@ -1529,17 +1623,6 @@ L_STR_ESC_D :                                                          // Double
 fragment
 L_DIGIT     : [0-9]                                                    // Digit
             ;
-
-fragment
-L_INVALID_NAME_PART  :
-        (L_DIGIT | L_INVALID_SYMBOL)*  ([a-zA-Z] | L_DIGIT | L_INVALID_SYMBOL)+
-    ;
-
-fragment
-L_INVALID_SYMBOL :
-        '@' | ':' | '#' | '$' | '[' | ']' | '{' | '}' | '(' | ')'
-    ;
-
 fragment
 L_BLANK     : (' ' | '\t' | '\r' | '\n')
             ;

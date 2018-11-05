@@ -547,7 +547,7 @@ fullselect_set_clause :
     ;
 
 subselect_stmt :
-        (T_SELECT | T_SEL) select_list into_clause? from_clause? from_clause_exce? where_clause? where_clause_exce? group_by_clause? (having_clause | qualify_clause)? order_by_clause? select_options?
+        (T_SELECT | T_SEL) select_list into_clause? from_clause? where_clause? group_by_clause? (having_clause | qualify_clause)? order_by_clause? select_options?
     ;
 
 select_list :
@@ -584,9 +584,6 @@ into_clause :
 from_clause :
         T_FROM from_table_clause (from_join_clause)*
     ;
-from_clause_exce :
-       T_WITHOUT_MEANING from_table_clause (from_join_clause)*
-     ;
 
 from_table_clause :
         from_table_name_clause
@@ -640,10 +637,6 @@ where_clause :
         T_WHERE bool_expr
     ;
 
-where_clause_exce:
-    T_WITHOUT_MEANING bool_expr
-;
-
 group_by_clause :
         T_GROUP T_BY expr (T_COMMA expr)*
     ;
@@ -670,22 +663,14 @@ select_options_item :
     ;
 
 non_balanced_expr :
-        open_p_
-    |   close_p_
-    ;
+        T_OPEN_P bool_expr
 
-open_p_:
-        T_OPEN_P
-    ;
-
-close_p_:
-        T_CLOSE_P
     ;
 
 // Boolean condition
 bool_expr :
         non_balanced_expr
-    |   T_NOT? open_p_ bool_expr close_p_
+    |   T_NOT? T_OPEN_P bool_expr T_CLOSE_P
     |   bool_expr bool_expr_logical_operator bool_expr
     |   bool_expr_atom
     ;
@@ -1183,7 +1168,6 @@ non_reserved_words :
     // T_WHERE reserved word
     |   T_WHILE
     |   T_WITH
-    |   T_WITHOUT_MEANING
     |   T_XML
     |   T_YES
     ;
@@ -1477,7 +1461,6 @@ T_STDEV                : S T D E V ;
 T_SYSDATE              : S Y S D A T E ;
 T_VARIANCE             : V A R I A N C E ;
 T_USER                 : U S E R;
-T_WITHOUT_MEANING      : [a-z]+;
 
 T_ADD          : '+' ;
 T_COLON        : ':' ;
