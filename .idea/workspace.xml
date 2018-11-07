@@ -7,8 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cbd17289-3488-4531-bbea-02b9d1cfb778" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/Hplsql.g4" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/Hplsql.g4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/Plsql.g4" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/Plsql.g4" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -103,24 +103,25 @@
     <session id="-499139924">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
+          <entry key="project.closed" value="4" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.16" value="1" />
+          <entry key="project.open.time.36" value="1" />
           <entry key="project.open.time.8" value="1" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="4" />
+          <entry key="project.opened" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="g4" value="4953" />
+          <entry key="g4" value="6494" />
           <entry key="java" value="4180" />
           <entry key="sql" value="55" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="ANTLR v4 grammar file" value="4953" />
+          <entry key="ANTLR v4 grammar file" value="6494" />
           <entry key="JAVA" value="4180" />
           <entry key="SQL" value="55" />
         </counts>
@@ -147,12 +148,12 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/antlr/Hplsql.g4">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="62" column="9" selection-start-line="62" selection-start-column="9" selection-end-line="62" selection-end-column="9" />
+            <state relative-caret-position="515">
+              <caret line="199" column="5" lean-forward="true" selection-start-line="199" selection-start-column="5" selection-end-line="199" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -160,8 +161,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/antlr/Plsql.g4">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="705">
-              <caret line="1554" column="24" lean-forward="true" selection-start-line="1554" selection-start-column="24" selection-end-line="1554" selection-end-column="24" />
+            <state relative-caret-position="32634">
+              <caret line="1554" column="24" selection-start-line="1554" selection-start-column="24" selection-end-line="1554" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -178,8 +179,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="17" column="18" lean-forward="true" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="18" />
+            <state relative-caret-position="210">
+              <caret line="17" column="18" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -207,15 +208,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>| non_balanced_bool_expr</find>
-      <find>extraneous</find>
-      <find>from_alias_clause</find>
-      <find>full_</find>
-      <find>expr</find>
-      <find>T_OPEN_P</find>
-      <find>invalid_expr</find>
-      <find>for_s</find>
-      <find>T_DOT2</find>
       <find>L_ID</find>
       <find>block</find>
       <find>if_</find>
@@ -237,6 +229,15 @@
       <find>invalid_where_clause</find>
       <find>for_range_stmt</find>
       <find>subselect_stmt</find>
+      <find>L_CHA</find>
+      <find>characters_word</find>
+      <find>non_reserved_words</find>
+      <find>T_FROM</find>
+      <find>cpp_funtion_</find>
+      <find>cpp_function_</find>
+      <find>cpp_function_body</find>
+      <find>cpp_function</find>
+      <find>cpp_function_params_clause</find>
     </findStrings>
     <replaceStrings>
       <replace>|    T_</replace>
@@ -353,7 +354,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541430601434" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541587247161" />
     <property name="last_opened_file_path" value="C:/Javalib/antlr-4.7.1-complete.jar!/" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -413,11 +414,12 @@
       <workItem from="1541103715040" duration="13682000" />
       <workItem from="1541167695910" duration="11532000" />
       <workItem from="1541186844562" duration="5839000" />
+      <workItem from="1541531917152" duration="8014000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="79405000" />
+    <option name="totallyTimeSpent" value="92423000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -432,7 +434,7 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.078313254" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16064256" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -454,8 +456,8 @@
       <window_info anchor="bottom" id="Terminal" order="12" weight="0.32863188" />
       <window_info anchor="bottom" id="Event Log" order="13" side_tool="true" />
       <window_info anchor="bottom" id="Tool Output" order="14" weight="0.32722145" />
-      <window_info active="true" anchor="bottom" id="ANTLR Preview" order="15" visible="true" weight="0.7052186" />
-      <window_info anchor="bottom" id="Messages" order="16" weight="0.32863188" />
+      <window_info anchor="bottom" id="Messages" order="15" weight="0.32863188" />
+      <window_info anchor="bottom" id="ANTLR Preview" order="16" weight="0.7729196" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="1" weight="0.25" />
       <window_info anchor="right" id="Palette" order="2" />
@@ -535,13 +537,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/antlr/example.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="37" selection-start-column="37" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/java/HplsqlBaseVisitor.java" />
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
@@ -557,10 +552,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/antlr/Hplsql.g4">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="515">
+          <caret line="199" column="5" lean-forward="true" selection-start-line="199" selection-start-column="5" selection-end-line="199" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/antlr/Plsql.g4">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="32634">
+          <caret line="1554" column="24" selection-start-line="1554" selection-start-column="24" selection-end-line="1554" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/antlr/example.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="37" selection-start-column="37" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="17" column="18" lean-forward="true" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="18" />
+        <state relative-caret-position="210">
+          <caret line="17" column="18" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -571,20 +587,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
           <caret line="24" column="25" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/antlr/Plsql.g4">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="1554" column="24" lean-forward="true" selection-start-line="1554" selection-start-column="24" selection-end-line="1554" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/antlr/Hplsql.g4">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="62" column="9" selection-start-line="62" selection-start-column="9" selection-end-line="62" selection-end-column="9" />
         </state>
       </provider>
     </entry>

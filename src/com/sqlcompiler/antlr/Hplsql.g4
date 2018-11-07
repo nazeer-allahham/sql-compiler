@@ -49,6 +49,7 @@ stmt :
     | return_stmt
     | select_stmt
     | while_stmt
+    | cpp_function_stmt
     | label
     | null_stmt
     | expr_stmt
@@ -57,6 +58,7 @@ stmt :
 
 error_stmt:
         invalid_select_stmt
+    |   invalid_cpp_function_stmt
     ;
 
 invalid_select_stmt:
@@ -163,6 +165,34 @@ invalid_select_options_item :
     |   T_WITH (T_RR | T_RS | T_CS | T_UR) (T_USE T_AND T_KEEP (T_EXCLUSIVE | T_UPDATE | T_SHARE) T_LOCKS)?
     ;
 
+invalid_cpp_function_stmt:
+        invalid_cpp_function_header invalid_cpp_function_body
+    |   invalid_cpp_function_header cpp_function_body
+    |   cpp_function_header invalid_cpp_function_body
+    ;
+
+invalid_cpp_function_header:
+        ident T_OPEN_P cpp_function_params_clause T_CLOSE_P
+    |   dtype T_OPEN_P cpp_function_params_clause T_CLOSE_P
+    |   dtype ident    cpp_function_params_clause T_CLOSE_P
+    |   dtype ident T_OPEN_P invalid_cpp_function_params_clause T_CLOSE_P
+    |   dtype ident T_OPEN_P cpp_function_params_clause cpp_function_body
+    ;
+
+invalid_cpp_function_params_clause:
+        invalid_cpp_function_param (T_COMMA (cpp_function_param | invalid_cpp_function_param))*
+    |   cpp_function_param (T_COMMA cpp_function_param)* (T_COMMA invalid_cpp_function_param)+ (T_COMMA cpp_function_param)*
+    ;
+
+invalid_cpp_function_param:
+        ident   // I choose here ident beacuse it's can match dtype and ident so we can match type without name and name without type status.
+    |   cpp_function_param ident
+    ;
+
+invalid_cpp_function_body:
+        T_OPEN_B cpp_function_body_content
+    |   cpp_function_body_content T_CLOSE_P
+    ;
 
 // Exception block
 exception_block :
@@ -602,6 +632,30 @@ quit_stmt :
 // RETURN statement
 return_stmt :
         T_RETURN expr?
+    ;
+
+cpp_function_stmt:
+        cpp_function_header cpp_function_body
+    ;
+
+cpp_function_header:
+        dtype ident T_OPEN_P cpp_function_params_clause T_CLOSE_P
+    ;
+
+cpp_function_params_clause:
+        cpp_function_param (T_COMMA cpp_function_param)*
+    ;
+
+cpp_function_param:
+        dtype ident
+    ;
+
+cpp_function_body:
+        T_OPEN_B cpp_function_body_content T_CLOSE_B
+    ;
+
+cpp_function_body_content:
+        stmt*
     ;
 
 // WHILE loop statement
