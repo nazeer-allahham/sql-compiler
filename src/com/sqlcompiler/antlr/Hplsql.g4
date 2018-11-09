@@ -50,45 +50,37 @@ stmt :
     | select_stmt
     | while_stmt
     | cpp_function_stmt
+    | invalid_select_stmt
     | label
     | null_stmt
     | expr_stmt
     | semicolon_stmt
+
     ;
 
 error_stmt:
-        invalid_select_stmt
-    |   invalid_cpp_function_stmt
+
+       invalid_cpp_function_stmt
     ;
 
 invalid_select_stmt:
-        (invalid_select_word) select_list (from_clause | invalid_from_clause) (valid_select_clauses)* invalid_select_clauses (valid_select_clauses)*
+        //into_clause? from_clause? where_clause? group_by_clause? (having_clause | qualify_clause)? order_by_clause? select_options?
+
+        (T_SELECT|invalid_select_word) select_list into_clause?
+        (from_clause | invalid_from_clause)
+        (where_clause|invalid_where_clause)
+        //(group_by_clause|invalid_group_by_clause)?
+        //(((having_clause|invalid_having_clause) | (qualify_clause|invalid_qualify_clause))?)?
+        //select_options?
     ;
 
-valid_select_clauses:
-        where_clause
-    |   group_by_clause
-    |   having_clause
-    |   qualify_clause
-    |   order_by_clause
-    |   select_options
-    ;
-
-invalid_select_clauses:
-        invalid_where_clause
-    |   invalid_group_by_clause
-    |   invalid_having_clause
-    |   invalid_qualify_clause
-    |   invalid_order_by_clause
-    |   invalid_select_options
-    ;
 
 invalid_select_word:
-        's'
+        .
     ;
 
 invalid_from_clause:
-        'f' invalid_from_table_clause (invalid_from_join_clause)*
+        . invalid_from_table_clause (invalid_from_join_clause)*
     ;
 
 invalid_from_table_clause :
@@ -136,24 +128,24 @@ invalid_from_alias_clause :
     ;
 
 invalid_where_clause :
-        'w' bool_expr
+        . bool_expr
     //|   T_WHERE bool_expr
     ;
 
 invalid_group_by_clause :
-        T_GROUP T_BY expr (T_COMMA expr)*
+        . T_BY expr (T_COMMA expr)*
     ;
 
 invalid_having_clause :
-        T_HAVING bool_expr
+        . bool_expr
     ;
 
 invalid_qualify_clause :
-        T_QUALIFY bool_expr
+        . bool_expr
     ;
 
 invalid_order_by_clause :
-        T_ORDER T_BY expr (T_ASC | T_DESC)? (T_COMMA expr (T_ASC | T_DESC)?)*
+        . T_BY expr (T_ASC | T_DESC)? (T_COMMA expr (T_ASC | T_DESC)?)*
     ;
 
 invalid_select_options :
