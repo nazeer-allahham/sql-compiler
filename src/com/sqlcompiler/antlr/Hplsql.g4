@@ -25,6 +25,9 @@ proc_block :
 
 stmt :
       error_stmt
+    | cpp_function_stmt
+    | cpp_if_stmt
+    | cpp_for_stmt
     | assignment_stmt
     | associate_locator_stmt
     | break_stmt
@@ -49,7 +52,6 @@ stmt :
     | return_stmt
     | select_stmt
     | while_stmt
-    | cpp_function_stmt
     | label
     | null_stmt
     | expr_stmt
@@ -62,47 +64,31 @@ error_stmt:
     ;
 
 invalid_select_stmt:
-        (invalid_select_word) select_list (from_clause | invalid_from_clause) (valid_select_clauses)* invalid_select_clauses (valid_select_clauses)*
-    ;
-
-valid_select_clauses:
-        where_clause
-    |   group_by_clause
-    |   having_clause
-    |   qualify_clause
-    |   order_by_clause
-    |   select_options
-    ;
-
-invalid_select_clauses:
-        invalid_where_clause
-    |   invalid_group_by_clause
-    |   invalid_having_clause
-    |   invalid_qualify_clause
-    |   invalid_order_by_clause
-    |   invalid_select_options
+        T_SELECT select_list invalid_from_clause where_clause?
+    |   T_SELECT select_list from_clause invalid_where_clause
+    |   T_SELECT select_list invalid_from_clause invalid_where_clause
+    |   invalid_select_word select_list from_clause where_clause?
+    |   invalid_select_word select_list invalid_from_clause where_clause?
+    |   invalid_select_word select_list from_clause invalid_where_clause
+    |   invalid_select_word select_list invalid_from_clause invalid_where_clause
     ;
 
 invalid_select_word:
-        's'
+        ident
     ;
 
 invalid_from_clause:
-        'f' invalid_from_table_clause (invalid_from_join_clause)*
+        ident invalid_from_table_clause (invalid_from_join_clause)*
     ;
 
 invalid_from_table_clause :
-        invalid_from_table_name_clause
-    |   invalid_from_subselect_clause
+        invalid_from_subselect_clause
     |   invalid_from_table_values_clause
     ;
 
-invalid_from_table_name_clause :
-        table_name //invalid_from_alias_clause?
-    ;
-
 invalid_from_subselect_clause :
-        T_OPEN_P (invalid_select_stmt | select_stmt) T_CLOSE_P invalid_from_alias_clause?
+        (invalid_select_stmt | select_stmt) T_CLOSE_P (from_alias_clause | invalid_from_alias_clause)?
+    |   T_OPEN_P (invalid_select_stmt | select_stmt) (from_alias_clause | invalid_from_alias_clause)?
     ;
 
 invalid_from_join_clause :
@@ -136,33 +122,7 @@ invalid_from_alias_clause :
     ;
 
 invalid_where_clause :
-        'w' bool_expr
-    //|   T_WHERE bool_expr
-    ;
-
-invalid_group_by_clause :
-        T_GROUP T_BY expr (T_COMMA expr)*
-    ;
-
-invalid_having_clause :
-        T_HAVING bool_expr
-    ;
-
-invalid_qualify_clause :
-        T_QUALIFY bool_expr
-    ;
-
-invalid_order_by_clause :
-        T_ORDER T_BY expr (T_ASC | T_DESC)? (T_COMMA expr (T_ASC | T_DESC)?)*
-    ;
-
-invalid_select_options :
-        invalid_select_options_item+
-    ;
-
-invalid_select_options_item :
-        T_LIMIT expr
-    |   T_WITH (T_RR | T_RS | T_CS | T_UR) (T_USE T_AND T_KEEP (T_EXCLUSIVE | T_UPDATE | T_SHARE) T_LOCKS)?
+        ident bool_expr
     ;
 
 invalid_cpp_function_stmt:
@@ -190,8 +150,8 @@ invalid_cpp_function_param:
     ;
 
 invalid_cpp_function_body:
-        T_OPEN_B cpp_function_body_content
-    |   cpp_function_body_content T_CLOSE_P
+        T_OPEN_B cpp_body_content
+    |   cpp_body_content T_CLOSE_P
     ;
 
 // Exception block
@@ -651,11 +611,55 @@ cpp_function_param:
     ;
 
 cpp_function_body:
-        T_OPEN_B cpp_function_body_content T_CLOSE_B
+        T_OPEN_B cpp_body_content T_CLOSE_B
     ;
 
-cpp_function_body_content:
-        stmt*
+cpp_if_stmt :
+        T_IF T_OPEN_P bool_expr T_CLOSE_P cpp_for_stmt_body cpp_elseif_clause* cpp_else_clause?
+    ;
+
+cpp_elseif_clause :
+        (T_ELSIF | T_ELSEIF) T_OPEN_P bool_expr T_CLOSE_P cpp_for_stmt_body
+    ;
+
+cpp_else_clause :
+        T_ELSE cpp_for_stmt_body
+    ;
+
+cpp_for_stmt:
+        cpp_for_stmt_header cpp_for_stmt_body
+    ;
+
+cpp_for_stmt_header:
+        T_FOR T_OPEN_P cpp_for_params_clause T_SEMICOLON bool_expr T_SEMICOLON cpp_for_stmt_var_incr_caluse  T_CLOSE_P
+    ;
+
+cpp_for_params_clause:
+        cpp_for_param (T_COMMA cpp_for_param)*
+    ;
+
+cpp_for_param:
+        dtype ident T_EQUAL L_INT
+    ;
+
+cpp_for_stmt_var_incr_caluse:
+        cpp_for_stmt_var_incr_ (T_COMMA cpp_for_stmt_var_incr_)*
+    ;
+
+cpp_for_stmt_var_incr_:
+        ident '+' '+'
+    |   ident '-' '-'
+    |   ident T_EQUAL L_INT
+    |   ident T_EQUAL ident ('+' | '-' | '*' | '/' | '%') L_INT
+    |   ident ('+' | '-' | '*' | '/' | '%') T_EQUAL L_INT
+    ;
+
+cpp_for_stmt_body:
+        T_OPEN_B cpp_body_content* T_CLOSE_B | cpp_body_content
+    ;
+
+cpp_body_content:
+        cpp_if_stmt | cpp_for_stmt | select_stmt
     ;
 
 // WHILE loop statement
@@ -1658,7 +1662,7 @@ L_FILE      : ([a-zA-Z] ':' '\\'?)? L_ID ('\\' L_ID)*                  // File p
 
 L_LABEL     : ([a-zA-Z] | L_DIGIT | '_')* ':'
             ;
-L_CHARS     : [a-zA-Z]+
+L_CHARS     : [a]+
             ;
 
 fragment
