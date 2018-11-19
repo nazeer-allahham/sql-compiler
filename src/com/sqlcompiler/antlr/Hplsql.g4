@@ -24,8 +24,7 @@ proc_block :
     ;
 
 stmt :
-      error_stmt
-    | cpp_function_stmt
+      cpp_function_stmt
     | cpp_if_stmt
     | cpp_for_stmt
     | assignment_stmt
@@ -52,6 +51,7 @@ stmt :
     | return_stmt
     | select_stmt
     | while_stmt
+    | error_stmt
     | label
     | null_stmt
     | expr_stmt
@@ -61,68 +61,37 @@ stmt :
 error_stmt:
         invalid_select_stmt
     |   invalid_cpp_function_stmt
+    |   non_balanced_p
     ;
 
-invalid_select_stmt:
-        T_SELECT select_list invalid_from_clause where_clause?
-    |   T_SELECT select_list from_clause invalid_where_clause
-    |   T_SELECT select_list invalid_from_clause invalid_where_clause
-    |   invalid_select_word select_list from_clause where_clause?
-    |   invalid_select_word select_list invalid_from_clause where_clause?
-    |   invalid_select_word select_list from_clause invalid_where_clause
-    |   invalid_select_word select_list invalid_from_clause invalid_where_clause
+// Invalid SELECT statement
+invalid_select_stmt :
+        invalid_fullselect_stmt
     ;
 
-invalid_select_word:
-        ident
+invalid_fullselect_stmt :
+        (invalid_fullselect_stmt_item | fullselect_stmt_item)
+        ((invalid_fullselect_set_clause | fullselect_set_clause) (invalid_fullselect_stmt_item | fullselect_stmt_item))*
+        ((invalid_fullselect_set_clause | fullselect_set_clause) invalid_fullselect_stmt_item)
+        ((invalid_fullselect_set_clause | fullselect_set_clause) (invalid_fullselect_stmt_item | fullselect_stmt_item))*
     ;
 
-invalid_from_clause:
-        ident invalid_from_table_clause (invalid_from_join_clause)*
+invalid_fullselect_stmt_item :
+        invalid_subselect_stmt
+    |   non_balanced_p
     ;
 
-invalid_from_table_clause :
-        invalid_from_subselect_clause
-    |   invalid_from_table_values_clause
+invalid_fullselect_set_clause :
+        T_UNION T_ALL?
+    |   T_EXCEPT T_ALL?
+    |   T_INTERSECT T_ALL?
     ;
 
-invalid_from_subselect_clause :
-        (invalid_select_stmt | select_stmt) T_CLOSE_P (from_alias_clause | invalid_from_alias_clause)?
-    |   T_OPEN_P (invalid_select_stmt | select_stmt) (from_alias_clause | invalid_from_alias_clause)?
-    ;
-
-invalid_from_join_clause :
-        T_COMMA invalid_from_table_clause
-    |   invalid_from_join_type_clause invalid_from_table_clause T_ON bool_expr
-    ;
-
-invalid_from_join_type_clause :
-        T_INNER? T_JOIN
-    |   (T_LEFT | T_RIGHT | T_FULL) T_OUTER? T_JOIN
-    ;
-
-invalid_from_table_values_clause:
-        T_TABLE T_OPEN_P T_VALUES invalid_from_table_values_row (T_COMMA invalid_from_table_values_row)* T_CLOSE_P invalid_from_alias_clause?
-    ;
-
-invalid_from_table_values_row:
-        expr
-    |   T_OPEN_P expr (T_COMMA expr)* T_CLOSE_P
-    ;
-
-invalid_from_alias_clause :
-        {!_input.LT(1).getText().equalsIgnoreCase("EXEC") &&
-         !_input.LT(1).getText().equalsIgnoreCase("EXECUTE") &&
-         !_input.LT(1).getText().equalsIgnoreCase("INNER") &&
-         !_input.LT(1).getText().equalsIgnoreCase("LEFT") &&
-         !_input.LT(1).getText().equalsIgnoreCase("GROUP") &&
-         !_input.LT(1).getText().equalsIgnoreCase("ORDER") &&
-         !_input.LT(1).getText().equalsIgnoreCase("LIMIT") &&
-         !_input.LT(1).getText().equalsIgnoreCase("WITH")}? T_AS? ident (T_OPEN_P L_ID (T_COMMA L_ID)* T_CLOSE_P)?
-    ;
-
-invalid_where_clause :
-        ident bool_expr
+invalid_subselect_stmt :
+        (T_SELECT | T_SEL) select_list into_clause? from_clause? where_clause? group_by_clause? (having_clause | qualify_clause)? order_by_clause? select_options?
+    |   select_list into_clause? from_clause? where_clause? group_by_clause? (having_clause | qualify_clause)? order_by_clause? select_options?
+    |   (T_SELECT | T_SEL) select_list into_clause? where_clause? group_by_clause? (having_clause | qualify_clause)? order_by_clause? select_options?
+    |   (T_SELECT | T_SEL) select_list into_clause? from_clause? group_by_clause? (having_clause | qualify_clause)? order_by_clause? select_options?
     ;
 
 invalid_cpp_function_stmt:
@@ -151,7 +120,11 @@ invalid_cpp_function_param:
 
 invalid_cpp_function_body:
         T_OPEN_B cpp_body_content
-    |   cpp_body_content T_CLOSE_P
+    |   cpp_body_content T_CLOSE_B
+    ;
+
+non_balanced_p:
+
     ;
 
 // Exception block
@@ -639,7 +612,7 @@ cpp_for_params_clause:
     ;
 
 cpp_for_param:
-        dtype ident T_EQUAL L_INT
+     dtype? ident T_EQUAL L_INT
     ;
 
 cpp_for_stmt_var_incr_caluse:
@@ -818,15 +791,9 @@ select_options_item :
     |   T_WITH (T_RR | T_RS | T_CS | T_UR) (T_USE T_AND T_KEEP (T_EXCLUSIVE | T_UPDATE | T_SHARE) T_LOCKS)?
     ;
 
-non_balanced_expr :
-        T_OPEN_P bool_expr
-
-    ;
-
 // Boolean condition
 bool_expr :
-        non_balanced_expr
-    |   T_NOT? T_OPEN_P bool_expr T_CLOSE_P
+        T_NOT? T_OPEN_P bool_expr T_CLOSE_P
     |   bool_expr bool_expr_logical_operator bool_expr
     |   bool_expr_atom
     ;
