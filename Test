@@ -1,3 +1,0 @@
-  T_OPEN_P invalid_fullselect_stmt
-| invalid_fullselect_stmt T_CLOSE_P
-|

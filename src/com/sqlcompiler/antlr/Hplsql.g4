@@ -24,7 +24,8 @@ proc_block :
     ;
 
 stmt :
-      cpp_function_stmt
+      error_stmt
+    | cpp_function_stmt
     | cpp_if_stmt
     | cpp_for_stmt
     | assignment_stmt
@@ -51,7 +52,6 @@ stmt :
     | return_stmt
     | select_stmt
     | while_stmt
-    | error_stmt
     | label
     | null_stmt
     | expr_stmt
@@ -59,39 +59,31 @@ stmt :
     ;
 
 error_stmt:
-        invalid_select_stmt
-    |   invalid_cpp_function_stmt
-    |   non_balanced_p
+        invalid_cpp_function_stmt
+    |   invalid_select_stmt
     ;
 
-// Invalid SELECT statement
+// SELECT statement
 invalid_select_stmt :
-        invalid_fullselect_stmt
+      (T_SELECT | T_SEL) select_list into_clause? from_clause? invalid_where_clause group_by_clause? (having_clause | qualify_clause)? order_by_clause? select_options?
     ;
 
-invalid_fullselect_stmt :
-        (invalid_fullselect_stmt_item | fullselect_stmt_item)
-        ((invalid_fullselect_set_clause | fullselect_set_clause) (invalid_fullselect_stmt_item | fullselect_stmt_item))*
-        ((invalid_fullselect_set_clause | fullselect_set_clause) invalid_fullselect_stmt_item)
-        ((invalid_fullselect_set_clause | fullselect_set_clause) (invalid_fullselect_stmt_item | fullselect_stmt_item))*
+//invalid_from_table_clause :
+    //    invalid_from_table_name_clause
+    //|   invalid_from_subselect_clause
+    //|   invalid_from_table_values_clause
+//    ;
+
+invalid_where_clause :
+        T_WHERE? invalid_bool_expr
+    |   T_WHERE
     ;
 
-invalid_fullselect_stmt_item :
-        invalid_subselect_stmt
-    |   non_balanced_p
-    ;
-
-invalid_fullselect_set_clause :
-        T_UNION T_ALL?
-    |   T_EXCEPT T_ALL?
-    |   T_INTERSECT T_ALL?
-    ;
-
-invalid_subselect_stmt :
-        (T_SELECT | T_SEL) select_list into_clause? from_clause? where_clause? group_by_clause? (having_clause | qualify_clause)? order_by_clause? select_options?
-    |   select_list into_clause? from_clause? where_clause? group_by_clause? (having_clause | qualify_clause)? order_by_clause? select_options?
-    |   (T_SELECT | T_SEL) select_list into_clause? where_clause? group_by_clause? (having_clause | qualify_clause)? order_by_clause? select_options?
-    |   (T_SELECT | T_SEL) select_list into_clause? from_clause? group_by_clause? (having_clause | qualify_clause)? order_by_clause? select_options?
+invalid_bool_expr:
+        T_NOT? bool_expr T_CLOSE_P
+    |   T_NOT? T_OPEN_P bool_expr
+    //|   bool_expr bool_expr_logical_operator bool_expr
+    //|   bool_expr_atom
     ;
 
 invalid_cpp_function_stmt:
@@ -101,30 +93,26 @@ invalid_cpp_function_stmt:
     ;
 
 invalid_cpp_function_header:
-        ident T_OPEN_P cpp_function_params_clause T_CLOSE_P
-    |   dtype T_OPEN_P cpp_function_params_clause T_CLOSE_P
-    |   dtype ident    cpp_function_params_clause T_CLOSE_P
+        ident T_OPEN_P (cpp_function_params_clause | invalid_cpp_function_params_clause) T_CLOSE_P
+    |   dtype T_OPEN_P (cpp_function_params_clause | invalid_cpp_function_params_clause) T_CLOSE_P
     |   dtype ident T_OPEN_P invalid_cpp_function_params_clause T_CLOSE_P
-    |   dtype ident T_OPEN_P cpp_function_params_clause cpp_function_body
+    |   dtype ident (cpp_function_params_clause | invalid_cpp_function_params_clause) T_CLOSE_P
+    |   dtype ident T_OPEN_P (cpp_function_params_clause | invalid_cpp_function_params_clause)
     ;
 
 invalid_cpp_function_params_clause:
-        invalid_cpp_function_param (T_COMMA (cpp_function_param | invalid_cpp_function_param))*
+        (invalid_cpp_function_param | cpp_function_param) T_COMMA
+    |   invalid_cpp_function_param (T_COMMA (cpp_function_param | invalid_cpp_function_param))*
     |   cpp_function_param (T_COMMA cpp_function_param)* (T_COMMA invalid_cpp_function_param)+ (T_COMMA cpp_function_param)*
     ;
 
 invalid_cpp_function_param:
         ident   // I choose here ident beacuse it's can match dtype and ident so we can match type without name and name without type status.
-    |   cpp_function_param ident
     ;
 
 invalid_cpp_function_body:
-        T_OPEN_B cpp_body_content
-    |   cpp_body_content T_CLOSE_B
-    ;
-
-non_balanced_p:
-
+        T_OPEN_B (cpp_body_content)*
+    |   (cpp_body_content)*  T_CLOSE_B
     ;
 
 // Exception block
@@ -584,7 +572,7 @@ cpp_function_param:
     ;
 
 cpp_function_body:
-        T_OPEN_B cpp_body_content T_CLOSE_B
+        T_OPEN_B (cpp_body_content)*  T_CLOSE_B
     ;
 
 cpp_if_stmt :
@@ -632,7 +620,7 @@ cpp_for_stmt_body:
     ;
 
 cpp_body_content:
-        cpp_if_stmt | cpp_for_stmt | select_stmt
+        cpp_if_stmt | cpp_for_stmt
     ;
 
 // WHILE loop statement
