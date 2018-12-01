@@ -6,11 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cbd17289-3488-4531-bbea-02b9d1cfb778" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test" beforeDir="false" afterPath="$PROJECT_DIR$/Test" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/Hplsql.g4" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/Hplsql.g4" afterDir="false" />
-    </list>
+    <list default="true" id="cbd17289-3488-4531-bbea-02b9d1cfb778" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -104,7 +100,7 @@
     <session id="-499139924">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="10" />
+          <entry key="project.closed" value="11" />
           <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.16" value="1" />
           <entry key="project.open.time.33" value="1" />
@@ -120,14 +116,14 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="Test" value="50" />
-          <entry key="g4" value="8874" />
+          <entry key="g4" value="9635" />
           <entry key="java" value="4180" />
           <entry key="sql" value="55" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="ANTLR v4 grammar file" value="8874" />
+          <entry key="ANTLR v4 grammar file" value="9635" />
           <entry key="JAVA" value="4180" />
           <entry key="PLAIN_TEXT" value="50" />
           <entry key="SQL" value="55" />
@@ -160,8 +156,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/antlr/Hplsql.g4">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="72" column="25" selection-start-line="71" selection-start-column="8" selection-end-line="72" selection-end-column="25" />
+            <state relative-caret-position="516">
+              <caret line="1044" column="17" lean-forward="true" selection-start-line="1044" selection-start-column="17" selection-end-line="1044" selection-end-column="17" />
               <folding>
                 <element signature="e#2607#2811#1" />
                 <element signature="e#1419#1827#1" />
@@ -184,8 +180,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>cpp_funtion_</find>
-      <find>cpp_function_</find>
       <find>cpp_function</find>
       <find>cpp_function_params_clause</find>
       <find>cpp_function_stmt</find>
@@ -214,6 +208,8 @@
       <find>cpp_function_body</find>
       <find>invalid_cpp_</find>
       <find>select_stmt</find>
+      <find>bool_expr</find>
+      <find>from_clause</find>
     </findStrings>
     <replaceStrings>
       <replace>|    T_</replace>
@@ -319,8 +315,8 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542668741806" />
-    <property name="last_opened_file_path" value="C:/Javalib/antlr-4.7.1-complete.jar!/" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542668831928" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Artifacts" />
@@ -385,12 +381,12 @@
       <workItem from="1541946505215" duration="10679000" />
       <workItem from="1542144327041" duration="75000" />
       <workItem from="1542576861657" duration="4758000" />
-      <workItem from="1542655990604" duration="9978000" />
+      <workItem from="1542655990604" duration="13967000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="125389000" />
+    <option name="totallyTimeSpent" value="129378000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -403,7 +399,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17269076" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -424,7 +419,7 @@
       <window_info anchor="bottom" id="TODO" order="9" weight="0.32994187" />
       <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="12" weight="0.32863188" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="12" visible="true" weight="0.32863188" />
       <window_info anchor="bottom" id="Event Log" order="13" side_tool="true" />
       <window_info anchor="bottom" id="Tool Output" order="14" weight="0.32722145" />
       <window_info anchor="bottom" id="Messages" order="15" weight="0.32863188" />
@@ -560,8 +555,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/antlr/Hplsql.g4">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="72" column="25" selection-start-line="71" selection-start-column="8" selection-end-line="72" selection-end-column="25" />
+        <state relative-caret-position="516">
+          <caret line="1044" column="17" lean-forward="true" selection-start-line="1044" selection-start-column="17" selection-end-line="1044" selection-end-column="17" />
           <folding>
             <element signature="e#2607#2811#1" />
             <element signature="e#1419#1827#1" />

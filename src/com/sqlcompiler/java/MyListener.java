@@ -38,4 +38,6 @@ public class MyListener extends HplsqlBaseListener {
 
         System.out.printf("syntax error at line %d: invalid variable name.", numberOfLines);
     }
+
+
 }
