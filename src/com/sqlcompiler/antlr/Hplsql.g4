@@ -35,7 +35,7 @@ stmt :
     | close_stmt
     | cmp_stmt
     | create_database_stmt
-    | create_function_stmt
+    //| create_function_stmt
     | create_index_stmt
     | create_local_temp_table_stmt
     | create_package_stmt
@@ -414,13 +414,6 @@ create_database_option :
     |   T_LOCATION expr
     ;
 
-create_function_stmt :
-        (T_ALTER | T_CREATE (T_OR T_REPLACE)? | T_REPLACE)? T_FUNCTION ident create_routine_params? create_function_return (T_AS | T_IS)? declare_block_inplace? single_block_stmt
-    ;
-
-create_function_return :
-        (T_RETURN | T_RETURNS) dtype dtype_len?
-    ;
 
 create_package_stmt :
         (T_ALTER | T_CREATE (T_OR T_REPLACE)? | T_REPLACE)? T_PACKAGE ident (T_AS | T_IS) package_spec T_END (ident T_SEMICOLON)?
@@ -432,7 +425,7 @@ package_spec :
 
 package_spec_item :
         declare_stmt_item
-    |   T_FUNCTION ident create_routine_params? create_function_return
+
     |   (T_PROCEDURE | T_PROC) ident create_routine_params?
     ;
 
@@ -446,7 +439,6 @@ package_body :
 
 package_body_item :
         declare_stmt_item
-    |   create_function_stmt
     |   create_procedure_stmt
     ;
 
