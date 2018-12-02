@@ -35,7 +35,7 @@ stmt :
     | close_stmt
     | cmp_stmt
     | create_database_stmt
-    //| create_function_stmt
+
     | create_index_stmt
     | create_local_temp_table_stmt
     | create_package_stmt
@@ -75,8 +75,8 @@ invalid_select_stmt :
 //    ;
 
 invalid_where_clause :
-        T_WHERE? invalid_bool_expr
-    |   T_WHERE
+        T_WHERE invalid_bool_expr
+    |   bool_expr
     ;
 
 invalid_bool_expr:
