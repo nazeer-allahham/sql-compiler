@@ -42,7 +42,6 @@ stmt :
     | create_package_body_stmt
     | create_procedure_stmt
     | create_table_stmt
-    | create_type_stmt
     | declare_stmt
     | exec_stmt
     | exit_stmt
@@ -61,6 +60,23 @@ stmt :
 
 error_stmt:
         invalid_cpp_function_stmt
+    |   invalid_select_stmt
+    ;
+
+// SELECT statement
+invalid_select_stmt :
+      (T_SELECT | T_SEL) select_list into_clause? from_clause? invalid_where_clause group_by_clause? (having_clause | qualify_clause)? order_by_clause? select_options?
+    ;
+
+//invalid_from_table_clause :
+    //    invalid_from_table_name_clause
+    //|   invalid_from_subselect_clause
+    //|   invalid_from_table_values_clause
+//    ;
+
+invalid_where_clause :
+        T_WHERE? invalid_bool_expr
+    |   T_WHERE
     ;
 
 invalid_bool_expr:
@@ -200,23 +216,6 @@ declare_condition_item :
 // Condition handler declaration
 declare_handler_item :
         (T_CONTINUE | T_EXIT) T_HANDLER T_FOR (T_SQLEXCEPTION | T_SQLWARNING | T_NOT T_FOUND | ident) single_block_stmt
-    ;
-
-// Create or define type statement
-create_type_stmt:
-        T_CREATE T_TYPE table_name create_type_definition
-    ;
-
-create_type_definition:
-        T_OPEN_P create_type_items T_CLOSE_P
-    ;
-
-create_type_items:
-        create_type_items_item (T_COMMA create_type_items_item)*
-    ;
-
-create_type_items_item:
-        string T_COLON string
     ;
 
 // DECLARE TEMPORARY TABLE statement
