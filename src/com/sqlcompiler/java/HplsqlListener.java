@@ -1,4 +1,4 @@
-// Generated from E:/ite-fourth-year/compilers/sql-compiler/src/com/sqlcompiler/antlr\Hplsql.g4 by ANTLR 4.7
+// Generated from E:/ite-fourth-year/compilers/projects/sql-compiler/src/com/sqlcompiler/antlr\Hplsql.g4 by ANTLR 4.7
 package com.sqlcompiler.java;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -77,6 +77,96 @@ public interface HplsqlListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitStmt(HplsqlParser.StmtContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HplsqlParser#error_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterError_stmt(HplsqlParser.Error_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HplsqlParser#error_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitError_stmt(HplsqlParser.Error_stmtContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HplsqlParser#invalid_select_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterInvalid_select_stmt(HplsqlParser.Invalid_select_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HplsqlParser#invalid_select_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitInvalid_select_stmt(HplsqlParser.Invalid_select_stmtContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HplsqlParser#invalid_where_clause}.
+	 * @param ctx the parse tree
+	 */
+	void enterInvalid_where_clause(HplsqlParser.Invalid_where_clauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HplsqlParser#invalid_where_clause}.
+	 * @param ctx the parse tree
+	 */
+	void exitInvalid_where_clause(HplsqlParser.Invalid_where_clauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HplsqlParser#invalid_bool_expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterInvalid_bool_expr(HplsqlParser.Invalid_bool_exprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HplsqlParser#invalid_bool_expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitInvalid_bool_expr(HplsqlParser.Invalid_bool_exprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HplsqlParser#invalid_cpp_function_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterInvalid_cpp_function_stmt(HplsqlParser.Invalid_cpp_function_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HplsqlParser#invalid_cpp_function_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitInvalid_cpp_function_stmt(HplsqlParser.Invalid_cpp_function_stmtContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HplsqlParser#invalid_cpp_function_header}.
+	 * @param ctx the parse tree
+	 */
+	void enterInvalid_cpp_function_header(HplsqlParser.Invalid_cpp_function_headerContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HplsqlParser#invalid_cpp_function_header}.
+	 * @param ctx the parse tree
+	 */
+	void exitInvalid_cpp_function_header(HplsqlParser.Invalid_cpp_function_headerContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HplsqlParser#invalid_cpp_function_params_clause}.
+	 * @param ctx the parse tree
+	 */
+	void enterInvalid_cpp_function_params_clause(HplsqlParser.Invalid_cpp_function_params_clauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HplsqlParser#invalid_cpp_function_params_clause}.
+	 * @param ctx the parse tree
+	 */
+	void exitInvalid_cpp_function_params_clause(HplsqlParser.Invalid_cpp_function_params_clauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HplsqlParser#invalid_cpp_function_param}.
+	 * @param ctx the parse tree
+	 */
+	void enterInvalid_cpp_function_param(HplsqlParser.Invalid_cpp_function_paramContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HplsqlParser#invalid_cpp_function_param}.
+	 * @param ctx the parse tree
+	 */
+	void exitInvalid_cpp_function_param(HplsqlParser.Invalid_cpp_function_paramContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HplsqlParser#invalid_cpp_function_body}.
+	 * @param ctx the parse tree
+	 */
+	void enterInvalid_cpp_function_body(HplsqlParser.Invalid_cpp_function_bodyContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HplsqlParser#invalid_cpp_function_body}.
+	 * @param ctx the parse tree
+	 */
+	void exitInvalid_cpp_function_body(HplsqlParser.Invalid_cpp_function_bodyContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link HplsqlParser#exception_block}.
 	 * @param ctx the parse tree
@@ -297,6 +387,46 @@ public interface HplsqlListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDeclare_temporary_table_item(HplsqlParser.Declare_temporary_table_itemContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HplsqlParser#create_type_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreate_type_stmt(HplsqlParser.Create_type_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HplsqlParser#create_type_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreate_type_stmt(HplsqlParser.Create_type_stmtContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HplsqlParser#create_type_definition}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreate_type_definition(HplsqlParser.Create_type_definitionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HplsqlParser#create_type_definition}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreate_type_definition(HplsqlParser.Create_type_definitionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HplsqlParser#create_type_items}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreate_type_items(HplsqlParser.Create_type_itemsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HplsqlParser#create_type_items}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreate_type_items(HplsqlParser.Create_type_itemsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HplsqlParser#create_type_items_item}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreate_type_items_item(HplsqlParser.Create_type_items_itemContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HplsqlParser#create_type_items_item}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreate_type_items_item(HplsqlParser.Create_type_items_itemContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link HplsqlParser#create_table_stmt}.
 	 * @param ctx the parse tree
@@ -878,6 +1008,166 @@ public interface HplsqlListener extends ParseTreeListener {
 	 */
 	void exitReturn_stmt(HplsqlParser.Return_stmtContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link HplsqlParser#cpp_function_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterCpp_function_stmt(HplsqlParser.Cpp_function_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HplsqlParser#cpp_function_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitCpp_function_stmt(HplsqlParser.Cpp_function_stmtContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HplsqlParser#cpp_function_header}.
+	 * @param ctx the parse tree
+	 */
+	void enterCpp_function_header(HplsqlParser.Cpp_function_headerContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HplsqlParser#cpp_function_header}.
+	 * @param ctx the parse tree
+	 */
+	void exitCpp_function_header(HplsqlParser.Cpp_function_headerContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HplsqlParser#cpp_function_params_clause}.
+	 * @param ctx the parse tree
+	 */
+	void enterCpp_function_params_clause(HplsqlParser.Cpp_function_params_clauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HplsqlParser#cpp_function_params_clause}.
+	 * @param ctx the parse tree
+	 */
+	void exitCpp_function_params_clause(HplsqlParser.Cpp_function_params_clauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HplsqlParser#cpp_function_param}.
+	 * @param ctx the parse tree
+	 */
+	void enterCpp_function_param(HplsqlParser.Cpp_function_paramContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HplsqlParser#cpp_function_param}.
+	 * @param ctx the parse tree
+	 */
+	void exitCpp_function_param(HplsqlParser.Cpp_function_paramContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HplsqlParser#cpp_function_body}.
+	 * @param ctx the parse tree
+	 */
+	void enterCpp_function_body(HplsqlParser.Cpp_function_bodyContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HplsqlParser#cpp_function_body}.
+	 * @param ctx the parse tree
+	 */
+	void exitCpp_function_body(HplsqlParser.Cpp_function_bodyContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HplsqlParser#cpp_if_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterCpp_if_stmt(HplsqlParser.Cpp_if_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HplsqlParser#cpp_if_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitCpp_if_stmt(HplsqlParser.Cpp_if_stmtContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HplsqlParser#cpp_elseif_clause}.
+	 * @param ctx the parse tree
+	 */
+	void enterCpp_elseif_clause(HplsqlParser.Cpp_elseif_clauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HplsqlParser#cpp_elseif_clause}.
+	 * @param ctx the parse tree
+	 */
+	void exitCpp_elseif_clause(HplsqlParser.Cpp_elseif_clauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HplsqlParser#cpp_else_clause}.
+	 * @param ctx the parse tree
+	 */
+	void enterCpp_else_clause(HplsqlParser.Cpp_else_clauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HplsqlParser#cpp_else_clause}.
+	 * @param ctx the parse tree
+	 */
+	void exitCpp_else_clause(HplsqlParser.Cpp_else_clauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HplsqlParser#cpp_for_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterCpp_for_stmt(HplsqlParser.Cpp_for_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HplsqlParser#cpp_for_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitCpp_for_stmt(HplsqlParser.Cpp_for_stmtContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HplsqlParser#cpp_for_stmt_header}.
+	 * @param ctx the parse tree
+	 */
+	void enterCpp_for_stmt_header(HplsqlParser.Cpp_for_stmt_headerContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HplsqlParser#cpp_for_stmt_header}.
+	 * @param ctx the parse tree
+	 */
+	void exitCpp_for_stmt_header(HplsqlParser.Cpp_for_stmt_headerContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HplsqlParser#cpp_for_params_clause}.
+	 * @param ctx the parse tree
+	 */
+	void enterCpp_for_params_clause(HplsqlParser.Cpp_for_params_clauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HplsqlParser#cpp_for_params_clause}.
+	 * @param ctx the parse tree
+	 */
+	void exitCpp_for_params_clause(HplsqlParser.Cpp_for_params_clauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HplsqlParser#cpp_for_param}.
+	 * @param ctx the parse tree
+	 */
+	void enterCpp_for_param(HplsqlParser.Cpp_for_paramContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HplsqlParser#cpp_for_param}.
+	 * @param ctx the parse tree
+	 */
+	void exitCpp_for_param(HplsqlParser.Cpp_for_paramContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HplsqlParser#cpp_for_stmt_var_incr_caluse}.
+	 * @param ctx the parse tree
+	 */
+	void enterCpp_for_stmt_var_incr_caluse(HplsqlParser.Cpp_for_stmt_var_incr_caluseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HplsqlParser#cpp_for_stmt_var_incr_caluse}.
+	 * @param ctx the parse tree
+	 */
+	void exitCpp_for_stmt_var_incr_caluse(HplsqlParser.Cpp_for_stmt_var_incr_caluseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HplsqlParser#cpp_for_stmt_var_incr_}.
+	 * @param ctx the parse tree
+	 */
+	void enterCpp_for_stmt_var_incr_(HplsqlParser.Cpp_for_stmt_var_incr_Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link HplsqlParser#cpp_for_stmt_var_incr_}.
+	 * @param ctx the parse tree
+	 */
+	void exitCpp_for_stmt_var_incr_(HplsqlParser.Cpp_for_stmt_var_incr_Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link HplsqlParser#cpp_for_stmt_body}.
+	 * @param ctx the parse tree
+	 */
+	void enterCpp_for_stmt_body(HplsqlParser.Cpp_for_stmt_bodyContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HplsqlParser#cpp_for_stmt_body}.
+	 * @param ctx the parse tree
+	 */
+	void exitCpp_for_stmt_body(HplsqlParser.Cpp_for_stmt_bodyContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HplsqlParser#cpp_body_content}.
+	 * @param ctx the parse tree
+	 */
+	void enterCpp_body_content(HplsqlParser.Cpp_body_contentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HplsqlParser#cpp_body_content}.
+	 * @param ctx the parse tree
+	 */
+	void exitCpp_body_content(HplsqlParser.Cpp_body_contentContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link HplsqlParser#while_stmt}.
 	 * @param ctx the parse tree
 	 */
@@ -927,36 +1217,6 @@ public interface HplsqlListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSelect_stmt(HplsqlParser.Select_stmtContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link HplsqlParser#cte_select_stmt}.
-	 * @param ctx the parse tree
-	 */
-	void enterCte_select_stmt(HplsqlParser.Cte_select_stmtContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link HplsqlParser#cte_select_stmt}.
-	 * @param ctx the parse tree
-	 */
-	void exitCte_select_stmt(HplsqlParser.Cte_select_stmtContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link HplsqlParser#cte_select_stmt_item}.
-	 * @param ctx the parse tree
-	 */
-	void enterCte_select_stmt_item(HplsqlParser.Cte_select_stmt_itemContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link HplsqlParser#cte_select_stmt_item}.
-	 * @param ctx the parse tree
-	 */
-	void exitCte_select_stmt_item(HplsqlParser.Cte_select_stmt_itemContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link HplsqlParser#cte_select_cols}.
-	 * @param ctx the parse tree
-	 */
-	void enterCte_select_cols(HplsqlParser.Cte_select_colsContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link HplsqlParser#cte_select_cols}.
-	 * @param ctx the parse tree
-	 */
-	void exitCte_select_cols(HplsqlParser.Cte_select_colsContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link HplsqlParser#fullselect_stmt}.
 	 * @param ctx the parse tree
@@ -1247,16 +1507,6 @@ public interface HplsqlListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitBool_expr(HplsqlParser.Bool_exprContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link HplsqlParser#non_balanced_bool_expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterNon_balanced_bool_expr(HplsqlParser.Non_balanced_bool_exprContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link HplsqlParser#non_balanced_bool_expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitNon_balanced_bool_expr(HplsqlParser.Non_balanced_bool_exprContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link HplsqlParser#bool_expr_atom}.
 	 * @param ctx the parse tree
@@ -1611,16 +1861,6 @@ public interface HplsqlListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitNew_line(HplsqlParser.New_lineContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link HplsqlParser#invalid_variable_name}.
-	 * @param ctx the parse tree
-	 */
-	void enterInvalid_variable_name(HplsqlParser.Invalid_variable_nameContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link HplsqlParser#invalid_variable_name}.
-	 * @param ctx the parse tree
-	 */
-	void exitInvalid_variable_name(HplsqlParser.Invalid_variable_nameContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link HplsqlParser#non_reserved_words}.
 	 * @param ctx the parse tree

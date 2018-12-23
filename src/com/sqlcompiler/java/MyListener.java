@@ -1,8 +1,22 @@
 package com.sqlcompiler.java;
 
+import java.util.LinkedList;
+
 public class MyListener extends HplsqlBaseListener {
 
-    private int numberOfLines = 1;
+    private LinkedList<DataType.Attribute> details;
+
+    MyListener()
+    {
+        try {
+            DataType.createPrimaryDataType("int", "int");
+            DataType.createPrimaryDataType("real", "float");
+            DataType.createPrimaryDataType("string", "char[]");
+            DataType.createPrimaryDataType("bool", "boolean");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void enterSelect_stmt(HplsqlParser.Select_stmtContext ctx) {
@@ -19,25 +33,20 @@ public class MyListener extends HplsqlBaseListener {
     }
 
     @Override
-    public void enterNon_balanced_bool_expr(HplsqlParser.Non_balanced_bool_exprContext ctx) {
-        super.enterNon_balanced_bool_expr(ctx);
+    public void exitCreate_type_stmt(HplsqlParser.Create_type_stmtContext ctx) {
+        super.exitCreate_type_stmt(ctx);
 
-        System.out.printf("Syntax error at line %d: non balanced parenthesis", numberOfLines);
+        DataType.createSecondaryDataType(ctx.table_name().getText(), this.details);
+        this.details = null;
     }
 
     @Override
-    public void enterNew_line(HplsqlParser.New_lineContext ctx) {
-        super.enterNew_line(ctx);
+    public void enterCreate_type_items_item(HplsqlParser.Create_type_items_itemContext ctx) {
+        super.enterCreate_type_items_item(ctx);
 
-        this.numberOfLines ++;
+        if(this.details == null) {
+            details = new LinkedList<>();
+        }
+        details.add(new DataType.Attribute(ctx.getChild(0).getText(), ctx.getChild(2).getText()));
     }
-
-    @Override
-    public void enterInvalid_variable_name(HplsqlParser.Invalid_variable_nameContext ctx) {
-        super.enterInvalid_variable_name(ctx);
-
-        System.out.printf("syntax error at line %d: invalid variable name.", numberOfLines);
-    }
-
-
 }

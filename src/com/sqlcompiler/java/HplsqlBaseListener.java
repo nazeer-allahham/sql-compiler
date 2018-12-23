@@ -1,4 +1,4 @@
-// Generated from E:/ite-fourth-year/compilers/sql-compiler/src/com/sqlcompiler/antlr\Hplsql.g4 by ANTLR 4.7
+// Generated from E:/ite-fourth-year/compilers/projects/sql-compiler/src/com/sqlcompiler/antlr\Hplsql.g4 by ANTLR 4.7
 package com.sqlcompiler.java;
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -95,6 +95,114 @@ public class HplsqlBaseListener implements HplsqlListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitStmt(HplsqlParser.StmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterError_stmt(HplsqlParser.Error_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitError_stmt(HplsqlParser.Error_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterInvalid_select_stmt(HplsqlParser.Invalid_select_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInvalid_select_stmt(HplsqlParser.Invalid_select_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterInvalid_where_clause(HplsqlParser.Invalid_where_clauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInvalid_where_clause(HplsqlParser.Invalid_where_clauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterInvalid_bool_expr(HplsqlParser.Invalid_bool_exprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInvalid_bool_expr(HplsqlParser.Invalid_bool_exprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterInvalid_cpp_function_stmt(HplsqlParser.Invalid_cpp_function_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInvalid_cpp_function_stmt(HplsqlParser.Invalid_cpp_function_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterInvalid_cpp_function_header(HplsqlParser.Invalid_cpp_function_headerContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInvalid_cpp_function_header(HplsqlParser.Invalid_cpp_function_headerContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterInvalid_cpp_function_params_clause(HplsqlParser.Invalid_cpp_function_params_clauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInvalid_cpp_function_params_clause(HplsqlParser.Invalid_cpp_function_params_clauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterInvalid_cpp_function_param(HplsqlParser.Invalid_cpp_function_paramContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInvalid_cpp_function_param(HplsqlParser.Invalid_cpp_function_paramContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterInvalid_cpp_function_body(HplsqlParser.Invalid_cpp_function_bodyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInvalid_cpp_function_body(HplsqlParser.Invalid_cpp_function_bodyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -359,6 +467,54 @@ public class HplsqlBaseListener implements HplsqlListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDeclare_temporary_table_item(HplsqlParser.Declare_temporary_table_itemContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCreate_type_stmt(HplsqlParser.Create_type_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCreate_type_stmt(HplsqlParser.Create_type_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCreate_type_definition(HplsqlParser.Create_type_definitionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCreate_type_definition(HplsqlParser.Create_type_definitionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCreate_type_items(HplsqlParser.Create_type_itemsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCreate_type_items(HplsqlParser.Create_type_itemsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCreate_type_items_item(HplsqlParser.Create_type_items_itemContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCreate_type_items_item(HplsqlParser.Create_type_items_itemContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1060,6 +1216,198 @@ public class HplsqlBaseListener implements HplsqlListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCpp_function_stmt(HplsqlParser.Cpp_function_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCpp_function_stmt(HplsqlParser.Cpp_function_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCpp_function_header(HplsqlParser.Cpp_function_headerContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCpp_function_header(HplsqlParser.Cpp_function_headerContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCpp_function_params_clause(HplsqlParser.Cpp_function_params_clauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCpp_function_params_clause(HplsqlParser.Cpp_function_params_clauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCpp_function_param(HplsqlParser.Cpp_function_paramContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCpp_function_param(HplsqlParser.Cpp_function_paramContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCpp_function_body(HplsqlParser.Cpp_function_bodyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCpp_function_body(HplsqlParser.Cpp_function_bodyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCpp_if_stmt(HplsqlParser.Cpp_if_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCpp_if_stmt(HplsqlParser.Cpp_if_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCpp_elseif_clause(HplsqlParser.Cpp_elseif_clauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCpp_elseif_clause(HplsqlParser.Cpp_elseif_clauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCpp_else_clause(HplsqlParser.Cpp_else_clauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCpp_else_clause(HplsqlParser.Cpp_else_clauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCpp_for_stmt(HplsqlParser.Cpp_for_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCpp_for_stmt(HplsqlParser.Cpp_for_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCpp_for_stmt_header(HplsqlParser.Cpp_for_stmt_headerContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCpp_for_stmt_header(HplsqlParser.Cpp_for_stmt_headerContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCpp_for_params_clause(HplsqlParser.Cpp_for_params_clauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCpp_for_params_clause(HplsqlParser.Cpp_for_params_clauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCpp_for_param(HplsqlParser.Cpp_for_paramContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCpp_for_param(HplsqlParser.Cpp_for_paramContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCpp_for_stmt_var_incr_caluse(HplsqlParser.Cpp_for_stmt_var_incr_caluseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCpp_for_stmt_var_incr_caluse(HplsqlParser.Cpp_for_stmt_var_incr_caluseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCpp_for_stmt_var_incr_(HplsqlParser.Cpp_for_stmt_var_incr_Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCpp_for_stmt_var_incr_(HplsqlParser.Cpp_for_stmt_var_incr_Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCpp_for_stmt_body(HplsqlParser.Cpp_for_stmt_bodyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCpp_for_stmt_body(HplsqlParser.Cpp_for_stmt_bodyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCpp_body_content(HplsqlParser.Cpp_body_contentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCpp_body_content(HplsqlParser.Cpp_body_contentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterWhile_stmt(HplsqlParser.While_stmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1115,42 +1463,6 @@ public class HplsqlBaseListener implements HplsqlListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitSelect_stmt(HplsqlParser.Select_stmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterCte_select_stmt(HplsqlParser.Cte_select_stmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitCte_select_stmt(HplsqlParser.Cte_select_stmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterCte_select_stmt_item(HplsqlParser.Cte_select_stmt_itemContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitCte_select_stmt_item(HplsqlParser.Cte_select_stmt_itemContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterCte_select_cols(HplsqlParser.Cte_select_colsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitCte_select_cols(HplsqlParser.Cte_select_colsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1499,18 +1811,6 @@ public class HplsqlBaseListener implements HplsqlListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitBool_expr(HplsqlParser.Bool_exprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterNon_balanced_bool_expr(HplsqlParser.Non_balanced_bool_exprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitNon_balanced_bool_expr(HplsqlParser.Non_balanced_bool_exprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1931,18 +2231,6 @@ public class HplsqlBaseListener implements HplsqlListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitNew_line(HplsqlParser.New_lineContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterInvalid_variable_name(HplsqlParser.Invalid_variable_nameContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitInvalid_variable_name(HplsqlParser.Invalid_variable_nameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
