@@ -55,7 +55,7 @@ public class DataType implements Serializable {
         }
     }
 
-    private int scopeID;
+    //private int scopeID;
 
     static void createSecondaryDataType(@NotNull String name, LinkedList<Attribute> attributes)
     {
