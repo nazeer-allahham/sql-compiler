@@ -1,4 +1,4 @@
-// Generated from E:/ite-fourth-year/compilers/projects/sql-compiler/src/com/sqlcompiler/antlr\Hplsql.g4 by ANTLR 4.7
+// Generated from E:/ite-fourth-year/compilers/projects/sql-compiler/src/com/sqlcompiler/antlr\Hplsql.g4 by ANTLR 4.7.2
 package com.sqlcompiler.java;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -87,26 +87,6 @@ public interface HplsqlListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitError_stmt(HplsqlParser.Error_stmtContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link HplsqlParser#invalid_select_stmt}.
-	 * @param ctx the parse tree
-	 */
-	void enterInvalid_select_stmt(HplsqlParser.Invalid_select_stmtContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link HplsqlParser#invalid_select_stmt}.
-	 * @param ctx the parse tree
-	 */
-	void exitInvalid_select_stmt(HplsqlParser.Invalid_select_stmtContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link HplsqlParser#invalid_where_clause}.
-	 * @param ctx the parse tree
-	 */
-	void enterInvalid_where_clause(HplsqlParser.Invalid_where_clauseContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link HplsqlParser#invalid_where_clause}.
-	 * @param ctx the parse tree
-	 */
-	void exitInvalid_where_clause(HplsqlParser.Invalid_where_clauseContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link HplsqlParser#invalid_bool_expr}.
 	 * @param ctx the parse tree
@@ -378,16 +358,6 @@ public interface HplsqlListener extends ParseTreeListener {
 	 */
 	void exitDeclare_handler_item(HplsqlParser.Declare_handler_itemContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link HplsqlParser#declare_temporary_table_item}.
-	 * @param ctx the parse tree
-	 */
-	void enterDeclare_temporary_table_item(HplsqlParser.Declare_temporary_table_itemContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link HplsqlParser#declare_temporary_table_item}.
-	 * @param ctx the parse tree
-	 */
-	void exitDeclare_temporary_table_item(HplsqlParser.Declare_temporary_table_itemContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link HplsqlParser#create_type_stmt}.
 	 * @param ctx the parse tree
 	 */
@@ -428,6 +398,19 @@ public interface HplsqlListener extends ParseTreeListener {
 	 */
 	void exitCreate_type_items_item(HplsqlParser.Create_type_items_itemContext ctx);
 	/**
+     * Enter a parse tree produced by {@link HplsqlParser#declare_temporary_table_item}.
+     * @param ctx the parse tree
+     */
+    void enterDeclare_temporary_table_item(HplsqlParser.Declare_temporary_table_itemContext ctx);
+
+    /**
+     * Exit a parse tree produced by {@link HplsqlParser#declare_temporary_table_item}.
+     *
+     * @param ctx the parse tree
+     */
+    void exitDeclare_temporary_table_item(HplsqlParser.Declare_temporary_table_itemContext ctx);
+
+    /**
 	 * Enter a parse tree produced by {@link HplsqlParser#create_table_stmt}.
 	 * @param ctx the parse tree
 	 */

@@ -6,7 +6,6 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
@@ -37,13 +36,16 @@ public class Main {
             CommonTokenStream commonTokenStream = new CommonTokenStream(lexer);
             HplsqlParser parser = new HplsqlParser(commonTokenStream);
 
-            //
-            //ParserRuleContext context = parser.program();
-            //Trees.inspect(context, parser);
+
+//            ParserRuleContext context = parser.program();
+//            Trees.inspect(context, parser);
 
             MyListener listener = new MyListener();
             ParseTreeWalker walker = new ParseTreeWalker();
             walker.walk(listener, parser.program());
+
+            MyVisitor visitor = new MyVisitor();
+            System.out.println(visitor.visit(parser.program()));
 
             DataTypes.save("my_data_types.json");
 
@@ -51,8 +53,6 @@ public class Main {
 
 //            DataTypes.restore("my_data_types.json");
 //            System.out.println(DataTypes.get("user", DataType.DATA_TYPE_TO_STRING_FLAT));
-        }catch (FileNotFoundException ex) {
-           System.out.println(ex.getMessage());
         } catch (IOException e) {
             e.printStackTrace();
         }

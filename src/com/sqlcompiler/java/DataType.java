@@ -55,12 +55,7 @@ public class DataType implements Serializable {
         }
     }
 
-    static void createPrimaryDataType(@NotNull String name, @NotNull String type) throws Exception {
-        DataType dt = new DataType(name, 1);
-        dt.addAttribute(new Attribute(name, type));
-
-        DataTypes.add(dt);
-    }
+    private int scopeID;
 
     static void createSecondaryDataType(@NotNull String name, LinkedList<Attribute> attributes)
     {
@@ -71,6 +66,13 @@ public class DataType implements Serializable {
     }
 
     private int                   rank;
+
+    static void createPrimaryDataType(@NotNull String name, @NotNull String type) {
+        DataType dt = new DataType(name, 1);
+        dt.addAttribute(new Attribute(name, type));
+
+        DataTypes.add(dt);
+    }
     private String                name;
     private LinkedList<Attribute> attributes;
 

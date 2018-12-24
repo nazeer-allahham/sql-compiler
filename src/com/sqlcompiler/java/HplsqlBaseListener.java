@@ -1,4 +1,4 @@
-// Generated from E:/ite-fourth-year/compilers/projects/sql-compiler/src/com/sqlcompiler/antlr\Hplsql.g4 by ANTLR 4.7
+// Generated from E:/ite-fourth-year/compilers/projects/sql-compiler/src/com/sqlcompiler/antlr\Hplsql.g4 by ANTLR 4.7.2
 package com.sqlcompiler.java;
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -107,30 +107,6 @@ public class HplsqlBaseListener implements HplsqlListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitError_stmt(HplsqlParser.Error_stmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterInvalid_select_stmt(HplsqlParser.Invalid_select_stmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitInvalid_select_stmt(HplsqlParser.Invalid_select_stmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterInvalid_where_clause(HplsqlParser.Invalid_where_clauseContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitInvalid_where_clause(HplsqlParser.Invalid_where_clauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -460,18 +436,6 @@ public class HplsqlBaseListener implements HplsqlListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDeclare_temporary_table_item(HplsqlParser.Declare_temporary_table_itemContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitDeclare_temporary_table_item(HplsqlParser.Declare_temporary_table_itemContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterCreate_type_stmt(HplsqlParser.Create_type_stmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -515,6 +479,24 @@ public class HplsqlBaseListener implements HplsqlListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCreate_type_items_item(HplsqlParser.Create_type_items_itemContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override
+	public void enterDeclare_temporary_table_item(HplsqlParser.Declare_temporary_table_itemContext ctx) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override
+	public void exitDeclare_temporary_table_item(HplsqlParser.Declare_temporary_table_itemContext ctx) {
+	}
+
 	/**
 	 * {@inheritDoc}
 	 *
