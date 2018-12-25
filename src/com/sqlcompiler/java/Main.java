@@ -3,6 +3,7 @@ package com.sqlcompiler.java;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -39,24 +40,25 @@ public class Main {
 //            ParserRuleContext context = parser.program();
 //            Trees.inspect(context, parser);
 
-//            MyListener listener = new MyListener();
-//            ParseTreeWalker walker = new ParseTreeWalker();
-//            walker.walk(listener, parser.program());
-
+            MyListener listener = new MyListener();
+            ParseTreeWalker walker = new ParseTreeWalker();
+            walker.walk(listener, parser.program());
+//
 //            MyVisitor visitor = new MyVisitor();
 //            System.out.println(visitor.visitProgram(parser.program()));
 
 //            DataTypes.save("my_data_types.json");
 //
 //            System.out.printf("%d data type is detected\n", DataTypes.count());
-
+//
 //            DataTypes.restore("my_data_types.json");
 //            System.out.println(DataTypes.get("user", DataType.DATA_TYPE_TO_STRING_FLAT));
 
-            AbstractSyntaxTree ast = new AbstractSyntaxTree();
-//            ast.printAST(parser.program(), false, 0);
-            ast.build(parser.program());
-            ast.print();
+//            AbstractSyntaxTree ast = new AbstractSyntaxTree();
+//            ast.build(parser.program());
+//            ast.print();
+
+            listener.symbolTable.print();
         } catch (IOException e) {
             e.printStackTrace();
         }

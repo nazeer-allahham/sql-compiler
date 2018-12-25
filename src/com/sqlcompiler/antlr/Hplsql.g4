@@ -25,10 +25,7 @@ proc_block :
 
 stmt :
       error_stmt
-    | cpp_function_stmt
-    | cpp_if_stmt
-    | cpp_for_stmt
-    | assignment_stmt
+    | cpp_stmt
     | associate_locator_stmt
     | break_stmt
     | call_stmt
@@ -106,8 +103,8 @@ invalid_cpp_function_param:
     ;
 
 invalid_cpp_function_body:
-        T_OPEN_B (cpp_body_content)*
-    |   (cpp_body_content)*  T_CLOSE_B
+        T_OPEN_B (cpp_stmt)*
+    |   (cpp_stmt)*  T_CLOSE_B
     ;
 
 // Exception block
@@ -567,6 +564,18 @@ return_stmt :
         T_RETURN expr?
     ;
 
+// C plus plus section
+cpp_stmt:
+            cpp_function_stmt
+        |   cpp_for_stmt
+        |   cpp_if_stmt
+        |   cpp_assignment_stmt
+        |   cpp_return_stmt
+        |   write_stmt
+        |   create_table_stmt
+        |   create_type_stmt
+    ;
+
 cpp_function_stmt:
         cpp_function_header cpp_function_body
     ;
@@ -584,7 +593,7 @@ cpp_function_param:
     ;
 
 cpp_function_body:
-        T_OPEN_B (cpp_body_content)*  T_CLOSE_B
+        cpp_scope
     ;
 
 cpp_if_stmt :
@@ -616,27 +625,30 @@ cpp_for_param:
     ;
 
 cpp_for_stmt_var_incr_caluse:
-        cpp_for_stmt_var_incr_ (T_COMMA cpp_for_stmt_var_incr_)*
+        cpp_for_stmt_var_incr (T_COMMA cpp_for_stmt_var_incr)*
     ;
 
-cpp_for_stmt_var_incr_:
+cpp_for_stmt_var_incr:
         ident '+' '+'
-    |   ident T_EQUAL L_INT
-    |   ident T_EQUAL ident ('+' | '-' | '*' | '/' | '%') L_INT
-    |   ident ('+' | '-' | '*' | '/' | '%') T_EQUAL L_INT
+    |   ident T_EQUAL ident
+    |   ident T_EQUAL ident ('+' | '-' | '*' | '/' | '%') ident (('+' | '-' | '*' | '/' | '%') ident)*
+    |   ident ('+' | '-' | '*' | '/' | '%') T_EQUAL ident
     ;
 
 cpp_for_stmt_body:
-        T_OPEN_B cpp_body_content* T_CLOSE_B | cpp_body_content
+        cpp_scope | cpp_stmt
     ;
 
-cpp_body_content:
-        cpp_if_stmt
-        | cpp_for_stmt
-        | dtype ident '=' select_stmt T_SEMICOLON
-        | T_RETURN ident T_SEMICOLON
+cpp_assignment_stmt:
+        (dtype | T_VAR) ident '=' stmt T_SEMICOLON
+    ;
 
+cpp_return_stmt:
+        T_RETURN expr T_SEMICOLON
+    ;
 
+cpp_scope:
+        T_OPEN_B cpp_stmt* T_CLOSE_B
     ;
 
 // WHILE loop statement
@@ -985,6 +997,14 @@ func_param :
         {!_input.LT(1).getText().equalsIgnoreCase("INTO")}? (ident T_EQUAL T_GREATER?)? expr
     ;
 
+write_stmt:
+        T_WRITE T_OPEN_P  write_stmt_string T_CLOSE_P
+    ;
+
+write_stmt_string:
+        (string | ident) ('+' (string | ident))*
+    ;
+
 // DATE 'YYYY-MM-DD' literal
 date_literal :
         T_DATE string
@@ -1001,8 +1021,8 @@ ident :
 
 // String literal (single or double quoted)
 string :
-        L_S_STRING                          # single_quotedString
-    |   L_D_STRING                          # double_quotedString
+        L_D_STRING                          # double_quotedString
+    |   L_S_STRING                          # single_quotedString
     ;
 
 // Integer (positive or negative)
@@ -1025,7 +1045,6 @@ bool_literal :
 null_const :
         T_NULL
     ;
-
 
 // Tokens that are not reserved words and can be used as identifiers
 non_reserved_words :
@@ -1292,6 +1311,7 @@ non_reserved_words :
     // T_WHERE reserved word
     |   T_WHILE
     |   T_WITH
+    |   T_WRITE
     |   T_XML
     |   T_YES
 
@@ -1586,6 +1606,7 @@ T_STDEV                : S T D E V ;
 T_SYSDATE              : S Y S D A T E ;
 T_VARIANCE             : V A R I A N C E ;
 T_USER                 : U S E R;
+T_WRITE                : W R I T E;
 
 
 T_ADD          : '+' ;

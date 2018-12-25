@@ -1,11 +1,8 @@
 package com.sqlcompiler.java;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.HashMap;
 
-public class SymbolTable {
-
+class SymbolTable {
 
     private Scope currentScope = null;
 
@@ -30,14 +27,11 @@ public class SymbolTable {
     }
 
     void insert(Symbol symbol) {
-        try {
-            if (currentScope.children.containsKey(symbol.name)) {
-                throw new Exception(String.format("IllegalStateSymbol <%s>", symbol.name));
-            }
-            currentScope.children.put(symbol.name, symbol);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (currentScope.children.containsKey(symbol.name)) {
+            System.err.println(String.format("Variable already declared : %s", symbol));
+            System.exit(1);
         }
+        currentScope.children.put(symbol.name, symbol);
     }
 
     void setAttribute() {
@@ -48,25 +42,47 @@ public class SymbolTable {
 
     }
 
-    class Scope {
+    void print() {
+        Scope temp = currentScope;
+        while (temp != null) {
+            System.out.println(temp.toString());
+            temp = temp.parent;
+        }
+    }
+
+    static class Scope {
+        private static int ID = 0;
         int id;
         HashMap<String, Symbol> children;
         Scope parent;
 
-        Scope(@NotNull Scope parent) {
-            this.parent = parent;
-            this.id = parent.children.size() + parent.id + 1;
+        Scope(Scope parent) {
+            if (parent != null) {
+                this.parent = parent;
+            }
+            this.id = ++ID;
             this.children = new HashMap<>();
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder mString = new StringBuilder("Scope").append(id).append('{');
+            for (Symbol sym : children.values())
+                mString.append(sym).append('\n');
+            mString.append('}');
+            return mString.toString();
         }
     }
 
-    class Symbol {
+    public static class Symbol {
         private String name;
         private String type;
         private String attribute;
 
-        Symbol() {
-
+        Symbol(String name, String type, String attribute) {
+            this.name = name;
+            this.type = type;
+            this.attribute = attribute;
         }
 
         public String getType() {
@@ -91,6 +107,11 @@ public class SymbolTable {
 
         public void setAttribute(String attribute) {
             this.attribute = attribute;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("symbol { name => %s, type => %s, attribute => %s }", this.name, this.type, this.attribute);
         }
     }
 }

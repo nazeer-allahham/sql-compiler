@@ -4,12 +4,13 @@ import java.util.LinkedList;
 
 public class MyListener extends HplsqlBaseListener {
 
-    private SymbolTable symbolTable;
+    SymbolTable symbolTable;
     private LinkedList<DataType.Attribute> details;
 
     MyListener()
     {
         this.symbolTable = new SymbolTable();
+        this.symbolTable.allocate();
         try {
             DataType.createPrimaryDataType("int", "int");
             DataType.createPrimaryDataType("real", "float");
@@ -50,5 +51,19 @@ public class MyListener extends HplsqlBaseListener {
             details = new LinkedList<>();
         }
         details.add(new DataType.Attribute(ctx.getChild(0).getText(), ctx.getChild(2).getText()));
+    }
+
+    @Override
+    public void enterBegin_end_block(HplsqlParser.Begin_end_blockContext ctx) {
+        super.enterBegin_end_block(ctx);
+
+        symbolTable.allocate();
+    }
+
+    @Override
+    public void enterDeclare_var_item(HplsqlParser.Declare_var_itemContext ctx) {
+        super.enterDeclare_var_item(ctx);
+
+        symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(0).getText(), ctx.getChild(1).getText(), ""));
     }
 }
