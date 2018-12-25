@@ -52,6 +52,7 @@ stmt :
     | quit_stmt
     | return_stmt
     | select_stmt
+    | invalid_select
     | while_stmt
     | label
     | null_stmt
@@ -62,12 +63,22 @@ stmt :
 error_stmt:
         invalid_cpp_function_stmt
     ;
+invalid_select:
+     (T_SELECT | T_SEL) select_list into_clause? (from_clause|invalid_from_clause)? (where_clause|invalid_where_clause)? group_by_clause? (having_clause | qualify_clause)? order_by_clause? select_options?
 
+;
+invalid_where_clause:
+        bool_expr
+     |T_WHERE invalid_bool_expr
+;
+
+invalid_from_clause:
+         from_table_clause (from_join_clause)*
+;
 invalid_bool_expr:
         T_NOT? bool_expr T_CLOSE_P
     |   T_NOT? T_OPEN_P bool_expr
-    //|   bool_expr bool_expr_logical_operator bool_expr
-    //|   bool_expr_atom
+
     ;
 
 invalid_cpp_function_stmt:
@@ -561,7 +572,7 @@ cpp_function_stmt:
     ;
 
 cpp_function_header:
-        dtype ident T_OPEN_P cpp_function_params_clause T_CLOSE_P
+        dtype ident T_OPEN_P cpp_function_params_clause? T_CLOSE_P
     ;
 
 cpp_function_params_clause:
@@ -610,7 +621,6 @@ cpp_for_stmt_var_incr_caluse:
 
 cpp_for_stmt_var_incr_:
         ident '+' '+'
-    |   ident '-' '-'
     |   ident T_EQUAL L_INT
     |   ident T_EQUAL ident ('+' | '-' | '*' | '/' | '%') L_INT
     |   ident ('+' | '-' | '*' | '/' | '%') T_EQUAL L_INT
@@ -621,7 +631,12 @@ cpp_for_stmt_body:
     ;
 
 cpp_body_content:
-        cpp_if_stmt | cpp_for_stmt
+        cpp_if_stmt
+        | cpp_for_stmt
+        | dtype ident '=' select_stmt T_SEMICOLON
+        | T_RETURN ident T_SEMICOLON
+
+
     ;
 
 // WHILE loop statement
@@ -1011,9 +1026,6 @@ null_const :
         T_NULL
     ;
 
-new_line :
-        '\n'
-    ;
 
 // Tokens that are not reserved words and can be used as identifiers
 non_reserved_words :
@@ -1282,7 +1294,7 @@ non_reserved_words :
     |   T_WITH
     |   T_XML
     |   T_YES
-    |   L_CHARS
+
     ;
 
 // Lexer rules
@@ -1575,6 +1587,7 @@ T_SYSDATE              : S Y S D A T E ;
 T_VARIANCE             : V A R I A N C E ;
 T_USER                 : U S E R;
 
+
 T_ADD          : '+' ;
 T_COLON        : ':' ;
 T_COMMA        : ',' ;
@@ -1618,8 +1631,7 @@ L_FILE      : ([a-zA-Z] ':' '\\'?)? L_ID ('\\' L_ID)*                  // File p
 
 L_LABEL     : ([a-zA-Z] | L_DIGIT | '_')* ':'
             ;
-L_CHARS     : [a]+
-            ;
+
 
 fragment
 L_ID_PART  :
