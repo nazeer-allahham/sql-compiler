@@ -1,94 +1,96 @@
 package com.sqlcompiler.java;
 
-import java.util.Hashtable;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.HashMap;
 
 public class SymbolTable {
 
-    Scope currentScope = null;
-    Hashtable<Integer, Scope> scopes = new Hashtable<>();
+
+    private Scope currentScope = null;
 
     void allocate() {
-        Scope temp = new Scope();
-        temp.parent=currentScope;       //initial parent _ start with null
-        temp.id=scopes.size();          //initial id  _  start from 0
-        temp.attributes=new Hashtable<>();
-        currentScope=temp;
-        scopes.put(scopes.size(), temp);
+        currentScope = new Scope(currentScope);
     }
 
     void free() {
-        scopes.clear();
+        while (currentScope != null) {
+            currentScope = currentScope.parent;
+        }
     }
 
-    Scope lookup(String name) {
-        //TODO create methods or data Structure for this comments
-        int res=0;
-        // if the symbol exist in the table (1)
-        Scope temp=currentScope;
-        while (temp.parent!=null){
-            if(temp.attributes.containsKey(name)){
-                res=1;
-                break;
-            }
-            temp=temp.parent;
-        }
-
-        //if it is declared before it is being used (2)
-        temp=currentScope;
-        while (temp.parent!=null){
-            if(temp.attributes.containsKey(name)){
-                res=2;
-                break;
-            }
-            temp=temp.parent;
-        }
-
-        //if the name is used in the scope (3)
-        if(currentScope.attributes.containsKey(name))res=3;
-
-        // if the symbol is initialized (4)
-
-        //if the symbol declared multiple times (5)
-        int count=0;
-        temp=currentScope;
-        while (temp.parent!=null){
-            if(temp.attributes.containsKey(name)){
-                count++;
-            }
-            temp=temp.parent;
-        }
-
+    Symbol lookup(String name) {
+        Scope temp = currentScope;
+        do {
+            if (temp.children.containsKey(name))
+                return temp.children.get(name);
+            temp = temp.parent;
+        } while (temp != null);
         return null;
     }
 
     void insert(Symbol symbol) {
-
-        symbol.scope_id=currentScope.id;
-        currentScope.attributes.put(symbol.name,symbol);
+        try {
+            if (currentScope.children.containsKey(symbol.name)) {
+                throw new Exception(String.format("IllegalStateSymbol <%s>", symbol.name));
+            }
+            currentScope.children.put(symbol.name, symbol);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     void setAttribute() {
 
     }
 
+    void getAttribute() {
+
+    }
+
     class Scope {
         int id;
-        Hashtable<String, Symbol> attributes;
+        HashMap<String, Symbol> children;
         Scope parent;
+
+        Scope(@NotNull Scope parent) {
+            this.parent = parent;
+            this.id = parent.children.size() + parent.id + 1;
+            this.children = new HashMap<>();
+        }
     }
 
     class Symbol {
         private String name;
-        private DataType dataType;
-        private int scope_id;
-        //private value TODO Checking if we need the value
+        private String type;
+        private String attribute;
 
-        public Symbol(String name, DataType dataType, int scope_id) {
+        Symbol() {
+
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
             this.name = name;
-            this.dataType = dataType;
-            this.scope_id = scope_id;
+        }
+
+        public String getAttribute() {
+            return attribute;
+        }
+
+        public void setAttribute(String attribute) {
+            this.attribute = attribute;
         }
     }
-
-
 }

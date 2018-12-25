@@ -55,8 +55,6 @@ public class DataType implements Serializable {
         }
     }
 
-    //private int scopeID;
-
     static void createSecondaryDataType(@NotNull String name, LinkedList<Attribute> attributes)
     {
         DataType mDataType = new DataType(name, 2);
@@ -65,14 +63,14 @@ public class DataType implements Serializable {
         DataTypes.add(mDataType);
     }
 
-    private int                   rank;
-
     static void createPrimaryDataType(@NotNull String name, @NotNull String type) {
         DataType dt = new DataType(name, 1);
         dt.addAttribute(new Attribute(name, type));
 
         DataTypes.add(dt);
     }
+
+    private int rank;
     private String                name;
     private LinkedList<Attribute> attributes;
 

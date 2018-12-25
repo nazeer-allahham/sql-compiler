@@ -4,10 +4,12 @@ import java.util.LinkedList;
 
 public class MyListener extends HplsqlBaseListener {
 
+    private SymbolTable symbolTable;
     private LinkedList<DataType.Attribute> details;
 
     MyListener()
     {
+        this.symbolTable = new SymbolTable();
         try {
             DataType.createPrimaryDataType("int", "int");
             DataType.createPrimaryDataType("real", "float");
