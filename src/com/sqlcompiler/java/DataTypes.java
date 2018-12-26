@@ -12,11 +12,27 @@ import java.nio.charset.Charset;
 import java.util.HashMap;
 
 class DataTypes {
-
     private static HashMap<String, DataType> types = new HashMap<>();
 
     static void add(DataType type) {
         types.put(type.getName(), type);
+    }
+
+    private static DataType item = null;
+
+    static void initialize(String name) {
+        flush();
+        item = new DataType(name, 2);
+    }
+
+    static void addAttribute(String name, String type) {
+        item.addAttribute(new DataType.Attribute(name, type));
+    }
+
+    static void flush() {
+        if (item != null) {
+            add(item);
+        }
     }
 
     static void delete(@NotNull DataType type) { types.remove(type.getName()); }

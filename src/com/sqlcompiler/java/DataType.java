@@ -2,7 +2,7 @@ package com.sqlcompiler.java;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.*;
+import java.io.Serializable;
 import java.util.LinkedList;
 
 public class DataType implements Serializable {
@@ -74,7 +74,7 @@ public class DataType implements Serializable {
     private String                name;
     private LinkedList<Attribute> attributes;
 
-    private DataType(String name, int rank) {
+    DataType(String name, int rank) {
         setName(name);
         setRank(rank);
         this.attributes = new LinkedList<>();

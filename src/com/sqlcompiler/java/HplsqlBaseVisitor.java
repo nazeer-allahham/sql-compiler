@@ -1,6 +1,5 @@
 // Generated from E:/ite-fourth-year/compilers/projects/sql-compiler/src/com/sqlcompiler/antlr\Hplsql.g4 by ANTLR 4.7.2
 package com.sqlcompiler.java;
-
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
@@ -9,7 +8,7 @@ import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
  * of the available methods.
  *
  * @param <T> The return type of the visit operation. Use {@link Void} for
- *            operations with no return type.
+ * operations with no return type.
  */
 public class HplsqlBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements HplsqlVisitor<T> {
     /**
@@ -107,7 +106,73 @@ public class HplsqlBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
      * {@link #visitChildren} on {@code ctx}.</p>
      */
     @Override
+    public T visitInvalid_select(HplsqlParser.Invalid_selectContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitInvalid_where_clause(HplsqlParser.Invalid_where_clauseContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitInvalid_from_clause(HplsqlParser.Invalid_from_clauseContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
     public T visitInvalid_bool_expr(HplsqlParser.Invalid_bool_exprContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitInvalid_bool_expr_atom(HplsqlParser.Invalid_bool_expr_atomContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitInvalid_bool_expr_binary(HplsqlParser.Invalid_bool_expr_binaryContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitInvalid_bool_expr_binary_operator(HplsqlParser.Invalid_bool_expr_binary_operatorContext ctx) {
         return visitChildren(ctx);
     }
 
@@ -152,17 +217,6 @@ public class HplsqlBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
      */
     @Override
     public T visitInvalid_cpp_function_param(HplsqlParser.Invalid_cpp_function_paramContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
-     */
-    @Override
-    public T visitInvalid_cpp_function_body(HplsqlParser.Invalid_cpp_function_bodyContext ctx) {
         return visitChildren(ctx);
     }
 
@@ -1097,6 +1151,17 @@ public class HplsqlBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
      * {@link #visitChildren} on {@code ctx}.</p>
      */
     @Override
+    public T visitCpp_stmt(HplsqlParser.Cpp_stmtContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
     public T visitCpp_function_stmt(HplsqlParser.Cpp_function_stmtContext ctx) {
         return visitChildren(ctx);
     }
@@ -1240,7 +1305,7 @@ public class HplsqlBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
      * {@link #visitChildren} on {@code ctx}.</p>
      */
     @Override
-    public T visitCpp_for_stmt_var_incr_(HplsqlParser.Cpp_for_stmt_var_incr_Context ctx) {
+    public T visitCpp_for_stmt_var_incr(HplsqlParser.Cpp_for_stmt_var_incrContext ctx) {
         return visitChildren(ctx);
     }
 
@@ -1262,7 +1327,51 @@ public class HplsqlBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
      * {@link #visitChildren} on {@code ctx}.</p>
      */
     @Override
-    public T visitCpp_body_content(HplsqlParser.Cpp_body_contentContext ctx) {
+    public T visitCpp_declare_assignment_stmt(HplsqlParser.Cpp_declare_assignment_stmtContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitCpp_declare_stmt(HplsqlParser.Cpp_declare_stmtContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitCpp_assignment_stmt(HplsqlParser.Cpp_assignment_stmtContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitCpp_return_stmt(HplsqlParser.Cpp_return_stmtContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitCpp_scope(HplsqlParser.Cpp_scopeContext ctx) {
         return visitChildren(ctx);
     }
 
@@ -1922,6 +2031,28 @@ public class HplsqlBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
      * {@link #visitChildren} on {@code ctx}.</p>
      */
     @Override
+    public T visitWrite_stmt(HplsqlParser.Write_stmtContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitWrite_stmt_string(HplsqlParser.Write_stmt_stringContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
     public T visitDate_literal(HplsqlParser.Date_literalContext ctx) {
         return visitChildren(ctx);
     }
@@ -1955,7 +2086,7 @@ public class HplsqlBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
      * {@link #visitChildren} on {@code ctx}.</p>
      */
     @Override
-    public T visitSingle_quotedString(HplsqlParser.Single_quotedStringContext ctx) {
+    public T visitDouble_quotedString(HplsqlParser.Double_quotedStringContext ctx) {
         return visitChildren(ctx);
     }
 
@@ -1966,7 +2097,7 @@ public class HplsqlBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
      * {@link #visitChildren} on {@code ctx}.</p>
      */
     @Override
-    public T visitDouble_quotedString(HplsqlParser.Double_quotedStringContext ctx) {
+    public T visitSingle_quotedString(HplsqlParser.Single_quotedStringContext ctx) {
         return visitChildren(ctx);
     }
 

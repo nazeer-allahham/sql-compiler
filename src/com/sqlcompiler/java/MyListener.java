@@ -4,13 +4,10 @@ import java.util.LinkedList;
 
 public class MyListener extends HplsqlBaseListener {
 
-    SymbolTable symbolTable;
     private LinkedList<DataType.Attribute> details;
 
     MyListener()
     {
-        this.symbolTable = new SymbolTable();
-        this.symbolTable.allocate();
         try {
             DataType.createPrimaryDataType("int", "int");
             DataType.createPrimaryDataType("real", "float");
@@ -19,20 +16,6 @@ public class MyListener extends HplsqlBaseListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void enterSelect_stmt(HplsqlParser.Select_stmtContext ctx) {
-        super.enterSelect_stmt(ctx);
-
-        System.out.println("Select statement entered");
-    }
-
-    @Override
-    public void exitSelect_stmt(HplsqlParser.Select_stmtContext ctx) {
-        super.exitSelect_stmt(ctx);
-
-        System.out.println("Select statement exited");
     }
 
     @Override
@@ -54,16 +37,20 @@ public class MyListener extends HplsqlBaseListener {
     }
 
     @Override
-    public void enterBegin_end_block(HplsqlParser.Begin_end_blockContext ctx) {
-        super.enterBegin_end_block(ctx);
+    public void exitCreate_table_stmt(HplsqlParser.Create_table_stmtContext ctx) {
+        super.exitCreate_table_stmt(ctx);
 
-        symbolTable.allocate();
+        DataType.createSecondaryDataType(ctx.table_name().getText(), this.details);
+        this.details = null;
     }
 
     @Override
-    public void enterDeclare_var_item(HplsqlParser.Declare_var_itemContext ctx) {
-        super.enterDeclare_var_item(ctx);
+    public void enterCreate_table_columns_item(HplsqlParser.Create_table_columns_itemContext ctx) {
+        super.enterCreate_table_columns_item(ctx);
 
-        symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(0).getText(), ctx.getChild(1).getText(), ""));
+        if (this.details == null) {
+            details = new LinkedList<>();
+        }
+        details.add(new DataType.Attribute(ctx.getChild(0).getText(), ctx.getChild(1).getText()));
     }
 }

@@ -1,6 +1,5 @@
 // Generated from E:/ite-fourth-year/compilers/projects/sql-compiler/src/com/sqlcompiler/antlr\Hplsql.g4 by ANTLR 4.7.2
 package com.sqlcompiler.java;
-
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -8,7 +7,7 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  * by {@link HplsqlParser}.
  *
  * @param <T> The return type of the visit operation. Use {@link Void} for
- *            operations with no return type.
+ * operations with no return type.
  */
 public interface HplsqlVisitor<T> extends ParseTreeVisitor<T> {
     /**
@@ -76,12 +75,60 @@ public interface HplsqlVisitor<T> extends ParseTreeVisitor<T> {
     T visitError_stmt(HplsqlParser.Error_stmtContext ctx);
 
     /**
+     * Visit a parse tree produced by {@link HplsqlParser#invalid_select}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitInvalid_select(HplsqlParser.Invalid_selectContext ctx);
+
+    /**
+     * Visit a parse tree produced by {@link HplsqlParser#invalid_where_clause}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitInvalid_where_clause(HplsqlParser.Invalid_where_clauseContext ctx);
+
+    /**
+     * Visit a parse tree produced by {@link HplsqlParser#invalid_from_clause}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitInvalid_from_clause(HplsqlParser.Invalid_from_clauseContext ctx);
+
+    /**
      * Visit a parse tree produced by {@link HplsqlParser#invalid_bool_expr}.
      *
      * @param ctx the parse tree
      * @return the visitor result
      */
     T visitInvalid_bool_expr(HplsqlParser.Invalid_bool_exprContext ctx);
+
+    /**
+     * Visit a parse tree produced by {@link HplsqlParser#invalid_bool_expr_atom}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitInvalid_bool_expr_atom(HplsqlParser.Invalid_bool_expr_atomContext ctx);
+
+    /**
+     * Visit a parse tree produced by {@link HplsqlParser#invalid_bool_expr_binary}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitInvalid_bool_expr_binary(HplsqlParser.Invalid_bool_expr_binaryContext ctx);
+
+    /**
+     * Visit a parse tree produced by {@link HplsqlParser#invalid_bool_expr_binary_operator}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitInvalid_bool_expr_binary_operator(HplsqlParser.Invalid_bool_expr_binary_operatorContext ctx);
 
     /**
      * Visit a parse tree produced by {@link HplsqlParser#invalid_cpp_function_stmt}.
@@ -114,14 +161,6 @@ public interface HplsqlVisitor<T> extends ParseTreeVisitor<T> {
      * @return the visitor result
      */
     T visitInvalid_cpp_function_param(HplsqlParser.Invalid_cpp_function_paramContext ctx);
-
-    /**
-     * Visit a parse tree produced by {@link HplsqlParser#invalid_cpp_function_body}.
-     *
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    T visitInvalid_cpp_function_body(HplsqlParser.Invalid_cpp_function_bodyContext ctx);
 
     /**
      * Visit a parse tree produced by {@link HplsqlParser#exception_block}.
@@ -796,6 +835,14 @@ public interface HplsqlVisitor<T> extends ParseTreeVisitor<T> {
     T visitReturn_stmt(HplsqlParser.Return_stmtContext ctx);
 
     /**
+     * Visit a parse tree produced by {@link HplsqlParser#cpp_stmt}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitCpp_stmt(HplsqlParser.Cpp_stmtContext ctx);
+
+    /**
      * Visit a parse tree produced by {@link HplsqlParser#cpp_function_stmt}.
      *
      * @param ctx the parse tree
@@ -900,12 +947,12 @@ public interface HplsqlVisitor<T> extends ParseTreeVisitor<T> {
     T visitCpp_for_stmt_var_incr_caluse(HplsqlParser.Cpp_for_stmt_var_incr_caluseContext ctx);
 
     /**
-     * Visit a parse tree produced by {@link HplsqlParser#cpp_for_stmt_var_incr_}.
+     * Visit a parse tree produced by {@link HplsqlParser#cpp_for_stmt_var_incr}.
      *
      * @param ctx the parse tree
      * @return the visitor result
      */
-    T visitCpp_for_stmt_var_incr_(HplsqlParser.Cpp_for_stmt_var_incr_Context ctx);
+    T visitCpp_for_stmt_var_incr(HplsqlParser.Cpp_for_stmt_var_incrContext ctx);
 
     /**
      * Visit a parse tree produced by {@link HplsqlParser#cpp_for_stmt_body}.
@@ -916,12 +963,44 @@ public interface HplsqlVisitor<T> extends ParseTreeVisitor<T> {
     T visitCpp_for_stmt_body(HplsqlParser.Cpp_for_stmt_bodyContext ctx);
 
     /**
-     * Visit a parse tree produced by {@link HplsqlParser#cpp_body_content}.
+     * Visit a parse tree produced by {@link HplsqlParser#cpp_declare_assignment_stmt}.
      *
      * @param ctx the parse tree
      * @return the visitor result
      */
-    T visitCpp_body_content(HplsqlParser.Cpp_body_contentContext ctx);
+    T visitCpp_declare_assignment_stmt(HplsqlParser.Cpp_declare_assignment_stmtContext ctx);
+
+    /**
+     * Visit a parse tree produced by {@link HplsqlParser#cpp_declare_stmt}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitCpp_declare_stmt(HplsqlParser.Cpp_declare_stmtContext ctx);
+
+    /**
+     * Visit a parse tree produced by {@link HplsqlParser#cpp_assignment_stmt}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitCpp_assignment_stmt(HplsqlParser.Cpp_assignment_stmtContext ctx);
+
+    /**
+     * Visit a parse tree produced by {@link HplsqlParser#cpp_return_stmt}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitCpp_return_stmt(HplsqlParser.Cpp_return_stmtContext ctx);
+
+    /**
+     * Visit a parse tree produced by {@link HplsqlParser#cpp_scope}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitCpp_scope(HplsqlParser.Cpp_scopeContext ctx);
 
     /**
      * Visit a parse tree produced by {@link HplsqlParser#while_stmt}.
@@ -1396,6 +1475,22 @@ public interface HplsqlVisitor<T> extends ParseTreeVisitor<T> {
     T visitFunc_param(HplsqlParser.Func_paramContext ctx);
 
     /**
+     * Visit a parse tree produced by {@link HplsqlParser#write_stmt}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitWrite_stmt(HplsqlParser.Write_stmtContext ctx);
+
+    /**
+     * Visit a parse tree produced by {@link HplsqlParser#write_stmt_string}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitWrite_stmt_string(HplsqlParser.Write_stmt_stringContext ctx);
+
+    /**
      * Visit a parse tree produced by {@link HplsqlParser#date_literal}.
      *
      * @param ctx the parse tree
@@ -1420,15 +1515,6 @@ public interface HplsqlVisitor<T> extends ParseTreeVisitor<T> {
     T visitIdent(HplsqlParser.IdentContext ctx);
 
     /**
-     * Visit a parse tree produced by the {@code single_quotedString}
-     * labeled alternative in {@link HplsqlParser#string}.
-     *
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    T visitSingle_quotedString(HplsqlParser.Single_quotedStringContext ctx);
-
-    /**
      * Visit a parse tree produced by the {@code double_quotedString}
      * labeled alternative in {@link HplsqlParser#string}.
      *
@@ -1436,6 +1522,15 @@ public interface HplsqlVisitor<T> extends ParseTreeVisitor<T> {
      * @return the visitor result
      */
     T visitDouble_quotedString(HplsqlParser.Double_quotedStringContext ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code single_quotedString}
+     * labeled alternative in {@link HplsqlParser#string}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitSingle_quotedString(HplsqlParser.Single_quotedStringContext ctx);
 
     /**
      * Visit a parse tree produced by {@link HplsqlParser#int_number}.

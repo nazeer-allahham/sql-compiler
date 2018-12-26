@@ -4,16 +4,23 @@ import java.util.HashMap;
 
 class SymbolTable {
 
-    private Scope currentScope = null;
+    private Scope currentScope;
+
+    SymbolTable() {
+        DataType.createPrimaryDataType("int", "int");
+        DataType.createPrimaryDataType("real", "float");
+        DataType.createPrimaryDataType("string", "char[]");
+        DataType.createPrimaryDataType("bool", "boolean");
+
+        currentScope = new Scope(null);
+    }
 
     void allocate() {
         currentScope = new Scope(currentScope);
     }
 
     void free() {
-        while (currentScope != null) {
-            currentScope = currentScope.parent;
-        }
+        currentScope = currentScope.parent;
     }
 
     Symbol lookup(String name) {
@@ -82,30 +89,6 @@ class SymbolTable {
         Symbol(String name, String type, String attribute) {
             this.name = name;
             this.type = type;
-            this.attribute = attribute;
-        }
-
-        public String getType() {
-            return type;
-        }
-
-        public void setType(String type) {
-            this.type = type;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getAttribute() {
-            return attribute;
-        }
-
-        public void setAttribute(String attribute) {
             this.attribute = attribute;
         }
 

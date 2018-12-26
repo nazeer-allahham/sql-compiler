@@ -25,7 +25,7 @@ proc_block :
 
 stmt :
       error_stmt
-    | cpp_stmt
+    | assignment_stmt
     | associate_locator_stmt
     | break_stmt
     | call_stmt
@@ -51,6 +51,7 @@ stmt :
     | select_stmt
     | invalid_select
     | while_stmt
+    | cpp_stmt
     | label
     | null_stmt
     | expr_stmt
@@ -58,7 +59,8 @@ stmt :
     ;
 
 error_stmt:
-        invalid_cpp_function_stmt
+       invalid_bool_expr
+    |  invalid_cpp_function_stmt
     ;
 invalid_select:
      (T_SELECT | T_SEL) select_list into_clause? (from_clause|invalid_from_clause)? (where_clause|invalid_where_clause)? group_by_clause? (having_clause | qualify_clause)? order_by_clause? select_options?
@@ -75,13 +77,23 @@ invalid_from_clause:
 invalid_bool_expr:
         T_NOT? bool_expr T_CLOSE_P
     |   T_NOT? T_OPEN_P bool_expr
+    |   invalid_bool_expr_atom
+    ;
 
+invalid_bool_expr_atom :
+        invalid_bool_expr_binary
+    ;
+
+invalid_bool_expr_binary :
+        expr invalid_bool_expr_binary_operator expr
+    ;
+
+invalid_bool_expr_binary_operator :
+        ident
     ;
 
 invalid_cpp_function_stmt:
-        invalid_cpp_function_header invalid_cpp_function_body
-    |   invalid_cpp_function_header cpp_function_body
-    |   cpp_function_header invalid_cpp_function_body
+        invalid_cpp_function_header cpp_function_body
     ;
 
 invalid_cpp_function_header:
@@ -100,11 +112,6 @@ invalid_cpp_function_params_clause:
 
 invalid_cpp_function_param:
         ident   // I choose here ident beacuse it's can match dtype and ident so we can match type without name and name without type status.
-    ;
-
-invalid_cpp_function_body:
-        T_OPEN_B (cpp_stmt)*
-    |   (cpp_stmt)*  T_CLOSE_B
     ;
 
 // Exception block
@@ -569,7 +576,9 @@ cpp_stmt:
             cpp_function_stmt
         |   cpp_for_stmt
         |   cpp_if_stmt
+        |   cpp_declare_stmt
         |   cpp_assignment_stmt
+        |   cpp_declare_assignment_stmt
         |   cpp_return_stmt
         |   write_stmt
         |   create_table_stmt
@@ -639,8 +648,16 @@ cpp_for_stmt_body:
         cpp_scope | cpp_stmt
     ;
 
-cpp_assignment_stmt:
+cpp_declare_assignment_stmt:
         (dtype | T_VAR) ident '=' stmt T_SEMICOLON
+    ;
+
+cpp_declare_stmt:
+        (dtype | T_VAR) ident T_SEMICOLON
+    ;
+
+cpp_assignment_stmt:
+        ident '=' stmt T_SEMICOLON
     ;
 
 cpp_return_stmt:
@@ -648,7 +665,7 @@ cpp_return_stmt:
     ;
 
 cpp_scope:
-        T_OPEN_B cpp_stmt* T_CLOSE_B
+        T_OPEN_B (cpp_stmt | cpp_scope)* T_CLOSE_B
     ;
 
 // WHILE loop statement
@@ -998,7 +1015,7 @@ func_param :
     ;
 
 write_stmt:
-        T_WRITE T_OPEN_P  write_stmt_string T_CLOSE_P
+        T_WRITE T_OPEN_P  write_stmt_string T_CLOSE_P T_SEMICOLON?
     ;
 
 write_stmt_string:
@@ -1044,6 +1061,10 @@ bool_literal :
 // NULL constant
 null_const :
         T_NULL
+    ;
+
+new_line:
+        '\n'
     ;
 
 // Tokens that are not reserved words and can be used as identifiers
