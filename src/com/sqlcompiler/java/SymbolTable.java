@@ -35,8 +35,13 @@ class SymbolTable {
 
     void insert(Symbol symbol) {
         if (currentScope.children.containsKey(symbol.name)) {
-            System.err.println(String.format("Variable already declared : %s", symbol));
+            System.err.println(String.format("Variable already declared: %s", symbol));
             System.exit(1);
+        }else {
+            if (DataTypes.instance(symbol.type) == null) {
+                System.err.println(String.format("Type already undefined: %s", symbol));
+                System.exit(1);
+            }
         }
         currentScope.children.put(symbol.name, symbol);
     }
@@ -89,7 +94,10 @@ class SymbolTable {
         Symbol(String name, String type, String attribute) {
             this.name = name;
             this.type = type;
-            this.attribute = attribute;
+            if (attribute.compareTo("") == 0)
+                this.attribute = "variable";
+            else
+                this.attribute = attribute;
         }
 
         @Override

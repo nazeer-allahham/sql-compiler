@@ -27,7 +27,6 @@ class AbstractSyntaxTree {
         while (!queue.isEmpty()) {
             RuleContext ctx = queue.pop();
 
-            boolean flag = false;
             switch (ctx.getRuleIndex()) {
                 case HplsqlParser.RULE_create_type_items_item:
                 case HplsqlParser.RULE_create_table_columns_item:
@@ -42,7 +41,7 @@ class AbstractSyntaxTree {
                 case HplsqlParser.RULE_cpp_scope:
                 case HplsqlParser.RULE_begin_end_block:
                     symbolTable.allocate();
-                    flag = true;
+                    currentDepth = ctx.depth();
                     break;
 
                 case HplsqlParser.RULE_declare_var_item:
@@ -69,14 +68,20 @@ class AbstractSyntaxTree {
                     // TODO: 26/12/2018 Check if types are compatible
                     break;
 
+                case HplsqlParser.RULE_create_procedure_stmt:
+                    symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(2).getText(), "", ctx.getChild(1).getText()));
+                    break;
+                case HplsqlParser.RULE_create_function_stmt:
+                    symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(2).getText(), ctx.getChild(4).getText().substring(7), ctx.getChild(1).getText()));
+                    break;
+
+                case HplsqlParser.RULE_cpp_function_stmt:
+                    symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(), ctx.getChild(0).getText(), ""));
+                    break;
+
                 case HplsqlParser.RULE_new_line:
                     lnCount++;
                     break;
-            }
-
-            if (currentDepth != ctx.depth() && flag) {
-                symbolTable.free();
-                currentDepth = ctx.depth();
             }
 
             if (ctx.getChildCount() == 1) {
@@ -91,9 +96,12 @@ class AbstractSyntaxTree {
                         parent.children.set(i, temp);
                     }
                 }
-            } else if (ctx.getChildCount() == 0) {
-                System.out.println(ctx.getText());
             }
+
+            if (currentDepth > ctx.depth()) {
+                symbolTable.free();
+            }
+
             for (int i = 0; i < ctx.getChildCount(); i++) {
                 ParseTree element = ctx.getChild(i);
                 if (element instanceof RuleContext) {

@@ -24,8 +24,7 @@ proc_block :
     ;
 
 stmt :
-      error_stmt
-    | assignment_stmt
+      assignment_stmt
     | associate_locator_stmt
     | break_stmt
     | call_stmt
@@ -52,6 +51,7 @@ stmt :
     | invalid_select
     | while_stmt
     | cpp_stmt
+    //| error_stmt
     | label
     | null_stmt
     | expr_stmt
@@ -1110,7 +1110,7 @@ non_reserved_words :
     |   T_CONTINUE
     |   T_COUNT
     |   T_COUNT_BIG
-    |   T_CREATE
+    //|   T_CREATE
     |   T_CREATION
     |   T_CREATOR
     |   T_CS
