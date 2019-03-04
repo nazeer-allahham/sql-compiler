@@ -5,6 +5,7 @@ import java.util.HashMap;
 class SymbolTable {
 
     private Scope currentScope;
+    private boolean state;
 
     SymbolTable() {
         DataType.createPrimaryDataType("int", "int");
@@ -17,6 +18,10 @@ class SymbolTable {
 
     void allocate() {
         currentScope = new Scope(currentScope);
+        if (state)
+        {
+            currentScope.parent.scopeChildren.put(currentScope.parent.lastChildName, currentScope);
+        }
     }
 
     void free() {
@@ -33,16 +38,18 @@ class SymbolTable {
         return null;
     }
 
-    void insert(Symbol symbol) {
+    void insert(Symbol symbol, boolean state) {
         if (currentScope.children.containsKey(symbol.name)) {
             System.err.println(String.format("Variable already declared: %s", symbol));
             System.exit(1);
         }else {
-            if (DataTypes.instance(symbol.type) == null) {
+            if (symbol.type.compareTo("") == 0 && DataTypes.instance(symbol.type) == null) {
                 System.err.println(String.format("Type already undefined: %s", symbol));
                 System.exit(1);
             }
         }
+        this.state = state;
+        currentScope.lastChildName = symbol.name;
         currentScope.children.put(symbol.name, symbol);
     }
 
@@ -66,7 +73,9 @@ class SymbolTable {
         private static int ID = 0;
         int id;
         HashMap<String, Symbol> children;
+        HashMap<String, Scope> scopeChildren;
         Scope parent;
+        String lastChildName;
 
         Scope(Scope parent) {
             if (parent != null) {
@@ -74,6 +83,7 @@ class SymbolTable {
             }
             this.id = ++ID;
             this.children = new HashMap<>();
+            this.scopeChildren = new HashMap<>();
         }
 
         @Override

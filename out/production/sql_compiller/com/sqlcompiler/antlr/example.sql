@@ -1,1 +1,4 @@
-create function f() return 1number is
+void f1 () {
+
+  user tt = (select * from x y);
+}

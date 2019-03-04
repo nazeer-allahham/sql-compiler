@@ -1,6 +1,4 @@
-CREATE FUNCTION f1 ( p_name INT)
-RETURNS string
-IS
-BEGIN
-RETURN ('Welcome '|| p_name);
-END;
+void f1 () {
+
+  user tt = (select * from x y);
+}

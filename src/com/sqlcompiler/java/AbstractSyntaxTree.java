@@ -45,16 +45,21 @@ class AbstractSyntaxTree {
                     break;
 
                 case HplsqlParser.RULE_declare_var_item:
+                    symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
+                            ctx.getChild(1).getText(),
+                            ""), false);
+                    break;
+
                 case HplsqlParser.RULE_cpp_declare_stmt:
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
-                            ctx.getChild(0).getText(),
-                            ""));
+                            ctx.getChild(1).getText(),
+                            ""), false);
                     break;
 
                 case HplsqlParser.RULE_cpp_declare_assignment_stmt:
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
                             ctx.getChild(0).getText(),
-                            ""));
+                            ""), false);
                     // TODO: 26/12/2018 Check if types are compatible
                     break;
 
@@ -69,14 +74,14 @@ class AbstractSyntaxTree {
                     break;
 
                 case HplsqlParser.RULE_create_procedure_stmt:
-                    symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(2).getText(), "", ctx.getChild(1).getText()));
+                    symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(2).getText(), "", ctx.getChild(1).getText().toLowerCase()), true);
                     break;
                 case HplsqlParser.RULE_create_function_stmt:
-                    symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(2).getText(), ctx.getChild(4).getText().substring(7), ctx.getChild(1).getText()));
+                    symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(2).getText(), ctx.getChild(4).getText().substring(7), ctx.getChild(1).getText().toLowerCase()), true);
                     break;
 
                 case HplsqlParser.RULE_cpp_function_stmt:
-                    symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(), ctx.getChild(0).getText(), ""));
+                    symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(), ctx.getChild(0).getText(), "function"), true);
                     break;
 
                 case HplsqlParser.RULE_new_line:

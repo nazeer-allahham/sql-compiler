@@ -42,14 +42,15 @@ public class Main {
 //            MyVisitor visitor = new MyVisitor();
 //            System.out.println(visitor.visitProgram(parser.program()));
 
-//            DataTypes.save("my_data_types.json");
-//            DataTypes.restore("my_data_types.json");
+            DataTypes.restore("my_data_types.json");
 
 //            System.out.println(DataTypes.get("user", DataType.DATA_TYPE_TO_STRING_FLAT));
 
             AbstractSyntaxTree ast = new AbstractSyntaxTree();
             ast.build(parser.program());
             ast.print();
+
+//            DataTypes.save("my_data_types.json");
 
             System.out.printf("%d data type is detected\n", DataTypes.count());
 

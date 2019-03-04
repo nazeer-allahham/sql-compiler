@@ -38,6 +38,7 @@ stmt :
     | create_package_body_stmt
     | create_procedure_stmt
     | create_table_stmt
+    | create_type_stmt
     | declare_stmt
     | exec_stmt
     | exit_stmt
@@ -47,11 +48,70 @@ stmt :
     | quit_stmt
     | return_stmt
     | select_stmt
+    | invalid_select
     | while_stmt
+    | cpp_stmt
+    //| error_stmt
     | label
     | null_stmt
     | expr_stmt
     | semicolon_stmt
+    ;
+
+error_stmt:
+       invalid_bool_expr
+    |  invalid_cpp_function_stmt
+    ;
+invalid_select:
+     (T_SELECT | T_SEL) select_list into_clause? (from_clause|invalid_from_clause)? (where_clause|invalid_where_clause)? group_by_clause? (having_clause | qualify_clause)? order_by_clause? select_options?
+
+;
+invalid_where_clause:
+        bool_expr
+     |T_WHERE invalid_bool_expr
+;
+
+invalid_from_clause:
+         from_table_clause (from_join_clause)*
+;
+invalid_bool_expr:
+        T_NOT? bool_expr T_CLOSE_P
+    |   T_NOT? T_OPEN_P bool_expr
+    |   invalid_bool_expr_atom
+    ;
+
+invalid_bool_expr_atom :
+        invalid_bool_expr_binary
+    ;
+
+invalid_bool_expr_binary :
+        expr invalid_bool_expr_binary_operator expr
+    ;
+
+invalid_bool_expr_binary_operator :
+        ident
+    ;
+
+invalid_cpp_function_stmt:
+        invalid_cpp_function_header cpp_function_body
+    ;
+
+invalid_cpp_function_header:
+        ident T_OPEN_P (cpp_function_params_clause | invalid_cpp_function_params_clause) T_CLOSE_P
+    |   dtype T_OPEN_P (cpp_function_params_clause | invalid_cpp_function_params_clause) T_CLOSE_P
+    |   dtype ident T_OPEN_P invalid_cpp_function_params_clause T_CLOSE_P
+    |   dtype ident (cpp_function_params_clause | invalid_cpp_function_params_clause) T_CLOSE_P
+    |   dtype ident T_OPEN_P (cpp_function_params_clause | invalid_cpp_function_params_clause)
+    ;
+
+invalid_cpp_function_params_clause:
+        (invalid_cpp_function_param | cpp_function_param) T_COMMA
+    |   invalid_cpp_function_param (T_COMMA (cpp_function_param | invalid_cpp_function_param))*
+    |   cpp_function_param (T_COMMA cpp_function_param)* (T_COMMA invalid_cpp_function_param)+ (T_COMMA cpp_function_param)*
+    ;
+
+invalid_cpp_function_param:
+        ident   // I choose here ident beacuse it's can match dtype and ident so we can match type without name and name without type status.
     ;
 
 // Exception block
@@ -155,6 +215,23 @@ declare_condition_item :
 // Condition handler declaration
 declare_handler_item :
         (T_CONTINUE | T_EXIT) T_HANDLER T_FOR (T_SQLEXCEPTION | T_SQLWARNING | T_NOT T_FOUND | ident) single_block_stmt
+    ;
+
+// Create or define type statement
+create_type_stmt:
+        T_CREATE T_TYPE table_name create_type_definition
+    ;
+
+create_type_definition:
+        T_OPEN_P create_type_items T_CLOSE_P
+    ;
+
+create_type_items:
+        create_type_items_item (T_COMMA create_type_items_item)*
+    ;
+
+create_type_items_item:
+        string T_COLON string
     ;
 
 // DECLARE TEMPORARY TABLE statement
@@ -432,19 +509,19 @@ if_stmt :
     ;
 
 if_plsql_stmt :
-        T_IF (bool_expr | non_balanced_bool_expr) T_THEN block elseif_block* else_block? T_END T_IF
+        T_IF bool_expr T_THEN block elseif_block* else_block? T_END T_IF
     ;
 
 if_tsql_stmt :
-        T_IF (bool_expr | non_balanced_bool_expr) single_block_stmt (T_ELSE single_block_stmt)?
+        T_IF bool_expr single_block_stmt (T_ELSE single_block_stmt)?
     ;
 
 if_bteq_stmt :
-        '.' T_IF (bool_expr | non_balanced_bool_expr) T_THEN single_block_stmt
+        '.' T_IF bool_expr T_THEN single_block_stmt
     ;
 
 elseif_block :
-        (T_ELSIF | T_ELSEIF) (bool_expr | non_balanced_bool_expr) T_THEN block
+        (T_ELSIF | T_ELSEIF) bool_expr T_THEN block
     ;
 
 else_block :
@@ -452,7 +529,7 @@ else_block :
     ;
 
 exit_stmt :
-        T_EXIT L_ID? (T_WHEN (bool_expr | non_balanced_bool_expr))?
+        T_EXIT L_ID? (T_WHEN bool_expr)?
     ;
 
 leave_stmt :
@@ -494,9 +571,106 @@ return_stmt :
         T_RETURN expr?
     ;
 
+// C plus plus section
+cpp_stmt:
+            cpp_function_stmt
+        |   cpp_for_stmt
+        |   cpp_if_stmt
+        |   cpp_declare_stmt
+        |   cpp_assignment_stmt
+        |   cpp_declare_assignment_stmt
+        |   cpp_return_stmt
+        |   write_stmt
+        |   create_table_stmt
+        |   create_type_stmt
+    ;
+
+cpp_function_stmt:
+        cpp_function_header cpp_function_body
+    ;
+
+cpp_function_header:
+        dtype ident T_OPEN_P cpp_function_params_clause? T_CLOSE_P
+    ;
+
+cpp_function_params_clause:
+        cpp_function_param (T_COMMA cpp_function_param)*
+    ;
+
+cpp_function_param:
+        dtype ident
+    ;
+
+cpp_function_body:
+        cpp_scope
+    ;
+
+cpp_if_stmt :
+        T_IF T_OPEN_P bool_expr T_CLOSE_P cpp_for_stmt_body cpp_elseif_clause* cpp_else_clause?
+    ;
+
+cpp_elseif_clause :
+        (T_ELSIF | T_ELSEIF) T_OPEN_P bool_expr T_CLOSE_P cpp_for_stmt_body
+    ;
+
+cpp_else_clause :
+        T_ELSE cpp_for_stmt_body
+    ;
+
+cpp_for_stmt:
+        cpp_for_stmt_header cpp_for_stmt_body
+    ;
+
+cpp_for_stmt_header:
+        T_FOR T_OPEN_P cpp_for_params_clause T_SEMICOLON bool_expr T_SEMICOLON cpp_for_stmt_var_incr_caluse  T_CLOSE_P
+    ;
+
+cpp_for_params_clause:
+        cpp_for_param (T_COMMA cpp_for_param)*
+    ;
+
+cpp_for_param:
+     dtype? ident T_EQUAL L_INT
+    ;
+
+cpp_for_stmt_var_incr_caluse:
+        cpp_for_stmt_var_incr (T_COMMA cpp_for_stmt_var_incr)*
+    ;
+
+cpp_for_stmt_var_incr:
+        ident '+' '+'
+    |   ident T_EQUAL ident
+    |   ident T_EQUAL ident ('+' | '-' | '*' | '/' | '%') ident (('+' | '-' | '*' | '/' | '%') ident)*
+    |   ident ('+' | '-' | '*' | '/' | '%') T_EQUAL ident
+    ;
+
+cpp_for_stmt_body:
+        cpp_scope | cpp_stmt
+    ;
+
+cpp_declare_assignment_stmt:
+        (dtype | T_VAR) ident '=' stmt T_SEMICOLON
+    ;
+
+cpp_declare_stmt:
+        (dtype | T_VAR) ident T_SEMICOLON
+    ;
+
+cpp_assignment_stmt:
+        ident '=' stmt T_SEMICOLON
+    ;
+
+cpp_return_stmt:
+        T_RETURN expr T_SEMICOLON
+    ;
+
+cpp_scope:
+        T_OPEN_B (cpp_stmt | cpp_scope)* T_CLOSE_B
+    ;
+
 // WHILE loop statement
 while_stmt :
-        T_WHILE (bool_expr | non_balanced_bool_expr) (T_DO | T_LOOP | T_THEN | T_BEGIN) block T_END (T_WHILE | T_LOOP)?
+        T_WHILE bool_expr (T_DO | T_LOOP | T_THEN | T_BEGIN) block T_END (T_WHILE | T_LOOP)?
     ;
 
 // FOR (Integer range) statement
@@ -516,19 +690,7 @@ using_clause :
 
 // SELECT statement
 select_stmt :
-        cte_select_stmt? fullselect_stmt
-    ;
-
-cte_select_stmt :
-        T_WITH cte_select_stmt_item (T_COMMA cte_select_stmt_item)*
-    ;
-
-cte_select_stmt_item :
-        ident cte_select_cols? T_AS T_OPEN_P fullselect_stmt T_CLOSE_P
-    ;
-
-cte_select_cols :
-        T_OPEN_P ident (T_COMMA ident)* T_CLOSE_P
+        fullselect_stmt
     ;
 
 fullselect_stmt :
@@ -601,7 +763,7 @@ from_subselect_clause :
 
 from_join_clause :
         T_COMMA from_table_clause
-    |   from_join_type_clause from_table_clause T_ON (bool_expr | non_balanced_bool_expr)
+    |   from_join_type_clause from_table_clause T_ON bool_expr
     ;
 
 from_join_type_clause :
@@ -634,7 +796,7 @@ table_name :
     ;
 
 where_clause :
-        T_WHERE (bool_expr | non_balanced_bool_expr)
+        T_WHERE bool_expr
     ;
 
 group_by_clause :
@@ -642,11 +804,11 @@ group_by_clause :
     ;
 
 having_clause :
-        T_HAVING (bool_expr | non_balanced_bool_expr)
+        T_HAVING bool_expr
     ;
 
 qualify_clause :
-        T_QUALIFY (bool_expr | non_balanced_bool_expr)
+        T_QUALIFY bool_expr
     ;
 
 order_by_clause :
@@ -662,16 +824,11 @@ select_options_item :
     |   T_WITH (T_RR | T_RS | T_CS | T_UR) (T_USE T_AND T_KEEP (T_EXCLUSIVE | T_UPDATE | T_SHARE) T_LOCKS)?
     ;
 
-
 // Boolean condition
 bool_expr :
         T_NOT? T_OPEN_P bool_expr T_CLOSE_P
     |   bool_expr bool_expr_logical_operator bool_expr
     |   bool_expr_atom
-    ;
-
-non_balanced_bool_expr :
-        T_NOT? T_OPEN_P? bool_expr T_CLOSE_P?
     ;
 
 bool_expr_atom :
@@ -728,6 +885,7 @@ expr :
     |   expr_interval
     |   expr_concat
     |   expr_case
+    |   expr_cursor_attribute
     |   expr_agg_window_func
     |   expr_spec_func
     |   expr_func
@@ -738,7 +896,6 @@ expr_atom :
         date_literal
     |   timestamp_literal
     |   bool_literal
-    |   invalid_variable_name
     |   ident
     |   string
     |   dec_number
@@ -857,6 +1014,14 @@ func_param :
         {!_input.LT(1).getText().equalsIgnoreCase("INTO")}? (ident T_EQUAL T_GREATER?)? expr
     ;
 
+write_stmt:
+        T_WRITE T_OPEN_P  write_stmt_string T_CLOSE_P T_SEMICOLON?
+    ;
+
+write_stmt_string:
+        (string | ident) ('+' (string | ident))*
+    ;
+
 // DATE 'YYYY-MM-DD' literal
 date_literal :
         T_DATE string
@@ -867,19 +1032,14 @@ timestamp_literal :
         T_TIMESTAMP string
     ;
 
-invalid_variable_name :
-       '1' L_INVALID_NAME
-    ;
-
 ident :
         (L_ID | non_reserved_words) ('.' (L_ID | non_reserved_words))*
     ;
 
-
 // String literal (single or double quoted)
 string :
-        L_S_STRING                          # single_quotedString
-    |   L_D_STRING                          # double_quotedString
+        L_D_STRING                          # double_quotedString
+    |   L_S_STRING                          # single_quotedString
     ;
 
 // Integer (positive or negative)
@@ -903,7 +1063,7 @@ null_const :
         T_NULL
     ;
 
-new_line :
+new_line:
         '\n'
     ;
 
@@ -950,7 +1110,7 @@ non_reserved_words :
     |   T_CONTINUE
     |   T_COUNT
     |   T_COUNT_BIG
-    |   T_CREATE
+    //|   T_CREATE
     |   T_CREATION
     |   T_CREATOR
     |   T_CS
@@ -1172,8 +1332,10 @@ non_reserved_words :
     // T_WHERE reserved word
     |   T_WHILE
     |   T_WITH
+    |   T_WRITE
     |   T_XML
     |   T_YES
+
     ;
 
 // Lexer rules
@@ -1465,6 +1627,8 @@ T_STDEV                : S T D E V ;
 T_SYSDATE              : S Y S D A T E ;
 T_VARIANCE             : V A R I A N C E ;
 T_USER                 : U S E R;
+T_WRITE                : W R I T E;
+
 
 T_ADD          : '+' ;
 T_COLON        : ':' ;
@@ -1492,10 +1656,6 @@ T_SUB          : '-' ;
 
 L_ID        : L_ID_PART                                                // Identifier
             ;
-
-L_INVALID_NAME : L_INVALID_NAME_PART
-            ;
-
 L_S_STRING  : '\'' (('\'' '\'') | ('\\' '\'') | ~('\''))* '\''         // Single quoted string literal
             ;
 L_D_STRING  : '"' (L_STR_ESC_D | .)*? '"'                              // Double quoted string literal
@@ -1514,6 +1674,7 @@ L_FILE      : ([a-zA-Z] ':' '\\'?)? L_ID ('\\' L_ID)*                  // File p
 L_LABEL     : ([a-zA-Z] | L_DIGIT | '_')* ':'
             ;
 
+
 fragment
 L_ID_PART  :
              [a-zA-Z] ([a-zA-Z] | L_DIGIT | '_')*                           // Identifier part
@@ -1530,11 +1691,6 @@ L_STR_ESC_D :                                                          // Double
 fragment
 L_DIGIT     : [0-9]                                                    // Digit
             ;
-
-fragment
-L_INVALID_NAME_PART  : (L_DIGIT | '@' | ':' | '#' | '$' | '[' | ']' | '{' | '}' | '(' | ')') ([a-zA-Z] | L_DIGIT | '_')+
-    ;
-
 fragment
 L_BLANK     : (' ' | '\t' | '\r' | '\n')
             ;
