@@ -1,5 +1,8 @@
 package com.sqlcompiler.java;
 
+import com.sqlcompiler.antlr.HplsqlBaseListener;
+import com.sqlcompiler.antlr.HplsqlParser;
+
 import java.util.LinkedList;
 
 public class MyListener extends HplsqlBaseListener {

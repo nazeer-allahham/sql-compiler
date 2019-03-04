@@ -1,5 +1,8 @@
 package com.sqlcompiler.java;
 
+import com.sqlcompiler.antlr.HplsqlBaseVisitor;
+import com.sqlcompiler.antlr.HplsqlParser;
+
 public class MyVisitor extends HplsqlBaseVisitor<String> {
     @Override
     public String visitCreate_table_stmt(HplsqlParser.Create_table_stmtContext ctx) {

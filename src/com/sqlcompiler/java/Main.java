@@ -1,63 +1,42 @@
 package com.sqlcompiler.java;
 
-import org.antlr.v4.runtime.CharStream;
-import org.antlr.v4.runtime.CharStreams;
-import org.antlr.v4.runtime.CommonTokenStream;
+import com.sqlcompiler.Environment;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
-
 /**
-  *  1- parenthesis.
-  *  2- expected 'from' found 'form'
-  *  3- invalid variable name
-  *  4- begin end
-  *  5- semi colon separate between each two statements in function
-  *  6- for syntax
-  *  7- min max ...
-  *  8- if syntax
-  *  9- aliases one word or one string
-  **/
+ * 1- Parenthesis.
+ * 2- Expected 'from' found 'form'
+ * 3- Invalid variable name
+ * 4- Begin end
+ * 5- Semi colon separate between each two statements in function
+ * 6- For syntax
+ * 7- Min max ...
+ * 8- If syntax
+ * 9- Aliases one word or one string
+ **/
 
 public class Main {
 
-    public static void main(@NotNull String[] args)
-    {
-        new Main();
+    public static void main(@NotNull String[] args) {
+        start();
     }
 
-    private Main()
-    {
-        try {
-            CharStream input = CharStreams.fromFileName("E:\\ite-fourth-year\\compilers\\projects\\sql-compiler\\src\\com\\sqlcompiler\\antlr\\example.sql");
+    private static void start() {
+        Compiler compiler = new Compiler(Compiler.COMPILE + Compiler.RETRIEVE_TYPES);
 
-            HplsqlLexer lexer = new HplsqlLexer(input);
-            CommonTokenStream commonTokenStream = new CommonTokenStream(lexer);
-            HplsqlParser parser = new HplsqlParser(commonTokenStream);
+        // Lexical analysis
+        compiler.lexical_analyzer();
 
-//            MyListener listener = new MyListener();
-//            ParseTreeWalker walker = new ParseTreeWalker();
-//            walker.walk(listener, tree);
+        // Parsing
+        compiler.parse();
 
-//            MyVisitor visitor = new MyVisitor();
-//            System.out.println(visitor.visitProgram(parser.program()));
+        // Semantic analysis
+        compiler.semantic_analyzer();
 
-            DataTypes.restore("my_data_types.json");
+        // Storing our data types
+        DataTypes.save(Environment.DATA_TYPES_PATH);
 
-//            System.out.println(DataTypes.get("user", DataType.DATA_TYPE_TO_STRING_FLAT));
-
-            AbstractSyntaxTree ast = new AbstractSyntaxTree();
-            ast.build(parser.program());
-            ast.print();
-
-//            DataTypes.save("my_data_types.json");
-
-            System.out.printf("%d data type is detected\n", DataTypes.count());
-
-            ast.symbolTable.print();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        // Print the results
+        compiler.print();
     }
 }
