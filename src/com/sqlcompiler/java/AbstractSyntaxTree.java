@@ -8,6 +8,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedList;
 
+import static com.sqlcompiler.java.DataType.PRIMARY_DATA_TYPE;
+
 class AbstractSyntaxTree {
     SymbolTable symbolTable = new SymbolTable();
     private Integer lnCount = 1;
@@ -36,7 +38,7 @@ class AbstractSyntaxTree {
 
                 case HplsqlParser.RULE_create_type_stmt:
                 case HplsqlParser.RULE_create_table_stmt:
-                    DataTypes.initialize(ctx.getChild(2).getText());
+                    DataTypes.initialize(PRIMARY_DATA_TYPE, ctx.getChild(2).getText());
                     break;
 
                 case HplsqlParser.RULE_cpp_scope:

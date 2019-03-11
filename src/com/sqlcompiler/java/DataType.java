@@ -10,68 +10,20 @@ public class DataType implements Serializable {
     static final int DATA_TYPE_TO_STRING = 0;
     static final int DATA_TYPE_TO_STRING_FLAT = 1;
 
-    public static class Attribute implements Serializable {
-        private String name;
-        private String type;
-
-        Attribute(String name, String type) {
-            if(name.charAt(0) == '\'' && name.charAt(name.length() - 1) == '\'')
-                name = name.substring(1, name.length()-1);
-
-            if(type.charAt(0) == '\'' && type.charAt(type.length() - 1) == '\'')
-                type = type.substring(1, type.length()-1);
-
-            this.name = name;
-            this.type = type;
-        }
-
-        @Override
-        public String toString() {
-
-            if(DataTypes.isPrimitive(this.type))
-                return String.format(" { \"name\" => \"%s\", \"type\" => \"%s\" } ", this.name, this.type);
-            else
-                return String.format(" { \"name\" => \"%s\", \"type\" => \"%s\", \"details\" => %s } ", this.name, this.type, DataTypes.get(this.type, DATA_TYPE_TO_STRING));
-        }
-
-        String toString(int mode) {
-
-            if(mode == DATA_TYPE_TO_STRING || DataTypes.isPrimitive(this.type))
-                return toString();
-            else
-            {
-                DataType obj = DataTypes.instance(this.type);
-                StringBuilder mString = new StringBuilder();
-                assert obj != null;
-                for(Attribute attr : obj.attributes)
-                {
-                    if(DataTypes.isPrimitive(attr.type))
-                        mString.append(String.format(" { \"name\" => \"%s_%s\", \"type\" => \"%s\" } ", this.name, attr.name, attr.type));
-                    else
-                        mString.append(DataTypes.get(attr.type, DATA_TYPE_TO_STRING_FLAT));
-                }
-                return mString.toString();
-            }
-        }
-    }
-
-    static void createSecondaryDataType(@NotNull String name, LinkedList<Attribute> attributes)
-    {
-        DataType mDataType = new DataType(name, 2);
-        mDataType.attributes = attributes;
-
-        DataTypes.add(mDataType);
-    }
-
-    static void createPrimaryDataType(@NotNull String name, @NotNull String type) {
-        DataType dt = new DataType(name, 1);
-        dt.addAttribute(new Attribute(name, type));
-
-        DataTypes.add(dt);
-    }
+    static final int PRIMARY_DATA_TYPE = 0;
+    static final int SECONDARY_DATA_TYPE = 1;
+    private String name;
 
     private int rank;
-    private String                name;
+
+    static String toUnquotedString(@NotNull String string) {
+        char first = string.charAt(0);
+        char last = string.charAt(string.length() - 1);
+
+        if(first == '\'' && last == '\'')
+            return string.substring(1, string.length() - 1);
+        return string;
+    }
     private LinkedList<Attribute> attributes;
 
     DataType(String name, int rank) {
@@ -87,14 +39,12 @@ public class DataType implements Serializable {
         }
     }
 
-    void setRank(int rank) {
+    private void setRank(int rank) {
         this.rank = rank;
     }
 
     private void setName(String name) {
-        if(name.charAt(0) == '\'' && name.charAt(name.length() - 1) == '\'')
-            name = name.substring(1, name.length()-1);
-        this.name = name;
+        this.name = toUnquotedString(name);
     }
 
     String getName() {
@@ -105,24 +55,34 @@ public class DataType implements Serializable {
         return rank;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder mString = new StringBuilder("{ ");
-        for (Attribute attr : this.attributes) {
-            mString.append(attr.toString());
-        }
-        mString.append(" }");
-        return mString.toString();
+    LinkedList<Attribute> getAttributes() {
+        return attributes;
     }
 
-    String toString(int mode) {
+    void setAttributes(LinkedList<Attribute> attributes) {
+        this.attributes = attributes;
+    }
+
+    @Override
+    public String toString() {
+        return this.toJson(DATA_TYPE_TO_STRING);
+    }
+
+    String toJson(int mode) {
         if(mode == DATA_TYPE_TO_STRING)
-            return toString();
+        {
+            StringBuilder mString = new StringBuilder("{ ");
+            for (Attribute attr : this.attributes) {
+                mString.append(attr.toString());
+            }
+            mString.append(" }");
+            return mString.toString();
+        }
         else
         {
             StringBuilder mString = new StringBuilder("{ ");
             for (Attribute attr : this.attributes) {
-                mString.append(attr.toString(DATA_TYPE_TO_STRING_FLAT));
+                mString.append(attr.toJson(DATA_TYPE_TO_STRING_FLAT));
             }
             mString.append(" }");
             return mString.toString();

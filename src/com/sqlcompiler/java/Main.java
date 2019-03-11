@@ -1,6 +1,5 @@
 package com.sqlcompiler.java;
 
-import com.sqlcompiler.Environment;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -33,10 +32,10 @@ public class Main {
         // Semantic analysis
         compiler.semantic_analyzer();
 
-        // Storing our data types
-        DataTypes.save(Environment.DATA_TYPES_PATH);
-
         // Print the results
         compiler.print();
+        compiler.printDataTypes();
+
+//        System.out.println(Objects.requireNonNull(DataTypes.get("student")).toJson(DataType.DATA_TYPE_TO_STRING_FLAT));
     }
 }

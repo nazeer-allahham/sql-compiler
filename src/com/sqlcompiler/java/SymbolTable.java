@@ -8,10 +8,10 @@ class SymbolTable {
     private boolean state;
 
     SymbolTable() {
-        DataType.createPrimaryDataType("int", "int");
-        DataType.createPrimaryDataType("real", "float");
-        DataType.createPrimaryDataType("string", "char[]");
-        DataType.createPrimaryDataType("bool", "boolean");
+        DataTypes.createPrimaryType("int", "int");
+        DataTypes.createPrimaryType("real", "float");
+        DataTypes.createPrimaryType("string", "char[]");
+        DataTypes.createPrimaryType("bool", "boolean");
 
         currentScope = new Scope(null);
     }
@@ -43,7 +43,7 @@ class SymbolTable {
             System.err.println(String.format("Variable already declared: %s", symbol));
             System.exit(1);
         }else {
-            if (symbol.type.compareTo("") == 0 && DataTypes.instance(symbol.type) == null) {
+            if (symbol.type.compareTo("") == 0 && DataTypes.get(symbol.type) == null) {
                 System.err.println(String.format("Type already undefined: %s", symbol));
                 System.exit(1);
             }

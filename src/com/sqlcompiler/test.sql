@@ -1,4 +1,1 @@
-void f1 () {
-
-  user tt = (select * from x y);
-}
+select * from t where (id = 1);

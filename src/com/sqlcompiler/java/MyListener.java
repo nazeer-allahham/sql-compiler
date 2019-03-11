@@ -7,15 +7,15 @@ import java.util.LinkedList;
 
 public class MyListener extends HplsqlBaseListener {
 
-    private LinkedList<DataType.Attribute> details;
+    private LinkedList<Attribute> details;
 
     MyListener()
     {
         try {
-            DataType.createPrimaryDataType("int", "int");
-            DataType.createPrimaryDataType("real", "float");
-            DataType.createPrimaryDataType("string", "char[]");
-            DataType.createPrimaryDataType("bool", "boolean");
+            DataTypes.createPrimaryType("int", "int");
+            DataTypes.createPrimaryType("real", "float");
+            DataTypes.createPrimaryType("string", "char[]");
+            DataTypes.createPrimaryType("bool", "boolean");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -25,7 +25,7 @@ public class MyListener extends HplsqlBaseListener {
     public void exitCreate_type_stmt(HplsqlParser.Create_type_stmtContext ctx) {
         super.exitCreate_type_stmt(ctx);
 
-        DataType.createSecondaryDataType(ctx.table_name().getText(), this.details);
+        DataTypes.createSecondaryType(ctx.table_name().getText(), this.details);
         this.details = null;
     }
 
@@ -36,14 +36,14 @@ public class MyListener extends HplsqlBaseListener {
         if(this.details == null) {
             details = new LinkedList<>();
         }
-        details.add(new DataType.Attribute(ctx.getChild(0).getText(), ctx.getChild(2).getText()));
+        details.add(new Attribute(ctx.getChild(0).getText(), ctx.getChild(2).getText()));
     }
 
     @Override
     public void exitCreate_table_stmt(HplsqlParser.Create_table_stmtContext ctx) {
         super.exitCreate_table_stmt(ctx);
 
-        DataType.createSecondaryDataType(ctx.table_name().getText(), this.details);
+        DataTypes.createSecondaryType(ctx.table_name().getText(), this.details);
         this.details = null;
     }
 
@@ -54,6 +54,6 @@ public class MyListener extends HplsqlBaseListener {
         if (this.details == null) {
             details = new LinkedList<>();
         }
-        details.add(new DataType.Attribute(ctx.getChild(0).getText(), ctx.getChild(1).getText()));
+        details.add(new Attribute(ctx.getChild(0).getText(), ctx.getChild(1).getText()));
     }
 }

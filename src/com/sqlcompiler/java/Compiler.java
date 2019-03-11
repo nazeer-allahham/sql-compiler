@@ -23,20 +23,21 @@ class Compiler {
     public Compiler(int mode) {
         if((mode & 1) != 0)
         {
-            log("reading input file...");
+            log("Reading input file:");
             try {
                 this.input = CharStreams.fromFileName(Environment.INPUT_PATH);
-                log("reading has been finished successfully!");
+                log("reading has been finished successfully.");
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
         if ((mode & 2) != 0) // then must retrieve data types
         {
-            log("retrieving data types...");
+            log("retrieving data types:");
             DataTypes.restore(Environment.DATA_TYPES_PATH);
-            log(String.valueOf(DataTypes.count()), "data type has been retrieved");
+            log(String.valueOf(DataTypes.count()), "data type has been retrieved.");
         }
+        log("divider");
     }
 
     void lexical_analyzer() {
@@ -50,11 +51,9 @@ class Compiler {
     }
 
     void semantic_analyzer() {
-        /*
-        MyListener listener = new MyListener();
-        ParseTreeWalker walker = new ParseTreeWalker();
-        walker.walk(listener, tree);
-        */
+//        MyListener listener = new MyListener();
+//        ParseTreeWalker walker = new ParseTreeWalker();
+//        walker.walk(listener, parser.program());
 
         /*
         MyVisitor visitor = new MyVisitor();
@@ -64,16 +63,33 @@ class Compiler {
         this.AST = new AbstractSyntaxTree();
         this.AST.build(parser.program());
         this.AST.print();
+
+        // Storing our data types
+        log("divider");
+        DataTypes.save(Environment.DATA_TYPES_PATH);
     }
 
     void print() {
-        System.out.printf("%d data type has been saved successfully.", DataTypes.count());
-        this.AST.symbolTable.print();
+        log("divider");
+        System.out.printf("%d data type has been saved successfully.\n", DataTypes.count());
+        if (this.AST != null)
+            this.AST.symbolTable.print();
+        log("divider");
+    }
+
+    void printDataTypes() {
+//        DataTypes.print();
     }
 
     private void log(@NotNull String ...args) {
         for (String arg : args) {
-            System.out.printf("%s\t", arg);
+            if (arg.equals("divider"))
+            {
+                System.out.print("________________________________________________");
+            }else
+            {
+                System.out.printf("%s\t", arg);
+            }
         }
         System.out.println();
     }

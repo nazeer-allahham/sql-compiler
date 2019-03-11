@@ -4,65 +4,100 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
 import java.lang.reflect.Type;
 import java.nio.charset.Charset;
 import java.util.HashMap;
+import java.util.LinkedList;
+
+import static com.sqlcompiler.java.DataType.DATA_TYPE_TO_STRING_FLAT;
+import static com.sqlcompiler.java.DataType.PRIMARY_DATA_TYPE;
+import static com.sqlcompiler.java.DataType.SECONDARY_DATA_TYPE;
 
 class DataTypes {
-    private static HashMap<String, DataType> types = new HashMap<>();
+    /**
+     * TYPES
+     * */
+    private static HashMap<String, DataType> TYPES = new HashMap<>();
+    private static DataType ITEM = null;
 
-    static void add(DataType type) {
-        types.put(type.getName(), type);
-    }
 
-    private static DataType item = null;
-
-    static void initialize(String name) {
-        flush();
-        item = new DataType(name, 2);
-    }
-
-    static void addAttribute(String name, String type) {
-        item.addAttribute(new DataType.Attribute(name, type));
-    }
-
-    static void flush() {
-        if (item != null) {
-            add(item);
+    DataTypes() {
+        if (TYPES.size() == 0) {
+            generatePrimaryTypes();
         }
     }
 
-    static void delete(@NotNull DataType type) { types.remove(type.getName()); }
+    private static void generatePrimaryTypes() {
+        DataTypes.createPrimaryType("int", "int");
+        DataTypes.createPrimaryType("real", "float");
+        DataTypes.createPrimaryType("string", "char[]");
+        DataTypes.createPrimaryType("bool", "boolean");
+    }
+
+
+    static void createPrimaryType(String name, String type) {
+        DataType dataType = new DataType(name, PRIMARY_DATA_TYPE);
+        dataType.addAttribute(new Attribute(name, type));
+        TYPES.put(name, dataType);
+    }
+
+    static void createSecondaryType(String name, Attribute ...attributes) {
+        DataType dataType = new DataType(name, SECONDARY_DATA_TYPE);
+        if (attributes != null) {
+            for (Attribute attribute : attributes) {
+                dataType.addAttribute(attribute);
+            }
+        }
+        TYPES.put(name, dataType);
+    }
+
+    static void createSecondaryType(String name, LinkedList<Attribute> attributes) {
+        DataType dataType = new DataType(name, SECONDARY_DATA_TYPE);
+        dataType.setAttributes(attributes);
+        TYPES.put(name, dataType);
+    }
+
+    private static void push(DataType dataType) {
+        TYPES.put(dataType.getName(), dataType);
+    }
+
+    static void flush() {
+        if (ITEM != null) {
+            push(ITEM);
+        }
+    }
+
+    static void initialize(Integer rank, String name) {
+        flush();
+        ITEM = new DataType(name, rank);
+    }
+
+    static void addAttribute(String name, String type) {
+        ITEM.addAttribute(new Attribute(name, type));
+    }
+
+    static void delete(@NotNull DataType type) { TYPES.remove(type.getName()); }
 
     static boolean isPrimitive(String typeName) {
-        if (types.containsKey(typeName)) {
-            return types.get(typeName).getRank() == 1;
+        if (TYPES.containsKey(typeName)) {
+            return TYPES.get(typeName).getRank() == PRIMARY_DATA_TYPE;
         }
         return false;
     }
 
-    @Nullable
-    static DataType instance(String typeName) {
-        if (types.containsKey(typeName)) {
-            return types.get(typeName);
+    static DataType get(String typeName) {
+        if (TYPES.containsKey(typeName)) {
+            return TYPES.get(typeName);
         }
         return null;
     }
 
-    static String get(String typeName, int mode) {
-        if (types.containsKey(typeName)) {
-            return types.get(typeName).toString(mode);
-        }
-        return "";
-    }
-
     static int count() {
-        if(types == null)
+        if(TYPES == null)
             return -1;
-        return types.size();
+        return TYPES.size();
     }
 
     static void save(String path) {
@@ -76,27 +111,29 @@ class DataTypes {
             }
             FileOutputStream stream = new FileOutputStream(file);
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(stream, Charset.forName("UTF-8")));
-            writer.write(gson.toJson(types));
+            writer.write(gson.toJson(TYPES));
             writer.close();
+            System.out.println("Data types save is completed successfully!");
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Data types save is completed successfully!");
     }
 
     static void restore(String path) {
         try {
             Gson gson = new Gson();
-            DataTypes.types.clear();
-            try {
-                Type type = new TypeToken<HashMap<String, DataType>>(){}.getType();
-                types = gson.fromJson(new InputStreamReader(new FileInputStream(new File(path))), type);
-            }catch (JsonSyntaxException e) {
-                e.printStackTrace();
-            }
-        } catch (IOException e) {
+            DataTypes.TYPES.clear();
+            Type type = new TypeToken<HashMap<String, DataType>>(){}.getType();
+            TYPES = gson.fromJson(new InputStreamReader(new FileInputStream(new File(path))), type);
+            System.out.println("Data types restore is completed successfully.");
+        } catch (JsonSyntaxException | IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Data types restore is completed successfully!");
+    }
+
+    static void print() {
+        for(DataType type : TYPES.values()) {
+            System.out.println(type.toJson(DATA_TYPE_TO_STRING_FLAT));
+        }
     }
 }

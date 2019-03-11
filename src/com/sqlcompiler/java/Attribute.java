@@ -1,0 +1,44 @@
+package com.sqlcompiler.java;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.io.Serializable;
+import java.util.Objects;
+
+public class Attribute implements Serializable {
+    private String name;
+    private String type;
+
+    Attribute(@NotNull String name, @NotNull String type) {
+        this.name = DataType.toUnquotedString(name);
+        this.type = DataType.toUnquotedString(type);
+    }
+
+    @Override
+    public String toString() {
+        return this.toJson(DataType.DATA_TYPE_TO_STRING);
+    }
+
+    String toJson(Integer mode) {
+        if(DataTypes.isPrimitive(this.type))
+            return String.format("{ \"name\" => \"%s\", \"type\" => \"%s\" } ", this.name, this.type);
+        else if (mode == DataType.DATA_TYPE_TO_STRING)
+            return String.format(" { \"name\" => \"%s\", \"type\" => \"%s\", \"details\" => %s } ", this.name,
+                                                                                                    this.type,
+                                                                                                    Objects.requireNonNull(DataTypes.get(this.type)).toJson(DataType.DATA_TYPE_TO_STRING));
+        else
+        {
+            DataType obj = DataTypes.get(this.type);
+            StringBuilder mString = new StringBuilder();
+            assert obj != null;
+            for(Attribute attr : obj.getAttributes())
+            {
+                if(DataTypes.isPrimitive(attr.type))
+                    mString.append(String.format(" { \"name\" => \"%s_%s\", \"type\" => \"%s\" } ", this.name, attr.name, attr.type));
+                else
+                    mString.append(Objects.requireNonNull(DataTypes.get(attr.type)).toJson(DataType.DATA_TYPE_TO_STRING_FLAT));
+            }
+            return mString.toString();
+        }
+    }
+}
