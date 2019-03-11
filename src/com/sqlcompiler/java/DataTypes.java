@@ -11,7 +11,6 @@ import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import static com.sqlcompiler.java.DataType.DATA_TYPE_TO_STRING_FLAT;
 import static com.sqlcompiler.java.DataType.PRIMARY_DATA_TYPE;
 import static com.sqlcompiler.java.DataType.SECONDARY_DATA_TYPE;
 
@@ -23,17 +22,12 @@ class DataTypes {
     private static DataType ITEM = null;
 
 
-    DataTypes() {
-        if (TYPES.size() == 0) {
-            generatePrimaryTypes();
-        }
-    }
-
-    private static void generatePrimaryTypes() {
+    static void generatePrimaryTypes() {
         DataTypes.createPrimaryType("int", "int");
         DataTypes.createPrimaryType("real", "float");
         DataTypes.createPrimaryType("string", "char[]");
         DataTypes.createPrimaryType("bool", "boolean");
+        //System.out.println(TYPES.size());
     }
 
 
@@ -132,8 +126,8 @@ class DataTypes {
     }
 
     static void print() {
-        for(DataType type : TYPES.values()) {
-            System.out.println(type.toJson(DATA_TYPE_TO_STRING_FLAT));
+        for(String key : TYPES.keySet()) {
+            System.out.println("138 " + TYPES.get(key));
         }
     }
 }

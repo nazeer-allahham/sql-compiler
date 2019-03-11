@@ -36,6 +36,7 @@ public class Main {
         compiler.print();
         compiler.printDataTypes();
 
-//        System.out.println(Objects.requireNonNull(DataTypes.get("student")).toJson(DataType.DATA_TYPE_TO_STRING_FLAT));
+        //System.out.println(DataTypes.get("tt") != null ? "true" : "false");
+        //System.out.println(new Attribute("name" , "typr"));
     }
 }

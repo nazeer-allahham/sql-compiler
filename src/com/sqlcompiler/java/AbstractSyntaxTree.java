@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedList;
 
-import static com.sqlcompiler.java.DataType.PRIMARY_DATA_TYPE;
+import static com.sqlcompiler.java.DataType.SECONDARY_DATA_TYPE;
 
 class AbstractSyntaxTree {
     SymbolTable symbolTable = new SymbolTable();
@@ -38,7 +38,7 @@ class AbstractSyntaxTree {
 
                 case HplsqlParser.RULE_create_type_stmt:
                 case HplsqlParser.RULE_create_table_stmt:
-                    DataTypes.initialize(PRIMARY_DATA_TYPE, ctx.getChild(2).getText());
+                    DataTypes.initialize(SECONDARY_DATA_TYPE, ctx.getChild(2).getText());
                     break;
 
                 case HplsqlParser.RULE_cpp_scope:
@@ -49,13 +49,14 @@ class AbstractSyntaxTree {
 
                 case HplsqlParser.RULE_declare_var_item:
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
-                            ctx.getChild(1).getText(),
+                            ctx.getChild(0).getText(),
                             ""), false);
                     break;
 
                 case HplsqlParser.RULE_cpp_declare_stmt:
+                case HplsqlParser.RULE_cpp_function_param:
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
-                            ctx.getChild(1).getText(),
+                            ctx.getChild(0).getText(),
                             ""), false);
                     break;
 
@@ -80,11 +81,15 @@ class AbstractSyntaxTree {
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(2).getText(), "", ctx.getChild(1).getText().toLowerCase()), true);
                     break;
                 case HplsqlParser.RULE_create_function_stmt:
-                    symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(2).getText(), ctx.getChild(4).getText().substring(7), ctx.getChild(1).getText().toLowerCase()), true);
+                    symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(2).getText(),
+                                                              // substring start from 7  to get the actual type value (miss return)
+                                                              ctx.getChild(4).getText().substring(7),
+                                                              ctx.getChild(1).getText().toLowerCase()), true);
                     break;
 
                 case HplsqlParser.RULE_cpp_function_stmt:
-                    symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(), ctx.getChild(0).getText(), "function"), true);
+                    symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(0).getChild(1).getText(),
+                                                              ctx.getChild(0).getChild(0).getText(), "function"), true);
                     break;
 
                 case HplsqlParser.RULE_new_line:

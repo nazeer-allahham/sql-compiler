@@ -1,1 +1,5 @@
-select * from t where (id = 1);
+void f1 (int xxxxxxx, int xxxxxxx) {
+    tt xx = select * from tttt;
+    int xxx = 1;
+
+}
