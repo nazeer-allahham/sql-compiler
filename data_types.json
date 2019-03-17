@@ -1,0 +1,52 @@
+{
+  "tt": {
+    "name": "tt",
+    "rank": 1,
+    "attributes": [
+      {
+        "name": "id",
+        "type": ":"
+      }
+    ]
+  },
+  "string": {
+    "name": "string",
+    "rank": 0,
+    "attributes": [
+      {
+        "name": "string",
+        "type": "char[]"
+      }
+    ]
+  },
+  "bool": {
+    "name": "bool",
+    "rank": 0,
+    "attributes": [
+      {
+        "name": "bool",
+        "type": "boolean"
+      }
+    ]
+  },
+  "real": {
+    "name": "real",
+    "rank": 0,
+    "attributes": [
+      {
+        "name": "real",
+        "type": "float"
+      }
+    ]
+  },
+  "int": {
+    "name": "int",
+    "rank": 0,
+    "attributes": [
+      {
+        "name": "int",
+        "type": "int"
+      }
+    ]
+  }
+}
