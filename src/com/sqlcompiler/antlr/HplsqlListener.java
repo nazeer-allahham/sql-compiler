@@ -1952,15 +1952,15 @@ public interface HplsqlListener extends ParseTreeListener {
 	 */
 	void exitNull_const(HplsqlParser.Null_constContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link HplsqlParser#new_line}.
+	 * Enter a parse tree produced by {@link HplsqlParser#white_spaces}.
 	 * @param ctx the parse tree
 	 */
-	void enterNew_line(HplsqlParser.New_lineContext ctx);
+	void enterWhite_spaces(HplsqlParser.White_spacesContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link HplsqlParser#new_line}.
+	 * Exit a parse tree produced by {@link HplsqlParser#white_spaces}.
 	 * @param ctx the parse tree
 	 */
-	void exitNew_line(HplsqlParser.New_lineContext ctx);
+	void exitWhite_spaces(HplsqlParser.White_spacesContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link HplsqlParser#non_reserved_words}.
 	 * @param ctx the parse tree

@@ -1177,11 +1177,11 @@ public interface HplsqlVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitNull_const(HplsqlParser.Null_constContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link HplsqlParser#new_line}.
+	 * Visit a parse tree produced by {@link HplsqlParser#white_spaces}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNew_line(HplsqlParser.New_lineContext ctx);
+	T visitWhite_spaces(HplsqlParser.White_spacesContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link HplsqlParser#non_reserved_words}.
 	 * @param ctx the parse tree

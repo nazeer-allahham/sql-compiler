@@ -116,7 +116,7 @@ call_stmt :
         T_CALL ident (T_OPEN_P expr_func_params? T_CLOSE_P | expr_func_params)?
     ;
 
-// CLOSE cursor statement
+// close cursor statement
 close_stmt :
         T_CLOSE L_ID
     ;

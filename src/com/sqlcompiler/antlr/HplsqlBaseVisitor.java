@@ -1375,7 +1375,7 @@ public class HplsqlBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitNew_line(HplsqlParser.New_lineContext ctx) { return visitChildren(ctx); }
+	@Override public T visitWhite_spaces(HplsqlParser.White_spacesContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

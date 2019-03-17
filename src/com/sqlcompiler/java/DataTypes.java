@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -16,8 +17,8 @@ import static com.sqlcompiler.java.DataType.SECONDARY_DATA_TYPE;
 
 class DataTypes {
     /**
-     * TYPES
-     * */
+      * TYPES
+      **/
     private static HashMap<String, DataType> TYPES = new HashMap<>();
     private static DataType ITEM = null;
 
@@ -29,7 +30,6 @@ class DataTypes {
         DataTypes.createPrimaryType("bool", "boolean");
         //System.out.println(TYPES.size());
     }
-
 
     static void createPrimaryType(String name, String type) {
         DataType dataType = new DataType(name, PRIMARY_DATA_TYPE);
@@ -81,6 +81,7 @@ class DataTypes {
         return false;
     }
 
+    @Nullable
     static DataType get(String typeName) {
         if (TYPES.containsKey(typeName)) {
             return TYPES.get(typeName);
@@ -95,7 +96,7 @@ class DataTypes {
     }
 
     static void save(String path) {
-
+        console.log(console.open);
         Gson gson = new Gson();
         File file = new File(path);
         try {
@@ -107,27 +108,32 @@ class DataTypes {
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(stream, Charset.forName("UTF-8")));
             writer.write(gson.toJson(TYPES));
             writer.close();
-            System.out.println("Data types save is completed successfully!");
+            console.log("Data types save is completed successfully!");
         } catch (IOException e) {
             e.printStackTrace();
         }
+        console.log(console.close);
     }
 
     static void restore(String path) {
+        console.log(console.open);
         try {
             Gson gson = new Gson();
             DataTypes.TYPES.clear();
             Type type = new TypeToken<HashMap<String, DataType>>(){}.getType();
             TYPES = gson.fromJson(new InputStreamReader(new FileInputStream(new File(path))), type);
-            System.out.println("Data types restore is completed successfully.");
+            console.log("Data types restore is completed successfully.");
         } catch (JsonSyntaxException | IOException e) {
             e.printStackTrace();
         }
+        console.log(console.close);
     }
 
     static void print() {
+        console.log(console.open);
         for(String key : TYPES.keySet()) {
-            System.out.println("138 " + TYPES.get(key));
+            console.log(TYPES.get(key).toJson(DataType.DATA_TYPE_TO_STRING_FLAT));
         }
+        console.log(console.close);
     }
 }

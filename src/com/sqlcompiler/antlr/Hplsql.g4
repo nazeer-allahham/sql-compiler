@@ -176,7 +176,7 @@ call_stmt :
         T_CALL ident (T_OPEN_P expr_func_params? T_CLOSE_P | expr_func_params)?
     ;
 
-// CLOSE cursor statement
+// close cursor statement
 close_stmt :
         T_CLOSE L_ID
     ;
@@ -1063,8 +1063,8 @@ null_const :
         T_NULL
     ;
 
-new_line:
-        '\n'
+white_spaces:
+        L_WS+
     ;
 
 // Tokens that are not reserved words and can be used as identifiers

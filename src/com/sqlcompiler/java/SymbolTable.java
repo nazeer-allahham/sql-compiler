@@ -3,16 +3,13 @@ package com.sqlcompiler.java;
 import java.util.HashMap;
 
 class SymbolTable {
-
     private Scope currentScope;
     private boolean state;
 
     SymbolTable() {
-        DataTypes.createPrimaryType("int", "int");
-        DataTypes.createPrimaryType("real", "float");
-        DataTypes.createPrimaryType("string", "char[]");
-        DataTypes.createPrimaryType("bool", "boolean");
-
+        if (DataTypes.count() == 0) {
+            DataTypes.generatePrimaryTypes();
+        }
         currentScope = new Scope(null);
     }
 
@@ -51,14 +48,6 @@ class SymbolTable {
         this.state = state;
         currentScope.lastChildName = symbol.name;
         currentScope.children.put(symbol.name, symbol);
-    }
-
-    void setAttribute() {
-
-    }
-
-    void getAttribute() {
-
     }
 
     void print() {

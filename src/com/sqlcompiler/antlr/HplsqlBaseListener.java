@@ -2344,13 +2344,13 @@ public class HplsqlBaseListener implements HplsqlListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNew_line(HplsqlParser.New_lineContext ctx) { }
+	@Override public void enterWhite_spaces(HplsqlParser.White_spacesContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitNew_line(HplsqlParser.New_lineContext ctx) { }
+	@Override public void exitWhite_spaces(HplsqlParser.White_spacesContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
