@@ -22,12 +22,11 @@ class DataTypes {
     private static HashMap<String, DataType> TYPES = new HashMap<>();
     private static DataType ITEM = null;
 
-
     static void generatePrimaryTypes() {
         DataTypes.createPrimaryType("int", "int");
-        DataTypes.createPrimaryType("real", "float");
-        DataTypes.createPrimaryType("string", "char[]");
-        DataTypes.createPrimaryType("bool", "boolean");
+        DataTypes.createPrimaryType("real", "real");
+        DataTypes.createPrimaryType("string", "string");
+        DataTypes.createPrimaryType("boolean", "boolean");
         //System.out.println(TYPES.size());
     }
 
@@ -64,8 +63,9 @@ class DataTypes {
     }
 
     static void initialize(Integer rank, String name) {
-        flush();
+        //flush();
         ITEM = new DataType(name, rank);
+        push(ITEM);
     }
 
     static void addAttribute(String name, String type) {
@@ -82,7 +82,9 @@ class DataTypes {
     }
 
     @Nullable
-    static DataType get(String typeName) {
+    static DataType get(@NotNull String typeName) {
+//        if (typeName.endsWith("[]"))
+//            typeName = typeName.substring(0, typeName.length()-2);
         if (TYPES.containsKey(typeName)) {
             return TYPES.get(typeName);
         }
@@ -121,7 +123,9 @@ class DataTypes {
             Gson gson = new Gson();
             DataTypes.TYPES.clear();
             Type type = new TypeToken<HashMap<String, DataType>>(){}.getType();
-            TYPES = gson.fromJson(new InputStreamReader(new FileInputStream(new File(path))), type);
+            HashMap<String, DataType> temp = gson.fromJson(new InputStreamReader(new FileInputStream(new File(path))), type);
+            if (temp != null)
+                TYPES = temp;
             console.log("Data types restore is completed successfully.");
         } catch (JsonSyntaxException | IOException e) {
             e.printStackTrace();

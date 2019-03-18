@@ -29,14 +29,20 @@ public class Attribute implements Serializable {
         else
         {
             DataType obj = DataTypes.get(this.type);
+            if (obj == null)
+                return "";
             StringBuilder mString = new StringBuilder();
-            assert obj != null;
-            for(Attribute attr : obj.getAttributes())
-            {
-                if(DataTypes.isPrimitive(attr.type))
-                    mString.append(String.format(" { \"name\" => \"%s_%s\", \"type\" => \"%s\" } ", this.name, attr.name, attr.type));
-                else
-                    mString.append(Objects.requireNonNull(DataTypes.get(attr.type)).toJson(DataType.DATA_TYPE_TO_STRING_FLAT));
+            try {
+                for(Attribute attr : obj.getAttributes())
+                {
+                    if(DataTypes.isPrimitive(attr.type))
+                        mString.append(String.format(" { \"name\" => \"%s_%s\", \"type\" => \"%s\" } ", this.name, attr.name, attr.type));
+                    else
+                        mString.append(Objects.requireNonNull(DataTypes.get(attr.type)).toJson(DataType.DATA_TYPE_TO_STRING_FLAT));
+                }
+            }
+            catch (Exception e) {
+                System.out.print("Error:"  + obj.getName());
             }
             return mString.toString();
         }

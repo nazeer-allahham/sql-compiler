@@ -35,6 +35,9 @@ class Compiler {
         {
             console.log(console.open, "retrieving data types:");
             DataTypes.restore(Environment.DATA_TYPES_PATH);
+            if (DataTypes.count() == 0) {
+                DataTypes.generatePrimaryTypes();
+            }
             console.log(String.format("%d data type has been retrieved.", DataTypes.count()));
             console.log(console.close);
         }

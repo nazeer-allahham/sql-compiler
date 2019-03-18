@@ -1469,30 +1469,6 @@ public class HplsqlParser extends Parser {
 		""
 	);
 
-	@Override
-	@Deprecated
-	public String[] getTokenNames() {
-		return tokenNames;
-	}
-
-	@Override
-
-	public Vocabulary getVocabulary() {
-		return VOCABULARY;
-	}
-
-	@Override
-	public String getGrammarFileName() { return "Hplsql.g4"; }
-
-	@Override
-	public String[] getRuleNames() { return ruleNames; }
-
-	@Override
-	public String getSerializedATN() { return _serializedATN; }
-
-	@Override
-	public ATN getATN() { return _ATN; }
-
 	static { RuntimeMetaData.checkVersion("4.7.2", RuntimeMetaData.VERSION); }
 
 	static {
@@ -1507,29 +1483,6 @@ public class HplsqlParser extends Parser {
 				tokenNames[i] = "<INVALID>";
 			}
 		}
-	}
-
-	public final ProgramContext program() throws RecognitionException {
-		ProgramContext _localctx = new ProgramContext(_ctx, getState());
-		enterRule(_localctx, 0, RULE_program);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(390);
-			block();
-			setState(391);
-			match(EOF);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
 	}
 
 	static {
@@ -1601,52 +1554,6 @@ public class HplsqlParser extends Parser {
 		};
 	}
 
-	public final Begin_end_blockContext begin_end_block() throws RecognitionException {
-		Begin_end_blockContext _localctx = new Begin_end_blockContext(_ctx, getState());
-		enterRule(_localctx, 4, RULE_begin_end_block);
-		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(405);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			if (_la==T_DECLARE) {
-				{
-				setState(404);
-				declare_block();
-				}
-			}
-
-			setState(407);
-			match(T_BEGIN);
-			setState(408);
-			block();
-			setState(410);
-			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
-			case 1:
-				{
-				setState(409);
-				exception_block();
-				}
-				break;
-			}
-			setState(412);
-			block_end();
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, "'@'", "'#'", "'%'", "'.'", null, null, null, null, null, null,
@@ -1677,64 +1584,6 @@ public class HplsqlParser extends Parser {
 			"'='", "'=='", "'<>'", "'!='", "'>'", "'>='", "'<'", "'<='", "'*'", "'{'",
 			"'('", "'['", "'}'", "')'", "']'", "';'", "'-'"
 		};
-	}
-
-	public final Single_block_stmtContext single_block_stmt() throws RecognitionException {
-		Single_block_stmtContext _localctx = new Single_block_stmtContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_single_block_stmt);
-		try {
-			setState(425);
-			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
-			case 1:
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(414);
-				match(T_BEGIN);
-				setState(415);
-				block();
-				setState(417);
-				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,5,_ctx) ) {
-				case 1:
-					{
-					setState(416);
-					exception_block();
-					}
-					break;
-				}
-				setState(419);
-				block_end();
-				}
-				break;
-			case 2:
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(421);
-				stmt();
-				setState(423);
-				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
-				case 1:
-					{
-					setState(422);
-					match(T_SEMICOLON);
-					}
-					break;
-				}
-				}
-				break;
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
 	}
 
 	private static String[] makeSymbolicNames() {
@@ -1795,16 +1644,40 @@ public class HplsqlParser extends Parser {
 		};
 	}
 
-	public final Block_endContext block_end() throws RecognitionException {
-		Block_endContext _localctx = new Block_endContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_block_end);
+	@Override
+	@Deprecated
+	public String[] getTokenNames() {
+		return tokenNames;
+	}
+
+	@Override
+
+	public Vocabulary getVocabulary() {
+		return VOCABULARY;
+	}
+
+	@Override
+	public String getGrammarFileName() { return "Hplsql.g4"; }
+
+	@Override
+	public String[] getRuleNames() { return ruleNames; }
+
+	@Override
+	public String getSerializedATN() { return _serializedATN; }
+
+	@Override
+	public ATN getATN() { return _ATN; }
+
+	public final ProgramContext program() throws RecognitionException {
+		ProgramContext _localctx = new ProgramContext(_ctx, getState());
+		enterRule(_localctx, 0, RULE_program);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(427);
-			if (!(!_input.LT(2).getText().equalsIgnoreCase("TRANSACTION"))) throw new FailedPredicateException(this, "!_input.LT(2).getText().equalsIgnoreCase(\"TRANSACTION\")");
-			setState(428);
-			match(T_END);
+			setState(390);
+			block();
+			setState(391);
+			match(EOF);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1869,6 +1742,133 @@ public class HplsqlParser extends Parser {
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,2,_ctx);
 			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public final Begin_end_blockContext begin_end_block() throws RecognitionException {
+		Begin_end_blockContext _localctx = new Begin_end_blockContext(_ctx, getState());
+		enterRule(_localctx, 4, RULE_begin_end_block);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(405);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==T_DECLARE) {
+				{
+				setState(404);
+				declare_block();
+				}
+			}
+
+			setState(407);
+			match(T_BEGIN);
+			setState(408);
+			block();
+			setState(410);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
+			case 1:
+				{
+				setState(409);
+				exception_block();
+				}
+				break;
+			}
+			setState(412);
+			block_end();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public final Single_block_stmtContext single_block_stmt() throws RecognitionException {
+		Single_block_stmtContext _localctx = new Single_block_stmtContext(_ctx, getState());
+		enterRule(_localctx, 6, RULE_single_block_stmt);
+		try {
+			setState(425);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
+			case 1:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(414);
+				match(T_BEGIN);
+				setState(415);
+				block();
+				setState(417);
+				_errHandler.sync(this);
+				switch ( getInterpreter().adaptivePredict(_input,5,_ctx) ) {
+				case 1:
+					{
+					setState(416);
+					exception_block();
+					}
+					break;
+				}
+				setState(419);
+				block_end();
+				}
+				break;
+			case 2:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(421);
+				stmt();
+				setState(423);
+				_errHandler.sync(this);
+				switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
+				case 1:
+					{
+					setState(422);
+					match(T_SEMICOLON);
+					}
+					break;
+				}
+				}
+				break;
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public final Block_endContext block_end() throws RecognitionException {
+		Block_endContext _localctx = new Block_endContext(_ctx, getState());
+		enterRule(_localctx, 8, RULE_block_end);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(427);
+			if (!(!_input.LT(2).getText().equalsIgnoreCase("TRANSACTION"))) throw new FailedPredicateException(this, "!_input.LT(2).getText().equalsIgnoreCase(\"TRANSACTION\")");
+			setState(428);
+			match(T_END);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2399,35 +2399,14 @@ public class HplsqlParser extends Parser {
 		return _localctx;
 	}
 
-	public final Exception_blockContext exception_block() throws RecognitionException {
-		Exception_blockContext _localctx = new Exception_blockContext(_ctx, getState());
-		enterRule(_localctx, 38, RULE_exception_block);
+	public final Invalid_cpp_function_paramContext invalid_cpp_function_param() throws RecognitionException {
+		Invalid_cpp_function_paramContext _localctx = new Invalid_cpp_function_paramContext(_ctx, getState());
+		enterRule(_localctx, 36, RULE_invalid_cpp_function_param);
 		try {
-			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(622);
-			match(T_EXCEPTION);
-			setState(624);
-			_errHandler.sync(this);
-			_alt = 1;
-			do {
-				switch (_alt) {
-				case 1:
-					{
-					{
-					setState(623);
-					exception_block_item();
-					}
-					}
-					break;
-				default:
-					throw new NoViableAltException(this);
-				}
-				setState(626);
-				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,37,_ctx);
-			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
+			setState(620);
+			ident();
 			}
 		}
 		catch (RecognitionException re) {
@@ -2561,43 +2540,35 @@ public class HplsqlParser extends Parser {
 		return _localctx;
 	}
 
-	public final Assignment_stmtContext assignment_stmt() throws RecognitionException {
-		Assignment_stmtContext _localctx = new Assignment_stmtContext(_ctx, getState());
-		enterRule(_localctx, 48, RULE_assignment_stmt);
+	public final Exception_blockContext exception_block() throws RecognitionException {
+		Exception_blockContext _localctx = new Exception_blockContext(_ctx, getState());
+		enterRule(_localctx, 38, RULE_exception_block);
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(642);
+			setState(622);
+			match(T_EXCEPTION);
+			setState(624);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,38,_ctx) ) {
-			case 1:
-				{
-				setState(641);
-				match(T_SET);
-				}
-				break;
-			}
-			setState(644);
-			assignment_stmt_item();
-			setState(649);
-			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,39,_ctx);
-			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
-				if ( _alt==1 ) {
+			_alt = 1;
+			do {
+				switch (_alt) {
+				case 1:
 					{
 					{
-					setState(645);
-					match(T_COMMA);
-					setState(646);
-					assignment_stmt_item();
+					setState(623);
+					exception_block_item();
 					}
 					}
+					break;
+				default:
+					throw new NoViableAltException(this);
 				}
-				setState(651);
+				setState(626);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,39,_ctx);
-			}
+				_alt = getInterpreter().adaptivePredict(_input,37,_ctx);
+			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
 			}
 		}
 		catch (RecognitionException re) {
@@ -2921,120 +2892,110 @@ public class HplsqlParser extends Parser {
 		return _localctx;
 	}
 
-	public final Declare_stmtContext declare_stmt() throws RecognitionException {
-		Declare_stmtContext _localctx = new Declare_stmtContext(_ctx, getState());
-		enterRule(_localctx, 66, RULE_declare_stmt);
+	public final Exception_block_itemContext exception_block_item() throws RecognitionException {
+		Exception_block_itemContext _localctx = new Exception_block_itemContext(_ctx, getState());
+		enterRule(_localctx, 40, RULE_exception_block_item);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(628);
+			match(T_WHEN);
+			setState(629);
+			match(L_ID);
+			setState(630);
+			match(T_THEN);
+			setState(631);
+			block();
+			setState(632);
+			_la = _input.LA(1);
+			if ( _la <= 0 || (_la==T_END || _la==T_WHEN) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public final Semicolon_stmtContext semicolon_stmt() throws RecognitionException {
+		Semicolon_stmtContext _localctx = new Semicolon_stmtContext(_ctx, getState());
+		enterRule(_localctx, 42, RULE_semicolon_stmt);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(634);
+			_la = _input.LA(1);
+			if ( !(_la==T__0 || _la==T__1 || _la==T_DIV || _la==T_SEMICOLON) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public final Assignment_stmtContext assignment_stmt() throws RecognitionException {
+		Assignment_stmtContext _localctx = new Assignment_stmtContext(_ctx, getState());
+		enterRule(_localctx, 48, RULE_assignment_stmt);
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(757);
-			match(T_DECLARE);
-			setState(758);
-			declare_stmt_item();
-			setState(763);
+			setState(642);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,54,_ctx);
+			switch ( getInterpreter().adaptivePredict(_input,38,_ctx) ) {
+			case 1:
+				{
+				setState(641);
+				match(T_SET);
+				}
+				break;
+			}
+			setState(644);
+			assignment_stmt_item();
+			setState(649);
+			_errHandler.sync(this);
+			_alt = getInterpreter().adaptivePredict(_input,39,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(759);
+					setState(645);
 					match(T_COMMA);
-					setState(760);
-					declare_stmt_item();
+					setState(646);
+					assignment_stmt_item();
 					}
 					}
 				}
-				setState(765);
+				setState(651);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,54,_ctx);
-			}
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public final Declare_blockContext declare_block() throws RecognitionException {
-		Declare_blockContext _localctx = new Declare_blockContext(_ctx, getState());
-		enterRule(_localctx, 68, RULE_declare_block);
-		try {
-			int _alt;
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(766);
-			match(T_DECLARE);
-			setState(767);
-			declare_stmt_item();
-			setState(768);
-			match(T_SEMICOLON);
-			setState(774);
-			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,55,_ctx);
-			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
-				if ( _alt==1 ) {
-					{
-					{
-					setState(769);
-					declare_stmt_item();
-					setState(770);
-					match(T_SEMICOLON);
-					}
-					}
-				}
-				setState(776);
-				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,55,_ctx);
-			}
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public final Declare_block_inplaceContext declare_block_inplace() throws RecognitionException {
-		Declare_block_inplaceContext _localctx = new Declare_block_inplaceContext(_ctx, getState());
-		enterRule(_localctx, 70, RULE_declare_block_inplace);
-		try {
-			int _alt;
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(777);
-			declare_stmt_item();
-			setState(778);
-			match(T_SEMICOLON);
-			setState(784);
-			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,56,_ctx);
-			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
-				if ( _alt==1 ) {
-					{
-					{
-					setState(779);
-					declare_stmt_item();
-					setState(780);
-					match(T_SEMICOLON);
-					}
-					}
-				}
-				setState(786);
-				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,56,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,39,_ctx);
 			}
 			}
 		}
@@ -3102,6 +3063,201 @@ public class HplsqlParser extends Parser {
 				invalid_bool_expr_atom();
 				}
 				break;
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public final Declare_stmtContext declare_stmt() throws RecognitionException {
+		Declare_stmtContext _localctx = new Declare_stmtContext(_ctx, getState());
+		enterRule(_localctx, 66, RULE_declare_stmt);
+		try {
+			int _alt;
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(757);
+			match(T_DECLARE);
+			setState(758);
+			declare_stmt_item();
+			setState(763);
+			_errHandler.sync(this);
+			_alt = getInterpreter().adaptivePredict(_input,54,_ctx);
+			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+				if ( _alt==1 ) {
+					{
+					{
+					setState(759);
+					match(T_COMMA);
+					setState(760);
+					declare_stmt_item();
+					}
+					}
+				}
+				setState(765);
+				_errHandler.sync(this);
+				_alt = getInterpreter().adaptivePredict(_input,54,_ctx);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public final Invalid_bool_expr_atomContext invalid_bool_expr_atom() throws RecognitionException {
+		Invalid_bool_expr_atomContext _localctx = new Invalid_bool_expr_atomContext(_ctx, getState());
+		enterRule(_localctx, 24, RULE_invalid_bool_expr_atom);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(530);
+			invalid_bool_expr_binary();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public final Declare_blockContext declare_block() throws RecognitionException {
+		Declare_blockContext _localctx = new Declare_blockContext(_ctx, getState());
+		enterRule(_localctx, 68, RULE_declare_block);
+		try {
+			int _alt;
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(766);
+			match(T_DECLARE);
+			setState(767);
+			declare_stmt_item();
+			setState(768);
+			match(T_SEMICOLON);
+			setState(774);
+			_errHandler.sync(this);
+			_alt = getInterpreter().adaptivePredict(_input,55,_ctx);
+			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+				if ( _alt==1 ) {
+					{
+					{
+					setState(769);
+					declare_stmt_item();
+					setState(770);
+					match(T_SEMICOLON);
+					}
+					}
+				}
+				setState(776);
+				_errHandler.sync(this);
+				_alt = getInterpreter().adaptivePredict(_input,55,_ctx);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public final Invalid_bool_expr_binaryContext invalid_bool_expr_binary() throws RecognitionException {
+		Invalid_bool_expr_binaryContext _localctx = new Invalid_bool_expr_binaryContext(_ctx, getState());
+		enterRule(_localctx, 26, RULE_invalid_bool_expr_binary);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(532);
+			expr(0);
+			setState(533);
+			invalid_bool_expr_binary_operator();
+			setState(534);
+			expr(0);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public final Declare_block_inplaceContext declare_block_inplace() throws RecognitionException {
+		Declare_block_inplaceContext _localctx = new Declare_block_inplaceContext(_ctx, getState());
+		enterRule(_localctx, 70, RULE_declare_block_inplace);
+		try {
+			int _alt;
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(777);
+			declare_stmt_item();
+			setState(778);
+			match(T_SEMICOLON);
+			setState(784);
+			_errHandler.sync(this);
+			_alt = getInterpreter().adaptivePredict(_input,56,_ctx);
+			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+				if ( _alt==1 ) {
+					{
+					{
+					setState(779);
+					declare_stmt_item();
+					setState(780);
+					match(T_SEMICOLON);
+					}
+					}
+				}
+				setState(786);
+				_errHandler.sync(this);
+				_alt = getInterpreter().adaptivePredict(_input,56,_ctx);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public final Invalid_bool_expr_binary_operatorContext invalid_bool_expr_binary_operator() throws RecognitionException {
+		Invalid_bool_expr_binary_operatorContext _localctx = new Invalid_bool_expr_binary_operatorContext(_ctx, getState());
+		enterRule(_localctx, 28, RULE_invalid_bool_expr_binary_operator);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(536);
+			ident();
 			}
 		}
 		catch (RecognitionException re) {
@@ -3241,14 +3397,16 @@ public class HplsqlParser extends Parser {
 		return _localctx;
 	}
 
-	public final Invalid_bool_expr_atomContext invalid_bool_expr_atom() throws RecognitionException {
-		Invalid_bool_expr_atomContext _localctx = new Invalid_bool_expr_atomContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_invalid_bool_expr_atom);
+	public final Invalid_cpp_function_stmtContext invalid_cpp_function_stmt() throws RecognitionException {
+		Invalid_cpp_function_stmtContext _localctx = new Invalid_cpp_function_stmtContext(_ctx, getState());
+		enterRule(_localctx, 30, RULE_invalid_cpp_function_stmt);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(530);
-			invalid_bool_expr_binary();
+			setState(538);
+			invalid_cpp_function_header();
+			setState(539);
+			cpp_function_body();
 			}
 		}
 		catch (RecognitionException re) {
@@ -3352,18 +3510,136 @@ public class HplsqlParser extends Parser {
 		return _localctx;
 	}
 
-	public final Invalid_bool_expr_binaryContext invalid_bool_expr_binary() throws RecognitionException {
-		Invalid_bool_expr_binaryContext _localctx = new Invalid_bool_expr_binaryContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_invalid_bool_expr_binary);
+	public final Invalid_cpp_function_headerContext invalid_cpp_function_header() throws RecognitionException {
+		Invalid_cpp_function_headerContext _localctx = new Invalid_cpp_function_headerContext(_ctx, getState());
+		enterRule(_localctx, 32, RULE_invalid_cpp_function_header);
 		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(532);
-			expr(0);
-			setState(533);
-			invalid_bool_expr_binary_operator();
-			setState(534);
-			expr(0);
+			setState(578);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,29,_ctx) ) {
+			case 1:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(541);
+				ident();
+				setState(542);
+				match(T_OPEN_P);
+				setState(545);
+				_errHandler.sync(this);
+				switch ( getInterpreter().adaptivePredict(_input,25,_ctx) ) {
+				case 1:
+					{
+					setState(543);
+					cpp_function_params_clause();
+					}
+					break;
+				case 2:
+					{
+					setState(544);
+					invalid_cpp_function_params_clause();
+					}
+					break;
+				}
+				setState(547);
+				match(T_CLOSE_P);
+				}
+				break;
+			case 2:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(549);
+				dtype();
+				setState(550);
+				match(T_OPEN_P);
+				setState(553);
+				_errHandler.sync(this);
+				switch ( getInterpreter().adaptivePredict(_input,26,_ctx) ) {
+				case 1:
+					{
+					setState(551);
+					cpp_function_params_clause();
+					}
+					break;
+				case 2:
+					{
+					setState(552);
+					invalid_cpp_function_params_clause();
+					}
+					break;
+				}
+				setState(555);
+				match(T_CLOSE_P);
+				}
+				break;
+			case 3:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(557);
+				dtype();
+				setState(558);
+				ident();
+				setState(559);
+				match(T_OPEN_P);
+				setState(560);
+				invalid_cpp_function_params_clause();
+				setState(561);
+				match(T_CLOSE_P);
+				}
+				break;
+			case 4:
+				enterOuterAlt(_localctx, 4);
+				{
+				setState(563);
+				dtype();
+				setState(564);
+				ident();
+				setState(567);
+				_errHandler.sync(this);
+				switch ( getInterpreter().adaptivePredict(_input,27,_ctx) ) {
+				case 1:
+					{
+					setState(565);
+					cpp_function_params_clause();
+					}
+					break;
+				case 2:
+					{
+					setState(566);
+					invalid_cpp_function_params_clause();
+					}
+					break;
+				}
+				setState(569);
+				match(T_CLOSE_P);
+				}
+				break;
+			case 5:
+				enterOuterAlt(_localctx, 5);
+				{
+				setState(571);
+				dtype();
+				setState(572);
+				ident();
+				setState(573);
+				match(T_OPEN_P);
+				setState(576);
+				_errHandler.sync(this);
+				switch ( getInterpreter().adaptivePredict(_input,28,_ctx) ) {
+				case 1:
+					{
+					setState(574);
+					cpp_function_params_clause();
+					}
+					break;
+				case 2:
+					{
+					setState(575);
+					invalid_cpp_function_params_clause();
+					}
+					break;
+				}
+				}
+				break;
 			}
 		}
 		catch (RecognitionException re) {
@@ -3411,27 +3687,6 @@ public class HplsqlParser extends Parser {
 		return _localctx;
 	}
 
-	public final Invalid_bool_expr_binary_operatorContext invalid_bool_expr_binary_operator() throws RecognitionException {
-		Invalid_bool_expr_binary_operatorContext _localctx = new Invalid_bool_expr_binary_operatorContext(_ctx, getState());
-		enterRule(_localctx, 28, RULE_invalid_bool_expr_binary_operator);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(536);
-			ident();
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
 	public final Create_table_optionsContext create_table_options() throws RecognitionException {
 		Create_table_optionsContext _localctx = new Create_table_optionsContext(_ctx, getState());
 		enterRule(_localctx, 114, RULE_create_table_options);
@@ -3459,29 +3714,6 @@ public class HplsqlParser extends Parser {
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,103,_ctx);
 			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public final Invalid_cpp_function_stmtContext invalid_cpp_function_stmt() throws RecognitionException {
-		Invalid_cpp_function_stmtContext _localctx = new Invalid_cpp_function_stmtContext(_ctx, getState());
-		enterRule(_localctx, 30, RULE_invalid_cpp_function_stmt);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(538);
-			invalid_cpp_function_header();
-			setState(539);
-			cpp_function_body();
 			}
 		}
 		catch (RecognitionException re) {
@@ -3886,149 +4118,6 @@ public class HplsqlParser extends Parser {
 		return _localctx;
 	}
 
-	public final Invalid_cpp_function_headerContext invalid_cpp_function_header() throws RecognitionException {
-		Invalid_cpp_function_headerContext _localctx = new Invalid_cpp_function_headerContext(_ctx, getState());
-		enterRule(_localctx, 32, RULE_invalid_cpp_function_header);
-		try {
-			setState(578);
-			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,29,_ctx) ) {
-			case 1:
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(541);
-				ident();
-				setState(542);
-				match(T_OPEN_P);
-				setState(545);
-				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,25,_ctx) ) {
-				case 1:
-					{
-					setState(543);
-					cpp_function_params_clause();
-					}
-					break;
-				case 2:
-					{
-					setState(544);
-					invalid_cpp_function_params_clause();
-					}
-					break;
-				}
-				setState(547);
-				match(T_CLOSE_P);
-				}
-				break;
-			case 2:
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(549);
-				dtype();
-				setState(550);
-				match(T_OPEN_P);
-				setState(553);
-				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,26,_ctx) ) {
-				case 1:
-					{
-					setState(551);
-					cpp_function_params_clause();
-					}
-					break;
-				case 2:
-					{
-					setState(552);
-					invalid_cpp_function_params_clause();
-					}
-					break;
-				}
-				setState(555);
-				match(T_CLOSE_P);
-				}
-				break;
-			case 3:
-				enterOuterAlt(_localctx, 3);
-				{
-				setState(557);
-				dtype();
-				setState(558);
-				ident();
-				setState(559);
-				match(T_OPEN_P);
-				setState(560);
-				invalid_cpp_function_params_clause();
-				setState(561);
-				match(T_CLOSE_P);
-				}
-				break;
-			case 4:
-				enterOuterAlt(_localctx, 4);
-				{
-				setState(563);
-				dtype();
-				setState(564);
-				ident();
-				setState(567);
-				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,27,_ctx) ) {
-				case 1:
-					{
-					setState(565);
-					cpp_function_params_clause();
-					}
-					break;
-				case 2:
-					{
-					setState(566);
-					invalid_cpp_function_params_clause();
-					}
-					break;
-				}
-				setState(569);
-				match(T_CLOSE_P);
-				}
-				break;
-			case 5:
-				enterOuterAlt(_localctx, 5);
-				{
-				setState(571);
-				dtype();
-				setState(572);
-				ident();
-				setState(573);
-				match(T_OPEN_P);
-				setState(576);
-				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,28,_ctx) ) {
-				case 1:
-					{
-					setState(574);
-					cpp_function_params_clause();
-					}
-					break;
-				case 2:
-					{
-					setState(575);
-					invalid_cpp_function_params_clause();
-					}
-					break;
-				}
-				}
-				break;
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
 	public final Create_table_hive_row_formatContext create_table_hive_row_format() throws RecognitionException {
 		Create_table_hive_row_formatContext _localctx = new Create_table_hive_row_formatContext(_ctx, getState());
 		enterRule(_localctx, 126, RULE_create_table_hive_row_format);
@@ -4165,27 +4254,6 @@ public class HplsqlParser extends Parser {
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,151,_ctx);
 			}
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public final Invalid_cpp_function_paramContext invalid_cpp_function_param() throws RecognitionException {
-		Invalid_cpp_function_paramContext _localctx = new Invalid_cpp_function_paramContext(_ctx, getState());
-		enterRule(_localctx, 36, RULE_invalid_cpp_function_param);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(620);
-			ident();
 			}
 		}
 		catch (RecognitionException re) {
@@ -4501,44 +4569,6 @@ public class HplsqlParser extends Parser {
 		return _localctx;
 	}
 
-	public final Exception_block_itemContext exception_block_item() throws RecognitionException {
-		Exception_block_itemContext _localctx = new Exception_block_itemContext(_ctx, getState());
-		enterRule(_localctx, 40, RULE_exception_block_item);
-		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(628);
-			match(T_WHEN);
-			setState(629);
-			match(L_ID);
-			setState(630);
-			match(T_THEN);
-			setState(631);
-			block();
-			setState(632);
-			_la = _input.LA(1);
-			if ( _la <= 0 || (_la==T_END || _la==T_WHEN) ) {
-			_errHandler.recoverInline(this);
-			}
-			else {
-				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-				_errHandler.reportMatch(this);
-				consume();
-			}
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
 	public final Create_routine_optionsContext create_routine_options() throws RecognitionException {
 		Create_routine_optionsContext _localctx = new Create_routine_optionsContext(_ctx, getState());
 		enterRule(_localctx, 168, RULE_create_routine_options);
@@ -4566,36 +4596,6 @@ public class HplsqlParser extends Parser {
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,180,_ctx);
 			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public final Semicolon_stmtContext semicolon_stmt() throws RecognitionException {
-		Semicolon_stmtContext _localctx = new Semicolon_stmtContext(_ctx, getState());
-		enterRule(_localctx, 42, RULE_semicolon_stmt);
-		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(634);
-			_la = _input.LA(1);
-			if ( !(_la==T__0 || _la==T__1 || _la==T_DIV || _la==T_SEMICOLON) ) {
-			_errHandler.recoverInline(this);
-			}
-			else {
-				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-				_errHandler.reportMatch(this);
-				consume();
-			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -14961,20 +14961,18 @@ public class HplsqlParser extends Parser {
 		public TerminalNode T_BY() { return getToken(HplsqlParser.T_BY, 0); }
 
 		public TerminalNode T_HASH() { return getToken(HplsqlParser.T_HASH, 0); }
+		public TerminalNode T_CLOSE_P() { return getToken(HplsqlParser.T_CLOSE_P, 0); }
 
 		public TerminalNode T_OPEN_P() { return getToken(HplsqlParser.T_OPEN_P, 0); }
-
-		public TerminalNode T_CLOSE_P() { return getToken(HplsqlParser.T_CLOSE_P, 0); }
 
 		public List<TerminalNode> T_COMMA() { return getTokens(HplsqlParser.T_COMMA); }
 
 		public TerminalNode T_COMMA(int i) {
 			return getToken(HplsqlParser.T_COMMA, i);
 		}
+		public TerminalNode T_NOT() { return getToken(HplsqlParser.T_NOT, 0); }
 
 		public TerminalNode T_LOGGED() { return getToken(HplsqlParser.T_LOGGED, 0); }
-
-		public TerminalNode T_NOT() { return getToken(HplsqlParser.T_NOT, 0); }
 
 		public TerminalNode T_COMPRESS() { return getToken(HplsqlParser.T_COMPRESS, 0); }
 
@@ -15175,12 +15173,11 @@ public class HplsqlParser extends Parser {
 		}
 
 		public TerminalNode T_STORED() { return getToken(HplsqlParser.T_STORED, 0); }
-
-		public TerminalNode T_AS() { return getToken(HplsqlParser.T_AS, 0); }
-
 		public IdentContext ident() {
 			return getRuleContext(IdentContext.class,0);
 		}
+
+		public TerminalNode T_AS() { return getToken(HplsqlParser.T_AS, 0); }
 
 		@Override public int getRuleIndex() { return RULE_create_table_options_hive_item; }
 		@Override
@@ -15438,12 +15435,11 @@ public class HplsqlParser extends Parser {
 		public Create_table_options_mssql_itemContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-
-		public TerminalNode T_ON() { return getToken(HplsqlParser.T_ON, 0); }
-
 		public IdentContext ident() {
 			return getRuleContext(IdentContext.class,0);
 		}
+
+		public TerminalNode T_ON() { return getToken(HplsqlParser.T_ON, 0); }
 
 		public TerminalNode T_TEXTIMAGE_ON() { return getToken(HplsqlParser.T_TEXTIMAGE_ON, 0); }
 
@@ -15769,12 +15765,11 @@ public class HplsqlParser extends Parser {
 		public Dtype_defaultContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-
-		public TerminalNode T_EQUAL() { return getToken(HplsqlParser.T_EQUAL, 0); }
-
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
+
+		public TerminalNode T_EQUAL() { return getToken(HplsqlParser.T_EQUAL, 0); }
 
 		public TerminalNode T_COLON() { return getToken(HplsqlParser.T_COLON, 0); }
 
@@ -15847,12 +15842,11 @@ public class HplsqlParser extends Parser {
 		public Create_database_optionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-
-		public TerminalNode T_COMMENT() { return getToken(HplsqlParser.T_COMMENT, 0); }
-
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
+
+		public TerminalNode T_COMMENT() { return getToken(HplsqlParser.T_COMMENT, 0); }
 
 		public TerminalNode T_LOCATION() { return getToken(HplsqlParser.T_LOCATION, 0); }
 
@@ -16048,16 +16042,14 @@ public class HplsqlParser extends Parser {
 		public Create_package_stmtContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-
-		public TerminalNode T_PACKAGE() { return getToken(HplsqlParser.T_PACKAGE, 0); }
-
 		public List<IdentContext> ident() {
 			return getRuleContexts(IdentContext.class);
 		}
-
 		public IdentContext ident(int i) {
 			return getRuleContext(IdentContext.class,i);
 		}
+
+		public TerminalNode T_PACKAGE() { return getToken(HplsqlParser.T_PACKAGE, 0); }
 
 		public Package_specContext package_spec() {
 			return getRuleContext(Package_specContext.class,0);
@@ -16211,12 +16203,11 @@ public class HplsqlParser extends Parser {
 		public Declare_stmt_itemContext declare_stmt_item() {
 			return getRuleContext(Declare_stmt_itemContext.class,0);
 		}
-
-		public TerminalNode T_FUNCTION() { return getToken(HplsqlParser.T_FUNCTION, 0); }
-
 		public IdentContext ident() {
 			return getRuleContext(IdentContext.class,0);
 		}
+
+		public TerminalNode T_FUNCTION() { return getToken(HplsqlParser.T_FUNCTION, 0); }
 
 		public Create_function_returnContext create_function_return() {
 			return getRuleContext(Create_function_returnContext.class,0);
@@ -16380,15 +16371,13 @@ public class HplsqlParser extends Parser {
 		public List<Package_body_itemContext> package_body_item() {
 			return getRuleContexts(Package_body_itemContext.class);
 		}
+		public List<TerminalNode> T_SEMICOLON() { return getTokens(HplsqlParser.T_SEMICOLON); }
+		public TerminalNode T_SEMICOLON(int i) {
+			return getToken(HplsqlParser.T_SEMICOLON, i);
+		}
 
 		public Package_body_itemContext package_body_item(int i) {
 			return getRuleContext(Package_body_itemContext.class,i);
-		}
-
-		public List<TerminalNode> T_SEMICOLON() { return getTokens(HplsqlParser.T_SEMICOLON); }
-
-		public TerminalNode T_SEMICOLON(int i) {
-			return getToken(HplsqlParser.T_SEMICOLON, i);
 		}
 
 		@Override public int getRuleIndex() { return RULE_package_body; }
@@ -16441,16 +16430,14 @@ public class HplsqlParser extends Parser {
 	}
 
 	public static class Create_procedure_stmtContext extends ParserRuleContext {
-		public Create_procedure_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-
 		public List<IdentContext> ident() {
 			return getRuleContexts(IdentContext.class);
 		}
-
 		public IdentContext ident(int i) {
 			return getRuleContext(IdentContext.class,i);
+		}
+		public Create_procedure_stmtContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
 		}
 
 		public Proc_blockContext proc_block() {
@@ -16482,10 +16469,9 @@ public class HplsqlParser extends Parser {
 		public LabelContext label() {
 			return getRuleContext(LabelContext.class,0);
 		}
+		public TerminalNode T_AS() { return getToken(HplsqlParser.T_AS, 0); }
 
 		public TerminalNode T_SEMICOLON() { return getToken(HplsqlParser.T_SEMICOLON, 0); }
-
-		public TerminalNode T_AS() { return getToken(HplsqlParser.T_AS, 0); }
 
 		public TerminalNode T_IS() { return getToken(HplsqlParser.T_IS, 0); }
 
@@ -16889,12 +16875,11 @@ public class HplsqlParser extends Parser {
 	}
 
 	public static class Create_routine_param_itemContext extends ParserRuleContext {
-		public Create_routine_param_itemContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-
 		public IdentContext ident() {
 			return getRuleContext(IdentContext.class,0);
+		}
+		public Create_routine_param_itemContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
 		}
 
 		public DtypeContext dtype() {
@@ -18040,29 +18025,24 @@ public class HplsqlParser extends Parser {
 		}
 
 		public TerminalNode T_WITH() { return getToken(HplsqlParser.T_WITH, 0); }
-
-		public TerminalNode T_OPEN_P() { return getToken(HplsqlParser.T_OPEN_P, 0); }
-
 		public List<IdentContext> ident() {
 			return getRuleContexts(IdentContext.class);
 		}
-
 		public IdentContext ident(int i) {
 			return getRuleContext(IdentContext.class,i);
 		}
 
+		public TerminalNode T_OPEN_P() { return getToken(HplsqlParser.T_OPEN_P, 0); }
+
 		public List<TerminalNode> T_EQUAL() { return getTokens(HplsqlParser.T_EQUAL); }
+		public TerminalNode T_CLOSE_P() { return getToken(HplsqlParser.T_CLOSE_P, 0); }
+		public List<TerminalNode> T_COMMA() { return getTokens(HplsqlParser.T_COMMA); }
+		public TerminalNode T_COMMA(int i) {
+			return getToken(HplsqlParser.T_COMMA, i);
+		}
 
 		public TerminalNode T_EQUAL(int i) {
 			return getToken(HplsqlParser.T_EQUAL, i);
-		}
-
-		public TerminalNode T_CLOSE_P() { return getToken(HplsqlParser.T_CLOSE_P, 0); }
-
-		public List<TerminalNode> T_COMMA() { return getTokens(HplsqlParser.T_COMMA); }
-
-		public TerminalNode T_COMMA(int i) {
-			return getToken(HplsqlParser.T_COMMA, i);
 		}
 
 		public List<Create_table_options_mssql_itemContext> create_table_options_mssql_item() {
@@ -18400,13 +18380,12 @@ public class HplsqlParser extends Parser {
 		public Cpp_function_headerContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
+		public IdentContext ident() {
+			return getRuleContext(IdentContext.class,0);
+		}
 
 		public DtypeContext dtype() {
 			return getRuleContext(DtypeContext.class,0);
-		}
-
-		public IdentContext ident() {
-			return getRuleContext(IdentContext.class,0);
 		}
 
 		public TerminalNode T_OPEN_P() { return getToken(HplsqlParser.T_OPEN_P, 0); }
@@ -19002,12 +18981,11 @@ public class HplsqlParser extends Parser {
 	}
 
 	public static class Cpp_for_paramContext extends ParserRuleContext {
-		public Cpp_for_paramContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-
 		public IdentContext ident() {
 			return getRuleContext(IdentContext.class,0);
+		}
+		public Cpp_for_paramContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
 		}
 
 		public TerminalNode T_EQUAL() { return getToken(HplsqlParser.T_EQUAL, 0); }
@@ -19419,19 +19397,17 @@ public class HplsqlParser extends Parser {
 	}
 
 	public static class Cpp_declare_stmtContext extends ParserRuleContext {
-		public Cpp_declare_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-
 		public IdentContext ident() {
 			return getRuleContext(IdentContext.class,0);
 		}
-
-		public TerminalNode T_SEMICOLON() { return getToken(HplsqlParser.T_SEMICOLON, 0); }
-
+		public Cpp_declare_stmtContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
 		public DtypeContext dtype() {
 			return getRuleContext(DtypeContext.class,0);
 		}
+
+		public TerminalNode T_SEMICOLON() { return getToken(HplsqlParser.T_SEMICOLON, 0); }
 
 		public TerminalNode T_VAR() { return getToken(HplsqlParser.T_VAR, 0); }
 
@@ -19606,20 +19582,17 @@ public class HplsqlParser extends Parser {
 		}
 
 		public List<TerminalNode> T_WHILE() { return getTokens(HplsqlParser.T_WHILE); }
+		public Bool_exprContext bool_expr() {
+			return getRuleContext(Bool_exprContext.class,0);
+		}
+		public BlockContext block() {
+			return getRuleContext(BlockContext.class,0);
+		}
+		public TerminalNode T_END() { return getToken(HplsqlParser.T_END, 0); }
 
 		public TerminalNode T_WHILE(int i) {
 			return getToken(HplsqlParser.T_WHILE, i);
 		}
-
-		public Bool_exprContext bool_expr() {
-			return getRuleContext(Bool_exprContext.class,0);
-		}
-
-		public BlockContext block() {
-			return getRuleContext(BlockContext.class,0);
-		}
-
-		public TerminalNode T_END() { return getToken(HplsqlParser.T_END, 0); }
 
 		public TerminalNode T_DO() { return getToken(HplsqlParser.T_DO, 0); }
 
@@ -19844,18 +19817,16 @@ public class HplsqlParser extends Parser {
 		public Fullselect_stmt_itemContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
+		public TerminalNode T_OPEN_P() { return getToken(HplsqlParser.T_OPEN_P, 0); }
 
 		public Subselect_stmtContext subselect_stmt() {
 			return getRuleContext(Subselect_stmtContext.class,0);
 		}
-
-		public TerminalNode T_OPEN_P() { return getToken(HplsqlParser.T_OPEN_P, 0); }
+		public TerminalNode T_CLOSE_P() { return getToken(HplsqlParser.T_CLOSE_P, 0); }
 
 		public Fullselect_stmtContext fullselect_stmt() {
 			return getRuleContext(Fullselect_stmtContext.class,0);
 		}
-
-		public TerminalNode T_CLOSE_P() { return getToken(HplsqlParser.T_CLOSE_P, 0); }
 
 		@Override public int getRuleIndex() { return RULE_fullselect_stmt_item; }
 		@Override
@@ -20024,15 +19995,13 @@ public class HplsqlParser extends Parser {
 		public Select_list_setContext select_list_set() {
 			return getRuleContext(Select_list_setContext.class,0);
 		}
+		public List<TerminalNode> T_COMMA() { return getTokens(HplsqlParser.T_COMMA); }
+		public TerminalNode T_COMMA(int i) {
+			return getToken(HplsqlParser.T_COMMA, i);
+		}
 
 		public Select_list_limitContext select_list_limit() {
 			return getRuleContext(Select_list_limitContext.class,0);
-		}
-
-		public List<TerminalNode> T_COMMA() { return getTokens(HplsqlParser.T_COMMA); }
-
-		public TerminalNode T_COMMA(int i) {
-			return getToken(HplsqlParser.T_COMMA, i);
 		}
 
 		@Override public int getRuleIndex() { return RULE_select_list; }
@@ -20246,12 +20215,11 @@ public class HplsqlParser extends Parser {
 		public Select_list_limitContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-
-		public TerminalNode T_TOP() { return getToken(HplsqlParser.T_TOP, 0); }
-
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
+
+		public TerminalNode T_TOP() { return getToken(HplsqlParser.T_TOP, 0); }
 
 		@Override public int getRuleIndex() { return RULE_select_list_limit; }
 		@Override
@@ -20493,15 +20461,13 @@ public class HplsqlParser extends Parser {
 		public List<IdentContext> ident() {
 			return getRuleContexts(IdentContext.class);
 		}
+		public List<TerminalNode> T_COMMA() { return getTokens(HplsqlParser.T_COMMA); }
+		public TerminalNode T_COMMA(int i) {
+			return getToken(HplsqlParser.T_COMMA, i);
+		}
 
 		public IdentContext ident(int i) {
 			return getRuleContext(IdentContext.class,i);
-		}
-
-		public List<TerminalNode> T_COMMA() { return getTokens(HplsqlParser.T_COMMA); }
-
-		public TerminalNode T_COMMA(int i) {
-			return getToken(HplsqlParser.T_COMMA, i);
 		}
 
 		@Override public int getRuleIndex() { return RULE_into_clause; }
@@ -20769,12 +20735,11 @@ public class HplsqlParser extends Parser {
 		public From_join_type_clauseContext from_join_type_clause() {
 			return getRuleContext(From_join_type_clauseContext.class,0);
 		}
-
-		public TerminalNode T_ON() { return getToken(HplsqlParser.T_ON, 0); }
-
 		public Bool_exprContext bool_expr() {
 			return getRuleContext(Bool_exprContext.class,0);
 		}
+
+		public TerminalNode T_ON() { return getToken(HplsqlParser.T_ON, 0); }
 
 		@Override public int getRuleIndex() { return RULE_from_join_clause; }
 		@Override
@@ -20886,14 +20851,12 @@ public class HplsqlParser extends Parser {
 		}
 
 		public TerminalNode T_OPEN_P() { return getToken(HplsqlParser.T_OPEN_P, 0); }
-
-		public TerminalNode T_CLOSE_P() { return getToken(HplsqlParser.T_CLOSE_P, 0); }
-
 		public List<TerminalNode> T_COMMA() { return getTokens(HplsqlParser.T_COMMA); }
-
 		public TerminalNode T_COMMA(int i) {
 			return getToken(HplsqlParser.T_COMMA, i);
 		}
+
+		public TerminalNode T_CLOSE_P() { return getToken(HplsqlParser.T_CLOSE_P, 0); }
 
 		@Override public int getRuleIndex() { return RULE_from_table_values_row; }
 		@Override
@@ -21203,24 +21166,19 @@ public class HplsqlParser extends Parser {
 		public Order_by_clauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-
-		public TerminalNode T_ORDER() { return getToken(HplsqlParser.T_ORDER, 0); }
-
 		public TerminalNode T_BY() { return getToken(HplsqlParser.T_BY, 0); }
-
 		public List<ExprContext> expr() {
 			return getRuleContexts(ExprContext.class);
 		}
-
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
-
 		public List<TerminalNode> T_COMMA() { return getTokens(HplsqlParser.T_COMMA); }
-
 		public TerminalNode T_COMMA(int i) {
 			return getToken(HplsqlParser.T_COMMA, i);
 		}
+
+		public TerminalNode T_ORDER() { return getToken(HplsqlParser.T_ORDER, 0); }
 
 		public List<TerminalNode> T_ASC() { return getTokens(HplsqlParser.T_ASC); }
 
@@ -22457,21 +22415,19 @@ public class HplsqlParser extends Parser {
 	}
 
 	public static class Bool_exprContext extends ParserRuleContext {
+		public TerminalNode T_OPEN_P() { return getToken(HplsqlParser.T_OPEN_P, 0); }
 		public Bool_exprContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 
-		public TerminalNode T_OPEN_P() { return getToken(HplsqlParser.T_OPEN_P, 0); }
-
 		public List<Bool_exprContext> bool_expr() {
 			return getRuleContexts(Bool_exprContext.class);
 		}
+		public TerminalNode T_CLOSE_P() { return getToken(HplsqlParser.T_CLOSE_P, 0); }
 
 		public Bool_exprContext bool_expr(int i) {
 			return getRuleContext(Bool_exprContext.class,i);
 		}
-
-		public TerminalNode T_CLOSE_P() { return getToken(HplsqlParser.T_CLOSE_P, 0); }
 
 		public TerminalNode T_NOT() { return getToken(HplsqlParser.T_NOT, 0); }
 
@@ -23874,17 +23830,15 @@ public class HplsqlParser extends Parser {
 	}
 
 	public static class Expr_concat_itemContext extends ParserRuleContext {
+		public TerminalNode T_OPEN_P() { return getToken(HplsqlParser.T_OPEN_P, 0); }
 		public Expr_concat_itemContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-
-		public TerminalNode T_OPEN_P() { return getToken(HplsqlParser.T_OPEN_P, 0); }
+		public TerminalNode T_CLOSE_P() { return getToken(HplsqlParser.T_CLOSE_P, 0); }
 
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
-
-		public TerminalNode T_CLOSE_P() { return getToken(HplsqlParser.T_CLOSE_P, 0); }
 
 		public Expr_caseContext expr_case() {
 			return getRuleContext(Expr_caseContext.class,0);
@@ -23955,16 +23909,14 @@ public class HplsqlParser extends Parser {
 		public Expr_case_simpleContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-
-		public TerminalNode T_CASE() { return getToken(HplsqlParser.T_CASE, 0); }
-
 		public List<ExprContext> expr() {
 			return getRuleContexts(ExprContext.class);
 		}
-
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
+
+		public TerminalNode T_CASE() { return getToken(HplsqlParser.T_CASE, 0); }
 
 		public TerminalNode T_END() { return getToken(HplsqlParser.T_END, 0); }
 
@@ -24344,12 +24296,10 @@ public class HplsqlParser extends Parser {
 		public Expr_func_over_clauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
+		public TerminalNode T_OPEN_P() { return getToken(HplsqlParser.T_OPEN_P, 0); }
+		public TerminalNode T_CLOSE_P() { return getToken(HplsqlParser.T_CLOSE_P, 0); }
 
 		public TerminalNode T_OVER() { return getToken(HplsqlParser.T_OVER, 0); }
-
-		public TerminalNode T_OPEN_P() { return getToken(HplsqlParser.T_OPEN_P, 0); }
-
-		public TerminalNode T_CLOSE_P() { return getToken(HplsqlParser.T_CLOSE_P, 0); }
 
 		public Expr_func_partition_by_clauseContext expr_func_partition_by_clause() {
 			return getRuleContext(Expr_func_partition_by_clauseContext.class,0);
@@ -24441,26 +24391,22 @@ public class HplsqlParser extends Parser {
 		}
 
 		public TerminalNode T_ACTIVITY_COUNT() { return getToken(HplsqlParser.T_ACTIVITY_COUNT, 0); }
-
-		public TerminalNode T_CAST() { return getToken(HplsqlParser.T_CAST, 0); }
-
 		public TerminalNode T_OPEN_P() { return getToken(HplsqlParser.T_OPEN_P, 0); }
-
 		public List<ExprContext> expr() {
 			return getRuleContexts(ExprContext.class);
 		}
-
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
 
+		public TerminalNode T_CAST() { return getToken(HplsqlParser.T_CAST, 0); }
+
 		public TerminalNode T_AS() { return getToken(HplsqlParser.T_AS, 0); }
+		public TerminalNode T_CLOSE_P() { return getToken(HplsqlParser.T_CLOSE_P, 0); }
 
 		public DtypeContext dtype() {
 			return getRuleContext(DtypeContext.class,0);
 		}
-
-		public TerminalNode T_CLOSE_P() { return getToken(HplsqlParser.T_CLOSE_P, 0); }
 
 		public Dtype_lenContext dtype_len() {
 			return getRuleContext(Dtype_lenContext.class,0);
@@ -24483,14 +24429,12 @@ public class HplsqlParser extends Parser {
 		public TerminalNode T_CURRENT_USER() { return getToken(HplsqlParser.T_CURRENT_USER, 0); }
 
 		public TerminalNode T_USER() { return getToken(HplsqlParser.T_USER, 0); }
-
-		public TerminalNode T_MAX_PART_STRING() { return getToken(HplsqlParser.T_MAX_PART_STRING, 0); }
-
 		public List<TerminalNode> T_COMMA() { return getTokens(HplsqlParser.T_COMMA); }
-
 		public TerminalNode T_COMMA(int i) {
 			return getToken(HplsqlParser.T_COMMA, i);
 		}
+
+		public TerminalNode T_MAX_PART_STRING() { return getToken(HplsqlParser.T_MAX_PART_STRING, 0); }
 
 		public List<TerminalNode> T_EQUAL() { return getTokens(HplsqlParser.T_EQUAL); }
 
@@ -24534,6 +24478,284 @@ public class HplsqlParser extends Parser {
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof HplsqlVisitor ) return ((HplsqlVisitor<? extends T>)visitor).visitExpr_spec_func(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public static class Non_reserved_wordsContext extends ParserRuleContext {
+		public TerminalNode T_ACTION() { return getToken(HplsqlParser.T_ACTION, 0); }
+		public TerminalNode T_ACTIVITY_COUNT() { return getToken(HplsqlParser.T_ACTIVITY_COUNT, 0); }
+		public TerminalNode T_AND() { return getToken(HplsqlParser.T_AND, 0); }
+		public TerminalNode T_AS() { return getToken(HplsqlParser.T_AS, 0); }
+		public TerminalNode T_ASC() { return getToken(HplsqlParser.T_ASC, 0); }
+		public TerminalNode T_ASSOCIATE() { return getToken(HplsqlParser.T_ASSOCIATE, 0); }
+		public TerminalNode T_AT() { return getToken(HplsqlParser.T_AT, 0); }
+		public TerminalNode T_AUTO_INCREMENT() { return getToken(HplsqlParser.T_AUTO_INCREMENT, 0); }
+		public TerminalNode T_AVG() { return getToken(HplsqlParser.T_AVG, 0); }
+		public TerminalNode T_BEGIN() { return getToken(HplsqlParser.T_BEGIN, 0); }
+		public TerminalNode T_BETWEEN() { return getToken(HplsqlParser.T_BETWEEN, 0); }
+		public TerminalNode T_BIGINT() { return getToken(HplsqlParser.T_BIGINT, 0); }
+		public TerminalNode T_BINARY_DOUBLE() { return getToken(HplsqlParser.T_BINARY_DOUBLE, 0); }
+		public TerminalNode T_BINARY_FLOAT() { return getToken(HplsqlParser.T_BINARY_FLOAT, 0); }
+		public TerminalNode T_BIT() { return getToken(HplsqlParser.T_BIT, 0); }
+		public TerminalNode T_BODY() { return getToken(HplsqlParser.T_BODY, 0); }
+		public TerminalNode T_BREAK() { return getToken(HplsqlParser.T_BREAK, 0); }
+		public TerminalNode T_BY() { return getToken(HplsqlParser.T_BY, 0); }
+		public TerminalNode T_BYTE() { return getToken(HplsqlParser.T_BYTE, 0); }
+		public TerminalNode T_CALL() { return getToken(HplsqlParser.T_CALL, 0); }
+		public TerminalNode T_CASCADE() { return getToken(HplsqlParser.T_CASCADE, 0); }
+		public TerminalNode T_CASE() { return getToken(HplsqlParser.T_CASE, 0); }
+		public TerminalNode T_CASESPECIFIC() { return getToken(HplsqlParser.T_CASESPECIFIC, 0); }
+		public TerminalNode T_CAST() { return getToken(HplsqlParser.T_CAST, 0); }
+		public TerminalNode T_CHAR() { return getToken(HplsqlParser.T_CHAR, 0); }
+		public TerminalNode T_CHARACTER() { return getToken(HplsqlParser.T_CHARACTER, 0); }
+		public TerminalNode T_CHARSET() { return getToken(HplsqlParser.T_CHARSET, 0); }
+		public TerminalNode T_CLOSE() { return getToken(HplsqlParser.T_CLOSE, 0); }
+		public TerminalNode T_CLUSTERED() { return getToken(HplsqlParser.T_CLUSTERED, 0); }
+		public TerminalNode T_CMP() { return getToken(HplsqlParser.T_CMP, 0); }
+		public TerminalNode T_COLLECT() { return getToken(HplsqlParser.T_COLLECT, 0); }
+		public TerminalNode T_COLLECTION() { return getToken(HplsqlParser.T_COLLECTION, 0); }
+		public TerminalNode T_COMMENT() { return getToken(HplsqlParser.T_COMMENT, 0); }
+		public TerminalNode T_COMPRESS() { return getToken(HplsqlParser.T_COMPRESS, 0); }
+		public TerminalNode T_CONSTANT() { return getToken(HplsqlParser.T_CONSTANT, 0); }
+		public TerminalNode T_CONCAT() { return getToken(HplsqlParser.T_CONCAT, 0); }
+		public TerminalNode T_CONDITION() { return getToken(HplsqlParser.T_CONDITION, 0); }
+		public TerminalNode T_CONSTRAINT() { return getToken(HplsqlParser.T_CONSTRAINT, 0); }
+		public TerminalNode T_CONTINUE() { return getToken(HplsqlParser.T_CONTINUE, 0); }
+		public TerminalNode T_COUNT() { return getToken(HplsqlParser.T_COUNT, 0); }
+		public TerminalNode T_COUNT_BIG() { return getToken(HplsqlParser.T_COUNT_BIG, 0); }
+		public TerminalNode T_CREATION() { return getToken(HplsqlParser.T_CREATION, 0); }
+		public TerminalNode T_CREATOR() { return getToken(HplsqlParser.T_CREATOR, 0); }
+		public TerminalNode T_CS() { return getToken(HplsqlParser.T_CS, 0); }
+		public TerminalNode T_CUME_DIST() { return getToken(HplsqlParser.T_CUME_DIST, 0); }
+		public TerminalNode T_CURRENT() { return getToken(HplsqlParser.T_CURRENT, 0); }
+		public TerminalNode T_CURRENT_DATE() { return getToken(HplsqlParser.T_CURRENT_DATE, 0); }
+		public TerminalNode T_CURRENT_TIMESTAMP() { return getToken(HplsqlParser.T_CURRENT_TIMESTAMP, 0); }
+		public TerminalNode T_CURRENT_USER() { return getToken(HplsqlParser.T_CURRENT_USER, 0); }
+		public TerminalNode T_DATA() { return getToken(HplsqlParser.T_DATA, 0); }
+		public TerminalNode T_DATABASE() { return getToken(HplsqlParser.T_DATABASE, 0); }
+		public TerminalNode T_DATE() { return getToken(HplsqlParser.T_DATE, 0); }
+		public TerminalNode T_DATETIME() { return getToken(HplsqlParser.T_DATETIME, 0); }
+		public TerminalNode T_DAY() { return getToken(HplsqlParser.T_DAY, 0); }
+		public TerminalNode T_DAYS() { return getToken(HplsqlParser.T_DAYS, 0); }
+		public TerminalNode T_DEC() { return getToken(HplsqlParser.T_DEC, 0); }
+		public TerminalNode T_DECIMAL() { return getToken(HplsqlParser.T_DECIMAL, 0); }
+		public TerminalNode T_DECLARE() { return getToken(HplsqlParser.T_DECLARE, 0); }
+		public TerminalNode T_DEFAULT() { return getToken(HplsqlParser.T_DEFAULT, 0); }
+		public TerminalNode T_DEFERRED() { return getToken(HplsqlParser.T_DEFERRED, 0); }
+		public TerminalNode T_DEFINED() { return getToken(HplsqlParser.T_DEFINED, 0); }
+		public TerminalNode T_DEFINER() { return getToken(HplsqlParser.T_DEFINER, 0); }
+		public TerminalNode T_DEFINITION() { return getToken(HplsqlParser.T_DEFINITION, 0); }
+		public TerminalNode T_DELETE() { return getToken(HplsqlParser.T_DELETE, 0); }
+		public TerminalNode T_DELIMITED() { return getToken(HplsqlParser.T_DELIMITED, 0); }
+		public TerminalNode T_DENSE_RANK() { return getToken(HplsqlParser.T_DENSE_RANK, 0); }
+		public TerminalNode T_DESC() { return getToken(HplsqlParser.T_DESC, 0); }
+		public TerminalNode T_DIR() { return getToken(HplsqlParser.T_DIR, 0); }
+		public TerminalNode T_DISTINCT() { return getToken(HplsqlParser.T_DISTINCT, 0); }
+		public TerminalNode T_DISTRIBUTE() { return getToken(HplsqlParser.T_DISTRIBUTE, 0); }
+		public TerminalNode T_DO() { return getToken(HplsqlParser.T_DO, 0); }
+		public TerminalNode T_DOUBLE() { return getToken(HplsqlParser.T_DOUBLE, 0); }
+		public TerminalNode T_DYNAMIC() { return getToken(HplsqlParser.T_DYNAMIC, 0); }
+		public TerminalNode T_END() { return getToken(HplsqlParser.T_END, 0); }
+		public TerminalNode T_ENABLE() { return getToken(HplsqlParser.T_ENABLE, 0); }
+		public TerminalNode T_ENGINE() { return getToken(HplsqlParser.T_ENGINE, 0); }
+		public TerminalNode T_ESCAPED() { return getToken(HplsqlParser.T_ESCAPED, 0); }
+		public TerminalNode T_EXCEPT() { return getToken(HplsqlParser.T_EXCEPT, 0); }
+		public TerminalNode T_EXEC() { return getToken(HplsqlParser.T_EXEC, 0); }
+		public TerminalNode T_EXECUTE() { return getToken(HplsqlParser.T_EXECUTE, 0); }
+		public TerminalNode T_EXCEPTION() { return getToken(HplsqlParser.T_EXCEPTION, 0); }
+		public TerminalNode T_EXCLUSIVE() { return getToken(HplsqlParser.T_EXCLUSIVE, 0); }
+		public TerminalNode T_EXISTS() { return getToken(HplsqlParser.T_EXISTS, 0); }
+		public TerminalNode T_EXIT() { return getToken(HplsqlParser.T_EXIT, 0); }
+		public TerminalNode T_FALLBACK() { return getToken(HplsqlParser.T_FALLBACK, 0); }
+		public TerminalNode T_FALSE() { return getToken(HplsqlParser.T_FALSE, 0); }
+		public TerminalNode T_FIELDS() { return getToken(HplsqlParser.T_FIELDS, 0); }
+		public TerminalNode T_FIRST_VALUE() { return getToken(HplsqlParser.T_FIRST_VALUE, 0); }
+		public TerminalNode T_FLOAT() { return getToken(HplsqlParser.T_FLOAT, 0); }
+		public TerminalNode T_FOR() { return getToken(HplsqlParser.T_FOR, 0); }
+		public TerminalNode T_FOREIGN() { return getToken(HplsqlParser.T_FOREIGN, 0); }
+		public TerminalNode T_FORMAT() { return getToken(HplsqlParser.T_FORMAT, 0); }
+		public TerminalNode T_FOUND() { return getToken(HplsqlParser.T_FOUND, 0); }
+		public TerminalNode T_FROM() { return getToken(HplsqlParser.T_FROM, 0); }
+		public TerminalNode T_FULL() { return getToken(HplsqlParser.T_FULL, 0); }
+		public TerminalNode T_FUNCTION() { return getToken(HplsqlParser.T_FUNCTION, 0); }
+		public TerminalNode T_GLOBAL() { return getToken(HplsqlParser.T_GLOBAL, 0); }
+		public TerminalNode T_GO() { return getToken(HplsqlParser.T_GO, 0); }
+		public TerminalNode T_GROUP() { return getToken(HplsqlParser.T_GROUP, 0); }
+		public TerminalNode T_HANDLER() { return getToken(HplsqlParser.T_HANDLER, 0); }
+		public TerminalNode T_HASH() { return getToken(HplsqlParser.T_HASH, 0); }
+		public TerminalNode T_HAVING() { return getToken(HplsqlParser.T_HAVING, 0); }
+		public TerminalNode T_IDENTITY() { return getToken(HplsqlParser.T_IDENTITY, 0); }
+		public TerminalNode T_IF() { return getToken(HplsqlParser.T_IF, 0); }
+		public TerminalNode T_IMMEDIATE() { return getToken(HplsqlParser.T_IMMEDIATE, 0); }
+		public TerminalNode T_IN() { return getToken(HplsqlParser.T_IN, 0); }
+		public TerminalNode T_INDEX() { return getToken(HplsqlParser.T_INDEX, 0); }
+		public TerminalNode T_INITRANS() { return getToken(HplsqlParser.T_INITRANS, 0); }
+		public TerminalNode T_INNER() { return getToken(HplsqlParser.T_INNER, 0); }
+		public TerminalNode T_INOUT() { return getToken(HplsqlParser.T_INOUT, 0); }
+		public TerminalNode T_INT() { return getToken(HplsqlParser.T_INT, 0); }
+		public TerminalNode T_INT2() { return getToken(HplsqlParser.T_INT2, 0); }
+		public TerminalNode T_INT4() { return getToken(HplsqlParser.T_INT4, 0); }
+		public TerminalNode T_INT8() { return getToken(HplsqlParser.T_INT8, 0); }
+		public TerminalNode T_INTEGER() { return getToken(HplsqlParser.T_INTEGER, 0); }
+		public TerminalNode T_INTERSECT() { return getToken(HplsqlParser.T_INTERSECT, 0); }
+		public TerminalNode T_INTERVAL() { return getToken(HplsqlParser.T_INTERVAL, 0); }
+		public TerminalNode T_INTO() { return getToken(HplsqlParser.T_INTO, 0); }
+		public TerminalNode T_INVOKER() { return getToken(HplsqlParser.T_INVOKER, 0); }
+		public TerminalNode T_ITEMS() { return getToken(HplsqlParser.T_ITEMS, 0); }
+		public TerminalNode T_IS() { return getToken(HplsqlParser.T_IS, 0); }
+		public TerminalNode T_ISOPEN() { return getToken(HplsqlParser.T_ISOPEN, 0); }
+		public TerminalNode T_JOIN() { return getToken(HplsqlParser.T_JOIN, 0); }
+		public TerminalNode T_KEEP() { return getToken(HplsqlParser.T_KEEP, 0); }
+		public TerminalNode T_KEY() { return getToken(HplsqlParser.T_KEY, 0); }
+		public TerminalNode T_KEYS() { return getToken(HplsqlParser.T_KEYS, 0); }
+		public TerminalNode T_LAG() { return getToken(HplsqlParser.T_LAG, 0); }
+		public TerminalNode T_LANGUAGE() { return getToken(HplsqlParser.T_LANGUAGE, 0); }
+		public TerminalNode T_LAST_VALUE() { return getToken(HplsqlParser.T_LAST_VALUE, 0); }
+		public TerminalNode T_LEAD() { return getToken(HplsqlParser.T_LEAD, 0); }
+		public TerminalNode T_LEAVE() { return getToken(HplsqlParser.T_LEAVE, 0); }
+		public TerminalNode T_LEFT() { return getToken(HplsqlParser.T_LEFT, 0); }
+		public TerminalNode T_LIKE() { return getToken(HplsqlParser.T_LIKE, 0); }
+		public TerminalNode T_LIMIT() { return getToken(HplsqlParser.T_LIMIT, 0); }
+		public TerminalNode T_LINES() { return getToken(HplsqlParser.T_LINES, 0); }
+		public TerminalNode T_LOCAL() { return getToken(HplsqlParser.T_LOCAL, 0); }
+		public TerminalNode T_LOCATION() { return getToken(HplsqlParser.T_LOCATION, 0); }
+		public TerminalNode T_LOCATOR() { return getToken(HplsqlParser.T_LOCATOR, 0); }
+		public TerminalNode T_LOCATORS() { return getToken(HplsqlParser.T_LOCATORS, 0); }
+		public TerminalNode T_LOCKS() { return getToken(HplsqlParser.T_LOCKS, 0); }
+		public TerminalNode T_LOG() { return getToken(HplsqlParser.T_LOG, 0); }
+		public TerminalNode T_LOGGED() { return getToken(HplsqlParser.T_LOGGED, 0); }
+		public TerminalNode T_LOGGING() { return getToken(HplsqlParser.T_LOGGING, 0); }
+		public TerminalNode T_LOOP() { return getToken(HplsqlParser.T_LOOP, 0); }
+		public TerminalNode T_MAP() { return getToken(HplsqlParser.T_MAP, 0); }
+		public TerminalNode T_MAX() { return getToken(HplsqlParser.T_MAX, 0); }
+		public TerminalNode T_MAXTRANS() { return getToken(HplsqlParser.T_MAXTRANS, 0); }
+		public TerminalNode T_MICROSECOND() { return getToken(HplsqlParser.T_MICROSECOND, 0); }
+		public TerminalNode T_MICROSECONDS() { return getToken(HplsqlParser.T_MICROSECONDS, 0); }
+		public TerminalNode T_MIN() { return getToken(HplsqlParser.T_MIN, 0); }
+		public TerminalNode T_MULTISET() { return getToken(HplsqlParser.T_MULTISET, 0); }
+		public TerminalNode T_NCHAR() { return getToken(HplsqlParser.T_NCHAR, 0); }
+		public TerminalNode T_NVARCHAR() { return getToken(HplsqlParser.T_NVARCHAR, 0); }
+		public TerminalNode T_NO() { return getToken(HplsqlParser.T_NO, 0); }
+		public TerminalNode T_NOCOMPRESS() { return getToken(HplsqlParser.T_NOCOMPRESS, 0); }
+		public TerminalNode T_NOLOGGING() { return getToken(HplsqlParser.T_NOLOGGING, 0); }
+		public TerminalNode T_NOT() { return getToken(HplsqlParser.T_NOT, 0); }
+		public TerminalNode T_NOTFOUND() { return getToken(HplsqlParser.T_NOTFOUND, 0); }
+		public TerminalNode T_NUMERIC() { return getToken(HplsqlParser.T_NUMERIC, 0); }
+		public TerminalNode T_NUMBER() { return getToken(HplsqlParser.T_NUMBER, 0); }
+		public TerminalNode T_ON() { return getToken(HplsqlParser.T_ON, 0); }
+		public TerminalNode T_ONLY() { return getToken(HplsqlParser.T_ONLY, 0); }
+		public TerminalNode T_OPEN() { return getToken(HplsqlParser.T_OPEN, 0); }
+		public TerminalNode T_OR() { return getToken(HplsqlParser.T_OR, 0); }
+		public TerminalNode T_ORDER() { return getToken(HplsqlParser.T_ORDER, 0); }
+		public TerminalNode T_OUT() { return getToken(HplsqlParser.T_OUT, 0); }
+		public TerminalNode T_OUTER() { return getToken(HplsqlParser.T_OUTER, 0); }
+		public TerminalNode T_OVER() { return getToken(HplsqlParser.T_OVER, 0); }
+		public TerminalNode T_OWNER() { return getToken(HplsqlParser.T_OWNER, 0); }
+		public TerminalNode T_PACKAGE() { return getToken(HplsqlParser.T_PACKAGE, 0); }
+		public TerminalNode T_PART_COUNT() { return getToken(HplsqlParser.T_PART_COUNT, 0); }
+		public TerminalNode T_PART_LOC() { return getToken(HplsqlParser.T_PART_LOC, 0); }
+		public TerminalNode T_PARTITION() { return getToken(HplsqlParser.T_PARTITION, 0); }
+		public TerminalNode T_PCTFREE() { return getToken(HplsqlParser.T_PCTFREE, 0); }
+		public TerminalNode T_PCTUSED() { return getToken(HplsqlParser.T_PCTUSED, 0); }
+		public TerminalNode T_PRECISION() { return getToken(HplsqlParser.T_PRECISION, 0); }
+		public TerminalNode T_PRESERVE() { return getToken(HplsqlParser.T_PRESERVE, 0); }
+		public TerminalNode T_PRIMARY() { return getToken(HplsqlParser.T_PRIMARY, 0); }
+		public TerminalNode T_PROC() { return getToken(HplsqlParser.T_PROC, 0); }
+		public TerminalNode T_PROCEDURE() { return getToken(HplsqlParser.T_PROCEDURE, 0); }
+		public TerminalNode T_QUALIFY() { return getToken(HplsqlParser.T_QUALIFY, 0); }
+		public TerminalNode T_QUIT() { return getToken(HplsqlParser.T_QUIT, 0); }
+		public TerminalNode T_RANK() { return getToken(HplsqlParser.T_RANK, 0); }
+		public TerminalNode T_REAL() { return getToken(HplsqlParser.T_REAL, 0); }
+		public TerminalNode T_REFERENCES() { return getToken(HplsqlParser.T_REFERENCES, 0); }
+		public TerminalNode T_REGEXP() { return getToken(HplsqlParser.T_REGEXP, 0); }
+		public TerminalNode T_RR() { return getToken(HplsqlParser.T_RR, 0); }
+		public TerminalNode T_REPLACE() { return getToken(HplsqlParser.T_REPLACE, 0); }
+		public TerminalNode T_RESTRICT() { return getToken(HplsqlParser.T_RESTRICT, 0); }
+		public TerminalNode T_RESULT() { return getToken(HplsqlParser.T_RESULT, 0); }
+		public TerminalNode T_RESULT_SET_LOCATOR() { return getToken(HplsqlParser.T_RESULT_SET_LOCATOR, 0); }
+		public TerminalNode T_RETURN() { return getToken(HplsqlParser.T_RETURN, 0); }
+		public TerminalNode T_RETURNS() { return getToken(HplsqlParser.T_RETURNS, 0); }
+		public TerminalNode T_REVERSE() { return getToken(HplsqlParser.T_REVERSE, 0); }
+		public TerminalNode T_RIGHT() { return getToken(HplsqlParser.T_RIGHT, 0); }
+		public TerminalNode T_RLIKE() { return getToken(HplsqlParser.T_RLIKE, 0); }
+		public TerminalNode T_RS() { return getToken(HplsqlParser.T_RS, 0); }
+		public TerminalNode T_ROW() { return getToken(HplsqlParser.T_ROW, 0); }
+		public TerminalNode T_ROWS() { return getToken(HplsqlParser.T_ROWS, 0); }
+		public TerminalNode T_ROW_COUNT() { return getToken(HplsqlParser.T_ROW_COUNT, 0); }
+		public TerminalNode T_ROW_NUMBER() { return getToken(HplsqlParser.T_ROW_NUMBER, 0); }
+		public TerminalNode T_SCHEMA() { return getToken(HplsqlParser.T_SCHEMA, 0); }
+		public TerminalNode T_SECOND() { return getToken(HplsqlParser.T_SECOND, 0); }
+		public TerminalNode T_SECONDS() { return getToken(HplsqlParser.T_SECONDS, 0); }
+		public TerminalNode T_SECURITY() { return getToken(HplsqlParser.T_SECURITY, 0); }
+		public TerminalNode T_SEGMENT() { return getToken(HplsqlParser.T_SEGMENT, 0); }
+		public TerminalNode T_SEL() { return getToken(HplsqlParser.T_SEL, 0); }
+		public TerminalNode T_SELECT() { return getToken(HplsqlParser.T_SELECT, 0); }
+		public TerminalNode T_SET() { return getToken(HplsqlParser.T_SET, 0); }
+		public TerminalNode T_SETS() { return getToken(HplsqlParser.T_SETS, 0); }
+		public TerminalNode T_SHARE() { return getToken(HplsqlParser.T_SHARE, 0); }
+		public TerminalNode T_SIMPLE_DOUBLE() { return getToken(HplsqlParser.T_SIMPLE_DOUBLE, 0); }
+		public TerminalNode T_SIMPLE_FLOAT() { return getToken(HplsqlParser.T_SIMPLE_FLOAT, 0); }
+		public TerminalNode T_SMALLDATETIME() { return getToken(HplsqlParser.T_SMALLDATETIME, 0); }
+		public TerminalNode T_SMALLINT() { return getToken(HplsqlParser.T_SMALLINT, 0); }
+		public TerminalNode T_SQL() { return getToken(HplsqlParser.T_SQL, 0); }
+		public TerminalNode T_SQLEXCEPTION() { return getToken(HplsqlParser.T_SQLEXCEPTION, 0); }
+		public TerminalNode T_SQLWARNING() { return getToken(HplsqlParser.T_SQLWARNING, 0); }
+		public TerminalNode T_STEP() { return getToken(HplsqlParser.T_STEP, 0); }
+		public TerminalNode T_STDEV() { return getToken(HplsqlParser.T_STDEV, 0); }
+		public TerminalNode T_STORAGE() { return getToken(HplsqlParser.T_STORAGE, 0); }
+		public TerminalNode T_STORED() { return getToken(HplsqlParser.T_STORED, 0); }
+		public TerminalNode T_STRING() { return getToken(HplsqlParser.T_STRING, 0); }
+		public TerminalNode T_SUBSTRING() { return getToken(HplsqlParser.T_SUBSTRING, 0); }
+		public TerminalNode T_SUM() { return getToken(HplsqlParser.T_SUM, 0); }
+		public TerminalNode T_SYSDATE() { return getToken(HplsqlParser.T_SYSDATE, 0); }
+		public TerminalNode T_SYS_REFCURSOR() { return getToken(HplsqlParser.T_SYS_REFCURSOR, 0); }
+		public TerminalNode T_TABLE() { return getToken(HplsqlParser.T_TABLE, 0); }
+		public TerminalNode T_TABLESPACE() { return getToken(HplsqlParser.T_TABLESPACE, 0); }
+		public TerminalNode T_TEMPORARY() { return getToken(HplsqlParser.T_TEMPORARY, 0); }
+		public TerminalNode T_TERMINATED() { return getToken(HplsqlParser.T_TERMINATED, 0); }
+		public TerminalNode T_TEXTIMAGE_ON() { return getToken(HplsqlParser.T_TEXTIMAGE_ON, 0); }
+		public TerminalNode T_THEN() { return getToken(HplsqlParser.T_THEN, 0); }
+		public TerminalNode T_TIMESTAMP() { return getToken(HplsqlParser.T_TIMESTAMP, 0); }
+		public TerminalNode T_TITLE() { return getToken(HplsqlParser.T_TITLE, 0); }
+		public TerminalNode T_TO() { return getToken(HplsqlParser.T_TO, 0); }
+		public TerminalNode T_TOP() { return getToken(HplsqlParser.T_TOP, 0); }
+		public TerminalNode T_TRIM() { return getToken(HplsqlParser.T_TRIM, 0); }
+		public TerminalNode T_TRUE() { return getToken(HplsqlParser.T_TRUE, 0); }
+		public TerminalNode T_UNIQUE() { return getToken(HplsqlParser.T_UNIQUE, 0); }
+		public TerminalNode T_UPDATE() { return getToken(HplsqlParser.T_UPDATE, 0); }
+		public TerminalNode T_UR() { return getToken(HplsqlParser.T_UR, 0); }
+		public TerminalNode T_USE() { return getToken(HplsqlParser.T_USE, 0); }
+		public TerminalNode T_USER() { return getToken(HplsqlParser.T_USER, 0); }
+		public TerminalNode T_USING() { return getToken(HplsqlParser.T_USING, 0); }
+		public TerminalNode T_VALUE() { return getToken(HplsqlParser.T_VALUE, 0); }
+		public TerminalNode T_VALUES() { return getToken(HplsqlParser.T_VALUES, 0); }
+		public TerminalNode T_VAR() { return getToken(HplsqlParser.T_VAR, 0); }
+		public TerminalNode T_VARCHAR() { return getToken(HplsqlParser.T_VARCHAR, 0); }
+		public TerminalNode T_VARCHAR2() { return getToken(HplsqlParser.T_VARCHAR2, 0); }
+		public TerminalNode T_VARYING() { return getToken(HplsqlParser.T_VARYING, 0); }
+		public TerminalNode T_VARIANCE() { return getToken(HplsqlParser.T_VARIANCE, 0); }
+		public TerminalNode T_VOLATILE() { return getToken(HplsqlParser.T_VOLATILE, 0); }
+		public TerminalNode T_WHILE() { return getToken(HplsqlParser.T_WHILE, 0); }
+		public TerminalNode T_WITH() { return getToken(HplsqlParser.T_WITH, 0); }
+		public TerminalNode T_WRITE() { return getToken(HplsqlParser.T_WRITE, 0); }
+		public TerminalNode T_XML() { return getToken(HplsqlParser.T_XML, 0); }
+		public TerminalNode T_YES() { return getToken(HplsqlParser.T_YES, 0); }
+		public Non_reserved_wordsContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_non_reserved_words; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof HplsqlListener ) ((HplsqlListener)listener).enterNon_reserved_words(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof HplsqlListener ) ((HplsqlListener)listener).exitNon_reserved_words(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof HplsqlVisitor ) return ((HplsqlVisitor<? extends T>)visitor).visitNon_reserved_words(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -24614,14 +24836,12 @@ public class HplsqlParser extends Parser {
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
+		public TerminalNode T_EQUAL() { return getToken(HplsqlParser.T_EQUAL, 0); }
+		public TerminalNode T_GREATER() { return getToken(HplsqlParser.T_GREATER, 0); }
 
 		public IdentContext ident() {
 			return getRuleContext(IdentContext.class,0);
 		}
-
-		public TerminalNode T_EQUAL() { return getToken(HplsqlParser.T_EQUAL, 0); }
-
-		public TerminalNode T_GREATER() { return getToken(HplsqlParser.T_GREATER, 0); }
 
 		@Override public int getRuleIndex() { return RULE_func_param; }
 		@Override
@@ -24643,16 +24863,14 @@ public class HplsqlParser extends Parser {
 		public Write_stmtContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
+		public TerminalNode T_OPEN_P() { return getToken(HplsqlParser.T_OPEN_P, 0); }
 
 		public TerminalNode T_WRITE() { return getToken(HplsqlParser.T_WRITE, 0); }
-
-		public TerminalNode T_OPEN_P() { return getToken(HplsqlParser.T_OPEN_P, 0); }
+		public TerminalNode T_CLOSE_P() { return getToken(HplsqlParser.T_CLOSE_P, 0); }
 
 		public Write_stmt_stringContext write_stmt_string() {
 			return getRuleContext(Write_stmt_stringContext.class,0);
 		}
-
-		public TerminalNode T_CLOSE_P() { return getToken(HplsqlParser.T_CLOSE_P, 0); }
 
 		public TerminalNode T_SEMICOLON() { return getToken(HplsqlParser.T_SEMICOLON, 0); }
 
@@ -24960,16 +25178,13 @@ public class HplsqlParser extends Parser {
 	}
 
 	public static class White_spacesContext extends ParserRuleContext {
-		public White_spacesContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-
 		public List<TerminalNode> L_WS() { return getTokens(HplsqlParser.L_WS); }
-
 		public TerminalNode L_WS(int i) {
 			return getToken(HplsqlParser.L_WS, i);
 		}
-
+		public White_spacesContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
 		@Override public int getRuleIndex() { return RULE_white_spaces; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
@@ -24982,284 +25197,6 @@ public class HplsqlParser extends Parser {
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof HplsqlVisitor ) return ((HplsqlVisitor<? extends T>)visitor).visitWhite_spaces(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public static class Non_reserved_wordsContext extends ParserRuleContext {
-		public TerminalNode T_ACTION() { return getToken(HplsqlParser.T_ACTION, 0); }
-		public TerminalNode T_ACTIVITY_COUNT() { return getToken(HplsqlParser.T_ACTIVITY_COUNT, 0); }
-		public TerminalNode T_AND() { return getToken(HplsqlParser.T_AND, 0); }
-		public TerminalNode T_AS() { return getToken(HplsqlParser.T_AS, 0); }
-		public TerminalNode T_ASC() { return getToken(HplsqlParser.T_ASC, 0); }
-		public TerminalNode T_ASSOCIATE() { return getToken(HplsqlParser.T_ASSOCIATE, 0); }
-		public TerminalNode T_AT() { return getToken(HplsqlParser.T_AT, 0); }
-		public TerminalNode T_AUTO_INCREMENT() { return getToken(HplsqlParser.T_AUTO_INCREMENT, 0); }
-		public TerminalNode T_AVG() { return getToken(HplsqlParser.T_AVG, 0); }
-		public TerminalNode T_BEGIN() { return getToken(HplsqlParser.T_BEGIN, 0); }
-		public TerminalNode T_BETWEEN() { return getToken(HplsqlParser.T_BETWEEN, 0); }
-		public TerminalNode T_BIGINT() { return getToken(HplsqlParser.T_BIGINT, 0); }
-		public TerminalNode T_BINARY_DOUBLE() { return getToken(HplsqlParser.T_BINARY_DOUBLE, 0); }
-		public TerminalNode T_BINARY_FLOAT() { return getToken(HplsqlParser.T_BINARY_FLOAT, 0); }
-		public TerminalNode T_BIT() { return getToken(HplsqlParser.T_BIT, 0); }
-		public TerminalNode T_BODY() { return getToken(HplsqlParser.T_BODY, 0); }
-		public TerminalNode T_BREAK() { return getToken(HplsqlParser.T_BREAK, 0); }
-		public TerminalNode T_BY() { return getToken(HplsqlParser.T_BY, 0); }
-		public TerminalNode T_BYTE() { return getToken(HplsqlParser.T_BYTE, 0); }
-		public TerminalNode T_CALL() { return getToken(HplsqlParser.T_CALL, 0); }
-		public TerminalNode T_CASCADE() { return getToken(HplsqlParser.T_CASCADE, 0); }
-		public TerminalNode T_CASE() { return getToken(HplsqlParser.T_CASE, 0); }
-		public TerminalNode T_CASESPECIFIC() { return getToken(HplsqlParser.T_CASESPECIFIC, 0); }
-		public TerminalNode T_CAST() { return getToken(HplsqlParser.T_CAST, 0); }
-		public TerminalNode T_CHAR() { return getToken(HplsqlParser.T_CHAR, 0); }
-		public TerminalNode T_CHARACTER() { return getToken(HplsqlParser.T_CHARACTER, 0); }
-		public TerminalNode T_CHARSET() { return getToken(HplsqlParser.T_CHARSET, 0); }
-		public TerminalNode T_CLOSE() { return getToken(HplsqlParser.T_CLOSE, 0); }
-		public TerminalNode T_CLUSTERED() { return getToken(HplsqlParser.T_CLUSTERED, 0); }
-		public TerminalNode T_CMP() { return getToken(HplsqlParser.T_CMP, 0); }
-		public TerminalNode T_COLLECT() { return getToken(HplsqlParser.T_COLLECT, 0); }
-		public TerminalNode T_COLLECTION() { return getToken(HplsqlParser.T_COLLECTION, 0); }
-		public TerminalNode T_COMMENT() { return getToken(HplsqlParser.T_COMMENT, 0); }
-		public TerminalNode T_COMPRESS() { return getToken(HplsqlParser.T_COMPRESS, 0); }
-		public TerminalNode T_CONSTANT() { return getToken(HplsqlParser.T_CONSTANT, 0); }
-		public TerminalNode T_CONCAT() { return getToken(HplsqlParser.T_CONCAT, 0); }
-		public TerminalNode T_CONDITION() { return getToken(HplsqlParser.T_CONDITION, 0); }
-		public TerminalNode T_CONSTRAINT() { return getToken(HplsqlParser.T_CONSTRAINT, 0); }
-		public TerminalNode T_CONTINUE() { return getToken(HplsqlParser.T_CONTINUE, 0); }
-		public TerminalNode T_COUNT() { return getToken(HplsqlParser.T_COUNT, 0); }
-		public TerminalNode T_COUNT_BIG() { return getToken(HplsqlParser.T_COUNT_BIG, 0); }
-		public TerminalNode T_CREATION() { return getToken(HplsqlParser.T_CREATION, 0); }
-		public TerminalNode T_CREATOR() { return getToken(HplsqlParser.T_CREATOR, 0); }
-		public TerminalNode T_CS() { return getToken(HplsqlParser.T_CS, 0); }
-		public TerminalNode T_CUME_DIST() { return getToken(HplsqlParser.T_CUME_DIST, 0); }
-		public TerminalNode T_CURRENT() { return getToken(HplsqlParser.T_CURRENT, 0); }
-		public TerminalNode T_CURRENT_DATE() { return getToken(HplsqlParser.T_CURRENT_DATE, 0); }
-		public TerminalNode T_CURRENT_TIMESTAMP() { return getToken(HplsqlParser.T_CURRENT_TIMESTAMP, 0); }
-		public TerminalNode T_CURRENT_USER() { return getToken(HplsqlParser.T_CURRENT_USER, 0); }
-		public TerminalNode T_DATA() { return getToken(HplsqlParser.T_DATA, 0); }
-		public TerminalNode T_DATABASE() { return getToken(HplsqlParser.T_DATABASE, 0); }
-		public TerminalNode T_DATE() { return getToken(HplsqlParser.T_DATE, 0); }
-		public TerminalNode T_DATETIME() { return getToken(HplsqlParser.T_DATETIME, 0); }
-		public TerminalNode T_DAY() { return getToken(HplsqlParser.T_DAY, 0); }
-		public TerminalNode T_DAYS() { return getToken(HplsqlParser.T_DAYS, 0); }
-		public TerminalNode T_DEC() { return getToken(HplsqlParser.T_DEC, 0); }
-		public TerminalNode T_DECIMAL() { return getToken(HplsqlParser.T_DECIMAL, 0); }
-		public TerminalNode T_DECLARE() { return getToken(HplsqlParser.T_DECLARE, 0); }
-		public TerminalNode T_DEFAULT() { return getToken(HplsqlParser.T_DEFAULT, 0); }
-		public TerminalNode T_DEFERRED() { return getToken(HplsqlParser.T_DEFERRED, 0); }
-		public TerminalNode T_DEFINED() { return getToken(HplsqlParser.T_DEFINED, 0); }
-		public TerminalNode T_DEFINER() { return getToken(HplsqlParser.T_DEFINER, 0); }
-		public TerminalNode T_DEFINITION() { return getToken(HplsqlParser.T_DEFINITION, 0); }
-		public TerminalNode T_DELETE() { return getToken(HplsqlParser.T_DELETE, 0); }
-		public TerminalNode T_DELIMITED() { return getToken(HplsqlParser.T_DELIMITED, 0); }
-		public TerminalNode T_DENSE_RANK() { return getToken(HplsqlParser.T_DENSE_RANK, 0); }
-		public TerminalNode T_DESC() { return getToken(HplsqlParser.T_DESC, 0); }
-		public TerminalNode T_DIR() { return getToken(HplsqlParser.T_DIR, 0); }
-		public TerminalNode T_DISTINCT() { return getToken(HplsqlParser.T_DISTINCT, 0); }
-		public TerminalNode T_DISTRIBUTE() { return getToken(HplsqlParser.T_DISTRIBUTE, 0); }
-		public TerminalNode T_DO() { return getToken(HplsqlParser.T_DO, 0); }
-		public TerminalNode T_DOUBLE() { return getToken(HplsqlParser.T_DOUBLE, 0); }
-		public TerminalNode T_DYNAMIC() { return getToken(HplsqlParser.T_DYNAMIC, 0); }
-		public TerminalNode T_END() { return getToken(HplsqlParser.T_END, 0); }
-		public TerminalNode T_ENABLE() { return getToken(HplsqlParser.T_ENABLE, 0); }
-		public TerminalNode T_ENGINE() { return getToken(HplsqlParser.T_ENGINE, 0); }
-		public TerminalNode T_ESCAPED() { return getToken(HplsqlParser.T_ESCAPED, 0); }
-		public TerminalNode T_EXCEPT() { return getToken(HplsqlParser.T_EXCEPT, 0); }
-		public TerminalNode T_EXEC() { return getToken(HplsqlParser.T_EXEC, 0); }
-		public TerminalNode T_EXECUTE() { return getToken(HplsqlParser.T_EXECUTE, 0); }
-		public TerminalNode T_EXCEPTION() { return getToken(HplsqlParser.T_EXCEPTION, 0); }
-		public TerminalNode T_EXCLUSIVE() { return getToken(HplsqlParser.T_EXCLUSIVE, 0); }
-		public TerminalNode T_EXISTS() { return getToken(HplsqlParser.T_EXISTS, 0); }
-		public TerminalNode T_EXIT() { return getToken(HplsqlParser.T_EXIT, 0); }
-		public TerminalNode T_FALLBACK() { return getToken(HplsqlParser.T_FALLBACK, 0); }
-		public TerminalNode T_FALSE() { return getToken(HplsqlParser.T_FALSE, 0); }
-		public TerminalNode T_FIELDS() { return getToken(HplsqlParser.T_FIELDS, 0); }
-		public TerminalNode T_FIRST_VALUE() { return getToken(HplsqlParser.T_FIRST_VALUE, 0); }
-		public TerminalNode T_FLOAT() { return getToken(HplsqlParser.T_FLOAT, 0); }
-		public TerminalNode T_FOR() { return getToken(HplsqlParser.T_FOR, 0); }
-		public TerminalNode T_FOREIGN() { return getToken(HplsqlParser.T_FOREIGN, 0); }
-		public TerminalNode T_FORMAT() { return getToken(HplsqlParser.T_FORMAT, 0); }
-		public TerminalNode T_FOUND() { return getToken(HplsqlParser.T_FOUND, 0); }
-		public TerminalNode T_FROM() { return getToken(HplsqlParser.T_FROM, 0); }
-		public TerminalNode T_FULL() { return getToken(HplsqlParser.T_FULL, 0); }
-		public TerminalNode T_FUNCTION() { return getToken(HplsqlParser.T_FUNCTION, 0); }
-		public TerminalNode T_GLOBAL() { return getToken(HplsqlParser.T_GLOBAL, 0); }
-		public TerminalNode T_GO() { return getToken(HplsqlParser.T_GO, 0); }
-		public TerminalNode T_GROUP() { return getToken(HplsqlParser.T_GROUP, 0); }
-		public TerminalNode T_HANDLER() { return getToken(HplsqlParser.T_HANDLER, 0); }
-		public TerminalNode T_HASH() { return getToken(HplsqlParser.T_HASH, 0); }
-		public TerminalNode T_HAVING() { return getToken(HplsqlParser.T_HAVING, 0); }
-		public TerminalNode T_IDENTITY() { return getToken(HplsqlParser.T_IDENTITY, 0); }
-		public TerminalNode T_IF() { return getToken(HplsqlParser.T_IF, 0); }
-		public TerminalNode T_IMMEDIATE() { return getToken(HplsqlParser.T_IMMEDIATE, 0); }
-		public TerminalNode T_IN() { return getToken(HplsqlParser.T_IN, 0); }
-		public TerminalNode T_INDEX() { return getToken(HplsqlParser.T_INDEX, 0); }
-		public TerminalNode T_INITRANS() { return getToken(HplsqlParser.T_INITRANS, 0); }
-		public TerminalNode T_INNER() { return getToken(HplsqlParser.T_INNER, 0); }
-		public TerminalNode T_INOUT() { return getToken(HplsqlParser.T_INOUT, 0); }
-		public TerminalNode T_INT() { return getToken(HplsqlParser.T_INT, 0); }
-		public TerminalNode T_INT2() { return getToken(HplsqlParser.T_INT2, 0); }
-		public TerminalNode T_INT4() { return getToken(HplsqlParser.T_INT4, 0); }
-		public TerminalNode T_INT8() { return getToken(HplsqlParser.T_INT8, 0); }
-		public TerminalNode T_INTEGER() { return getToken(HplsqlParser.T_INTEGER, 0); }
-		public TerminalNode T_INTERSECT() { return getToken(HplsqlParser.T_INTERSECT, 0); }
-		public TerminalNode T_INTERVAL() { return getToken(HplsqlParser.T_INTERVAL, 0); }
-		public TerminalNode T_INTO() { return getToken(HplsqlParser.T_INTO, 0); }
-		public TerminalNode T_INVOKER() { return getToken(HplsqlParser.T_INVOKER, 0); }
-		public TerminalNode T_ITEMS() { return getToken(HplsqlParser.T_ITEMS, 0); }
-		public TerminalNode T_IS() { return getToken(HplsqlParser.T_IS, 0); }
-		public TerminalNode T_ISOPEN() { return getToken(HplsqlParser.T_ISOPEN, 0); }
-		public TerminalNode T_JOIN() { return getToken(HplsqlParser.T_JOIN, 0); }
-		public TerminalNode T_KEEP() { return getToken(HplsqlParser.T_KEEP, 0); }
-		public TerminalNode T_KEY() { return getToken(HplsqlParser.T_KEY, 0); }
-		public TerminalNode T_KEYS() { return getToken(HplsqlParser.T_KEYS, 0); }
-		public TerminalNode T_LAG() { return getToken(HplsqlParser.T_LAG, 0); }
-		public TerminalNode T_LANGUAGE() { return getToken(HplsqlParser.T_LANGUAGE, 0); }
-		public TerminalNode T_LAST_VALUE() { return getToken(HplsqlParser.T_LAST_VALUE, 0); }
-		public TerminalNode T_LEAD() { return getToken(HplsqlParser.T_LEAD, 0); }
-		public TerminalNode T_LEAVE() { return getToken(HplsqlParser.T_LEAVE, 0); }
-		public TerminalNode T_LEFT() { return getToken(HplsqlParser.T_LEFT, 0); }
-		public TerminalNode T_LIKE() { return getToken(HplsqlParser.T_LIKE, 0); }
-		public TerminalNode T_LIMIT() { return getToken(HplsqlParser.T_LIMIT, 0); }
-		public TerminalNode T_LINES() { return getToken(HplsqlParser.T_LINES, 0); }
-		public TerminalNode T_LOCAL() { return getToken(HplsqlParser.T_LOCAL, 0); }
-		public TerminalNode T_LOCATION() { return getToken(HplsqlParser.T_LOCATION, 0); }
-		public TerminalNode T_LOCATOR() { return getToken(HplsqlParser.T_LOCATOR, 0); }
-		public TerminalNode T_LOCATORS() { return getToken(HplsqlParser.T_LOCATORS, 0); }
-		public TerminalNode T_LOCKS() { return getToken(HplsqlParser.T_LOCKS, 0); }
-		public TerminalNode T_LOG() { return getToken(HplsqlParser.T_LOG, 0); }
-		public TerminalNode T_LOGGED() { return getToken(HplsqlParser.T_LOGGED, 0); }
-		public TerminalNode T_LOGGING() { return getToken(HplsqlParser.T_LOGGING, 0); }
-		public TerminalNode T_LOOP() { return getToken(HplsqlParser.T_LOOP, 0); }
-		public TerminalNode T_MAP() { return getToken(HplsqlParser.T_MAP, 0); }
-		public TerminalNode T_MAX() { return getToken(HplsqlParser.T_MAX, 0); }
-		public TerminalNode T_MAXTRANS() { return getToken(HplsqlParser.T_MAXTRANS, 0); }
-		public TerminalNode T_MICROSECOND() { return getToken(HplsqlParser.T_MICROSECOND, 0); }
-		public TerminalNode T_MICROSECONDS() { return getToken(HplsqlParser.T_MICROSECONDS, 0); }
-		public TerminalNode T_MIN() { return getToken(HplsqlParser.T_MIN, 0); }
-		public TerminalNode T_MULTISET() { return getToken(HplsqlParser.T_MULTISET, 0); }
-		public TerminalNode T_NCHAR() { return getToken(HplsqlParser.T_NCHAR, 0); }
-		public TerminalNode T_NVARCHAR() { return getToken(HplsqlParser.T_NVARCHAR, 0); }
-		public TerminalNode T_NO() { return getToken(HplsqlParser.T_NO, 0); }
-		public TerminalNode T_NOCOMPRESS() { return getToken(HplsqlParser.T_NOCOMPRESS, 0); }
-		public TerminalNode T_NOLOGGING() { return getToken(HplsqlParser.T_NOLOGGING, 0); }
-		public TerminalNode T_NOT() { return getToken(HplsqlParser.T_NOT, 0); }
-		public TerminalNode T_NOTFOUND() { return getToken(HplsqlParser.T_NOTFOUND, 0); }
-		public TerminalNode T_NUMERIC() { return getToken(HplsqlParser.T_NUMERIC, 0); }
-		public TerminalNode T_NUMBER() { return getToken(HplsqlParser.T_NUMBER, 0); }
-		public TerminalNode T_ON() { return getToken(HplsqlParser.T_ON, 0); }
-		public TerminalNode T_ONLY() { return getToken(HplsqlParser.T_ONLY, 0); }
-		public TerminalNode T_OPEN() { return getToken(HplsqlParser.T_OPEN, 0); }
-		public TerminalNode T_OR() { return getToken(HplsqlParser.T_OR, 0); }
-		public TerminalNode T_ORDER() { return getToken(HplsqlParser.T_ORDER, 0); }
-		public TerminalNode T_OUT() { return getToken(HplsqlParser.T_OUT, 0); }
-		public TerminalNode T_OUTER() { return getToken(HplsqlParser.T_OUTER, 0); }
-		public TerminalNode T_OVER() { return getToken(HplsqlParser.T_OVER, 0); }
-		public TerminalNode T_OWNER() { return getToken(HplsqlParser.T_OWNER, 0); }
-		public TerminalNode T_PACKAGE() { return getToken(HplsqlParser.T_PACKAGE, 0); }
-		public TerminalNode T_PART_COUNT() { return getToken(HplsqlParser.T_PART_COUNT, 0); }
-		public TerminalNode T_PART_LOC() { return getToken(HplsqlParser.T_PART_LOC, 0); }
-		public TerminalNode T_PARTITION() { return getToken(HplsqlParser.T_PARTITION, 0); }
-		public TerminalNode T_PCTFREE() { return getToken(HplsqlParser.T_PCTFREE, 0); }
-		public TerminalNode T_PCTUSED() { return getToken(HplsqlParser.T_PCTUSED, 0); }
-		public TerminalNode T_PRECISION() { return getToken(HplsqlParser.T_PRECISION, 0); }
-		public TerminalNode T_PRESERVE() { return getToken(HplsqlParser.T_PRESERVE, 0); }
-		public TerminalNode T_PRIMARY() { return getToken(HplsqlParser.T_PRIMARY, 0); }
-		public TerminalNode T_PROC() { return getToken(HplsqlParser.T_PROC, 0); }
-		public TerminalNode T_PROCEDURE() { return getToken(HplsqlParser.T_PROCEDURE, 0); }
-		public TerminalNode T_QUALIFY() { return getToken(HplsqlParser.T_QUALIFY, 0); }
-		public TerminalNode T_QUIT() { return getToken(HplsqlParser.T_QUIT, 0); }
-		public TerminalNode T_RANK() { return getToken(HplsqlParser.T_RANK, 0); }
-		public TerminalNode T_REAL() { return getToken(HplsqlParser.T_REAL, 0); }
-		public TerminalNode T_REFERENCES() { return getToken(HplsqlParser.T_REFERENCES, 0); }
-		public TerminalNode T_REGEXP() { return getToken(HplsqlParser.T_REGEXP, 0); }
-		public TerminalNode T_RR() { return getToken(HplsqlParser.T_RR, 0); }
-		public TerminalNode T_REPLACE() { return getToken(HplsqlParser.T_REPLACE, 0); }
-		public TerminalNode T_RESTRICT() { return getToken(HplsqlParser.T_RESTRICT, 0); }
-		public TerminalNode T_RESULT() { return getToken(HplsqlParser.T_RESULT, 0); }
-		public TerminalNode T_RESULT_SET_LOCATOR() { return getToken(HplsqlParser.T_RESULT_SET_LOCATOR, 0); }
-		public TerminalNode T_RETURN() { return getToken(HplsqlParser.T_RETURN, 0); }
-		public TerminalNode T_RETURNS() { return getToken(HplsqlParser.T_RETURNS, 0); }
-		public TerminalNode T_REVERSE() { return getToken(HplsqlParser.T_REVERSE, 0); }
-		public TerminalNode T_RIGHT() { return getToken(HplsqlParser.T_RIGHT, 0); }
-		public TerminalNode T_RLIKE() { return getToken(HplsqlParser.T_RLIKE, 0); }
-		public TerminalNode T_RS() { return getToken(HplsqlParser.T_RS, 0); }
-		public TerminalNode T_ROW() { return getToken(HplsqlParser.T_ROW, 0); }
-		public TerminalNode T_ROWS() { return getToken(HplsqlParser.T_ROWS, 0); }
-		public TerminalNode T_ROW_COUNT() { return getToken(HplsqlParser.T_ROW_COUNT, 0); }
-		public TerminalNode T_ROW_NUMBER() { return getToken(HplsqlParser.T_ROW_NUMBER, 0); }
-		public TerminalNode T_SCHEMA() { return getToken(HplsqlParser.T_SCHEMA, 0); }
-		public TerminalNode T_SECOND() { return getToken(HplsqlParser.T_SECOND, 0); }
-		public TerminalNode T_SECONDS() { return getToken(HplsqlParser.T_SECONDS, 0); }
-		public TerminalNode T_SECURITY() { return getToken(HplsqlParser.T_SECURITY, 0); }
-		public TerminalNode T_SEGMENT() { return getToken(HplsqlParser.T_SEGMENT, 0); }
-		public TerminalNode T_SEL() { return getToken(HplsqlParser.T_SEL, 0); }
-		public TerminalNode T_SELECT() { return getToken(HplsqlParser.T_SELECT, 0); }
-		public TerminalNode T_SET() { return getToken(HplsqlParser.T_SET, 0); }
-		public TerminalNode T_SETS() { return getToken(HplsqlParser.T_SETS, 0); }
-		public TerminalNode T_SHARE() { return getToken(HplsqlParser.T_SHARE, 0); }
-		public TerminalNode T_SIMPLE_DOUBLE() { return getToken(HplsqlParser.T_SIMPLE_DOUBLE, 0); }
-		public TerminalNode T_SIMPLE_FLOAT() { return getToken(HplsqlParser.T_SIMPLE_FLOAT, 0); }
-		public TerminalNode T_SMALLDATETIME() { return getToken(HplsqlParser.T_SMALLDATETIME, 0); }
-		public TerminalNode T_SMALLINT() { return getToken(HplsqlParser.T_SMALLINT, 0); }
-		public TerminalNode T_SQL() { return getToken(HplsqlParser.T_SQL, 0); }
-		public TerminalNode T_SQLEXCEPTION() { return getToken(HplsqlParser.T_SQLEXCEPTION, 0); }
-		public TerminalNode T_SQLWARNING() { return getToken(HplsqlParser.T_SQLWARNING, 0); }
-		public TerminalNode T_STEP() { return getToken(HplsqlParser.T_STEP, 0); }
-		public TerminalNode T_STDEV() { return getToken(HplsqlParser.T_STDEV, 0); }
-		public TerminalNode T_STORAGE() { return getToken(HplsqlParser.T_STORAGE, 0); }
-		public TerminalNode T_STORED() { return getToken(HplsqlParser.T_STORED, 0); }
-		public TerminalNode T_STRING() { return getToken(HplsqlParser.T_STRING, 0); }
-		public TerminalNode T_SUBSTRING() { return getToken(HplsqlParser.T_SUBSTRING, 0); }
-		public TerminalNode T_SUM() { return getToken(HplsqlParser.T_SUM, 0); }
-		public TerminalNode T_SYSDATE() { return getToken(HplsqlParser.T_SYSDATE, 0); }
-		public TerminalNode T_SYS_REFCURSOR() { return getToken(HplsqlParser.T_SYS_REFCURSOR, 0); }
-		public TerminalNode T_TABLE() { return getToken(HplsqlParser.T_TABLE, 0); }
-		public TerminalNode T_TABLESPACE() { return getToken(HplsqlParser.T_TABLESPACE, 0); }
-		public TerminalNode T_TEMPORARY() { return getToken(HplsqlParser.T_TEMPORARY, 0); }
-		public TerminalNode T_TERMINATED() { return getToken(HplsqlParser.T_TERMINATED, 0); }
-		public TerminalNode T_TEXTIMAGE_ON() { return getToken(HplsqlParser.T_TEXTIMAGE_ON, 0); }
-		public TerminalNode T_THEN() { return getToken(HplsqlParser.T_THEN, 0); }
-		public TerminalNode T_TIMESTAMP() { return getToken(HplsqlParser.T_TIMESTAMP, 0); }
-		public TerminalNode T_TITLE() { return getToken(HplsqlParser.T_TITLE, 0); }
-		public TerminalNode T_TO() { return getToken(HplsqlParser.T_TO, 0); }
-		public TerminalNode T_TOP() { return getToken(HplsqlParser.T_TOP, 0); }
-		public TerminalNode T_TRIM() { return getToken(HplsqlParser.T_TRIM, 0); }
-		public TerminalNode T_TRUE() { return getToken(HplsqlParser.T_TRUE, 0); }
-		public TerminalNode T_UNIQUE() { return getToken(HplsqlParser.T_UNIQUE, 0); }
-		public TerminalNode T_UPDATE() { return getToken(HplsqlParser.T_UPDATE, 0); }
-		public TerminalNode T_UR() { return getToken(HplsqlParser.T_UR, 0); }
-		public TerminalNode T_USE() { return getToken(HplsqlParser.T_USE, 0); }
-		public TerminalNode T_USER() { return getToken(HplsqlParser.T_USER, 0); }
-		public TerminalNode T_USING() { return getToken(HplsqlParser.T_USING, 0); }
-		public TerminalNode T_VALUE() { return getToken(HplsqlParser.T_VALUE, 0); }
-		public TerminalNode T_VALUES() { return getToken(HplsqlParser.T_VALUES, 0); }
-		public TerminalNode T_VAR() { return getToken(HplsqlParser.T_VAR, 0); }
-		public TerminalNode T_VARCHAR() { return getToken(HplsqlParser.T_VARCHAR, 0); }
-		public TerminalNode T_VARCHAR2() { return getToken(HplsqlParser.T_VARCHAR2, 0); }
-		public TerminalNode T_VARYING() { return getToken(HplsqlParser.T_VARYING, 0); }
-		public TerminalNode T_VARIANCE() { return getToken(HplsqlParser.T_VARIANCE, 0); }
-		public TerminalNode T_VOLATILE() { return getToken(HplsqlParser.T_VOLATILE, 0); }
-		public TerminalNode T_WHILE() { return getToken(HplsqlParser.T_WHILE, 0); }
-		public TerminalNode T_WITH() { return getToken(HplsqlParser.T_WITH, 0); }
-		public TerminalNode T_WRITE() { return getToken(HplsqlParser.T_WRITE, 0); }
-		public TerminalNode T_XML() { return getToken(HplsqlParser.T_XML, 0); }
-		public TerminalNode T_YES() { return getToken(HplsqlParser.T_YES, 0); }
-		public Non_reserved_wordsContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_non_reserved_words; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof HplsqlListener ) ((HplsqlListener)listener).enterNon_reserved_words(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof HplsqlListener ) ((HplsqlListener)listener).exitNon_reserved_words(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof HplsqlVisitor ) return ((HplsqlVisitor<? extends T>)visitor).visitNon_reserved_words(this);
 			else return visitor.visitChildren(this);
 		}
 	}

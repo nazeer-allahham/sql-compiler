@@ -7,9 +7,6 @@ class SymbolTable {
     private boolean state;
 
     SymbolTable() {
-        if (DataTypes.count() == 0) {
-            DataTypes.generatePrimaryTypes();
-        }
         currentScope = new Scope(null);
     }
 

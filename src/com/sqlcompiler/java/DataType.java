@@ -56,7 +56,7 @@ public class DataType implements Serializable {
     }
 
     LinkedList<Attribute> getAttributes() {
-        return attributes;
+        return this.attributes;
     }
 
     void setAttributes(LinkedList<Attribute> attributes) {
@@ -71,6 +71,10 @@ public class DataType implements Serializable {
     String toJson(int mode) {
         if(mode == DATA_TYPE_TO_STRING)
         {
+            if (this.rank == DataType.PRIMARY_DATA_TYPE)
+            {
+                return this.attributes.get(0).toString();
+            }
             StringBuilder mString = new StringBuilder("{ ");
             for (Attribute attr : this.attributes) {
                 mString.append(attr.toString());
@@ -80,6 +84,10 @@ public class DataType implements Serializable {
         }
         else
         {
+            if (this.rank == DataType.PRIMARY_DATA_TYPE)
+            {
+                return this.attributes.get(0).toJson(DATA_TYPE_TO_STRING_FLAT);
+            }
             StringBuilder mString = new StringBuilder("{ ");
             for (Attribute attr : this.attributes) {
                 mString.append(attr.toJson(DATA_TYPE_TO_STRING_FLAT));

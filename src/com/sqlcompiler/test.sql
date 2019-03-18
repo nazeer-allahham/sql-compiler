@@ -1,5 +1,6 @@
-void f1 (int xxxxxxx, int xx1) {
-    tt xx = select * from tttt;
-    int xxx = 1;
-
-}
+select n.id, m.name, m.age
+from mhd n, moz m
+where
+n.id = m.id
+and n.name like 'a_%'
+or n.age in (12, 15)

@@ -48,10 +48,9 @@ stmt :
     | quit_stmt
     | return_stmt
     | select_stmt
-    | invalid_select
     | while_stmt
     | cpp_stmt
-    //| error_stmt
+    | error_stmt
     | label
     | null_stmt
     | expr_stmt
@@ -59,7 +58,8 @@ stmt :
     ;
 
 error_stmt:
-       invalid_bool_expr
+       invalid_select
+    |  invalid_bool_expr
     |  invalid_cpp_function_stmt
     ;
 invalid_select:
@@ -1061,10 +1061,6 @@ bool_literal :
 // NULL constant
 null_const :
         T_NULL
-    ;
-
-white_spaces:
-        L_WS+
     ;
 
 // Tokens that are not reserved words and can be used as identifiers

@@ -32,10 +32,13 @@ class AbstractSyntaxTree {
 
             switch (ctx.getRuleIndex()) {
                 case HplsqlParser.RULE_create_type_items_item:
-                case HplsqlParser.RULE_create_table_columns_item:
-                    DataTypes.addAttribute(ctx.getChild(0).getText(), ctx.getChild(1).getText());
+                    DataTypes.addAttribute(ctx.getChild(0).getText(), ctx.getChild(2).getText());
                     break;
 
+                case HplsqlParser.RULE_create_table_columns_item:
+                    //System.out.print(ctx.getChild(0).getText() + " " + ctx.getChild(1).getText());
+                    DataTypes.addAttribute(ctx.getChild(0).getText(), ctx.getChild(1).getText());
+                    break;
                 case HplsqlParser.RULE_create_type_stmt:
                 case HplsqlParser.RULE_create_table_stmt:
                     DataTypes.initialize(SECONDARY_DATA_TYPE, ctx.getChild(2).getText());
@@ -93,11 +96,15 @@ class AbstractSyntaxTree {
                     break;
 
                 case HplsqlParser.RULE_white_spaces:
+                    System.out.print("ssassadasdasd");
                     for(int i=0 ; i<ctx.getChildCount() ; i++)
-                    System.out.print(ctx.getChild(i).getText());
+                        System.out.print(ctx.getChild(i).getText());
                     if (true) {
                         lnCount++;
                     }
+                    break;
+                case HplsqlParser.RULE_select_stmt:
+//                    DataTypes.get(ctx.getChild(0).getText()).getPath();
                     break;
             }
 
