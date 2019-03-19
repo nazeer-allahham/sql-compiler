@@ -1,4 +1,4 @@
-// Generated from E:/ite-fourth-year/compilers-1/projects/sql-compiler/src/com/sqlcompiler/antlr\Hplsql.g4 by ANTLR 4.7.2
+// Generated from C:/Users/96399/Documents/GitHub/sql-compiler/src/com/sqlcompiler/antlr\Hplsql.g4 by ANTLR 4.7.2
 package com.sqlcompiler.antlr;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
@@ -11,75 +11,72 @@ import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class HplsqlLexer extends Lexer {
+	static { RuntimeMetaData.checkVersion("4.7.2", RuntimeMetaData.VERSION); }
+
+	protected static final DFA[] _decisionToDFA;
+	protected static final PredictionContextCache _sharedContextCache =
+		new PredictionContextCache();
 	public static final int
-		T__0=1, T__1=2, T__2=3, T__3=4, T_ACTION=5, T_ALL=6, T_ALTER=7, T_AND=8,
-		T_AS=9, T_ASC=10, T_ASSOCIATE=11, T_AT=12, T_AUTO_INCREMENT=13, T_AVG=14,
-		T_BEGIN=15, T_BETWEEN=16, T_BIGINT=17, T_BINARY_DOUBLE=18, T_BINARY_FLOAT=19,
-		T_BINARY_INTEGER=20, T_BIT=21, T_BODY=22, T_BREAK=23, T_BY=24, T_BYTE=25,
-		T_CALL=26, T_CASCADE=27, T_CASE=28, T_CASESPECIFIC=29, T_CAST=30, T_CHAR=31,
-		T_CHARACTER=32, T_CHARSET=33, T_CLOSE=34, T_CLUSTERED=35, T_CMP=36, T_COLLECT=37,
-		T_COLLECTION=38, T_COMMENT=39, T_CONSTANT=40, T_COMMIT=41, T_COMPRESS=42,
-		T_CONCAT=43, T_CONDITION=44, T_CONSTRAINT=45, T_CONTINUE=46, T_COUNT=47,
-		T_COUNT_BIG=48, T_CREATE=49, T_CREATION=50, T_CREATOR=51, T_CS=52, T_CURRENT=53,
-		T_DATABASE=54, T_DATA=55, T_DATE=56, T_DATETIME=57, T_DAY=58, T_DAYS=59,
-		T_DEC=60, T_DECIMAL=61, T_DECLARE=62, T_DEFAULT=63, T_DEFERRED=64, T_DEFINED=65,
-		T_DEFINER=66, T_DEFINITION=67, T_DELETE=68, T_DELIMITED=69, T_DESC=70,
-		T_DIR=71, T_DIRECTORY=72, T_DISTINCT=73, T_DISTRIBUTE=74, T_DO=75, T_DOUBLE=76,
-		T_DROP=77, T_DYNAMIC=78, T_ELSE=79, T_ELSEIF=80, T_ELSIF=81, T_ENABLE=82,
-		T_END=83, T_ENGINE=84, T_ESCAPED=85, T_EXCEPT=86, T_EXEC=87, T_EXECUTE=88,
-		T_EXCEPTION=89, T_EXCLUSIVE=90, T_EXISTS=91, T_EXIT=92, T_FALLBACK=93,
-		T_FALSE=94, T_FIELDS=95, T_FLOAT=96, T_FOR=97, T_FOREIGN=98, T_FORMAT=99,
-		T_FOUND=100, T_FROM=101, T_FULL=102, T_FUNCTION=103, T_GET=104, T_GLOBAL=105,
-		T_GO=106, T_GROUP=107, T_HANDLER=108, T_HASH=109, T_HAVING=110, T_HDFS=111,
-		T_IDENTITY=112, T_IF=113, T_IMMEDIATE=114, T_IN=115, T_INDEX=116, T_INITRANS=117,
-		T_INNER=118, T_INOUT=119, T_INSERT=120, T_INT=121, T_INT2=122, T_INT4=123,
-		T_INT8=124, T_INTEGER=125, T_INTERSECT=126, T_INTERVAL=127, T_INTO=128,
-		T_INVOKER=129, T_IS=130, T_ISOPEN=131, T_ITEMS=132, T_JOIN=133, T_KEEP=134,
-		T_KEY=135, T_KEYS=136, T_LANGUAGE=137, T_LEAVE=138, T_LEFT=139, T_LIKE=140,
-		T_LIMIT=141, T_LINES=142, T_LOCAL=143, T_LOCATION=144, T_LOCATOR=145,
-		T_LOCATORS=146, T_LOCKS=147, T_LOG=148, T_LOGGED=149, T_LOGGING=150, T_LOOP=151,
-		T_MAP=152, T_MAX=153, T_MAXTRANS=154, T_MERGE=155, T_MICROSECOND=156,
-		T_MICROSECONDS=157, T_MIN=158, T_MULTISET=159, T_NCHAR=160, T_NVARCHAR=161,
-		T_NO=162, T_NOCOMPRESS=163, T_NOLOGGING=164, T_NOT=165, T_NOTFOUND=166,
-		T_NULL=167, T_NUMERIC=168, T_NUMBER=169, T_ON=170, T_ONLY=171, T_OPEN=172,
-		T_OR=173, T_ORDER=174, T_OUT=175, T_OUTER=176, T_OVER=177, T_OWNER=178,
-		T_PACKAGE=179, T_PARTITION=180, T_PCTFREE=181, T_PCTUSED=182, T_PLS_INTEGER=183,
-		T_PRECISION=184, T_PRESERVE=185, T_PRIMARY=186, T_PROC=187, T_PROCEDURE=188,
-		T_QUALIFY=189, T_QUIT=190, T_REAL=191, T_REFERENCES=192, T_REGEXP=193,
-		T_REPLACE=194, T_RESTRICT=195, T_RESULT=196, T_RESULT_SET_LOCATOR=197,
-		T_RETURN=198, T_RETURNS=199, T_REVERSE=200, T_RIGHT=201, T_RLIKE=202,
-		T_ROW=203, T_ROWS=204, T_ROW_COUNT=205, T_RR=206, T_RS=207, T_TRIM=208,
-		T_SCHEMA=209, T_SECOND=210, T_SECONDS=211, T_SECURITY=212, T_SEGMENT=213,
-		T_SEL=214, T_SELECT=215, T_SET=216, T_SETS=217, T_SHARE=218, T_SIMPLE_DOUBLE=219,
-		T_SIMPLE_FLOAT=220, T_SIMPLE_INTEGER=221, T_SMALLDATETIME=222, T_SMALLINT=223,
-		T_SQL=224, T_SQLEXCEPTION=225, T_SQLWARNING=226, T_STEP=227, T_STORAGE=228,
-		T_STORED=229, T_STRING=230, T_SUBSTRING=231, T_SUM=232, T_SYS_REFCURSOR=233,
-		T_TABLE=234, T_TABLESPACE=235, T_TEMPORARY=236, T_TERMINATED=237, T_TEXTIMAGE_ON=238,
-		T_THEN=239, T_TIMESTAMP=240, T_TINYINT=241, T_TITLE=242, T_TO=243, T_TOP=244,
-		T_TRUE=245, T_TYPE=246, T_UNION=247, T_UNIQUE=248, T_UPDATE=249, T_UR=250,
-		T_USE=251, T_USING=252, T_VALUE=253, T_VALUES=254, T_VAR=255, T_VARCHAR=256,
-		T_VARCHAR2=257, T_VARYING=258, T_VOLATILE=259, T_WHEN=260, T_WHERE=261,
-		T_WHILE=262, T_WITH=263, T_WORK=264, T_XML=265, T_YES=266, T_ACTIVITY_COUNT=267,
-		T_CUME_DIST=268, T_CURRENT_DATE=269, T_CURRENT_TIMESTAMP=270, T_CURRENT_USER=271,
-		T_DENSE_RANK=272, T_FIRST_VALUE=273, T_LAG=274, T_LAST_VALUE=275, T_LEAD=276,
-		T_MAX_PART_STRING=277, T_MIN_PART_STRING=278, T_MAX_PART_INT=279, T_MIN_PART_INT=280,
-		T_MAX_PART_DATE=281, T_MIN_PART_DATE=282, T_PART_COUNT=283, T_PART_LOC=284,
-		T_RANK=285, T_ROW_NUMBER=286, T_STDEV=287, T_SYSDATE=288, T_VARIANCE=289,
-		T_USER=290, T_WRITE=291, T_ADD=292, T_COLON=293, T_COMMA=294, T_PIPE=295,
-		T_DIV=296, T_DOT2=297, T_EQUAL=298, T_EQUAL2=299, T_NOTEQUAL=300, T_NOTEQUAL2=301,
-		T_GREATER=302, T_GREATEREQUAL=303, T_LESS=304, T_LESSEQUAL=305, T_MUL=306,
-		T_OPEN_B=307, T_OPEN_P=308, T_OPEN_SB=309, T_CLOSE_B=310, T_CLOSE_P=311,
-		T_CLOSE_SB=312, T_SEMICOLON=313, T_SUB=314, L_ID=315, L_S_STRING=316,
-		L_D_STRING=317, L_INT=318, L_DEC=319, L_WS=320, L_M_COMMENT=321, L_S_COMMENT=322,
+		T__0=1, T__1=2, T__2=3, T__3=4, T_ACTION=5, T_ALL=6, T_ALTER=7, T_AND=8, 
+		T_AS=9, T_ASC=10, T_ASSOCIATE=11, T_AT=12, T_AUTO_INCREMENT=13, T_AVG=14, 
+		T_BEGIN=15, T_BETWEEN=16, T_BIGINT=17, T_BINARY_DOUBLE=18, T_BINARY_FLOAT=19, 
+		T_BINARY_INTEGER=20, T_BIT=21, T_BODY=22, T_BREAK=23, T_BY=24, T_BYTE=25, 
+		T_CALL=26, T_CASCADE=27, T_CASE=28, T_CASESPECIFIC=29, T_CAST=30, T_CHAR=31, 
+		T_CHARACTER=32, T_CHARSET=33, T_CLOSE=34, T_CLUSTERED=35, T_CMP=36, T_COLLECT=37, 
+		T_COLLECTION=38, T_COMMENT=39, T_CONSTANT=40, T_COMMIT=41, T_COMPRESS=42, 
+		T_CONCAT=43, T_CONDITION=44, T_CONSTRAINT=45, T_CONTINUE=46, T_COUNT=47, 
+		T_COUNT_BIG=48, T_CREATE=49, T_CREATION=50, T_CREATOR=51, T_CS=52, T_CURRENT=53, 
+		T_DATABASE=54, T_DATA=55, T_DATE=56, T_DATETIME=57, T_DAY=58, T_DAYS=59, 
+		T_DEC=60, T_DECIMAL=61, T_DECLARE=62, T_DEFAULT=63, T_DEFERRED=64, T_DEFINED=65, 
+		T_DEFINER=66, T_DEFINITION=67, T_DELETE=68, T_DELIMITED=69, T_DESC=70, 
+		T_DIR=71, T_DIRECTORY=72, T_DISTINCT=73, T_DISTRIBUTE=74, T_DO=75, T_DOUBLE=76, 
+		T_DROP=77, T_DYNAMIC=78, T_ELSE=79, T_ELSEIF=80, T_ELSIF=81, T_ENABLE=82, 
+		T_END=83, T_ENGINE=84, T_ESCAPED=85, T_EXCEPT=86, T_EXEC=87, T_EXECUTE=88, 
+		T_EXCEPTION=89, T_EXCLUSIVE=90, T_EXISTS=91, T_EXIT=92, T_FALLBACK=93, 
+		T_FALSE=94, T_FIELDS=95, T_FLOAT=96, T_FOR=97, T_FOREIGN=98, T_FORMAT=99, 
+		T_FOUND=100, T_FROM=101, T_FULL=102, T_FUNCTION=103, T_GET=104, T_GLOBAL=105, 
+		T_GO=106, T_GROUP=107, T_HANDLER=108, T_HASH=109, T_HAVING=110, T_HDFS=111, 
+		T_IDENTITY=112, T_IF=113, T_IMMEDIATE=114, T_IN=115, T_INDEX=116, T_INITRANS=117, 
+		T_INNER=118, T_INOUT=119, T_INSERT=120, T_INT=121, T_INT2=122, T_INT4=123, 
+		T_INT8=124, T_INTEGER=125, T_INTERSECT=126, T_INTERVAL=127, T_INTO=128, 
+		T_INVOKER=129, T_IS=130, T_ISOPEN=131, T_ITEMS=132, T_JOIN=133, T_KEEP=134, 
+		T_KEY=135, T_KEYS=136, T_LANGUAGE=137, T_LEAVE=138, T_LEFT=139, T_LIKE=140, 
+		T_LIMIT=141, T_LINES=142, T_LOCAL=143, T_LOCATION=144, T_LOCATOR=145, 
+		T_LOCATORS=146, T_LOCKS=147, T_LOG=148, T_LOGGED=149, T_LOGGING=150, T_LOOP=151, 
+		T_MAP=152, T_MAX=153, T_MAXTRANS=154, T_MERGE=155, T_MICROSECOND=156, 
+		T_MICROSECONDS=157, T_MIN=158, T_MULTISET=159, T_NCHAR=160, T_NVARCHAR=161, 
+		T_NO=162, T_NOCOMPRESS=163, T_NOLOGGING=164, T_NOT=165, T_NOTFOUND=166, 
+		T_NULL=167, T_NUMERIC=168, T_NUMBER=169, T_ON=170, T_ONLY=171, T_OPEN=172, 
+		T_OR=173, T_ORDER=174, T_OUT=175, T_OUTER=176, T_OVER=177, T_OWNER=178, 
+		T_PACKAGE=179, T_PARTITION=180, T_PCTFREE=181, T_PCTUSED=182, T_PLS_INTEGER=183, 
+		T_PRECISION=184, T_PRESERVE=185, T_PRIMARY=186, T_PROC=187, T_PROCEDURE=188, 
+		T_QUALIFY=189, T_QUIT=190, T_REAL=191, T_REFERENCES=192, T_REGEXP=193, 
+		T_REPLACE=194, T_RESTRICT=195, T_RESULT=196, T_RESULT_SET_LOCATOR=197, 
+		T_RETURN=198, T_RETURNS=199, T_REVERSE=200, T_RIGHT=201, T_RLIKE=202, 
+		T_ROW=203, T_ROWS=204, T_ROW_COUNT=205, T_RR=206, T_RS=207, T_TRIM=208, 
+		T_SCHEMA=209, T_SECOND=210, T_SECONDS=211, T_SECURITY=212, T_SEGMENT=213, 
+		T_SEL=214, T_SELECT=215, T_SET=216, T_SETS=217, T_SHARE=218, T_SIMPLE_DOUBLE=219, 
+		T_SIMPLE_FLOAT=220, T_SIMPLE_INTEGER=221, T_SMALLDATETIME=222, T_SMALLINT=223, 
+		T_SQL=224, T_SQLEXCEPTION=225, T_SQLWARNING=226, T_STEP=227, T_STORAGE=228, 
+		T_STORED=229, T_STRING=230, T_SUBSTRING=231, T_SUM=232, T_SYS_REFCURSOR=233, 
+		T_TABLE=234, T_TABLESPACE=235, T_TEMPORARY=236, T_TERMINATED=237, T_TEXTIMAGE_ON=238, 
+		T_THEN=239, T_TIMESTAMP=240, T_TINYINT=241, T_TITLE=242, T_TO=243, T_TOP=244, 
+		T_TRUE=245, T_TYPE=246, T_UNION=247, T_UNIQUE=248, T_UPDATE=249, T_UR=250, 
+		T_USE=251, T_USING=252, T_VALUE=253, T_VALUES=254, T_VAR=255, T_VARCHAR=256, 
+		T_VARCHAR2=257, T_VARYING=258, T_VOLATILE=259, T_WHEN=260, T_WHERE=261, 
+		T_WHILE=262, T_WITH=263, T_WORK=264, T_XML=265, T_YES=266, T_ACTIVITY_COUNT=267, 
+		T_CUME_DIST=268, T_CURRENT_DATE=269, T_CURRENT_TIMESTAMP=270, T_CURRENT_USER=271, 
+		T_DENSE_RANK=272, T_FIRST_VALUE=273, T_LAG=274, T_LAST_VALUE=275, T_LEAD=276, 
+		T_MAX_PART_STRING=277, T_MIN_PART_STRING=278, T_MAX_PART_INT=279, T_MIN_PART_INT=280, 
+		T_MAX_PART_DATE=281, T_MIN_PART_DATE=282, T_PART_COUNT=283, T_PART_LOC=284, 
+		T_RANK=285, T_ROW_NUMBER=286, T_STDEV=287, T_SYSDATE=288, T_VARIANCE=289, 
+		T_USER=290, T_WRITE=291, T_ADD=292, T_COLON=293, T_COMMA=294, T_PIPE=295, 
+		T_DIV=296, T_DOT2=297, T_EQUAL=298, T_EQUAL2=299, T_NOTEQUAL=300, T_NOTEQUAL2=301, 
+		T_GREATER=302, T_GREATEREQUAL=303, T_LESS=304, T_LESSEQUAL=305, T_MUL=306, 
+		T_OPEN_B=307, T_OPEN_P=308, T_OPEN_SB=309, T_CLOSE_B=310, T_CLOSE_P=311, 
+		T_CLOSE_SB=312, T_SEMICOLON=313, T_SUB=314, L_ID=315, L_S_STRING=316, 
+		L_D_STRING=317, L_INT=318, L_DEC=319, L_WS=320, L_M_COMMENT=321, L_S_COMMENT=322, 
 		L_FILE=323, L_LABEL=324;
-	public static final String[] ruleNames = makeRuleNames();
-	/**
-	 * @deprecated Use {@link #VOCABULARY} instead.
-	 */
-	@Deprecated
-	public static final String[] tokenNames;
-	public static final ATN _ATN =
-		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	public static String[] channelNames = {
 		"DEFAULT_TOKEN_CHANNEL", "HIDDEN"
 	};
@@ -87,13 +84,166 @@ public class HplsqlLexer extends Lexer {
 	public static String[] modeNames = {
 		"DEFAULT_MODE"
 	};
-	protected static final DFA[] _decisionToDFA;
-	protected static final PredictionContextCache _sharedContextCache =
-		new PredictionContextCache();
 
-	static { RuntimeMetaData.checkVersion("4.7.2", RuntimeMetaData.VERSION); }
+	private static String[] makeRuleNames() {
+		return new String[] {
+			"T__0", "T__1", "T__2", "T__3", "T_ACTION", "T_ALL", "T_ALTER", "T_AND", 
+			"T_AS", "T_ASC", "T_ASSOCIATE", "T_AT", "T_AUTO_INCREMENT", "T_AVG", 
+			"T_BEGIN", "T_BETWEEN", "T_BIGINT", "T_BINARY_DOUBLE", "T_BINARY_FLOAT", 
+			"T_BINARY_INTEGER", "T_BIT", "T_BODY", "T_BREAK", "T_BY", "T_BYTE", "T_CALL", 
+			"T_CASCADE", "T_CASE", "T_CASESPECIFIC", "T_CAST", "T_CHAR", "T_CHARACTER", 
+			"T_CHARSET", "T_CLOSE", "T_CLUSTERED", "T_CMP", "T_COLLECT", "T_COLLECTION", 
+			"T_COMMENT", "T_CONSTANT", "T_COMMIT", "T_COMPRESS", "T_CONCAT", "T_CONDITION", 
+			"T_CONSTRAINT", "T_CONTINUE", "T_COUNT", "T_COUNT_BIG", "T_CREATE", "T_CREATION", 
+			"T_CREATOR", "T_CS", "T_CURRENT", "T_DATABASE", "T_DATA", "T_DATE", "T_DATETIME", 
+			"T_DAY", "T_DAYS", "T_DEC", "T_DECIMAL", "T_DECLARE", "T_DEFAULT", "T_DEFERRED", 
+			"T_DEFINED", "T_DEFINER", "T_DEFINITION", "T_DELETE", "T_DELIMITED", 
+			"T_DESC", "T_DIR", "T_DIRECTORY", "T_DISTINCT", "T_DISTRIBUTE", "T_DO", 
+			"T_DOUBLE", "T_DROP", "T_DYNAMIC", "T_ELSE", "T_ELSEIF", "T_ELSIF", "T_ENABLE", 
+			"T_END", "T_ENGINE", "T_ESCAPED", "T_EXCEPT", "T_EXEC", "T_EXECUTE", 
+			"T_EXCEPTION", "T_EXCLUSIVE", "T_EXISTS", "T_EXIT", "T_FALLBACK", "T_FALSE", 
+			"T_FIELDS", "T_FLOAT", "T_FOR", "T_FOREIGN", "T_FORMAT", "T_FOUND", "T_FROM", 
+			"T_FULL", "T_FUNCTION", "T_GET", "T_GLOBAL", "T_GO", "T_GROUP", "T_HANDLER", 
+			"T_HASH", "T_HAVING", "T_HDFS", "T_IDENTITY", "T_IF", "T_IMMEDIATE", 
+			"T_IN", "T_INDEX", "T_INITRANS", "T_INNER", "T_INOUT", "T_INSERT", "T_INT", 
+			"T_INT2", "T_INT4", "T_INT8", "T_INTEGER", "T_INTERSECT", "T_INTERVAL", 
+			"T_INTO", "T_INVOKER", "T_IS", "T_ISOPEN", "T_ITEMS", "T_JOIN", "T_KEEP", 
+			"T_KEY", "T_KEYS", "T_LANGUAGE", "T_LEAVE", "T_LEFT", "T_LIKE", "T_LIMIT", 
+			"T_LINES", "T_LOCAL", "T_LOCATION", "T_LOCATOR", "T_LOCATORS", "T_LOCKS", 
+			"T_LOG", "T_LOGGED", "T_LOGGING", "T_LOOP", "T_MAP", "T_MAX", "T_MAXTRANS", 
+			"T_MERGE", "T_MICROSECOND", "T_MICROSECONDS", "T_MIN", "T_MULTISET", 
+			"T_NCHAR", "T_NVARCHAR", "T_NO", "T_NOCOMPRESS", "T_NOLOGGING", "T_NOT", 
+			"T_NOTFOUND", "T_NULL", "T_NUMERIC", "T_NUMBER", "T_ON", "T_ONLY", "T_OPEN", 
+			"T_OR", "T_ORDER", "T_OUT", "T_OUTER", "T_OVER", "T_OWNER", "T_PACKAGE", 
+			"T_PARTITION", "T_PCTFREE", "T_PCTUSED", "T_PLS_INTEGER", "T_PRECISION", 
+			"T_PRESERVE", "T_PRIMARY", "T_PROC", "T_PROCEDURE", "T_QUALIFY", "T_QUIT", 
+			"T_REAL", "T_REFERENCES", "T_REGEXP", "T_REPLACE", "T_RESTRICT", "T_RESULT", 
+			"T_RESULT_SET_LOCATOR", "T_RETURN", "T_RETURNS", "T_REVERSE", "T_RIGHT", 
+			"T_RLIKE", "T_ROW", "T_ROWS", "T_ROW_COUNT", "T_RR", "T_RS", "T_TRIM", 
+			"T_SCHEMA", "T_SECOND", "T_SECONDS", "T_SECURITY", "T_SEGMENT", "T_SEL", 
+			"T_SELECT", "T_SET", "T_SETS", "T_SHARE", "T_SIMPLE_DOUBLE", "T_SIMPLE_FLOAT", 
+			"T_SIMPLE_INTEGER", "T_SMALLDATETIME", "T_SMALLINT", "T_SQL", "T_SQLEXCEPTION", 
+			"T_SQLWARNING", "T_STEP", "T_STORAGE", "T_STORED", "T_STRING", "T_SUBSTRING", 
+			"T_SUM", "T_SYS_REFCURSOR", "T_TABLE", "T_TABLESPACE", "T_TEMPORARY", 
+			"T_TERMINATED", "T_TEXTIMAGE_ON", "T_THEN", "T_TIMESTAMP", "T_TINYINT", 
+			"T_TITLE", "T_TO", "T_TOP", "T_TRUE", "T_TYPE", "T_UNION", "T_UNIQUE", 
+			"T_UPDATE", "T_UR", "T_USE", "T_USING", "T_VALUE", "T_VALUES", "T_VAR", 
+			"T_VARCHAR", "T_VARCHAR2", "T_VARYING", "T_VOLATILE", "T_WHEN", "T_WHERE", 
+			"T_WHILE", "T_WITH", "T_WORK", "T_XML", "T_YES", "T_ACTIVITY_COUNT", 
+			"T_CUME_DIST", "T_CURRENT_DATE", "T_CURRENT_TIMESTAMP", "T_CURRENT_USER", 
+			"T_DENSE_RANK", "T_FIRST_VALUE", "T_LAG", "T_LAST_VALUE", "T_LEAD", "T_MAX_PART_STRING", 
+			"T_MIN_PART_STRING", "T_MAX_PART_INT", "T_MIN_PART_INT", "T_MAX_PART_DATE", 
+			"T_MIN_PART_DATE", "T_PART_COUNT", "T_PART_LOC", "T_RANK", "T_ROW_NUMBER", 
+			"T_STDEV", "T_SYSDATE", "T_VARIANCE", "T_USER", "T_WRITE", "T_ADD", "T_COLON", 
+			"T_COMMA", "T_PIPE", "T_DIV", "T_DOT2", "T_EQUAL", "T_EQUAL2", "T_NOTEQUAL", 
+			"T_NOTEQUAL2", "T_GREATER", "T_GREATEREQUAL", "T_LESS", "T_LESSEQUAL", 
+			"T_MUL", "T_OPEN_B", "T_OPEN_P", "T_OPEN_SB", "T_CLOSE_B", "T_CLOSE_P", 
+			"T_CLOSE_SB", "T_SEMICOLON", "T_SUB", "L_ID", "L_S_STRING", "L_D_STRING", 
+			"L_INT", "L_DEC", "L_WS", "L_M_COMMENT", "L_S_COMMENT", "L_FILE", "L_LABEL", 
+			"L_ID_PART", "L_STR_ESC_D", "L_DIGIT", "L_BLANK", "A", "B", "C", "D", 
+			"E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", 
+			"S", "T", "U", "V", "W", "X", "Y", "Z"
+		};
+	}
+	public static final String[] ruleNames = makeRuleNames();
+
+	private static String[] makeLiteralNames() {
+		return new String[] {
+			null, "'@'", "'#'", "'%'", "'.'", null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, "'+'", "':'", "','", "'||'", "'/'", "'..'", 
+			"'='", "'=='", "'<>'", "'!='", "'>'", "'>='", "'<'", "'<='", "'*'", "'{'", 
+			"'('", "'['", "'}'", "')'", "']'", "';'", "'-'"
+		};
+	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
+	private static String[] makeSymbolicNames() {
+		return new String[] {
+			null, null, null, null, null, "T_ACTION", "T_ALL", "T_ALTER", "T_AND", 
+			"T_AS", "T_ASC", "T_ASSOCIATE", "T_AT", "T_AUTO_INCREMENT", "T_AVG", 
+			"T_BEGIN", "T_BETWEEN", "T_BIGINT", "T_BINARY_DOUBLE", "T_BINARY_FLOAT", 
+			"T_BINARY_INTEGER", "T_BIT", "T_BODY", "T_BREAK", "T_BY", "T_BYTE", "T_CALL", 
+			"T_CASCADE", "T_CASE", "T_CASESPECIFIC", "T_CAST", "T_CHAR", "T_CHARACTER", 
+			"T_CHARSET", "T_CLOSE", "T_CLUSTERED", "T_CMP", "T_COLLECT", "T_COLLECTION", 
+			"T_COMMENT", "T_CONSTANT", "T_COMMIT", "T_COMPRESS", "T_CONCAT", "T_CONDITION", 
+			"T_CONSTRAINT", "T_CONTINUE", "T_COUNT", "T_COUNT_BIG", "T_CREATE", "T_CREATION", 
+			"T_CREATOR", "T_CS", "T_CURRENT", "T_DATABASE", "T_DATA", "T_DATE", "T_DATETIME", 
+			"T_DAY", "T_DAYS", "T_DEC", "T_DECIMAL", "T_DECLARE", "T_DEFAULT", "T_DEFERRED", 
+			"T_DEFINED", "T_DEFINER", "T_DEFINITION", "T_DELETE", "T_DELIMITED", 
+			"T_DESC", "T_DIR", "T_DIRECTORY", "T_DISTINCT", "T_DISTRIBUTE", "T_DO", 
+			"T_DOUBLE", "T_DROP", "T_DYNAMIC", "T_ELSE", "T_ELSEIF", "T_ELSIF", "T_ENABLE", 
+			"T_END", "T_ENGINE", "T_ESCAPED", "T_EXCEPT", "T_EXEC", "T_EXECUTE", 
+			"T_EXCEPTION", "T_EXCLUSIVE", "T_EXISTS", "T_EXIT", "T_FALLBACK", "T_FALSE", 
+			"T_FIELDS", "T_FLOAT", "T_FOR", "T_FOREIGN", "T_FORMAT", "T_FOUND", "T_FROM", 
+			"T_FULL", "T_FUNCTION", "T_GET", "T_GLOBAL", "T_GO", "T_GROUP", "T_HANDLER", 
+			"T_HASH", "T_HAVING", "T_HDFS", "T_IDENTITY", "T_IF", "T_IMMEDIATE", 
+			"T_IN", "T_INDEX", "T_INITRANS", "T_INNER", "T_INOUT", "T_INSERT", "T_INT", 
+			"T_INT2", "T_INT4", "T_INT8", "T_INTEGER", "T_INTERSECT", "T_INTERVAL", 
+			"T_INTO", "T_INVOKER", "T_IS", "T_ISOPEN", "T_ITEMS", "T_JOIN", "T_KEEP", 
+			"T_KEY", "T_KEYS", "T_LANGUAGE", "T_LEAVE", "T_LEFT", "T_LIKE", "T_LIMIT", 
+			"T_LINES", "T_LOCAL", "T_LOCATION", "T_LOCATOR", "T_LOCATORS", "T_LOCKS", 
+			"T_LOG", "T_LOGGED", "T_LOGGING", "T_LOOP", "T_MAP", "T_MAX", "T_MAXTRANS", 
+			"T_MERGE", "T_MICROSECOND", "T_MICROSECONDS", "T_MIN", "T_MULTISET", 
+			"T_NCHAR", "T_NVARCHAR", "T_NO", "T_NOCOMPRESS", "T_NOLOGGING", "T_NOT", 
+			"T_NOTFOUND", "T_NULL", "T_NUMERIC", "T_NUMBER", "T_ON", "T_ONLY", "T_OPEN", 
+			"T_OR", "T_ORDER", "T_OUT", "T_OUTER", "T_OVER", "T_OWNER", "T_PACKAGE", 
+			"T_PARTITION", "T_PCTFREE", "T_PCTUSED", "T_PLS_INTEGER", "T_PRECISION", 
+			"T_PRESERVE", "T_PRIMARY", "T_PROC", "T_PROCEDURE", "T_QUALIFY", "T_QUIT", 
+			"T_REAL", "T_REFERENCES", "T_REGEXP", "T_REPLACE", "T_RESTRICT", "T_RESULT", 
+			"T_RESULT_SET_LOCATOR", "T_RETURN", "T_RETURNS", "T_REVERSE", "T_RIGHT", 
+			"T_RLIKE", "T_ROW", "T_ROWS", "T_ROW_COUNT", "T_RR", "T_RS", "T_TRIM", 
+			"T_SCHEMA", "T_SECOND", "T_SECONDS", "T_SECURITY", "T_SEGMENT", "T_SEL", 
+			"T_SELECT", "T_SET", "T_SETS", "T_SHARE", "T_SIMPLE_DOUBLE", "T_SIMPLE_FLOAT", 
+			"T_SIMPLE_INTEGER", "T_SMALLDATETIME", "T_SMALLINT", "T_SQL", "T_SQLEXCEPTION", 
+			"T_SQLWARNING", "T_STEP", "T_STORAGE", "T_STORED", "T_STRING", "T_SUBSTRING", 
+			"T_SUM", "T_SYS_REFCURSOR", "T_TABLE", "T_TABLESPACE", "T_TEMPORARY", 
+			"T_TERMINATED", "T_TEXTIMAGE_ON", "T_THEN", "T_TIMESTAMP", "T_TINYINT", 
+			"T_TITLE", "T_TO", "T_TOP", "T_TRUE", "T_TYPE", "T_UNION", "T_UNIQUE", 
+			"T_UPDATE", "T_UR", "T_USE", "T_USING", "T_VALUE", "T_VALUES", "T_VAR", 
+			"T_VARCHAR", "T_VARCHAR2", "T_VARYING", "T_VOLATILE", "T_WHEN", "T_WHERE", 
+			"T_WHILE", "T_WITH", "T_WORK", "T_XML", "T_YES", "T_ACTIVITY_COUNT", 
+			"T_CUME_DIST", "T_CURRENT_DATE", "T_CURRENT_TIMESTAMP", "T_CURRENT_USER", 
+			"T_DENSE_RANK", "T_FIRST_VALUE", "T_LAG", "T_LAST_VALUE", "T_LEAD", "T_MAX_PART_STRING", 
+			"T_MIN_PART_STRING", "T_MAX_PART_INT", "T_MIN_PART_INT", "T_MAX_PART_DATE", 
+			"T_MIN_PART_DATE", "T_PART_COUNT", "T_PART_LOC", "T_RANK", "T_ROW_NUMBER", 
+			"T_STDEV", "T_SYSDATE", "T_VARIANCE", "T_USER", "T_WRITE", "T_ADD", "T_COLON", 
+			"T_COMMA", "T_PIPE", "T_DIV", "T_DOT2", "T_EQUAL", "T_EQUAL2", "T_NOTEQUAL", 
+			"T_NOTEQUAL2", "T_GREATER", "T_GREATEREQUAL", "T_LESS", "T_LESSEQUAL", 
+			"T_MUL", "T_OPEN_B", "T_OPEN_P", "T_OPEN_SB", "T_CLOSE_B", "T_CLOSE_P", 
+			"T_CLOSE_SB", "T_SEMICOLON", "T_SUB", "L_ID", "L_S_STRING", "L_D_STRING", 
+			"L_INT", "L_DEC", "L_WS", "L_M_COMMENT", "L_S_COMMENT", "L_FILE", "L_LABEL"
+		};
+	}
+	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
+	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
+	/**
+	 * @deprecated Use {@link #VOCABULARY} instead.
+	 */
+	@Deprecated
+	public static final String[] tokenNames;
 	static {
 		tokenNames = new String[_SYMBOLIC_NAMES.length];
 		for (int i = 0; i < tokenNames.length; i++) {
@@ -107,164 +257,6 @@ public class HplsqlLexer extends Lexer {
 			}
 		}
 	}
-	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
-	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
-
-	public HplsqlLexer(CharStream input) {
-		super(input);
-		_interp = new LexerATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
-	}
-
-	private static String[] makeRuleNames() {
-		return new String[] {
-			"T__0", "T__1", "T__2", "T__3", "T_ACTION", "T_ALL", "T_ALTER", "T_AND",
-			"T_AS", "T_ASC", "T_ASSOCIATE", "T_AT", "T_AUTO_INCREMENT", "T_AVG",
-			"T_BEGIN", "T_BETWEEN", "T_BIGINT", "T_BINARY_DOUBLE", "T_BINARY_FLOAT",
-			"T_BINARY_INTEGER", "T_BIT", "T_BODY", "T_BREAK", "T_BY", "T_BYTE", "T_CALL",
-			"T_CASCADE", "T_CASE", "T_CASESPECIFIC", "T_CAST", "T_CHAR", "T_CHARACTER",
-			"T_CHARSET", "T_CLOSE", "T_CLUSTERED", "T_CMP", "T_COLLECT", "T_COLLECTION",
-			"T_COMMENT", "T_CONSTANT", "T_COMMIT", "T_COMPRESS", "T_CONCAT", "T_CONDITION",
-			"T_CONSTRAINT", "T_CONTINUE", "T_COUNT", "T_COUNT_BIG", "T_CREATE", "T_CREATION",
-			"T_CREATOR", "T_CS", "T_CURRENT", "T_DATABASE", "T_DATA", "T_DATE", "T_DATETIME",
-			"T_DAY", "T_DAYS", "T_DEC", "T_DECIMAL", "T_DECLARE", "T_DEFAULT", "T_DEFERRED",
-			"T_DEFINED", "T_DEFINER", "T_DEFINITION", "T_DELETE", "T_DELIMITED",
-			"T_DESC", "T_DIR", "T_DIRECTORY", "T_DISTINCT", "T_DISTRIBUTE", "T_DO",
-			"T_DOUBLE", "T_DROP", "T_DYNAMIC", "T_ELSE", "T_ELSEIF", "T_ELSIF", "T_ENABLE",
-			"T_END", "T_ENGINE", "T_ESCAPED", "T_EXCEPT", "T_EXEC", "T_EXECUTE",
-			"T_EXCEPTION", "T_EXCLUSIVE", "T_EXISTS", "T_EXIT", "T_FALLBACK", "T_FALSE",
-			"T_FIELDS", "T_FLOAT", "T_FOR", "T_FOREIGN", "T_FORMAT", "T_FOUND", "T_FROM",
-			"T_FULL", "T_FUNCTION", "T_GET", "T_GLOBAL", "T_GO", "T_GROUP", "T_HANDLER",
-			"T_HASH", "T_HAVING", "T_HDFS", "T_IDENTITY", "T_IF", "T_IMMEDIATE",
-			"T_IN", "T_INDEX", "T_INITRANS", "T_INNER", "T_INOUT", "T_INSERT", "T_INT",
-			"T_INT2", "T_INT4", "T_INT8", "T_INTEGER", "T_INTERSECT", "T_INTERVAL",
-			"T_INTO", "T_INVOKER", "T_IS", "T_ISOPEN", "T_ITEMS", "T_JOIN", "T_KEEP",
-			"T_KEY", "T_KEYS", "T_LANGUAGE", "T_LEAVE", "T_LEFT", "T_LIKE", "T_LIMIT",
-			"T_LINES", "T_LOCAL", "T_LOCATION", "T_LOCATOR", "T_LOCATORS", "T_LOCKS",
-			"T_LOG", "T_LOGGED", "T_LOGGING", "T_LOOP", "T_MAP", "T_MAX", "T_MAXTRANS",
-			"T_MERGE", "T_MICROSECOND", "T_MICROSECONDS", "T_MIN", "T_MULTISET",
-			"T_NCHAR", "T_NVARCHAR", "T_NO", "T_NOCOMPRESS", "T_NOLOGGING", "T_NOT",
-			"T_NOTFOUND", "T_NULL", "T_NUMERIC", "T_NUMBER", "T_ON", "T_ONLY", "T_OPEN",
-			"T_OR", "T_ORDER", "T_OUT", "T_OUTER", "T_OVER", "T_OWNER", "T_PACKAGE",
-			"T_PARTITION", "T_PCTFREE", "T_PCTUSED", "T_PLS_INTEGER", "T_PRECISION",
-			"T_PRESERVE", "T_PRIMARY", "T_PROC", "T_PROCEDURE", "T_QUALIFY", "T_QUIT",
-			"T_REAL", "T_REFERENCES", "T_REGEXP", "T_REPLACE", "T_RESTRICT", "T_RESULT",
-			"T_RESULT_SET_LOCATOR", "T_RETURN", "T_RETURNS", "T_REVERSE", "T_RIGHT",
-			"T_RLIKE", "T_ROW", "T_ROWS", "T_ROW_COUNT", "T_RR", "T_RS", "T_TRIM",
-			"T_SCHEMA", "T_SECOND", "T_SECONDS", "T_SECURITY", "T_SEGMENT", "T_SEL",
-			"T_SELECT", "T_SET", "T_SETS", "T_SHARE", "T_SIMPLE_DOUBLE", "T_SIMPLE_FLOAT",
-			"T_SIMPLE_INTEGER", "T_SMALLDATETIME", "T_SMALLINT", "T_SQL", "T_SQLEXCEPTION",
-			"T_SQLWARNING", "T_STEP", "T_STORAGE", "T_STORED", "T_STRING", "T_SUBSTRING",
-			"T_SUM", "T_SYS_REFCURSOR", "T_TABLE", "T_TABLESPACE", "T_TEMPORARY",
-			"T_TERMINATED", "T_TEXTIMAGE_ON", "T_THEN", "T_TIMESTAMP", "T_TINYINT",
-			"T_TITLE", "T_TO", "T_TOP", "T_TRUE", "T_TYPE", "T_UNION", "T_UNIQUE",
-			"T_UPDATE", "T_UR", "T_USE", "T_USING", "T_VALUE", "T_VALUES", "T_VAR",
-			"T_VARCHAR", "T_VARCHAR2", "T_VARYING", "T_VOLATILE", "T_WHEN", "T_WHERE",
-			"T_WHILE", "T_WITH", "T_WORK", "T_XML", "T_YES", "T_ACTIVITY_COUNT",
-			"T_CUME_DIST", "T_CURRENT_DATE", "T_CURRENT_TIMESTAMP", "T_CURRENT_USER",
-			"T_DENSE_RANK", "T_FIRST_VALUE", "T_LAG", "T_LAST_VALUE", "T_LEAD", "T_MAX_PART_STRING",
-			"T_MIN_PART_STRING", "T_MAX_PART_INT", "T_MIN_PART_INT", "T_MAX_PART_DATE",
-			"T_MIN_PART_DATE", "T_PART_COUNT", "T_PART_LOC", "T_RANK", "T_ROW_NUMBER",
-			"T_STDEV", "T_SYSDATE", "T_VARIANCE", "T_USER", "T_WRITE", "T_ADD", "T_COLON",
-			"T_COMMA", "T_PIPE", "T_DIV", "T_DOT2", "T_EQUAL", "T_EQUAL2", "T_NOTEQUAL",
-			"T_NOTEQUAL2", "T_GREATER", "T_GREATEREQUAL", "T_LESS", "T_LESSEQUAL",
-			"T_MUL", "T_OPEN_B", "T_OPEN_P", "T_OPEN_SB", "T_CLOSE_B", "T_CLOSE_P",
-			"T_CLOSE_SB", "T_SEMICOLON", "T_SUB", "L_ID", "L_S_STRING", "L_D_STRING",
-			"L_INT", "L_DEC", "L_WS", "L_M_COMMENT", "L_S_COMMENT", "L_FILE", "L_LABEL",
-			"L_ID_PART", "L_STR_ESC_D", "L_DIGIT", "L_BLANK", "A", "B", "C", "D",
-			"E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R",
-			"S", "T", "U", "V", "W", "X", "Y", "Z"
-		};
-	}
-
-	private static String[] makeLiteralNames() {
-		return new String[] {
-			null, "'@'", "'#'", "'%'", "'.'", null, null, null, null, null, null,
-			null, null, null, null, null, null, null, null, null, null, null, null,
-			null, null, null, null, null, null, null, null, null, null, null, null,
-			null, null, null, null, null, null, null, null, null, null, null, null,
-			null, null, null, null, null, null, null, null, null, null, null, null,
-			null, null, null, null, null, null, null, null, null, null, null, null,
-			null, null, null, null, null, null, null, null, null, null, null, null,
-			null, null, null, null, null, null, null, null, null, null, null, null,
-			null, null, null, null, null, null, null, null, null, null, null, null,
-			null, null, null, null, null, null, null, null, null, null, null, null,
-			null, null, null, null, null, null, null, null, null, null, null, null,
-			null, null, null, null, null, null, null, null, null, null, null, null,
-			null, null, null, null, null, null, null, null, null, null, null, null,
-			null, null, null, null, null, null, null, null, null, null, null, null,
-			null, null, null, null, null, null, null, null, null, null, null, null,
-			null, null, null, null, null, null, null, null, null, null, null, null,
-			null, null, null, null, null, null, null, null, null, null, null, null,
-			null, null, null, null, null, null, null, null, null, null, null, null,
-			null, null, null, null, null, null, null, null, null, null, null, null,
-			null, null, null, null, null, null, null, null, null, null, null, null,
-			null, null, null, null, null, null, null, null, null, null, null, null,
-			null, null, null, null, null, null, null, null, null, null, null, null,
-			null, null, null, null, null, null, null, null, null, null, null, null,
-			null, null, null, null, null, null, null, null, null, null, null, null,
-			null, null, null, null, null, "'+'", "':'", "','", "'||'", "'/'", "'..'",
-			"'='", "'=='", "'<>'", "'!='", "'>'", "'>='", "'<'", "'<='", "'*'", "'{'",
-			"'('", "'['", "'}'", "')'", "']'", "';'", "'-'"
-		};
-	}
-
-	private static String[] makeSymbolicNames() {
-		return new String[] {
-			null, null, null, null, null, "T_ACTION", "T_ALL", "T_ALTER", "T_AND",
-			"T_AS", "T_ASC", "T_ASSOCIATE", "T_AT", "T_AUTO_INCREMENT", "T_AVG",
-			"T_BEGIN", "T_BETWEEN", "T_BIGINT", "T_BINARY_DOUBLE", "T_BINARY_FLOAT",
-			"T_BINARY_INTEGER", "T_BIT", "T_BODY", "T_BREAK", "T_BY", "T_BYTE", "T_CALL",
-			"T_CASCADE", "T_CASE", "T_CASESPECIFIC", "T_CAST", "T_CHAR", "T_CHARACTER",
-			"T_CHARSET", "T_CLOSE", "T_CLUSTERED", "T_CMP", "T_COLLECT", "T_COLLECTION",
-			"T_COMMENT", "T_CONSTANT", "T_COMMIT", "T_COMPRESS", "T_CONCAT", "T_CONDITION",
-			"T_CONSTRAINT", "T_CONTINUE", "T_COUNT", "T_COUNT_BIG", "T_CREATE", "T_CREATION",
-			"T_CREATOR", "T_CS", "T_CURRENT", "T_DATABASE", "T_DATA", "T_DATE", "T_DATETIME",
-			"T_DAY", "T_DAYS", "T_DEC", "T_DECIMAL", "T_DECLARE", "T_DEFAULT", "T_DEFERRED",
-			"T_DEFINED", "T_DEFINER", "T_DEFINITION", "T_DELETE", "T_DELIMITED",
-			"T_DESC", "T_DIR", "T_DIRECTORY", "T_DISTINCT", "T_DISTRIBUTE", "T_DO",
-			"T_DOUBLE", "T_DROP", "T_DYNAMIC", "T_ELSE", "T_ELSEIF", "T_ELSIF", "T_ENABLE",
-			"T_END", "T_ENGINE", "T_ESCAPED", "T_EXCEPT", "T_EXEC", "T_EXECUTE",
-			"T_EXCEPTION", "T_EXCLUSIVE", "T_EXISTS", "T_EXIT", "T_FALLBACK", "T_FALSE",
-			"T_FIELDS", "T_FLOAT", "T_FOR", "T_FOREIGN", "T_FORMAT", "T_FOUND", "T_FROM",
-			"T_FULL", "T_FUNCTION", "T_GET", "T_GLOBAL", "T_GO", "T_GROUP", "T_HANDLER",
-			"T_HASH", "T_HAVING", "T_HDFS", "T_IDENTITY", "T_IF", "T_IMMEDIATE",
-			"T_IN", "T_INDEX", "T_INITRANS", "T_INNER", "T_INOUT", "T_INSERT", "T_INT",
-			"T_INT2", "T_INT4", "T_INT8", "T_INTEGER", "T_INTERSECT", "T_INTERVAL",
-			"T_INTO", "T_INVOKER", "T_IS", "T_ISOPEN", "T_ITEMS", "T_JOIN", "T_KEEP",
-			"T_KEY", "T_KEYS", "T_LANGUAGE", "T_LEAVE", "T_LEFT", "T_LIKE", "T_LIMIT",
-			"T_LINES", "T_LOCAL", "T_LOCATION", "T_LOCATOR", "T_LOCATORS", "T_LOCKS",
-			"T_LOG", "T_LOGGED", "T_LOGGING", "T_LOOP", "T_MAP", "T_MAX", "T_MAXTRANS",
-			"T_MERGE", "T_MICROSECOND", "T_MICROSECONDS", "T_MIN", "T_MULTISET",
-			"T_NCHAR", "T_NVARCHAR", "T_NO", "T_NOCOMPRESS", "T_NOLOGGING", "T_NOT",
-			"T_NOTFOUND", "T_NULL", "T_NUMERIC", "T_NUMBER", "T_ON", "T_ONLY", "T_OPEN",
-			"T_OR", "T_ORDER", "T_OUT", "T_OUTER", "T_OVER", "T_OWNER", "T_PACKAGE",
-			"T_PARTITION", "T_PCTFREE", "T_PCTUSED", "T_PLS_INTEGER", "T_PRECISION",
-			"T_PRESERVE", "T_PRIMARY", "T_PROC", "T_PROCEDURE", "T_QUALIFY", "T_QUIT",
-			"T_REAL", "T_REFERENCES", "T_REGEXP", "T_REPLACE", "T_RESTRICT", "T_RESULT",
-			"T_RESULT_SET_LOCATOR", "T_RETURN", "T_RETURNS", "T_REVERSE", "T_RIGHT",
-			"T_RLIKE", "T_ROW", "T_ROWS", "T_ROW_COUNT", "T_RR", "T_RS", "T_TRIM",
-			"T_SCHEMA", "T_SECOND", "T_SECONDS", "T_SECURITY", "T_SEGMENT", "T_SEL",
-			"T_SELECT", "T_SET", "T_SETS", "T_SHARE", "T_SIMPLE_DOUBLE", "T_SIMPLE_FLOAT",
-			"T_SIMPLE_INTEGER", "T_SMALLDATETIME", "T_SMALLINT", "T_SQL", "T_SQLEXCEPTION",
-			"T_SQLWARNING", "T_STEP", "T_STORAGE", "T_STORED", "T_STRING", "T_SUBSTRING",
-			"T_SUM", "T_SYS_REFCURSOR", "T_TABLE", "T_TABLESPACE", "T_TEMPORARY",
-			"T_TERMINATED", "T_TEXTIMAGE_ON", "T_THEN", "T_TIMESTAMP", "T_TINYINT",
-			"T_TITLE", "T_TO", "T_TOP", "T_TRUE", "T_TYPE", "T_UNION", "T_UNIQUE",
-			"T_UPDATE", "T_UR", "T_USE", "T_USING", "T_VALUE", "T_VALUES", "T_VAR",
-			"T_VARCHAR", "T_VARCHAR2", "T_VARYING", "T_VOLATILE", "T_WHEN", "T_WHERE",
-			"T_WHILE", "T_WITH", "T_WORK", "T_XML", "T_YES", "T_ACTIVITY_COUNT",
-			"T_CUME_DIST", "T_CURRENT_DATE", "T_CURRENT_TIMESTAMP", "T_CURRENT_USER",
-			"T_DENSE_RANK", "T_FIRST_VALUE", "T_LAG", "T_LAST_VALUE", "T_LEAD", "T_MAX_PART_STRING",
-			"T_MIN_PART_STRING", "T_MAX_PART_INT", "T_MIN_PART_INT", "T_MAX_PART_DATE",
-			"T_MIN_PART_DATE", "T_PART_COUNT", "T_PART_LOC", "T_RANK", "T_ROW_NUMBER",
-			"T_STDEV", "T_SYSDATE", "T_VARIANCE", "T_USER", "T_WRITE", "T_ADD", "T_COLON",
-			"T_COMMA", "T_PIPE", "T_DIV", "T_DOT2", "T_EQUAL", "T_EQUAL2", "T_NOTEQUAL",
-			"T_NOTEQUAL2", "T_GREATER", "T_GREATEREQUAL", "T_LESS", "T_LESSEQUAL",
-			"T_MUL", "T_OPEN_B", "T_OPEN_P", "T_OPEN_SB", "T_CLOSE_B", "T_CLOSE_P",
-			"T_CLOSE_SB", "T_SEMICOLON", "T_SUB", "L_ID", "L_S_STRING", "L_D_STRING",
-			"L_INT", "L_DEC", "L_WS", "L_M_COMMENT", "L_S_COMMENT", "L_FILE", "L_LABEL"
-		};
-	}
 
 	@Override
 	@Deprecated
@@ -276,6 +268,12 @@ public class HplsqlLexer extends Lexer {
 
 	public Vocabulary getVocabulary() {
 		return VOCABULARY;
+	}
+
+
+	public HplsqlLexer(CharStream input) {
+		super(input);
+		_interp = new LexerATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
 	@Override
@@ -292,6 +290,9 @@ public class HplsqlLexer extends Lexer {
 
 	@Override
 	public String[] getModeNames() { return modeNames; }
+
+	@Override
+	public ATN getATN() { return _ATN; }
 
 	private static final int _serializedATNSegments = 2;
 	private static final String _serializedATNSegment0 =
@@ -1700,9 +1701,8 @@ public class HplsqlLexer extends Lexer {
 		},
 		""
 	);
-
-	@Override
-	public ATN getATN() { return _ATN; }
+	public static final ATN _ATN =
+		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
 		_decisionToDFA = new DFA[_ATN.getNumberOfDecisions()];
 		for (int i = 0; i < _ATN.getNumberOfDecisions(); i++) {

@@ -95,14 +95,6 @@ class AbstractSyntaxTree {
                                                               ctx.getChild(0).getChild(0).getText(), "function"), true);
                     break;
 
-                case HplsqlParser.RULE_white_spaces:
-                    System.out.print("ssassadasdasd");
-                    for(int i=0 ; i<ctx.getChildCount() ; i++)
-                        System.out.print(ctx.getChild(i).getText());
-                    if (true) {
-                        lnCount++;
-                    }
-                    break;
                 case HplsqlParser.RULE_select_stmt:
 //                    DataTypes.get(ctx.getChild(0).getText()).getPath();
                     break;

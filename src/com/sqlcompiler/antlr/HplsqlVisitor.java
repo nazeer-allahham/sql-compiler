@@ -1,4 +1,4 @@
-// Generated from E:/ite-fourth-year/compilers-1/projects/sql-compiler/src/com/sqlcompiler/antlr\Hplsql.g4 by ANTLR 4.7.2
+// Generated from C:/Users/96399/Documents/GitHub/sql-compiler/src/com/sqlcompiler/antlr\Hplsql.g4 by ANTLR 4.7.2
 package com.sqlcompiler.antlr;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -1176,12 +1176,6 @@ public interface HplsqlVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitNull_const(HplsqlParser.Null_constContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link HplsqlParser#white_spaces}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitWhite_spaces(HplsqlParser.White_spacesContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link HplsqlParser#non_reserved_words}.
 	 * @param ctx the parse tree

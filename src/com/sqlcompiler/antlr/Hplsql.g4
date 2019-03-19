@@ -67,16 +67,17 @@ invalid_select:
 
 ;
 invalid_where_clause:
-        bool_expr
+        bool_expr {notifyErrorListeners("Missing 'where' word ");}
      |T_WHERE invalid_bool_expr
 ;
 
 invalid_from_clause:
-         from_table_clause (from_join_clause)*
+         from_table_clause (from_join_clause)* {notifyErrorListeners("Missing 'from' word ");}
 ;
 invalid_bool_expr:
-        T_NOT? bool_expr T_CLOSE_P
-    |   T_NOT? T_OPEN_P bool_expr
+        T_NOT? bool_expr T_CLOSE_P {notifyErrorListeners("Missing opening '('");}
+    |   T_NOT? T_OPEN_P bool_expr {notifyErrorListeners("Missing closing ')'");}
+    |   T_NOT?  bool_expr T_CLOSE_P T_CLOSE_P+  {notifyErrorListeners("Too many parentheses");}
     |   invalid_bool_expr_atom
     ;
 
@@ -97,21 +98,21 @@ invalid_cpp_function_stmt:
     ;
 
 invalid_cpp_function_header:
-        ident T_OPEN_P (cpp_function_params_clause | invalid_cpp_function_params_clause) T_CLOSE_P
-    |   dtype T_OPEN_P (cpp_function_params_clause | invalid_cpp_function_params_clause) T_CLOSE_P
+        ident T_OPEN_P (cpp_function_params_clause | invalid_cpp_function_params_clause) T_CLOSE_P {notifyErrorListeners("Missing data type");}
+    |   dtype T_OPEN_P (cpp_function_params_clause | invalid_cpp_function_params_clause) T_CLOSE_P {notifyErrorListeners("Missing identify");}
     |   dtype ident T_OPEN_P invalid_cpp_function_params_clause T_CLOSE_P
-    |   dtype ident (cpp_function_params_clause | invalid_cpp_function_params_clause) T_CLOSE_P
-    |   dtype ident T_OPEN_P (cpp_function_params_clause | invalid_cpp_function_params_clause)
+    |   dtype ident (cpp_function_params_clause | invalid_cpp_function_params_clause) T_CLOSE_P {notifyErrorListeners("Missing openning '(' ");}
+    |   dtype ident T_OPEN_P (cpp_function_params_clause | invalid_cpp_function_params_clause) {notifyErrorListeners("Missing closing ')' ");}
     ;
 
 invalid_cpp_function_params_clause:
-        (invalid_cpp_function_param | cpp_function_param) T_COMMA
+        (invalid_cpp_function_param | cpp_function_param) T_COMMA {notifyErrorListeners("append comma");}
     |   invalid_cpp_function_param (T_COMMA (cpp_function_param | invalid_cpp_function_param))*
     |   cpp_function_param (T_COMMA cpp_function_param)* (T_COMMA invalid_cpp_function_param)+ (T_COMMA cpp_function_param)*
     ;
 
 invalid_cpp_function_param:
-        ident   // I choose here ident beacuse it's can match dtype and ident so we can match type without name and name without type status.
+        ident  {notifyErrorListeners("Missing data type");} // I choose here ident beacuse it's can match dtype and ident so we can match type without name and name without type status.
     ;
 
 // Exception block
