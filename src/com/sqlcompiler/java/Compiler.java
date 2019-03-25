@@ -71,6 +71,10 @@ class Compiler {
         DataTypes.save(Environment.DATA_TYPES_PATH);
     }
 
+    void codeG() {
+
+    }
+
     void print() {
         console.log(console.open);
         console.log(String.format("%d data type has been saved successfully.", DataTypes.count()));

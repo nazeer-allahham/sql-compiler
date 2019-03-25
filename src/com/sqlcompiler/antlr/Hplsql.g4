@@ -232,7 +232,7 @@ create_type_items:
     ;
 
 create_type_items_item:
-        ident T_COLON ident
+        ident T_COLON (ident | string)
     ;
 
 // DECLARE TEMPORARY TABLE statement
@@ -310,6 +310,7 @@ create_table_options_item :
     |   create_table_options_hive_item
     |   create_table_options_mssql_item
     |   create_table_options_mysql_item
+    |   create_table_store_location
     ;
 
 create_table_options_ora_item :
@@ -340,6 +341,9 @@ create_table_options_hive_item :
         create_table_hive_row_format
     |   T_STORED T_AS ident
     ;
+
+create_table_store_location:
+        T_LOCATION string;
 
 create_table_hive_row_format :
         T_ROW T_FORMAT T_DELIMITED create_table_hive_row_format_fields*
@@ -782,14 +786,7 @@ from_table_values_row:
     ;
 
 from_alias_clause :
-        {!_input.LT(1).getText().equalsIgnoreCase("EXEC") &&
-         !_input.LT(1).getText().equalsIgnoreCase("EXECUTE") &&
-         !_input.LT(1).getText().equalsIgnoreCase("INNER") &&
-         !_input.LT(1).getText().equalsIgnoreCase("LEFT") &&
-         !_input.LT(1).getText().equalsIgnoreCase("GROUP") &&
-         !_input.LT(1).getText().equalsIgnoreCase("ORDER") &&
-         !_input.LT(1).getText().equalsIgnoreCase("LIMIT") &&
-         !_input.LT(1).getText().equalsIgnoreCase("WITH")}? T_AS? ident (T_OPEN_P L_ID (T_COMMA L_ID)* T_CLOSE_P)?
+    T_AS? ident (T_OPEN_P L_ID (T_COMMA L_ID)* T_CLOSE_P)?
     ;
 
 table_name :

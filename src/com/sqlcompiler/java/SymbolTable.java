@@ -1,5 +1,7 @@
 package com.sqlcompiler.java;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashMap;
 
 class SymbolTable {
@@ -87,7 +89,7 @@ class SymbolTable {
         private String type;
         private String attribute;
 
-        Symbol(String name, String type, String attribute) {
+        Symbol(String name, String type, @NotNull String attribute) {
             this.name = name;
             this.type = type;
             if (attribute.compareTo("") == 0)
@@ -98,7 +100,7 @@ class SymbolTable {
 
         @Override
         public String toString() {
-            return String.format("symbol { name => %s, type => %s, attribute => %s }", this.name, this.type, this.attribute);
+            return String.format("Symbol { name => %s, type => %s, attribute => %s }", this.name, this.type, this.attribute);
         }
     }
 }

@@ -1,11 +1,16 @@
 package com.sqlcompiler.java;
 
+import com.sqlcompiler.Environment;
 import com.sqlcompiler.antlr.HplsqlParser;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.LinkedList;
 
 import static com.sqlcompiler.java.DataType.SECONDARY_DATA_TYPE;
@@ -26,6 +31,15 @@ class AbstractSyntaxTree {
         LinkedList<RuleContext> queue = new LinkedList<>();
         queue.add(start);
         int currentDepth = start.depth();
+
+        File file = new File(Environment.KOTLIN + "main.kt");
+        ObjectOutputStream stream = null;
+        try {
+            file.createNewFile();
+            stream = new ObjectOutputStream(new FileOutputStream(file));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         while (!queue.isEmpty()) {
             RuleContext ctx = queue.pop();
@@ -97,6 +111,16 @@ class AbstractSyntaxTree {
 
                 case HplsqlParser.RULE_select_stmt:
 //                    DataTypes.get(ctx.getChild(0).getText()).getPath();
+                    try {
+
+                        stream.writeUTF("package com.sqlcompiler.kotlin\n" +
+                                "\n" +
+                                "fun main() {\n" +
+                                "    Handler.handleSelect()\n" +
+                                "}");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     break;
             }
 
@@ -124,6 +148,11 @@ class AbstractSyntaxTree {
                     queue.add((RuleContext) element);
                 }
             }
+        }
+        try {
+            stream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

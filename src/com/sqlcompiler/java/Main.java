@@ -14,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
  * 9- Aliases one word or one string
  **/
 
+
 public class Main {
 
     public static void main(@NotNull String[] args) {
