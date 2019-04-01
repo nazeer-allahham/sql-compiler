@@ -128,7 +128,7 @@ class DataTypes {
                 TYPES = temp;
             console.log("Data types restore is completed successfully.");
         } catch (JsonSyntaxException | IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         console.log(console.close);
     }
@@ -139,5 +139,9 @@ class DataTypes {
             console.log(TYPES.get(key).toJson(DataType.DATA_TYPE_TO_STRING_FLAT));
         }
         console.log(console.close);
+    }
+
+    public static void setStoreLocation(String location) {
+        ITEM.setLocation(location);
     }
 }

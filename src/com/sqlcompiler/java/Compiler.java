@@ -7,6 +7,7 @@ import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 
+import java.io.DataInputStream;
 import java.io.IOException;
 
 class Compiler {
@@ -71,8 +72,25 @@ class Compiler {
         DataTypes.save(Environment.DATA_TYPES_PATH);
     }
 
-    void codeG() {
+    void code_generation() {
+        console.log(console.open, "Generating the code...");
 
+        Runtime runtime = Runtime.getRuntime();
+        try {
+            Process p = runtime.exec("cmd /c \"cd src\\com\\sqlcompiler\\ && C:\\lib\\kotlin\\kotlinc\\bin\\kotlinc ./Environment.java ./kotlin/Handler.kt ./kotlin/main.kt -include-runtime -d ./jar/main.jar && java -jar ./jar/main.jar\"");
+            p.waitFor();
+
+            DataInputStream s = new DataInputStream(p.getInputStream());
+            while (s.available() > 0) {
+                console.log(s.readLine());
+            }
+
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        console.log("Done.");
+        console.log(console.close);
     }
 
     void print() {

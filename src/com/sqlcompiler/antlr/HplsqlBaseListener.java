@@ -772,7 +772,27 @@ public class HplsqlBaseListener implements HplsqlListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCreate_table_hive_row_format(HplsqlParser.Create_table_hive_row_formatContext ctx) { }
+    @Override
+    public void enterCreate_table_store_location(HplsqlParser.Create_table_store_locationContext ctx) {
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation does nothing.</p>
+     */
+    @Override
+    public void exitCreate_table_store_location(HplsqlParser.Create_table_store_locationContext ctx) {
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation does nothing.</p>
+     */
+    @Override
+    public void enterCreate_table_hive_row_format(HplsqlParser.Create_table_hive_row_formatContext ctx) {
+    }
 	/**
 	 * {@inheritDoc}
 	 *

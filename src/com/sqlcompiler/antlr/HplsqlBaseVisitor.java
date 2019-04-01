@@ -458,7 +458,21 @@ public class HplsqlBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCreate_table_hive_row_format(HplsqlParser.Create_table_hive_row_formatContext ctx) { return visitChildren(ctx); }
+    @Override
+    public T visitCreate_table_store_location(HplsqlParser.Create_table_store_locationContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitCreate_table_hive_row_format(HplsqlParser.Create_table_hive_row_formatContext ctx) {
+        return visitChildren(ctx);
+    }
 	/**
 	 * {@inheritDoc}
 	 *

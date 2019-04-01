@@ -33,6 +33,9 @@ public class Main {
         // Semantic analysis
         compiler.semantic_analyzer();
 
+        // Code generation
+        compiler.code_generation();
+
         // Print the results
         compiler.print();
         compiler.printDataTypes();

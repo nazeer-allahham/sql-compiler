@@ -13,6 +13,7 @@ public class DataType implements Serializable {
     static final int PRIMARY_DATA_TYPE = 0;
     static final int SECONDARY_DATA_TYPE = 1;
     private String name;
+    private String location;
 
     private int rank;
 
@@ -37,6 +38,14 @@ public class DataType implements Serializable {
         {
             this.attributes.add(attribute);
         }
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = toUnquotedString(location);
     }
 
     private void setRank(int rank) {

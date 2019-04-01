@@ -7,10 +7,7 @@ import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.LinkedList;
 
 import static com.sqlcompiler.java.DataType.SECONDARY_DATA_TYPE;
@@ -33,10 +30,10 @@ class AbstractSyntaxTree {
         int currentDepth = start.depth();
 
         File file = new File(Environment.KOTLIN + "main.kt");
-        ObjectOutputStream stream = null;
+        DataOutputStream stream = null;
         try {
             file.createNewFile();
-            stream = new ObjectOutputStream(new FileOutputStream(file));
+            stream = new DataOutputStream(new FileOutputStream(file));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -53,6 +50,12 @@ class AbstractSyntaxTree {
                     //System.out.print(ctx.getChild(0).getText() + " " + ctx.getChild(1).getText());
                     DataTypes.addAttribute(ctx.getChild(0).getText(), ctx.getChild(1).getText());
                     break;
+
+                case HplsqlParser.RULE_create_table_store_location:
+                    System.out.println(ctx.getChild(1).getText());
+                    DataTypes.setStoreLocation(ctx.getChild(1).getText());
+                    break;
+
                 case HplsqlParser.RULE_create_type_stmt:
                 case HplsqlParser.RULE_create_table_stmt:
                     DataTypes.initialize(SECONDARY_DATA_TYPE, ctx.getChild(2).getText());
@@ -112,11 +115,11 @@ class AbstractSyntaxTree {
                 case HplsqlParser.RULE_select_stmt:
 //                    DataTypes.get(ctx.getChild(0).getText()).getPath();
                     try {
-
-                        stream.writeUTF("package com.sqlcompiler.kotlin\n" +
+                        assert stream != null;
+                        stream.writeBytes("package com.sqlcompiler.kotlin\n" +
                                 "\n" +
                                 "fun main() {\n" +
-                                "    Handler.handleSelect()\n" +
+                                "    Handler.select()\n" +
                                 "}");
                     } catch (IOException e) {
                         e.printStackTrace();
