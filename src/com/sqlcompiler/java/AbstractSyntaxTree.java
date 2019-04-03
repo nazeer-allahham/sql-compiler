@@ -2,12 +2,16 @@ package com.sqlcompiler.java;
 
 import com.sqlcompiler.Environment;
 import com.sqlcompiler.antlr.HplsqlParser;
+import org.antlr.stringtemplate.StringTemplate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.*;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.LinkedList;
 
 import static com.sqlcompiler.java.DataType.SECONDARY_DATA_TYPE;
@@ -31,6 +35,9 @@ class AbstractSyntaxTree {
 
         File file = new File(Environment.KOTLIN + "main.kt");
         DataOutputStream stream = null;
+
+        StringTemplate template = new StringTemplate("fun select(tables)");
+
         try {
             file.createNewFile();
             stream = new DataOutputStream(new FileOutputStream(file));

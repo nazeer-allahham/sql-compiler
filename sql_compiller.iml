@@ -21,5 +21,6 @@
     <orderEntry type="library" exported="" name="antlr-runtime-4.7.2" level="application" />
     <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
     <orderEntry type="library" name="kotlin-compiler" level="project" />
+    <orderEntry type="library" name="stringtemplate-3.2.1" level="project" />
   </component>
 </module>
