@@ -1,5 +1,9 @@
 package com.sqlcompiler.kotlin
 
+import com.sqlcompiler.Environment
+import java.io.File
+import java.io.FileWriter
+import java.util.*
 import kotlin.math.min
 
 object Console {
@@ -53,19 +57,23 @@ object Console {
         return subMessage
     }
 
-    fun showResult(header: Row, rows: MutableList<Row>) {
+    fun showOutput(header: Row, rows: MutableList<Row>) {
         if (rows.size == 0) {
             log("0 row affected.")
         } else {
-            println(); divider()
+            val file = File(Environment.OUTPUT + "output_${Date().toLocaleString().replace(Regex("[-: ]"), "_")}.csv")
+            file.createNewFile()
+            val writer = FileWriter(file)
+
             // Printing the header
-            header.fields.forEachIndexed { index, field -> print("${if (index == 0) "|\t" else "\t"} $field ${if (index == header.fields.size - 1) "|\n" else "\t|\t"}") }
-            divider()
+            // TODO delete table name from header fields
+            header.fields.forEachIndexed { index, field -> writer.append("$field ${if (index == header.fields.size - 1) "\n" else ","}") }
             // Printing the rows
             for (i in 0 until rows.size) {
-                rows[i].fields.forEachIndexed { index, field -> print("${if (index == 0) "|\t" else "\t"} $field ${if (index == rows[0].fields.size - 1) "|\n" else "\t|\t"}") }
+                rows[i].fields.forEachIndexed { index, field -> writer.append("$field ${if (index == rows[0].fields.size - 1) "\n" else ","}") }
             }
             log("${rows.size} rows affected.")
+            writer.close()
         }
     }
 }

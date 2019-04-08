@@ -1,8 +1,10 @@
 package com.sqlcompiler.kotlin
 
+import com.github.keelar.exprk.Expressions
 import java.io.File
 import java.io.FileReader
 import java.io.FileWriter
+import java.math.BigDecimal
 import kotlin.system.exitProcess
 
 object Handler {
@@ -22,7 +24,7 @@ object Handler {
         val writer = FileWriter(file)
 
         table.columns.forEachIndexed { i, column ->
-            writer.append(column.name.plus(if (i == table.columns.size - 1) '\n' else ','))
+            writer.append(column.title.plus(if (i == table.columns.size - 1) '\n' else ','))
         }
 
         writer.close()
@@ -30,7 +32,7 @@ object Handler {
     }
 
     fun select(tables: ArrayList<Table>,
-               condition: String) {
+               condition: Pair<String, ArrayList<String>>) {
         var (header, rows) = this.readTable(tables[0])
 
         if (tables.size > 1) {
@@ -40,15 +42,18 @@ object Handler {
                 rows = j.second
             }
         }
+        rows = rows.filter { row -> getRowStatus(header, row, condition.first, condition.second) } as ArrayList<Row>
 
-        rows.forEach { row ->
-            if (row.fields[0] != null && row.fields[1] == "10" && row.fields[0] == "10") {
-                
-            }
-        }
-
-        Console.showResult(header, rows)
+        Console.showOutput(header, rows)
         Console.flushErrors()
+    }
+
+    private fun getRowStatus(header: Row, row: Row, condition: String, params: ArrayList<String>): Boolean {
+        var expr = Expressions()
+        params.forEach { param ->
+            expr = expr.define(param, row.fields[header.find(param)])
+        }
+        return expr.eval(condition) != BigDecimal(0)
     }
 
     private fun joinTable(rows: ArrayList<Row>, table: Table): Pair<Row, ArrayList<Row>> {
@@ -85,7 +90,8 @@ object Handler {
             }
 
             if (index == 0) {
-                header = Row(fields as ArrayList<String>)
+                header = Row()
+                fields.forEach { field -> header?.addField(table.name + "_" + field) }
             } else {
                 rows.add(Row(fields as ArrayList<String>))
             }

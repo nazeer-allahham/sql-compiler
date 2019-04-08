@@ -6,3 +6,8 @@ LOCATION 'adsadasdasdasdasd'
 --         join t3 on t3.id = t2_device_id
 -- group by t2.system_name, t3.device_name
 --
+
+
+select * from t as ttt where id = 1
+t.id = 1
+t_id = 1

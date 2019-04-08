@@ -16,4 +16,9 @@ data class Row(val fields: ArrayList<String> = ArrayList()) {
         this.fields.forEach { f -> s.append(f).append("\t") }
         return s.toString()
     }
+
+    fun find(param: String): Int {
+        this.fields.forEachIndexed { i, field -> if (field == param) return i }
+        return -1
+    }
 }
