@@ -15,7 +15,7 @@ import java.util.LinkedList;
 import static com.sqlcompiler.java.DataType.PRIMARY_DATA_TYPE;
 import static com.sqlcompiler.java.DataType.SECONDARY_DATA_TYPE;
 
-class DataTypes {
+class DataTypes implements Serializable{
     /**
       * TYPES
       **/

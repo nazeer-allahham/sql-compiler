@@ -54,14 +54,7 @@ class Compiler {
     }
 
     void semantic_analyzer() {
-//        MyListener listener = new MyListener();
-//        ParseTreeWalker walker = new ParseTreeWalker();
-//        walker.walk(listener, parser.program());
 
-        /*
-        MyVisitor visitor = new MyVisitor();
-        System.out.println(visitor.visitProgram(parser.program()));
-        */
 
         this.AST = new AbstractSyntaxTree();
         this.AST.build(parser.program());
@@ -69,7 +62,6 @@ class Compiler {
 
         // Storing our data types
         console.log(console.divider);
-        DataTypes.save(Environment.DATA_TYPES_PATH);
     }
 
     void code_generation() {

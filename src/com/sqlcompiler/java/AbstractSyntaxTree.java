@@ -2,7 +2,6 @@ package com.sqlcompiler.java;
 
 import com.sqlcompiler.Environment;
 import com.sqlcompiler.antlr.HplsqlParser;
-import org.antlr.stringtemplate.StringTemplate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -20,6 +19,8 @@ class AbstractSyntaxTree {
     SymbolTable symbolTable = new SymbolTable();
     private Integer lnCount = 1;
     private ParserRuleContext root = null;
+    private LinkedList<Attribute>attributes=null;
+    private String nameAttribute,typeAttribute,nameTable;
 
     void build(RuleContext ctx) {
         root = (ParserRuleContext) ctx;
@@ -36,7 +37,6 @@ class AbstractSyntaxTree {
         File file = new File(Environment.KOTLIN + "main.kt");
         DataOutputStream stream = null;
 
-        StringTemplate template = new StringTemplate("fun select(tables)");
 
         try {
             file.createNewFile();
@@ -53,10 +53,6 @@ class AbstractSyntaxTree {
                     DataTypes.addAttribute(ctx.getChild(0).getText(), ctx.getChild(2).getText());
                     break;
 
-                case HplsqlParser.RULE_create_table_columns_item:
-                    //System.out.print(ctx.getChild(0).getText() + " " + ctx.getChild(1).getText());
-                    DataTypes.addAttribute(ctx.getChild(0).getText(), ctx.getChild(1).getText());
-                    break;
 
                 case HplsqlParser.RULE_create_table_store_location:
                     System.out.println(ctx.getChild(1).getText());
@@ -64,10 +60,26 @@ class AbstractSyntaxTree {
                     break;
 
                 case HplsqlParser.RULE_create_type_stmt:
-                case HplsqlParser.RULE_create_table_stmt:
                     DataTypes.initialize(SECONDARY_DATA_TYPE, ctx.getChild(2).getText());
                     break;
 
+                case HplsqlParser.RULE_create_table_stmt:/**___create table __*/
+                    DataTypes.initialize(SECONDARY_DATA_TYPE, ctx.getChild(2).getText());
+                    nameTable=ctx.getChild(2).getText();
+                    attributes=new LinkedList<>();
+
+                    for (int i = 0; i < ctx.getChild(3).getChild(1).getChildCount(); i++) {
+                        if(i%2==0) {
+                            nameAttribute = ctx.getChild(3).getChild(1).getChild(i).getChild(0).getText();
+                            typeAttribute = ctx.getChild(3).getChild(1).getChild(i).getChild(1).getText();
+                            attributes.add(new Attribute(nameAttribute, typeAttribute));
+                        }
+                    }
+                    DataTypes.createSecondaryType(nameTable, attributes);
+                    symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(2).getText(),
+                            "Table",
+                            "table"), false);
+                    break;
                 case HplsqlParser.RULE_cpp_scope:
                 case HplsqlParser.RULE_begin_end_block:
                     symbolTable.allocate();
@@ -91,16 +103,28 @@ class AbstractSyntaxTree {
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
                             ctx.getChild(0).getText(),
                             ""), false);
+                    String type=ctx.getChild(0).getText();
+                    if(symbolTable.CheckTypeCompatible(type,ctx.getChild(3).getText()))
+                        System.out.println("int is correct________________");
+                    else System.out.println("not correct ______________");
                     // TODO: 26/12/2018 Check if types are compatible
                     break;
 
-                case HplsqlParser.RULE_cpp_assignment_stmt:
-                case HplsqlParser.RULE_assignment_stmt_single_item:
-                    SymbolTable.Symbol symbol = symbolTable.lookup(ctx.getChild(0).getText());
+                case HplsqlParser.RULE_from_table_name_clause:
+                    SymbolTable.Symbol symbol = symbolTable.lookup(ctx.getChild(0).getChild(0).getText());
                     if (symbol == null) {
-                        System.err.println("Semantic error at line " + lnCount + ": variable " + ctx.getChild(0).getText() + " used before it's declared");
+                        System.err.println("Semantic error : variable " + ctx.getChild(0).getChild(0).getText() + " used before it's declared");
                         System.exit(1);
                     }
+                    break;
+                case HplsqlParser.RULE_cpp_assignment_stmt:
+                case HplsqlParser.RULE_assignment_stmt_single_item:
+                    symbol = symbolTable.lookup(ctx.getChild(0).getText());
+                    if (symbol == null) {
+                        System.err.println("Semantic error : variable " + ctx.getChild(0).getText() + " used before it's declared");
+                        System.exit(1);
+                    }
+
                     // TODO: 26/12/2018 Check if types are compatible
                     break;
 
@@ -123,12 +147,12 @@ class AbstractSyntaxTree {
 //                    DataTypes.get(ctx.getChild(0).getText()).getPath();
                     try {
                         assert stream != null;
-                        stream.writeBytes("package com.sqlcompiler.kotlin\n" +
+                        /*stream.writeBytes("package com.sqlcompiler.kotlin\n" +
                                 "\n" +
                                 "fun main() {\n" +
                                 "    Handler.select()\n" +
-                                "}");
-                    } catch (IOException e) {
+                                "}");*/
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     break;
@@ -164,6 +188,7 @@ class AbstractSyntaxTree {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        DataTypes.save(Environment.DATA_TYPES_PATH);
     }
 
     void print() {

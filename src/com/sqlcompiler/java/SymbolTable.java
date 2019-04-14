@@ -19,7 +19,21 @@ class SymbolTable {
             currentScope.parent.scopeChildren.put(currentScope.parent.lastChildName, currentScope);
         }
     }
-
+    boolean CheckTypeCompatible(String type,String stmt){
+        try {
+            switch (type) {
+                case "int":
+                    Integer.parseInt(stmt);
+                    break;
+            }
+        }
+        catch(NumberFormatException e) {
+            return false;
+        } catch(NullPointerException e) {
+            return false;
+        }
+        return true;
+    }
     void free() {
         currentScope = currentScope.parent;
     }

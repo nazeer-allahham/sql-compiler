@@ -48,10 +48,9 @@ stmt :
     | quit_stmt
     | return_stmt
     | select_stmt
-    | invalid_select
     | while_stmt
     | cpp_stmt
-    //| error_stmt
+    | error_stmt
     | label
     | null_stmt
     | expr_stmt
@@ -59,7 +58,8 @@ stmt :
     ;
 
 error_stmt:
-       invalid_bool_expr
+       invalid_select
+    |  invalid_bool_expr
     |  invalid_cpp_function_stmt
     ;
 invalid_select:
@@ -67,16 +67,17 @@ invalid_select:
 
 ;
 invalid_where_clause:
-        bool_expr
+        bool_expr {notifyErrorListeners("Missing 'where' word ");}
      |T_WHERE invalid_bool_expr
 ;
 
 invalid_from_clause:
-         from_table_clause (from_join_clause)*
+         from_table_clause (from_join_clause)* {notifyErrorListeners("Missing 'from' word ");}
 ;
 invalid_bool_expr:
-        T_NOT? bool_expr T_CLOSE_P
-    |   T_NOT? T_OPEN_P bool_expr
+        T_NOT? bool_expr T_CLOSE_P {notifyErrorListeners("Missing opening '('");}
+    |   T_NOT? T_OPEN_P bool_expr {notifyErrorListeners("Missing closing ')'");}
+    |   T_NOT?  bool_expr T_CLOSE_P T_CLOSE_P+  {notifyErrorListeners("Too many parentheses");}
     |   invalid_bool_expr_atom
     ;
 
@@ -97,21 +98,21 @@ invalid_cpp_function_stmt:
     ;
 
 invalid_cpp_function_header:
-        ident T_OPEN_P (cpp_function_params_clause | invalid_cpp_function_params_clause) T_CLOSE_P
-    |   dtype T_OPEN_P (cpp_function_params_clause | invalid_cpp_function_params_clause) T_CLOSE_P
+        ident T_OPEN_P (cpp_function_params_clause | invalid_cpp_function_params_clause) T_CLOSE_P {notifyErrorListeners("Missing data type");}
+    |   dtype T_OPEN_P (cpp_function_params_clause | invalid_cpp_function_params_clause) T_CLOSE_P {notifyErrorListeners("Missing identify");}
     |   dtype ident T_OPEN_P invalid_cpp_function_params_clause T_CLOSE_P
-    |   dtype ident (cpp_function_params_clause | invalid_cpp_function_params_clause) T_CLOSE_P
-    |   dtype ident T_OPEN_P (cpp_function_params_clause | invalid_cpp_function_params_clause)
+    |   dtype ident (cpp_function_params_clause | invalid_cpp_function_params_clause) T_CLOSE_P {notifyErrorListeners("Missing openning '(' ");}
+    |   dtype ident T_OPEN_P (cpp_function_params_clause | invalid_cpp_function_params_clause) {notifyErrorListeners("Missing closing ')' ");}
     ;
 
 invalid_cpp_function_params_clause:
-        (invalid_cpp_function_param | cpp_function_param) T_COMMA
+        (invalid_cpp_function_param | cpp_function_param) T_COMMA {notifyErrorListeners("append comma");}
     |   invalid_cpp_function_param (T_COMMA (cpp_function_param | invalid_cpp_function_param))*
     |   cpp_function_param (T_COMMA cpp_function_param)* (T_COMMA invalid_cpp_function_param)+ (T_COMMA cpp_function_param)*
     ;
 
 invalid_cpp_function_param:
-        ident   // I choose here ident beacuse it's can match dtype and ident so we can match type without name and name without type status.
+        ident  {notifyErrorListeners("Missing data type");} // I choose here ident beacuse it's can match dtype and ident so we can match type without name and name without type status.
     ;
 
 // Exception block
@@ -176,7 +177,7 @@ call_stmt :
         T_CALL ident (T_OPEN_P expr_func_params? T_CLOSE_P | expr_func_params)?
     ;
 
-// CLOSE cursor statement
+// close cursor statement
 close_stmt :
         T_CLOSE L_ID
     ;
@@ -231,7 +232,7 @@ create_type_items:
     ;
 
 create_type_items_item:
-        string T_COLON string
+        ident T_COLON (ident | string)
     ;
 
 // DECLARE TEMPORARY TABLE statement
@@ -249,6 +250,7 @@ create_local_temp_table_stmt :
 
 create_table_definition :
         (T_AS? T_OPEN_P select_stmt T_CLOSE_P | T_AS? select_stmt | T_OPEN_P create_table_columns T_CLOSE_P) create_table_options?
+
     ;
 
 create_table_columns :
@@ -309,6 +311,7 @@ create_table_options_item :
     |   create_table_options_hive_item
     |   create_table_options_mssql_item
     |   create_table_options_mysql_item
+    |   create_table_store_location
     ;
 
 create_table_options_ora_item :
@@ -339,6 +342,9 @@ create_table_options_hive_item :
         create_table_hive_row_format
     |   T_STORED T_AS ident
     ;
+
+create_table_store_location:
+        T_LOCATION string;
 
 create_table_hive_row_format :
         T_ROW T_FORMAT T_DELIMITED create_table_hive_row_format_fields*
@@ -781,14 +787,7 @@ from_table_values_row:
     ;
 
 from_alias_clause :
-        {!_input.LT(1).getText().equalsIgnoreCase("EXEC") &&
-         !_input.LT(1).getText().equalsIgnoreCase("EXECUTE") &&
-         !_input.LT(1).getText().equalsIgnoreCase("INNER") &&
-         !_input.LT(1).getText().equalsIgnoreCase("LEFT") &&
-         !_input.LT(1).getText().equalsIgnoreCase("GROUP") &&
-         !_input.LT(1).getText().equalsIgnoreCase("ORDER") &&
-         !_input.LT(1).getText().equalsIgnoreCase("LIMIT") &&
-         !_input.LT(1).getText().equalsIgnoreCase("WITH")}? T_AS? ident (T_OPEN_P L_ID (T_COMMA L_ID)* T_CLOSE_P)?
+    T_AS? ident (T_OPEN_P L_ID (T_COMMA L_ID)* T_CLOSE_P)?
     ;
 
 table_name :
@@ -1061,10 +1060,6 @@ bool_literal :
 // NULL constant
 null_const :
         T_NULL
-    ;
-
-new_line:
-        '\n'
     ;
 
 // Tokens that are not reserved words and can be used as identifiers
