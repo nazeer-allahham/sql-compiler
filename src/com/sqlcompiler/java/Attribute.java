@@ -47,4 +47,12 @@ public class Attribute implements Serializable {
             return mString.toString();
         }
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getType() {
+        return type;
+    }
 }

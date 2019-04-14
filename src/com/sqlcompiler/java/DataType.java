@@ -3,6 +3,7 @@ package com.sqlcompiler.java;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class DataType implements Serializable {
@@ -40,6 +41,24 @@ public class DataType implements Serializable {
         }
     }
 
+    public ArrayList<String> isContainColumns(ArrayList<String>columns){
+        boolean OK;
+        ArrayList<String> result=new ArrayList<>();
+        for (String column : columns) {
+            OK=false;
+            for (Attribute it : this.getAttributes()) {
+                if (it.getName().equalsIgnoreCase(column))
+                {
+                    OK=true;break;
+                }
+
+            }
+            if (!OK){
+                result.add(column);
+            }
+        }
+      return result.size()!=0 ? result : null;
+    }
     public String getLocation() {
         return location;
     }
