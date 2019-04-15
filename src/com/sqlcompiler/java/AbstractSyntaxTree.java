@@ -93,6 +93,7 @@ class AbstractSyntaxTree {
                     break;
 
                 case HplsqlParser.RULE_declare_var_item:
+                    symbolTable.nameSymbols.add(ctx.getChild(1).getText());
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
                             ctx.getChild(0).getText(),
                             ""), false);
@@ -100,19 +101,21 @@ class AbstractSyntaxTree {
 
                 case HplsqlParser.RULE_cpp_declare_stmt:
                 case HplsqlParser.RULE_cpp_function_param:
+                    symbolTable.nameSymbols.add(ctx.getChild(1).getText());
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
                             ctx.getChild(0).getText(),
                             ""), false);
                     break;
 
                 case HplsqlParser.RULE_cpp_declare_assignment_stmt:
+                    symbolTable.nameSymbols.add(ctx.getChild(1).getText());
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
                             ctx.getChild(0).getText(),
-                            ""), false);
-                    String type = ctx.getChild(0).getText();
-                    if (symbolTable.CheckTypeCompatible(type, ctx.getChild(3).getText()))
-                        System.out.println("int is correct________________");
-                    else System.out.println("not correct ______________");
+                            "",true), false);
+//                    String type = ctx.getChild(0).getText();
+//                    if (symbolTable.CheckTypeCompatible(type, ctx.getChild(3).getText()))
+//                        System.out.println("int is correct________________");
+//                    else System.out.println("not correct ______________");
                     // TODO: 26/12/2018 Check if types are compatible
                     break;
 
@@ -138,6 +141,10 @@ class AbstractSyntaxTree {
                         System.err.println("Semantic error : variable " + ctx.getChild(0).getText() + " used before it's declared");
                         System.exit(1);
                     }
+                    SymbolTable.Symbol newsymbol=new SymbolTable.Symbol(symbol);
+                    newsymbol.setAssigned(true);
+                    symbolTable.AllSymbol.replace(symbol.getName(),symbol,newsymbol);
+                    //TODO edit if symbol assignment
 
                     // TODO: 26/12/2018 Check if types are compatible
                     break;
@@ -202,6 +209,7 @@ class AbstractSyntaxTree {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        symbolTable.isUnassignedVariable();
         DataTypes.save(Environment.DATA_TYPES_PATH);
     }
 

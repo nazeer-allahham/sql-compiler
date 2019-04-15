@@ -1,2 +1,2 @@
-
-int z=o4;
+int x=4;
+int s;
