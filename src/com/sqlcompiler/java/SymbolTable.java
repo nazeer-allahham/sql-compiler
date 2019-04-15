@@ -37,6 +37,10 @@ class SymbolTable {
         return true;
     }
 
+    boolean checkCasting(String type1,String type2){
+        if (type2==null)return true;
+        return type1.charAt(0)>type2.charAt(0);
+    }
     void isUnassignedVariable(){
         for (String sname : nameSymbols)
             if (!AllSymbol.get(sname).isAssigned)

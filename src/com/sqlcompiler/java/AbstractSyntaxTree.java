@@ -107,8 +107,8 @@ class AbstractSyntaxTree {
                             ""), false);
                     break;
                 case HplsqlParser.RULE_expr_func:
-                    if(symbolTable.lookup(ctx.getChild(0).getText())==null){
-                        System.err.println("Error for calling undeclared method : "+ctx.getChild(0).getText());
+                    if (symbolTable.lookup(ctx.getChild(0).getText()) == null) {
+                        System.err.println("Error for calling undeclared method : " + ctx.getChild(0).getText());
                     }
                     break;
 
@@ -116,7 +116,13 @@ class AbstractSyntaxTree {
                     symbolTable.nameSymbols.add(ctx.getChild(1).getText());
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
                             ctx.getChild(0).getText(),
-                            "",true), false);
+                            "", true), false);
+                    try {
+                        if (!symbolTable.checkCasting(ctx.getChild(0).getText(), symbolTable.AllSymbol.get(ctx.getChild(3).getText()).getType())) {
+                            System.err.println("checkCasting");
+                        }
+                    }catch (Exception e){}
+
 //                    String type = ctx.getChild(0).getText();
 //                    if (symbolTable.CheckTypeCompatible(type, ctx.getChild(3).getText()))
 //                        System.out.println("int is correct________________");
@@ -146,9 +152,9 @@ class AbstractSyntaxTree {
                         System.err.println("Semantic error : variable " + ctx.getChild(0).getText() + " used before it's declared");
                         System.exit(1);
                     }
-                    SymbolTable.Symbol newsymbol=new SymbolTable.Symbol(symbol);
+                    SymbolTable.Symbol newsymbol = new SymbolTable.Symbol(symbol);
                     newsymbol.setAssigned(true);
-                    symbolTable.AllSymbol.replace(symbol.getName(),symbol,newsymbol);
+                    symbolTable.AllSymbol.replace(symbol.getName(), symbol, newsymbol);
                     //TODO edit if symbol assignment
 
                     // TODO: 26/12/2018 Check if types are compatible

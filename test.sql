@@ -1,4 +1,3 @@
-int f(){
 
-}
-int x=f1();
+string d="jjj";
+int x=d;
