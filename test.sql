@@ -1,2 +1,4 @@
-int x=4;
-int s;
+int f(){
+
+}
+int x=f1();

@@ -106,6 +106,11 @@ class AbstractSyntaxTree {
                             ctx.getChild(0).getText(),
                             ""), false);
                     break;
+                case HplsqlParser.RULE_expr_func:
+                    if(symbolTable.lookup(ctx.getChild(0).getText())==null){
+                        System.err.println("Error for calling undeclared method : "+ctx.getChild(0).getText());
+                    }
+                    break;
 
                 case HplsqlParser.RULE_cpp_declare_assignment_stmt:
                     symbolTable.nameSymbols.add(ctx.getChild(1).getText());
