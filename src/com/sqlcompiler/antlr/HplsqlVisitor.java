@@ -1,4 +1,4 @@
-// Generated from E:/ite-fourth-year/compilers-1/projects/sql-compiler/src/com/sqlcompiler/antlr\Hplsql.g4 by ANTLR 4.7.2
+// Generated from C:/Users/96399/Documents/GitHub/sql-compiler/src/com/sqlcompiler/antlr\Hplsql.g4 by ANTLR 4.7.2
 package com.sqlcompiler.antlr;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -389,19 +389,17 @@ public interface HplsqlVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreate_table_options_hive_item(HplsqlParser.Create_table_options_hive_itemContext ctx);
 	/**
-     * Visit a parse tree produced by {@link HplsqlParser#create_table_store_location}.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    T visitCreate_table_store_location(HplsqlParser.Create_table_store_locationContext ctx);
-
-    /**
-     * Visit a parse tree produced by {@link HplsqlParser#create_table_hive_row_format}.
-     *
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    T visitCreate_table_hive_row_format(HplsqlParser.Create_table_hive_row_formatContext ctx);
+	 * Visit a parse tree produced by {@link HplsqlParser#create_table_store_location}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreate_table_store_location(HplsqlParser.Create_table_store_locationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link HplsqlParser#create_table_hive_row_format}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreate_table_hive_row_format(HplsqlParser.Create_table_hive_row_formatContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link HplsqlParser#create_table_hive_row_format_fields}.
 	 * @param ctx the parse tree

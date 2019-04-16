@@ -736,7 +736,7 @@ select_list_item :
 
 select_list_alias :
         {!_input.LT(1).getText().equalsIgnoreCase("INTO") &&
-         !_input.LT(1).getText().equalsIgnoreCase("FROM")}? T_AS? ident
+         !_input.LT(1).getText().equalsIgnoreCase("FROM")}? T_AS ident
     |   T_OPEN_P T_TITLE L_S_STRING T_CLOSE_P
     ;
 

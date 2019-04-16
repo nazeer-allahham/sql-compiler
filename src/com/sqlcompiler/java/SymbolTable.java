@@ -2,11 +2,14 @@ package com.sqlcompiler.java;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 class SymbolTable {
     private Scope currentScope;
     private boolean state;
+    public HashMap<String, Symbol> AllSymbol=new HashMap<>();
+    public ArrayList<String> nameSymbols=new ArrayList<>();
 
     SymbolTable() {
         currentScope = new Scope(null);
@@ -14,10 +17,35 @@ class SymbolTable {
 
     void allocate() {
         currentScope = new Scope(currentScope);
-        if (state)
-        {
+        if (state) {
             currentScope.parent.scopeChildren.put(currentScope.parent.lastChildName, currentScope);
         }
+    }
+
+    boolean CheckTypeCompatible(String type, String stmt) {
+        try {
+            switch (type) {
+                case "int":
+                    Integer.parseInt(stmt);
+                    break;
+            }
+        } catch (NumberFormatException e) {
+            return false;
+        } catch (NullPointerException e) {
+            return false;
+        }
+        return true;
+    }
+
+    boolean checkCasting(String type1,String type2){
+        if (type2==null)return true;
+        return type1.charAt(0)>type2.charAt(0);
+    }
+    void isUnassignedVariable(){
+        for (String sname : nameSymbols)
+            if (!AllSymbol.get(sname).isAssigned)
+                System.err.println("Warring unassigned variable "+sname);
+
     }
 
     void free() {
@@ -35,7 +63,7 @@ class SymbolTable {
     }
 
     void insert(Symbol symbol, boolean state) {
-        if (symbol.attribute.equals("variable") && DataTypes.get(symbol.type) == null ) {
+        if (symbol.attribute.equals("variable") && DataTypes.get(symbol.type) == null) {
             System.err.println(String.format("Type already undefined: %s", symbol.type));
             System.exit(1);
         }
@@ -47,6 +75,7 @@ class SymbolTable {
         this.state = state;
         currentScope.lastChildName = symbol.name;
         currentScope.children.put(symbol.name, symbol);
+        AllSymbol.put(symbol.name, symbol);
     }
 
     void print() {
@@ -72,6 +101,7 @@ class SymbolTable {
             this.id = ++ID;
             this.children = new HashMap<>();
             this.scopeChildren = new HashMap<>();
+
         }
 
         @Override
@@ -88,6 +118,7 @@ class SymbolTable {
         private String name;
         private String type;
         private String attribute;
+        private boolean isAssigned=false;
 
         Symbol(String name, String type, @NotNull String attribute) {
             this.name = name;
@@ -96,6 +127,51 @@ class SymbolTable {
                 this.attribute = "variable";
             else
                 this.attribute = attribute;
+        }
+
+        public Symbol(Symbol symbol){
+            this.name=symbol.name;
+            this.type=symbol.type;
+            this.attribute=symbol.attribute;
+            this.isAssigned=symbol.isAssigned;
+        }
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public void setAttribute(String attribute) {
+            this.attribute = attribute;
+        }
+
+        public void setAssigned(boolean assigned) {
+            isAssigned = assigned;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public String getAttribute() {
+            return attribute;
+        }
+
+        public boolean isAssigned() {
+            return isAssigned;
+        }
+
+        public Symbol(String name, String type, String attribute, boolean isAssigned) {
+            this.name = name;
+            this.type = type;
+            this.attribute = attribute;
+            this.isAssigned = isAssigned;
         }
 
         @Override

@@ -2,6 +2,7 @@ package com.sqlcompiler.java;
 
 import com.sqlcompiler.Environment;
 import com.sqlcompiler.antlr.HplsqlParser;
+import org.antlr.stringtemplate.StringTemplate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -60,10 +61,30 @@ class AbstractSyntaxTree {
                     break;
 
                 case HplsqlParser.RULE_create_type_stmt:
-                case HplsqlParser.RULE_create_table_stmt:
                     DataTypes.initialize(SECONDARY_DATA_TYPE, ctx.getChild(2).getText());
                     break;
 
+                case HplsqlParser.RULE_create_table_stmt:/**___create table __*/
+                    DataTypes.initialize(SECONDARY_DATA_TYPE, ctx.getChild(2).getText());
+                    nameTable = ctx.getChild(2).getText();
+                    attributes = new LinkedList<>();
+
+                    for (int i = 0; i < ctx.getChild(3).getChild(1).getChildCount(); i++) {
+                        if (i % 2 == 0) {
+                            nameAttribute = ctx.getChild(3).getChild(1).getChild(i).getChild(0).getText();
+                            typeAttribute = ctx.getChild(3).getChild(1).getChild(i).getChild(1).getText();
+                            attributes.add(new Attribute(nameAttribute, typeAttribute));
+                        }
+                    }
+                    DataTypes.createSecondaryType(nameTable, attributes);
+                    symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(2).getText(),
+                            "Table",
+                            "table"), false);
+                    break;
+                case HplsqlParser.RULE_select_list_item:
+                    columns.add(ctx.getText());
+                    //System.out.println(ctx.parent.getText()+"______________");
+                    break;
                 case HplsqlParser.RULE_cpp_scope:
                 case HplsqlParser.RULE_begin_end_block:
                     symbolTable.allocate();
@@ -71,6 +92,7 @@ class AbstractSyntaxTree {
                     break;
 
                 case HplsqlParser.RULE_declare_var_item:
+                    symbolTable.nameSymbols.add(ctx.getChild(1).getText());
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
                             ctx.getChild(0).getText(),
                             ""), false);
@@ -78,25 +100,62 @@ class AbstractSyntaxTree {
 
                 case HplsqlParser.RULE_cpp_declare_stmt:
                 case HplsqlParser.RULE_cpp_function_param:
+                    symbolTable.nameSymbols.add(ctx.getChild(1).getText());
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
                             ctx.getChild(0).getText(),
                             ""), false);
+                    break;
+                case HplsqlParser.RULE_expr_func:
+                    if (symbolTable.lookup(ctx.getChild(0).getText()) == null) {
+                        System.err.println("Error for calling undeclared method : " + ctx.getChild(0).getText());
+                    }
                     break;
 
                 case HplsqlParser.RULE_cpp_declare_assignment_stmt:
+                    symbolTable.nameSymbols.add(ctx.getChild(1).getText());
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
                             ctx.getChild(0).getText(),
-                            ""), false);
+                            "", true), false);
+                    try {
+                        if (!symbolTable.checkCasting(ctx.getChild(0).getText(), symbolTable.AllSymbol.get(ctx.getChild(3).getText()).getType())) {
+                            System.err.println("checkCasting");
+                        }
+                    }catch (Exception e){}
+
+//                    String type = ctx.getChild(0).getText();
+//                    if (symbolTable.CheckTypeCompatible(type, ctx.getChild(3).getText()))
+//                        System.out.println("int is correct________________");
+//                    else System.out.println("not correct ______________");
                     // TODO: 26/12/2018 Check if types are compatible
                     break;
 
-                case HplsqlParser.RULE_cpp_assignment_stmt:
-                case HplsqlParser.RULE_assignment_stmt_single_item:
-                    SymbolTable.Symbol symbol = symbolTable.lookup(ctx.getChild(0).getText());
-                    if (symbol == null) {
-                        System.err.println("Semantic error at line " + lnCount + ": variable " + ctx.getChild(0).getText() + " used before it's declared");
+                case HplsqlParser.RULE_from_table_name_clause:
+                    DataType dataType = DataTypes.get(ctx.getText());
+                    SymbolTable.Symbol symbol = symbolTable.lookup(ctx.getChild(0).getChild(0).getText());
+                    if (dataType == null) {
+                        System.err.println("Semantic error : variable " + ctx.getChild(0).getChild(0).getText() + " used before it's declared");
                         System.exit(1);
                     }
+                    if ((columns = dataType.isContainColumns(columns)) != null) {
+                        if (columns.size() > 1)
+                            System.err.println("Semantic error columns  " + columns.toString() + "  doesn't exist in table");
+                        else
+                            System.err.println("Semantic error column  " + columns.toString() + "  doesn't exist in table");
+
+                    }
+                    break;
+                case HplsqlParser.RULE_cpp_assignment_stmt:
+                case HplsqlParser.RULE_assignment_stmt_single_item:
+                    symbol = symbolTable.lookup(ctx.getChild(0).getText());
+                    if (symbol == null) {
+                        System.err.println("Semantic error : variable " + ctx.getChild(0).getText() + " used before it's declared");
+                        System.exit(1);
+                    }
+                    SymbolTable.Symbol newsymbol = new SymbolTable.Symbol(symbol);
+                    newsymbol.setAssigned(true);
+                    symbolTable.AllSymbol.replace(symbol.getName(), symbol, newsymbol);
+                    //TODO edit if symbol assignment
+
                     // TODO: 26/12/2018 Check if types are compatible
                     break;
 
@@ -105,20 +164,26 @@ class AbstractSyntaxTree {
                     break;
                 case HplsqlParser.RULE_create_function_stmt:
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(2).getText(),
-                                                              // substring start from 7  to get the actual type value (miss return)
-                                                              ctx.getChild(4).getText().substring(7),
-                                                              ctx.getChild(1).getText().toLowerCase()), true);
+                            // substring start from 7  to get the actual type value (miss return)
+                            ctx.getChild(4).getText().substring(7),
+                            ctx.getChild(1).getText().toLowerCase()), true);
                     break;
 
                 case HplsqlParser.RULE_cpp_function_stmt:
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(0).getChild(1).getText(),
-                                                              ctx.getChild(0).getChild(0).getText(), "function"), true);
+                            ctx.getChild(0).getChild(0).getText(), "function"), true);
                     break;
 
                 case HplsqlParser.RULE_select_stmt:
 //                    DataTypes.get(ctx.getChild(0).getText()).getPath();
                     try {
                         assert stream != null;
+                        /*stream.writeBytes("package com.sqlcompiler.kotlin\n" +
+                                "\n" +
+                                "fun main() {\n" +
+                                "    Handler.select()\n" +
+                                "}");*/
+                    } catch (Exception e) {
                         stream.writeBytes("");
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -165,6 +230,8 @@ class AbstractSyntaxTree {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        symbolTable.isUnassignedVariable();
+        DataTypes.save(Environment.DATA_TYPES_PATH);
     }
 
     void print() {

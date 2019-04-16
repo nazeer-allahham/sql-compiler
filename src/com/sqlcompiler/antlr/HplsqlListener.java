@@ -1,4 +1,4 @@
-// Generated from E:/ite-fourth-year/compilers-1/projects/sql-compiler/src/com/sqlcompiler/antlr\Hplsql.g4 by ANTLR 4.7.2
+// Generated from C:/Users/96399/Documents/GitHub/sql-compiler/src/com/sqlcompiler/antlr\Hplsql.g4 by ANTLR 4.7.2
 package com.sqlcompiler.antlr;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -638,23 +638,20 @@ public interface HplsqlListener extends ParseTreeListener {
 	 */
 	void exitCreate_table_options_hive_item(HplsqlParser.Create_table_options_hive_itemContext ctx);
 	/**
-     * Enter a parse tree produced by {@link HplsqlParser#create_table_store_location}.
-     * @param ctx the parse tree
-     */
-    void enterCreate_table_store_location(HplsqlParser.Create_table_store_locationContext ctx);
-
-    /**
-     * Exit a parse tree produced by {@link HplsqlParser#create_table_store_location}.
-     *
-     * @param ctx the parse tree
-     */
-    void exitCreate_table_store_location(HplsqlParser.Create_table_store_locationContext ctx);
-
-    /**
-     * Enter a parse tree produced by {@link HplsqlParser#create_table_hive_row_format}.
-     * @param ctx the parse tree
-     */
-    void enterCreate_table_hive_row_format(HplsqlParser.Create_table_hive_row_formatContext ctx);
+	 * Enter a parse tree produced by {@link HplsqlParser#create_table_store_location}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreate_table_store_location(HplsqlParser.Create_table_store_locationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HplsqlParser#create_table_store_location}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreate_table_store_location(HplsqlParser.Create_table_store_locationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HplsqlParser#create_table_hive_row_format}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreate_table_hive_row_format(HplsqlParser.Create_table_hive_row_formatContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link HplsqlParser#create_table_hive_row_format}.
 	 * @param ctx the parse tree
