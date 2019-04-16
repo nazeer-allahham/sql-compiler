@@ -1,34 +1,22 @@
 package com.sqlcompiler.kotlin
 
-import java.io.BufferedReader
 import java.io.File
-import java.io.FileReader
 
-class mapper {
+object Mapper {
 
-    /**
-     * @param path:  path of the file which want to map it's content
-     * @return true if the process completed successfully else return false
-     **/
-    fun run(path: String): Boolean {
-        var reader: BufferedReader? = null
-        try {
-            reader = BufferedReader(FileReader(File(path)))
-            var row: String
-            do {
-                row = reader.readLine()
+    fun map(directory: File,
+            table: Table,
+            conditions: Pair<String, ArrayList<String>>): ArrayList<String> {
+        val files: ArrayList<String> = ArrayList()
 
-                val columns: List<String> = row.split('\t')
-                if (columns.size == 3) {
-                    println("${columns[0]}\t${columns[1]}")
-                }
-            }while (row.isNotEmpty())
+        var (header, rows) = Handler.readTable(table)
 
-        }catch (ex: Exception) {
-            return false
-        }finally {
-            reader?.close()
-        }
-        return true
+        rows = rows.filter { row -> Handler.getRowStatus(header, row, conditions.first, conditions.second) } as ArrayList<Row>
+
+        files.add(directory.path + File.separator + "mapper.csv")
+        Handler.writeToFile(files[0], header, rows)
+
+        ExecutionPlan.addStep("Mapper", "read the rows")
+        return files
     }
 }

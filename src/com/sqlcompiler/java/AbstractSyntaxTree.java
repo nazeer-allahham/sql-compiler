@@ -2,7 +2,6 @@ package com.sqlcompiler.java;
 
 import com.sqlcompiler.Environment;
 import com.sqlcompiler.antlr.HplsqlParser;
-import org.antlr.stringtemplate.StringTemplate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -12,6 +11,7 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import static com.sqlcompiler.java.DataType.SECONDARY_DATA_TYPE;
@@ -20,6 +20,8 @@ class AbstractSyntaxTree {
     SymbolTable symbolTable = new SymbolTable();
     private Integer lnCount = 1;
     private ParserRuleContext root = null;
+    ArrayList<String> columns = new ArrayList<>();
+    private String nameAttribute, typeAttribute, nameTable;
 
     void build(RuleContext ctx) {
         root = (ParserRuleContext) ctx;
@@ -33,6 +35,7 @@ class AbstractSyntaxTree {
 
         File file = new File(Environment.KOTLIN + "main.kt");
         DataOutputStream stream = null;
+
 
         try {
             file.createNewFile();
@@ -49,11 +52,6 @@ class AbstractSyntaxTree {
                     DataTypes.addField(ctx.getChild(0).getText(), ctx.getChild(2).getText());
                     break;
 
-                case HplsqlParser.RULE_create_table_columns_item:
-                    //System.out.print(ctx.getChild(0).getText() + " " + ctx.getChild(1).getText());
-                    System.out.println(DataTypes.currentType.hashCode());
-                    DataTypes.addField(ctx.getChild(0).getText(), ctx.getChild(1).getText());
-                    break;
 
                 case HplsqlParser.RULE_create_table_store_location:
                     System.out.println(ctx.getChild(1).getText());
@@ -67,16 +65,6 @@ class AbstractSyntaxTree {
                 case HplsqlParser.RULE_create_table_stmt:/**___create table __*/
                     DataTypes.initialize(SECONDARY_DATA_TYPE, ctx.getChild(2).getText());
                     nameTable = ctx.getChild(2).getText();
-                    attributes = new LinkedList<>();
-
-                    for (int i = 0; i < ctx.getChild(3).getChild(1).getChildCount(); i++) {
-                        if (i % 2 == 0) {
-                            nameAttribute = ctx.getChild(3).getChild(1).getChild(i).getChild(0).getText();
-                            typeAttribute = ctx.getChild(3).getChild(1).getChild(i).getChild(1).getText();
-                            attributes.add(new Attribute(nameAttribute, typeAttribute));
-                        }
-                    }
-                    DataTypes.createSecondaryType(nameTable, attributes);
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(2).getText(),
                             "Table",
                             "table"), false);
@@ -184,19 +172,9 @@ class AbstractSyntaxTree {
                                 "    Handler.select()\n" +
                                 "}");*/
                     } catch (Exception e) {
-                        stream.writeBytes("");
-                    } catch (IOException e) {
                         e.printStackTrace();
                     }
                     break;
-                case HplsqlParser.RULE_order_by_clause: {
-                    LinkedList<String> orderBy = new LinkedList<>();
-                    for (int i = 2; i < ctx.getChildCount(); i += 2) {
-                        orderBy.add(ctx.getChild(i).getText());
-                    }
-//                    stream.write(orderBy.to);
-                }
-                break;
             }
 
             if (ctx.getChildCount() == 1) {
@@ -225,7 +203,6 @@ class AbstractSyntaxTree {
             }
         }
         try {
-            assert stream != null;
             stream.close();
         } catch (IOException e) {
             e.printStackTrace();
