@@ -2,7 +2,6 @@ package com.sqlcompiler.java;
 
 import com.sqlcompiler.Environment;
 import com.sqlcompiler.antlr.HplsqlParser;
-import org.antlr.stringtemplate.StringTemplate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -24,8 +23,6 @@ class AbstractSyntaxTree {
     void build(RuleContext ctx) {
         root = (ParserRuleContext) ctx;
         buildHelper(ctx);
-
-        DataTypes.flush();
     }
 
     private void buildHelper(@NotNull RuleContext start) {
@@ -35,8 +32,6 @@ class AbstractSyntaxTree {
 
         File file = new File(Environment.KOTLIN + "main.kt");
         DataOutputStream stream = null;
-
-        StringTemplate template = new StringTemplate("fun select(tables)");
 
         try {
             file.createNewFile();
@@ -50,17 +45,18 @@ class AbstractSyntaxTree {
 
             switch (ctx.getRuleIndex()) {
                 case HplsqlParser.RULE_create_type_items_item:
-                    DataTypes.addAttribute(ctx.getChild(0).getText(), ctx.getChild(2).getText());
+                    DataTypes.addField(ctx.getChild(0).getText(), ctx.getChild(2).getText());
                     break;
 
                 case HplsqlParser.RULE_create_table_columns_item:
                     //System.out.print(ctx.getChild(0).getText() + " " + ctx.getChild(1).getText());
-                    DataTypes.addAttribute(ctx.getChild(0).getText(), ctx.getChild(1).getText());
+                    System.out.println(DataTypes.currentType.hashCode());
+                    DataTypes.addField(ctx.getChild(0).getText(), ctx.getChild(1).getText());
                     break;
 
                 case HplsqlParser.RULE_create_table_store_location:
                     System.out.println(ctx.getChild(1).getText());
-                    DataTypes.setStoreLocation(ctx.getChild(1).getText());
+                    DataTypes.addLocation(ctx.getChild(1).getText());
                     break;
 
                 case HplsqlParser.RULE_create_type_stmt:
@@ -123,15 +119,19 @@ class AbstractSyntaxTree {
 //                    DataTypes.get(ctx.getChild(0).getText()).getPath();
                     try {
                         assert stream != null;
-                        stream.writeBytes("package com.sqlcompiler.kotlin\n" +
-                                "\n" +
-                                "fun main() {\n" +
-                                "    Handler.select()\n" +
-                                "}");
+                        stream.writeBytes("");
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                     break;
+                case HplsqlParser.RULE_order_by_clause: {
+                    LinkedList<String> orderBy = new LinkedList<>();
+                    for (int i = 2; i < ctx.getChildCount(); i += 2) {
+                        orderBy.add(ctx.getChild(i).getText());
+                    }
+//                    stream.write(orderBy.to);
+                }
+                break;
             }
 
             if (ctx.getChildCount() == 1) {
@@ -160,6 +160,7 @@ class AbstractSyntaxTree {
             }
         }
         try {
+            assert stream != null;
             stream.close();
         } catch (IOException e) {
             e.printStackTrace();

@@ -41,6 +41,6 @@ public class Main {
         compiler.printDataTypes();
 
         //System.out.println(DataTypes.get("tt") != null ? "true" : "false");
-        //System.out.println(new Attribute("name" , "typr"));
+        //System.out.println(new Field("name" , "typr"));
     }
 }

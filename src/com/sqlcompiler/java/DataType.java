@@ -12,65 +12,90 @@ public class DataType implements Serializable {
 
     static final int PRIMARY_DATA_TYPE = 0;
     static final int SECONDARY_DATA_TYPE = 1;
-    private String name;
-    private String location;
 
     private int rank;
+    private String name;
+    private LinkedList<String> locations;
+    private LinkedList<Field> fields;
+
+    DataType(int rank, String name) {
+        setName(toUnquotedString(name));
+        setRank(rank);
+        this.fields = new LinkedList<>();
+        this.locations = new LinkedList<>();
+    }
+
+    DataType(int rank, String name, String type) {
+        this(rank, name);
+        this.fields.add(new Field(name, type));
+    }
+
+    DataType(int rank, String name, @NotNull Field... fields) {
+        this(rank, name);
+        for (Field field : fields) {
+            addField(field);
+        }
+    }
+
+    DataType(int rank, String name, LinkedList<Field> fields) {
+        this(rank, name);
+        setFields(fields);
+    }
 
     static String toUnquotedString(@NotNull String string) {
         char first = string.charAt(0);
         char last = string.charAt(string.length() - 1);
 
-        if(first == '\'' && last == '\'')
+        if (first == '\'' && last == '\'' || first == '"' && last == '"')
             return string.substring(1, string.length() - 1);
         return string;
     }
-    private LinkedList<Attribute> attributes;
 
-    DataType(String name, int rank) {
-        setName(name);
-        setRank(rank);
-        this.attributes = new LinkedList<>();
-    }
-
-    void addAttribute(Attribute attribute) {
-        if(this.attributes != null)
+    void addField(Field field) {
+        if (this.fields != null)
         {
-            this.attributes.add(attribute);
+            this.fields.add(field);
         }
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = toUnquotedString(location);
-    }
-
-    private void setRank(int rank) {
-        this.rank = rank;
-    }
-
-    private void setName(String name) {
-        this.name = toUnquotedString(name);
-    }
-
-    String getName() {
-        return name;
+    void addLocation(String location) {
+        if (this.locations != null) {
+            this.locations.add(toUnquotedString(location));
+        }
     }
 
     int getRank() {
-        return rank;
+        return this.rank;
     }
 
-    LinkedList<Attribute> getAttributes() {
-        return this.attributes;
+    void setRank(int rank) {
+        this.rank = rank;
     }
 
-    void setAttributes(LinkedList<Attribute> attributes) {
-        this.attributes = attributes;
+    public String getName() {
+        return this.name;
     }
+
+    public void setName(String name) {
+        this.name = toUnquotedString(name);
+    }
+
+    public LinkedList<String> getLocations() {
+        return this.locations;
+    }
+
+    public void setLocations(LinkedList<String> locations) {
+        this.locations = locations;
+    }
+
+    public LinkedList<Field> getFields() {
+        return this.fields;
+    }
+
+    public void setFields(LinkedList<Field> fields) {
+        this.fields = fields;
+    }
+
 
     @Override
     public String toString() {
@@ -82,10 +107,10 @@ public class DataType implements Serializable {
         {
             if (this.rank == DataType.PRIMARY_DATA_TYPE)
             {
-                return this.attributes.get(0).toString();
+                return this.fields.get(0).toString();
             }
             StringBuilder mString = new StringBuilder("{ ");
-            for (Attribute attr : this.attributes) {
+            for (Field attr : this.fields) {
                 mString.append(attr.toString());
             }
             mString.append(" }");
@@ -95,10 +120,10 @@ public class DataType implements Serializable {
         {
             if (this.rank == DataType.PRIMARY_DATA_TYPE)
             {
-                return this.attributes.get(0).toJson(DATA_TYPE_TO_STRING_FLAT);
+                return this.fields.get(0).toJson(DATA_TYPE_TO_STRING_FLAT);
             }
             StringBuilder mString = new StringBuilder("{ ");
-            for (Attribute attr : this.attributes) {
+            for (Field attr : this.fields) {
                 mString.append(attr.toJson(DATA_TYPE_TO_STRING_FLAT));
             }
             mString.append(" }");

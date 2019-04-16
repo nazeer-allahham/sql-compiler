@@ -2,7 +2,7 @@ package com.sqlcompiler.java;
 
 import org.jetbrains.annotations.NotNull;
 
-class console {
+class Console {
     public  static final int divider = 1;
     public  static final int open = 2;
     public  static final int close = 3;

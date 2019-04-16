@@ -7,7 +7,6 @@ import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 
-import java.io.DataInputStream;
 import java.io.IOException;
 
 class Compiler {
@@ -23,24 +22,24 @@ class Compiler {
     public Compiler(int mode) {
         if((mode & 1) != 0)
         {
-            console.log(console.open, "Reading input file:");
+            Console.log(Console.open, "Reading input file:");
             try {
                 this.input = CharStreams.fromFileName(Environment.INPUT_PATH);
-                console.log("reading has been finished successfully.");
+                Console.log("reading has been finished successfully.");
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            //console.log(console.close);
+            //Console.log(Console.close);
         }
         if ((mode & 2) != 0) // then must retrieve data types
         {
-            console.log(console.open, "retrieving data types:");
+            Console.log(Console.open, "retrieving data types:");
             DataTypes.restore(Environment.DATA_TYPES_PATH);
             if (DataTypes.count() == 0) {
-                DataTypes.generatePrimaryTypes();
+                DataTypes.generateDefaultDataTypes();
             }
-            console.log(String.format("%d data type has been retrieved.", DataTypes.count()));
-            console.log(console.close);
+            Console.log(String.format("%d data type has been retrieved.", DataTypes.count()));
+            Console.log(Console.close);
         }
     }
 
@@ -68,37 +67,33 @@ class Compiler {
         this.AST.print();
 
         // Storing our data types
-        console.log(console.divider);
+        Console.log(Console.divider);
         DataTypes.save(Environment.DATA_TYPES_PATH);
     }
 
     void code_generation() {
-        console.log(console.open, "Generating the code...");
+        Console.log(Console.open, "Generating the code...");
 
         Runtime runtime = Runtime.getRuntime();
         try {
-            Process p = runtime.exec("cmd /c \"cd src\\com\\sqlcompiler\\ && C:\\lib\\kotlin\\kotlinc\\bin\\kotlinc ./Environment.java ./kotlin/Handler.kt ./kotlin/main.kt -include-runtime -d ./jar/main.jar && java -jar ./jar/main.jar\"");
-            p.waitFor();
+            // Process p = runtime.exec("cmd /c \"cd src\\com\\sqlcompiler\\ && C:\\lib\\kotlin\\kotlinc\\bin\\kotlinc ./Environment.java ./kotlin/Handler.kt ./kotlin/main.kt -include-runtime -d ./jar/main.jar && java -jar ./jar/main.jar\"");
+            // p.waitFor();
 
-            DataInputStream s = new DataInputStream(p.getInputStream());
-            while (s.available() > 0) {
-                console.log(s.readLine());
-            }
 
-        } catch (IOException | InterruptedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        console.log("Done.");
-        console.log(console.close);
+        Console.log("Done.");
+        Console.log(Console.close);
     }
 
     void print() {
-        console.log(console.open);
-        console.log(String.format("%d data type has been saved successfully.", DataTypes.count()));
+        Console.log(Console.open);
+        Console.log(String.format("%d data type has been saved successfully.", DataTypes.count()));
         if (this.AST != null)
             this.AST.symbolTable.print();
-        console.log(console.close);
+        Console.log(Console.close);
     }
 
     void printDataTypes() {

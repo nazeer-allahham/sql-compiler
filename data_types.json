@@ -1,29 +1,23 @@
 {
   "boolean": {
-    "name": "boolean",
     "rank": 0,
-    "attributes": [
+    "name": "boolean",
+    "locations": [],
+    "fields": [
       {
         "name": "boolean",
         "type": "boolean"
       }
     ]
   },
-  "string": {
-    "name": "string",
-    "rank": 0,
-    "attributes": [
-      {
-        "name": "string",
-        "type": "string"
-      }
-    ]
-  },
-  "t": {
-    "name": "t",
-    "location": "adsadasdasdasdasd",
+  "c": {
     "rank": 1,
-    "attributes": [
+    "name": "c",
+    "locations": [
+      "tables\\c\\c1.csv",
+      "tables\\c\\c2.csv"
+    ],
+    "fields": [
       {
         "name": "id",
         "type": "int"
@@ -31,13 +25,39 @@
       {
         "name": "name",
         "type": "string"
+      },
+      {
+        "name": "salary",
+        "type": "int"
+      },
+      {
+        "name": "birth_year",
+        "type": "int"
       }
     ]
   },
-  "real": {
-    "name": "real",
+  "string": {
     "rank": 0,
-    "attributes": [
+    "name": "string",
+    "locations": [],
+    "fields": [
+      {
+        "name": "string",
+        "type": "string"
+      }
+    ]
+  },
+  "t": {
+    "rank": 1,
+    "name": "t",
+    "locations": [],
+    "fields": []
+  },
+  "real": {
+    "rank": 0,
+    "name": "real",
+    "locations": [],
+    "fields": [
       {
         "name": "real",
         "type": "real"
@@ -45,9 +65,10 @@
     ]
   },
   "int": {
-    "name": "int",
     "rank": 0,
-    "attributes": [
+    "name": "int",
+    "locations": [],
+    "fields": [
       {
         "name": "int",
         "type": "int"

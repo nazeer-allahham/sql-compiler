@@ -7,15 +7,15 @@ import java.util.LinkedList;
 
 public class MyListener extends HplsqlBaseListener {
 
-    private LinkedList<Attribute> details;
+    private LinkedList<Field> details;
 
     MyListener()
     {
         try {
-            DataTypes.createPrimaryType("int", "int");
-            DataTypes.createPrimaryType("real", "float");
-            DataTypes.createPrimaryType("string", "char[]");
-            DataTypes.createPrimaryType("bool", "boolean");
+            DataTypes.createPrimaryDataType("int", "int");
+            DataTypes.createPrimaryDataType("real", "float");
+            DataTypes.createPrimaryDataType("string", "char[]");
+            DataTypes.createPrimaryDataType("bool", "boolean");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -25,7 +25,7 @@ public class MyListener extends HplsqlBaseListener {
     public void exitCreate_type_stmt(HplsqlParser.Create_type_stmtContext ctx) {
         super.exitCreate_type_stmt(ctx);
 
-        DataTypes.createSecondaryType(ctx.table_name().getText(), this.details);
+        DataTypes.createSecondaryDataType(ctx.table_name().getText(), this.details);
         this.details = null;
     }
 
@@ -36,14 +36,14 @@ public class MyListener extends HplsqlBaseListener {
         if(this.details == null) {
             details = new LinkedList<>();
         }
-        details.add(new Attribute(ctx.getChild(0).getText(), ctx.getChild(2).getText()));
+        details.add(new Field(ctx.getChild(0).getText(), ctx.getChild(2).getText()));
     }
 
     @Override
     public void exitCreate_table_stmt(HplsqlParser.Create_table_stmtContext ctx) {
         super.exitCreate_table_stmt(ctx);
 
-        DataTypes.createSecondaryType(ctx.table_name().getText(), this.details);
+        DataTypes.createSecondaryDataType(ctx.table_name().getText(), this.details);
         this.details = null;
     }
 
@@ -54,6 +54,6 @@ public class MyListener extends HplsqlBaseListener {
         if (this.details == null) {
             details = new LinkedList<>();
         }
-        details.add(new Attribute(ctx.getChild(0).getText(), ctx.getChild(1).getText()));
+        details.add(new Field(ctx.getChild(0).getText(), ctx.getChild(1).getText()));
     }
 }

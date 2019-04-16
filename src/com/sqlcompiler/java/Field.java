@@ -5,13 +5,21 @@ import org.jetbrains.annotations.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Attribute implements Serializable {
+public class Field implements Serializable {
     private String name;
     private String type;
 
-    Attribute(@NotNull String name, @NotNull String type) {
+    Field(@NotNull String name, @NotNull String type) {
         this.name = DataType.toUnquotedString(name);
         this.type = DataType.toUnquotedString(type);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getType() {
+        return type;
     }
 
     @Override
@@ -20,7 +28,7 @@ public class Attribute implements Serializable {
     }
 
     String toJson(Integer mode) {
-        if(DataTypes.isPrimitive(this.type))
+        if (DataTypes.primitive(this.type))
             return String.format("{ \"name\" => \"%s\", \"type\" => \"%s\" } ", this.name, this.type);
         else if (mode == DataType.DATA_TYPE_TO_STRING)
             return String.format(" { \"name\" => \"%s\", \"type\" => \"%s\", \"details\" => %s } ", this.name,
@@ -33,9 +41,9 @@ public class Attribute implements Serializable {
                 return "";
             StringBuilder mString = new StringBuilder();
             try {
-                for(Attribute attr : obj.getAttributes())
+                for (Field attr : obj.getFields())
                 {
-                    if(DataTypes.isPrimitive(attr.type))
+                    if (DataTypes.primitive(attr.type))
                         mString.append(String.format(" { \"name\" => \"%s_%s\", \"type\" => \"%s\" } ", this.name, attr.name, attr.type));
                     else
                         mString.append(Objects.requireNonNull(DataTypes.get(attr.type)).toJson(DataType.DATA_TYPE_TO_STRING_FLAT));

@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -12,93 +11,66 @@ import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import static com.sqlcompiler.java.DataType.PRIMARY_DATA_TYPE;
-import static com.sqlcompiler.java.DataType.SECONDARY_DATA_TYPE;
-
 class DataTypes {
-    /**
-      * TYPES
-      **/
-    private static HashMap<String, DataType> TYPES = new HashMap<>();
-    private static DataType ITEM = null;
+    static DataType currentType;
+    private static HashMap<String, DataType> types = new HashMap<>();
 
-    static void generatePrimaryTypes() {
-        DataTypes.createPrimaryType("int", "int");
-        DataTypes.createPrimaryType("real", "real");
-        DataTypes.createPrimaryType("string", "string");
-        DataTypes.createPrimaryType("boolean", "boolean");
-        //System.out.println(TYPES.size());
+    static void generateDefaultDataTypes() {
+        createPrimaryDataType("int", "int");
+        createPrimaryDataType("real", "real");
+        createPrimaryDataType("string", "string");
+        createPrimaryDataType("boolean", "boolean");
     }
 
-    static void createPrimaryType(String name, String type) {
-        DataType dataType = new DataType(name, PRIMARY_DATA_TYPE);
-        dataType.addAttribute(new Attribute(name, type));
-        TYPES.put(name, dataType);
+    static void createPrimaryDataType(String name, String type) {
+        types.put(name, new DataType(DataType.PRIMARY_DATA_TYPE, name, type));
     }
 
-    static void createSecondaryType(String name, Attribute ...attributes) {
-        DataType dataType = new DataType(name, SECONDARY_DATA_TYPE);
-        if (attributes != null) {
-            for (Attribute attribute : attributes) {
-                dataType.addAttribute(attribute);
-            }
-        }
-        TYPES.put(name, dataType);
+    static void createSecondaryDataType(String name, Field... fields) {
+        types.put(name, new DataType(DataType.SECONDARY_DATA_TYPE, name, fields));
     }
 
-    static void createSecondaryType(String name, LinkedList<Attribute> attributes) {
-        DataType dataType = new DataType(name, SECONDARY_DATA_TYPE);
-        dataType.setAttributes(attributes);
-        TYPES.put(name, dataType);
-    }
-
-    private static void push(DataType dataType) {
-        TYPES.put(dataType.getName(), dataType);
-    }
-
-    static void flush() {
-        if (ITEM != null) {
-            push(ITEM);
-        }
+    static void createSecondaryDataType(String name, LinkedList<Field> fields) {
+        types.put(name, new DataType(DataType.SECONDARY_DATA_TYPE, name, fields));
     }
 
     static void initialize(Integer rank, String name) {
-        //flush();
-        ITEM = new DataType(name, rank);
-        push(ITEM);
+        currentType = new DataType(rank, name);
+        Console.log(currentType.hashCode());
+        put(currentType);
     }
 
-    static void addAttribute(String name, String type) {
-        ITEM.addAttribute(new Attribute(name, type));
+    static void put(DataType type) {
+        types.put(type.getName(), type);
     }
 
-    static void delete(@NotNull DataType type) { TYPES.remove(type.getName()); }
-
-    static boolean isPrimitive(String typeName) {
-        if (TYPES.containsKey(typeName)) {
-            return TYPES.get(typeName).getRank() == PRIMARY_DATA_TYPE;
-        }
-        return false;
+    static void remove(@NotNull DataType type) {
+        types.remove(type.getName());
     }
 
-    @Nullable
-    static DataType get(@NotNull String typeName) {
-//        if (typeName.endsWith("[]"))
-//            typeName = typeName.substring(0, typeName.length()-2);
-        if (TYPES.containsKey(typeName)) {
-            return TYPES.get(typeName);
-        }
-        return null;
+    static boolean primitive(String name) {
+        return types.containsKey(name) && types.get(name).getRank() == DataType.PRIMARY_DATA_TYPE;
+    }
+
+    static DataType get(String name) {
+        return types.getOrDefault(name, null);
+    }
+
+    static void addField(String name, String type) {
+        currentType.addField(new Field(name, type));
+    }
+
+    static void addLocation(String location) {
+        currentType.addLocation(location);
     }
 
     static int count() {
-        if(TYPES == null)
-            return -1;
-        return TYPES.size();
+        return types.size();
     }
 
     static void save(String path) {
-        console.log(console.open);
+        Console.log(Console.open);
+
         Gson gson = new Gson();
         File file = new File(path);
         try {
@@ -108,40 +80,36 @@ class DataTypes {
             }
             FileOutputStream stream = new FileOutputStream(file);
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(stream, Charset.forName("UTF-8")));
-            writer.write(gson.toJson(TYPES));
+            writer.write(gson.toJson(types));
             writer.close();
-            console.log("Data types save is completed successfully!");
+            Console.log("Data types save is completed successfully!");
         } catch (IOException e) {
             e.printStackTrace();
         }
-        console.log(console.close);
+        Console.log(Console.close);
     }
 
     static void restore(String path) {
-        console.log(console.open);
+        Console.log(Console.open);
         try {
             Gson gson = new Gson();
-            DataTypes.TYPES.clear();
+            types.clear();
             Type type = new TypeToken<HashMap<String, DataType>>(){}.getType();
             HashMap<String, DataType> temp = gson.fromJson(new InputStreamReader(new FileInputStream(new File(path))), type);
             if (temp != null)
-                TYPES = temp;
-            console.log("Data types restore is completed successfully.");
+                types = temp;
+            Console.log("Data types restore is completed successfully.");
         } catch (JsonSyntaxException | IOException e) {
             //e.printStackTrace();
         }
-        console.log(console.close);
+        Console.log(Console.close);
     }
 
     static void print() {
-        console.log(console.open);
-        for(String key : TYPES.keySet()) {
-            console.log(TYPES.get(key).toJson(DataType.DATA_TYPE_TO_STRING_FLAT));
+        Console.log(Console.open);
+        for (String key : types.keySet()) {
+            Console.log(types.get(key).toJson(DataType.DATA_TYPE_TO_STRING_FLAT));
         }
-        console.log(console.close);
-    }
-
-    public static void setStoreLocation(String location) {
-        ITEM.setLocation(location);
+        Console.log(Console.close);
     }
 }
