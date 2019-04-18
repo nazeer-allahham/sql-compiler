@@ -116,7 +116,7 @@ call_stmt :
         T_CALL ident (T_OPEN_P expr_func_params? T_CLOSE_P | expr_func_params)?
     ;
 
-// CLOSE cursor statement
+// close cursor statement
 close_stmt :
         T_CLOSE L_ID
     ;
@@ -663,22 +663,14 @@ select_options_item :
     ;
 
 non_balanced_expr :
-        open_p_
-    |   close_p_
-    ;
+        T_OPEN_P bool_expr
 
-open_p_:
-        T_OPEN_P
-    ;
-
-close_p_:
-        T_CLOSE_P
     ;
 
 // Boolean condition
 bool_expr :
         non_balanced_expr
-    |   T_NOT? open_p_ bool_expr close_p_
+    |   T_NOT? T_OPEN_P bool_expr T_CLOSE_P
     |   bool_expr bool_expr_logical_operator bool_expr
     |   bool_expr_atom
     ;

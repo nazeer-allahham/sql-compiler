@@ -581,10 +581,10 @@ cpp_stmt:
             cpp_function_stmt
         |   cpp_for_stmt
         |   cpp_if_stmt
+        |   cpp_return_stmt
         |   cpp_declare_stmt
         |   cpp_assignment_stmt
         |   cpp_declare_assignment_stmt
-        |   cpp_return_stmt
         |   write_stmt
         |   create_table_stmt
         |   create_type_stmt

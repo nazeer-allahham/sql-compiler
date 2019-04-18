@@ -20,6 +20,7 @@ class AbstractSyntaxTree {
     SymbolTable symbolTable = new SymbolTable();
     private Integer lnCount = 1;
     private ParserRuleContext root = null;
+    private LinkedList<Field> ColumnsCreateTable = null;
     ArrayList<String> columns = new ArrayList<>();
     private String nameAttribute, typeAttribute, nameTable;
 
@@ -65,6 +66,16 @@ class AbstractSyntaxTree {
                 case HplsqlParser.RULE_create_table_stmt:/**___create table __*/
                     DataTypes.initialize(SECONDARY_DATA_TYPE, ctx.getChild(2).getText());
                     nameTable = ctx.getChild(2).getText();
+                    ColumnsCreateTable = new LinkedList<>();
+
+                    for (int i = 0; i < ctx.getChild(3).getChild(1).getChildCount(); i++) {
+                        if (i % 2 == 0) {
+                            nameAttribute = ctx.getChild(3).getChild(1).getChild(i).getChild(0).getText();
+                            typeAttribute = ctx.getChild(3).getChild(1).getChild(i).getChild(1).getText();
+                            ColumnsCreateTable.add(new Field(nameAttribute, typeAttribute));
+                        }
+                    }
+                    DataTypes.createSecondaryDataType(nameTable, ColumnsCreateTable);
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(2).getText(),
                             "Table",
                             "table"), false);
@@ -119,7 +130,7 @@ class AbstractSyntaxTree {
 
                 case HplsqlParser.RULE_from_table_name_clause:
                     DataType dataType = DataTypes.get(ctx.getText());
-                    SymbolTable.Symbol symbol = symbolTable.lookup(ctx.getChild(0).getChild(0).getText());
+                    SymbolTable.Symbol symbol ;
                     if (dataType == null) {
                         System.err.println("Semantic error : variable " + ctx.getChild(0).getChild(0).getText() + " used before it's declared");
                         System.exit(1);

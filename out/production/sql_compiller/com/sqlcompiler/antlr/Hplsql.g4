@@ -250,7 +250,6 @@ create_local_temp_table_stmt :
 
 create_table_definition :
         (T_AS? T_OPEN_P select_stmt T_CLOSE_P | T_AS? select_stmt | T_OPEN_P create_table_columns T_CLOSE_P) create_table_options?
-
     ;
 
 create_table_columns :
@@ -582,10 +581,10 @@ cpp_stmt:
             cpp_function_stmt
         |   cpp_for_stmt
         |   cpp_if_stmt
+        |   cpp_return_stmt
         |   cpp_declare_stmt
         |   cpp_assignment_stmt
         |   cpp_declare_assignment_stmt
-        |   cpp_return_stmt
         |   write_stmt
         |   create_table_stmt
         |   create_type_stmt
@@ -737,7 +736,7 @@ select_list_item :
 
 select_list_alias :
         {!_input.LT(1).getText().equalsIgnoreCase("INTO") &&
-         !_input.LT(1).getText().equalsIgnoreCase("FROM")}? T_AS? ident
+         !_input.LT(1).getText().equalsIgnoreCase("FROM")}? T_AS ident
     |   T_OPEN_P T_TITLE L_S_STRING T_CLOSE_P
     ;
 
