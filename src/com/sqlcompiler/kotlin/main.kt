@@ -30,10 +30,13 @@ fun main() {
 //            "devices_id < 10 && devices_price == 1111" to arrayListOf("devices_id", "devices_price")
 //    )
 
-    Handler.select1(
+    Handler.select(
             arrayListOf("c"),
-            "c_id >= 2 && c_id <= 5" to arrayListOf("c_id", "c_salary"),
-            arrayListOf("c_id", "c_name"),
-            arrayListOf("c_name", "c_id")
+            "c_id > 0" to arrayListOf("c_id"),
+            //arrayListOf("c_id", "c_name"),
+            arrayListOf(DesiredColumn("c_id", "min")),
+            //arrayListOf("c_name", "c_id")
+            arrayListOf(),
+            arrayListOf("c_name")
     )
 }

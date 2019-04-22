@@ -28,9 +28,16 @@ data class Row(val fields: ArrayList<String> = ArrayList()) {
         return row
     }
 
+    /*
     fun filter(columns: ArrayList<String>): ArrayList<Int> {
         val indexes = ArrayList<Int>()
         columns.forEach { i -> indexes.add(find(i)) }
+        return indexes
+    }
+    */
+    fun filter(columns: ArrayList<DesiredColumn>): ArrayList<Int> {
+        val indexes = ArrayList<Int>()
+        columns.forEach { i -> indexes.add(find(i.columnName)) }
         return indexes
     }
 

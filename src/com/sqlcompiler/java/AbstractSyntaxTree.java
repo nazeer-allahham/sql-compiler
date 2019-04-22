@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 import static com.sqlcompiler.java.DataType.SECONDARY_DATA_TYPE;
@@ -21,6 +22,7 @@ class AbstractSyntaxTree {
     private Integer lnCount = 1;
     private ParserRuleContext root = null;
     ArrayList<String> columns = new ArrayList<>();
+    HashMap<String, String> functions = new HashMap<>();
     private String nameAttribute, typeAttribute, nameTable;
 
     void build(RuleContext ctx) {
@@ -28,6 +30,8 @@ class AbstractSyntaxTree {
         buildHelper(ctx);
     }
 
+    // TODO Left and Right outer join must add to where conditions (Left / Right) table id >=0 && < 0
+    // TODO Full outer join must add to where conditions always true
     private void buildHelper(@NotNull RuleContext start) {
         LinkedList<RuleContext> queue = new LinkedList<>();
         queue.add(start);
@@ -54,8 +58,13 @@ class AbstractSyntaxTree {
 
 
                 case HplsqlParser.RULE_create_table_store_location:
+                    System.out.println(ctx.getChildCount() / 2);
+                    for (int i = 1; i < ctx.getChildCount(); i += 2)
+                        DataTypes.addLocation(ctx.getChild(i).getText());
+                    break;
+                case HplsqlParser.RULE_create_table_delemiter:
                     System.out.println(ctx.getChild(1).getText());
-                    DataTypes.addLocation(ctx.getChild(1).getText());
+                    DataTypes.setDelimiter(ctx.getChild(1).getText());
                     break;
 
                 case HplsqlParser.RULE_create_type_stmt:
@@ -160,6 +169,7 @@ class AbstractSyntaxTree {
                 case HplsqlParser.RULE_cpp_function_stmt:
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(0).getChild(1).getText(),
                             ctx.getChild(0).getChild(0).getText(), "function"), true);
+
                     break;
 
                 case HplsqlParser.RULE_select_stmt:
