@@ -84,7 +84,7 @@ object Handler {
         Console.log("Table created successfully")
     }
 
-    /*fun select(tables: ArrayList<Table>,
+    fun select(tables: ArrayList<Table>,
                condition: Pair<String, ArrayList<String>>) {
         var (header, rows) = this.readTable(tables[0])
 
@@ -98,22 +98,17 @@ object Handler {
         rows = rows.filter { row -> getRowStatus(header, row, condition.first, condition.second) } as ArrayList<Row>
 
         Console.output(header, rows)
-    }*/
+    }
 
-    fun select(names: ArrayList<String>,
-               conditions: Pair<String, ArrayList<String>>,
-               desiredColumns: ArrayList<DesiredColumn>,
-               orderBy: ArrayList<String>,
-               groupBy: ArrayList<String>) {
+    fun select1(names: ArrayList<String>,
+                conditions: Pair<String, ArrayList<String>>,
+                desiredColumns: ArrayList<String>,
+                orderBy: ArrayList<String>) {
         val directory = File(Environment.OUTPUT_FILE_NAME)
         directory.mkdirs()
 
         val tables = restoreTables(names)
-        if (groupBy.size > 0) {
-            Reducer.groupByReduce(directory, Shuffler.shuffle(directory, orderBy, groupBy, Mapper.map(directory, tables, conditions)), desiredColumns)
-        } else {
-            Reducer.basicReduce(directory, Shuffler.shuffle(directory, orderBy, groupBy, Mapper.map(directory, tables, conditions)), desiredColumns)
-        }
+        Reducer.reduce(directory, Shuffler.shuffle(directory, orderBy, Mapper.map(directory, tables[0], conditions)), desiredColumns)
     }
 
     private fun restoreTables(names: ArrayList<String>): List<Table> {
@@ -135,7 +130,7 @@ object Handler {
         return expr.eval(condition) != BigDecimal(0)
     }
 
-    fun joinTable(rows: ArrayList<Row>, table: Table): Pair<Row, ArrayList<Row>> {
+    private fun joinTable(rows: ArrayList<Row>, table: Table): Pair<Row, ArrayList<Row>> {
         val result = ArrayList<Row>()
         val (header2, rows2) = this.readTable(table)
 

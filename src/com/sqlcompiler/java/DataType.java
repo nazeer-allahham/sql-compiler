@@ -16,7 +16,6 @@ public class DataType implements Serializable {
 
     private int rank;
     private String name;
-    private String delemiter;
     private LinkedList<String> locations;
     private LinkedList<Field> fields;
 
@@ -96,14 +95,6 @@ public class DataType implements Serializable {
 
     public void setFields(LinkedList<Field> fields) {
         this.fields = fields;
-    }
-
-    public String getDelimiter() {
-        return delemiter;
-    }
-
-    public void setDelimiter(String delimiter) {
-        this.delemiter = delimiter;
     }
 
     public ArrayList<String> isContainColumns(ArrayList<String> columns) {
