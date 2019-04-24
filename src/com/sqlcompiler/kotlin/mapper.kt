@@ -5,11 +5,19 @@ import java.io.File
 object Mapper {
 
     fun map(directory: File,
-            table: Table,
+            tables: List<Table>,
             conditions: Pair<String, ArrayList<String>>): ArrayList<String> {
         val files: ArrayList<String> = ArrayList()
 
-        var (header, rows) = Handler.readTable(table)
+        var (header, rows) = Handler.readTable(tables[0])
+
+        if (tables.size > 1) {
+            for (i in 1 until tables.size) {
+                val j = Handler.joinTable(rows, tables[i])
+                header.addFields(j.first.fields)
+                rows = j.second
+            }
+        }
 
         rows = rows.filter { row -> Handler.getRowStatus(header, row, conditions.first, conditions.second) } as ArrayList<Row>
 

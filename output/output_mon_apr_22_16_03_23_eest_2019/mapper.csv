@@ -1,0 +1,5 @@
+c_id,c_name,c_salary,c_birth_year,devices_id,devices_name,devices_price
+2,mhd,-1,1997,1,n1,0
+2,mhd,-1,1997,2,m2,0
+3,hmz,-1000,2000,1,n1,0
+3,hmz,-1000,2000,2,m2,0

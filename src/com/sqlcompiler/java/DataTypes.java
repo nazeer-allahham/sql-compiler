@@ -112,4 +112,8 @@ class DataTypes {
         }
         Console.log(Console.close);
     }
+
+    static void setDelimiter(String delimiter) {
+        currentType.setDelimiter(delimiter);
+    }
 }

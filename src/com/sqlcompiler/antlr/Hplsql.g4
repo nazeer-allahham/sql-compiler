@@ -220,7 +220,7 @@ declare_handler_item :
 
 // Create or define type statement
 create_type_stmt:
-        T_CREATE T_TYPE table_name create_type_definition
+        T_CREATE T_TYPE table_name create_type_definition create_type_options?
     ;
 
 create_type_definition:
@@ -232,8 +232,23 @@ create_type_items:
     ;
 
 create_type_items_item:
-        ident T_COLON (ident | string)
+        ident T_COLON ident
     ;
+
+create_type_options:
+        create_type_option+
+    ;
+
+create_type_option:
+        create_type_store_location
+    |   create_type_delemiter
+    ;
+
+create_type_store_location:
+        T_LOCATION string (T_COMMA string)*;
+
+create_type_delemiter:
+        T_DELIMITED string;
 
 // DECLARE TEMPORARY TABLE statement
 declare_temporary_table_item :
@@ -311,6 +326,7 @@ create_table_options_item :
     |   create_table_options_mssql_item
     |   create_table_options_mysql_item
     |   create_table_store_location
+    |   create_table_delemiter
     ;
 
 create_table_options_ora_item :
@@ -343,7 +359,10 @@ create_table_options_hive_item :
     ;
 
 create_table_store_location:
-        T_LOCATION string;
+        T_LOCATION string (T_COMMA string)*;
+
+create_table_delemiter:
+        T_DELIMITED string;
 
 create_table_hive_row_format :
         T_ROW T_FORMAT T_DELIMITED create_table_hive_row_format_fields*
@@ -1128,6 +1147,7 @@ non_reserved_words :
     |   T_DEFINER
     |   T_DEFINITION
     |   T_DELETE
+    |   T_DELEMITER
     |   T_DELIMITED
     |   T_DENSE_RANK
     |   T_DESC
@@ -1397,6 +1417,7 @@ T_DEFINED         : D E F I N E D ;
 T_DEFINER         : D E F I N E R ;
 T_DEFINITION      : D E F I N I T I O N ;
 T_DELETE          : D E L E T E ;
+T_DELEMITER       : D E L E M I T I E R;
 T_DELIMITED       : D E L I M I T E D ;
 T_DESC            : D E S C ;
 T_DIR             : D I R ;
