@@ -1,3 +1,4 @@
-int f() {
-  t = select * from ttt;
+string r;
+String f (int c){
+return r;
 }
