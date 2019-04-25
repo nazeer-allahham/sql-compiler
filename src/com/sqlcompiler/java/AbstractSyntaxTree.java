@@ -12,7 +12,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 
 import static com.sqlcompiler.java.DataType.SECONDARY_DATA_TYPE;
@@ -21,9 +20,10 @@ class AbstractSyntaxTree {
     SymbolTable symbolTable = new SymbolTable();
     private Integer lnCount = 1;
     private ParserRuleContext root = null;
-    private ArrayList<String> columns = new ArrayList<>();
-    HashMap<String, String> functions = new HashMap<>();
-    private String nameAttribute, typeAttribute, nameTable;
+    private LinkedList<Field> ColumnsCreateTable = null;
+    ArrayList<String> columnsSelectStmt = new ArrayList<>();
+    ArrayList<Field> cppFunctionParam = null;
+    private String nameField, typeField, nameTable, typeCppFunction;
 
     void build(RuleContext ctx) {
         root = (ParserRuleContext) ctx;
@@ -75,12 +75,22 @@ class AbstractSyntaxTree {
                 case HplsqlParser.RULE_create_table_stmt:
                     DataTypes.initialize(SECONDARY_DATA_TYPE, ctx.getChild(2).getText());
                     nameTable = ctx.getChild(2).getText();
+                    ColumnsCreateTable = new LinkedList<>();
+
+                    for (int i = 0; i < ctx.getChild(3).getChild(1).getChildCount(); i++) {
+                        if (i % 2 == 0) {
+                            nameField = ctx.getChild(3).getChild(1).getChild(i).getChild(0).getText();
+                            typeField = ctx.getChild(3).getChild(1).getChild(i).getChild(1).getText();
+                            ColumnsCreateTable.add(new Field(nameField, typeField));
+                        }
+                    }
+                    DataTypes.createSecondaryDataType(nameTable, ColumnsCreateTable);
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(2).getText(),
                             "Table",
                             "table"), false);
                     break;
                 case HplsqlParser.RULE_select_list_item:
-                    columns.add(ctx.getText());
+                    columnsSelectStmt.add(ctx.getText());
                     //System.out.println(ctx.parent.getText()+"______________");
                     break;
                 case HplsqlParser.RULE_cpp_scope:
@@ -88,7 +98,7 @@ class AbstractSyntaxTree {
                     symbolTable.allocate();
                     currentDepth = ctx.depth();
                     break;
-
+                case HplsqlParser.RULE_cpp_declare_stmt:
                 case HplsqlParser.RULE_declare_var_item:
                     symbolTable.nameSymbols.add(ctx.getChild(1).getText());
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
@@ -96,12 +106,12 @@ class AbstractSyntaxTree {
                             ""), false);
                     break;
 
-                case HplsqlParser.RULE_cpp_declare_stmt:
+
                 case HplsqlParser.RULE_cpp_function_param:
                     symbolTable.nameSymbols.add(ctx.getChild(1).getText());
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
                             ctx.getChild(0).getText(),
-                            ""), false);
+                            "", true), false);
                     break;
                 case HplsqlParser.RULE_expr_func:
                     if (symbolTable.lookup(ctx.getChild(0).getText()) == null) {
@@ -112,33 +122,29 @@ class AbstractSyntaxTree {
                 case HplsqlParser.RULE_cpp_declare_assignment_stmt:
                     symbolTable.nameSymbols.add(ctx.getChild(1).getText());
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
-                            ctx.getChild(0).getText(),
-                            "", true), false);
+                            ctx.getChild(0).getText(), "",
+                            ctx.getChild(3).getText(), true), false);
                     try {
                         if (!symbolTable.checkCasting(ctx.getChild(0).getText(), symbolTable.AllSymbol.get(ctx.getChild(3).getText()).getType())) {
                             System.err.println("checkCasting");
                         }
-                    }catch (Exception e){}
+                    } catch (Exception e) {
+                    }
 
-//                    String type = ctx.getChild(0).getText();
-//                    if (symbolTable.CheckTypeCompatible(type, ctx.getChild(3).getText()))
-//                        System.out.println("int is correct________________");
-//                    else System.out.println("not correct ______________");
-                    // TODO: 26/12/2018 Check if types are compatible
                     break;
 
                 case HplsqlParser.RULE_from_table_name_clause:
                     DataType dataType = DataTypes.get(ctx.getText());
-                    SymbolTable.Symbol symbol = symbolTable.lookup(ctx.getChild(0).getChild(0).getText());
+                    SymbolTable.Symbol symbol;
                     if (dataType == null) {
                         System.err.println("Semantic error : variable " + ctx.getChild(0).getChild(0).getText() + " used before it's declared");
                         System.exit(1);
                     }
-                    if ((columns = dataType.isContainColumns(columns)) != null) {
-                        if (columns.size() > 1)
-                            System.err.println("Semantic error columns  " + columns.toString() + "  doesn't exist in table");
+                    if ((columnsSelectStmt = dataType.isContainColumns(columnsSelectStmt)) != null) {
+                        if (columnsSelectStmt.size() > 1)
+                            System.err.println("Semantic error columns  " + columnsSelectStmt.toString() + "  doesn't exist in table");
                         else
-                            System.err.println("Semantic error column  " + columns.toString() + "  doesn't exist in table");
+                            System.err.println("Semantic error column  " + columnsSelectStmt.toString() + "  doesn't exist in table");
 
                     }
                     break;
@@ -151,10 +157,8 @@ class AbstractSyntaxTree {
                     }
                     SymbolTable.Symbol newsymbol = new SymbolTable.Symbol(symbol);
                     newsymbol.setAssigned(true);
+                    newsymbol.setValue(ctx.getChild(2).getText());
                     symbolTable.AllSymbol.replace(symbol.getName(), symbol, newsymbol);
-                    //TODO edit if symbol assignment
-
-                    // TODO: 26/12/2018 Check if types are compatible
                     break;
 
                 case HplsqlParser.RULE_create_procedure_stmt:
@@ -168,11 +172,35 @@ class AbstractSyntaxTree {
                     break;
 
                 case HplsqlParser.RULE_cpp_function_stmt:
+                    // get parameter function
+                    cppFunctionParam = new ArrayList<>();
+                    for (int i = 0; i < ctx.getChild(0).getChild(3).getChildCount(); i++) {
+                        if (i % 2 == 0){
+                            cppFunctionParam.add(
+                                    new Field(ctx.getChild(0).getChild(3).getChild(i).getChild(1).getText(),
+                                            ctx.getChild(0).getChild(3).getChild(i).getChild(0).getText()));
+                        }
+                    }
+                    typeCppFunction = ctx.getChild(0).getChild(0).getText();
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(0).getChild(1).getText(),
-                            ctx.getChild(0).getChild(0).getText(), "function"), true);
-
+                            ctx.getChild(0).getChild(0).getText(), "function",cppFunctionParam), true);
                     break;
-
+                case HplsqlParser.RULE_expr_func_params:
+                    for (int i = 0; i <ctx.getChildCount(); i++) {
+                        if (i%2==0) {
+                            if (!symbolTable.checkParampetersFunctionCpp(
+                                    ctx.parent.getChild(0).getText(),
+                                    ctx.getChild(i).getText(), i/2)){
+                                System.err.println("Error functions calls ");
+                            }
+                        }
+                    }
+                    break;
+                case HplsqlParser.RULE_cpp_return_stmt:
+                    if (!symbolTable.isTypeCompatible(typeCppFunction, ctx.getChild(1).getText())) {
+                        System.err.println("Error  return ");
+                    }
+                    break;
                 case HplsqlParser.RULE_select_stmt:
 //                    DataTypes.get(ctx.getChild(0).getText()).getPath();
                     try {

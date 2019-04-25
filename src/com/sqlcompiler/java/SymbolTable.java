@@ -8,8 +8,8 @@ import java.util.HashMap;
 class SymbolTable {
     private Scope currentScope;
     private boolean state;
-    public HashMap<String, Symbol> AllSymbol=new HashMap<>();
-    public ArrayList<String> nameSymbols=new ArrayList<>();
+    public HashMap<String, Symbol> AllSymbol = new HashMap<>();
+    public ArrayList<String> nameSymbols = new ArrayList<>();
 
     SymbolTable() {
         currentScope = new Scope(null);
@@ -22,29 +22,48 @@ class SymbolTable {
         }
     }
 
-    boolean CheckTypeCompatible(String type, String stmt) {
+    boolean isTypeCompatible(String type, String value) {
+        try {
+            type = type.toLowerCase();
+        } catch (Exception e) {
+        }
+        if (isVariable(value)) {
+           return isTypeCompatible(type, AllSymbol.get(value).getValue());
+        }
         try {
             switch (type) {
                 case "int":
-                    Integer.parseInt(stmt);
+                    Integer.parseInt(value);
                     break;
+                case "real":
+                    Float.parseFloat(value);
+                    break;
+                case "string":
+                    return value.startsWith("\"") && value.endsWith("\"");
+                case "boolean":
+                    return value.equalsIgnoreCase("true")
+                            ||value.equalsIgnoreCase("false");
             }
-        } catch (NumberFormatException e) {
-            return false;
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
             return false;
         }
         return true;
     }
 
-    boolean checkCasting(String type1,String type2){
-        if (type2==null)return true;
-        return type1.charAt(0)>type2.charAt(0);
+    boolean isVariable(String value) {
+        return AllSymbol.get(value) != null;
     }
-    void isUnassignedVariable(){
+
+
+    boolean checkCasting(String type1, String type2) {
+        if (type2 == null) return true;
+        return type1.charAt(0) >= type2.charAt(0);
+    }
+
+    void isUnassignedVariable() {
         for (String sname : nameSymbols)
             if (!AllSymbol.get(sname).isAssigned)
-                System.err.println("Warring unassigned variable "+sname);
+                System.err.println("Warring unassigned variable " + sname);
 
     }
 
@@ -86,6 +105,39 @@ class SymbolTable {
         }
     }
 
+    public boolean checkParampetersFunctionCpp(String nameFunction, String parameter ,int indexParameter) {
+        try {
+            Field field=AllSymbol.get(nameFunction).getLocalField().get(indexParameter);
+            if(!isTypeCompatible(field.getType(),parameter)){
+                if (isVariable(parameter)) {
+                    parameter = AllSymbol.get(parameter).type;
+                    return checkCasting(field.getType(),parameter);
+                }
+                else {
+                    try {
+                        Integer.parseInt(parameter);
+                        return checkCasting(field.getType(),"int");
+                    }catch (Exception e){}
+                    try {
+                        Float.parseFloat(parameter);
+                        return checkCasting(field.getType(),"real");
+                    }catch (Exception e){}
+                    if((parameter.equalsIgnoreCase("true")
+                            ||parameter.equalsIgnoreCase("false"))
+                            &&field.getType().equalsIgnoreCase("boolean")){
+                        return true;
+                    }
+                    return parameter.startsWith("\"") && parameter.endsWith("\"")
+                            && field.getType().equalsIgnoreCase("string");
+
+                }
+            }
+        }catch (Exception e){
+            return false;//over parameter
+        }
+        return true;
+    }
+
     static class Scope {
         private static int ID = 0;
         int id;
@@ -118,7 +170,9 @@ class SymbolTable {
         private String name;
         private String type;
         private String attribute;
-        private boolean isAssigned=false;
+        private String value;
+        private boolean isAssigned = false;
+        private ArrayList<Field> localField;//parameter in func and we can use it as columns in Tables
 
         Symbol(String name, String type, @NotNull String attribute) {
             this.name = name;
@@ -129,12 +183,36 @@ class SymbolTable {
                 this.attribute = attribute;
         }
 
-        public Symbol(Symbol symbol){
-            this.name=symbol.name;
-            this.type=symbol.type;
-            this.attribute=symbol.attribute;
-            this.isAssigned=symbol.isAssigned;
+        public Symbol(Symbol symbol) {
+            this.name = symbol.name;
+            this.type = symbol.type;
+            this.attribute = symbol.attribute;
+            this.isAssigned = symbol.isAssigned;
         }
+
+        public Symbol(String name, String type, String attribute, String value, boolean isAssigned) {
+            this.name = name;
+            this.type = type;
+            this.attribute = attribute;
+            this.value = value;
+            this.isAssigned = isAssigned;
+        }
+
+        public Symbol(String name, String type, String attribute, ArrayList<Field> localField) {
+            this.name = name;
+            this.type = type;
+            this.attribute = attribute;
+            this.localField = localField;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
+        }
+
         public void setName(String name) {
             this.name = name;
         }
@@ -165,6 +243,14 @@ class SymbolTable {
 
         public boolean isAssigned() {
             return isAssigned;
+        }
+
+        public ArrayList<Field> getLocalField() {
+            return localField;
+        }
+
+        public void setLocalField(ArrayList<Field> localField) {
+            this.localField = localField;
         }
 
         public Symbol(String name, String type, String attribute, boolean isAssigned) {

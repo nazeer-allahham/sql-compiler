@@ -11,7 +11,7 @@
     ]
   },
   "c": {
-    "rank": 2,
+    "rank": 1,
     "name": "c",
     "locations": [
       "tables\\c\\c1.csv",
@@ -32,27 +32,6 @@
       },
       {
         "name": "birth_year",
-        "type": "int"
-      }
-    ]
-  },
-  "devices": {
-    "rank": 2,
-    "name": "devices",
-    "locations": [
-      "tables\\devices.csv"
-    ],
-    "fields": [
-      {
-        "name": "id",
-        "type": "int"
-      },
-      {
-        "name": "name",
-        "type": "string"
-      },
-      {
-        "name": "price",
         "type": "int"
       }
     ]

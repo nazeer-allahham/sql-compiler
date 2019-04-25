@@ -220,7 +220,7 @@ declare_handler_item :
 
 // Create or define type statement
 create_type_stmt:
-        T_CREATE T_TYPE table_name create_type_definition create_type_options?
+        T_CREATE T_TYPE table_name create_type_definition
     ;
 
 create_type_definition:
@@ -232,11 +232,7 @@ create_type_items:
     ;
 
 create_type_items_item:
-        ident T_COLON ident
-    ;
-
-create_type_options:
-        create_type_option+
+        ident T_COLON (ident | string)
     ;
 
 create_type_option:
@@ -600,10 +596,10 @@ cpp_stmt:
             cpp_function_stmt
         |   cpp_for_stmt
         |   cpp_if_stmt
+        |   cpp_return_stmt
         |   cpp_declare_stmt
         |   cpp_assignment_stmt
         |   cpp_declare_assignment_stmt
-        |   cpp_return_stmt
         |   write_stmt
         |   create_table_stmt
         |   create_type_stmt
@@ -755,7 +751,7 @@ select_list_item :
 
 select_list_alias :
         {!_input.LT(1).getText().equalsIgnoreCase("INTO") &&
-         !_input.LT(1).getText().equalsIgnoreCase("FROM")}? T_AS ident
+         !_input.LT(1).getText().equalsIgnoreCase("FROM")}? T_AS? ident
     |   T_OPEN_P T_TITLE L_S_STRING T_CLOSE_P
     ;
 
@@ -1147,7 +1143,6 @@ non_reserved_words :
     |   T_DEFINER
     |   T_DEFINITION
     |   T_DELETE
-    |   T_DELEMITER
     |   T_DELIMITED
     |   T_DENSE_RANK
     |   T_DESC
@@ -1417,7 +1412,6 @@ T_DEFINED         : D E F I N E D ;
 T_DEFINER         : D E F I N E R ;
 T_DEFINITION      : D E F I N I T I O N ;
 T_DELETE          : D E L E T E ;
-T_DELEMITER       : D E L E M I T I E R;
 T_DELIMITED       : D E L I M I T E D ;
 T_DESC            : D E S C ;
 T_DIR             : D I R ;
