@@ -1,4 +1,6 @@
-string r;
-String f (int c){
-return r;
+int f(boolean x, string s)
+{
+
 }
+boolean b=false;
+int v=f("" ,4);

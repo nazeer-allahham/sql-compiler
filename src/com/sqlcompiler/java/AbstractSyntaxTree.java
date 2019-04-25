@@ -22,7 +22,8 @@ class AbstractSyntaxTree {
     private ParserRuleContext root = null;
     private LinkedList<Field> ColumnsCreateTable = null;
     ArrayList<String> columnsSelectStmt = new ArrayList<>();
-    private String nameField, typeField, nameTable,typeCppFunction;
+    ArrayList<Field> cppFunctionParam = null;
+    private String nameField, typeField, nameTable, typeCppFunction;
 
     void build(RuleContext ctx) {
         root = (ParserRuleContext) ctx;
@@ -102,7 +103,7 @@ class AbstractSyntaxTree {
                     symbolTable.nameSymbols.add(ctx.getChild(1).getText());
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
                             ctx.getChild(0).getText(),
-                            "",true), false);
+                            "", true), false);
                     break;
                 case HplsqlParser.RULE_expr_func:
                     if (symbolTable.lookup(ctx.getChild(0).getText()) == null) {
@@ -113,19 +114,20 @@ class AbstractSyntaxTree {
                 case HplsqlParser.RULE_cpp_declare_assignment_stmt:
                     symbolTable.nameSymbols.add(ctx.getChild(1).getText());
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
-                            ctx.getChild(0).getText(),"",
+                            ctx.getChild(0).getText(), "",
                             ctx.getChild(3).getText(), true), false);
                     try {
                         if (!symbolTable.checkCasting(ctx.getChild(0).getText(), symbolTable.AllSymbol.get(ctx.getChild(3).getText()).getType())) {
                             System.err.println("checkCasting");
                         }
-                    }catch (Exception e){}
+                    } catch (Exception e) {
+                    }
 
                     break;
 
                 case HplsqlParser.RULE_from_table_name_clause:
                     DataType dataType = DataTypes.get(ctx.getText());
-                    SymbolTable.Symbol symbol ;
+                    SymbolTable.Symbol symbol;
                     if (dataType == null) {
                         System.err.println("Semantic error : variable " + ctx.getChild(0).getChild(0).getText() + " used before it's declared");
                         System.exit(1);
@@ -162,12 +164,32 @@ class AbstractSyntaxTree {
                     break;
 
                 case HplsqlParser.RULE_cpp_function_stmt:
-                    typeCppFunction=ctx.getChild(0).getChild(0).getText();
+                    // get parameter function
+                    cppFunctionParam = new ArrayList<>();
+                    for (int i = 0; i < ctx.getChild(0).getChild(3).getChildCount(); i++) {
+                        if (i % 2 == 0){
+                            cppFunctionParam.add(
+                                    new Field(ctx.getChild(0).getChild(3).getChild(i).getChild(1).getText(),
+                                            ctx.getChild(0).getChild(3).getChild(i).getChild(0).getText()));
+                        }
+                    }
+                    typeCppFunction = ctx.getChild(0).getChild(0).getText();
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(0).getChild(1).getText(),
-                            ctx.getChild(0).getChild(0).getText(), "function"), true);
+                            ctx.getChild(0).getChild(0).getText(), "function",cppFunctionParam), true);
+                    break;
+                case HplsqlParser.RULE_expr_func_params:
+                    for (int i = 0; i <ctx.getChildCount(); i++) {
+                        if (i%2==0) {
+                            if (!symbolTable.checkParampetersFunctionCpp(
+                                    ctx.parent.getChild(0).getText(),
+                                    ctx.getChild(i).getText(), i/2)){
+                                System.err.println("Error functions calls ");
+                            }
+                        }
+                    }
                     break;
                 case HplsqlParser.RULE_cpp_return_stmt:
-                    if (!symbolTable.isTypeCompatible(typeCppFunction,ctx.getChild(1).getText())){
+                    if (!symbolTable.isTypeCompatible(typeCppFunction, ctx.getChild(1).getText())) {
                         System.err.println("Error  return ");
                     }
                     break;

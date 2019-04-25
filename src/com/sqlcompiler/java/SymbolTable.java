@@ -35,7 +35,7 @@ class SymbolTable {
                 case "int":
                     Integer.parseInt(value);
                     break;
-                case "float":
+                case "real":
                     Float.parseFloat(value);
                     break;
                 case "string":
@@ -54,9 +54,10 @@ class SymbolTable {
         return AllSymbol.get(value) != null;
     }
 
+
     boolean checkCasting(String type1, String type2) {
         if (type2 == null) return true;
-        return type1.charAt(0) > type2.charAt(0);
+        return type1.charAt(0) >= type2.charAt(0);
     }
 
     void isUnassignedVariable() {
@@ -104,6 +105,39 @@ class SymbolTable {
         }
     }
 
+    public boolean checkParampetersFunctionCpp(String nameFunction, String parameter ,int indexParameter) {
+        try {
+            Field field=AllSymbol.get(nameFunction).getLocalField().get(indexParameter);
+            if(!isTypeCompatible(field.getType(),parameter)){
+                if (isVariable(parameter)) {
+                    parameter = AllSymbol.get(parameter).type;
+                    return checkCasting(field.getType(),parameter);
+                }
+                else {
+                    try {
+                        Integer.parseInt(parameter);
+                        return checkCasting(field.getType(),"int");
+                    }catch (Exception e){}
+                    try {
+                        Float.parseFloat(parameter);
+                        return checkCasting(field.getType(),"real");
+                    }catch (Exception e){}
+                    if((parameter.equalsIgnoreCase("true")
+                            ||parameter.equalsIgnoreCase("false"))
+                            &&field.getType().equalsIgnoreCase("boolean")){
+                        return true;
+                    }
+                    return parameter.startsWith("\"") && parameter.endsWith("\"")
+                            && field.getType().equalsIgnoreCase("string");
+
+                }
+            }
+        }catch (Exception e){
+            return false;//over parameter
+        }
+        return true;
+    }
+
     static class Scope {
         private static int ID = 0;
         int id;
@@ -138,6 +172,7 @@ class SymbolTable {
         private String attribute;
         private String value;
         private boolean isAssigned = false;
+        private ArrayList<Field> localField;//parameter in func and we can use it as columns in Tables
 
         Symbol(String name, String type, @NotNull String attribute) {
             this.name = name;
@@ -161,6 +196,13 @@ class SymbolTable {
             this.attribute = attribute;
             this.value = value;
             this.isAssigned = isAssigned;
+        }
+
+        public Symbol(String name, String type, String attribute, ArrayList<Field> localField) {
+            this.name = name;
+            this.type = type;
+            this.attribute = attribute;
+            this.localField = localField;
         }
 
         public String getValue() {
@@ -201,6 +243,14 @@ class SymbolTable {
 
         public boolean isAssigned() {
             return isAssigned;
+        }
+
+        public ArrayList<Field> getLocalField() {
+            return localField;
+        }
+
+        public void setLocalField(ArrayList<Field> localField) {
+            this.localField = localField;
         }
 
         public Symbol(String name, String type, String attribute, boolean isAssigned) {
