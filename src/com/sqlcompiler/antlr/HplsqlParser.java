@@ -26,8 +26,8 @@ public class HplsqlParser extends Parser {
 		T_COLLECTION=38, T_COMMENT=39, T_CONSTANT=40, T_COMMIT=41, T_COMPRESS=42, 
 		T_CONCAT=43, T_CONDITION=44, T_CONSTRAINT=45, T_CONTINUE=46, T_COUNT=47, 
 		T_COUNT_BIG=48, T_CREATE=49, T_CREATION=50, T_CREATOR=51, T_CS=52, T_CURRENT=53, 
-		T_DATABASE=54, T_DATA=55, T_DATE=56, T_DATETIME=57, T_DAY=58, T_DAYS=59, 
-		T_DEC=60, T_DECIMAL=61, T_DECLARE=62, T_DEFAULT=63, T_DEFERRED=64, T_DEFINED=65,
+		T_DATABASE=54, T_DATA=55, T_DATE=56, T_DATETIME=57, T_DAY=58, T_DAYS=59,
+            T_DEC = 60, T_DECIMAL = 61, T_DECLARE = 62, T_DEFAULT = 63, T_DEFERRED = 64, T_DEFINED = 65,
             T_DEFINER = 66, T_DEFINITION = 67, T_DELETE = 68, T_DELEMITER = 69, T_DELIMITED = 70,
             T_DESC = 71, T_DIR = 72, T_DIRECTORY = 73, T_DISTINCT = 74, T_DISTRIBUTE = 75, T_DO = 76,
             T_DOUBLE = 77, T_DROP = 78, T_DYNAMIC = 79, T_ELSE = 80, T_ELSEIF = 81, T_ELSIF = 82,
@@ -78,23 +78,23 @@ public class HplsqlParser extends Parser {
             L_D_STRING = 318, L_INT = 319, L_DEC = 320, L_WS = 321, L_M_COMMENT = 322, L_S_COMMENT = 323,
             L_FILE = 324, L_LABEL = 325;
 	public static final int
-		RULE_program = 0, RULE_block = 1, RULE_begin_end_block = 2, RULE_single_block_stmt = 3,
-		RULE_block_end = 4, RULE_proc_block = 5, RULE_stmt = 6, RULE_error_stmt = 7,
-		RULE_invalid_select = 8, RULE_invalid_where_clause = 9, RULE_invalid_from_clause = 10,
-		RULE_invalid_bool_expr = 11, RULE_invalid_bool_expr_atom = 12, RULE_invalid_bool_expr_binary = 13,
-		RULE_invalid_bool_expr_binary_operator = 14, RULE_invalid_cpp_function_stmt = 15,
-		RULE_invalid_cpp_function_header = 16, RULE_invalid_cpp_function_params_clause = 17,
-		RULE_invalid_cpp_function_param = 18, RULE_exception_block = 19, RULE_exception_block_item = 20,
-		RULE_semicolon_stmt = 21, RULE_null_stmt = 22, RULE_expr_stmt = 23, RULE_assignment_stmt = 24,
-		RULE_assignment_stmt_item = 25, RULE_assignment_stmt_single_item = 26,
-		RULE_assignment_stmt_multiple_item = 27, RULE_assignment_stmt_select_item = 28,
-		RULE_associate_locator_stmt = 29, RULE_break_stmt = 30, RULE_call_stmt = 31,
-		RULE_close_stmt = 32, RULE_declare_stmt = 33, RULE_declare_block = 34,
-		RULE_declare_block_inplace = 35, RULE_declare_stmt_item = 36, RULE_declare_var_item = 37,
-		RULE_declare_condition_item = 38, RULE_declare_handler_item = 39, RULE_create_type_stmt = 40,
-		RULE_create_type_definition = 41, RULE_create_type_items = 42, RULE_create_type_items_item = 43,
+            RULE_program = 0, RULE_block = 1, RULE_begin_end_block = 2, RULE_single_block_stmt = 3,
+            RULE_block_end = 4, RULE_proc_block = 5, RULE_stmt = 6, RULE_error_stmt = 7,
+            RULE_invalid_select = 8, RULE_invalid_where_clause = 9, RULE_invalid_from_clause = 10,
+            RULE_invalid_bool_expr = 11, RULE_invalid_bool_expr_atom = 12, RULE_invalid_bool_expr_binary = 13,
+            RULE_invalid_bool_expr_binary_operator = 14, RULE_invalid_cpp_function_stmt = 15,
+            RULE_invalid_cpp_function_header = 16, RULE_invalid_cpp_function_params_clause = 17,
+            RULE_invalid_cpp_function_param = 18, RULE_exception_block = 19, RULE_exception_block_item = 20,
+            RULE_semicolon_stmt = 21, RULE_null_stmt = 22, RULE_expr_stmt = 23, RULE_assignment_stmt = 24,
+            RULE_assignment_stmt_item = 25, RULE_assignment_stmt_single_item = 26,
+            RULE_assignment_stmt_multiple_item = 27, RULE_assignment_stmt_select_item = 28,
+            RULE_associate_locator_stmt = 29, RULE_break_stmt = 30, RULE_call_stmt = 31,
+            RULE_close_stmt = 32, RULE_declare_stmt = 33, RULE_declare_block = 34,
+            RULE_declare_block_inplace = 35, RULE_declare_stmt_item = 36, RULE_declare_var_item = 37,
+            RULE_declare_condition_item = 38, RULE_declare_handler_item = 39, RULE_create_type_stmt = 40,
+            RULE_create_type_definition = 41, RULE_create_type_items = 42, RULE_create_type_items_item = 43,
             RULE_create_type_options = 44, RULE_create_type_option = 45, RULE_create_type_store_location = 46,
-            RULE_create_type_delemiter = 47, RULE_declare_temporary_table_item = 48,
+            RULE_create_type_delimiter = 47, RULE_declare_temporary_table_item = 48,
             RULE_create_table_stmt = 49, RULE_create_local_temp_table_stmt = 50, RULE_create_table_definition = 51,
             RULE_create_table_columns = 52, RULE_create_table_columns_item = 53, RULE_column_name = 54,
             RULE_create_table_column_inline_cons = 55, RULE_create_table_column_cons = 56,
@@ -103,7 +103,7 @@ public class HplsqlParser extends Parser {
             RULE_create_table_options_item = 62, RULE_create_table_options_ora_item = 63,
             RULE_create_table_options_db2_item = 64, RULE_create_table_options_td_item = 65,
             RULE_create_table_options_hive_item = 66, RULE_create_table_store_location = 67,
-            RULE_create_table_delemiter = 68, RULE_create_table_hive_row_format = 69,
+            RULE_create_table_delimiter = 68, RULE_create_table_hive_row_format = 69,
             RULE_create_table_hive_row_format_fields = 70, RULE_create_table_options_mssql_item = 71,
             RULE_create_table_options_mysql_item = 72, RULE_dtype = 73, RULE_dtype_len = 74,
             RULE_dtype_attr = 75, RULE_dtype_default = 76, RULE_create_database_stmt = 77,
@@ -147,6 +147,16 @@ public class HplsqlParser extends Parser {
             RULE_write_stmt_string = 190, RULE_date_literal = 191, RULE_timestamp_literal = 192,
             RULE_ident = 193, RULE_string = 194, RULE_int_number = 195, RULE_dec_number = 196,
             RULE_bool_literal = 197, RULE_null_const = 198, RULE_non_reserved_words = 199;
+    public static final String[] ruleNames = makeRuleNames();
+    /**
+     * @deprecated Use {@link #VOCABULARY} instead.
+     */
+    @Deprecated
+    public static final String[] tokenNames;
+    private static final String[] _LITERAL_NAMES = makeLiteralNames();
+    private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
+    public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
+    private static final int _serializedATNSegments = 2;
     private static final String _serializedATNSegment0 =
             "\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\u0147\u0b90\4\2\t" +
                     "\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13" +
@@ -1185,7 +1195,6 @@ public class HplsqlParser extends Parser {
                     "\7\u0089\2\2\u08da\u08db\t\"\2\2\u08db\u08dd\7\u0096\2\2\u08dc\u08d7\3" +
                     "\2\2\2\u08dc\u08dd\3\2\2\2\u08dd\u08df\3\2\2\2\u08de\u08d3\3\2\2\2\u08de" +
                     "\u08d5\3\2\2\2\u08df\u0147\3\2\2\2\u08e0\u08e2\b\u00a5\1\2\u08e1";
-    public static final String[] ruleNames = makeRuleNames();
     private static final String _serializedATNSegment1 =
             "\u08e3\7\u00a8\2\2\u08e2\u08e1\3\2\2\2\u08e2\u08e3\3\2\2\2\u08e3\u08e4" +
                     "\3\2\2\2\u08e4\u08e5\7\u0137\2\2\u08e5\u08e6\5\u0148\u00a5\2\u08e6\u08e7" +
@@ -1482,10 +1491,28 @@ public class HplsqlParser extends Parser {
                     "\u0aa1\u0ab1\u0ab4\u0ac4\u0ac7\u0ad7\u0ada\u0aea\u0aed\u0afd\u0b00\u0b0e" +
                     "\u0b1d\u0b21\u0b31\u0b37\u0b3c\u0b45\u0b4c\u0b4e\u0b57\u0b5b\u0b60\u0b64" +
                     "\u0b6f\u0b74\u0b78\u0b7d\u0b80\u0b85";
-    private static final String[] _LITERAL_NAMES = makeLiteralNames();
+
+    static {
+        tokenNames = new String[_SYMBOLIC_NAMES.length];
+        for (int i = 0; i < tokenNames.length; i++) {
+            tokenNames[i] = VOCABULARY.getLiteralName(i);
+            if (tokenNames[i] == null) {
+                tokenNames[i] = VOCABULARY.getSymbolicName(i);
+            }
+
+            if (tokenNames[i] == null) {
+                tokenNames[i] = "<INVALID>";
+            }
+        }
+    }
+
+    public HplsqlParser(TokenStream input) {
+        super(input);
+        _interp = new ParserATNSimulator(this, _ATN, _decisionToDFA, _sharedContextCache);
+    }
 
 	private static String[] makeRuleNames() {
-		return new String[] {
+		return new String[]{
                 "program", "block", "begin_end_block", "single_block_stmt", "block_end",
                 "proc_block", "stmt", "error_stmt", "invalid_select", "invalid_where_clause",
                 "invalid_from_clause", "invalid_bool_expr", "invalid_bool_expr_atom",
@@ -1499,14 +1526,14 @@ public class HplsqlParser extends Parser {
                 "declare_condition_item", "declare_handler_item", "create_type_stmt",
                 "create_type_definition", "create_type_items", "create_type_items_item",
                 "create_type_options", "create_type_option", "create_type_store_location",
-                "create_type_delemiter", "declare_temporary_table_item", "create_table_stmt",
+                "create_type_delimiter", "declare_temporary_table_item", "create_table_stmt",
                 "create_local_temp_table_stmt", "create_table_definition", "create_table_columns",
                 "create_table_columns_item", "column_name", "create_table_column_inline_cons",
                 "create_table_column_cons", "create_table_fk_action", "create_table_preoptions",
                 "create_table_preoptions_item", "create_table_preoptions_td_item", "create_table_options",
                 "create_table_options_item", "create_table_options_ora_item", "create_table_options_db2_item",
                 "create_table_options_td_item", "create_table_options_hive_item", "create_table_store_location",
-                "create_table_delemiter", "create_table_hive_row_format", "create_table_hive_row_format_fields",
+                "create_table_delimiter", "create_table_hive_row_format", "create_table_hive_row_format_fields",
                 "create_table_options_mssql_item", "create_table_options_mysql_item",
                 "dtype", "dtype_len", "dtype_attr", "dtype_default", "create_database_stmt",
                 "create_database_option", "create_function_stmt", "create_function_return",
@@ -1543,103 +1570,8 @@ public class HplsqlParser extends Parser {
 		};
 	}
 
-    private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
-    public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
-
-    /**
-     * @deprecated Use {@link #VOCABULARY} instead.
-     */
-    @Deprecated
-    public static final String[] tokenNames;
-
-    static {
-        tokenNames = new String[_SYMBOLIC_NAMES.length];
-        for (int i = 0; i < tokenNames.length; i++) {
-            tokenNames[i] = VOCABULARY.getLiteralName(i);
-            if (tokenNames[i] == null) {
-                tokenNames[i] = VOCABULARY.getSymbolicName(i);
-            }
-
-            if (tokenNames[i] == null) {
-                tokenNames[i] = "<INVALID>";
-            }
-        }
-    }
-
-    @Override
-    @Deprecated
-    public String[] getTokenNames() {
-        return tokenNames;
-    }
-
-    @Override
-
-    public Vocabulary getVocabulary() {
-        return VOCABULARY;
-    }
-
-    @Override
-    public String getGrammarFileName() {
-        return "Hplsql.g4";
-    }
-
-    @Override
-    public String[] getRuleNames() {
-        return ruleNames;
-    }
-
-    @Override
-    public String getSerializedATN() {
-        return _serializedATN;
-    }
-
-    @Override
-    public ATN getATN() {
-        return _ATN;
-    }
-
-    public HplsqlParser(TokenStream input) {
-        super(input);
-        _interp = new ParserATNSimulator(this, _ATN, _decisionToDFA, _sharedContextCache);
-    }
-
-    public static class ProgramContext extends ParserRuleContext {
-        public BlockContext block() {
-            return getRuleContext(BlockContext.class, 0);
-        }
-
-        public TerminalNode EOF() {
-            return getToken(HplsqlParser.EOF, 0);
-        }
-
-        public ProgramContext(ParserRuleContext parent, int invokingState) {
-            super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_program;
-        }
-
-        @Override
-        public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterProgram(this);
-        }
-
-        @Override
-        public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitProgram(this);
-        }
-
-        @Override
-        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitProgram(this);
-            else return visitor.visitChildren(this);
-        }
-    }
-
 	private static String[] makeLiteralNames() {
-		return new String[]{
+        return new String[]{
                 null, "'@'", "'#'", "'%'", "'.'", null, null, null, null, null, null,
                 null, null, null, null, null, null, null, null, null, null, null, null,
                 null, null, null, null, null, null, null, null, null, null, null, null,
@@ -1668,61 +1600,10 @@ public class HplsqlParser extends Parser {
                 "'..'", "'='", "'=='", "'<>'", "'!='", "'>'", "'>='", "'<'", "'<='",
                 "'*'", "'{'", "'('", "'['", "'}'", "')'", "']'", "';'", "'-'"
         };
-    }
-
-    public static class BlockContext extends ParserRuleContext {
-        public List<Begin_end_blockContext> begin_end_block() {
-            return getRuleContexts(Begin_end_blockContext.class);
-        }
-
-        public Begin_end_blockContext begin_end_block(int i) {
-            return getRuleContext(Begin_end_blockContext.class, i);
-        }
-
-        public List<StmtContext> stmt() {
-            return getRuleContexts(StmtContext.class);
-        }
-
-        public StmtContext stmt(int i) {
-            return getRuleContext(StmtContext.class, i);
-        }
-
-        public List<TerminalNode> T_GO() {
-            return getTokens(HplsqlParser.T_GO);
-        }
-
-        public TerminalNode T_GO(int i) {
-            return getToken(HplsqlParser.T_GO, i);
-        }
-
-        public BlockContext(ParserRuleContext parent, int invokingState) {
-            super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_block;
-        }
-
-        @Override
-        public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterBlock(this);
-        }
-
-        @Override
-        public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitBlock(this);
-        }
-
-        @Override
-        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitBlock(this);
-            else return visitor.visitChildren(this);
-        }
 	}
 
 	private static String[] makeSymbolicNames() {
-		return new String[]{
+        return new String[]{
                 null, null, null, null, null, "T_ACTION", "T_ALL", "T_ALTER", "T_AND",
                 "T_AS", "T_ASC", "T_ASSOCIATE", "T_AT", "T_AUTO_INCREMENT", "T_AVG",
                 "T_BEGIN", "T_BETWEEN", "T_BIGINT", "T_BINARY_DOUBLE", "T_BINARY_FLOAT",
@@ -1776,49 +1657,39 @@ public class HplsqlParser extends Parser {
                 "T_MUL", "T_OPEN_B", "T_OPEN_P", "T_OPEN_SB", "T_CLOSE_B", "T_CLOSE_P",
                 "T_CLOSE_SB", "T_SEMICOLON", "T_SUB", "L_ID", "L_S_STRING", "L_D_STRING",
 			"L_INT", "L_DEC", "L_WS", "L_M_COMMENT", "L_S_COMMENT", "L_FILE", "L_LABEL"
-		};
+        };
     }
 
-    public static class Begin_end_blockContext extends ParserRuleContext {
-        public TerminalNode T_BEGIN() {
-            return getToken(HplsqlParser.T_BEGIN, 0); }
-		public BlockContext block() {
-			return getRuleContext(BlockContext.class,0);
-        }
+    @Override
+    @Deprecated
+    public String[] getTokenNames() {
+        return tokenNames;
+    }
 
-        public Block_endContext block_end() {
-            return getRuleContext(Block_endContext.class, 0);
-        }
+    @Override
 
-        public Declare_blockContext declare_block() {
-            return getRuleContext(Declare_blockContext.class, 0);
-        }
+    public Vocabulary getVocabulary() {
+        return VOCABULARY;
+    }
 
-        public Exception_blockContext exception_block() {
-            return getRuleContext(Exception_blockContext.class, 0);
-        }
+    @Override
+    public String getGrammarFileName() {
+        return "Hplsql.g4";
+    }
 
-        public Begin_end_blockContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
+    @Override
+    public String[] getRuleNames() {
+        return ruleNames;
+    }
 
-        @Override
-        public int getRuleIndex() {
-            return RULE_begin_end_block; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterBegin_end_block(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitBegin_end_block(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitBegin_end_block(this);
-			else return visitor.visitChildren(this);
-		}
-	}
+    @Override
+    public String getSerializedATN() {
+        return _serializedATN;
+    }
+
+    @Override
+    public ATN getATN() {
+        return _ATN; }
 
 	public final ProgramContext program() throws RecognitionException {
 		ProgramContext _localctx = new ProgramContext(_ctx, getState());
@@ -1841,53 +1712,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Single_block_stmtContext extends ParserRuleContext {
-        public TerminalNode T_BEGIN() {
-            return getToken(HplsqlParser.T_BEGIN, 0);
-        }
-
-        public BlockContext block() {
-            return getRuleContext(BlockContext.class, 0);
-        }
-
-        public Block_endContext block_end() {
-            return getRuleContext(Block_endContext.class, 0);
-        }
-
-        public Exception_blockContext exception_block() {
-            return getRuleContext(Exception_blockContext.class, 0);
-        }
-
-        public StmtContext stmt() {
-            return getRuleContext(StmtContext.class, 0);
-        }
-
-        public TerminalNode T_SEMICOLON() {
-            return getToken(HplsqlParser.T_SEMICOLON, 0);
-        }
-
-        public Single_block_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_single_block_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterSingle_block_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitSingle_block_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitSingle_block_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final BlockContext block() throws RecognitionException {
@@ -1902,28 +1726,27 @@ public class HplsqlParser extends Parser {
 			_alt = 1;
 			do {
 				switch (_alt) {
-				case 1:
-					{
-                        {
-                            setState(405);
+				case 1: {
+                    {
+                        setState(405);
 					_errHandler.sync(this);
-					switch ( getInterpreter().adaptivePredict(_input,0,_ctx) ) {
-					case 1: {
-                        setState(403);
+					switch ( getInterpreter().adaptivePredict(_input,0,_ctx)) {
+                        case 1: {
+                            setState(403);
 						begin_end_block();
 						}
 						break;
-					case 2: {
-                        setState(404);
+                        case 2: {
+                            setState(404);
 						stmt();
 						}
 						break;
                     }
-                            setState(408);
+                        setState(408);
 					_errHandler.sync(this);
-					switch ( getInterpreter().adaptivePredict(_input,1,_ctx) ) {
-					case 1: {
-                        setState(407);
+					switch ( getInterpreter().adaptivePredict(_input,1,_ctx)) {
+                        case 1: {
+                            setState(407);
 						match(T_GO);
 						}
 						break;
@@ -1949,33 +1772,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Block_endContext extends ParserRuleContext {
-        public TerminalNode T_END() {
-            return getToken(HplsqlParser.T_END, 0);
-        }
-
-        public Block_endContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_block_end; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterBlock_end(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitBlock_end(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitBlock_end(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Begin_end_blockContext begin_end_block() throws RecognitionException {
@@ -1992,7 +1788,7 @@ public class HplsqlParser extends Parser {
                 {
                     setState(414);
 				declare_block();
-				}
+                }
             }
 
                 setState(417);
@@ -2001,9 +1797,9 @@ public class HplsqlParser extends Parser {
 			block();
                 setState(420);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
-			case 1: {
-                setState(419);
+			switch ( getInterpreter().adaptivePredict(_input,4,_ctx)) {
+                case 1: {
+                    setState(419);
 				exception_block();
 				}
 				break;
@@ -2021,45 +1817,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Proc_blockContext extends ParserRuleContext {
-        public Begin_end_blockContext begin_end_block() {
-            return getRuleContext(Begin_end_blockContext.class, 0);
-        }
-
-        public List<StmtContext> stmt() {
-            return getRuleContexts(StmtContext.class);
-        }
-
-        public StmtContext stmt(int i) {
-            return getRuleContext(StmtContext.class, i);
-        }
-
-        public TerminalNode T_GO() {
-            return getToken(HplsqlParser.T_GO, 0);
-        }
-
-        public Proc_blockContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_proc_block; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterProc_block(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitProc_block(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitProc_block(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Single_block_stmtContext single_block_stmt() throws RecognitionException {
@@ -2078,9 +1835,9 @@ public class HplsqlParser extends Parser {
 				block();
                 setState(427);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,5,_ctx) ) {
-				case 1: {
-                    setState(426);
+				switch ( getInterpreter().adaptivePredict(_input,5,_ctx)) {
+                    case 1: {
+                        setState(426);
 					exception_block();
 					}
 					break;
@@ -2096,9 +1853,9 @@ public class HplsqlParser extends Parser {
 				stmt();
                 setState(433);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
-				case 1: {
-                    setState(432);
+				switch ( getInterpreter().adaptivePredict(_input,6,_ctx)) {
+                    case 1: {
+                        setState(432);
 					match(T_SEMICOLON);
 					}
 					break;
@@ -2116,154 +1873,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-	}
-
-    public static class StmtContext extends ParserRuleContext {
-        public Assignment_stmtContext assignment_stmt() {
-            return getRuleContext(Assignment_stmtContext.class,0);
-        }
-
-        public Associate_locator_stmtContext associate_locator_stmt() {
-            return getRuleContext(Associate_locator_stmtContext.class,0);
-        }
-
-        public Break_stmtContext break_stmt() {
-            return getRuleContext(Break_stmtContext.class,0);
-        }
-
-        public Call_stmtContext call_stmt() {
-            return getRuleContext(Call_stmtContext.class,0);
-        }
-
-        public Close_stmtContext close_stmt() {
-            return getRuleContext(Close_stmtContext.class,0);
-        }
-
-        public Cmp_stmtContext cmp_stmt() {
-            return getRuleContext(Cmp_stmtContext.class,0);
-        }
-
-        public Create_database_stmtContext create_database_stmt() {
-            return getRuleContext(Create_database_stmtContext.class,0);
-        }
-
-        public Create_function_stmtContext create_function_stmt() {
-            return getRuleContext(Create_function_stmtContext.class,0);
-        }
-
-        public Create_index_stmtContext create_index_stmt() {
-            return getRuleContext(Create_index_stmtContext.class,0);
-        }
-
-        public Create_local_temp_table_stmtContext create_local_temp_table_stmt() {
-            return getRuleContext(Create_local_temp_table_stmtContext.class,0);
-        }
-
-        public Create_package_stmtContext create_package_stmt() {
-            return getRuleContext(Create_package_stmtContext.class,0);
-        }
-
-        public Create_package_body_stmtContext create_package_body_stmt() {
-            return getRuleContext(Create_package_body_stmtContext.class,0);
-        }
-
-        public Create_procedure_stmtContext create_procedure_stmt() {
-            return getRuleContext(Create_procedure_stmtContext.class,0);
-        }
-
-        public Create_table_stmtContext create_table_stmt() {
-            return getRuleContext(Create_table_stmtContext.class,0);
-        }
-
-        public Create_type_stmtContext create_type_stmt() {
-            return getRuleContext(Create_type_stmtContext.class,0);
-        }
-
-        public Declare_stmtContext declare_stmt() {
-            return getRuleContext(Declare_stmtContext.class,0);
-        }
-
-        public Exec_stmtContext exec_stmt() {
-            return getRuleContext(Exec_stmtContext.class,0);
-        }
-
-        public Exit_stmtContext exit_stmt() {
-            return getRuleContext(Exit_stmtContext.class,0);
-        }
-
-        public For_range_stmtContext for_range_stmt() {
-            return getRuleContext(For_range_stmtContext.class,0);
-        }
-
-        public If_stmtContext if_stmt() {
-            return getRuleContext(If_stmtContext.class,0);
-        }
-
-        public Leave_stmtContext leave_stmt() {
-            return getRuleContext(Leave_stmtContext.class,0);
-        }
-
-        public Quit_stmtContext quit_stmt() {
-            return getRuleContext(Quit_stmtContext.class,0);
-        }
-
-        public Return_stmtContext return_stmt() {
-            return getRuleContext(Return_stmtContext.class,0);
-        }
-
-        public Select_stmtContext select_stmt() {
-            return getRuleContext(Select_stmtContext.class,0);
-        }
-
-        public While_stmtContext while_stmt() {
-            return getRuleContext(While_stmtContext.class,0);
-        }
-
-        public Cpp_stmtContext cpp_stmt() {
-            return getRuleContext(Cpp_stmtContext.class,0);
-        }
-
-        public Error_stmtContext error_stmt() {
-            return getRuleContext(Error_stmtContext.class,0);
-        }
-
-        public LabelContext label() {
-            return getRuleContext(LabelContext.class,0);
-        }
-
-        public Null_stmtContext null_stmt() {
-            return getRuleContext(Null_stmtContext.class,0);
-        }
-
-        public Expr_stmtContext expr_stmt() {
-            return getRuleContext(Expr_stmtContext.class,0);
-        }
-
-        public Semicolon_stmtContext semicolon_stmt() {
-            return getRuleContext(Semicolon_stmtContext.class,0);
-        }
-
-        public StmtContext(ParserRuleContext parent, int invokingState) {
-            super(parent, invokingState);
-        }
-
-        @Override public int getRuleIndex() { return RULE_stmt; }
-
-        @Override
-        public void enterRule(ParseTreeListener listener) {
-            if ( listener instanceof HplsqlListener ) ((HplsqlListener)listener).enterStmt(this);
-        }
-
-        @Override
-        public void exitRule(ParseTreeListener listener) {
-            if ( listener instanceof HplsqlListener ) ((HplsqlListener)listener).exitStmt(this);
-        }
-
-        @Override
-        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if ( visitor instanceof HplsqlVisitor ) return ((HplsqlVisitor<? extends T>)visitor).visitStmt(this);
-            else return visitor.visitChildren(this);
-        }
     }
 
     public final Block_endContext block_end() throws RecognitionException {
@@ -2286,45 +1895,6 @@ public class HplsqlParser extends Parser {
             exitRule();
         }
         return _localctx;
-    }
-
-    public static class Error_stmtContext extends ParserRuleContext {
-        public Invalid_selectContext invalid_select() {
-            return getRuleContext(Invalid_selectContext.class, 0);
-        }
-
-        public Invalid_bool_exprContext invalid_bool_expr() {
-            return getRuleContext(Invalid_bool_exprContext.class, 0);
-        }
-
-        public Invalid_cpp_function_stmtContext invalid_cpp_function_stmt() {
-            return getRuleContext(Invalid_cpp_function_stmtContext.class, 0);
-        }
-
-        public Error_stmtContext(ParserRuleContext parent, int invokingState) {
-            super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_error_stmt;
-        }
-
-        @Override
-        public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterError_stmt(this);
-        }
-
-        @Override
-        public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitError_stmt(this);
-        }
-
-        @Override
-        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitError_stmt(this);
-            else return visitor.visitChildren(this);
-        }
     }
 
     public final Proc_blockContext proc_block() throws RecognitionException {
@@ -2384,87 +1954,7 @@ public class HplsqlParser extends Parser {
             exitRule();
         }
         return _localctx;
-    }
-
-    public static class Invalid_selectContext extends ParserRuleContext {
-        public Select_listContext select_list() {
-            return getRuleContext(Select_listContext.class, 0);
-        }
-
-        public TerminalNode T_SELECT() {
-            return getToken(HplsqlParser.T_SELECT, 0);
-        }
-
-        public TerminalNode T_SEL() {
-            return getToken(HplsqlParser.T_SEL, 0);
-        }
-
-        public Into_clauseContext into_clause() {
-            return getRuleContext(Into_clauseContext.class, 0);
-        }
-
-        public From_clauseContext from_clause() {
-            return getRuleContext(From_clauseContext.class, 0);
-        }
-
-        public Invalid_from_clauseContext invalid_from_clause() {
-            return getRuleContext(Invalid_from_clauseContext.class, 0);
-        }
-
-        public Where_clauseContext where_clause() {
-            return getRuleContext(Where_clauseContext.class, 0);
-        }
-
-        public Invalid_where_clauseContext invalid_where_clause() {
-            return getRuleContext(Invalid_where_clauseContext.class, 0);
-        }
-
-        public Group_by_clauseContext group_by_clause() {
-            return getRuleContext(Group_by_clauseContext.class, 0);
-        }
-
-        public Having_clauseContext having_clause() {
-            return getRuleContext(Having_clauseContext.class, 0);
-        }
-
-        public Qualify_clauseContext qualify_clause() {
-            return getRuleContext(Qualify_clauseContext.class, 0);
-        }
-
-        public Order_by_clauseContext order_by_clause() {
-            return getRuleContext(Order_by_clauseContext.class, 0);
-        }
-
-        public Select_optionsContext select_options() {
-            return getRuleContext(Select_optionsContext.class, 0);
-        }
-
-        public Invalid_selectContext(ParserRuleContext parent, int invokingState) {
-            super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_invalid_select;
-        }
-
-        @Override
-        public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterInvalid_select(this);
-        }
-
-        @Override
-        public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitInvalid_select(this);
-        }
-
-        @Override
-        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitInvalid_select(this);
-            else return visitor.visitChildren(this);
-        }
-    }
+	}
 
 	public final StmtContext stmt() throws RecognitionException {
 		StmtContext _localctx = new StmtContext(_ctx, getState());
@@ -2701,40 +2191,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Invalid_where_clauseContext extends ParserRuleContext {
-        public Bool_exprContext bool_expr() {
-            return getRuleContext(Bool_exprContext.class, 0);
-        }
-
-        public TerminalNode T_WHERE() {
-            return getToken(HplsqlParser.T_WHERE, 0); }
-		public Invalid_bool_exprContext invalid_bool_expr() {
-			return getRuleContext(Invalid_bool_exprContext.class,0);
-        }
-
-        public Invalid_where_clauseContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_invalid_where_clause; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterInvalid_where_clause(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitInvalid_where_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitInvalid_where_clause(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Error_stmtContext error_stmt() throws RecognitionException {
@@ -2776,42 +2232,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Invalid_from_clauseContext extends ParserRuleContext {
-        public From_table_clauseContext from_table_clause() {
-            return getRuleContext(From_table_clauseContext.class, 0);
-        }
-
-        public List<From_join_clauseContext> from_join_clause() {
-            return getRuleContexts(From_join_clauseContext.class);
-        }
-
-        public From_join_clauseContext from_join_clause(int i) {
-            return getRuleContext(From_join_clauseContext.class, i);
-        }
-
-        public Invalid_from_clauseContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_invalid_from_clause; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterInvalid_from_clause(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitInvalid_from_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitInvalid_from_clause(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Invalid_selectContext invalid_select() throws RecognitionException {
@@ -2835,78 +2255,78 @@ public class HplsqlParser extends Parser {
 			select_list();
                 setState(492);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,13,_ctx) ) {
-			case 1: {
-                setState(491);
+			switch ( getInterpreter().adaptivePredict(_input,13,_ctx)) {
+                case 1: {
+                    setState(491);
 				into_clause();
 				}
 				break;
             }
                 setState(496);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,14,_ctx) ) {
-			case 1: {
-                setState(494);
+			switch ( getInterpreter().adaptivePredict(_input,14,_ctx)) {
+                case 1: {
+                    setState(494);
 				from_clause();
 				}
 				break;
-			case 2: {
-                setState(495);
+                case 2: {
+                    setState(495);
 				invalid_from_clause();
 				}
 				break;
             }
                 setState(500);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,15,_ctx) ) {
-			case 1: {
-                setState(498);
+			switch ( getInterpreter().adaptivePredict(_input,15,_ctx)) {
+                case 1: {
+                    setState(498);
 				where_clause();
 				}
 				break;
-			case 2: {
-                setState(499);
+                case 2: {
+                    setState(499);
 				invalid_where_clause();
 				}
 				break;
             }
                 setState(503);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,16,_ctx) ) {
-			case 1: {
-                setState(502);
+			switch ( getInterpreter().adaptivePredict(_input,16,_ctx)) {
+                case 1: {
+                    setState(502);
 				group_by_clause();
 				}
 				break;
             }
                 setState(507);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,17,_ctx) ) {
-			case 1: {
-                setState(505);
+			switch ( getInterpreter().adaptivePredict(_input,17,_ctx)) {
+                case 1: {
+                    setState(505);
 				having_clause();
 				}
 				break;
-			case 2: {
-                setState(506);
+                case 2: {
+                    setState(506);
 				qualify_clause();
 				}
 				break;
             }
                 setState(510);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,18,_ctx) ) {
-			case 1: {
-                setState(509);
+			switch ( getInterpreter().adaptivePredict(_input,18,_ctx)) {
+                case 1: {
+                    setState(509);
 				order_by_clause();
 				}
 				break;
             }
                 setState(513);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,19,_ctx) ) {
-			case 1: {
-                setState(512);
+			switch ( getInterpreter().adaptivePredict(_input,19,_ctx)) {
+                case 1: {
+                    setState(512);
 				select_options();
 				}
 				break;
@@ -2922,53 +2342,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Invalid_bool_exprContext extends ParserRuleContext {
-		public Bool_exprContext bool_expr() {
-			return getRuleContext(Bool_exprContext.class,0);
-        }
-
-        public List<TerminalNode> T_CLOSE_P() {
-            return getTokens(HplsqlParser.T_CLOSE_P);
-        }
-
-        public TerminalNode T_CLOSE_P(int i) {
-            return getToken(HplsqlParser.T_CLOSE_P, i);
-        }
-
-        public TerminalNode T_NOT() {
-            return getToken(HplsqlParser.T_NOT, 0);
-        }
-
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public Invalid_bool_expr_atomContext invalid_bool_expr_atom() {
-            return getRuleContext(Invalid_bool_expr_atomContext.class, 0);
-        }
-
-        public Invalid_bool_exprContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_invalid_bool_expr; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterInvalid_bool_expr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitInvalid_bool_expr(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitInvalid_bool_expr(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Invalid_where_clauseContext invalid_where_clause() throws RecognitionException {
@@ -3281,34 +2654,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Invalid_bool_expr_atomContext extends ParserRuleContext {
-        public Invalid_bool_expr_binaryContext invalid_bool_expr_binary() {
-            return getRuleContext(Invalid_bool_expr_binaryContext.class, 0);
-        }
-
-        public Invalid_bool_expr_atomContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_invalid_bool_expr_atom; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterInvalid_bool_expr_atom(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitInvalid_bool_expr_atom(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitInvalid_bool_expr_atom(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Invalid_from_clauseContext invalid_from_clause() throws RecognitionException {
@@ -3325,7 +2670,7 @@ public class HplsqlParser extends Parser {
 			_alt = getInterpreter().adaptivePredict(_input,21,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
-					{
+                    {
                         {
                             setState(523);
 					from_join_clause();
@@ -3348,42 +2693,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Invalid_bool_expr_binaryContext extends ParserRuleContext {
-        public List<ExprContext> expr() {
-            return getRuleContexts(ExprContext.class);
-        }
-
-        public ExprContext expr(int i) {
-            return getRuleContext(ExprContext.class, i);
-        }
-
-        public Invalid_bool_expr_binary_operatorContext invalid_bool_expr_binary_operator() {
-            return getRuleContext(Invalid_bool_expr_binary_operatorContext.class, 0);
-        }
-
-        public Invalid_bool_expr_binaryContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_invalid_bool_expr_binary; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterInvalid_bool_expr_binary(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitInvalid_bool_expr_binary(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitInvalid_bool_expr_binary(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Invalid_bool_exprContext invalid_bool_expr() throws RecognitionException {
@@ -3400,9 +2709,9 @@ public class HplsqlParser extends Parser {
             {
                 setState(532);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,22,_ctx) ) {
-				case 1: {
-                    setState(531);
+				switch ( getInterpreter().adaptivePredict(_input,22,_ctx)) {
+                    case 1: {
+                        setState(531);
 					match(T_NOT);
 					}
 					break;
@@ -3424,7 +2733,7 @@ public class HplsqlParser extends Parser {
                     {
                         setState(538);
 					match(T_NOT);
-					}
+                    }
                 }
 
                 setState(541);
@@ -3439,9 +2748,9 @@ public class HplsqlParser extends Parser {
             {
                 setState(546);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,24,_ctx) ) {
-				case 1: {
-                    setState(545);
+				switch ( getInterpreter().adaptivePredict(_input,24,_ctx)) {
+                    case 1: {
+                        setState(545);
 					match(T_NOT);
 					}
 					break;
@@ -3455,10 +2764,9 @@ public class HplsqlParser extends Parser {
 				_alt = 1;
 				do {
 					switch (_alt) {
-					case 1:
-						{
-                            {
-                                setState(550);
+					case 1: {
+                        {
+                            setState(550);
 						match(T_CLOSE_P);
 						}
 						}
@@ -3491,34 +2799,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Invalid_bool_expr_binary_operatorContext extends ParserRuleContext {
-        public IdentContext ident() {
-            return getRuleContext(IdentContext.class, 0);
-        }
-
-        public Invalid_bool_expr_binary_operatorContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_invalid_bool_expr_binary_operator; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterInvalid_bool_expr_binary_operator(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitInvalid_bool_expr_binary_operator(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitInvalid_bool_expr_binary_operator(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Invalid_bool_expr_atomContext invalid_bool_expr_atom() throws RecognitionException {
@@ -3540,38 +2820,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Invalid_cpp_function_stmtContext extends ParserRuleContext {
-        public Invalid_cpp_function_headerContext invalid_cpp_function_header() {
-            return getRuleContext(Invalid_cpp_function_headerContext.class, 0);
-        }
-
-        public Cpp_function_bodyContext cpp_function_body() {
-            return getRuleContext(Cpp_function_bodyContext.class, 0);
-        }
-
-        public Invalid_cpp_function_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_invalid_cpp_function_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterInvalid_cpp_function_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitInvalid_cpp_function_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitInvalid_cpp_function_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Invalid_bool_expr_binaryContext invalid_bool_expr_binary() throws RecognitionException {
@@ -3597,54 +2845,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Invalid_cpp_function_headerContext extends ParserRuleContext {
-		public IdentContext ident() {
-			return getRuleContext(IdentContext.class,0);
-        }
-
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public TerminalNode T_CLOSE_P() {
-            return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public Cpp_function_params_clauseContext cpp_function_params_clause() {
-            return getRuleContext(Cpp_function_params_clauseContext.class, 0);
-        }
-
-        public Invalid_cpp_function_params_clauseContext invalid_cpp_function_params_clause() {
-            return getRuleContext(Invalid_cpp_function_params_clauseContext.class, 0);
-        }
-
-        public DtypeContext dtype() {
-            return getRuleContext(DtypeContext.class, 0);
-        }
-
-        public Invalid_cpp_function_headerContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_invalid_cpp_function_header; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterInvalid_cpp_function_header(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitInvalid_cpp_function_header(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitInvalid_cpp_function_header(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Invalid_bool_expr_binary_operatorContext invalid_bool_expr_binary_operator() throws RecognitionException {
@@ -3666,54 +2866,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Invalid_cpp_function_params_clauseContext extends ParserRuleContext {
-        public List<TerminalNode> T_COMMA() {
-            return getTokens(HplsqlParser.T_COMMA);
-        }
-
-        public TerminalNode T_COMMA(int i) {
-            return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public List<Invalid_cpp_function_paramContext> invalid_cpp_function_param() {
-            return getRuleContexts(Invalid_cpp_function_paramContext.class);
-        }
-
-        public Invalid_cpp_function_paramContext invalid_cpp_function_param(int i) {
-            return getRuleContext(Invalid_cpp_function_paramContext.class, i);
-        }
-
-        public List<Cpp_function_paramContext> cpp_function_param() {
-            return getRuleContexts(Cpp_function_paramContext.class);
-        }
-
-        public Cpp_function_paramContext cpp_function_param(int i) {
-            return getRuleContext(Cpp_function_paramContext.class, i);
-        }
-
-        public Invalid_cpp_function_params_clauseContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_invalid_cpp_function_params_clause; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterInvalid_cpp_function_params_clause(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitInvalid_cpp_function_params_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitInvalid_cpp_function_params_clause(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Invalid_cpp_function_stmtContext invalid_cpp_function_stmt() throws RecognitionException {
@@ -3737,34 +2889,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Invalid_cpp_function_paramContext extends ParserRuleContext {
-		public IdentContext ident() {
-			return getRuleContext(IdentContext.class,0);
-        }
-
-        public Invalid_cpp_function_paramContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_invalid_cpp_function_param; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterInvalid_cpp_function_param(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitInvalid_cpp_function_param(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitInvalid_cpp_function_param(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Invalid_cpp_function_headerContext invalid_cpp_function_header() throws RecognitionException {
@@ -3783,14 +2907,14 @@ public class HplsqlParser extends Parser {
 				match(T_OPEN_P);
                 setState(575);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,27,_ctx) ) {
-				case 1: {
-                    setState(573);
+				switch ( getInterpreter().adaptivePredict(_input,27,_ctx)) {
+                    case 1: {
+                        setState(573);
 					cpp_function_params_clause();
 					}
 					break;
-				case 2: {
-                    setState(574);
+                    case 2: {
+                        setState(574);
 					invalid_cpp_function_params_clause();
 					}
 					break;
@@ -3809,14 +2933,14 @@ public class HplsqlParser extends Parser {
 				match(T_OPEN_P);
                 setState(584);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,28,_ctx) ) {
-				case 1: {
-                    setState(582);
+				switch ( getInterpreter().adaptivePredict(_input,28,_ctx)) {
+                    case 1: {
+                        setState(582);
 					cpp_function_params_clause();
 					}
 					break;
-				case 2: {
-                    setState(583);
+                    case 2: {
+                        setState(583);
 					invalid_cpp_function_params_clause();
 					}
 					break;
@@ -3850,14 +2974,14 @@ public class HplsqlParser extends Parser {
 				ident();
                 setState(599);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,29,_ctx) ) {
-				case 1: {
-                    setState(597);
+				switch ( getInterpreter().adaptivePredict(_input,29,_ctx)) {
+                    case 1: {
+                        setState(597);
 					cpp_function_params_clause();
 					}
 					break;
-				case 2: {
-                    setState(598);
+                    case 2: {
+                        setState(598);
 					invalid_cpp_function_params_clause();
 					}
 					break;
@@ -3878,14 +3002,14 @@ public class HplsqlParser extends Parser {
 				match(T_OPEN_P);
                 setState(609);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,30,_ctx) ) {
-				case 1: {
-                    setState(607);
+				switch ( getInterpreter().adaptivePredict(_input,30,_ctx)) {
+                    case 1: {
+                        setState(607);
 					cpp_function_params_clause();
 					}
 					break;
-				case 2: {
-                    setState(608);
+                    case 2: {
+                        setState(608);
 					invalid_cpp_function_params_clause();
 					}
 					break;
@@ -3904,41 +3028,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Exception_blockContext extends ParserRuleContext {
-        public TerminalNode T_EXCEPTION() {
-            return getToken(HplsqlParser.T_EXCEPTION, 0);
-        }
-
-        public List<Exception_block_itemContext> exception_block_item() {
-            return getRuleContexts(Exception_block_itemContext.class);
-        }
-
-        public Exception_block_itemContext exception_block_item(int i) {
-            return getRuleContext(Exception_block_itemContext.class, i);
-        }
-
-        public Exception_blockContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_exception_block; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterException_block(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitException_block(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitException_block(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Invalid_cpp_function_params_clauseContext invalid_cpp_function_params_clause() throws RecognitionException {
@@ -3955,14 +3044,14 @@ public class HplsqlParser extends Parser {
             {
                 setState(617);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,32,_ctx) ) {
-				case 1: {
-                    setState(615);
+				switch ( getInterpreter().adaptivePredict(_input,32,_ctx)) {
+                    case 1: {
+                        setState(615);
 					invalid_cpp_function_param();
 					}
 					break;
-				case 2: {
-                    setState(616);
+                    case 2: {
+                        setState(616);
 					cpp_function_param();
 					}
 					break;
@@ -3981,25 +3070,25 @@ public class HplsqlParser extends Parser {
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==T_COMMA) {
-					{
+                    {
                         {
                             setState(623);
 					match(T_COMMA);
                             setState(626);
 					_errHandler.sync(this);
-					switch ( getInterpreter().adaptivePredict(_input,33,_ctx) ) {
-					case 1: {
-                        setState(624);
+					switch ( getInterpreter().adaptivePredict(_input,33,_ctx)) {
+                        case 1: {
+                            setState(624);
 						cpp_function_param();
 						}
 						break;
-					case 2: {
-                        setState(625);
+                        case 2: {
+                            setState(625);
 						invalid_cpp_function_param();
 						}
 						break;
 					}
-					}
+                        }
                     }
                     setState(632);
 					_errHandler.sync(this);
@@ -4017,7 +3106,7 @@ public class HplsqlParser extends Parser {
 				_alt = getInterpreter().adaptivePredict(_input,35,_ctx);
 				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 					if ( _alt==1 ) {
-						{
+                        {
                             {
                                 setState(634);
 						match(T_COMMA);
@@ -4035,12 +3124,11 @@ public class HplsqlParser extends Parser {
 				_alt = 1;
 				do {
 					switch (_alt) {
-					case 1:
-						{
-                            {
-                                setState(641);
+					case 1: {
+                        {
+                            setState(641);
 						match(T_COMMA);
-                                setState(642);
+                            setState(642);
 						invalid_cpp_function_param();
 						}
 						}
@@ -4051,18 +3139,18 @@ public class HplsqlParser extends Parser {
                     setState(645);
 					_errHandler.sync(this);
 					_alt = getInterpreter().adaptivePredict(_input,36,_ctx);
-				} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER);
+                } while (_alt != 2 && _alt != org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER);
                 setState(651);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==T_COMMA) {
-					{
+                    {
                         {
                             setState(647);
 					match(T_COMMA);
                             setState(648);
 					cpp_function_param();
-					}
+                        }
                     }
                     setState(653);
 					_errHandler.sync(this);
@@ -4081,54 +3169,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Exception_block_itemContext extends ParserRuleContext {
-        public List<TerminalNode> T_WHEN() {
-            return getTokens(HplsqlParser.T_WHEN);
-        }
-
-        public TerminalNode T_WHEN(int i) {
-            return getToken(HplsqlParser.T_WHEN, i);
-        }
-
-        public TerminalNode L_ID() {
-            return getToken(HplsqlParser.L_ID, 0);
-        }
-
-        public TerminalNode T_THEN() {
-            return getToken(HplsqlParser.T_THEN, 0);
-        }
-
-        public BlockContext block() {
-            return getRuleContext(BlockContext.class, 0);
-        }
-
-        public TerminalNode T_END() {
-            return getToken(HplsqlParser.T_END, 0);
-        }
-
-        public Exception_block_itemContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_exception_block_item; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterException_block_item(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitException_block_item(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitException_block_item(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Invalid_cpp_function_paramContext invalid_cpp_function_param() throws RecognitionException {
@@ -4151,37 +3191,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Semicolon_stmtContext extends ParserRuleContext {
-        public TerminalNode T_SEMICOLON() {
-            return getToken(HplsqlParser.T_SEMICOLON, 0);
-        }
-
-        public TerminalNode T_DIV() {
-            return getToken(HplsqlParser.T_DIV, 0);
-        }
-
-        public Semicolon_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_semicolon_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterSemicolon_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitSemicolon_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitSemicolon_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Exception_blockContext exception_block() throws RecognitionException {
@@ -4198,10 +3207,9 @@ public class HplsqlParser extends Parser {
 			_alt = 1;
 			do {
 				switch (_alt) {
-				case 1:
-					{
-                        {
-                            setState(660);
+				case 1: {
+                    {
+                        setState(660);
 					exception_block_item();
 					}
 					}
@@ -4224,33 +3232,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Null_stmtContext extends ParserRuleContext {
-        public TerminalNode T_NULL() {
-            return getToken(HplsqlParser.T_NULL, 0);
-        }
-
-        public Null_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_null_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterNull_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitNull_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitNull_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Exception_block_itemContext exception_block_item() throws RecognitionException {
@@ -4289,33 +3270,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Expr_stmtContext extends ParserRuleContext {
-        public ExprContext expr() {
-            return getRuleContext(ExprContext.class, 0);
-        }
-
-        public Expr_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_expr_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExpr_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitExpr_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Semicolon_stmtContext semicolon_stmt() throws RecognitionException {
@@ -4346,49 +3300,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Assignment_stmtContext extends ParserRuleContext {
-        public List<Assignment_stmt_itemContext> assignment_stmt_item() {
-            return getRuleContexts(Assignment_stmt_itemContext.class);
-        }
-
-        public Assignment_stmt_itemContext assignment_stmt_item(int i) {
-            return getRuleContext(Assignment_stmt_itemContext.class, i);
-        }
-
-        public TerminalNode T_SET() {
-            return getToken(HplsqlParser.T_SET, 0);
-        }
-
-        public List<TerminalNode> T_COMMA() {
-            return getTokens(HplsqlParser.T_COMMA);
-        }
-
-        public TerminalNode T_COMMA(int i) {
-            return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public Assignment_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_assignment_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterAssignment_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitAssignment_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitAssignment_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Null_stmtContext null_stmt() throws RecognitionException {
@@ -4410,42 +3321,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Assignment_stmt_itemContext extends ParserRuleContext {
-        public Assignment_stmt_single_itemContext assignment_stmt_single_item() {
-            return getRuleContext(Assignment_stmt_single_itemContext.class, 0);
-        }
-
-        public Assignment_stmt_multiple_itemContext assignment_stmt_multiple_item() {
-            return getRuleContext(Assignment_stmt_multiple_itemContext.class, 0);
-        }
-
-        public Assignment_stmt_select_itemContext assignment_stmt_select_item() {
-            return getRuleContext(Assignment_stmt_select_itemContext.class, 0);
-        }
-
-        public Assignment_stmt_itemContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_assignment_stmt_item; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterAssignment_stmt_item(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitAssignment_stmt_item(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitAssignment_stmt_item(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Expr_stmtContext expr_stmt() throws RecognitionException {
@@ -4469,54 +3344,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Assignment_stmt_single_itemContext extends ParserRuleContext {
-        public IdentContext ident() {
-            return getRuleContext(IdentContext.class, 0);
-        }
-
-        public TerminalNode T_EQUAL() {
-            return getToken(HplsqlParser.T_EQUAL, 0);
-        }
-
-        public ExprContext expr() {
-            return getRuleContext(ExprContext.class, 0);
-        }
-
-        public TerminalNode T_COLON() {
-            return getToken(HplsqlParser.T_COLON, 0);
-        }
-
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public TerminalNode T_CLOSE_P() {
-            return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public Assignment_stmt_single_itemContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_assignment_stmt_single_item; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterAssignment_stmt_single_item(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitAssignment_stmt_single_item(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitAssignment_stmt_single_item(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Assignment_stmtContext assignment_stmt() throws RecognitionException {
@@ -4528,9 +3355,9 @@ public class HplsqlParser extends Parser {
             {
                 setState(679);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,40,_ctx) ) {
-			case 1: {
-                setState(678);
+			switch ( getInterpreter().adaptivePredict(_input,40,_ctx)) {
+                case 1: {
+                    setState(678);
 				match(T_SET);
 				}
 				break;
@@ -4542,7 +3369,7 @@ public class HplsqlParser extends Parser {
 			_alt = getInterpreter().adaptivePredict(_input,41,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
-					{
+                    {
                         {
                             setState(682);
 					match(T_COMMA);
@@ -4566,78 +3393,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Assignment_stmt_multiple_itemContext extends ParserRuleContext {
-        public List<TerminalNode> T_OPEN_P() {
-            return getTokens(HplsqlParser.T_OPEN_P);
-        }
-
-        public TerminalNode T_OPEN_P(int i) {
-            return getToken(HplsqlParser.T_OPEN_P, i);
-        }
-
-        public List<IdentContext> ident() {
-            return getRuleContexts(IdentContext.class);
-        }
-
-        public IdentContext ident(int i) {
-            return getRuleContext(IdentContext.class, i);
-        }
-
-        public List<TerminalNode> T_CLOSE_P() {
-            return getTokens(HplsqlParser.T_CLOSE_P);
-        }
-
-        public TerminalNode T_CLOSE_P(int i) {
-            return getToken(HplsqlParser.T_CLOSE_P, i);
-        }
-
-        public TerminalNode T_EQUAL() {
-            return getToken(HplsqlParser.T_EQUAL, 0);
-        }
-
-        public List<ExprContext> expr() {
-            return getRuleContexts(ExprContext.class);
-        }
-
-        public ExprContext expr(int i) {
-            return getRuleContext(ExprContext.class, i);
-        }
-
-        public List<TerminalNode> T_COMMA() {
-            return getTokens(HplsqlParser.T_COMMA);
-        }
-
-        public TerminalNode T_COMMA(int i) {
-            return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public TerminalNode T_COLON() {
-            return getToken(HplsqlParser.T_COLON, 0);
-        }
-
-        public Assignment_stmt_multiple_itemContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_assignment_stmt_multiple_item; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterAssignment_stmt_multiple_item(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitAssignment_stmt_multiple_item(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitAssignment_stmt_multiple_item(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Assignment_stmt_itemContext assignment_stmt_item() throws RecognitionException {
@@ -4679,71 +3434,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Assignment_stmt_select_itemContext extends ParserRuleContext {
-		public TerminalNode T_EQUAL() { return getToken(HplsqlParser.T_EQUAL, 0);
-        }
-
-        public List<TerminalNode> T_OPEN_P() {
-            return getTokens(HplsqlParser.T_OPEN_P);
-        }
-
-        public TerminalNode T_OPEN_P(int i) {
-            return getToken(HplsqlParser.T_OPEN_P, i);
-        }
-
-        public Select_stmtContext select_stmt() {
-            return getRuleContext(Select_stmtContext.class, 0);
-        }
-
-        public List<TerminalNode> T_CLOSE_P() {
-            return getTokens(HplsqlParser.T_CLOSE_P);
-        }
-
-        public TerminalNode T_CLOSE_P(int i) {
-            return getToken(HplsqlParser.T_CLOSE_P, i);
-        }
-
-        public List<IdentContext> ident() {
-            return getRuleContexts(IdentContext.class);
-        }
-
-        public IdentContext ident(int i) {
-            return getRuleContext(IdentContext.class,i);
-		}
-		public TerminalNode T_COLON() { return getToken(HplsqlParser.T_COLON, 0);
-        }
-
-        public List<TerminalNode> T_COMMA() {
-            return getTokens(HplsqlParser.T_COMMA);
-        }
-
-        public TerminalNode T_COMMA(int i) {
-            return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public Assignment_stmt_select_itemContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_assignment_stmt_select_item; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterAssignment_stmt_select_item(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitAssignment_stmt_select_item(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitAssignment_stmt_select_item(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Assignment_stmt_single_itemContext assignment_stmt_single_item() throws RecognitionException {
@@ -5025,7 +3715,7 @@ public class HplsqlParser extends Parser {
                     {
                         setState(695);
 					match(T_COLON);
-					}
+                    }
                 }
 
                 setState(698);
@@ -5050,7 +3740,7 @@ public class HplsqlParser extends Parser {
                     {
                         setState(704);
 					match(T_COLON);
-					}
+                    }
                 }
 
                 setState(707);
@@ -5072,74 +3762,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Associate_locator_stmtContext extends ParserRuleContext {
-        public TerminalNode T_ASSOCIATE() {
-            return getToken(HplsqlParser.T_ASSOCIATE, 0);
-        }
-
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0); }
-		public List<IdentContext> ident() {
-			return getRuleContexts(IdentContext.class);
-		}
-		public IdentContext ident(int i) {
-			return getRuleContext(IdentContext.class,i);
-        }
-
-        public TerminalNode T_CLOSE_P() {
-            return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public TerminalNode T_WITH() {
-            return getToken(HplsqlParser.T_WITH, 0);
-        }
-
-        public TerminalNode T_PROCEDURE() {
-            return getToken(HplsqlParser.T_PROCEDURE, 0);
-        }
-
-        public TerminalNode T_LOCATOR() {
-            return getToken(HplsqlParser.T_LOCATOR, 0);
-        }
-
-        public TerminalNode T_LOCATORS() {
-            return getToken(HplsqlParser.T_LOCATORS, 0);
-        }
-
-        public TerminalNode T_RESULT() {
-            return getToken(HplsqlParser.T_RESULT, 0);
-        }
-
-        public TerminalNode T_SET() {
-            return getToken(HplsqlParser.T_SET, 0); }
-		public List<TerminalNode> T_COMMA() { return getTokens(HplsqlParser.T_COMMA); }
-		public TerminalNode T_COMMA(int i) {
-			return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public Associate_locator_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_associate_locator_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterAssociate_locator_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitAssociate_locator_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitAssociate_locator_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Assignment_stmt_multiple_itemContext assignment_stmt_multiple_item() throws RecognitionException {
@@ -5157,13 +3779,13 @@ public class HplsqlParser extends Parser {
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==T_COMMA) {
-				{
+                {
                     {
                         setState(714);
 				match(T_COMMA);
                         setState(715);
 				ident();
-				}
+                    }
                 }
                 setState(720);
 				_errHandler.sync(this);
@@ -5178,7 +3800,7 @@ public class HplsqlParser extends Parser {
                 {
                     setState(722);
 				match(T_COLON);
-				}
+                }
             }
 
                 setState(725);
@@ -5191,13 +3813,13 @@ public class HplsqlParser extends Parser {
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==T_COMMA) {
-				{
+                {
                     {
                         setState(728);
 				match(T_COMMA);
                         setState(729);
 				expr(0);
-				}
+                    }
                 }
                 setState(734);
 				_errHandler.sync(this);
@@ -5216,33 +3838,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Break_stmtContext extends ParserRuleContext {
-        public TerminalNode T_BREAK() {
-            return getToken(HplsqlParser.T_BREAK, 0);
-        }
-
-        public Break_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_break_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterBreak_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitBreak_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitBreak_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Assignment_stmt_select_itemContext assignment_stmt_select_item() throws RecognitionException {
@@ -5514,35 +4109,34 @@ public class HplsqlParser extends Parser {
 			case T_VARIANCE:
 			case T_USER:
 			case T_WRITE:
-			case L_ID: {
-                setState(737);
+                case L_ID: {
+                    setState(737);
 				ident();
 				}
 				break;
-			case T_OPEN_P:
-				{
-                    {
-                        setState(738);
+			case T_OPEN_P: {
+                {
+                    setState(738);
 				match(T_OPEN_P);
-                        setState(739);
+                    setState(739);
 				ident();
-                        setState(744);
+                    setState(744);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==T_COMMA) {
-					{
+                    {
                         {
                             setState(740);
 					match(T_COMMA);
                             setState(741);
 					ident();
-					}
+                        }
                     }
                     setState(746);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
                 }
-                        setState(747);
+                    setState(747);
 				match(T_CLOSE_P);
 				}
 				}
@@ -5557,7 +4151,7 @@ public class HplsqlParser extends Parser {
                 {
                     setState(751);
 				match(T_COLON);
-				}
+                }
             }
 
                 setState(754);
@@ -5579,44 +4173,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Call_stmtContext extends ParserRuleContext {
-        public TerminalNode T_CALL() {
-            return getToken(HplsqlParser.T_CALL, 0);
-        }
-
-        public IdentContext ident() {
-            return getRuleContext(IdentContext.class, 0);
-		}
-		public TerminalNode T_OPEN_P() { return getToken(HplsqlParser.T_OPEN_P, 0); }
-		public TerminalNode T_CLOSE_P() { return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public Expr_func_paramsContext expr_func_params() {
-            return getRuleContext(Expr_func_paramsContext.class, 0);
-        }
-
-        public Call_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_call_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCall_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCall_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitCall_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Associate_locator_stmtContext associate_locator_stmt() throws RecognitionException {
@@ -5637,7 +4193,7 @@ public class HplsqlParser extends Parser {
 				match(T_RESULT);
                     setState(761);
 				match(T_SET);
-				}
+                }
             }
 
                 setState(764);
@@ -5658,13 +4214,13 @@ public class HplsqlParser extends Parser {
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==T_COMMA) {
-				{
+                {
                     {
                         setState(767);
 				match(T_COMMA);
                         setState(768);
 				ident();
-				}
+                    }
                 }
                 setState(773);
 				_errHandler.sync(this);
@@ -5689,37 +4245,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Close_stmtContext extends ParserRuleContext {
-        public TerminalNode T_CLOSE() {
-            return getToken(HplsqlParser.T_CLOSE, 0);
-        }
-
-        public TerminalNode L_ID() {
-            return getToken(HplsqlParser.L_ID, 0);
-        }
-
-        public Close_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_close_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterClose_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitClose_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitClose_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Break_stmtContext break_stmt() throws RecognitionException {
@@ -5741,49 +4266,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Declare_stmtContext extends ParserRuleContext {
-        public TerminalNode T_DECLARE() {
-            return getToken(HplsqlParser.T_DECLARE, 0);
-        }
-
-        public List<Declare_stmt_itemContext> declare_stmt_item() {
-            return getRuleContexts(Declare_stmt_itemContext.class);
-        }
-
-        public Declare_stmt_itemContext declare_stmt_item(int i) {
-            return getRuleContext(Declare_stmt_itemContext.class, i);
-        }
-
-        public List<TerminalNode> T_COMMA() {
-            return getTokens(HplsqlParser.T_COMMA);
-        }
-
-        public TerminalNode T_COMMA(int i) {
-            return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public Declare_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_declare_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterDeclare_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitDeclare_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitDeclare_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Call_stmtContext call_stmt() throws RecognitionException {
@@ -5798,25 +4280,25 @@ public class HplsqlParser extends Parser {
 			ident();
                 setState(789);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,55,_ctx) ) {
-			case 1: {
-                setState(783);
+			switch ( getInterpreter().adaptivePredict(_input,55,_ctx)) {
+                case 1: {
+                    setState(783);
 				match(T_OPEN_P);
-                setState(785);
+                    setState(785);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,54,_ctx) ) {
-				case 1: {
-                    setState(784);
+				switch ( getInterpreter().adaptivePredict(_input,54,_ctx)) {
+                    case 1: {
+                        setState(784);
 					expr_func_params();
 					}
 					break;
                 }
-                setState(787);
+                    setState(787);
 				match(T_CLOSE_P);
 				}
 				break;
-			case 2: {
-                setState(788);
+                case 2: {
+                    setState(788);
 				expr_func_params();
 				}
 				break;
@@ -5832,49 +4314,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Declare_blockContext extends ParserRuleContext {
-        public TerminalNode T_DECLARE() {
-            return getToken(HplsqlParser.T_DECLARE, 0);
-        }
-
-        public List<Declare_stmt_itemContext> declare_stmt_item() {
-            return getRuleContexts(Declare_stmt_itemContext.class);
-        }
-
-        public Declare_stmt_itemContext declare_stmt_item(int i) {
-            return getRuleContext(Declare_stmt_itemContext.class, i);
-        }
-
-        public List<TerminalNode> T_SEMICOLON() {
-            return getTokens(HplsqlParser.T_SEMICOLON);
-        }
-
-        public TerminalNode T_SEMICOLON(int i) {
-            return getToken(HplsqlParser.T_SEMICOLON, i);
-        }
-
-        public Declare_blockContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_declare_block; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterDeclare_block(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitDeclare_block(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitDeclare_block(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Close_stmtContext close_stmt() throws RecognitionException {
@@ -5898,45 +4337,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Declare_block_inplaceContext extends ParserRuleContext {
-		public List<Declare_stmt_itemContext> declare_stmt_item() {
-			return getRuleContexts(Declare_stmt_itemContext.class);
-		}
-		public Declare_stmt_itemContext declare_stmt_item(int i) {
-			return getRuleContext(Declare_stmt_itemContext.class,i);
-        }
-
-        public List<TerminalNode> T_SEMICOLON() {
-            return getTokens(HplsqlParser.T_SEMICOLON);
-        }
-
-        public TerminalNode T_SEMICOLON(int i) {
-            return getToken(HplsqlParser.T_SEMICOLON, i);
-        }
-
-        public Declare_block_inplaceContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_declare_block_inplace; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterDeclare_block_inplace(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitDeclare_block_inplace(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitDeclare_block_inplace(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Declare_stmtContext declare_stmt() throws RecognitionException {
@@ -5955,7 +4355,7 @@ public class HplsqlParser extends Parser {
 			_alt = getInterpreter().adaptivePredict(_input,56,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
-					{
+                    {
                         {
                             setState(796);
 					match(T_COMMA);
@@ -5979,45 +4379,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Declare_stmt_itemContext extends ParserRuleContext {
-        public Declare_condition_itemContext declare_condition_item() {
-            return getRuleContext(Declare_condition_itemContext.class, 0);
-        }
-
-        public Declare_handler_itemContext declare_handler_item() {
-            return getRuleContext(Declare_handler_itemContext.class, 0);
-        }
-
-        public Declare_var_itemContext declare_var_item() {
-            return getRuleContext(Declare_var_itemContext.class, 0);
-        }
-
-        public Declare_temporary_table_itemContext declare_temporary_table_item() {
-            return getRuleContext(Declare_temporary_table_itemContext.class, 0);
-        }
-
-        public Declare_stmt_itemContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_declare_stmt_item; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterDeclare_stmt_item(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitDeclare_stmt_item(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitDeclare_stmt_item(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Declare_blockContext declare_block() throws RecognitionException {
@@ -6038,7 +4399,7 @@ public class HplsqlParser extends Parser {
 			_alt = getInterpreter().adaptivePredict(_input,57,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
-					{
+                    {
                         {
                             setState(806);
 					declare_stmt_item();
@@ -6062,73 +4423,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Declare_var_itemContext extends ParserRuleContext {
-        public List<IdentContext> ident() {
-            return getRuleContexts(IdentContext.class);
-        }
-
-        public IdentContext ident(int i) {
-            return getRuleContext(IdentContext.class, i);
-        }
-
-        public DtypeContext dtype() {
-            return getRuleContext(DtypeContext.class, 0);
-        }
-
-        public List<TerminalNode> T_COMMA() {
-            return getTokens(HplsqlParser.T_COMMA);
-        }
-
-        public TerminalNode T_COMMA(int i) {
-            return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public TerminalNode T_AS() {
-            return getToken(HplsqlParser.T_AS, 0);
-        }
-
-        public Dtype_lenContext dtype_len() {
-            return getRuleContext(Dtype_lenContext.class, 0);
-        }
-
-        public List<Dtype_attrContext> dtype_attr() {
-            return getRuleContexts(Dtype_attrContext.class);
-        }
-
-        public Dtype_attrContext dtype_attr(int i) {
-            return getRuleContext(Dtype_attrContext.class, i);
-        }
-
-        public Dtype_defaultContext dtype_default() {
-            return getRuleContext(Dtype_defaultContext.class, 0);
-        }
-
-        public TerminalNode T_CONSTANT() {
-            return getToken(HplsqlParser.T_CONSTANT, 0);
-        }
-
-        public Declare_var_itemContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_declare_var_item; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterDeclare_var_item(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitDeclare_var_item(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitDeclare_var_item(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Declare_block_inplaceContext declare_block_inplace() throws RecognitionException {
@@ -6147,7 +4441,7 @@ public class HplsqlParser extends Parser {
 			_alt = getInterpreter().adaptivePredict(_input,58,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
-					{
+                    {
                         {
                             setState(816);
 					declare_stmt_item();
@@ -6171,38 +4465,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Declare_condition_itemContext extends ParserRuleContext {
-        public IdentContext ident() {
-            return getRuleContext(IdentContext.class, 0);
-        }
-
-        public TerminalNode T_CONDITION() {
-            return getToken(HplsqlParser.T_CONDITION, 0);
-        }
-
-        public Declare_condition_itemContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_declare_condition_item; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterDeclare_condition_item(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitDeclare_condition_item(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitDeclare_condition_item(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Declare_stmt_itemContext declare_stmt_item() throws RecognitionException {
@@ -6251,70 +4513,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Declare_handler_itemContext extends ParserRuleContext {
-        public TerminalNode T_HANDLER() {
-            return getToken(HplsqlParser.T_HANDLER, 0);
-        }
-
-        public TerminalNode T_FOR() {
-            return getToken(HplsqlParser.T_FOR, 0);
-        }
-
-        public Single_block_stmtContext single_block_stmt() {
-            return getRuleContext(Single_block_stmtContext.class, 0);
-        }
-
-        public TerminalNode T_CONTINUE() {
-            return getToken(HplsqlParser.T_CONTINUE, 0);
-        }
-
-        public TerminalNode T_EXIT() {
-            return getToken(HplsqlParser.T_EXIT, 0);
-        }
-
-        public TerminalNode T_SQLEXCEPTION() {
-            return getToken(HplsqlParser.T_SQLEXCEPTION, 0);
-        }
-
-        public TerminalNode T_SQLWARNING() {
-            return getToken(HplsqlParser.T_SQLWARNING, 0);
-        }
-
-        public TerminalNode T_NOT() {
-            return getToken(HplsqlParser.T_NOT, 0);
-        }
-
-        public TerminalNode T_FOUND() {
-            return getToken(HplsqlParser.T_FOUND, 0);
-        }
-
-        public IdentContext ident() {
-            return getRuleContext(IdentContext.class, 0);
-        }
-
-        public Declare_handler_itemContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_declare_handler_item; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterDeclare_handler_item(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitDeclare_handler_item(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitDeclare_handler_item(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Declare_var_itemContext declare_var_item() throws RecognitionException {
@@ -6335,13 +4533,13 @@ public class HplsqlParser extends Parser {
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==T_COMMA) {
-					{
+                    {
                         {
                             setState(831);
 					match(T_COMMA);
                             setState(832);
 					ident();
-					}
+                        }
                     }
                     setState(837);
 					_errHandler.sync(this);
@@ -6349,9 +4547,9 @@ public class HplsqlParser extends Parser {
                 }
                 setState(839);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,61,_ctx) ) {
-				case 1: {
-                    setState(838);
+				switch ( getInterpreter().adaptivePredict(_input,61,_ctx)) {
+                    case 1: {
+                        setState(838);
 					match(T_AS);
 					}
 					break;
@@ -6360,9 +4558,9 @@ public class HplsqlParser extends Parser {
 				dtype();
                 setState(843);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,62,_ctx) ) {
-				case 1: {
-                    setState(842);
+				switch ( getInterpreter().adaptivePredict(_input,62,_ctx)) {
+                    case 1: {
+                        setState(842);
 					dtype_len();
 					}
 					break;
@@ -6372,7 +4570,7 @@ public class HplsqlParser extends Parser {
 				_alt = getInterpreter().adaptivePredict(_input,63,_ctx);
 				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 					if ( _alt==1 ) {
-						{
+                        {
                             {
                                 setState(845);
 						dtype_attr();
@@ -6385,9 +4583,9 @@ public class HplsqlParser extends Parser {
                 }
                 setState(852);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,64,_ctx) ) {
-				case 1: {
-                    setState(851);
+				switch ( getInterpreter().adaptivePredict(_input,64,_ctx)) {
+                    case 1: {
+                        setState(851);
 					dtype_default();
 					}
 					break;
@@ -6403,9 +4601,9 @@ public class HplsqlParser extends Parser {
 				match(T_CONSTANT);
                 setState(857);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,65,_ctx) ) {
-				case 1: {
-                    setState(856);
+				switch ( getInterpreter().adaptivePredict(_input,65,_ctx)) {
+                    case 1: {
+                        setState(856);
 					match(T_AS);
 					}
 					break;
@@ -6419,7 +4617,7 @@ public class HplsqlParser extends Parser {
                     {
                         setState(860);
 					dtype_len();
-					}
+                    }
                 }
 
                 setState(863);
@@ -6485,26 +4683,26 @@ public class HplsqlParser extends Parser {
 			match(T_FOR);
                 setState(878);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,68,_ctx) ) {
-			case 1: {
-                setState(873);
+			switch ( getInterpreter().adaptivePredict(_input,68,_ctx)) {
+                case 1: {
+                    setState(873);
 				match(T_SQLEXCEPTION);
 				}
 				break;
-			case 2: {
-                setState(874);
+                case 2: {
+                    setState(874);
 				match(T_SQLWARNING);
 				}
 				break;
-			case 3: {
-                setState(875);
+                case 3: {
+                    setState(875);
 				match(T_NOT);
-                setState(876);
+                    setState(876);
 				match(T_FOUND);
 				}
 				break;
-			case 4: {
-                setState(877);
+                case 4: {
+                    setState(877);
 				ident();
 				}
 				break;
@@ -6522,42 +4720,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_type_definitionContext extends ParserRuleContext {
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public Create_type_itemsContext create_type_items() {
-            return getRuleContext(Create_type_itemsContext.class, 0);
-        }
-
-        public TerminalNode T_CLOSE_P() {
-            return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public Create_type_definitionContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_type_definition; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_type_definition(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_type_definition(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_type_definition(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Create_type_stmtContext create_type_stmt() throws RecognitionException {
@@ -6582,7 +4744,7 @@ public class HplsqlParser extends Parser {
                         create_type_options();
                     }
                     break;
-                }
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -6594,45 +4756,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_type_itemsContext extends ParserRuleContext {
-        public List<Create_type_items_itemContext> create_type_items_item() {
-            return getRuleContexts(Create_type_items_itemContext.class);
-        }
-
-        public Create_type_items_itemContext create_type_items_item(int i) {
-            return getRuleContext(Create_type_items_itemContext.class, i);
-        }
-
-        public List<TerminalNode> T_COMMA() {
-            return getTokens(HplsqlParser.T_COMMA);
-        }
-
-        public TerminalNode T_COMMA(int i) {
-            return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public Create_type_itemsContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_type_items; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_type_items(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_type_items(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitCreate_type_items(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Create_type_definitionContext create_type_definition() throws RecognitionException {
@@ -6658,42 +4781,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_type_items_itemContext extends ParserRuleContext {
-        public List<IdentContext> ident() {
-            return getRuleContexts(IdentContext.class);
-        }
-
-        public IdentContext ident(int i) {
-            return getRuleContext(IdentContext.class, i);
-        }
-
-        public TerminalNode T_COLON() {
-            return getToken(HplsqlParser.T_COLON, 0);
-        }
-
-        public Create_type_items_itemContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_type_items_item; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_type_items_item(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_type_items_item(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_type_items_item(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Create_type_itemsContext create_type_items() throws RecognitionException {
@@ -6709,13 +4796,13 @@ public class HplsqlParser extends Parser {
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==T_COMMA) {
-				{
+                {
                     {
                         setState(894);
 				match(T_COMMA);
                         setState(895);
 				create_type_items_item();
-				}
+                    }
                 }
                 setState(900);
 				_errHandler.sync(this);
@@ -6812,7 +4899,7 @@ public class HplsqlParser extends Parser {
                     enterOuterAlt(_localctx, 2);
                 {
                     setState(911);
-                    create_type_delemiter();
+                    create_type_delimiter();
 				}
 				break;
 			default:
@@ -6870,9 +4957,9 @@ public class HplsqlParser extends Parser {
         return _localctx;
     }
 
-    public final Create_type_delemiterContext create_type_delemiter() throws RecognitionException {
-        Create_type_delemiterContext _localctx = new Create_type_delemiterContext(_ctx, getState());
-        enterRule(_localctx, 94, RULE_create_type_delemiter);
+    public final Create_type_delimiterContext create_type_delimiter() throws RecognitionException {
+        Create_type_delimiterContext _localctx = new Create_type_delimiterContext(_ctx, getState());
+        enterRule(_localctx, 94, RULE_create_type_delimiter);
         try {
             enterOuterAlt(_localctx, 1);
             {
@@ -6905,7 +4992,7 @@ public class HplsqlParser extends Parser {
                 {
                     setState(926);
 				match(T_GLOBAL);
-				}
+                }
             }
 
                 setState(929);
@@ -6921,7 +5008,7 @@ public class HplsqlParser extends Parser {
                 {
                     setState(932);
 				create_table_preoptions();
-				}
+                }
             }
 
                 setState(935);
@@ -6952,13 +5039,13 @@ public class HplsqlParser extends Parser {
 			match(T_TABLE);
                 setState(942);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 76, _ctx) ) {
-			case 1: {
-                setState(939);
+                switch (getInterpreter().adaptivePredict(_input, 76, _ctx)) {
+                    case 1: {
+                        setState(939);
 				match(T_IF);
-                setState(940);
+                        setState(940);
 				match(T_NOT);
-                setState(941);
+                        setState(941);
 				match(T_EXISTS);
 				}
 				break;
@@ -6972,7 +5059,7 @@ public class HplsqlParser extends Parser {
                 {
                     setState(945);
 				create_table_preoptions();
-				}
+                }
             }
 
                 setState(948);
@@ -7002,17 +5089,17 @@ public class HplsqlParser extends Parser {
                 setState(957);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case T_LOCAL: {
-                setState(951);
+                case T_LOCAL: {
+                    setState(951);
 				match(T_LOCAL);
-                setState(952);
+                    setState(952);
 				match(T_TEMPORARY);
 				}
 				break;
 			case T_MULTISET:
 			case T_SET:
-			case T_VOLATILE: {
-                setState(954);
+                case T_VOLATILE: {
+                    setState(954);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==T_MULTISET || _la==T_SET) {
@@ -7027,10 +5114,10 @@ public class HplsqlParser extends Parser {
 						_errHandler.reportMatch(this);
 						consume();
 					}
-					}
+                    }
                 }
 
-                setState(956);
+                    setState(956);
 				match(T_VOLATILE);
 				}
 				break;
@@ -7048,7 +5135,7 @@ public class HplsqlParser extends Parser {
                 {
                     setState(961);
 				create_table_preoptions();
-				}
+                }
             }
 
                 setState(964);
@@ -7064,54 +5151,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Declare_temporary_table_itemContext extends ParserRuleContext {
-        public TerminalNode T_TEMPORARY() {
-            return getToken(HplsqlParser.T_TEMPORARY, 0);
-        }
-
-        public TerminalNode T_TABLE() {
-            return getToken(HplsqlParser.T_TABLE, 0);
-        }
-
-        public IdentContext ident() {
-            return getRuleContext(IdentContext.class, 0);
-        }
-
-        public Create_table_definitionContext create_table_definition() {
-            return getRuleContext(Create_table_definitionContext.class, 0);
-        }
-
-        public TerminalNode T_GLOBAL() {
-            return getToken(HplsqlParser.T_GLOBAL, 0);
-        }
-
-        public Create_table_preoptionsContext create_table_preoptions() {
-            return getRuleContext(Create_table_preoptionsContext.class, 0);
-        }
-
-        public Declare_temporary_table_itemContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_declare_temporary_table_item; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterDeclare_temporary_table_item(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitDeclare_temporary_table_item(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitDeclare_temporary_table_item(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Create_table_definitionContext create_table_definition() throws RecognitionException {
@@ -7123,56 +5162,56 @@ public class HplsqlParser extends Parser {
             {
                 setState(981);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 83, _ctx) ) {
-			case 1: {
-                setState(967);
+                switch (getInterpreter().adaptivePredict(_input, 83, _ctx)) {
+                    case 1: {
+                        setState(967);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==T_AS) {
                     {
                         setState(966);
 					match(T_AS);
-					}
+                    }
                 }
 
-                setState(969);
+                        setState(969);
 				match(T_OPEN_P);
-                setState(970);
+                        setState(970);
 				select_stmt();
-                setState(971);
+                        setState(971);
 				match(T_CLOSE_P);
 				}
 				break;
-			case 2: {
-                setState(974);
+                    case 2: {
+                        setState(974);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==T_AS) {
                     {
                         setState(973);
 					match(T_AS);
-					}
+                    }
                 }
 
-                setState(976);
+                        setState(976);
 				select_stmt();
 				}
 				break;
-			case 3: {
-                setState(977);
+                    case 3: {
+                        setState(977);
 				match(T_OPEN_P);
-                setState(978);
+                        setState(978);
 				create_table_columns();
-                setState(979);
+                        setState(979);
 				match(T_CLOSE_P);
 				}
 				break;
                 }
                 setState(984);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 84, _ctx) ) {
-			case 1: {
-                setState(983);
+                switch (getInterpreter().adaptivePredict(_input, 84, _ctx)) {
+                    case 1: {
+                        setState(983);
 				create_table_options();
 				}
 				break;
@@ -7188,61 +5227,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_table_stmtContext extends ParserRuleContext {
-        public TerminalNode T_CREATE() {
-            return getToken(HplsqlParser.T_CREATE, 0);
-        }
-
-        public TerminalNode T_TABLE() {
-            return getToken(HplsqlParser.T_TABLE, 0);
-        }
-
-        public Table_nameContext table_name() {
-            return getRuleContext(Table_nameContext.class, 0);
-        }
-
-        public Create_table_definitionContext create_table_definition() {
-            return getRuleContext(Create_table_definitionContext.class, 0);
-        }
-
-        public TerminalNode T_IF() {
-            return getToken(HplsqlParser.T_IF, 0);
-        }
-
-        public TerminalNode T_NOT() {
-            return getToken(HplsqlParser.T_NOT, 0);
-        }
-
-        public TerminalNode T_EXISTS() {
-            return getToken(HplsqlParser.T_EXISTS, 0);
-        }
-
-        public Create_table_preoptionsContext create_table_preoptions() {
-            return getRuleContext(Create_table_preoptionsContext.class, 0);
-        }
-
-        public Create_table_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_table_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Create_table_columnsContext create_table_columns() throws RecognitionException {
@@ -7258,13 +5242,13 @@ public class HplsqlParser extends Parser {
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==T_COMMA) {
-				{
+                {
                     {
                         setState(987);
 				match(T_COMMA);
                         setState(988);
 				create_table_columns_item();
-				}
+                    }
                 }
                 setState(993);
 				_errHandler.sync(this);
@@ -7281,68 +5265,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_local_temp_table_stmtContext extends ParserRuleContext {
-        public TerminalNode T_CREATE() {
-            return getToken(HplsqlParser.T_CREATE, 0);
-        }
-
-        public TerminalNode T_TABLE() {
-            return getToken(HplsqlParser.T_TABLE, 0); }
-		public IdentContext ident() {
-			return getRuleContext(IdentContext.class,0);
-        }
-
-        public Create_table_definitionContext create_table_definition() {
-            return getRuleContext(Create_table_definitionContext.class, 0);
-        }
-
-        public TerminalNode T_LOCAL() {
-            return getToken(HplsqlParser.T_LOCAL, 0);
-        }
-
-        public TerminalNode T_TEMPORARY() {
-            return getToken(HplsqlParser.T_TEMPORARY, 0);
-        }
-
-        public TerminalNode T_VOLATILE() {
-            return getToken(HplsqlParser.T_VOLATILE, 0);
-        }
-
-        public Create_table_preoptionsContext create_table_preoptions() {
-            return getRuleContext(Create_table_preoptionsContext.class, 0);
-        }
-
-        public TerminalNode T_SET() {
-            return getToken(HplsqlParser.T_SET, 0);
-        }
-
-        public TerminalNode T_MULTISET() {
-            return getToken(HplsqlParser.T_MULTISET, 0);
-        }
-
-        public Create_local_temp_table_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_local_temp_table_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_local_temp_table_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_local_temp_table_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_local_temp_table_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Create_table_columns_itemContext create_table_columns_item() throws RecognitionException {
@@ -7368,7 +5290,7 @@ public class HplsqlParser extends Parser {
                     {
                         setState(996);
 					dtype_len();
-					}
+                    }
                 }
 
                 setState(1002);
@@ -7376,7 +5298,7 @@ public class HplsqlParser extends Parser {
                 _alt = getInterpreter().adaptivePredict(_input, 87,_ctx);
 				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 					if ( _alt==1 ) {
-						{
+                        {
                             {
                                 setState(999);
 						dtype_attr();
@@ -7385,17 +5307,17 @@ public class HplsqlParser extends Parser {
                     }
                     setState(1004);
 					_errHandler.sync(this);
-                    _alt = getInterpreter().adaptivePredict(_input, 87,_ctx);
+                    _alt = getInterpreter().adaptivePredict(_input, 87, _ctx);
                 }
                 setState(1008);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
                 while (_la == T_AUTO_INCREMENT || _la == T_DEFAULT || _la == T_ENABLE || _la == T_IDENTITY || ((((_la - 166)) & ~0x3f) == 0 && ((1L << (_la - 166)) & ((1L << (T_NOT - 166)) | (1L << (T_NULL - 166)) | (1L << (T_PRIMARY - 166)) | (1L << (T_REFERENCES - 166)))) != 0) || ((((_la - 249)) & ~0x3f) == 0 && ((1L << (_la - 249)) & ((1L << (T_UNIQUE - 249)) | (1L << (T_WITH - 249)) | (1L << (T_COLON - 249)) | (1L << (T_EQUAL - 249)))) != 0)) {
-					{
+                    {
                         {
                             setState(1005);
 					create_table_column_inline_cons();
-					}
+                        }
                     }
                     setState(1010);
 					_errHandler.sync(this);
@@ -7415,7 +5337,7 @@ public class HplsqlParser extends Parser {
 					match(T_CONSTRAINT);
                         setState(1012);
 					ident();
-					}
+                    }
                 }
 
                 setState(1015);
@@ -7433,54 +5355,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_table_definitionContext extends ParserRuleContext {
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public Select_stmtContext select_stmt() {
-            return getRuleContext(Select_stmtContext.class, 0);
-        }
-
-        public TerminalNode T_CLOSE_P() {
-            return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public Create_table_columnsContext create_table_columns() {
-            return getRuleContext(Create_table_columnsContext.class, 0);
-        }
-
-        public Create_table_optionsContext create_table_options() {
-            return getRuleContext(Create_table_optionsContext.class, 0);
-        }
-
-        public TerminalNode T_AS() {
-            return getToken(HplsqlParser.T_AS, 0);
-        }
-
-        public Create_table_definitionContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_table_definition; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_definition(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_definition(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_definition(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Column_nameContext column_name() throws RecognitionException {
@@ -7502,42 +5376,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_table_columnsContext extends ParserRuleContext {
-        public List<Create_table_columns_itemContext> create_table_columns_item() {
-            return getRuleContexts(Create_table_columns_itemContext.class);
-        }
-
-        public Create_table_columns_itemContext create_table_columns_item(int i) {
-            return getRuleContext(Create_table_columns_itemContext.class,i);
-		}
-		public List<TerminalNode> T_COMMA() { return getTokens(HplsqlParser.T_COMMA); }
-		public TerminalNode T_COMMA(int i) {
-			return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public Create_table_columnsContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_table_columns; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_columns(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_columns(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_columns(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Create_table_column_inline_consContext create_table_column_inline_cons() throws RecognitionException {
@@ -7569,7 +5407,7 @@ public class HplsqlParser extends Parser {
                     {
                         setState(1021);
 					match(T_NOT);
-					}
+                    }
                 }
 
                 setState(1024);
@@ -7609,11 +5447,11 @@ public class HplsqlParser extends Parser {
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==T_ON) {
-					{
+                    {
                         {
                             setState(1033);
 					create_table_fk_action();
-					}
+                        }
                     }
                     setState(1038);
 					_errHandler.sync(this);
@@ -7634,13 +5472,13 @@ public class HplsqlParser extends Parser {
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==T_COMMA) {
-					{
+                    {
                         {
                             setState(1042);
 					match(T_COMMA);
                             setState(1043);
 					match(L_INT);
-					}
+                        }
                     }
                     setState(1048);
 					_errHandler.sync(this);
@@ -7677,70 +5515,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_table_columns_itemContext extends ParserRuleContext {
-        public Column_nameContext column_name() {
-            return getRuleContext(Column_nameContext.class, 0);
-        }
-
-        public DtypeContext dtype() {
-            return getRuleContext(DtypeContext.class, 0);
-        }
-
-        public Dtype_lenContext dtype_len() {
-            return getRuleContext(Dtype_lenContext.class, 0);
-        }
-
-        public List<Dtype_attrContext> dtype_attr() {
-            return getRuleContexts(Dtype_attrContext.class);
-        }
-
-        public Dtype_attrContext dtype_attr(int i) {
-            return getRuleContext(Dtype_attrContext.class, i);
-        }
-
-        public List<Create_table_column_inline_consContext> create_table_column_inline_cons() {
-            return getRuleContexts(Create_table_column_inline_consContext.class);
-        }
-
-        public Create_table_column_inline_consContext create_table_column_inline_cons(int i) {
-            return getRuleContext(Create_table_column_inline_consContext.class, i);
-        }
-
-        public Create_table_column_consContext create_table_column_cons() {
-            return getRuleContext(Create_table_column_consContext.class, 0);
-        }
-
-        public TerminalNode T_CONSTRAINT() {
-            return getToken(HplsqlParser.T_CONSTRAINT, 0);
-        }
-
-        public IdentContext ident() {
-            return getRuleContext(IdentContext.class, 0);
-        }
-
-        public Create_table_columns_itemContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_table_columns_item; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_columns_item(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_columns_item(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_columns_item(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Create_table_column_consContext create_table_column_cons() throws RecognitionException {
@@ -7765,7 +5539,7 @@ public class HplsqlParser extends Parser {
                     {
                         setState(1056);
 					match(T_CLUSTERED);
-					}
+                    }
                 }
 
                 setState(1059);
@@ -7787,14 +5561,14 @@ public class HplsqlParser extends Parser {
 						_errHandler.reportMatch(this);
 						consume();
 					}
-					}
+                    }
                 }
 
                 setState(1071);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==T_COMMA) {
-					{
+                    {
                         {
                             setState(1064);
 					match(T_COMMA);
@@ -7818,7 +5592,7 @@ public class HplsqlParser extends Parser {
 						}
 					}
 
-					}
+                        }
                     }
                     setState(1073);
 					_errHandler.sync(this);
@@ -7833,7 +5607,7 @@ public class HplsqlParser extends Parser {
                     {
                         setState(1075);
 					match(T_ENABLE);
-					}
+                    }
                 }
 
                 setState(1079);
@@ -7863,13 +5637,13 @@ public class HplsqlParser extends Parser {
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==T_COMMA) {
-					{
+                    {
                         {
                             setState(1085);
 					match(T_COMMA);
                             setState(1086);
 					ident();
-					}
+                        }
                     }
                     setState(1091);
 					_errHandler.sync(this);
@@ -7889,13 +5663,13 @@ public class HplsqlParser extends Parser {
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==T_COMMA) {
-					{
+                    {
                         {
                             setState(1097);
 					match(T_COMMA);
                             setState(1098);
 					ident();
-					}
+                        }
                     }
                     setState(1103);
 					_errHandler.sync(this);
@@ -7907,11 +5681,11 @@ public class HplsqlParser extends Parser {
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==T_ON) {
-					{
+                    {
                         {
                             setState(1105);
 					create_table_fk_action();
-					}
+                        }
                     }
                     setState(1110);
 					_errHandler.sync(this);
@@ -7932,33 +5706,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Column_nameContext extends ParserRuleContext {
-        public IdentContext ident() {
-            return getRuleContext(IdentContext.class, 0);
-        }
-
-        public Column_nameContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_column_name; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterColumn_name(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitColumn_name(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitColumn_name(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Create_table_fk_actionContext create_table_fk_action() throws RecognitionException {
@@ -7982,35 +5729,35 @@ public class HplsqlParser extends Parser {
             }
                 setState(1123);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 105, _ctx) ) {
-			case 1: {
-                setState(1115);
+                switch (getInterpreter().adaptivePredict(_input, 105, _ctx)) {
+                    case 1: {
+                        setState(1115);
 				match(T_NO);
-                setState(1116);
+                        setState(1116);
 				match(T_ACTION);
 				}
 				break;
-			case 2: {
-                setState(1117);
+                    case 2: {
+                        setState(1117);
 				match(T_RESTRICT);
 				}
 				break;
-			case 3: {
-                setState(1118);
+                    case 3: {
+                        setState(1118);
 				match(T_SET);
-                setState(1119);
+                        setState(1119);
 				match(T_NULL);
 				}
 				break;
-			case 4: {
-                setState(1120);
+                    case 4: {
+                        setState(1120);
 				match(T_SET);
-                setState(1121);
+                        setState(1121);
 				match(T_DEFAULT);
 				}
 				break;
-			case 5: {
-                setState(1122);
+                    case 5: {
+                        setState(1122);
 				match(T_CASCADE);
 				}
 				break;
@@ -8026,110 +5773,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_table_column_inline_consContext extends ParserRuleContext {
-        public Dtype_defaultContext dtype_default() {
-            return getRuleContext(Dtype_defaultContext.class, 0);
-        }
-
-        public TerminalNode T_NULL() {
-            return getToken(HplsqlParser.T_NULL, 0);
-        }
-
-        public TerminalNode T_NOT() {
-            return getToken(HplsqlParser.T_NOT, 0);
-        }
-
-        public TerminalNode T_PRIMARY() {
-            return getToken(HplsqlParser.T_PRIMARY, 0);
-        }
-
-        public TerminalNode T_KEY() {
-            return getToken(HplsqlParser.T_KEY, 0);
-        }
-
-        public TerminalNode T_UNIQUE() {
-            return getToken(HplsqlParser.T_UNIQUE, 0);
-        }
-
-        public TerminalNode T_REFERENCES() {
-            return getToken(HplsqlParser.T_REFERENCES, 0);
-        }
-
-        public Table_nameContext table_name() {
-            return getRuleContext(Table_nameContext.class, 0);
-        }
-
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public IdentContext ident() {
-            return getRuleContext(IdentContext.class, 0);
-        }
-
-        public TerminalNode T_CLOSE_P() {
-            return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public List<Create_table_fk_actionContext> create_table_fk_action() {
-            return getRuleContexts(Create_table_fk_actionContext.class);
-        }
-
-        public Create_table_fk_actionContext create_table_fk_action(int i) {
-            return getRuleContext(Create_table_fk_actionContext.class, i);
-        }
-
-        public TerminalNode T_IDENTITY() {
-            return getToken(HplsqlParser.T_IDENTITY, 0);
-        }
-
-        public List<TerminalNode> L_INT() {
-            return getTokens(HplsqlParser.L_INT);
-        }
-
-        public TerminalNode L_INT(int i) {
-            return getToken(HplsqlParser.L_INT, i);
-        }
-
-        public List<TerminalNode> T_COMMA() {
-            return getTokens(HplsqlParser.T_COMMA);
-        }
-
-        public TerminalNode T_COMMA(int i) {
-            return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public TerminalNode T_AUTO_INCREMENT() {
-            return getToken(HplsqlParser.T_AUTO_INCREMENT, 0);
-        }
-
-        public TerminalNode T_ENABLE() {
-            return getToken(HplsqlParser.T_ENABLE, 0);
-        }
-
-        public Create_table_column_inline_consContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_table_column_inline_cons; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_column_inline_cons(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_column_inline_cons(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_column_inline_cons(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Create_table_preoptionsContext create_table_preoptions() throws RecognitionException {
@@ -8143,11 +5786,11 @@ public class HplsqlParser extends Parser {
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
-				{
+                {
                     {
                         setState(1125);
 				create_table_preoptions_item();
-				}
+                    }
                 }
                 setState(1128);
 				_errHandler.sync(this);
@@ -8164,118 +5807,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_table_column_consContext extends ParserRuleContext {
-        public TerminalNode T_PRIMARY() {
-            return getToken(HplsqlParser.T_PRIMARY, 0);
-        }
-
-        public TerminalNode T_KEY() {
-            return getToken(HplsqlParser.T_KEY, 0);
-        }
-
-        public List<TerminalNode> T_OPEN_P() {
-            return getTokens(HplsqlParser.T_OPEN_P);
-        }
-
-        public TerminalNode T_OPEN_P(int i) {
-            return getToken(HplsqlParser.T_OPEN_P, i);
-        }
-
-        public List<IdentContext> ident() {
-            return getRuleContexts(IdentContext.class);
-        }
-
-        public IdentContext ident(int i) {
-            return getRuleContext(IdentContext.class, i);
-        }
-
-        public List<TerminalNode> T_CLOSE_P() {
-            return getTokens(HplsqlParser.T_CLOSE_P);
-        }
-
-        public TerminalNode T_CLOSE_P(int i) {
-            return getToken(HplsqlParser.T_CLOSE_P, i);
-        }
-
-        public TerminalNode T_CLUSTERED() {
-            return getToken(HplsqlParser.T_CLUSTERED, 0);
-        }
-
-        public List<TerminalNode> T_COMMA() {
-            return getTokens(HplsqlParser.T_COMMA);
-        }
-
-        public TerminalNode T_COMMA(int i) {
-            return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public TerminalNode T_ENABLE() {
-            return getToken(HplsqlParser.T_ENABLE, 0);
-        }
-
-        public Index_storage_clauseContext index_storage_clause() {
-            return getRuleContext(Index_storage_clauseContext.class, 0);
-        }
-
-        public List<TerminalNode> T_ASC() {
-            return getTokens(HplsqlParser.T_ASC);
-        }
-
-        public TerminalNode T_ASC(int i) {
-            return getToken(HplsqlParser.T_ASC, i);
-        }
-
-        public List<TerminalNode> T_DESC() {
-            return getTokens(HplsqlParser.T_DESC);
-        }
-
-        public TerminalNode T_DESC(int i) {
-            return getToken(HplsqlParser.T_DESC, i);
-        }
-
-        public TerminalNode T_FOREIGN() {
-            return getToken(HplsqlParser.T_FOREIGN, 0);
-        }
-
-        public TerminalNode T_REFERENCES() {
-            return getToken(HplsqlParser.T_REFERENCES, 0);
-        }
-
-        public Table_nameContext table_name() {
-            return getRuleContext(Table_nameContext.class, 0);
-        }
-
-        public List<Create_table_fk_actionContext> create_table_fk_action() {
-            return getRuleContexts(Create_table_fk_actionContext.class);
-        }
-
-        public Create_table_fk_actionContext create_table_fk_action(int i) {
-            return getRuleContext(Create_table_fk_actionContext.class, i);
-        }
-
-        public Create_table_column_consContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_table_column_cons; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_column_cons(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_column_cons(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_column_cons(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Create_table_preoptions_itemContext create_table_preoptions_item() throws RecognitionException {
@@ -8315,67 +5846,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_table_fk_actionContext extends ParserRuleContext {
-        public TerminalNode T_ON() {
-            return getToken(HplsqlParser.T_ON, 0);
-        }
-
-        public TerminalNode T_UPDATE() {
-            return getToken(HplsqlParser.T_UPDATE, 0);
-        }
-
-        public TerminalNode T_DELETE() {
-            return getToken(HplsqlParser.T_DELETE, 0); }
-		public TerminalNode T_NO() { return getToken(HplsqlParser.T_NO, 0);
-        }
-
-        public TerminalNode T_ACTION() {
-            return getToken(HplsqlParser.T_ACTION, 0);
-        }
-
-        public TerminalNode T_RESTRICT() {
-            return getToken(HplsqlParser.T_RESTRICT, 0);
-        }
-
-        public TerminalNode T_SET() {
-            return getToken(HplsqlParser.T_SET, 0);
-        }
-
-        public TerminalNode T_NULL() {
-            return getToken(HplsqlParser.T_NULL, 0);
-        }
-
-        public TerminalNode T_DEFAULT() {
-            return getToken(HplsqlParser.T_DEFAULT, 0);
-        }
-
-        public TerminalNode T_CASCADE() {
-            return getToken(HplsqlParser.T_CASCADE, 0);
-        }
-
-        public Create_table_fk_actionContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_table_fk_action; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_fk_action(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_fk_action(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_fk_action(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Create_table_preoptions_td_itemContext create_table_preoptions_td_item() throws RecognitionException {
@@ -8392,7 +5862,7 @@ public class HplsqlParser extends Parser {
                 {
                     setState(1135);
 				match(T_NO);
-				}
+                }
             }
 
                 setState(1138);
@@ -8416,38 +5886,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_table_preoptionsContext extends ParserRuleContext {
-        public List<Create_table_preoptions_itemContext> create_table_preoptions_item() {
-            return getRuleContexts(Create_table_preoptions_itemContext.class);
-        }
-
-        public Create_table_preoptions_itemContext create_table_preoptions_item(int i) {
-            return getRuleContext(Create_table_preoptions_itemContext.class, i);
-        }
-
-        public Create_table_preoptionsContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_table_preoptions; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_preoptions(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_preoptions(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_preoptions(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Create_table_optionsContext create_table_options() throws RecognitionException {
@@ -8462,10 +5900,9 @@ public class HplsqlParser extends Parser {
 			_alt = 1;
 			do {
 				switch (_alt) {
-				case 1:
-					{
-                        {
-                            setState(1140);
+				case 1: {
+                    {
+                        setState(1140);
 					create_table_options_item();
 					}
 					}
@@ -8488,41 +5925,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_table_preoptions_itemContext extends ParserRuleContext {
-        public TerminalNode T_COMMA() {
-            return getToken(HplsqlParser.T_COMMA, 0);
-        }
-
-        public Create_table_preoptions_td_itemContext create_table_preoptions_td_item() {
-            return getRuleContext(Create_table_preoptions_td_itemContext.class,0);
-		}
-		public Create_table_options_hive_itemContext create_table_options_hive_item() {
-			return getRuleContext(Create_table_options_hive_itemContext.class,0);
-        }
-
-        public Create_table_preoptions_itemContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_table_preoptions_item; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_preoptions_item(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_preoptions_item(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_preoptions_item(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Create_table_options_itemContext create_table_options_item() throws RecognitionException {
@@ -8607,7 +6009,7 @@ public class HplsqlParser extends Parser {
                     enterOuterAlt(_localctx, 9);
                 {
                     setState(1156);
-                    create_table_delemiter();
+                    create_table_delimiter();
                 }
                 break;
 			}
@@ -8621,42 +6023,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_table_preoptions_td_itemContext extends ParserRuleContext {
-        public TerminalNode T_LOG() {
-            return getToken(HplsqlParser.T_LOG, 0);
-        }
-
-        public TerminalNode T_FALLBACK() {
-            return getToken(HplsqlParser.T_FALLBACK, 0);
-        }
-
-        public TerminalNode T_NO() {
-            return getToken(HplsqlParser.T_NO, 0);
-        }
-
-        public Create_table_preoptions_td_itemContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_table_preoptions_td_item; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_preoptions_td_item(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_preoptions_td_item(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_preoptions_td_item(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Create_table_options_ora_itemContext create_table_options_ora_item() throws RecognitionException {
@@ -8739,7 +6105,7 @@ public class HplsqlParser extends Parser {
                 setState(1170);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				do {
+                do {
                     {
                         setState(1170);
 					_errHandler.sync(this);
@@ -9003,19 +6369,19 @@ public class HplsqlParser extends Parser {
 					case T_VARIANCE:
 					case T_USER:
 					case T_WRITE:
-					case L_ID: {
-                        setState(1168);
+                        case L_ID: {
+                            setState(1168);
 						ident();
 						}
 						break;
-					case L_INT: {
-                        setState(1169);
+                        case L_INT: {
+                            setState(1169);
 						match(L_INT);
 						}
 						break;
 					default:
 						throw new NoViableAltException(this);
-					}
+                    }
                     }
                     setState(1172);
 					_errHandler.sync(this);
@@ -9048,38 +6414,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_table_optionsContext extends ParserRuleContext {
-        public List<Create_table_options_itemContext> create_table_options_item() {
-            return getRuleContexts(Create_table_options_itemContext.class);
-        }
-
-        public Create_table_options_itemContext create_table_options_item(int i) {
-            return getRuleContext(Create_table_options_itemContext.class, i);
-        }
-
-        public Create_table_optionsContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_table_options; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_options(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_options(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_options(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Create_table_options_db2_itemContext create_table_options_db2_item() throws RecognitionException {
@@ -9100,7 +6434,7 @@ public class HplsqlParser extends Parser {
                     {
                         setState(1179);
 					match(T_INDEX);
-					}
+                    }
                 }
 
                 setState(1182);
@@ -9135,13 +6469,13 @@ public class HplsqlParser extends Parser {
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==T_COMMA) {
-					{
+                    {
                         {
                             setState(1191);
 					match(T_COMMA);
                             setState(1192);
 					ident();
-					}
+                        }
                     }
                     setState(1197);
 					_errHandler.sync(this);
@@ -9161,7 +6495,7 @@ public class HplsqlParser extends Parser {
                     {
                         setState(1200);
 					match(T_NOT);
-					}
+                    }
                 }
 
                 setState(1203);
@@ -9239,7 +6573,7 @@ public class HplsqlParser extends Parser {
                     {
                         setState(1214);
 					match(T_UNIQUE);
-					}
+                    }
                 }
 
                 setState(1217);
@@ -9254,13 +6588,13 @@ public class HplsqlParser extends Parser {
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==T_COMMA) {
-					{
+                    {
                         {
                             setState(1221);
 					match(T_COMMA);
                             setState(1222);
 					ident();
-					}
+                        }
                     }
                     setState(1227);
 					_errHandler.sync(this);
@@ -9332,106 +6666,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_table_options_ora_itemContext extends ParserRuleContext {
-        public TerminalNode T_SEGMENT() {
-            return getToken(HplsqlParser.T_SEGMENT, 0);
-        }
-
-        public TerminalNode T_CREATION() {
-            return getToken(HplsqlParser.T_CREATION, 0);
-        }
-
-        public TerminalNode T_IMMEDIATE() {
-            return getToken(HplsqlParser.T_IMMEDIATE, 0);
-        }
-
-        public TerminalNode T_DEFERRED() {
-            return getToken(HplsqlParser.T_DEFERRED, 0);
-        }
-
-        public List<TerminalNode> L_INT() {
-            return getTokens(HplsqlParser.L_INT);
-        }
-
-        public TerminalNode L_INT(int i) {
-            return getToken(HplsqlParser.L_INT, i);
-        }
-
-        public TerminalNode T_PCTFREE() {
-            return getToken(HplsqlParser.T_PCTFREE, 0);
-        }
-
-        public TerminalNode T_PCTUSED() {
-            return getToken(HplsqlParser.T_PCTUSED, 0);
-        }
-
-        public TerminalNode T_INITRANS() {
-            return getToken(HplsqlParser.T_INITRANS, 0);
-        }
-
-        public TerminalNode T_MAXTRANS() {
-            return getToken(HplsqlParser.T_MAXTRANS, 0);
-        }
-
-        public TerminalNode T_NOCOMPRESS() {
-            return getToken(HplsqlParser.T_NOCOMPRESS, 0);
-        }
-
-        public TerminalNode T_LOGGING() {
-            return getToken(HplsqlParser.T_LOGGING, 0);
-        }
-
-        public TerminalNode T_NOLOGGING() {
-            return getToken(HplsqlParser.T_NOLOGGING, 0);
-        }
-
-        public TerminalNode T_STORAGE() {
-            return getToken(HplsqlParser.T_STORAGE, 0);
-        }
-
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public TerminalNode T_CLOSE_P() {
-            return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public List<IdentContext> ident() {
-            return getRuleContexts(IdentContext.class);
-        }
-
-        public IdentContext ident(int i) {
-            return getRuleContext(IdentContext.class, i);
-        }
-
-        public TerminalNode T_TABLESPACE() {
-            return getToken(HplsqlParser.T_TABLESPACE, 0);
-        }
-
-        public Create_table_options_ora_itemContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_table_options_ora_item; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_options_ora_item(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_options_ora_item(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_options_ora_item(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Create_table_store_locationContext create_table_store_location() throws RecognitionException {
@@ -9474,130 +6708,9 @@ public class HplsqlParser extends Parser {
         return _localctx;
     }
 
-    public static class Create_table_options_db2_itemContext extends ParserRuleContext {
-        public TerminalNode T_IN() {
-            return getToken(HplsqlParser.T_IN, 0);
-        }
-
-        public List<IdentContext> ident() {
-            return getRuleContexts(IdentContext.class);
-        }
-
-        public IdentContext ident(int i) {
-            return getRuleContext(IdentContext.class, i);
-        }
-
-        public TerminalNode T_INDEX() {
-            return getToken(HplsqlParser.T_INDEX, 0);
-        }
-
-        public TerminalNode T_WITH() {
-            return getToken(HplsqlParser.T_WITH, 0);
-        }
-
-        public TerminalNode T_REPLACE() {
-            return getToken(HplsqlParser.T_REPLACE, 0);
-        }
-
-        public TerminalNode T_DISTRIBUTE() {
-            return getToken(HplsqlParser.T_DISTRIBUTE, 0);
-        }
-
-        public TerminalNode T_BY() {
-            return getToken(HplsqlParser.T_BY, 0);
-        }
-
-        public TerminalNode T_HASH() {
-            return getToken(HplsqlParser.T_HASH, 0);
-        }
-
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public TerminalNode T_CLOSE_P() {
-            return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public List<TerminalNode> T_COMMA() {
-            return getTokens(HplsqlParser.T_COMMA);
-        }
-
-        public TerminalNode T_COMMA(int i) {
-            return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public TerminalNode T_LOGGED() {
-            return getToken(HplsqlParser.T_LOGGED, 0);
-        }
-
-        public TerminalNode T_NOT() {
-            return getToken(HplsqlParser.T_NOT, 0);
-        }
-
-        public TerminalNode T_COMPRESS() {
-            return getToken(HplsqlParser.T_COMPRESS, 0);
-        }
-
-        public TerminalNode T_YES() {
-            return getToken(HplsqlParser.T_YES, 0);
-        }
-
-        public TerminalNode T_NO() {
-            return getToken(HplsqlParser.T_NO, 0);
-        }
-
-        public TerminalNode T_DEFINITION() {
-            return getToken(HplsqlParser.T_DEFINITION, 0);
-        }
-
-        public TerminalNode T_ONLY() {
-            return getToken(HplsqlParser.T_ONLY, 0);
-        }
-
-        public TerminalNode T_RESTRICT() {
-            return getToken(HplsqlParser.T_RESTRICT, 0);
-        }
-
-        public TerminalNode T_ON() {
-            return getToken(HplsqlParser.T_ON, 0);
-        }
-
-        public TerminalNode T_DROP() {
-            return getToken(HplsqlParser.T_DROP, 0);
-        }
-
-        public Create_table_options_db2_itemContext(ParserRuleContext parent, int invokingState) {
-            super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_table_options_db2_item;
-        }
-
-        @Override
-        public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener)
-                ((HplsqlListener) listener).enterCreate_table_options_db2_item(this);
-        }
-
-        @Override
-        public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_options_db2_item(this);
-        }
-
-        @Override
-        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_options_db2_item(this);
-            else return visitor.visitChildren(this);
-        }
-    }
-
-    public final Create_table_delemiterContext create_table_delemiter() throws RecognitionException {
-        Create_table_delemiterContext _localctx = new Create_table_delemiterContext(_ctx, getState());
-        enterRule(_localctx, 136, RULE_create_table_delemiter);
+    public final Create_table_delimiterContext create_table_delimiter() throws RecognitionException {
+        Create_table_delimiterContext _localctx = new Create_table_delimiterContext(_ctx, getState());
+        enterRule(_localctx, 136, RULE_create_table_delimiter);
         try {
             enterOuterAlt(_localctx, 1);
             {
@@ -9616,74 +6729,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_table_options_td_itemContext extends ParserRuleContext {
-        public TerminalNode T_PRIMARY() {
-            return getToken(HplsqlParser.T_PRIMARY, 0);
-        }
-
-        public TerminalNode T_INDEX() {
-            return getToken(HplsqlParser.T_INDEX, 0);
-        }
-
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public List<IdentContext> ident() {
-            return getRuleContexts(IdentContext.class);
-        }
-
-        public IdentContext ident(int i) {
-            return getRuleContext(IdentContext.class, i);
-        }
-
-        public TerminalNode T_CLOSE_P() {
-            return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public TerminalNode T_UNIQUE() {
-            return getToken(HplsqlParser.T_UNIQUE, 0);
-        }
-
-        public List<TerminalNode> T_COMMA() {
-            return getTokens(HplsqlParser.T_COMMA);
-        }
-
-        public TerminalNode T_COMMA(int i) {
-            return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public TerminalNode T_WITH() {
-            return getToken(HplsqlParser.T_WITH, 0);
-        }
-
-        public TerminalNode T_DATA() {
-            return getToken(HplsqlParser.T_DATA, 0);
-        }
-
-        public Create_table_options_td_itemContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_table_options_td_item; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_options_td_item(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_options_td_item(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_options_td_item(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Create_table_hive_row_formatContext create_table_hive_row_format() throws RecognitionException {
@@ -9704,7 +6749,7 @@ public class HplsqlParser extends Parser {
                 _alt = getInterpreter().adaptivePredict(_input, 123,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
-					{
+                    {
                         {
                             setState(1255);
 					create_table_hive_row_format_fields();
@@ -9726,43 +6771,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_table_options_hive_itemContext extends ParserRuleContext {
-        public Create_table_hive_row_formatContext create_table_hive_row_format() {
-            return getRuleContext(Create_table_hive_row_formatContext.class, 0);
-        }
-
-        public TerminalNode T_STORED() {
-            return getToken(HplsqlParser.T_STORED, 0); }
-		public TerminalNode T_AS() { return getToken(HplsqlParser.T_AS, 0);
-        }
-
-        public IdentContext ident() {
-            return getRuleContext(IdentContext.class, 0);
-        }
-
-        public Create_table_options_hive_itemContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_table_options_hive_item; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_options_hive_item(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_options_hive_item(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_options_hive_item(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Create_table_hive_row_format_fieldsContext create_table_hive_row_format_fields() throws RecognitionException {
@@ -9785,13 +6793,13 @@ public class HplsqlParser extends Parser {
 				expr(0);
                 setState(1268);
 				_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 124, _ctx) ) {
-				case 1: {
-                    setState(1265);
+                switch (getInterpreter().adaptivePredict(_input, 124, _ctx)) {
+                    case 1: {
+                        setState(1265);
 					match(T_ESCAPED);
-                    setState(1266);
+                        setState(1266);
 					match(T_BY);
-                    setState(1267);
+                        setState(1267);
 					expr(0);
 					}
 					break;
@@ -9929,7 +6937,7 @@ public class HplsqlParser extends Parser {
                     {
                         setState(1297);
 					match(T_EQUAL);
-					}
+                    }
                 }
 
                 setState(1300);
@@ -9948,7 +6956,7 @@ public class HplsqlParser extends Parser {
                     {
                         setState(1302);
 					match(T_EQUAL);
-					}
+                    }
                 }
 
                 setState(1305);
@@ -9967,21 +6975,21 @@ public class HplsqlParser extends Parser {
                     {
                         setState(1306);
 					match(T_DEFAULT);
-					}
+                    }
                 }
 
                 setState(1312);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
-				case T_CHARACTER: {
-                    setState(1309);
+                    case T_CHARACTER: {
+                        setState(1309);
 					match(T_CHARACTER);
-                    setState(1310);
+                        setState(1310);
 					match(T_SET);
 					}
 					break;
-				case T_CHARSET: {
-                    setState(1311);
+                    case T_CHARSET: {
+                        setState(1311);
 					match(T_CHARSET);
 					}
 					break;
@@ -9995,7 +7003,7 @@ public class HplsqlParser extends Parser {
                     {
                         setState(1314);
 					match(T_EQUAL);
-					}
+                    }
                 }
 
                 setState(1317);
@@ -10014,7 +7022,7 @@ public class HplsqlParser extends Parser {
                     {
                         setState(1319);
 					match(T_EQUAL);
-					}
+                    }
                 }
 
                 setState(1322);
@@ -10120,9 +7128,9 @@ public class HplsqlParser extends Parser {
 				match(T_DOUBLE);
                 setState(1337);
 				_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 134, _ctx) ) {
-				case 1: {
-                    setState(1336);
+                switch (getInterpreter().adaptivePredict(_input, 134, _ctx)) {
+                    case 1: {
+                        setState(1336);
 					match(T_PRECISION);
 					}
 					break;
@@ -10313,12 +7321,12 @@ public class HplsqlParser extends Parser {
 				ident();
                 setState(1368);
 				_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 135, _ctx) ) {
-				case 1: {
-                    setState(1366);
+                switch (getInterpreter().adaptivePredict(_input, 135, _ctx)) {
+                    case 1: {
+                        setState(1366);
 					match(T__2);
-                    {
-                        setState(1367);
+                        {
+                            setState(1367);
 					match(T_TYPE);
 					}
 					}
@@ -10373,7 +7381,7 @@ public class HplsqlParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				}
+                }
             }
 
                 setState(1379);
@@ -10385,7 +7393,7 @@ public class HplsqlParser extends Parser {
 				match(T_COMMA);
                     setState(1378);
 				match(L_INT);
-				}
+                }
             }
 
                 setState(1381);
@@ -10401,50 +7409,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_table_hive_row_formatContext extends ParserRuleContext {
-        public TerminalNode T_ROW() {
-            return getToken(HplsqlParser.T_ROW, 0);
-        }
-
-        public TerminalNode T_FORMAT() {
-            return getToken(HplsqlParser.T_FORMAT, 0);
-        }
-
-        public TerminalNode T_DELIMITED() {
-            return getToken(HplsqlParser.T_DELIMITED, 0);
-        }
-
-        public List<Create_table_hive_row_format_fieldsContext> create_table_hive_row_format_fields() {
-            return getRuleContexts(Create_table_hive_row_format_fieldsContext.class);
-        }
-
-        public Create_table_hive_row_format_fieldsContext create_table_hive_row_format_fields(int i) {
-            return getRuleContext(Create_table_hive_row_format_fieldsContext.class, i);
-        }
-
-        public Create_table_hive_row_formatContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_table_hive_row_format; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_hive_row_format(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_hive_row_format(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_hive_row_format(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Dtype_attrContext dtype_attr() throws RecognitionException {
@@ -10465,7 +7429,7 @@ public class HplsqlParser extends Parser {
                     {
                         setState(1383);
 					match(T_NOT);
-					}
+                    }
                 }
 
                 setState(1386);
@@ -10493,7 +7457,7 @@ public class HplsqlParser extends Parser {
                     {
                         setState(1390);
 					match(T_NOT);
-					}
+                    }
                 }
 
                 setState(1393);
@@ -10519,91 +7483,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_table_hive_row_format_fieldsContext extends ParserRuleContext {
-        public TerminalNode T_FIELDS() {
-            return getToken(HplsqlParser.T_FIELDS, 0);
-        }
-
-        public TerminalNode T_TERMINATED() {
-            return getToken(HplsqlParser.T_TERMINATED, 0);
-        }
-
-        public List<TerminalNode> T_BY() {
-            return getTokens(HplsqlParser.T_BY);
-        }
-
-        public TerminalNode T_BY(int i) {
-            return getToken(HplsqlParser.T_BY, i);
-        }
-
-        public List<ExprContext> expr() {
-            return getRuleContexts(ExprContext.class);
-        }
-
-        public ExprContext expr(int i) {
-            return getRuleContext(ExprContext.class, i);
-        }
-
-        public TerminalNode T_ESCAPED() {
-            return getToken(HplsqlParser.T_ESCAPED, 0);
-        }
-
-        public TerminalNode T_COLLECTION() {
-            return getToken(HplsqlParser.T_COLLECTION, 0);
-        }
-
-        public TerminalNode T_ITEMS() {
-            return getToken(HplsqlParser.T_ITEMS, 0);
-        }
-
-        public TerminalNode T_MAP() {
-            return getToken(HplsqlParser.T_MAP, 0);
-        }
-
-        public TerminalNode T_KEYS() {
-            return getToken(HplsqlParser.T_KEYS, 0);
-        }
-
-        public TerminalNode T_LINES() {
-            return getToken(HplsqlParser.T_LINES, 0);
-        }
-
-        public TerminalNode T_NULL() {
-            return getToken(HplsqlParser.T_NULL, 0);
-        }
-
-        public TerminalNode T_DEFINED() {
-            return getToken(HplsqlParser.T_DEFINED, 0);
-        }
-
-        public TerminalNode T_AS() {
-            return getToken(HplsqlParser.T_AS, 0);
-        }
-
-        public Create_table_hive_row_format_fieldsContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_table_hive_row_format_fields; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener)
-                ((HplsqlListener) listener).enterCreate_table_hive_row_format_fields(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_hive_row_format_fields(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_hive_row_format_fields(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Dtype_defaultContext dtype_default() throws RecognitionException {
@@ -10625,7 +7504,7 @@ public class HplsqlParser extends Parser {
                     {
                         setState(1396);
 					match(T_COLON);
-					}
+                    }
                 }
 
                 setState(1399);
@@ -10645,16 +7524,16 @@ public class HplsqlParser extends Parser {
                     {
                         setState(1401);
 					match(T_WITH);
-					}
+                    }
                 }
 
                 setState(1404);
 				match(T_DEFAULT);
                 setState(1406);
 				_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 144, _ctx) ) {
-				case 1: {
-                    setState(1405);
+                switch (getInterpreter().adaptivePredict(_input, 144, _ctx)) {
+                    case 1: {
+                        setState(1405);
 					expr(0);
 					}
 					break;
@@ -10674,42 +7553,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_table_options_mssql_itemContext extends ParserRuleContext {
-        public TerminalNode T_ON() {
-            return getToken(HplsqlParser.T_ON, 0);
-        }
-
-        public IdentContext ident() {
-            return getRuleContext(IdentContext.class, 0);
-        }
-
-        public TerminalNode T_TEXTIMAGE_ON() {
-            return getToken(HplsqlParser.T_TEXTIMAGE_ON, 0);
-        }
-
-        public Create_table_options_mssql_itemContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_table_options_mssql_item; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_options_mssql_item(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_options_mssql_item(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_options_mssql_item(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Create_database_stmtContext create_database_stmt() throws RecognitionException {
@@ -10734,13 +7577,13 @@ public class HplsqlParser extends Parser {
             }
                 setState(1415);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 146, _ctx) ) {
-			case 1: {
-                setState(1412);
+                switch (getInterpreter().adaptivePredict(_input, 146, _ctx)) {
+                    case 1: {
+                        setState(1412);
 				match(T_IF);
-                setState(1413);
+                        setState(1413);
 				match(T_NOT);
-                setState(1414);
+                        setState(1414);
 				match(T_EXISTS);
 				}
 				break;
@@ -10752,7 +7595,7 @@ public class HplsqlParser extends Parser {
                 _alt = getInterpreter().adaptivePredict(_input, 147,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
-					{
+                    {
                         {
                             setState(1418);
 					create_database_option();
@@ -10774,64 +7617,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_table_options_mysql_itemContext extends ParserRuleContext {
-        public TerminalNode T_AUTO_INCREMENT() {
-            return getToken(HplsqlParser.T_AUTO_INCREMENT, 0); }
-		public ExprContext expr() {
-			return getRuleContext(ExprContext.class,0);
-        }
-
-        public TerminalNode T_EQUAL() {
-            return getToken(HplsqlParser.T_EQUAL, 0);
-        }
-
-        public TerminalNode T_COMMENT() {
-            return getToken(HplsqlParser.T_COMMENT, 0);
-        }
-
-        public TerminalNode T_CHARACTER() {
-            return getToken(HplsqlParser.T_CHARACTER, 0);
-        }
-
-        public TerminalNode T_SET() {
-            return getToken(HplsqlParser.T_SET, 0);
-        }
-
-        public TerminalNode T_CHARSET() {
-            return getToken(HplsqlParser.T_CHARSET, 0);
-        }
-
-        public TerminalNode T_DEFAULT() {
-            return getToken(HplsqlParser.T_DEFAULT, 0);
-        }
-
-        public TerminalNode T_ENGINE() {
-            return getToken(HplsqlParser.T_ENGINE, 0);
-        }
-
-        public Create_table_options_mysql_itemContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_table_options_mysql_item; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_options_mysql_item(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_options_mysql_item(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_options_mysql_item(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Create_database_optionContext create_database_option() throws RecognitionException {
@@ -10872,187 +7657,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class DtypeContext extends ParserRuleContext {
-        public TerminalNode T_CHAR() {
-            return getToken(HplsqlParser.T_CHAR, 0);
-        }
-
-        public TerminalNode T_BIGINT() {
-            return getToken(HplsqlParser.T_BIGINT, 0);
-        }
-
-        public TerminalNode T_BINARY_DOUBLE() {
-            return getToken(HplsqlParser.T_BINARY_DOUBLE, 0);
-        }
-
-        public TerminalNode T_BINARY_FLOAT() {
-            return getToken(HplsqlParser.T_BINARY_FLOAT, 0);
-        }
-
-        public TerminalNode T_BINARY_INTEGER() {
-            return getToken(HplsqlParser.T_BINARY_INTEGER, 0);
-        }
-
-        public TerminalNode T_BIT() {
-            return getToken(HplsqlParser.T_BIT, 0);
-        }
-
-        public TerminalNode T_DATE() {
-            return getToken(HplsqlParser.T_DATE, 0);
-        }
-
-        public TerminalNode T_DATETIME() {
-            return getToken(HplsqlParser.T_DATETIME, 0);
-        }
-
-        public TerminalNode T_DEC() {
-            return getToken(HplsqlParser.T_DEC, 0);
-        }
-
-        public TerminalNode T_DECIMAL() {
-            return getToken(HplsqlParser.T_DECIMAL, 0);
-        }
-
-        public TerminalNode T_DOUBLE() {
-            return getToken(HplsqlParser.T_DOUBLE, 0);
-        }
-
-        public TerminalNode T_PRECISION() {
-            return getToken(HplsqlParser.T_PRECISION, 0);
-        }
-
-        public TerminalNode T_FLOAT() {
-            return getToken(HplsqlParser.T_FLOAT, 0);
-        }
-
-        public TerminalNode T_INT() {
-            return getToken(HplsqlParser.T_INT, 0);
-        }
-
-        public TerminalNode T_INT2() {
-            return getToken(HplsqlParser.T_INT2, 0);
-        }
-
-        public TerminalNode T_INT4() {
-            return getToken(HplsqlParser.T_INT4, 0);
-        }
-
-        public TerminalNode T_INT8() {
-            return getToken(HplsqlParser.T_INT8, 0);
-        }
-
-        public TerminalNode T_INTEGER() {
-            return getToken(HplsqlParser.T_INTEGER, 0);
-        }
-
-        public TerminalNode T_NCHAR() {
-            return getToken(HplsqlParser.T_NCHAR, 0);
-        }
-
-        public TerminalNode T_NVARCHAR() {
-            return getToken(HplsqlParser.T_NVARCHAR, 0);
-        }
-
-        public TerminalNode T_NUMBER() {
-            return getToken(HplsqlParser.T_NUMBER, 0);
-        }
-
-        public TerminalNode T_NUMERIC() {
-            return getToken(HplsqlParser.T_NUMERIC, 0);
-        }
-
-        public TerminalNode T_PLS_INTEGER() {
-            return getToken(HplsqlParser.T_PLS_INTEGER, 0);
-        }
-
-        public TerminalNode T_REAL() {
-            return getToken(HplsqlParser.T_REAL, 0);
-        }
-
-        public TerminalNode T_RESULT_SET_LOCATOR() {
-            return getToken(HplsqlParser.T_RESULT_SET_LOCATOR, 0);
-        }
-
-        public TerminalNode T_VARYING() {
-            return getToken(HplsqlParser.T_VARYING, 0);
-        }
-
-        public TerminalNode T_SIMPLE_FLOAT() {
-            return getToken(HplsqlParser.T_SIMPLE_FLOAT, 0);
-        }
-
-        public TerminalNode T_SIMPLE_DOUBLE() {
-            return getToken(HplsqlParser.T_SIMPLE_DOUBLE, 0);
-        }
-
-        public TerminalNode T_SIMPLE_INTEGER() {
-            return getToken(HplsqlParser.T_SIMPLE_INTEGER, 0);
-        }
-
-        public TerminalNode T_SMALLINT() {
-            return getToken(HplsqlParser.T_SMALLINT, 0);
-        }
-
-        public TerminalNode T_SMALLDATETIME() {
-            return getToken(HplsqlParser.T_SMALLDATETIME, 0);
-        }
-
-        public TerminalNode T_STRING() {
-            return getToken(HplsqlParser.T_STRING, 0);
-        }
-
-        public TerminalNode T_SYS_REFCURSOR() {
-            return getToken(HplsqlParser.T_SYS_REFCURSOR, 0);
-        }
-
-        public TerminalNode T_TIMESTAMP() {
-            return getToken(HplsqlParser.T_TIMESTAMP, 0);
-        }
-
-        public TerminalNode T_TINYINT() {
-            return getToken(HplsqlParser.T_TINYINT, 0);
-        }
-
-        public TerminalNode T_VARCHAR() {
-            return getToken(HplsqlParser.T_VARCHAR, 0);
-        }
-
-        public TerminalNode T_VARCHAR2() {
-            return getToken(HplsqlParser.T_VARCHAR2, 0);
-        }
-
-        public TerminalNode T_XML() {
-            return getToken(HplsqlParser.T_XML, 0); }
-		public IdentContext ident() {
-			return getRuleContext(IdentContext.class,0);
-        }
-
-        public TerminalNode T_TYPE() {
-            return getToken(HplsqlParser.T_TYPE, 0);
-        }
-
-        public DtypeContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_dtype; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterDtype(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitDtype(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitDtype(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Create_function_stmtContext create_function_stmt() throws RecognitionException {
@@ -11065,15 +7669,15 @@ public class HplsqlParser extends Parser {
                 setState(1437);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case T_ALTER: {
-                setState(1430);
+                case T_ALTER: {
+                    setState(1430);
 				match(T_ALTER);
 				}
 				break;
-			case T_CREATE: {
-                setState(1431);
+                case T_CREATE: {
+                    setState(1431);
 				match(T_CREATE);
-                setState(1434);
+                    setState(1434);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==T_OR) {
@@ -11087,8 +7691,8 @@ public class HplsqlParser extends Parser {
 
 				}
 				break;
-			case T_REPLACE: {
-                setState(1436);
+                case T_REPLACE: {
+                    setState(1436);
 				match(T_REPLACE);
 				}
 				break;
@@ -11103,9 +7707,9 @@ public class HplsqlParser extends Parser {
 			ident();
                 setState(1442);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 151, _ctx) ) {
-			case 1: {
-                setState(1441);
+                switch (getInterpreter().adaptivePredict(_input, 151, _ctx)) {
+                    case 1: {
+                        setState(1441);
 				create_routine_params();
 				}
 				break;
@@ -11114,9 +7718,9 @@ public class HplsqlParser extends Parser {
 			create_function_return();
                 setState(1446);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 152, _ctx) ) {
-			case 1: {
-                setState(1445);
+                switch (getInterpreter().adaptivePredict(_input, 152, _ctx)) {
+                    case 1: {
+                        setState(1445);
 				_la = _input.LA(1);
 				if ( !(_la==T_AS || _la==T_IS) ) {
 				_errHandler.recoverInline(this);
@@ -11131,9 +7735,9 @@ public class HplsqlParser extends Parser {
                 }
                 setState(1449);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 153, _ctx) ) {
-			case 1: {
-                setState(1448);
+                switch (getInterpreter().adaptivePredict(_input, 153, _ctx)) {
+                    case 1: {
+                        setState(1448);
 				declare_block_inplace();
 				}
 				break;
@@ -11151,61 +7755,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Dtype_lenContext extends ParserRuleContext {
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public TerminalNode T_CLOSE_P() {
-            return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public List<TerminalNode> L_INT() {
-            return getTokens(HplsqlParser.L_INT);
-        }
-
-        public TerminalNode L_INT(int i) {
-            return getToken(HplsqlParser.L_INT, i);
-        }
-
-        public TerminalNode T_MAX() {
-            return getToken(HplsqlParser.T_MAX, 0);
-        }
-
-        public TerminalNode T_COMMA() {
-            return getToken(HplsqlParser.T_COMMA, 0);
-        }
-
-        public TerminalNode T_CHAR() {
-            return getToken(HplsqlParser.T_CHAR, 0);
-        }
-
-        public TerminalNode T_BYTE() {
-            return getToken(HplsqlParser.T_BYTE, 0);
-        }
-
-        public Dtype_lenContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_dtype_len; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterDtype_len(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitDtype_len(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitDtype_len(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Create_function_returnContext create_function_return() throws RecognitionException {
@@ -11229,9 +7778,9 @@ public class HplsqlParser extends Parser {
 			dtype();
                 setState(1456);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 154, _ctx) ) {
-			case 1: {
-                setState(1455);
+                switch (getInterpreter().adaptivePredict(_input, 154, _ctx)) {
+                    case 1: {
+                        setState(1455);
 				dtype_len();
 				}
 				break;
@@ -11247,57 +7796,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Dtype_attrContext extends ParserRuleContext {
-        public TerminalNode T_NULL() {
-            return getToken(HplsqlParser.T_NULL, 0);
-        }
-
-        public TerminalNode T_NOT() {
-            return getToken(HplsqlParser.T_NOT, 0);
-        }
-
-        public TerminalNode T_CHARACTER() {
-            return getToken(HplsqlParser.T_CHARACTER, 0);
-        }
-
-        public TerminalNode T_SET() {
-            return getToken(HplsqlParser.T_SET, 0);
-        }
-
-        public IdentContext ident() {
-            return getRuleContext(IdentContext.class, 0);
-        }
-
-        public TerminalNode T_CASESPECIFIC() {
-            return getToken(HplsqlParser.T_CASESPECIFIC, 0);
-        }
-
-        public TerminalNode T_CS() {
-            return getToken(HplsqlParser.T_CS, 0);
-        }
-
-        public Dtype_attrContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_dtype_attr; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterDtype_attr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitDtype_attr(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitDtype_attr(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Create_package_stmtContext create_package_stmt() throws RecognitionException {
@@ -11310,15 +7808,15 @@ public class HplsqlParser extends Parser {
                 setState(1465);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case T_ALTER: {
-                setState(1458);
+                case T_ALTER: {
+                    setState(1458);
 				match(T_ALTER);
 				}
 				break;
-			case T_CREATE: {
-                setState(1459);
+                case T_CREATE: {
+                    setState(1459);
 				match(T_CREATE);
-                setState(1462);
+                    setState(1462);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==T_OR) {
@@ -11332,8 +7830,8 @@ public class HplsqlParser extends Parser {
 
 				}
 				break;
-			case T_REPLACE: {
-                setState(1464);
+                case T_REPLACE: {
+                    setState(1464);
 				match(T_REPLACE);
 				}
 				break;
@@ -11362,11 +7860,11 @@ public class HplsqlParser extends Parser {
 			match(T_END);
                 setState(1475);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 157, _ctx) ) {
-			case 1: {
-                setState(1472);
+                switch (getInterpreter().adaptivePredict(_input, 157, _ctx)) {
+                    case 1: {
+                        setState(1472);
 				ident();
-                setState(1473);
+                        setState(1473);
 				match(T_SEMICOLON);
 				}
 				break;
@@ -11382,49 +7880,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Dtype_defaultContext extends ParserRuleContext {
-        public TerminalNode T_EQUAL() {
-            return getToken(HplsqlParser.T_EQUAL, 0);
-        }
-
-        public ExprContext expr() {
-            return getRuleContext(ExprContext.class, 0);
-        }
-
-        public TerminalNode T_COLON() {
-            return getToken(HplsqlParser.T_COLON, 0);
-        }
-
-        public TerminalNode T_DEFAULT() {
-            return getToken(HplsqlParser.T_DEFAULT, 0);
-        }
-
-        public TerminalNode T_WITH() {
-            return getToken(HplsqlParser.T_WITH, 0);
-        }
-
-        public Dtype_defaultContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_dtype_default; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterDtype_default(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitDtype_default(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitDtype_default(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Package_specContext package_spec() throws RecognitionException {
@@ -11443,7 +7898,7 @@ public class HplsqlParser extends Parser {
                 _alt = getInterpreter().adaptivePredict(_input, 158,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
-					{
+                    {
                         {
                             setState(1479);
 					package_spec_item();
@@ -11467,66 +7922,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_database_stmtContext extends ParserRuleContext {
-        public TerminalNode T_CREATE() {
-            return getToken(HplsqlParser.T_CREATE, 0);
-        }
-
-        public ExprContext expr() {
-            return getRuleContext(ExprContext.class, 0);
-        }
-
-        public TerminalNode T_DATABASE() {
-            return getToken(HplsqlParser.T_DATABASE, 0);
-        }
-
-        public TerminalNode T_SCHEMA() {
-            return getToken(HplsqlParser.T_SCHEMA, 0);
-        }
-
-        public TerminalNode T_IF() {
-            return getToken(HplsqlParser.T_IF, 0);
-        }
-
-        public TerminalNode T_NOT() {
-            return getToken(HplsqlParser.T_NOT, 0);
-        }
-
-        public TerminalNode T_EXISTS() {
-            return getToken(HplsqlParser.T_EXISTS, 0);
-        }
-
-        public List<Create_database_optionContext> create_database_option() {
-            return getRuleContexts(Create_database_optionContext.class);
-        }
-
-        public Create_database_optionContext create_database_option(int i) {
-            return getRuleContext(Create_database_optionContext.class, i);
-        }
-
-        public Create_database_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_database_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_database_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_database_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_database_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Package_spec_itemContext package_spec_item() throws RecognitionException {
@@ -11553,9 +7948,9 @@ public class HplsqlParser extends Parser {
 				ident();
                 setState(1491);
 				_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 159, _ctx) ) {
-				case 1: {
-                    setState(1490);
+                switch (getInterpreter().adaptivePredict(_input, 159, _ctx)) {
+                    case 1: {
+                        setState(1490);
 					create_routine_params();
 					}
 					break;
@@ -11581,9 +7976,9 @@ public class HplsqlParser extends Parser {
 				ident();
                 setState(1498);
 				_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 160, _ctx) ) {
-				case 1: {
-                    setState(1497);
+                switch (getInterpreter().adaptivePredict(_input, 160, _ctx)) {
+                    case 1: {
+                        setState(1497);
 					create_routine_params();
 					}
 					break;
@@ -11601,42 +7996,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_database_optionContext extends ParserRuleContext {
-        public TerminalNode T_COMMENT() {
-            return getToken(HplsqlParser.T_COMMENT, 0);
-        }
-
-        public ExprContext expr() {
-            return getRuleContext(ExprContext.class, 0);
-        }
-
-        public TerminalNode T_LOCATION() {
-            return getToken(HplsqlParser.T_LOCATION, 0);
-        }
-
-        public Create_database_optionContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_database_option; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_database_option(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_database_option(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_database_option(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Create_package_body_stmtContext create_package_body_stmt() throws RecognitionException {
@@ -11649,15 +8008,15 @@ public class HplsqlParser extends Parser {
                 setState(1509);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case T_ALTER: {
-                setState(1502);
+                case T_ALTER: {
+                    setState(1502);
 				match(T_ALTER);
 				}
 				break;
-			case T_CREATE: {
-                setState(1503);
+                case T_CREATE: {
+                    setState(1503);
 				match(T_CREATE);
-                setState(1506);
+                    setState(1506);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==T_OR) {
@@ -11671,8 +8030,8 @@ public class HplsqlParser extends Parser {
 
 				}
 				break;
-			case T_REPLACE: {
-                setState(1508);
+                case T_REPLACE: {
+                    setState(1508);
 				match(T_REPLACE);
 				}
 				break;
@@ -11703,11 +8062,11 @@ public class HplsqlParser extends Parser {
 			match(T_END);
                 setState(1520);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 164, _ctx) ) {
-			case 1: {
-                setState(1517);
+                switch (getInterpreter().adaptivePredict(_input, 164, _ctx)) {
+                    case 1: {
+                        setState(1517);
 				ident();
-                setState(1518);
+                        setState(1518);
 				match(T_SEMICOLON);
 				}
 				break;
@@ -11723,78 +8082,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_function_stmtContext extends ParserRuleContext {
-        public TerminalNode T_FUNCTION() {
-            return getToken(HplsqlParser.T_FUNCTION, 0);
-        }
-
-        public IdentContext ident() {
-            return getRuleContext(IdentContext.class, 0);
-        }
-
-        public Create_function_returnContext create_function_return() {
-            return getRuleContext(Create_function_returnContext.class, 0);
-        }
-
-        public Single_block_stmtContext single_block_stmt() {
-            return getRuleContext(Single_block_stmtContext.class, 0);
-        }
-
-        public TerminalNode T_ALTER() {
-            return getToken(HplsqlParser.T_ALTER, 0);
-        }
-
-        public TerminalNode T_CREATE() {
-            return getToken(HplsqlParser.T_CREATE, 0);
-        }
-
-        public TerminalNode T_REPLACE() {
-            return getToken(HplsqlParser.T_REPLACE, 0);
-        }
-
-        public Create_routine_paramsContext create_routine_params() {
-            return getRuleContext(Create_routine_paramsContext.class, 0);
-        }
-
-        public Declare_block_inplaceContext declare_block_inplace() {
-            return getRuleContext(Declare_block_inplaceContext.class, 0);
-        }
-
-        public TerminalNode T_AS() {
-            return getToken(HplsqlParser.T_AS, 0);
-        }
-
-        public TerminalNode T_IS() {
-            return getToken(HplsqlParser.T_IS, 0);
-        }
-
-        public TerminalNode T_OR() {
-            return getToken(HplsqlParser.T_OR, 0);
-        }
-
-        public Create_function_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_function_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_function_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_function_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_function_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Package_bodyContext package_body() throws RecognitionException {
@@ -11813,7 +8100,7 @@ public class HplsqlParser extends Parser {
                 _alt = getInterpreter().adaptivePredict(_input, 165,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
-					{
+                    {
                         {
                             setState(1524);
 					package_body_item();
@@ -11837,46 +8124,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_function_returnContext extends ParserRuleContext {
-        public DtypeContext dtype() {
-            return getRuleContext(DtypeContext.class, 0);
-        }
-
-        public TerminalNode T_RETURN() {
-            return getToken(HplsqlParser.T_RETURN, 0);
-        }
-
-        public TerminalNode T_RETURNS() {
-            return getToken(HplsqlParser.T_RETURNS, 0);
-        }
-
-        public Dtype_lenContext dtype_len() {
-            return getRuleContext(Dtype_lenContext.class, 0);
-        }
-
-        public Create_function_returnContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_function_return; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_function_return(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_function_return(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_function_return(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Package_body_itemContext package_body_item() throws RecognitionException {
@@ -11918,60 +8165,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_package_stmtContext extends ParserRuleContext {
-        public TerminalNode T_PACKAGE() {
-            return getToken(HplsqlParser.T_PACKAGE, 0); }
-		public List<IdentContext> ident() {
-			return getRuleContexts(IdentContext.class);
-		}
-		public IdentContext ident(int i) {
-			return getRuleContext(IdentContext.class,i);
-        }
-
-        public Package_specContext package_spec() {
-            return getRuleContext(Package_specContext.class, 0);
-        }
-
-        public TerminalNode T_END() {
-            return getToken(HplsqlParser.T_END, 0);
-        }
-
-        public TerminalNode T_AS() {
-            return getToken(HplsqlParser.T_AS, 0);
-        }
-
-        public TerminalNode T_IS() {
-            return getToken(HplsqlParser.T_IS, 0); }
-		public TerminalNode T_ALTER() { return getToken(HplsqlParser.T_ALTER, 0); }
-		public TerminalNode T_CREATE() { return getToken(HplsqlParser.T_CREATE, 0); }
-		public TerminalNode T_REPLACE() { return getToken(HplsqlParser.T_REPLACE, 0); }
-		public TerminalNode T_SEMICOLON() { return getToken(HplsqlParser.T_SEMICOLON, 0); }
-		public TerminalNode T_OR() { return getToken(HplsqlParser.T_OR, 0);
-        }
-
-        public Create_package_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_package_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_package_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_package_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_package_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Create_procedure_stmtContext create_procedure_stmt() throws RecognitionException {
@@ -11984,15 +8177,15 @@ public class HplsqlParser extends Parser {
                 setState(1544);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case T_ALTER: {
-                setState(1537);
+                case T_ALTER: {
+                    setState(1537);
 				match(T_ALTER);
 				}
 				break;
-			case T_CREATE: {
-                setState(1538);
+                case T_CREATE: {
+                    setState(1538);
 				match(T_CREATE);
-                setState(1541);
+                    setState(1541);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==T_OR) {
@@ -12006,8 +8199,8 @@ public class HplsqlParser extends Parser {
 
 				}
 				break;
-			case T_REPLACE: {
-                setState(1543);
+                case T_REPLACE: {
+                    setState(1543);
 				match(T_REPLACE);
 				}
 				break;
@@ -12031,27 +8224,27 @@ public class HplsqlParser extends Parser {
 			ident();
                 setState(1549);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 169, _ctx) ) {
-			case 1: {
-                setState(1548);
+                switch (getInterpreter().adaptivePredict(_input, 169, _ctx)) {
+                    case 1: {
+                        setState(1548);
 				create_routine_params();
 				}
 				break;
                 }
                 setState(1552);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 170, _ctx) ) {
-			case 1: {
-                setState(1551);
+                switch (getInterpreter().adaptivePredict(_input, 170, _ctx)) {
+                    case 1: {
+                        setState(1551);
 				create_routine_options();
 				}
 				break;
                 }
                 setState(1555);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 171, _ctx) ) {
-			case 1: {
-                setState(1554);
+                switch (getInterpreter().adaptivePredict(_input, 171, _ctx)) {
+                    case 1: {
+                        setState(1554);
 				_la = _input.LA(1);
 				if ( !(_la==T_AS || _la==T_IS) ) {
 				_errHandler.recoverInline(this);
@@ -12066,18 +8259,18 @@ public class HplsqlParser extends Parser {
                 }
                 setState(1558);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 172, _ctx) ) {
-			case 1: {
-                setState(1557);
+                switch (getInterpreter().adaptivePredict(_input, 172, _ctx)) {
+                    case 1: {
+                        setState(1557);
 				declare_block_inplace();
 				}
 				break;
                 }
                 setState(1561);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 173, _ctx) ) {
-			case 1: {
-                setState(1560);
+                switch (getInterpreter().adaptivePredict(_input, 173, _ctx)) {
+                    case 1: {
+                        setState(1560);
 				label();
 				}
 				break;
@@ -12086,11 +8279,11 @@ public class HplsqlParser extends Parser {
 			proc_block();
                 setState(1567);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 174, _ctx) ) {
-			case 1: {
-                setState(1564);
+                switch (getInterpreter().adaptivePredict(_input, 174, _ctx)) {
+                    case 1: {
+                        setState(1564);
 				ident();
-                setState(1565);
+                        setState(1565);
 				match(T_SEMICOLON);
 				}
 				break;
@@ -12106,45 +8299,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Package_specContext extends ParserRuleContext {
-        public List<Package_spec_itemContext> package_spec_item() {
-            return getRuleContexts(Package_spec_itemContext.class);
-        }
-
-        public Package_spec_itemContext package_spec_item(int i) {
-            return getRuleContext(Package_spec_itemContext.class, i);
-        }
-
-        public List<TerminalNode> T_SEMICOLON() {
-            return getTokens(HplsqlParser.T_SEMICOLON);
-        }
-
-        public TerminalNode T_SEMICOLON(int i) {
-            return getToken(HplsqlParser.T_SEMICOLON, i);
-        }
-
-        public Package_specContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_package_spec; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterPackage_spec(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitPackage_spec(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitPackage_spec(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Create_routine_paramsContext create_routine_params() throws RecognitionException {
@@ -12176,13 +8330,13 @@ public class HplsqlParser extends Parser {
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==T_COMMA) {
-					{
+                    {
                         {
                             setState(1573);
 					match(T_COMMA);
                             setState(1574);
 					create_routine_param_item();
-					}
+                        }
                     }
                     setState(1579);
 					_errHandler.sync(this);
@@ -12208,7 +8362,7 @@ public class HplsqlParser extends Parser {
                 _alt = getInterpreter().adaptivePredict(_input, 176,_ctx);
 				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 					if ( _alt==1 ) {
-						{
+                        {
                             {
                                 setState(1584);
 						match(T_COMMA);
@@ -12234,55 +8388,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Package_spec_itemContext extends ParserRuleContext {
-        public Declare_stmt_itemContext declare_stmt_item() {
-            return getRuleContext(Declare_stmt_itemContext.class, 0);
-        }
-
-        public TerminalNode T_FUNCTION() {
-            return getToken(HplsqlParser.T_FUNCTION, 0); }
-		public IdentContext ident() {
-			return getRuleContext(IdentContext.class,0);
-        }
-
-        public Create_function_returnContext create_function_return() {
-            return getRuleContext(Create_function_returnContext.class, 0);
-        }
-
-        public Create_routine_paramsContext create_routine_params() {
-            return getRuleContext(Create_routine_paramsContext.class, 0);
-        }
-
-        public TerminalNode T_PROCEDURE() {
-            return getToken(HplsqlParser.T_PROCEDURE, 0);
-        }
-
-        public TerminalNode T_PROC() {
-            return getToken(HplsqlParser.T_PROC, 0);
-        }
-
-        public Package_spec_itemContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_package_spec_item; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterPackage_spec_item(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitPackage_spec_item(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitPackage_spec_item(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Create_routine_param_itemContext create_routine_param_item() throws RecognitionException {
@@ -12298,26 +8403,26 @@ public class HplsqlParser extends Parser {
             {
                 setState(1598);
 				_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 178, _ctx) ) {
-				case 1: {
-                    setState(1593);
+                switch (getInterpreter().adaptivePredict(_input, 178, _ctx)) {
+                    case 1: {
+                        setState(1593);
 					match(T_IN);
 					}
 					break;
-				case 2: {
-                    setState(1594);
+                    case 2: {
+                        setState(1594);
 					match(T_OUT);
 					}
 					break;
-				case 3: {
-                    setState(1595);
+                    case 3: {
+                        setState(1595);
 					match(T_INOUT);
 					}
 					break;
-				case 4: {
-                    setState(1596);
+                    case 4: {
+                        setState(1596);
 					match(T_IN);
-                    setState(1597);
+                        setState(1597);
 					match(T_OUT);
 					}
 					break;
@@ -12328,9 +8433,9 @@ public class HplsqlParser extends Parser {
 				dtype();
                 setState(1603);
 				_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 179, _ctx) ) {
-				case 1: {
-                    setState(1602);
+                switch (getInterpreter().adaptivePredict(_input, 179, _ctx)) {
+                    case 1: {
+                        setState(1602);
 					dtype_len();
 					}
 					break;
@@ -12340,7 +8445,7 @@ public class HplsqlParser extends Parser {
                 _alt = getInterpreter().adaptivePredict(_input, 180,_ctx);
 				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 					if ( _alt==1 ) {
-						{
+                        {
                             {
                                 setState(1605);
 						dtype_attr();
@@ -12349,13 +8454,13 @@ public class HplsqlParser extends Parser {
                     }
                     setState(1610);
 					_errHandler.sync(this);
-                    _alt = getInterpreter().adaptivePredict(_input, 180,_ctx);
+                    _alt = getInterpreter().adaptivePredict(_input, 180, _ctx);
                 }
                 setState(1612);
 				_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 181, _ctx) ) {
-				case 1: {
-                    setState(1611);
+                switch (getInterpreter().adaptivePredict(_input, 181, _ctx)) {
+                    case 1: {
+                        setState(1611);
 					dtype_default();
 					}
 					break;
@@ -12369,26 +8474,26 @@ public class HplsqlParser extends Parser {
 				ident();
                 setState(1620);
 				_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 182, _ctx) ) {
-				case 1: {
-                    setState(1615);
+                switch (getInterpreter().adaptivePredict(_input, 182, _ctx)) {
+                    case 1: {
+                        setState(1615);
 					match(T_IN);
 					}
 					break;
-				case 2: {
-                    setState(1616);
+                    case 2: {
+                        setState(1616);
 					match(T_OUT);
 					}
 					break;
-				case 3: {
-                    setState(1617);
+                    case 3: {
+                        setState(1617);
 					match(T_INOUT);
 					}
 					break;
-				case 4: {
-                    setState(1618);
+                    case 4: {
+                        setState(1618);
 					match(T_IN);
-                    setState(1619);
+                        setState(1619);
 					match(T_OUT);
 					}
 					break;
@@ -12397,9 +8502,9 @@ public class HplsqlParser extends Parser {
 				dtype();
                 setState(1624);
 				_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 183, _ctx) ) {
-				case 1: {
-                    setState(1623);
+                switch (getInterpreter().adaptivePredict(_input, 183, _ctx)) {
+                    case 1: {
+                        setState(1623);
 					dtype_len();
 					}
 					break;
@@ -12409,7 +8514,7 @@ public class HplsqlParser extends Parser {
                 _alt = getInterpreter().adaptivePredict(_input, 184,_ctx);
 				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 					if ( _alt==1 ) {
-						{
+                        {
                             {
                                 setState(1626);
 						dtype_attr();
@@ -12418,13 +8523,13 @@ public class HplsqlParser extends Parser {
                     }
                     setState(1631);
 					_errHandler.sync(this);
-                    _alt = getInterpreter().adaptivePredict(_input, 184,_ctx);
+                    _alt = getInterpreter().adaptivePredict(_input, 184, _ctx);
                 }
                 setState(1633);
 				_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 185, _ctx) ) {
-				case 1: {
-                    setState(1632);
+                switch (getInterpreter().adaptivePredict(_input, 185, _ctx)) {
+                    case 1: {
+                        setState(1632);
 					dtype_default();
 					}
 					break;
@@ -12442,82 +8547,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_package_body_stmtContext extends ParserRuleContext {
-        public TerminalNode T_PACKAGE() {
-            return getToken(HplsqlParser.T_PACKAGE, 0);
-        }
-
-        public TerminalNode T_BODY() {
-            return getToken(HplsqlParser.T_BODY, 0);
-        }
-
-        public List<IdentContext> ident() {
-            return getRuleContexts(IdentContext.class);
-        }
-
-        public IdentContext ident(int i) {
-            return getRuleContext(IdentContext.class, i);
-        }
-
-        public Package_bodyContext package_body() {
-            return getRuleContext(Package_bodyContext.class, 0);
-        }
-
-        public TerminalNode T_END() {
-            return getToken(HplsqlParser.T_END, 0);
-        }
-
-        public TerminalNode T_AS() {
-            return getToken(HplsqlParser.T_AS, 0);
-        }
-
-        public TerminalNode T_IS() {
-            return getToken(HplsqlParser.T_IS, 0);
-        }
-
-        public TerminalNode T_ALTER() {
-            return getToken(HplsqlParser.T_ALTER, 0);
-        }
-
-        public TerminalNode T_CREATE() {
-            return getToken(HplsqlParser.T_CREATE, 0);
-        }
-
-        public TerminalNode T_REPLACE() {
-            return getToken(HplsqlParser.T_REPLACE, 0);
-        }
-
-        public TerminalNode T_SEMICOLON() {
-            return getToken(HplsqlParser.T_SEMICOLON, 0);
-        }
-
-        public TerminalNode T_OR() {
-            return getToken(HplsqlParser.T_OR, 0);
-        }
-
-        public Create_package_body_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_package_body_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_package_body_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_package_body_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_package_body_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Create_routine_optionsContext create_routine_options() throws RecognitionException {
@@ -12532,10 +8561,9 @@ public class HplsqlParser extends Parser {
 			_alt = 1;
 			do {
 				switch (_alt) {
-				case 1:
-					{
-                        {
-                            setState(1637);
+				case 1: {
+                    {
+                        setState(1637);
 					create_routine_option();
 					}
 					}
@@ -12558,45 +8586,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Package_bodyContext extends ParserRuleContext {
-        public List<Package_body_itemContext> package_body_item() {
-            return getRuleContexts(Package_body_itemContext.class);
-        }
-
-        public Package_body_itemContext package_body_item(int i) {
-            return getRuleContext(Package_body_itemContext.class, i);
-        }
-
-        public List<TerminalNode> T_SEMICOLON() {
-            return getTokens(HplsqlParser.T_SEMICOLON);
-        }
-
-        public TerminalNode T_SEMICOLON(int i) {
-            return getToken(HplsqlParser.T_SEMICOLON, i);
-        }
-
-        public Package_bodyContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_package_body; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterPackage_body(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitPackage_body(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitPackage_body(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Create_routine_optionContext create_routine_option() throws RecognitionException {
@@ -12646,7 +8635,7 @@ public class HplsqlParser extends Parser {
                     {
                         setState(1647);
 					match(T_DYNAMIC);
-					}
+                    }
                 }
 
                 setState(1650);
@@ -12670,41 +8659,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Package_body_itemContext extends ParserRuleContext {
-        public Declare_stmt_itemContext declare_stmt_item() {
-            return getRuleContext(Declare_stmt_itemContext.class, 0);
-        }
-
-        public Create_function_stmtContext create_function_stmt() {
-            return getRuleContext(Create_function_stmtContext.class, 0);
-        }
-
-        public Create_procedure_stmtContext create_procedure_stmt() {
-            return getRuleContext(Create_procedure_stmtContext.class, 0);
-        }
-
-        public Package_body_itemContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_package_body_item; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterPackage_body_item(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitPackage_body_item(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitPackage_body_item(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Exec_stmtContext exec_stmt() throws RecognitionException {
@@ -12727,9 +8681,9 @@ public class HplsqlParser extends Parser {
             }
                 setState(1657);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 190, _ctx) ) {
-			case 1: {
-                setState(1656);
+                switch (getInterpreter().adaptivePredict(_input, 190, _ctx)) {
+                    case 1: {
+                        setState(1656);
 				match(T_IMMEDIATE);
 				}
 				break;
@@ -12738,36 +8692,36 @@ public class HplsqlParser extends Parser {
 			expr(0);
                 setState(1665);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 191, _ctx) ) {
-			case 1: {
-                setState(1660);
+                switch (getInterpreter().adaptivePredict(_input, 191, _ctx)) {
+                    case 1: {
+                        setState(1660);
 				match(T_OPEN_P);
-                setState(1661);
+                        setState(1661);
 				expr_func_params();
-                setState(1662);
+                        setState(1662);
 				match(T_CLOSE_P);
 				}
 				break;
-			case 2: {
-                setState(1664);
+                    case 2: {
+                        setState(1664);
 				expr_func_params();
 				}
 				break;
                 }
                 setState(1676);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 193, _ctx) ) {
-			case 1: {
-                setState(1667);
+                switch (getInterpreter().adaptivePredict(_input, 193, _ctx)) {
+                    case 1: {
+                        setState(1667);
 				match(T_INTO);
-                setState(1668);
+                        setState(1668);
 				match(L_ID);
-                setState(1673);
+                        setState(1673);
 				_errHandler.sync(this);
-                _alt = getInterpreter().adaptivePredict(_input, 192,_ctx);
+                        _alt = getInterpreter().adaptivePredict(_input, 192,_ctx);
 				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 					if ( _alt==1 ) {
-						{
+                        {
                             {
                                 setState(1669);
 						match(T_COMMA);
@@ -12785,9 +8739,9 @@ public class HplsqlParser extends Parser {
                 }
                 setState(1679);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 194, _ctx) ) {
-			case 1: {
-                setState(1678);
+                switch (getInterpreter().adaptivePredict(_input, 194, _ctx)) {
+                    case 1: {
+                        setState(1678);
 				using_clause();
 				}
 				break;
@@ -12803,94 +8757,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_procedure_stmtContext extends ParserRuleContext {
-        public List<IdentContext> ident() {
-            return getRuleContexts(IdentContext.class);
-        }
-
-        public IdentContext ident(int i) {
-            return getRuleContext(IdentContext.class, i);
-        }
-
-        public Proc_blockContext proc_block() {
-            return getRuleContext(Proc_blockContext.class, 0);
-        }
-
-        public TerminalNode T_PROCEDURE() {
-            return getToken(HplsqlParser.T_PROCEDURE, 0);
-        }
-
-        public TerminalNode T_PROC() {
-            return getToken(HplsqlParser.T_PROC, 0);
-        }
-
-        public TerminalNode T_ALTER() {
-            return getToken(HplsqlParser.T_ALTER, 0);
-        }
-
-        public TerminalNode T_CREATE() {
-            return getToken(HplsqlParser.T_CREATE, 0);
-        }
-
-        public TerminalNode T_REPLACE() {
-            return getToken(HplsqlParser.T_REPLACE, 0);
-        }
-
-        public Create_routine_paramsContext create_routine_params() {
-            return getRuleContext(Create_routine_paramsContext.class, 0);
-        }
-
-        public Create_routine_optionsContext create_routine_options() {
-            return getRuleContext(Create_routine_optionsContext.class, 0);
-        }
-
-        public Declare_block_inplaceContext declare_block_inplace() {
-            return getRuleContext(Declare_block_inplaceContext.class, 0);
-        }
-
-        public LabelContext label() {
-            return getRuleContext(LabelContext.class, 0);
-        }
-
-        public TerminalNode T_SEMICOLON() {
-            return getToken(HplsqlParser.T_SEMICOLON, 0);
-        }
-
-        public TerminalNode T_AS() {
-            return getToken(HplsqlParser.T_AS, 0);
-        }
-
-        public TerminalNode T_IS() {
-            return getToken(HplsqlParser.T_IS, 0);
-        }
-
-        public TerminalNode T_OR() {
-            return getToken(HplsqlParser.T_OR, 0);
-        }
-
-        public Create_procedure_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_procedure_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_procedure_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_procedure_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_procedure_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final If_stmtContext if_stmt() throws RecognitionException {
@@ -12932,54 +8798,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_routine_paramsContext extends ParserRuleContext {
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public TerminalNode T_CLOSE_P() {
-            return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public List<Create_routine_param_itemContext> create_routine_param_item() {
-            return getRuleContexts(Create_routine_param_itemContext.class);
-        }
-
-        public Create_routine_param_itemContext create_routine_param_item(int i) {
-            return getRuleContext(Create_routine_param_itemContext.class, i);
-        }
-
-        public List<TerminalNode> T_COMMA() {
-            return getTokens(HplsqlParser.T_COMMA);
-        }
-
-        public TerminalNode T_COMMA(int i) {
-            return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public Create_routine_paramsContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_routine_params; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_routine_params(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_routine_params(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_routine_params(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final If_plsql_stmtContext if_plsql_stmt() throws RecognitionException {
@@ -13001,11 +8819,11 @@ public class HplsqlParser extends Parser {
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==T_ELSEIF || _la==T_ELSIF) {
-				{
+                {
                     {
                         setState(1690);
 				elseif_block();
-				}
+                    }
                 }
                 setState(1695);
 				_errHandler.sync(this);
@@ -13018,7 +8836,7 @@ public class HplsqlParser extends Parser {
                 {
                     setState(1696);
 				else_block();
-				}
+                }
             }
 
                 setState(1699);
@@ -13036,66 +8854,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_routine_param_itemContext extends ParserRuleContext {
-        public IdentContext ident() {
-            return getRuleContext(IdentContext.class, 0);
-        }
-
-        public DtypeContext dtype() {
-            return getRuleContext(DtypeContext.class, 0);
-        }
-
-        public TerminalNode T_IN() {
-            return getToken(HplsqlParser.T_IN, 0);
-        }
-
-        public TerminalNode T_OUT() {
-            return getToken(HplsqlParser.T_OUT, 0);
-        }
-
-        public TerminalNode T_INOUT() {
-            return getToken(HplsqlParser.T_INOUT, 0);
-        }
-
-        public Dtype_lenContext dtype_len() {
-            return getRuleContext(Dtype_lenContext.class, 0);
-        }
-
-        public List<Dtype_attrContext> dtype_attr() {
-            return getRuleContexts(Dtype_attrContext.class);
-        }
-
-        public Dtype_attrContext dtype_attr(int i) {
-            return getRuleContext(Dtype_attrContext.class, i);
-        }
-
-        public Dtype_defaultContext dtype_default() {
-            return getRuleContext(Dtype_defaultContext.class, 0);
-        }
-
-        public Create_routine_param_itemContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_routine_param_item; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_routine_param_item(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_routine_param_item(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_routine_param_item(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final If_tsql_stmtContext if_tsql_stmt() throws RecognitionException {
@@ -13112,11 +8870,11 @@ public class HplsqlParser extends Parser {
 			single_block_stmt();
                 setState(1707);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 198, _ctx) ) {
-			case 1: {
-                setState(1705);
+                switch (getInterpreter().adaptivePredict(_input, 198, _ctx)) {
+                    case 1: {
+                        setState(1705);
 				match(T_ELSE);
-                setState(1706);
+                        setState(1706);
 				single_block_stmt();
 				}
 				break;
@@ -13132,38 +8890,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_routine_optionsContext extends ParserRuleContext {
-        public List<Create_routine_optionContext> create_routine_option() {
-            return getRuleContexts(Create_routine_optionContext.class);
-        }
-
-        public Create_routine_optionContext create_routine_option(int i) {
-            return getRuleContext(Create_routine_optionContext.class, i);
-        }
-
-        public Create_routine_optionsContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_routine_options; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_routine_options(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_routine_options(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_routine_options(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final If_bteq_stmtContext if_bteq_stmt() throws RecognitionException {
@@ -13193,74 +8919,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_routine_optionContext extends ParserRuleContext {
-        public TerminalNode T_LANGUAGE() {
-            return getToken(HplsqlParser.T_LANGUAGE, 0);
-        }
-
-        public TerminalNode T_SQL() {
-            return getToken(HplsqlParser.T_SQL, 0);
-        }
-
-        public TerminalNode T_SECURITY() {
-            return getToken(HplsqlParser.T_SECURITY, 0);
-        }
-
-        public TerminalNode T_CREATOR() {
-            return getToken(HplsqlParser.T_CREATOR, 0);
-        }
-
-        public TerminalNode T_DEFINER() {
-            return getToken(HplsqlParser.T_DEFINER, 0);
-        }
-
-        public TerminalNode T_INVOKER() {
-            return getToken(HplsqlParser.T_INVOKER, 0);
-        }
-
-        public TerminalNode T_OWNER() {
-            return getToken(HplsqlParser.T_OWNER, 0);
-        }
-
-        public TerminalNode T_RESULT() {
-            return getToken(HplsqlParser.T_RESULT, 0);
-        }
-
-        public TerminalNode T_SETS() {
-            return getToken(HplsqlParser.T_SETS, 0);
-        }
-
-        public TerminalNode L_INT() {
-            return getToken(HplsqlParser.L_INT, 0);
-        }
-
-        public TerminalNode T_DYNAMIC() {
-            return getToken(HplsqlParser.T_DYNAMIC, 0);
-        }
-
-        public Create_routine_optionContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_routine_option; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_routine_option(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_routine_option(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_routine_option(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Elseif_blockContext elseif_block() throws RecognitionException {
@@ -13297,81 +8955,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Exec_stmtContext extends ParserRuleContext {
-        public ExprContext expr() {
-            return getRuleContext(ExprContext.class, 0);
-        }
-
-        public TerminalNode T_EXEC() {
-            return getToken(HplsqlParser.T_EXEC, 0);
-        }
-
-        public TerminalNode T_EXECUTE() {
-            return getToken(HplsqlParser.T_EXECUTE, 0);
-        }
-
-        public TerminalNode T_IMMEDIATE() {
-            return getToken(HplsqlParser.T_IMMEDIATE, 0);
-        }
-
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public Expr_func_paramsContext expr_func_params() {
-            return getRuleContext(Expr_func_paramsContext.class, 0);
-        }
-
-        public TerminalNode T_CLOSE_P() {
-            return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public TerminalNode T_INTO() {
-            return getToken(HplsqlParser.T_INTO, 0);
-        }
-
-        public List<TerminalNode> L_ID() {
-            return getTokens(HplsqlParser.L_ID);
-        }
-
-        public TerminalNode L_ID(int i) {
-            return getToken(HplsqlParser.L_ID, i);
-        }
-
-        public Using_clauseContext using_clause() {
-            return getRuleContext(Using_clauseContext.class, 0);
-        }
-
-        public List<TerminalNode> T_COMMA() {
-            return getTokens(HplsqlParser.T_COMMA);
-        }
-
-        public TerminalNode T_COMMA(int i) {
-            return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public Exec_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_exec_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExec_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExec_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitExec_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Else_blockContext else_block() throws RecognitionException {
@@ -13395,41 +8978,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class If_stmtContext extends ParserRuleContext {
-        public If_plsql_stmtContext if_plsql_stmt() {
-            return getRuleContext(If_plsql_stmtContext.class, 0);
-        }
-
-        public If_tsql_stmtContext if_tsql_stmt() {
-            return getRuleContext(If_tsql_stmtContext.class, 0);
-        }
-
-        public If_bteq_stmtContext if_bteq_stmt() {
-            return getRuleContext(If_bteq_stmtContext.class, 0);
-        }
-
-        public If_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_if_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterIf_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitIf_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitIf_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Exit_stmtContext exit_stmt() throws RecognitionException {
@@ -13442,20 +8990,20 @@ public class HplsqlParser extends Parser {
 			match(T_EXIT);
                 setState(1725);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 199, _ctx) ) {
-			case 1: {
-                setState(1724);
+                switch (getInterpreter().adaptivePredict(_input, 199, _ctx)) {
+                    case 1: {
+                        setState(1724);
 				match(L_ID);
 				}
 				break;
                 }
                 setState(1729);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 200, _ctx) ) {
-			case 1: {
-                setState(1727);
+                switch (getInterpreter().adaptivePredict(_input, 200, _ctx)) {
+                    case 1: {
+                        setState(1727);
 				match(T_WHEN);
-                setState(1728);
+                        setState(1728);
 				bool_expr(0);
 				}
 				break;
@@ -13471,65 +9019,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class If_plsql_stmtContext extends ParserRuleContext {
-        public List<TerminalNode> T_IF() {
-            return getTokens(HplsqlParser.T_IF);
-        }
-
-        public TerminalNode T_IF(int i) {
-            return getToken(HplsqlParser.T_IF, i);
-        }
-
-        public Bool_exprContext bool_expr() {
-            return getRuleContext(Bool_exprContext.class, 0);
-        }
-
-        public TerminalNode T_THEN() {
-            return getToken(HplsqlParser.T_THEN, 0);
-        }
-
-        public BlockContext block() {
-            return getRuleContext(BlockContext.class, 0);
-        }
-
-        public TerminalNode T_END() {
-            return getToken(HplsqlParser.T_END, 0);
-        }
-
-        public List<Elseif_blockContext> elseif_block() {
-            return getRuleContexts(Elseif_blockContext.class);
-        }
-
-        public Elseif_blockContext elseif_block(int i) {
-            return getRuleContext(Elseif_blockContext.class, i);
-        }
-
-        public Else_blockContext else_block() {
-            return getRuleContext(Else_blockContext.class, 0);
-        }
-
-        public If_plsql_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_if_plsql_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterIf_plsql_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitIf_plsql_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitIf_plsql_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Leave_stmtContext leave_stmt() throws RecognitionException {
@@ -13542,9 +9031,9 @@ public class HplsqlParser extends Parser {
 			match(T_LEAVE);
                 setState(1733);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 201, _ctx) ) {
-			case 1: {
-                setState(1732);
+                switch (getInterpreter().adaptivePredict(_input, 201, _ctx)) {
+                    case 1: {
+                        setState(1732);
 				match(L_ID);
 				}
 				break;
@@ -13560,49 +9049,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class If_tsql_stmtContext extends ParserRuleContext {
-        public TerminalNode T_IF() {
-            return getToken(HplsqlParser.T_IF, 0);
-        }
-
-        public Bool_exprContext bool_expr() {
-            return getRuleContext(Bool_exprContext.class, 0);
-        }
-
-        public List<Single_block_stmtContext> single_block_stmt() {
-            return getRuleContexts(Single_block_stmtContext.class);
-        }
-
-        public Single_block_stmtContext single_block_stmt(int i) {
-            return getRuleContext(Single_block_stmtContext.class, i);
-        }
-
-        public TerminalNode T_ELSE() {
-            return getToken(HplsqlParser.T_ELSE, 0);
-        }
-
-        public If_tsql_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_if_tsql_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterIf_tsql_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitIf_tsql_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitIf_tsql_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Cmp_stmtContext cmp_stmt() throws RecognitionException {
@@ -13641,45 +9087,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class If_bteq_stmtContext extends ParserRuleContext {
-        public TerminalNode T_IF() {
-            return getToken(HplsqlParser.T_IF, 0);
-        }
-
-        public Bool_exprContext bool_expr() {
-            return getRuleContext(Bool_exprContext.class, 0);
-        }
-
-        public TerminalNode T_THEN() {
-            return getToken(HplsqlParser.T_THEN, 0);
-        }
-
-        public Single_block_stmtContext single_block_stmt() {
-            return getRuleContext(Single_block_stmtContext.class, 0);
-        }
-
-        public If_bteq_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_if_bteq_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterIf_bteq_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitIf_bteq_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitIf_bteq_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Cmp_sourceContext cmp_source() throws RecognitionException {
@@ -13950,26 +9357,26 @@ public class HplsqlParser extends Parser {
 			case T_VARIANCE:
 			case T_USER:
 			case T_WRITE:
-			case L_ID: {
-                setState(1741);
+                case L_ID: {
+                    setState(1741);
 				table_name();
-                setState(1743);
+                    setState(1743);
 				_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 202, _ctx) ) {
-				case 1: {
-                    setState(1742);
+                    switch (getInterpreter().adaptivePredict(_input, 202, _ctx)) {
+                        case 1: {
+                            setState(1742);
 					where_clause();
 					}
 					break;
 				}
 				}
 				break;
-			case T_OPEN_P: {
-                setState(1745);
+                case T_OPEN_P: {
+                    setState(1745);
 				match(T_OPEN_P);
-                setState(1746);
+                    setState(1746);
 				select_stmt();
-                setState(1747);
+                    setState(1747);
 				match(T_CLOSE_P);
 				}
 				break;
@@ -13978,11 +9385,11 @@ public class HplsqlParser extends Parser {
             }
                 setState(1753);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 204, _ctx) ) {
-			case 1: {
-                setState(1751);
+                switch (getInterpreter().adaptivePredict(_input, 204, _ctx)) {
+                    case 1: {
+                        setState(1751);
 				match(T_AT);
-                setState(1752);
+                        setState(1752);
 				ident();
 				}
 				break;
@@ -13998,49 +9405,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Elseif_blockContext extends ParserRuleContext {
-        public Bool_exprContext bool_expr() {
-            return getRuleContext(Bool_exprContext.class, 0);
-        }
-
-        public TerminalNode T_THEN() {
-            return getToken(HplsqlParser.T_THEN, 0);
-        }
-
-        public BlockContext block() {
-            return getRuleContext(BlockContext.class, 0);
-        }
-
-        public TerminalNode T_ELSIF() {
-            return getToken(HplsqlParser.T_ELSIF, 0);
-        }
-
-        public TerminalNode T_ELSEIF() {
-            return getToken(HplsqlParser.T_ELSEIF, 0);
-        }
-
-        public Elseif_blockContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_elseif_block; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterElseif_block(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitElseif_block(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitElseif_block(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Create_index_stmtContext create_index_stmt() throws RecognitionException {
@@ -14059,7 +9423,7 @@ public class HplsqlParser extends Parser {
                 {
                     setState(1756);
 				match(T_UNIQUE);
-				}
+                }
             }
 
                 setState(1759);
@@ -14078,13 +9442,13 @@ public class HplsqlParser extends Parser {
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==T_COMMA) {
-				{
+                {
                     {
                         setState(1765);
 				match(T_COMMA);
                         setState(1766);
 				create_index_col();
-				}
+                    }
                 }
                 setState(1771);
 				_errHandler.sync(this);
@@ -14103,37 +9467,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Else_blockContext extends ParserRuleContext {
-        public TerminalNode T_ELSE() {
-            return getToken(HplsqlParser.T_ELSE, 0);
-        }
-
-        public BlockContext block() {
-            return getRuleContext(BlockContext.class, 0);
-        }
-
-        public Else_blockContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_else_block; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterElse_block(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitElse_block(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitElse_block(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Create_index_colContext create_index_col() throws RecognitionException {
@@ -14174,45 +9507,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Exit_stmtContext extends ParserRuleContext {
-        public TerminalNode T_EXIT() {
-            return getToken(HplsqlParser.T_EXIT, 0);
-        }
-
-        public TerminalNode L_ID() {
-            return getToken(HplsqlParser.L_ID, 0);
-        }
-
-        public TerminalNode T_WHEN() {
-            return getToken(HplsqlParser.T_WHEN, 0);
-        }
-
-        public Bool_exprContext bool_expr() {
-            return getRuleContext(Bool_exprContext.class, 0);
-        }
-
-        public Exit_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_exit_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExit_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExit_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitExit_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Index_storage_clauseContext index_storage_clause() throws RecognitionException {
@@ -14234,37 +9528,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Leave_stmtContext extends ParserRuleContext {
-        public TerminalNode T_LEAVE() {
-            return getToken(HplsqlParser.T_LEAVE, 0);
-        }
-
-        public TerminalNode L_ID() {
-            return getToken(HplsqlParser.L_ID, 0);
-        }
-
-        public Leave_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_leave_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterLeave_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitLeave_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitLeave_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Index_mssql_storage_clauseContext index_mssql_storage_clause() throws RecognitionException {
@@ -14288,7 +9551,7 @@ public class HplsqlParser extends Parser {
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==T_COMMA) {
-				{
+                {
                     {
                         setState(1785);
 				match(T_COMMA);
@@ -14298,7 +9561,7 @@ public class HplsqlParser extends Parser {
 				match(T_EQUAL);
                         setState(1788);
 				ident();
-				}
+                    }
                 }
                 setState(1794);
 				_errHandler.sync(this);
@@ -14310,11 +9573,11 @@ public class HplsqlParser extends Parser {
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==T_ON || _la==T_TEXTIMAGE_ON) {
-				{
+                {
                     {
                         setState(1796);
 				create_table_options_mssql_item();
-				}
+                    }
                 }
                 setState(1801);
 				_errHandler.sync(this);
@@ -14331,53 +9594,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Cmp_stmtContext extends ParserRuleContext {
-        public TerminalNode T_CMP() {
-            return getToken(HplsqlParser.T_CMP, 0);
-        }
-
-        public List<Cmp_sourceContext> cmp_source() {
-            return getRuleContexts(Cmp_sourceContext.class);
-        }
-
-        public Cmp_sourceContext cmp_source(int i) {
-            return getRuleContext(Cmp_sourceContext.class, i);
-        }
-
-        public TerminalNode T_COMMA() {
-            return getToken(HplsqlParser.T_COMMA, 0);
-        }
-
-        public TerminalNode T_ROW_COUNT() {
-            return getToken(HplsqlParser.T_ROW_COUNT, 0);
-        }
-
-        public TerminalNode T_SUM() {
-            return getToken(HplsqlParser.T_SUM, 0);
-        }
-
-        public Cmp_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_cmp_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCmp_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCmp_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitCmp_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Quit_stmtContext quit_stmt() throws RecognitionException {
@@ -14394,16 +9610,16 @@ public class HplsqlParser extends Parser {
                 {
                     setState(1802);
 				match(T__3);
-				}
+                }
             }
 
                 setState(1805);
 			match(T_QUIT);
                 setState(1807);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 211, _ctx) ) {
-			case 1: {
-                setState(1806);
+                switch (getInterpreter().adaptivePredict(_input, 211, _ctx)) {
+                    case 1: {
+                        setState(1806);
 				expr(0);
 				}
 				break;
@@ -14419,57 +9635,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Cmp_sourceContext extends ParserRuleContext {
-        public Table_nameContext table_name() {
-            return getRuleContext(Table_nameContext.class, 0);
-        }
-
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public Select_stmtContext select_stmt() {
-            return getRuleContext(Select_stmtContext.class, 0);
-        }
-
-        public TerminalNode T_CLOSE_P() {
-            return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public TerminalNode T_AT() {
-            return getToken(HplsqlParser.T_AT, 0);
-        }
-
-        public IdentContext ident() {
-            return getRuleContext(IdentContext.class, 0);
-        }
-
-        public Where_clauseContext where_clause() {
-            return getRuleContext(Where_clauseContext.class, 0);
-        }
-
-        public Cmp_sourceContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_cmp_source; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCmp_source(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCmp_source(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitCmp_source(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Return_stmtContext return_stmt() throws RecognitionException {
@@ -14482,9 +9647,9 @@ public class HplsqlParser extends Parser {
 			match(T_RETURN);
                 setState(1811);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 212, _ctx) ) {
-			case 1: {
-                setState(1810);
+                switch (getInterpreter().adaptivePredict(_input, 212, _ctx)) {
+                    case 1: {
+                        setState(1810);
 				expr(0);
 				}
 				break;
@@ -14500,77 +9665,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_index_stmtContext extends ParserRuleContext {
-        public TerminalNode T_CREATE() {
-            return getToken(HplsqlParser.T_CREATE, 0);
-        }
-
-        public TerminalNode T_INDEX() {
-            return getToken(HplsqlParser.T_INDEX, 0);
-        }
-
-        public IdentContext ident() {
-            return getRuleContext(IdentContext.class, 0);
-        }
-
-        public TerminalNode T_ON() {
-            return getToken(HplsqlParser.T_ON, 0);
-        }
-
-        public Table_nameContext table_name() {
-            return getRuleContext(Table_nameContext.class, 0);
-        }
-
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public List<Create_index_colContext> create_index_col() {
-            return getRuleContexts(Create_index_colContext.class);
-        }
-
-        public Create_index_colContext create_index_col(int i) {
-            return getRuleContext(Create_index_colContext.class, i);
-        }
-
-        public TerminalNode T_CLOSE_P() {
-            return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public TerminalNode T_UNIQUE() {
-            return getToken(HplsqlParser.T_UNIQUE, 0);
-        }
-
-        public List<TerminalNode> T_COMMA() {
-            return getTokens(HplsqlParser.T_COMMA);
-        }
-
-        public TerminalNode T_COMMA(int i) {
-            return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public Create_index_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_index_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_index_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_index_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitCreate_index_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Cpp_stmtContext cpp_stmt() throws RecognitionException {
@@ -14661,41 +9755,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Create_index_colContext extends ParserRuleContext {
-        public IdentContext ident() {
-            return getRuleContext(IdentContext.class, 0);
-        }
-
-        public TerminalNode T_ASC() {
-            return getToken(HplsqlParser.T_ASC, 0);
-        }
-
-        public TerminalNode T_DESC() {
-            return getToken(HplsqlParser.T_DESC, 0);
-        }
-
-        public Create_index_colContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_index_col; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_index_col(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_index_col(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitCreate_index_col(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Cpp_function_stmtContext cpp_function_stmt() throws RecognitionException {
@@ -14719,34 +9778,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Index_storage_clauseContext extends ParserRuleContext {
-        public Index_mssql_storage_clauseContext index_mssql_storage_clause() {
-            return getRuleContext(Index_mssql_storage_clauseContext.class, 0);
-        }
-
-        public Index_storage_clauseContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_index_storage_clause; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterIndex_storage_clause(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitIndex_storage_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitIndex_storage_clause(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Cpp_function_headerContext cpp_function_header() throws RecognitionException {
@@ -14769,7 +9800,7 @@ public class HplsqlParser extends Parser {
                     {
                         setState(1831);
 				cpp_function_params_clause();
-				}
+                    }
                 }
 
                 setState(1834);
@@ -14785,69 +9816,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Index_mssql_storage_clauseContext extends ParserRuleContext {
-        public TerminalNode T_WITH() {
-            return getToken(HplsqlParser.T_WITH, 0);
-        }
-
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public List<IdentContext> ident() {
-            return getRuleContexts(IdentContext.class);
-        }
-
-        public IdentContext ident(int i) {
-            return getRuleContext(IdentContext.class, i);
-        }
-
-        public List<TerminalNode> T_EQUAL() {
-            return getTokens(HplsqlParser.T_EQUAL);
-        }
-
-        public TerminalNode T_EQUAL(int i) {
-            return getToken(HplsqlParser.T_EQUAL, i);
-        }
-
-        public TerminalNode T_CLOSE_P() {
-            return getToken(HplsqlParser.T_CLOSE_P, 0); }
-		public List<TerminalNode> T_COMMA() { return getTokens(HplsqlParser.T_COMMA); }
-		public TerminalNode T_COMMA(int i) {
-			return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public List<Create_table_options_mssql_itemContext> create_table_options_mssql_item() {
-            return getRuleContexts(Create_table_options_mssql_itemContext.class);
-        }
-
-        public Create_table_options_mssql_itemContext create_table_options_mssql_item(int i) {
-            return getRuleContext(Create_table_options_mssql_itemContext.class, i);
-        }
-
-        public Index_mssql_storage_clauseContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_index_mssql_storage_clause; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterIndex_mssql_storage_clause(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitIndex_mssql_storage_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitIndex_mssql_storage_clause(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Cpp_function_params_clauseContext cpp_function_params_clause() throws RecognitionException {
@@ -14863,13 +9831,13 @@ public class HplsqlParser extends Parser {
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==T_COMMA) {
-				{
+                {
                     {
                         setState(1837);
 				match(T_COMMA);
                         setState(1838);
 				cpp_function_param();
-				}
+                    }
                 }
                 setState(1843);
 				_errHandler.sync(this);
@@ -14886,37 +9854,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Quit_stmtContext extends ParserRuleContext {
-        public TerminalNode T_QUIT() {
-            return getToken(HplsqlParser.T_QUIT, 0);
-        }
-
-        public ExprContext expr() {
-            return getRuleContext(ExprContext.class, 0);
-        }
-
-        public Quit_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_quit_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterQuit_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitQuit_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitQuit_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Cpp_function_paramContext cpp_function_param() throws RecognitionException {
@@ -14940,37 +9877,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Return_stmtContext extends ParserRuleContext {
-        public TerminalNode T_RETURN() {
-            return getToken(HplsqlParser.T_RETURN, 0);
-        }
-
-        public ExprContext expr() {
-            return getRuleContext(ExprContext.class, 0);
-        }
-
-        public Return_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_return_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterReturn_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitReturn_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitReturn_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Cpp_function_bodyContext cpp_function_body() throws RecognitionException {
@@ -14992,69 +9898,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Cpp_stmtContext extends ParserRuleContext {
-        public Cpp_function_stmtContext cpp_function_stmt() {
-            return getRuleContext(Cpp_function_stmtContext.class, 0);
-        }
-
-        public Cpp_for_stmtContext cpp_for_stmt() {
-            return getRuleContext(Cpp_for_stmtContext.class, 0);
-        }
-
-        public Cpp_if_stmtContext cpp_if_stmt() {
-            return getRuleContext(Cpp_if_stmtContext.class, 0);
-        }
-
-        public Cpp_declare_stmtContext cpp_declare_stmt() {
-            return getRuleContext(Cpp_declare_stmtContext.class, 0);
-        }
-
-        public Cpp_assignment_stmtContext cpp_assignment_stmt() {
-            return getRuleContext(Cpp_assignment_stmtContext.class, 0);
-        }
-
-        public Cpp_declare_assignment_stmtContext cpp_declare_assignment_stmt() {
-            return getRuleContext(Cpp_declare_assignment_stmtContext.class, 0);
-        }
-
-        public Cpp_return_stmtContext cpp_return_stmt() {
-            return getRuleContext(Cpp_return_stmtContext.class, 0);
-        }
-
-        public Write_stmtContext write_stmt() {
-            return getRuleContext(Write_stmtContext.class, 0);
-        }
-
-        public Create_table_stmtContext create_table_stmt() {
-            return getRuleContext(Create_table_stmtContext.class, 0);
-        }
-
-        public Create_type_stmtContext create_type_stmt() {
-            return getRuleContext(Create_type_stmtContext.class, 0);
-        }
-
-        public Cpp_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_cpp_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitCpp_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Cpp_if_stmtContext cpp_if_stmt() throws RecognitionException {
@@ -15079,7 +9922,7 @@ public class HplsqlParser extends Parser {
                 _alt = getInterpreter().adaptivePredict(_input, 216,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
-					{
+                    {
                         {
                             setState(1854);
 					cpp_elseif_clause();
@@ -15088,13 +9931,13 @@ public class HplsqlParser extends Parser {
                 }
                 setState(1859);
 				_errHandler.sync(this);
-                _alt = getInterpreter().adaptivePredict(_input, 216,_ctx);
+                _alt = getInterpreter().adaptivePredict(_input, 216, _ctx);
             }
                 setState(1861);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 217, _ctx) ) {
-			case 1: {
-                setState(1860);
+                switch (getInterpreter().adaptivePredict(_input, 217, _ctx)) {
+                    case 1: {
+                        setState(1860);
 				cpp_else_clause();
 				}
 				break;
@@ -15110,37 +9953,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Cpp_function_stmtContext extends ParserRuleContext {
-        public Cpp_function_headerContext cpp_function_header() {
-            return getRuleContext(Cpp_function_headerContext.class, 0);
-        }
-
-        public Cpp_function_bodyContext cpp_function_body() {
-            return getRuleContext(Cpp_function_bodyContext.class, 0);
-        }
-
-        public Cpp_function_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_cpp_function_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_function_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_function_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitCpp_function_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Cpp_elseif_clauseContext cpp_elseif_clause() throws RecognitionException {
@@ -15179,50 +9991,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Cpp_function_headerContext extends ParserRuleContext {
-        public DtypeContext dtype() {
-            return getRuleContext(DtypeContext.class, 0);
-        }
-
-        public IdentContext ident() {
-            return getRuleContext(IdentContext.class, 0);
-        }
-
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public TerminalNode T_CLOSE_P() {
-            return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public Cpp_function_params_clauseContext cpp_function_params_clause() {
-            return getRuleContext(Cpp_function_params_clauseContext.class, 0);
-        }
-
-        public Cpp_function_headerContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_cpp_function_header; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_function_header(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_function_header(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCpp_function_header(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Cpp_else_clauseContext cpp_else_clause() throws RecognitionException {
@@ -15246,46 +10014,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Cpp_function_params_clauseContext extends ParserRuleContext {
-        public List<Cpp_function_paramContext> cpp_function_param() {
-            return getRuleContexts(Cpp_function_paramContext.class);
-        }
-
-        public Cpp_function_paramContext cpp_function_param(int i) {
-            return getRuleContext(Cpp_function_paramContext.class, i);
-        }
-
-        public List<TerminalNode> T_COMMA() {
-            return getTokens(HplsqlParser.T_COMMA);
-        }
-
-        public TerminalNode T_COMMA(int i) {
-            return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public Cpp_function_params_clauseContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_cpp_function_params_clause; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_function_params_clause(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_function_params_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCpp_function_params_clause(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Cpp_for_stmtContext cpp_for_stmt() throws RecognitionException {
@@ -15309,37 +10037,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Cpp_function_paramContext extends ParserRuleContext {
-        public DtypeContext dtype() {
-            return getRuleContext(DtypeContext.class, 0);
-        }
-
-        public IdentContext ident() {
-            return getRuleContext(IdentContext.class, 0);
-        }
-
-        public Cpp_function_paramContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_cpp_function_param; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_function_param(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_function_param(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitCpp_function_param(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Cpp_for_stmt_headerContext cpp_for_stmt_header() throws RecognitionException {
@@ -15375,33 +10072,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Cpp_function_bodyContext extends ParserRuleContext {
-        public Cpp_scopeContext cpp_scope() {
-            return getRuleContext(Cpp_scopeContext.class, 0);
-        }
-
-        public Cpp_function_bodyContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_cpp_function_body; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_function_body(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_function_body(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitCpp_function_body(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Cpp_for_params_clauseContext cpp_for_params_clause() throws RecognitionException {
@@ -15417,13 +10087,13 @@ public class HplsqlParser extends Parser {
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==T_COMMA) {
-				{
+                {
                     {
                         setState(1885);
 				match(T_COMMA);
                         setState(1886);
 				cpp_for_param();
-				}
+                    }
                 }
                 setState(1891);
 				_errHandler.sync(this);
@@ -15440,61 +10110,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Cpp_if_stmtContext extends ParserRuleContext {
-        public TerminalNode T_IF() {
-            return getToken(HplsqlParser.T_IF, 0);
-        }
-
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public Bool_exprContext bool_expr() {
-            return getRuleContext(Bool_exprContext.class, 0);
-        }
-
-        public TerminalNode T_CLOSE_P() {
-            return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public Cpp_for_stmt_bodyContext cpp_for_stmt_body() {
-            return getRuleContext(Cpp_for_stmt_bodyContext.class, 0);
-        }
-
-        public List<Cpp_elseif_clauseContext> cpp_elseif_clause() {
-            return getRuleContexts(Cpp_elseif_clauseContext.class);
-        }
-
-        public Cpp_elseif_clauseContext cpp_elseif_clause(int i) {
-            return getRuleContext(Cpp_elseif_clauseContext.class, i);
-        }
-
-        public Cpp_else_clauseContext cpp_else_clause() {
-            return getRuleContext(Cpp_else_clauseContext.class, 0);
-        }
-
-        public Cpp_if_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_cpp_if_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_if_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_if_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitCpp_if_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Cpp_for_paramContext cpp_for_param() throws RecognitionException {
@@ -15505,9 +10120,9 @@ public class HplsqlParser extends Parser {
             {
                 setState(1893);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 219, _ctx) ) {
-			case 1: {
-                setState(1892);
+                switch (getInterpreter().adaptivePredict(_input, 219, _ctx)) {
+                    case 1: {
+                        setState(1892);
 				dtype();
 				}
 				break;
@@ -15529,53 +10144,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Cpp_elseif_clauseContext extends ParserRuleContext {
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public Bool_exprContext bool_expr() {
-            return getRuleContext(Bool_exprContext.class, 0);
-        }
-
-        public TerminalNode T_CLOSE_P() {
-            return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public Cpp_for_stmt_bodyContext cpp_for_stmt_body() {
-            return getRuleContext(Cpp_for_stmt_bodyContext.class, 0);
-        }
-
-        public TerminalNode T_ELSIF() {
-            return getToken(HplsqlParser.T_ELSIF, 0);
-        }
-
-        public TerminalNode T_ELSEIF() {
-            return getToken(HplsqlParser.T_ELSEIF, 0);
-        }
-
-        public Cpp_elseif_clauseContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_cpp_elseif_clause; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_elseif_clause(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_elseif_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitCpp_elseif_clause(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Cpp_for_stmt_var_incr_caluseContext cpp_for_stmt_var_incr_caluse() throws RecognitionException {
@@ -15591,13 +10159,13 @@ public class HplsqlParser extends Parser {
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==T_COMMA) {
-				{
+                {
                     {
                         setState(1900);
 				match(T_COMMA);
                         setState(1901);
 				cpp_for_stmt_var_incr();
-				}
+                    }
                 }
                 setState(1906);
 				_errHandler.sync(this);
@@ -15614,37 +10182,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Cpp_else_clauseContext extends ParserRuleContext {
-        public TerminalNode T_ELSE() {
-            return getToken(HplsqlParser.T_ELSE, 0);
-        }
-
-        public Cpp_for_stmt_bodyContext cpp_for_stmt_body() {
-            return getRuleContext(Cpp_for_stmt_bodyContext.class, 0);
-        }
-
-        public Cpp_else_clauseContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_cpp_else_clause; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_else_clause(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_else_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitCpp_else_clause(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Cpp_for_stmt_var_incrContext cpp_for_stmt_var_incr() throws RecognitionException {
@@ -15702,7 +10239,7 @@ public class HplsqlParser extends Parser {
 				_errHandler.sync(this);
 				_la = _input.LA(1);
                 while (_la == T__2 || ((((_la - 293)) & ~0x3f) == 0 && ((1L << (_la - 293)) & ((1L << (T_ADD - 293)) | (1L << (T_DIV - 293)) | (1L << (T_MUL - 293)) | (1L << (T_SUB - 293)))) != 0)) {
-					{
+                    {
                         {
                             setState(1920);
 					_la = _input.LA(1);
@@ -15716,7 +10253,7 @@ public class HplsqlParser extends Parser {
                             }
                             setState(1921);
 					ident();
-					}
+                        }
                     }
                     setState(1926);
 					_errHandler.sync(this);
@@ -15756,37 +10293,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Cpp_for_stmtContext extends ParserRuleContext {
-        public Cpp_for_stmt_headerContext cpp_for_stmt_header() {
-            return getRuleContext(Cpp_for_stmt_headerContext.class, 0);
-        }
-
-        public Cpp_for_stmt_bodyContext cpp_for_stmt_body() {
-            return getRuleContext(Cpp_for_stmt_bodyContext.class, 0);
-        }
-
-        public Cpp_for_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_cpp_for_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_for_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_for_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitCpp_for_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Cpp_for_stmt_bodyContext cpp_for_stmt_body() throws RecognitionException {
@@ -16087,62 +10593,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Cpp_for_stmt_headerContext extends ParserRuleContext {
-        public TerminalNode T_FOR() {
-            return getToken(HplsqlParser.T_FOR, 0);
-        }
-
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public Cpp_for_params_clauseContext cpp_for_params_clause() {
-            return getRuleContext(Cpp_for_params_clauseContext.class, 0);
-        }
-
-        public List<TerminalNode> T_SEMICOLON() {
-            return getTokens(HplsqlParser.T_SEMICOLON);
-        }
-
-        public TerminalNode T_SEMICOLON(int i) {
-            return getToken(HplsqlParser.T_SEMICOLON, i);
-        }
-
-        public Bool_exprContext bool_expr() {
-            return getRuleContext(Bool_exprContext.class, 0);
-        }
-
-        public Cpp_for_stmt_var_incr_caluseContext cpp_for_stmt_var_incr_caluse() {
-            return getRuleContext(Cpp_for_stmt_var_incr_caluseContext.class, 0);
-        }
-
-        public TerminalNode T_CLOSE_P() {
-            return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public Cpp_for_stmt_headerContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_cpp_for_stmt_header; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_for_stmt_header(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_for_stmt_header(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCpp_for_stmt_header(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Cpp_declare_assignment_stmtContext cpp_declare_assignment_stmt() throws RecognitionException {
@@ -16153,14 +10603,14 @@ public class HplsqlParser extends Parser {
             {
                 setState(1940);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 224, _ctx) ) {
-			case 1: {
-                setState(1938);
+                switch (getInterpreter().adaptivePredict(_input, 224, _ctx)) {
+                    case 1: {
+                        setState(1938);
 				dtype();
 				}
 				break;
-			case 2: {
-                setState(1939);
+                    case 2: {
+                        setState(1939);
 				match(T_VAR);
 				}
 				break;
@@ -16184,46 +10634,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Cpp_for_params_clauseContext extends ParserRuleContext {
-        public List<Cpp_for_paramContext> cpp_for_param() {
-            return getRuleContexts(Cpp_for_paramContext.class);
-        }
-
-        public Cpp_for_paramContext cpp_for_param(int i) {
-            return getRuleContext(Cpp_for_paramContext.class, i);
-        }
-
-        public List<TerminalNode> T_COMMA() {
-            return getTokens(HplsqlParser.T_COMMA);
-        }
-
-        public TerminalNode T_COMMA(int i) {
-            return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public Cpp_for_params_clauseContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_cpp_for_params_clause; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_for_params_clause(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_for_params_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCpp_for_params_clause(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Cpp_declare_stmtContext cpp_declare_stmt() throws RecognitionException {
@@ -16234,14 +10644,14 @@ public class HplsqlParser extends Parser {
             {
                 setState(1949);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 225, _ctx) ) {
-			case 1: {
-                setState(1947);
+                switch (getInterpreter().adaptivePredict(_input, 225, _ctx)) {
+                    case 1: {
+                        setState(1947);
 				dtype();
 				}
 				break;
-			case 2: {
-                setState(1948);
+                    case 2: {
+                        setState(1948);
 				match(T_VAR);
 				}
 				break;
@@ -16261,43 +10671,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Cpp_for_paramContext extends ParserRuleContext {
-		public IdentContext ident() {
-			return getRuleContext(IdentContext.class,0);
-		}
-		public TerminalNode T_EQUAL() { return getToken(HplsqlParser.T_EQUAL, 0);
-        }
-
-        public TerminalNode L_INT() {
-            return getToken(HplsqlParser.L_INT, 0);
-        }
-
-        public DtypeContext dtype() {
-            return getRuleContext(DtypeContext.class, 0);
-        }
-
-        public Cpp_for_paramContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_cpp_for_param; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_for_param(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_for_param(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitCpp_for_param(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Cpp_assignment_stmtContext cpp_assignment_stmt() throws RecognitionException {
@@ -16325,46 +10698,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Cpp_for_stmt_var_incr_caluseContext extends ParserRuleContext {
-        public List<Cpp_for_stmt_var_incrContext> cpp_for_stmt_var_incr() {
-            return getRuleContexts(Cpp_for_stmt_var_incrContext.class);
-        }
-
-        public Cpp_for_stmt_var_incrContext cpp_for_stmt_var_incr(int i) {
-            return getRuleContext(Cpp_for_stmt_var_incrContext.class, i);
-        }
-
-        public List<TerminalNode> T_COMMA() {
-            return getTokens(HplsqlParser.T_COMMA);
-        }
-
-        public TerminalNode T_COMMA(int i) {
-            return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public Cpp_for_stmt_var_incr_caluseContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_cpp_for_stmt_var_incr_caluse; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_for_stmt_var_incr_caluse(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_for_stmt_var_incr_caluse(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCpp_for_stmt_var_incr_caluse(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Cpp_return_stmtContext cpp_return_stmt() throws RecognitionException {
@@ -16390,74 +10723,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Cpp_for_stmt_var_incrContext extends ParserRuleContext {
-        public List<IdentContext> ident() {
-            return getRuleContexts(IdentContext.class);
-        }
-
-        public IdentContext ident(int i) {
-            return getRuleContext(IdentContext.class, i);
-        }
-
-        public List<TerminalNode> T_ADD() {
-            return getTokens(HplsqlParser.T_ADD);
-        }
-
-        public TerminalNode T_ADD(int i) {
-            return getToken(HplsqlParser.T_ADD, i);
-        }
-
-        public TerminalNode T_EQUAL() {
-            return getToken(HplsqlParser.T_EQUAL, 0);
-        }
-
-        public List<TerminalNode> T_SUB() {
-            return getTokens(HplsqlParser.T_SUB);
-        }
-
-        public TerminalNode T_SUB(int i) {
-            return getToken(HplsqlParser.T_SUB, i);
-        }
-
-        public List<TerminalNode> T_MUL() {
-            return getTokens(HplsqlParser.T_MUL);
-        }
-
-        public TerminalNode T_MUL(int i) {
-            return getToken(HplsqlParser.T_MUL, i);
-        }
-
-        public List<TerminalNode> T_DIV() {
-            return getTokens(HplsqlParser.T_DIV);
-        }
-
-        public TerminalNode T_DIV(int i) {
-            return getToken(HplsqlParser.T_DIV, i);
-        }
-
-        public Cpp_for_stmt_var_incrContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_cpp_for_stmt_var_incr; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_for_stmt_var_incr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_for_stmt_var_incr(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCpp_for_stmt_var_incr(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Cpp_scopeContext cpp_scope() throws RecognitionException {
@@ -16741,19 +11006,19 @@ public class HplsqlParser extends Parser {
 				case T_VARIANCE:
 				case T_USER:
 				case T_WRITE:
-				case L_ID: {
-                    setState(1964);
+                    case L_ID: {
+                        setState(1964);
 					cpp_stmt();
 					}
 					break;
-				case T_OPEN_B: {
-                    setState(1965);
+                    case T_OPEN_B: {
+                        setState(1965);
 					cpp_scope();
 					}
 					break;
 				default:
 					throw new NoViableAltException(this);
-				}
+                }
                     }
                     setState(1970);
 				_errHandler.sync(this);
@@ -16772,37 +11037,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Cpp_for_stmt_bodyContext extends ParserRuleContext {
-        public Cpp_scopeContext cpp_scope() {
-            return getRuleContext(Cpp_scopeContext.class, 0);
-        }
-
-        public Cpp_stmtContext cpp_stmt() {
-            return getRuleContext(Cpp_stmtContext.class, 0);
-        }
-
-        public Cpp_for_stmt_bodyContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_cpp_for_stmt_body; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_for_stmt_body(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_for_stmt_body(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitCpp_for_stmt_body(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final While_stmtContext while_stmt() throws RecognitionException {
@@ -16832,9 +11066,9 @@ public class HplsqlParser extends Parser {
 			match(T_END);
                 setState(1979);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 228, _ctx) ) {
-			case 1: {
-                setState(1978);
+                switch (getInterpreter().adaptivePredict(_input, 228, _ctx)) {
+                    case 1: {
+                        setState(1978);
 				_la = _input.LA(1);
 				if ( !(_la==T_LOOP || _la==T_WHILE) ) {
 				_errHandler.recoverInline(this);
@@ -16858,54 +11092,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Cpp_declare_assignment_stmtContext extends ParserRuleContext {
-        public IdentContext ident() {
-            return getRuleContext(IdentContext.class, 0);
-        }
-
-        public TerminalNode T_EQUAL() {
-            return getToken(HplsqlParser.T_EQUAL, 0);
-        }
-
-        public StmtContext stmt() {
-            return getRuleContext(StmtContext.class, 0);
-        }
-
-        public TerminalNode T_SEMICOLON() {
-            return getToken(HplsqlParser.T_SEMICOLON, 0);
-        }
-
-        public DtypeContext dtype() {
-            return getRuleContext(DtypeContext.class, 0);
-        }
-
-        public TerminalNode T_VAR() {
-            return getToken(HplsqlParser.T_VAR, 0);
-        }
-
-        public Cpp_declare_assignment_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_cpp_declare_assignment_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_declare_assignment_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_declare_assignment_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCpp_declare_assignment_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final For_range_stmtContext for_range_stmt() throws RecognitionException {
@@ -16923,9 +11109,9 @@ public class HplsqlParser extends Parser {
 			match(T_IN);
                 setState(1985);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 229, _ctx) ) {
-			case 1: {
-                setState(1984);
+                switch (getInterpreter().adaptivePredict(_input, 229, _ctx)) {
+                    case 1: {
+                        setState(1984);
 				match(T_REVERSE);
 				}
 				break;
@@ -16953,7 +11139,7 @@ public class HplsqlParser extends Parser {
                 }
                     setState(1991);
 				expr(0);
-				}
+                }
             }
 
                 setState(1994);
@@ -16975,45 +11161,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Cpp_declare_stmtContext extends ParserRuleContext {
-        public IdentContext ident() {
-            return getRuleContext(IdentContext.class, 0);
-        }
-
-        public TerminalNode T_SEMICOLON() {
-            return getToken(HplsqlParser.T_SEMICOLON, 0);
-        }
-
-        public DtypeContext dtype() {
-            return getRuleContext(DtypeContext.class, 0);
-        }
-
-        public TerminalNode T_VAR() {
-            return getToken(HplsqlParser.T_VAR, 0);
-        }
-
-        public Cpp_declare_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_cpp_declare_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_declare_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_declare_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitCpp_declare_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final LabelContext label() throws RecognitionException {
@@ -17058,46 +11205,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Cpp_assignment_stmtContext extends ParserRuleContext {
-        public IdentContext ident() {
-            return getRuleContext(IdentContext.class, 0);
-        }
-
-        public TerminalNode T_EQUAL() {
-            return getToken(HplsqlParser.T_EQUAL, 0);
-        }
-
-        public StmtContext stmt() {
-            return getRuleContext(StmtContext.class, 0);
-        }
-
-        public TerminalNode T_SEMICOLON() {
-            return getToken(HplsqlParser.T_SEMICOLON, 0);
-        }
-
-        public Cpp_assignment_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_cpp_assignment_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_assignment_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_assignment_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCpp_assignment_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Using_clauseContext using_clause() throws RecognitionException {
@@ -17116,7 +11223,7 @@ public class HplsqlParser extends Parser {
                 _alt = getInterpreter().adaptivePredict(_input, 232,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
-					{
+                    {
                         {
                             setState(2009);
 					match(T_COMMA);
@@ -17140,41 +11247,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Cpp_return_stmtContext extends ParserRuleContext {
-        public TerminalNode T_RETURN() {
-            return getToken(HplsqlParser.T_RETURN, 0);
-        }
-
-        public ExprContext expr() {
-            return getRuleContext(ExprContext.class, 0);
-        }
-
-        public TerminalNode T_SEMICOLON() {
-            return getToken(HplsqlParser.T_SEMICOLON, 0);
-        }
-
-        public Cpp_return_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_cpp_return_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_return_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_return_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitCpp_return_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Select_stmtContext select_stmt() throws RecognitionException {
@@ -17196,53 +11268,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Cpp_scopeContext extends ParserRuleContext {
-        public TerminalNode T_OPEN_B() {
-            return getToken(HplsqlParser.T_OPEN_B, 0);
-        }
-
-        public TerminalNode T_CLOSE_B() {
-            return getToken(HplsqlParser.T_CLOSE_B, 0);
-        }
-
-        public List<Cpp_stmtContext> cpp_stmt() {
-            return getRuleContexts(Cpp_stmtContext.class);
-        }
-
-        public Cpp_stmtContext cpp_stmt(int i) {
-            return getRuleContext(Cpp_stmtContext.class, i);
-        }
-
-        public List<Cpp_scopeContext> cpp_scope() {
-            return getRuleContexts(Cpp_scopeContext.class);
-        }
-
-        public Cpp_scopeContext cpp_scope(int i) {
-            return getRuleContext(Cpp_scopeContext.class, i);
-        }
-
-        public Cpp_scopeContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_cpp_scope; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_scope(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_scope(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitCpp_scope(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Fullselect_stmtContext fullselect_stmt() throws RecognitionException {
@@ -17259,7 +11284,7 @@ public class HplsqlParser extends Parser {
                 _alt = getInterpreter().adaptivePredict(_input, 233,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
-					{
+                    {
                         {
                             setState(2019);
 					fullselect_set_clause();
@@ -17283,69 +11308,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class While_stmtContext extends ParserRuleContext {
-        public List<TerminalNode> T_WHILE() {
-            return getTokens(HplsqlParser.T_WHILE);
-        }
-
-        public TerminalNode T_WHILE(int i) {
-            return getToken(HplsqlParser.T_WHILE, i);
-        }
-
-        public Bool_exprContext bool_expr() {
-            return getRuleContext(Bool_exprContext.class, 0);
-        }
-
-        public BlockContext block() {
-            return getRuleContext(BlockContext.class, 0);
-        }
-
-        public TerminalNode T_END() {
-            return getToken(HplsqlParser.T_END, 0);
-        }
-
-        public TerminalNode T_DO() {
-            return getToken(HplsqlParser.T_DO, 0);
-        }
-
-        public List<TerminalNode> T_LOOP() {
-            return getTokens(HplsqlParser.T_LOOP);
-        }
-
-        public TerminalNode T_LOOP(int i) {
-            return getToken(HplsqlParser.T_LOOP, i);
-        }
-
-        public TerminalNode T_THEN() {
-            return getToken(HplsqlParser.T_THEN, 0);
-        }
-
-        public TerminalNode T_BEGIN() {
-            return getToken(HplsqlParser.T_BEGIN, 0);
-        }
-
-        public While_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_while_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterWhile_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitWhile_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitWhile_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Fullselect_stmt_itemContext fullselect_stmt_item() throws RecognitionException {
@@ -17387,81 +11349,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class For_range_stmtContext extends ParserRuleContext {
-        public TerminalNode T_FOR() {
-            return getToken(HplsqlParser.T_FOR, 0);
-        }
-
-        public TerminalNode L_ID() {
-            return getToken(HplsqlParser.L_ID, 0);
-        }
-
-        public TerminalNode T_IN() {
-            return getToken(HplsqlParser.T_IN, 0);
-        }
-
-        public List<ExprContext> expr() {
-            return getRuleContexts(ExprContext.class);
-        }
-
-        public ExprContext expr(int i) {
-            return getRuleContext(ExprContext.class, i);
-        }
-
-        public TerminalNode T_DOT2() {
-            return getToken(HplsqlParser.T_DOT2, 0);
-        }
-
-        public List<TerminalNode> T_LOOP() {
-            return getTokens(HplsqlParser.T_LOOP);
-        }
-
-        public TerminalNode T_LOOP(int i) {
-            return getToken(HplsqlParser.T_LOOP, i);
-        }
-
-        public BlockContext block() {
-            return getRuleContext(BlockContext.class, 0);
-        }
-
-        public TerminalNode T_END() {
-            return getToken(HplsqlParser.T_END, 0);
-        }
-
-        public TerminalNode T_REVERSE() {
-            return getToken(HplsqlParser.T_REVERSE, 0);
-        }
-
-        public TerminalNode T_BY() {
-            return getToken(HplsqlParser.T_BY, 0);
-        }
-
-        public TerminalNode T_STEP() {
-            return getToken(HplsqlParser.T_STEP, 0);
-        }
-
-        public For_range_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_for_range_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterFor_range_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitFor_range_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitFor_range_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Fullselect_set_clauseContext fullselect_set_clause() throws RecognitionException {
@@ -17536,53 +11423,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class LabelContext extends ParserRuleContext {
-        public TerminalNode L_LABEL() {
-            return getToken(HplsqlParser.L_LABEL, 0);
-        }
-
-        public List<TerminalNode> T_LESS() {
-            return getTokens(HplsqlParser.T_LESS);
-        }
-
-        public TerminalNode T_LESS(int i) {
-            return getToken(HplsqlParser.T_LESS, i);
-        }
-
-        public TerminalNode L_ID() {
-            return getToken(HplsqlParser.L_ID, 0);
-        }
-
-        public List<TerminalNode> T_GREATER() {
-            return getTokens(HplsqlParser.T_GREATER);
-        }
-
-        public TerminalNode T_GREATER(int i) {
-            return getToken(HplsqlParser.T_GREATER, i);
-        }
-
-        public LabelContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_label; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterLabel(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitLabel(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitLabel(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Subselect_stmtContext subselect_stmt() throws RecognitionException {
@@ -17606,68 +11446,68 @@ public class HplsqlParser extends Parser {
 			select_list();
                 setState(2051);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 239, _ctx) ) {
-			case 1: {
-                setState(2050);
+                switch (getInterpreter().adaptivePredict(_input, 239, _ctx)) {
+                    case 1: {
+                        setState(2050);
 				into_clause();
 				}
 				break;
                 }
                 setState(2054);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 240, _ctx) ) {
-			case 1: {
-                setState(2053);
+                switch (getInterpreter().adaptivePredict(_input, 240, _ctx)) {
+                    case 1: {
+                        setState(2053);
 				from_clause();
 				}
 				break;
                 }
                 setState(2057);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 241, _ctx) ) {
-			case 1: {
-                setState(2056);
+                switch (getInterpreter().adaptivePredict(_input, 241, _ctx)) {
+                    case 1: {
+                        setState(2056);
 				where_clause();
 				}
 				break;
                 }
                 setState(2060);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 242, _ctx) ) {
-			case 1: {
-                setState(2059);
+                switch (getInterpreter().adaptivePredict(_input, 242, _ctx)) {
+                    case 1: {
+                        setState(2059);
 				group_by_clause();
 				}
 				break;
                 }
                 setState(2064);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 243, _ctx) ) {
-			case 1: {
-                setState(2062);
+                switch (getInterpreter().adaptivePredict(_input, 243, _ctx)) {
+                    case 1: {
+                        setState(2062);
 				having_clause();
 				}
 				break;
-			case 2: {
-                setState(2063);
+                    case 2: {
+                        setState(2063);
 				qualify_clause();
 				}
 				break;
                 }
                 setState(2067);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 244, _ctx) ) {
-			case 1: {
-                setState(2066);
+                switch (getInterpreter().adaptivePredict(_input, 244, _ctx)) {
+                    case 1: {
+                        setState(2066);
 				order_by_clause();
 				}
 				break;
                 }
                 setState(2070);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 245, _ctx) ) {
-			case 1: {
-                setState(2069);
+                switch (getInterpreter().adaptivePredict(_input, 245, _ctx)) {
+                    case 1: {
+                        setState(2069);
 				select_options();
 				}
 				break;
@@ -17683,45 +11523,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Using_clauseContext extends ParserRuleContext {
-        public TerminalNode T_USING() {
-            return getToken(HplsqlParser.T_USING, 0);
-        }
-
-        public List<ExprContext> expr() {
-            return getRuleContexts(ExprContext.class);
-        }
-
-        public ExprContext expr(int i) {
-            return getRuleContext(ExprContext.class,i);
-		}
-		public List<TerminalNode> T_COMMA() { return getTokens(HplsqlParser.T_COMMA); }
-		public TerminalNode T_COMMA(int i) {
-			return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public Using_clauseContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_using_clause; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterUsing_clause(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitUsing_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitUsing_clause(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Select_listContext select_list() throws RecognitionException {
@@ -17733,18 +11534,18 @@ public class HplsqlParser extends Parser {
             {
                 setState(2073);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 246, _ctx) ) {
-			case 1: {
-                setState(2072);
+                switch (getInterpreter().adaptivePredict(_input, 246, _ctx)) {
+                    case 1: {
+                        setState(2072);
 				select_list_set();
 				}
 				break;
                 }
                 setState(2076);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 247, _ctx) ) {
-			case 1: {
-                setState(2075);
+                switch (getInterpreter().adaptivePredict(_input, 247, _ctx)) {
+                    case 1: {
+                        setState(2075);
 				select_list_limit();
 				}
 				break;
@@ -17756,7 +11557,7 @@ public class HplsqlParser extends Parser {
                 _alt = getInterpreter().adaptivePredict(_input, 248,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
-					{
+                    {
                         {
                             setState(2079);
 					match(T_COMMA);
@@ -17780,33 +11581,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Select_stmtContext extends ParserRuleContext {
-        public Fullselect_stmtContext fullselect_stmt() {
-            return getRuleContext(Fullselect_stmtContext.class, 0);
-        }
-
-        public Select_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_select_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterSelect_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitSelect_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitSelect_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Select_list_setContext select_list_set() throws RecognitionException {
@@ -17837,45 +11611,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Fullselect_stmtContext extends ParserRuleContext {
-        public List<Fullselect_stmt_itemContext> fullselect_stmt_item() {
-            return getRuleContexts(Fullselect_stmt_itemContext.class);
-        }
-
-        public Fullselect_stmt_itemContext fullselect_stmt_item(int i) {
-            return getRuleContext(Fullselect_stmt_itemContext.class, i);
-        }
-
-        public List<Fullselect_set_clauseContext> fullselect_set_clause() {
-            return getRuleContexts(Fullselect_set_clauseContext.class);
-        }
-
-        public Fullselect_set_clauseContext fullselect_set_clause(int i) {
-            return getRuleContext(Fullselect_set_clauseContext.class, i);
-        }
-
-        public Fullselect_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_fullselect_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterFullselect_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitFullselect_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitFullselect_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Select_list_limitContext select_list_limit() throws RecognitionException {
@@ -17899,46 +11634,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Fullselect_stmt_itemContext extends ParserRuleContext {
-        public Subselect_stmtContext subselect_stmt() {
-            return getRuleContext(Subselect_stmtContext.class, 0);
-        }
-
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public Fullselect_stmtContext fullselect_stmt() {
-            return getRuleContext(Fullselect_stmtContext.class, 0);
-        }
-
-        public TerminalNode T_CLOSE_P() {
-            return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public Fullselect_stmt_itemContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_fullselect_stmt_item; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterFullselect_stmt_item(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitFullselect_stmt_item(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitFullselect_stmt_item(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Select_list_itemContext select_list_item() throws RecognitionException {
@@ -17949,34 +11644,34 @@ public class HplsqlParser extends Parser {
             {
                 setState(2101);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 251, _ctx) ) {
-			case 1: {
-                setState(2094);
+                switch (getInterpreter().adaptivePredict(_input, 251, _ctx)) {
+                    case 1: {
+                        setState(2094);
 				_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 249, _ctx) ) {
-				case 1: {
-                    setState(2091);
+                        switch (getInterpreter().adaptivePredict(_input, 249, _ctx)) {
+                            case 1: {
+                                setState(2091);
 					ident();
-                    setState(2092);
+                                setState(2092);
 					match(T_EQUAL);
 					}
 					break;
-                }
-                setState(2096);
+                        }
+                        setState(2096);
 				expr(0);
-                setState(2098);
+                        setState(2098);
 				_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 250, _ctx) ) {
-				case 1: {
-                    setState(2097);
+                        switch (getInterpreter().adaptivePredict(_input, 250, _ctx)) {
+                            case 1: {
+                                setState(2097);
 					select_list_alias();
 					}
 					break;
 				}
 				}
 				break;
-			case 2: {
-                setState(2100);
+                    case 2: {
+                        setState(2100);
 				select_list_asterisk();
 				}
 				break;
@@ -17992,46 +11687,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Fullselect_set_clauseContext extends ParserRuleContext {
-        public TerminalNode T_UNION() {
-            return getToken(HplsqlParser.T_UNION, 0);
-        }
-
-        public TerminalNode T_ALL() {
-            return getToken(HplsqlParser.T_ALL, 0);
-        }
-
-        public TerminalNode T_EXCEPT() {
-            return getToken(HplsqlParser.T_EXCEPT, 0);
-        }
-
-        public TerminalNode T_INTERSECT() {
-            return getToken(HplsqlParser.T_INTERSECT, 0);
-        }
-
-        public Fullselect_set_clauseContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_fullselect_set_clause; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterFullselect_set_clause(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitFullselect_set_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitFullselect_set_clause(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Select_list_aliasContext select_list_alias() throws RecognitionException {
@@ -18077,73 +11732,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Subselect_stmtContext extends ParserRuleContext {
-        public Select_listContext select_list() {
-            return getRuleContext(Select_listContext.class, 0);
-        }
-
-        public TerminalNode T_SELECT() {
-            return getToken(HplsqlParser.T_SELECT, 0);
-        }
-
-        public TerminalNode T_SEL() {
-            return getToken(HplsqlParser.T_SEL, 0);
-        }
-
-        public Into_clauseContext into_clause() {
-            return getRuleContext(Into_clauseContext.class, 0);
-        }
-
-        public From_clauseContext from_clause() {
-            return getRuleContext(From_clauseContext.class, 0);
-        }
-
-        public Where_clauseContext where_clause() {
-            return getRuleContext(Where_clauseContext.class, 0);
-        }
-
-        public Group_by_clauseContext group_by_clause() {
-            return getRuleContext(Group_by_clauseContext.class, 0);
-        }
-
-        public Having_clauseContext having_clause() {
-            return getRuleContext(Having_clauseContext.class, 0);
-        }
-
-        public Qualify_clauseContext qualify_clause() {
-            return getRuleContext(Qualify_clauseContext.class, 0);
-        }
-
-        public Order_by_clauseContext order_by_clause() {
-            return getRuleContext(Order_by_clauseContext.class, 0);
-        }
-
-        public Select_optionsContext select_options() {
-            return getRuleContext(Select_optionsContext.class, 0);
-        }
-
-        public Subselect_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_subselect_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterSubselect_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitSubselect_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitSubselect_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Select_list_asteriskContext select_list_asterisk() throws RecognitionException {
@@ -18162,7 +11750,7 @@ public class HplsqlParser extends Parser {
 				match(L_ID);
                     setState(2113);
 				match(T__3);
-				}
+                }
             }
 
                 setState(2116);
@@ -18178,49 +11766,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Select_listContext extends ParserRuleContext {
-        public List<Select_list_itemContext> select_list_item() {
-            return getRuleContexts(Select_list_itemContext.class);
-        }
-
-        public Select_list_itemContext select_list_item(int i) {
-            return getRuleContext(Select_list_itemContext.class, i);
-        }
-
-        public Select_list_setContext select_list_set() {
-            return getRuleContext(Select_list_setContext.class, 0);
-        }
-
-        public Select_list_limitContext select_list_limit() {
-            return getRuleContext(Select_list_limitContext.class,0);
-		}
-		public List<TerminalNode> T_COMMA() { return getTokens(HplsqlParser.T_COMMA); }
-		public TerminalNode T_COMMA(int i) {
-			return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public Select_listContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_select_list; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterSelect_list(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitSelect_list(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitSelect_list(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Into_clauseContext into_clause() throws RecognitionException {
@@ -18239,7 +11784,7 @@ public class HplsqlParser extends Parser {
                 _alt = getInterpreter().adaptivePredict(_input, 254,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
-					{
+                    {
                         {
                             setState(2120);
 					match(T_COMMA);
@@ -18263,37 +11808,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Select_list_setContext extends ParserRuleContext {
-        public TerminalNode T_ALL() {
-            return getToken(HplsqlParser.T_ALL, 0);
-        }
-
-        public TerminalNode T_DISTINCT() {
-            return getToken(HplsqlParser.T_DISTINCT, 0);
-        }
-
-        public Select_list_setContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_select_list_set; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterSelect_list_set(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitSelect_list_set(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitSelect_list_set(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final From_clauseContext from_clause() throws RecognitionException {
@@ -18312,7 +11826,7 @@ public class HplsqlParser extends Parser {
                 _alt = getInterpreter().adaptivePredict(_input, 255,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
-					{
+                    {
                         {
                             setState(2129);
 					from_join_clause();
@@ -18334,37 +11848,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Select_list_limitContext extends ParserRuleContext {
-        public TerminalNode T_TOP() {
-            return getToken(HplsqlParser.T_TOP, 0);
-        }
-
-        public ExprContext expr() {
-            return getRuleContext(ExprContext.class, 0);
-        }
-
-        public Select_list_limitContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_select_list_limit; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterSelect_list_limit(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitSelect_list_limit(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitSelect_list_limit(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final From_table_clauseContext from_table_clause() throws RecognitionException {
@@ -18406,49 +11889,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Select_list_itemContext extends ParserRuleContext {
-        public ExprContext expr() {
-            return getRuleContext(ExprContext.class, 0);
-        }
-
-        public Select_list_asteriskContext select_list_asterisk() {
-            return getRuleContext(Select_list_asteriskContext.class, 0);
-        }
-
-        public IdentContext ident() {
-            return getRuleContext(IdentContext.class, 0);
-        }
-
-        public TerminalNode T_EQUAL() {
-            return getToken(HplsqlParser.T_EQUAL, 0);
-        }
-
-        public Select_list_aliasContext select_list_alias() {
-            return getRuleContext(Select_list_aliasContext.class, 0);
-        }
-
-        public Select_list_itemContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_select_list_item; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterSelect_list_item(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitSelect_list_item(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitSelect_list_item(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final From_table_name_clauseContext from_table_name_clause() throws RecognitionException {
@@ -18461,9 +11901,9 @@ public class HplsqlParser extends Parser {
 			table_name();
                 setState(2142);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 257, _ctx) ) {
-			case 1: {
-                setState(2141);
+                switch (getInterpreter().adaptivePredict(_input, 257, _ctx)) {
+                    case 1: {
+                        setState(2141);
 				from_alias_clause();
 				}
 				break;
@@ -18479,48 +11919,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Select_list_aliasContext extends ParserRuleContext {
-        public TerminalNode T_AS() {
-            return getToken(HplsqlParser.T_AS, 0);
-        }
-
-        public IdentContext ident() {
-            return getRuleContext(IdentContext.class, 0);
-		}
-		public TerminalNode T_OPEN_P() { return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public TerminalNode T_TITLE() {
-            return getToken(HplsqlParser.T_TITLE, 0);
-        }
-
-        public TerminalNode L_S_STRING() {
-            return getToken(HplsqlParser.L_S_STRING, 0); }
-		public TerminalNode T_CLOSE_P() { return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public Select_list_aliasContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_select_list_alias; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterSelect_list_alias(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitSelect_list_alias(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitSelect_list_alias(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final From_subselect_clauseContext from_subselect_clause() throws RecognitionException {
@@ -18537,9 +11935,9 @@ public class HplsqlParser extends Parser {
 			match(T_CLOSE_P);
                 setState(2148);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 258, _ctx) ) {
-			case 1: {
-                setState(2147);
+                switch (getInterpreter().adaptivePredict(_input, 258, _ctx)) {
+                    case 1: {
+                        setState(2147);
 				from_alias_clause();
 				}
 				break;
@@ -18555,38 +11953,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Select_list_asteriskContext extends ParserRuleContext {
-        public TerminalNode T_MUL() {
-            return getToken(HplsqlParser.T_MUL, 0);
-        }
-
-        public TerminalNode L_ID() {
-            return getToken(HplsqlParser.L_ID, 0);
-        }
-
-        public Select_list_asteriskContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_select_list_asterisk; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterSelect_list_asterisk(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitSelect_list_asterisk(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitSelect_list_asterisk(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final From_join_clauseContext from_join_clause() throws RecognitionException {
@@ -18635,49 +12001,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Into_clauseContext extends ParserRuleContext {
-        public TerminalNode T_INTO() {
-            return getToken(HplsqlParser.T_INTO, 0);
-        }
-
-        public List<IdentContext> ident() {
-            return getRuleContexts(IdentContext.class);
-        }
-
-        public IdentContext ident(int i) {
-            return getRuleContext(IdentContext.class, i);
-        }
-
-        public List<TerminalNode> T_COMMA() {
-            return getTokens(HplsqlParser.T_COMMA);
-        }
-
-        public TerminalNode T_COMMA(int i) {
-            return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public Into_clauseContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_into_clause; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterInto_clause(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitInto_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitInto_clause(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final From_join_type_clauseContext from_join_type_clause() throws RecognitionException {
@@ -18699,7 +12022,7 @@ public class HplsqlParser extends Parser {
                     {
                         setState(2159);
 					match(T_INNER);
-					}
+                    }
                 }
 
                 setState(2162);
@@ -18728,7 +12051,7 @@ public class HplsqlParser extends Parser {
                     {
                         setState(2164);
 					match(T_OUTER);
-					}
+                    }
                 }
 
                 setState(2167);
@@ -18748,45 +12071,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class From_clauseContext extends ParserRuleContext {
-        public TerminalNode T_FROM() {
-            return getToken(HplsqlParser.T_FROM, 0);
-        }
-
-        public From_table_clauseContext from_table_clause() {
-            return getRuleContext(From_table_clauseContext.class, 0);
-        }
-
-        public List<From_join_clauseContext> from_join_clause() {
-            return getRuleContexts(From_join_clauseContext.class);
-        }
-
-        public From_join_clauseContext from_join_clause(int i) {
-            return getRuleContext(From_join_clauseContext.class, i);
-        }
-
-        public From_clauseContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_from_clause; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterFrom_clause(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitFrom_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitFrom_clause(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final From_table_values_clauseContext from_table_values_clause() throws RecognitionException {
@@ -18808,13 +12092,13 @@ public class HplsqlParser extends Parser {
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==T_COMMA) {
-				{
+                {
                     {
                         setState(2174);
 				match(T_COMMA);
                         setState(2175);
 				from_table_values_row();
-				}
+                    }
                 }
                 setState(2180);
 				_errHandler.sync(this);
@@ -18824,9 +12108,9 @@ public class HplsqlParser extends Parser {
 			match(T_CLOSE_P);
                 setState(2183);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 264, _ctx) ) {
-			case 1: {
-                setState(2182);
+                switch (getInterpreter().adaptivePredict(_input, 264, _ctx)) {
+                    case 1: {
+                        setState(2182);
 				from_alias_clause();
 				}
 				break;
@@ -18842,41 +12126,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class From_table_clauseContext extends ParserRuleContext {
-        public From_table_name_clauseContext from_table_name_clause() {
-            return getRuleContext(From_table_name_clauseContext.class, 0);
-        }
-
-        public From_subselect_clauseContext from_subselect_clause() {
-            return getRuleContext(From_subselect_clauseContext.class, 0);
-        }
-
-        public From_table_values_clauseContext from_table_values_clause() {
-            return getRuleContext(From_table_values_clauseContext.class, 0);
-        }
-
-        public From_table_clauseContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_from_table_clause; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterFrom_table_clause(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitFrom_table_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitFrom_table_clause(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final From_table_values_rowContext from_table_values_row() throws RecognitionException {
@@ -18905,13 +12154,13 @@ public class HplsqlParser extends Parser {
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==T_COMMA) {
-					{
+                    {
                         {
                             setState(2188);
 					match(T_COMMA);
                             setState(2189);
 					expr(0);
-					}
+                        }
                     }
                     setState(2194);
 					_errHandler.sync(this);
@@ -18932,38 +12181,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class From_table_name_clauseContext extends ParserRuleContext {
-        public Table_nameContext table_name() {
-            return getRuleContext(Table_nameContext.class, 0);
-        }
-
-        public From_alias_clauseContext from_alias_clause() {
-            return getRuleContext(From_alias_clauseContext.class, 0);
-        }
-
-        public From_table_name_clauseContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_from_table_name_clause; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterFrom_table_name_clause(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitFrom_table_name_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitFrom_table_name_clause(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final From_alias_clauseContext from_alias_clause() throws RecognitionException {
@@ -18975,9 +12192,9 @@ public class HplsqlParser extends Parser {
             {
                 setState(2200);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 267, _ctx) ) {
-			case 1: {
-                setState(2199);
+                switch (getInterpreter().adaptivePredict(_input, 267, _ctx)) {
+                    case 1: {
+                        setState(2199);
 				match(T_AS);
 				}
 				break;
@@ -18986,29 +12203,29 @@ public class HplsqlParser extends Parser {
 			ident();
                 setState(2213);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 269, _ctx) ) {
-			case 1: {
-                setState(2203);
+                switch (getInterpreter().adaptivePredict(_input, 269, _ctx)) {
+                    case 1: {
+                        setState(2203);
 				match(T_OPEN_P);
-                setState(2204);
+                        setState(2204);
 				match(L_ID);
-                setState(2209);
+                        setState(2209);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==T_COMMA) {
-					{
+                    {
                         {
                             setState(2205);
 					match(T_COMMA);
                             setState(2206);
 					match(L_ID);
-					}
+                        }
                     }
                     setState(2211);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
                 }
-                setState(2212);
+                        setState(2212);
 				match(T_CLOSE_P);
 				}
 				break;
@@ -19024,46 +12241,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class From_subselect_clauseContext extends ParserRuleContext {
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public Select_stmtContext select_stmt() {
-            return getRuleContext(Select_stmtContext.class, 0);
-        }
-
-        public TerminalNode T_CLOSE_P() {
-            return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public From_alias_clauseContext from_alias_clause() {
-            return getRuleContext(From_alias_clauseContext.class, 0);
-        }
-
-        public From_subselect_clauseContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_from_subselect_clause; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterFrom_subselect_clause(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitFrom_subselect_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitFrom_subselect_clause(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Table_nameContext table_name() throws RecognitionException {
@@ -19085,47 +12262,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class From_join_clauseContext extends ParserRuleContext {
-        public TerminalNode T_COMMA() {
-            return getToken(HplsqlParser.T_COMMA, 0);
-        }
-
-        public From_table_clauseContext from_table_clause() {
-            return getRuleContext(From_table_clauseContext.class, 0);
-        }
-
-        public From_join_type_clauseContext from_join_type_clause() {
-            return getRuleContext(From_join_type_clauseContext.class, 0);
-        }
-
-        public TerminalNode T_ON() {
-            return getToken(HplsqlParser.T_ON, 0); }
-		public Bool_exprContext bool_expr() {
-			return getRuleContext(Bool_exprContext.class,0);
-        }
-
-        public From_join_clauseContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_from_join_clause; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterFrom_join_clause(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitFrom_join_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitFrom_join_clause(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Where_clauseContext where_clause() throws RecognitionException {
@@ -19149,54 +12285,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class From_join_type_clauseContext extends ParserRuleContext {
-        public TerminalNode T_JOIN() {
-            return getToken(HplsqlParser.T_JOIN, 0);
-        }
-
-        public TerminalNode T_INNER() {
-            return getToken(HplsqlParser.T_INNER, 0);
-        }
-
-        public TerminalNode T_LEFT() {
-            return getToken(HplsqlParser.T_LEFT, 0);
-        }
-
-        public TerminalNode T_RIGHT() {
-            return getToken(HplsqlParser.T_RIGHT, 0);
-        }
-
-        public TerminalNode T_FULL() {
-            return getToken(HplsqlParser.T_FULL, 0);
-        }
-
-        public TerminalNode T_OUTER() {
-            return getToken(HplsqlParser.T_OUTER, 0);
-        }
-
-        public From_join_type_clauseContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_from_join_type_clause; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterFrom_join_type_clause(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitFrom_join_type_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitFrom_join_type_clause(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Group_by_clauseContext group_by_clause() throws RecognitionException {
@@ -19217,7 +12305,7 @@ public class HplsqlParser extends Parser {
                 _alt = getInterpreter().adaptivePredict(_input, 270,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
-					{
+                    {
                         {
                             setState(2223);
 					match(T_COMMA);
@@ -19241,66 +12329,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class From_table_values_clauseContext extends ParserRuleContext {
-        public TerminalNode T_TABLE() {
-            return getToken(HplsqlParser.T_TABLE, 0);
-        }
-
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public TerminalNode T_VALUES() {
-            return getToken(HplsqlParser.T_VALUES, 0);
-        }
-
-        public List<From_table_values_rowContext> from_table_values_row() {
-            return getRuleContexts(From_table_values_rowContext.class);
-        }
-
-        public From_table_values_rowContext from_table_values_row(int i) {
-            return getRuleContext(From_table_values_rowContext.class, i);
-        }
-
-        public TerminalNode T_CLOSE_P() {
-            return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public List<TerminalNode> T_COMMA() {
-            return getTokens(HplsqlParser.T_COMMA);
-        }
-
-        public TerminalNode T_COMMA(int i) {
-            return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public From_alias_clauseContext from_alias_clause() {
-            return getRuleContext(From_alias_clauseContext.class, 0);
-        }
-
-        public From_table_values_clauseContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_from_table_values_clause; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterFrom_table_values_clause(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitFrom_table_values_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitFrom_table_values_clause(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Having_clauseContext having_clause() throws RecognitionException {
@@ -19324,54 +12352,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class From_table_values_rowContext extends ParserRuleContext {
-        public List<ExprContext> expr() {
-            return getRuleContexts(ExprContext.class);
-        }
-
-        public ExprContext expr(int i) {
-            return getRuleContext(ExprContext.class, i);
-        }
-
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public TerminalNode T_CLOSE_P() {
-            return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public List<TerminalNode> T_COMMA() {
-            return getTokens(HplsqlParser.T_COMMA);
-        }
-
-        public TerminalNode T_COMMA(int i) {
-            return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public From_table_values_rowContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_from_table_values_row; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterFrom_table_values_row(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitFrom_table_values_row(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitFrom_table_values_row(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Qualify_clauseContext qualify_clause() throws RecognitionException {
@@ -19395,56 +12375,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class From_alias_clauseContext extends ParserRuleContext {
-        public IdentContext ident() {
-            return getRuleContext(IdentContext.class, 0);
-        }
-
-        public TerminalNode T_AS() {
-            return getToken(HplsqlParser.T_AS, 0);
-        }
-
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public List<TerminalNode> L_ID() {
-            return getTokens(HplsqlParser.L_ID);
-        }
-
-        public TerminalNode L_ID(int i) {
-            return getToken(HplsqlParser.L_ID, i);
-        }
-
-        public TerminalNode T_CLOSE_P() {
-            return getToken(HplsqlParser.T_CLOSE_P, 0); }
-		public List<TerminalNode> T_COMMA() { return getTokens(HplsqlParser.T_COMMA); }
-		public TerminalNode T_COMMA(int i) {
-			return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public From_alias_clauseContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_from_alias_clause; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterFrom_alias_clause(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitFrom_alias_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitFrom_alias_clause(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Order_by_clauseContext order_by_clause() throws RecognitionException {
@@ -19463,9 +12393,9 @@ public class HplsqlParser extends Parser {
 			expr(0);
                 setState(2240);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 271, _ctx) ) {
-			case 1: {
-                setState(2239);
+                switch (getInterpreter().adaptivePredict(_input, 271, _ctx)) {
+                    case 1: {
+                        setState(2239);
 				_la = _input.LA(1);
 				if ( !(_la==T_ASC || _la==T_DESC) ) {
 				_errHandler.recoverInline(this);
@@ -19483,7 +12413,7 @@ public class HplsqlParser extends Parser {
                 _alt = getInterpreter().adaptivePredict(_input, 273,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
-					{
+                    {
                         {
                             setState(2242);
 					match(T_COMMA);
@@ -19491,9 +12421,9 @@ public class HplsqlParser extends Parser {
 					expr(0);
                             setState(2245);
 					_errHandler.sync(this);
-                            switch (getInterpreter().adaptivePredict(_input, 272, _ctx) ) {
-					case 1: {
-                        setState(2244);
+                            switch (getInterpreter().adaptivePredict(_input, 272, _ctx)) {
+                                case 1: {
+                                    setState(2244);
 						_la = _input.LA(1);
 						if ( !(_la==T_ASC || _la==T_DESC) ) {
 						_errHandler.recoverInline(this);
@@ -19505,7 +12435,7 @@ public class HplsqlParser extends Parser {
 						}
 						}
 						break;
-					}
+                            }
                         }
                     }
                 }
@@ -19524,33 +12454,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Table_nameContext extends ParserRuleContext {
-        public IdentContext ident() {
-            return getRuleContext(IdentContext.class, 0);
-        }
-
-        public Table_nameContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_table_name; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterTable_name(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitTable_name(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitTable_name(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Select_optionsContext select_options() throws RecognitionException {
@@ -19565,10 +12468,9 @@ public class HplsqlParser extends Parser {
 			_alt = 1;
 			do {
 				switch (_alt) {
-				case 1:
-					{
-                        {
-                            setState(2252);
+				case 1: {
+                    {
+                        setState(2252);
 					select_options_item();
 					}
 					}
@@ -19591,37 +12493,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Where_clauseContext extends ParserRuleContext {
-        public TerminalNode T_WHERE() {
-            return getToken(HplsqlParser.T_WHERE, 0);
-        }
-
-        public Bool_exprContext bool_expr() {
-            return getRuleContext(Bool_exprContext.class, 0);
-        }
-
-        public Where_clauseContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_where_clause; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterWhere_clause(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitWhere_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitWhere_clause(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Select_options_itemContext select_options_item() throws RecognitionException {
@@ -19658,15 +12529,15 @@ public class HplsqlParser extends Parser {
                 }
                 setState(2266);
 				_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 275, _ctx) ) {
-				case 1: {
-                    setState(2261);
+                switch (getInterpreter().adaptivePredict(_input, 275, _ctx)) {
+                    case 1: {
+                        setState(2261);
 					match(T_USE);
-                    setState(2262);
+                        setState(2262);
 					match(T_AND);
-                    setState(2263);
+                        setState(2263);
 					match(T_KEEP);
-                    setState(2264);
+                        setState(2264);
 					_la = _input.LA(1);
 					if ( !(_la==T_EXCLUSIVE || _la==T_SHARE || _la==T_UPDATE) ) {
 					_errHandler.recoverInline(this);
@@ -19676,7 +12547,7 @@ public class HplsqlParser extends Parser {
 						_errHandler.reportMatch(this);
 						consume();
                     }
-                    setState(2265);
+                        setState(2265);
 					match(T_LOCKS);
 					}
 					break;
@@ -19698,51 +12569,8 @@ public class HplsqlParser extends Parser {
 		return _localctx;
     }
 
-    public static class Group_by_clauseContext extends ParserRuleContext {
-        public TerminalNode T_GROUP() {
-            return getToken(HplsqlParser.T_GROUP, 0);
-        }
-
-        public TerminalNode T_BY() {
-            return getToken(HplsqlParser.T_BY, 0);
-        }
-
-        public List<ExprContext> expr() {
-            return getRuleContexts(ExprContext.class);
-        }
-
-        public ExprContext expr(int i) {
-            return getRuleContext(ExprContext.class, i);
-        }
-
-        public List<TerminalNode> T_COMMA() {
-            return getTokens(HplsqlParser.T_COMMA);
-        }
-
-        public TerminalNode T_COMMA(int i) {
-            return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public Group_by_clauseContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_group_by_clause; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterGroup_by_clause(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitGroup_by_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitGroup_by_clause(this);
-			else return visitor.visitChildren(this);
-		}
+    public final Bool_exprContext bool_expr() throws RecognitionException {
+        return bool_expr(0);
 	}
 
 	private Bool_exprContext bool_expr(int _p) throws RecognitionException {
@@ -19759,28 +12587,28 @@ public class HplsqlParser extends Parser {
             {
                 setState(2279);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 278, _ctx) ) {
-			case 1: {
-                setState(2272);
+                switch (getInterpreter().adaptivePredict(_input, 278, _ctx)) {
+                    case 1: {
+                        setState(2272);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==T_NOT) {
                     {
                         setState(2271);
 					match(T_NOT);
-					}
+                    }
                 }
 
-                setState(2274);
+                        setState(2274);
 				match(T_OPEN_P);
-                setState(2275);
+                        setState(2275);
 				bool_expr(0);
-                setState(2276);
+                        setState(2276);
 				match(T_CLOSE_P);
 				}
 				break;
-			case 2: {
-                setState(2278);
+                    case 2: {
+                        setState(2278);
 				bool_expr_atom();
 				}
 				break;
@@ -19821,37 +12649,6 @@ public class HplsqlParser extends Parser {
 			unrollRecursionContexts(_parentctx);
 		}
 		return _localctx;
-    }
-
-    public static class Having_clauseContext extends ParserRuleContext {
-        public TerminalNode T_HAVING() {
-            return getToken(HplsqlParser.T_HAVING, 0);
-        }
-
-        public Bool_exprContext bool_expr() {
-            return getRuleContext(Bool_exprContext.class, 0);
-        }
-
-        public Having_clauseContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_having_clause; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterHaving_clause(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitHaving_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitHaving_clause(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Bool_expr_atomContext bool_expr_atom() throws RecognitionException {
@@ -19893,37 +12690,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Qualify_clauseContext extends ParserRuleContext {
-        public TerminalNode T_QUALIFY() {
-            return getToken(HplsqlParser.T_QUALIFY, 0);
-        }
-
-        public Bool_exprContext bool_expr() {
-            return getRuleContext(Bool_exprContext.class, 0);
-        }
-
-        public Qualify_clauseContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_qualify_clause; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterQualify_clause(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitQualify_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitQualify_clause(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Bool_expr_unaryContext bool_expr_unary() throws RecognitionException {
@@ -19948,7 +12714,7 @@ public class HplsqlParser extends Parser {
                     {
                         setState(2297);
 					match(T_NOT);
-					}
+                    }
                 }
 
                 setState(2300);
@@ -19980,7 +12746,7 @@ public class HplsqlParser extends Parser {
                     {
                         setState(2308);
 					match(T_NOT);
-					}
+                    }
                 }
 
                 setState(2311);
@@ -20018,62 +12784,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Order_by_clauseContext extends ParserRuleContext {
-        public TerminalNode T_ORDER() {
-            return getToken(HplsqlParser.T_ORDER, 0);
-        }
-
-        public TerminalNode T_BY() {
-            return getToken(HplsqlParser.T_BY, 0); }
-		public List<ExprContext> expr() {
-			return getRuleContexts(ExprContext.class);
-		}
-		public ExprContext expr(int i) {
-			return getRuleContext(ExprContext.class,i);
-		}
-		public List<TerminalNode> T_COMMA() { return getTokens(HplsqlParser.T_COMMA); }
-		public TerminalNode T_COMMA(int i) {
-			return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public List<TerminalNode> T_ASC() {
-            return getTokens(HplsqlParser.T_ASC);
-        }
-
-        public TerminalNode T_ASC(int i) {
-            return getToken(HplsqlParser.T_ASC, i);
-        }
-
-        public List<TerminalNode> T_DESC() {
-            return getTokens(HplsqlParser.T_DESC);
-        }
-
-        public TerminalNode T_DESC(int i) {
-            return getToken(HplsqlParser.T_DESC, i);
-        }
-
-        public Order_by_clauseContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_order_by_clause; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterOrder_by_clause(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitOrder_by_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitOrder_by_clause(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Bool_expr_single_inContext bool_expr_single_in() throws RecognitionException {
@@ -20092,7 +12802,7 @@ public class HplsqlParser extends Parser {
                 {
                     setState(2321);
 				match(T_NOT);
-				}
+                }
             }
 
                 setState(2324);
@@ -20102,22 +12812,21 @@ public class HplsqlParser extends Parser {
                 setState(2335);
 			_errHandler.sync(this);
                 switch (getInterpreter().adaptivePredict(_input, 286, _ctx) ) {
-			case 1:
-				{
-                    {
-                        setState(2326);
+			case 1: {
+                {
+                    setState(2326);
 				expr(0);
-                        setState(2331);
+                    setState(2331);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==T_COMMA) {
-					{
+                    {
                         {
                             setState(2327);
 					match(T_COMMA);
                             setState(2328);
 					expr(0);
-					}
+                        }
                     }
                     setState(2333);
 					_errHandler.sync(this);
@@ -20126,8 +12835,8 @@ public class HplsqlParser extends Parser {
 				}
 				}
 				break;
-			case 2: {
-                setState(2334);
+                    case 2: {
+                        setState(2334);
 				select_stmt();
 				}
 				break;
@@ -20145,37 +12854,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Select_optionsContext extends ParserRuleContext {
-        public List<Select_options_itemContext> select_options_item() {
-            return getRuleContexts(Select_options_itemContext.class);
-        }
-
-        public Select_options_itemContext select_options_item(int i) {
-            return getRuleContext(Select_options_itemContext.class, i);
-        }
-
-        public Select_optionsContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_select_options; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterSelect_options(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitSelect_options(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitSelect_options(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Bool_expr_multi_inContext bool_expr_multi_in() throws RecognitionException {
@@ -20193,13 +12871,13 @@ public class HplsqlParser extends Parser {
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==T_COMMA) {
-				{
+                {
                     {
                         setState(2341);
 				match(T_COMMA);
                         setState(2342);
 				expr(0);
-				}
+                    }
                 }
                 setState(2347);
 				_errHandler.sync(this);
@@ -20214,7 +12892,7 @@ public class HplsqlParser extends Parser {
                 {
                     setState(2349);
 				match(T_NOT);
-				}
+                }
             }
 
                 setState(2352);
@@ -20236,86 +12914,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Select_options_itemContext extends ParserRuleContext {
-        public TerminalNode T_LIMIT() {
-            return getToken(HplsqlParser.T_LIMIT, 0);
-        }
-
-        public ExprContext expr() {
-            return getRuleContext(ExprContext.class, 0);
-        }
-
-        public TerminalNode T_WITH() {
-            return getToken(HplsqlParser.T_WITH, 0);
-        }
-
-        public TerminalNode T_RR() {
-            return getToken(HplsqlParser.T_RR, 0);
-        }
-
-        public TerminalNode T_RS() {
-            return getToken(HplsqlParser.T_RS, 0);
-        }
-
-        public TerminalNode T_CS() {
-            return getToken(HplsqlParser.T_CS, 0);
-        }
-
-        public TerminalNode T_UR() {
-            return getToken(HplsqlParser.T_UR, 0);
-        }
-
-        public TerminalNode T_USE() {
-            return getToken(HplsqlParser.T_USE, 0);
-        }
-
-        public TerminalNode T_AND() {
-            return getToken(HplsqlParser.T_AND, 0);
-        }
-
-        public TerminalNode T_KEEP() {
-            return getToken(HplsqlParser.T_KEEP, 0);
-        }
-
-        public TerminalNode T_LOCKS() {
-            return getToken(HplsqlParser.T_LOCKS, 0);
-        }
-
-        public TerminalNode T_EXCLUSIVE() {
-            return getToken(HplsqlParser.T_EXCLUSIVE, 0);
-        }
-
-        public TerminalNode T_UPDATE() {
-            return getToken(HplsqlParser.T_UPDATE, 0);
-        }
-
-        public TerminalNode T_SHARE() {
-            return getToken(HplsqlParser.T_SHARE, 0);
-        }
-
-        public Select_options_itemContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_select_options_item; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterSelect_options_item(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitSelect_options_item(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitSelect_options_item(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Bool_expr_binaryContext bool_expr_binary() throws RecognitionException {
@@ -20341,65 +12939,7 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Bool_exprContext extends ParserRuleContext {
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public List<Bool_exprContext> bool_expr() {
-            return getRuleContexts(Bool_exprContext.class);
-        }
-
-        public Bool_exprContext bool_expr(int i) {
-            return getRuleContext(Bool_exprContext.class, i);
-        }
-
-        public TerminalNode T_CLOSE_P() {
-            return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public TerminalNode T_NOT() {
-            return getToken(HplsqlParser.T_NOT, 0);
-        }
-
-        public Bool_expr_atomContext bool_expr_atom() {
-            return getRuleContext(Bool_expr_atomContext.class, 0);
-        }
-
-        public Bool_expr_logical_operatorContext bool_expr_logical_operator() {
-            return getRuleContext(Bool_expr_logical_operatorContext.class, 0);
-        }
-
-        public Bool_exprContext(ParserRuleContext parent, int invokingState) {
-            super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_bool_expr; }
-
-        @Override
-        public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterBool_expr(this);
-        }
-
-        @Override
-        public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitBool_expr(this);
-        }
-
-        @Override
-        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitBool_expr(this);
-            else return visitor.visitChildren(this);
-        }
-    }
-
-    public final Bool_exprContext bool_expr() throws RecognitionException {
-        return bool_expr(0);
-    }
+	}
 
 	public final Bool_expr_logical_operatorContext bool_expr_logical_operator() throws RecognitionException {
 		Bool_expr_logical_operatorContext _localctx = new Bool_expr_logical_operatorContext(_ctx, getState());
@@ -20429,41 +12969,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Bool_expr_atomContext extends ParserRuleContext {
-        public Bool_expr_unaryContext bool_expr_unary() {
-            return getRuleContext(Bool_expr_unaryContext.class, 0);
-        }
-
-        public Bool_expr_binaryContext bool_expr_binary() {
-            return getRuleContext(Bool_expr_binaryContext.class, 0);
-        }
-
-        public ExprContext expr() {
-            return getRuleContext(ExprContext.class, 0);
-        }
-
-        public Bool_expr_atomContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_bool_expr_atom; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterBool_expr_atom(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitBool_expr_atom(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitBool_expr_atom(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Bool_expr_binary_operatorContext bool_expr_binary_operator() throws RecognitionException {
@@ -20543,7 +13048,7 @@ public class HplsqlParser extends Parser {
                     {
                         setState(2371);
 					match(T_NOT);
-					}
+                    }
                 }
 
                 setState(2374);
@@ -20573,78 +13078,8 @@ public class HplsqlParser extends Parser {
 		return _localctx;
     }
 
-    public static class Bool_expr_unaryContext extends ParserRuleContext {
-		public List<ExprContext> expr() {
-			return getRuleContexts(ExprContext.class);
-		}
-		public ExprContext expr(int i) {
-			return getRuleContext(ExprContext.class,i);
-        }
-
-        public TerminalNode T_IS() {
-            return getToken(HplsqlParser.T_IS, 0);
-        }
-
-        public TerminalNode T_NULL() {
-            return getToken(HplsqlParser.T_NULL, 0);
-        }
-
-        public TerminalNode T_NOT() {
-            return getToken(HplsqlParser.T_NOT, 0);
-        }
-
-        public TerminalNode T_BETWEEN() {
-            return getToken(HplsqlParser.T_BETWEEN, 0);
-        }
-
-        public TerminalNode T_AND() {
-            return getToken(HplsqlParser.T_AND, 0);
-        }
-
-        public TerminalNode T_EXISTS() {
-            return getToken(HplsqlParser.T_EXISTS, 0);
-        }
-
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public Select_stmtContext select_stmt() {
-            return getRuleContext(Select_stmtContext.class, 0);
-        }
-
-        public TerminalNode T_CLOSE_P() {
-            return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public Bool_expr_single_inContext bool_expr_single_in() {
-            return getRuleContext(Bool_expr_single_inContext.class, 0);
-        }
-
-        public Bool_expr_multi_inContext bool_expr_multi_in() {
-            return getRuleContext(Bool_expr_multi_inContext.class, 0);
-        }
-
-        public Bool_expr_unaryContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_bool_expr_unary; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterBool_expr_unary(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitBool_expr_unary(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitBool_expr_unary(this);
-			else return visitor.visitChildren(this);
-		}
+    public final ExprContext expr() throws RecognitionException {
+        return expr(0);
 	}
 
 	private ExprContext expr(int _p) throws RecognitionException {
@@ -20660,62 +13095,62 @@ public class HplsqlParser extends Parser {
             {
                 setState(2394);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 291, _ctx) ) {
-			case 1: {
-                setState(2378);
+                switch (getInterpreter().adaptivePredict(_input, 291, _ctx)) {
+                    case 1: {
+                        setState(2378);
 				match(T_OPEN_P);
-                setState(2379);
+                        setState(2379);
 				select_stmt();
-                setState(2380);
+                        setState(2380);
 				match(T_CLOSE_P);
 				}
 				break;
-			case 2: {
-                setState(2382);
+                    case 2: {
+                        setState(2382);
 				match(T_OPEN_P);
-                setState(2383);
+                        setState(2383);
 				expr(0);
-                setState(2384);
+                        setState(2384);
 				match(T_CLOSE_P);
 				}
 				break;
-			case 3: {
-                setState(2386);
+                    case 3: {
+                        setState(2386);
 				expr_interval();
 				}
 				break;
-			case 4: {
-                setState(2387);
+                    case 4: {
+                        setState(2387);
 				expr_concat();
 				}
 				break;
-			case 5: {
-                setState(2388);
+                    case 5: {
+                        setState(2388);
 				expr_case();
 				}
 				break;
-			case 6: {
-                setState(2389);
+                    case 6: {
+                        setState(2389);
 				expr_cursor_attribute();
 				}
 				break;
-			case 7: {
-                setState(2390);
+                    case 7: {
+                        setState(2390);
 				expr_agg_window_func();
 				}
 				break;
-			case 8: {
-                setState(2391);
+                    case 8: {
+                        setState(2391);
 				expr_spec_func();
 				}
 				break;
-			case 9: {
-                setState(2392);
+                    case 9: {
+                        setState(2392);
 				expr_func();
 				}
 				break;
-			case 10: {
-                setState(2393);
+                    case 10: {
+                        setState(2393);
 				expr_atom();
 				}
 				break;
@@ -20808,66 +13243,6 @@ public class HplsqlParser extends Parser {
 			unrollRecursionContexts(_parentctx);
 		}
 		return _localctx;
-    }
-
-    public static class Bool_expr_single_inContext extends ParserRuleContext {
-        public List<ExprContext> expr() {
-            return getRuleContexts(ExprContext.class);
-        }
-
-        public ExprContext expr(int i) {
-            return getRuleContext(ExprContext.class, i);
-        }
-
-        public TerminalNode T_IN() {
-            return getToken(HplsqlParser.T_IN, 0);
-        }
-
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public TerminalNode T_CLOSE_P() {
-            return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public Select_stmtContext select_stmt() {
-            return getRuleContext(Select_stmtContext.class, 0);
-        }
-
-        public TerminalNode T_NOT() {
-            return getToken(HplsqlParser.T_NOT, 0);
-        }
-
-        public List<TerminalNode> T_COMMA() {
-            return getTokens(HplsqlParser.T_COMMA);
-        }
-
-        public TerminalNode T_COMMA(int i) {
-            return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public Bool_expr_single_inContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_bool_expr_single_in; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterBool_expr_single_in(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitBool_expr_single_in(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitBool_expr_single_in(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Expr_atomContext expr_atom() throws RecognitionException {
@@ -20944,73 +13319,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Bool_expr_multi_inContext extends ParserRuleContext {
-        public List<TerminalNode> T_OPEN_P() {
-            return getTokens(HplsqlParser.T_OPEN_P);
-        }
-
-        public TerminalNode T_OPEN_P(int i) {
-            return getToken(HplsqlParser.T_OPEN_P, i);
-        }
-
-        public List<ExprContext> expr() {
-            return getRuleContexts(ExprContext.class);
-        }
-
-        public ExprContext expr(int i) {
-            return getRuleContext(ExprContext.class, i);
-        }
-
-        public List<TerminalNode> T_CLOSE_P() {
-            return getTokens(HplsqlParser.T_CLOSE_P);
-        }
-
-        public TerminalNode T_CLOSE_P(int i) {
-            return getToken(HplsqlParser.T_CLOSE_P, i);
-        }
-
-        public TerminalNode T_IN() {
-            return getToken(HplsqlParser.T_IN, 0);
-        }
-
-        public Select_stmtContext select_stmt() {
-            return getRuleContext(Select_stmtContext.class, 0);
-        }
-
-        public List<TerminalNode> T_COMMA() {
-            return getTokens(HplsqlParser.T_COMMA);
-        }
-
-        public TerminalNode T_COMMA(int i) {
-            return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public TerminalNode T_NOT() {
-            return getToken(HplsqlParser.T_NOT, 0);
-        }
-
-        public Bool_expr_multi_inContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_bool_expr_multi_in; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterBool_expr_multi_in(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitBool_expr_multi_in(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitBool_expr_multi_in(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Expr_intervalContext expr_interval() throws RecognitionException {
@@ -21036,41 +13344,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Bool_expr_binaryContext extends ParserRuleContext {
-        public List<ExprContext> expr() {
-            return getRuleContexts(ExprContext.class);
-        }
-
-        public ExprContext expr(int i) {
-            return getRuleContext(ExprContext.class, i);
-        }
-
-        public Bool_expr_binary_operatorContext bool_expr_binary_operator() {
-            return getRuleContext(Bool_expr_binary_operatorContext.class, 0);
-        }
-
-        public Bool_expr_binaryContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_bool_expr_binary; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterBool_expr_binary(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitBool_expr_binary(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitBool_expr_binary(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Interval_itemContext interval_item() throws RecognitionException {
@@ -21101,38 +13374,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Bool_expr_logical_operatorContext extends ParserRuleContext {
-        public TerminalNode T_AND() {
-            return getToken(HplsqlParser.T_AND, 0);
-        }
-
-        public TerminalNode T_OR() {
-            return getToken(HplsqlParser.T_OR, 0);
-        }
-
-        public Bool_expr_logical_operatorContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_bool_expr_logical_operator; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterBool_expr_logical_operator(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitBool_expr_logical_operator(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitBool_expr_logical_operator(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Expr_concatContext expr_concat() throws RecognitionException {
@@ -21162,7 +13403,7 @@ public class HplsqlParser extends Parser {
                 _alt = getInterpreter().adaptivePredict(_input, 295,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
-					{
+                    {
                         {
                             setState(2434);
 					_la = _input.LA(1);
@@ -21194,78 +13435,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Bool_expr_binary_operatorContext extends ParserRuleContext {
-        public TerminalNode T_EQUAL() {
-            return getToken(HplsqlParser.T_EQUAL, 0);
-        }
-
-        public TerminalNode T_EQUAL2() {
-            return getToken(HplsqlParser.T_EQUAL2, 0);
-        }
-
-        public TerminalNode T_NOTEQUAL() {
-            return getToken(HplsqlParser.T_NOTEQUAL, 0);
-        }
-
-        public TerminalNode T_NOTEQUAL2() {
-            return getToken(HplsqlParser.T_NOTEQUAL2, 0);
-        }
-
-        public TerminalNode T_LESS() {
-            return getToken(HplsqlParser.T_LESS, 0);
-        }
-
-        public TerminalNode T_LESSEQUAL() {
-            return getToken(HplsqlParser.T_LESSEQUAL, 0);
-        }
-
-        public TerminalNode T_GREATER() {
-            return getToken(HplsqlParser.T_GREATER, 0);
-        }
-
-        public TerminalNode T_GREATEREQUAL() {
-            return getToken(HplsqlParser.T_GREATEREQUAL, 0);
-        }
-
-        public TerminalNode T_LIKE() {
-            return getToken(HplsqlParser.T_LIKE, 0);
-        }
-
-        public TerminalNode T_RLIKE() {
-            return getToken(HplsqlParser.T_RLIKE, 0);
-        }
-
-        public TerminalNode T_REGEXP() {
-            return getToken(HplsqlParser.T_REGEXP, 0);
-        }
-
-        public TerminalNode T_NOT() {
-            return getToken(HplsqlParser.T_NOT, 0);
-        }
-
-        public Bool_expr_binary_operatorContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_bool_expr_binary_operator; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterBool_expr_binary_operator(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitBool_expr_binary_operator(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitBool_expr_binary_operator(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Expr_concat_itemContext expr_concat_item() throws RecognitionException {
@@ -21332,109 +13501,7 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class ExprContext extends ParserRuleContext {
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public Select_stmtContext select_stmt() {
-            return getRuleContext(Select_stmtContext.class, 0);
-        }
-
-        public TerminalNode T_CLOSE_P() {
-            return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public List<ExprContext> expr() {
-            return getRuleContexts(ExprContext.class);
-        }
-
-        public ExprContext expr(int i) {
-            return getRuleContext(ExprContext.class, i);
-        }
-
-        public Expr_intervalContext expr_interval() {
-            return getRuleContext(Expr_intervalContext.class, 0);
-        }
-
-        public Expr_concatContext expr_concat() {
-            return getRuleContext(Expr_concatContext.class, 0);
-        }
-
-        public Expr_caseContext expr_case() {
-            return getRuleContext(Expr_caseContext.class, 0);
-        }
-
-        public Expr_cursor_attributeContext expr_cursor_attribute() {
-            return getRuleContext(Expr_cursor_attributeContext.class, 0);
-        }
-
-        public Expr_agg_window_funcContext expr_agg_window_func() {
-            return getRuleContext(Expr_agg_window_funcContext.class, 0);
-        }
-
-        public Expr_spec_funcContext expr_spec_func() {
-            return getRuleContext(Expr_spec_funcContext.class, 0);
-        }
-
-        public Expr_funcContext expr_func() {
-            return getRuleContext(Expr_funcContext.class, 0);
-        }
-
-        public Expr_atomContext expr_atom() {
-            return getRuleContext(Expr_atomContext.class, 0);
-        }
-
-        public TerminalNode T_MUL() {
-            return getToken(HplsqlParser.T_MUL, 0);
-        }
-
-        public TerminalNode T_DIV() {
-            return getToken(HplsqlParser.T_DIV, 0);
-        }
-
-        public TerminalNode T_ADD() {
-            return getToken(HplsqlParser.T_ADD, 0);
-        }
-
-        public TerminalNode T_SUB() {
-            return getToken(HplsqlParser.T_SUB, 0);
-        }
-
-        public Interval_itemContext interval_item() {
-            return getRuleContext(Interval_itemContext.class, 0);
-        }
-
-        public ExprContext(ParserRuleContext parent, int invokingState) {
-            super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_expr; }
-
-        @Override
-        public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExpr(this);
-        }
-
-        @Override
-        public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr(this);
-        }
-
-        @Override
-        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitExpr(this);
-            else return visitor.visitChildren(this);
-        }
-    }
-
-    public final ExprContext expr() throws RecognitionException {
-        return expr(0);
-    }
+	}
 
 	public final Expr_caseContext expr_case() throws RecognitionException {
 		Expr_caseContext _localctx = new Expr_caseContext(_ctx, getState());
@@ -21468,61 +13535,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Expr_atomContext extends ParserRuleContext {
-        public Date_literalContext date_literal() {
-            return getRuleContext(Date_literalContext.class, 0);
-        }
-
-        public Timestamp_literalContext timestamp_literal() {
-            return getRuleContext(Timestamp_literalContext.class, 0);
-        }
-
-        public Bool_literalContext bool_literal() {
-            return getRuleContext(Bool_literalContext.class, 0);
-        }
-
-        public IdentContext ident() {
-            return getRuleContext(IdentContext.class, 0);
-        }
-
-        public StringContext string() {
-            return getRuleContext(StringContext.class, 0);
-        }
-
-        public Dec_numberContext dec_number() {
-            return getRuleContext(Dec_numberContext.class, 0);
-        }
-
-        public Int_numberContext int_number() {
-            return getRuleContext(Int_numberContext.class, 0);
-        }
-
-        public Null_constContext null_const() {
-            return getRuleContext(Null_constContext.class, 0);
-        }
-
-        public Expr_atomContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_expr_atom; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExpr_atom(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr_atom(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitExpr_atom(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Expr_case_simpleContext expr_case_simple() throws RecognitionException {
@@ -21540,7 +13552,7 @@ public class HplsqlParser extends Parser {
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
-				{
+                {
                     {
                         setState(2458);
 				match(T_WHEN);
@@ -21550,12 +13562,12 @@ public class HplsqlParser extends Parser {
 				match(T_THEN);
                         setState(2461);
 				expr(0);
-				}
+                    }
                 }
                 setState(2465);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( _la==T_WHEN);
+            } while (_la == T_WHEN);
                 setState(2469);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
@@ -21565,7 +13577,7 @@ public class HplsqlParser extends Parser {
 				match(T_ELSE);
                     setState(2468);
 				expr(0);
-				}
+                }
             }
 
                 setState(2471);
@@ -21581,41 +13593,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Expr_intervalContext extends ParserRuleContext {
-        public TerminalNode T_INTERVAL() {
-            return getToken(HplsqlParser.T_INTERVAL, 0);
-        }
-
-        public ExprContext expr() {
-            return getRuleContext(ExprContext.class, 0);
-        }
-
-        public Interval_itemContext interval_item() {
-            return getRuleContext(Interval_itemContext.class, 0);
-        }
-
-        public Expr_intervalContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_expr_interval; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExpr_interval(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr_interval(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitExpr_interval(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Expr_case_searchedContext expr_case_searched() throws RecognitionException {
@@ -21631,7 +13608,7 @@ public class HplsqlParser extends Parser {
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
-				{
+                {
                     {
                         setState(2474);
 				match(T_WHEN);
@@ -21641,12 +13618,12 @@ public class HplsqlParser extends Parser {
 				match(T_THEN);
                         setState(2477);
 				expr(0);
-				}
+                    }
                 }
                 setState(2481);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( _la==T_WHEN);
+            } while (_la == T_WHEN);
                 setState(2485);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
@@ -21656,7 +13633,7 @@ public class HplsqlParser extends Parser {
 				match(T_ELSE);
                     setState(2484);
 				expr(0);
-				}
+                }
             }
 
                 setState(2487);
@@ -21672,53 +13649,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Interval_itemContext extends ParserRuleContext {
-        public TerminalNode T_DAY() {
-            return getToken(HplsqlParser.T_DAY, 0);
-        }
-
-        public TerminalNode T_DAYS() {
-            return getToken(HplsqlParser.T_DAYS, 0);
-        }
-
-        public TerminalNode T_MICROSECOND() {
-            return getToken(HplsqlParser.T_MICROSECOND, 0);
-        }
-
-        public TerminalNode T_MICROSECONDS() {
-            return getToken(HplsqlParser.T_MICROSECONDS, 0);
-        }
-
-        public TerminalNode T_SECOND() {
-            return getToken(HplsqlParser.T_SECOND, 0);
-        }
-
-        public TerminalNode T_SECONDS() {
-            return getToken(HplsqlParser.T_SECONDS, 0);
-        }
-
-        public Interval_itemContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_interval_item; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterInterval_item(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitInterval_item(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitInterval_item(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Expr_cursor_attributeContext expr_cursor_attribute() throws RecognitionException {
@@ -21753,53 +13683,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Expr_concatContext extends ParserRuleContext {
-        public List<Expr_concat_itemContext> expr_concat_item() {
-            return getRuleContexts(Expr_concat_itemContext.class);
-        }
-
-        public Expr_concat_itemContext expr_concat_item(int i) {
-            return getRuleContext(Expr_concat_itemContext.class, i);
-        }
-
-        public List<TerminalNode> T_PIPE() {
-            return getTokens(HplsqlParser.T_PIPE);
-        }
-
-        public TerminalNode T_PIPE(int i) {
-            return getToken(HplsqlParser.T_PIPE, i);
-        }
-
-        public List<TerminalNode> T_CONCAT() {
-            return getTokens(HplsqlParser.T_CONCAT);
-        }
-
-        public TerminalNode T_CONCAT(int i) {
-            return getToken(HplsqlParser.T_CONCAT, i);
-        }
-
-        public Expr_concatContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_expr_concat; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExpr_concat(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr_concat(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitExpr_concat(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Expr_agg_window_funcContext expr_agg_window_func() throws RecognitionException {
@@ -21819,9 +13702,9 @@ public class HplsqlParser extends Parser {
 				match(T_OPEN_P);
                 setState(2496);
 				_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 302, _ctx) ) {
-				case 1: {
-                    setState(2495);
+                switch (getInterpreter().adaptivePredict(_input, 302, _ctx)) {
+                    case 1: {
+                        setState(2495);
 					expr_func_all_distinct();
 					}
 					break;
@@ -21832,9 +13715,9 @@ public class HplsqlParser extends Parser {
 				match(T_CLOSE_P);
                 setState(2501);
 				_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 303, _ctx) ) {
-				case 1: {
-                    setState(2500);
+                switch (getInterpreter().adaptivePredict(_input, 303, _ctx)) {
+                    case 1: {
+                        setState(2500);
 					expr_func_over_clause();
 					}
 					break;
@@ -22125,25 +14008,24 @@ public class HplsqlParser extends Parser {
 				case L_S_STRING:
 				case L_D_STRING:
 				case L_INT:
-				case L_DEC:
-					{
-                        {
-                            setState(2506);
+				case L_DEC: {
+                    {
+                        setState(2506);
 					_errHandler.sync(this);
-                            switch (getInterpreter().adaptivePredict(_input, 304, _ctx) ) {
-					case 1: {
-                        setState(2505);
+                        switch (getInterpreter().adaptivePredict(_input, 304, _ctx)) {
+                            case 1: {
+                                setState(2505);
 						expr_func_all_distinct();
 						}
 						break;
-                            }
-                            setState(2508);
+                        }
+                        setState(2508);
 					expr(0);
 					}
 					}
 					break;
-				case T_MUL: {
-                    setState(2509);
+                    case T_MUL: {
+                        setState(2509);
 					match(T_MUL);
 					}
 					break;
@@ -22154,9 +14036,9 @@ public class HplsqlParser extends Parser {
 				match(T_CLOSE_P);
                 setState(2514);
 				_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 306, _ctx) ) {
-				case 1: {
-                    setState(2513);
+                switch (getInterpreter().adaptivePredict(_input, 306, _ctx)) {
+                    case 1: {
+                        setState(2513);
 					expr_func_over_clause();
 					}
 					break;
@@ -22447,25 +14329,24 @@ public class HplsqlParser extends Parser {
 				case L_S_STRING:
 				case L_D_STRING:
 				case L_INT:
-				case L_DEC:
-					{
-                        {
-                            setState(2519);
+				case L_DEC: {
+                    {
+                        setState(2519);
 					_errHandler.sync(this);
-                            switch (getInterpreter().adaptivePredict(_input, 307, _ctx) ) {
-					case 1: {
-                        setState(2518);
+                        switch (getInterpreter().adaptivePredict(_input, 307, _ctx)) {
+                            case 1: {
+                                setState(2518);
 						expr_func_all_distinct();
 						}
 						break;
-                            }
-                            setState(2521);
+                        }
+                        setState(2521);
 					expr(0);
 					}
 					}
 					break;
-				case T_MUL: {
-                    setState(2522);
+                    case T_MUL: {
+                        setState(2522);
 					match(T_MUL);
 					}
 					break;
@@ -22476,9 +14357,9 @@ public class HplsqlParser extends Parser {
 				match(T_CLOSE_P);
                 setState(2527);
 				_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 309, _ctx) ) {
-				case 1: {
-                    setState(2526);
+                switch (getInterpreter().adaptivePredict(_input, 309, _ctx)) {
+                    case 1: {
+                        setState(2526);
 					expr_func_over_clause();
 					}
 					break;
@@ -22556,7 +14437,7 @@ public class HplsqlParser extends Parser {
 						}
 					}
 
-					}
+                    }
                 }
 
                 setState(2554);
@@ -22610,7 +14491,7 @@ public class HplsqlParser extends Parser {
 						}
 					}
 
-					}
+                    }
                 }
 
                 setState(2574);
@@ -22628,9 +14509,9 @@ public class HplsqlParser extends Parser {
 				match(T_OPEN_P);
                 setState(2580);
 				_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 314, _ctx) ) {
-				case 1: {
-                    setState(2579);
+                switch (getInterpreter().adaptivePredict(_input, 314, _ctx)) {
+                    case 1: {
+                        setState(2579);
 					expr_func_all_distinct();
 					}
 					break;
@@ -22641,9 +14522,9 @@ public class HplsqlParser extends Parser {
 				match(T_CLOSE_P);
                 setState(2585);
 				_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 315, _ctx) ) {
-				case 1: {
-                    setState(2584);
+                switch (getInterpreter().adaptivePredict(_input, 315, _ctx)) {
+                    case 1: {
+                        setState(2584);
 					expr_func_over_clause();
 					}
 					break;
@@ -22659,9 +14540,9 @@ public class HplsqlParser extends Parser {
 				match(T_OPEN_P);
                 setState(2590);
 				_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 316, _ctx) ) {
-				case 1: {
-                    setState(2589);
+                switch (getInterpreter().adaptivePredict(_input, 316, _ctx)) {
+                    case 1: {
+                        setState(2589);
 					expr_func_all_distinct();
 					}
 					break;
@@ -22672,9 +14553,9 @@ public class HplsqlParser extends Parser {
 				match(T_CLOSE_P);
                 setState(2595);
 				_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 317, _ctx) ) {
-				case 1: {
-                    setState(2594);
+                switch (getInterpreter().adaptivePredict(_input, 317, _ctx)) {
+                    case 1: {
+                        setState(2594);
 					expr_func_over_clause();
 					}
 					break;
@@ -22716,9 +14597,9 @@ public class HplsqlParser extends Parser {
 				match(T_OPEN_P);
                 setState(2608);
 				_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 318, _ctx) ) {
-				case 1: {
-                    setState(2607);
+                switch (getInterpreter().adaptivePredict(_input, 318, _ctx)) {
+                    case 1: {
+                        setState(2607);
 					expr_func_all_distinct();
 					}
 					break;
@@ -22729,9 +14610,9 @@ public class HplsqlParser extends Parser {
 				match(T_CLOSE_P);
                 setState(2613);
 				_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 319, _ctx) ) {
-				case 1: {
-                    setState(2612);
+                switch (getInterpreter().adaptivePredict(_input, 319, _ctx)) {
+                    case 1: {
+                        setState(2612);
 					expr_func_over_clause();
 					}
 					break;
@@ -22747,9 +14628,9 @@ public class HplsqlParser extends Parser {
 				match(T_OPEN_P);
                 setState(2618);
 				_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 320, _ctx) ) {
-				case 1: {
-                    setState(2617);
+                switch (getInterpreter().adaptivePredict(_input, 320, _ctx)) {
+                    case 1: {
+                        setState(2617);
 					expr_func_all_distinct();
 					}
 					break;
@@ -22760,9 +14641,9 @@ public class HplsqlParser extends Parser {
 				match(T_CLOSE_P);
                 setState(2623);
 				_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 321, _ctx) ) {
-				case 1: {
-                    setState(2622);
+                switch (getInterpreter().adaptivePredict(_input, 321, _ctx)) {
+                    case 1: {
+                        setState(2622);
 					expr_func_over_clause();
 					}
 					break;
@@ -22778,9 +14659,9 @@ public class HplsqlParser extends Parser {
 				match(T_OPEN_P);
                 setState(2628);
 				_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 322, _ctx) ) {
-				case 1: {
-                    setState(2627);
+                switch (getInterpreter().adaptivePredict(_input, 322, _ctx)) {
+                    case 1: {
+                        setState(2627);
 					expr_func_all_distinct();
 					}
 					break;
@@ -22791,9 +14672,9 @@ public class HplsqlParser extends Parser {
 				match(T_CLOSE_P);
                 setState(2633);
 				_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 323, _ctx) ) {
-				case 1: {
-                    setState(2632);
+                switch (getInterpreter().adaptivePredict(_input, 323, _ctx)) {
+                    case 1: {
+                        setState(2632);
 					expr_func_over_clause();
 					}
 					break;
@@ -22809,9 +14690,9 @@ public class HplsqlParser extends Parser {
 				match(T_OPEN_P);
                 setState(2638);
 				_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 324, _ctx) ) {
-				case 1: {
-                    setState(2637);
+                switch (getInterpreter().adaptivePredict(_input, 324, _ctx)) {
+                    case 1: {
+                        setState(2637);
 					expr_func_all_distinct();
 					}
 					break;
@@ -22822,9 +14703,9 @@ public class HplsqlParser extends Parser {
 				match(T_CLOSE_P);
                 setState(2643);
 				_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 325, _ctx) ) {
-				case 1: {
-                    setState(2642);
+                switch (getInterpreter().adaptivePredict(_input, 325, _ctx)) {
+                    case 1: {
+                        setState(2642);
 					expr_func_over_clause();
 					}
 					break;
@@ -22844,61 +14725,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Expr_concat_itemContext extends ParserRuleContext {
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public ExprContext expr() {
-            return getRuleContext(ExprContext.class, 0);
-        }
-
-        public TerminalNode T_CLOSE_P() {
-            return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public Expr_caseContext expr_case() {
-            return getRuleContext(Expr_caseContext.class, 0);
-        }
-
-        public Expr_agg_window_funcContext expr_agg_window_func() {
-            return getRuleContext(Expr_agg_window_funcContext.class, 0);
-        }
-
-        public Expr_spec_funcContext expr_spec_func() {
-            return getRuleContext(Expr_spec_funcContext.class, 0);
-        }
-
-        public Expr_funcContext expr_func() {
-            return getRuleContext(Expr_funcContext.class, 0);
-        }
-
-        public Expr_atomContext expr_atom() {
-            return getRuleContext(Expr_atomContext.class, 0);
-        }
-
-        public Expr_concat_itemContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_expr_concat_item; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExpr_concat_item(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr_concat_item(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitExpr_concat_item(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Expr_func_all_distinctContext expr_func_all_distinct() throws RecognitionException {
@@ -22929,37 +14755,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Expr_caseContext extends ParserRuleContext {
-        public Expr_case_simpleContext expr_case_simple() {
-            return getRuleContext(Expr_case_simpleContext.class, 0);
-        }
-
-        public Expr_case_searchedContext expr_case_searched() {
-            return getRuleContext(Expr_case_searchedContext.class, 0);
-        }
-
-        public Expr_caseContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_expr_case; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExpr_case(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr_case(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitExpr_case(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Expr_func_over_clauseContext expr_func_over_clause() throws RecognitionException {
@@ -22980,7 +14775,7 @@ public class HplsqlParser extends Parser {
                 {
                     setState(2651);
 				expr_func_partition_by_clause();
-				}
+                }
             }
 
                 setState(2655);
@@ -22990,7 +14785,7 @@ public class HplsqlParser extends Parser {
                 {
                     setState(2654);
 				order_by_clause();
-				}
+                }
             }
 
                 setState(2657);
@@ -23006,62 +14801,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Expr_case_simpleContext extends ParserRuleContext {
-        public TerminalNode T_CASE() {
-            return getToken(HplsqlParser.T_CASE, 0); }
-		public List<ExprContext> expr() {
-			return getRuleContexts(ExprContext.class);
-		}
-		public ExprContext expr(int i) {
-			return getRuleContext(ExprContext.class,i);
-        }
-
-        public TerminalNode T_END() {
-            return getToken(HplsqlParser.T_END, 0);
-        }
-
-        public List<TerminalNode> T_WHEN() {
-            return getTokens(HplsqlParser.T_WHEN);
-        }
-
-        public TerminalNode T_WHEN(int i) {
-            return getToken(HplsqlParser.T_WHEN, i);
-        }
-
-        public List<TerminalNode> T_THEN() {
-            return getTokens(HplsqlParser.T_THEN);
-        }
-
-        public TerminalNode T_THEN(int i) {
-            return getToken(HplsqlParser.T_THEN, i);
-        }
-
-        public TerminalNode T_ELSE() {
-            return getToken(HplsqlParser.T_ELSE, 0);
-        }
-
-        public Expr_case_simpleContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_expr_case_simple; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExpr_case_simple(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr_case_simple(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitExpr_case_simple(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Expr_func_partition_by_clauseContext expr_func_partition_by_clause() throws RecognitionException {
@@ -23081,13 +14820,13 @@ public class HplsqlParser extends Parser {
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==T_COMMA) {
-				{
+                {
                     {
                         setState(2662);
 				match(T_COMMA);
                         setState(2663);
 				expr(0);
-				}
+                    }
                 }
                 setState(2668);
 				_errHandler.sync(this);
@@ -23104,71 +14843,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Expr_case_searchedContext extends ParserRuleContext {
-        public TerminalNode T_CASE() {
-            return getToken(HplsqlParser.T_CASE, 0);
-        }
-
-        public TerminalNode T_END() {
-            return getToken(HplsqlParser.T_END, 0);
-        }
-
-        public List<TerminalNode> T_WHEN() {
-            return getTokens(HplsqlParser.T_WHEN);
-        }
-
-        public TerminalNode T_WHEN(int i) {
-            return getToken(HplsqlParser.T_WHEN, i);
-        }
-
-        public List<Bool_exprContext> bool_expr() {
-            return getRuleContexts(Bool_exprContext.class);
-        }
-
-        public Bool_exprContext bool_expr(int i) {
-            return getRuleContext(Bool_exprContext.class, i);
-        }
-
-        public List<TerminalNode> T_THEN() {
-            return getTokens(HplsqlParser.T_THEN);
-        }
-
-        public TerminalNode T_THEN(int i) {
-            return getToken(HplsqlParser.T_THEN, i);
-		}
-		public List<ExprContext> expr() {
-			return getRuleContexts(ExprContext.class);
-		}
-		public ExprContext expr(int i) {
-			return getRuleContext(ExprContext.class,i);
-        }
-
-        public TerminalNode T_ELSE() {
-            return getToken(HplsqlParser.T_ELSE, 0);
-        }
-
-        public Expr_case_searchedContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_expr_case_searched; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExpr_case_searched(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr_case_searched(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitExpr_case_searched(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Expr_spec_funcContext expr_spec_func() throws RecognitionException {
@@ -23207,7 +14881,7 @@ public class HplsqlParser extends Parser {
                     {
                         setState(2675);
 					dtype_len();
-					}
+                    }
                 }
 
                 setState(2678);
@@ -23497,13 +15171,13 @@ public class HplsqlParser extends Parser {
 				case L_S_STRING:
 				case L_D_STRING:
 				case L_INT:
-				case L_DEC: {
-                    setState(2682);
+                    case L_DEC: {
+                        setState(2682);
 					expr(0);
 					}
 					break;
-				case T_MUL: {
-                    setState(2683);
+                    case T_MUL: {
+                        setState(2683);
 					match(T_MUL);
 					}
 					break;
@@ -23536,15 +15210,15 @@ public class HplsqlParser extends Parser {
                 setState(2693);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
-				case T_CURRENT_TIMESTAMP: {
-                    setState(2690);
+                    case T_CURRENT_TIMESTAMP: {
+                        setState(2690);
 					match(T_CURRENT_TIMESTAMP);
 					}
 					break;
-				case T_CURRENT: {
-                    setState(2691);
+                    case T_CURRENT: {
+                        setState(2691);
 					match(T_CURRENT);
-                    setState(2692);
+                        setState(2692);
 					match(T_TIMESTAMP);
 					}
 					break;
@@ -23553,13 +15227,13 @@ public class HplsqlParser extends Parser {
                 }
                 setState(2699);
 				_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 333, _ctx) ) {
-				case 1: {
-                    setState(2695);
+                switch (getInterpreter().adaptivePredict(_input, 333, _ctx)) {
+                    case 1: {
+                        setState(2695);
 					match(T_OPEN_P);
-                    setState(2696);
+                        setState(2696);
 					expr(0);
-                    setState(2697);
+                        setState(2697);
 					match(T_CLOSE_P);
 					}
 					break;
@@ -23604,7 +15278,7 @@ public class HplsqlParser extends Parser {
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					while (_la==T_COMMA) {
-						{
+                        {
                             {
                                 setState(2709);
 						match(T_COMMA);
@@ -23614,13 +15288,13 @@ public class HplsqlParser extends Parser {
 						match(T_EQUAL);
                                 setState(2712);
 						expr(0);
-						}
+                            }
                         }
                         setState(2718);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 					}
-					}
+                    }
                 }
 
                 setState(2721);
@@ -23649,7 +15323,7 @@ public class HplsqlParser extends Parser {
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					while (_la==T_COMMA) {
-						{
+                        {
                             {
                                 setState(2728);
 						match(T_COMMA);
@@ -23659,13 +15333,13 @@ public class HplsqlParser extends Parser {
 						match(T_EQUAL);
                                 setState(2731);
 						expr(0);
-						}
+                            }
                         }
                         setState(2737);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 					}
-					}
+                    }
                 }
 
                 setState(2740);
@@ -23694,7 +15368,7 @@ public class HplsqlParser extends Parser {
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					while (_la==T_COMMA) {
-						{
+                        {
                             {
                                 setState(2747);
 						match(T_COMMA);
@@ -23704,13 +15378,13 @@ public class HplsqlParser extends Parser {
 						match(T_EQUAL);
                                 setState(2750);
 						expr(0);
-						}
+                            }
                         }
                         setState(2756);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 					}
-					}
+                    }
                 }
 
                 setState(2759);
@@ -23739,7 +15413,7 @@ public class HplsqlParser extends Parser {
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					while (_la==T_COMMA) {
-						{
+                        {
                             {
                                 setState(2766);
 						match(T_COMMA);
@@ -23749,13 +15423,13 @@ public class HplsqlParser extends Parser {
 						match(T_EQUAL);
                                 setState(2769);
 						expr(0);
-						}
+                            }
                         }
                         setState(2775);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 					}
-					}
+                    }
                 }
 
                 setState(2778);
@@ -23784,7 +15458,7 @@ public class HplsqlParser extends Parser {
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					while (_la==T_COMMA) {
-						{
+                        {
                             {
                                 setState(2785);
 						match(T_COMMA);
@@ -23794,13 +15468,13 @@ public class HplsqlParser extends Parser {
 						match(T_EQUAL);
                                 setState(2788);
 						expr(0);
-						}
+                            }
                         }
                         setState(2794);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 					}
-					}
+                    }
                 }
 
                 setState(2797);
@@ -23829,7 +15503,7 @@ public class HplsqlParser extends Parser {
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					while (_la==T_COMMA) {
-						{
+                        {
                             {
                                 setState(2804);
 						match(T_COMMA);
@@ -23839,13 +15513,13 @@ public class HplsqlParser extends Parser {
 						match(T_EQUAL);
                                 setState(2807);
 						expr(0);
-						}
+                            }
                         }
                         setState(2813);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 					}
-					}
+                    }
                 }
 
                 setState(2816);
@@ -23865,7 +15539,7 @@ public class HplsqlParser extends Parser {
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==T_COMMA) {
-					{
+                    {
                         {
                             setState(2821);
 					match(T_COMMA);
@@ -23875,7 +15549,7 @@ public class HplsqlParser extends Parser {
 					match(T_EQUAL);
                             setState(2824);
 					expr(0);
-					}
+                        }
                     }
                     setState(2830);
 					_errHandler.sync(this);
@@ -23899,16 +15573,15 @@ public class HplsqlParser extends Parser {
 				_alt = 1;
 				do {
 					switch (_alt) {
-					case 1:
-						{
-                            {
-                                setState(2836);
+					case 1: {
+                        {
+                            setState(2836);
 						match(T_COMMA);
-                                setState(2837);
+                            setState(2837);
 						expr(0);
-                                setState(2838);
+                            setState(2838);
 						match(T_EQUAL);
-                                setState(2839);
+                            setState(2839);
 						expr(0);
 						}
 						}
@@ -23918,8 +15591,8 @@ public class HplsqlParser extends Parser {
                     }
                     setState(2843);
 					_errHandler.sync(this);
-                    _alt = getInterpreter().adaptivePredict(_input, 347,_ctx);
-				} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER);
+                    _alt = getInterpreter().adaptivePredict(_input, 347, _ctx);
+                } while (_alt != 2 && _alt != org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER);
                 setState(2847);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
@@ -23929,7 +15602,7 @@ public class HplsqlParser extends Parser {
 					match(T_COMMA);
                         setState(2846);
 					expr(0);
-					}
+                    }
                 }
 
                 setState(2849);
@@ -23971,7 +15644,7 @@ public class HplsqlParser extends Parser {
 					match(T_FOR);
                         setState(2862);
 					expr(0);
-					}
+                    }
                 }
 
                 setState(2865);
@@ -24003,46 +15676,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Expr_cursor_attributeContext extends ParserRuleContext {
-		public IdentContext ident() {
-			return getRuleContext(IdentContext.class,0);
-        }
-
-        public TerminalNode T_ISOPEN() {
-            return getToken(HplsqlParser.T_ISOPEN, 0);
-        }
-
-        public TerminalNode T_FOUND() {
-            return getToken(HplsqlParser.T_FOUND, 0);
-        }
-
-        public TerminalNode T_NOTFOUND() {
-            return getToken(HplsqlParser.T_NOTFOUND, 0);
-        }
-
-        public Expr_cursor_attributeContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_expr_cursor_attribute; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExpr_cursor_attribute(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr_cursor_attribute(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitExpr_cursor_attribute(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Expr_funcContext expr_func() throws RecognitionException {
@@ -24057,9 +15690,9 @@ public class HplsqlParser extends Parser {
 			match(T_OPEN_P);
                 setState(2874);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 351, _ctx) ) {
-			case 1: {
-                setState(2873);
+                switch (getInterpreter().adaptivePredict(_input, 351, _ctx)) {
+                    case 1: {
+                        setState(2873);
 				expr_func_params();
 				}
 				break;
@@ -24077,129 +15710,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Expr_agg_window_funcContext extends ParserRuleContext {
-        public TerminalNode T_AVG() {
-            return getToken(HplsqlParser.T_AVG, 0);
-        }
-
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public List<ExprContext> expr() {
-            return getRuleContexts(ExprContext.class);
-        }
-
-        public ExprContext expr(int i) {
-            return getRuleContext(ExprContext.class, i);
-        }
-
-        public TerminalNode T_CLOSE_P() {
-            return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public Expr_func_all_distinctContext expr_func_all_distinct() {
-            return getRuleContext(Expr_func_all_distinctContext.class, 0);
-        }
-
-        public Expr_func_over_clauseContext expr_func_over_clause() {
-            return getRuleContext(Expr_func_over_clauseContext.class, 0);
-        }
-
-        public TerminalNode T_COUNT() {
-            return getToken(HplsqlParser.T_COUNT, 0);
-        }
-
-        public TerminalNode T_MUL() {
-            return getToken(HplsqlParser.T_MUL, 0);
-        }
-
-        public TerminalNode T_COUNT_BIG() {
-            return getToken(HplsqlParser.T_COUNT_BIG, 0);
-        }
-
-        public TerminalNode T_CUME_DIST() {
-            return getToken(HplsqlParser.T_CUME_DIST, 0);
-        }
-
-        public TerminalNode T_DENSE_RANK() {
-            return getToken(HplsqlParser.T_DENSE_RANK, 0);
-        }
-
-        public TerminalNode T_FIRST_VALUE() {
-            return getToken(HplsqlParser.T_FIRST_VALUE, 0);
-        }
-
-        public TerminalNode T_LAG() {
-            return getToken(HplsqlParser.T_LAG, 0); }
-		public List<TerminalNode> T_COMMA() { return getTokens(HplsqlParser.T_COMMA); }
-		public TerminalNode T_COMMA(int i) {
-			return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public TerminalNode T_LAST_VALUE() {
-            return getToken(HplsqlParser.T_LAST_VALUE, 0);
-        }
-
-        public TerminalNode T_LEAD() {
-            return getToken(HplsqlParser.T_LEAD, 0);
-        }
-
-        public TerminalNode T_MAX() {
-            return getToken(HplsqlParser.T_MAX, 0);
-        }
-
-        public TerminalNode T_MIN() {
-            return getToken(HplsqlParser.T_MIN, 0);
-        }
-
-        public TerminalNode T_RANK() {
-            return getToken(HplsqlParser.T_RANK, 0);
-        }
-
-        public TerminalNode T_ROW_NUMBER() {
-            return getToken(HplsqlParser.T_ROW_NUMBER, 0);
-        }
-
-        public TerminalNode T_STDEV() {
-            return getToken(HplsqlParser.T_STDEV, 0);
-        }
-
-        public TerminalNode T_SUM() {
-            return getToken(HplsqlParser.T_SUM, 0);
-        }
-
-        public TerminalNode T_VAR() {
-            return getToken(HplsqlParser.T_VAR, 0);
-        }
-
-        public TerminalNode T_VARIANCE() {
-            return getToken(HplsqlParser.T_VARIANCE, 0);
-        }
-
-        public Expr_agg_window_funcContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_expr_agg_window_func; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExpr_agg_window_func(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr_agg_window_func(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitExpr_agg_window_func(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Expr_func_paramsContext expr_func_params() throws RecognitionException {
@@ -24216,7 +15726,7 @@ public class HplsqlParser extends Parser {
                 _alt = getInterpreter().adaptivePredict(_input, 352,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
-					{
+                    {
                         {
                             setState(2879);
 					match(T_COMMA);
@@ -24240,38 +15750,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Expr_func_all_distinctContext extends ParserRuleContext {
-        public TerminalNode T_ALL() {
-            return getToken(HplsqlParser.T_ALL, 0);
-        }
-
-        public TerminalNode T_DISTINCT() {
-            return getToken(HplsqlParser.T_DISTINCT, 0);
-        }
-
-        public Expr_func_all_distinctContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_expr_func_all_distinct; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExpr_func_all_distinct(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr_func_all_distinct(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitExpr_func_all_distinct(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Func_paramContext func_param() throws RecognitionException {
@@ -24285,13 +15763,13 @@ public class HplsqlParser extends Parser {
 			if (!(!_input.LT(1).getText().equalsIgnoreCase("INTO"))) throw new FailedPredicateException(this, "!_input.LT(1).getText().equalsIgnoreCase(\"INTO\")");
                 setState(2892);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 354, _ctx) ) {
-			case 1: {
-                setState(2887);
+                switch (getInterpreter().adaptivePredict(_input, 354, _ctx)) {
+                    case 1: {
+                        setState(2887);
 				ident();
-                setState(2888);
+                        setState(2888);
 				match(T_EQUAL);
-                setState(2890);
+                        setState(2890);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==T_GREATER) {
@@ -24317,44 +15795,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Expr_func_over_clauseContext extends ParserRuleContext {
-        public TerminalNode T_OVER() {
-            return getToken(HplsqlParser.T_OVER, 0); }
-		public TerminalNode T_OPEN_P() { return getToken(HplsqlParser.T_OPEN_P, 0); }
-		public TerminalNode T_CLOSE_P() { return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public Expr_func_partition_by_clauseContext expr_func_partition_by_clause() {
-            return getRuleContext(Expr_func_partition_by_clauseContext.class, 0);
-        }
-
-        public Order_by_clauseContext order_by_clause() {
-            return getRuleContext(Order_by_clauseContext.class, 0);
-        }
-
-        public Expr_func_over_clauseContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_expr_func_over_clause; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExpr_func_over_clause(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr_func_over_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitExpr_func_over_clause(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Write_stmtContext write_stmt() throws RecognitionException {
@@ -24373,9 +15813,9 @@ public class HplsqlParser extends Parser {
 			match(T_CLOSE_P);
                 setState(2901);
 			_errHandler.sync(this);
-                switch (getInterpreter().adaptivePredict(_input, 355, _ctx) ) {
-			case 1: {
-                setState(2900);
+                switch (getInterpreter().adaptivePredict(_input, 355, _ctx)) {
+                    case 1: {
+                        setState(2900);
 				match(T_SEMICOLON);
 				}
 				break;
@@ -24391,54 +15831,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Expr_func_partition_by_clauseContext extends ParserRuleContext {
-        public TerminalNode T_PARTITION() {
-            return getToken(HplsqlParser.T_PARTITION, 0);
-        }
-
-        public TerminalNode T_BY() {
-            return getToken(HplsqlParser.T_BY, 0);
-        }
-
-        public List<ExprContext> expr() {
-            return getRuleContexts(ExprContext.class);
-        }
-
-        public ExprContext expr(int i) {
-            return getRuleContext(ExprContext.class, i);
-        }
-
-        public List<TerminalNode> T_COMMA() {
-            return getTokens(HplsqlParser.T_COMMA);
-        }
-
-        public TerminalNode T_COMMA(int i) {
-            return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public Expr_func_partition_by_clauseContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_expr_func_partition_by_clause; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExpr_func_partition_by_clause(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr_func_partition_by_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitExpr_func_partition_by_clause(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Write_stmt_stringContext write_stmt_string() throws RecognitionException {
@@ -24452,8 +15844,8 @@ public class HplsqlParser extends Parser {
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case L_S_STRING:
-			case L_D_STRING: {
-                setState(2903);
+                case L_D_STRING: {
+                    setState(2903);
 				string();
 				}
 				break;
@@ -24716,8 +16108,8 @@ public class HplsqlParser extends Parser {
 			case T_VARIANCE:
 			case T_USER:
 			case T_WRITE:
-			case L_ID: {
-                setState(2904);
+                case L_ID: {
+                    setState(2904);
 				ident();
 				}
 				break;
@@ -24728,7 +16120,7 @@ public class HplsqlParser extends Parser {
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==T_ADD) {
-				{
+                {
                     {
                         setState(2907);
 				match(T_ADD);
@@ -24736,8 +16128,8 @@ public class HplsqlParser extends Parser {
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
 				case L_S_STRING:
-				case L_D_STRING: {
-                    setState(2908);
+                    case L_D_STRING: {
+                        setState(2908);
 					string();
 					}
 					break;
@@ -25000,15 +16392,15 @@ public class HplsqlParser extends Parser {
 				case T_VARIANCE:
 				case T_USER:
 				case T_WRITE:
-				case L_ID: {
-                    setState(2909);
+                    case L_ID: {
+                        setState(2909);
 					ident();
 					}
 					break;
 				default:
 					throw new NoViableAltException(this);
 				}
-				}
+                    }
                 }
                 setState(2916);
 				_errHandler.sync(this);
@@ -25025,166 +16417,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Expr_spec_funcContext extends ParserRuleContext {
-        public TerminalNode T_ACTIVITY_COUNT() {
-            return getToken(HplsqlParser.T_ACTIVITY_COUNT, 0);
-        }
-
-        public TerminalNode T_CAST() {
-            return getToken(HplsqlParser.T_CAST, 0);
-        }
-
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public List<ExprContext> expr() {
-            return getRuleContexts(ExprContext.class);
-        }
-
-        public ExprContext expr(int i) {
-            return getRuleContext(ExprContext.class, i);
-        }
-
-        public TerminalNode T_AS() {
-            return getToken(HplsqlParser.T_AS, 0);
-        }
-
-        public DtypeContext dtype() {
-            return getRuleContext(DtypeContext.class, 0);
-        }
-
-        public TerminalNode T_CLOSE_P() {
-            return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public Dtype_lenContext dtype_len() {
-            return getRuleContext(Dtype_lenContext.class, 0);
-        }
-
-        public TerminalNode T_COUNT() {
-            return getToken(HplsqlParser.T_COUNT, 0);
-        }
-
-        public TerminalNode T_MUL() {
-            return getToken(HplsqlParser.T_MUL, 0);
-        }
-
-        public TerminalNode T_CURRENT_DATE() {
-            return getToken(HplsqlParser.T_CURRENT_DATE, 0);
-        }
-
-        public TerminalNode T_CURRENT() {
-            return getToken(HplsqlParser.T_CURRENT, 0); }
-		public TerminalNode T_DATE() { return getToken(HplsqlParser.T_DATE, 0);
-        }
-
-        public TerminalNode T_CURRENT_TIMESTAMP() {
-            return getToken(HplsqlParser.T_CURRENT_TIMESTAMP, 0);
-        }
-
-        public TerminalNode T_TIMESTAMP() {
-            return getToken(HplsqlParser.T_TIMESTAMP, 0);
-        }
-
-        public TerminalNode T_CURRENT_USER() {
-            return getToken(HplsqlParser.T_CURRENT_USER, 0);
-        }
-
-        public TerminalNode T_USER() {
-            return getToken(HplsqlParser.T_USER, 0);
-        }
-
-        public TerminalNode T_MAX_PART_STRING() {
-            return getToken(HplsqlParser.T_MAX_PART_STRING, 0);
-        }
-
-        public List<TerminalNode> T_COMMA() {
-            return getTokens(HplsqlParser.T_COMMA);
-        }
-
-        public TerminalNode T_COMMA(int i) {
-            return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public List<TerminalNode> T_EQUAL() {
-            return getTokens(HplsqlParser.T_EQUAL);
-        }
-
-        public TerminalNode T_EQUAL(int i) {
-            return getToken(HplsqlParser.T_EQUAL, i);
-        }
-
-        public TerminalNode T_MIN_PART_STRING() {
-            return getToken(HplsqlParser.T_MIN_PART_STRING, 0);
-        }
-
-        public TerminalNode T_MAX_PART_INT() {
-            return getToken(HplsqlParser.T_MAX_PART_INT, 0);
-        }
-
-        public TerminalNode T_MIN_PART_INT() {
-            return getToken(HplsqlParser.T_MIN_PART_INT, 0);
-        }
-
-        public TerminalNode T_MAX_PART_DATE() {
-            return getToken(HplsqlParser.T_MAX_PART_DATE, 0);
-        }
-
-        public TerminalNode T_MIN_PART_DATE() {
-            return getToken(HplsqlParser.T_MIN_PART_DATE, 0);
-        }
-
-        public TerminalNode T_PART_COUNT() {
-            return getToken(HplsqlParser.T_PART_COUNT, 0);
-        }
-
-        public TerminalNode T_PART_LOC() {
-            return getToken(HplsqlParser.T_PART_LOC, 0);
-        }
-
-        public TerminalNode T_TRIM() {
-            return getToken(HplsqlParser.T_TRIM, 0);
-        }
-
-        public TerminalNode T_SUBSTRING() {
-            return getToken(HplsqlParser.T_SUBSTRING, 0);
-        }
-
-        public TerminalNode T_FROM() {
-            return getToken(HplsqlParser.T_FROM, 0);
-        }
-
-        public TerminalNode T_FOR() {
-            return getToken(HplsqlParser.T_FOR, 0);
-        }
-
-        public TerminalNode T_SYSDATE() {
-            return getToken(HplsqlParser.T_SYSDATE, 0);
-        }
-
-        public Expr_spec_funcContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_expr_spec_func; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExpr_spec_func(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr_spec_func(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitExpr_spec_func(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Date_literalContext date_literal() throws RecognitionException {
@@ -25208,45 +16440,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Expr_funcContext extends ParserRuleContext {
-        public IdentContext ident() {
-            return getRuleContext(IdentContext.class, 0);
-        }
-
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public TerminalNode T_CLOSE_P() {
-            return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public Expr_func_paramsContext expr_func_params() {
-            return getRuleContext(Expr_func_paramsContext.class, 0);
-        }
-
-        public Expr_funcContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_expr_func; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExpr_func(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr_func(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitExpr_func(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Timestamp_literalContext timestamp_literal() throws RecognitionException {
@@ -25270,45 +16463,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Expr_func_paramsContext extends ParserRuleContext {
-        public List<Func_paramContext> func_param() {
-            return getRuleContexts(Func_paramContext.class);
-        }
-
-        public Func_paramContext func_param(int i) {
-            return getRuleContext(Func_paramContext.class, i);
-        }
-
-        public List<TerminalNode> T_COMMA() {
-            return getTokens(HplsqlParser.T_COMMA);
-        }
-
-        public TerminalNode T_COMMA(int i) {
-            return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public Expr_func_paramsContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_expr_func_params; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExpr_func_params(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr_func_params(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitExpr_func_params(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final IdentContext ident() throws RecognitionException {
@@ -25321,8 +16475,8 @@ public class HplsqlParser extends Parser {
                 setState(2925);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case L_ID: {
-                setState(2923);
+                case L_ID: {
+                    setState(2923);
 				match(L_ID);
 				}
 				break;
@@ -25584,8 +16738,8 @@ public class HplsqlParser extends Parser {
 			case T_SYSDATE:
 			case T_VARIANCE:
 			case T_USER:
-			case T_WRITE: {
-                setState(2924);
+                case T_WRITE: {
+                    setState(2924);
 				non_reserved_words();
 				}
 				break;
@@ -25597,15 +16751,15 @@ public class HplsqlParser extends Parser {
                 _alt = getInterpreter().adaptivePredict(_input, 361,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
-					{
+                    {
                         {
                             setState(2927);
 					match(T__3);
                             setState(2930);
 					_errHandler.sync(this);
 					switch (_input.LA(1)) {
-					case L_ID: {
-                        setState(2928);
+                        case L_ID: {
+                            setState(2928);
 						match(L_ID);
 						}
 						break;
@@ -25867,14 +17021,14 @@ public class HplsqlParser extends Parser {
 					case T_SYSDATE:
 					case T_VARIANCE:
 					case T_USER:
-					case T_WRITE: {
-                        setState(2929);
+                        case T_WRITE: {
+                            setState(2929);
 						non_reserved_words();
 						}
 						break;
 					default:
 						throw new NoViableAltException(this);
-					}
+                    }
                         }
                     }
                 }
@@ -25893,45 +17047,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Func_paramContext extends ParserRuleContext {
-        public ExprContext expr() {
-            return getRuleContext(ExprContext.class, 0);
-        }
-
-        public IdentContext ident() {
-            return getRuleContext(IdentContext.class, 0);
-        }
-
-        public TerminalNode T_EQUAL() {
-            return getToken(HplsqlParser.T_EQUAL, 0);
-        }
-
-        public TerminalNode T_GREATER() {
-            return getToken(HplsqlParser.T_GREATER, 0);
-        }
-
-        public Func_paramContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_func_param; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterFunc_param(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitFunc_param(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitFunc_param(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final StringContext string() throws RecognitionException {
@@ -25970,49 +17085,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Write_stmtContext extends ParserRuleContext {
-        public TerminalNode T_WRITE() {
-            return getToken(HplsqlParser.T_WRITE, 0);
-        }
-
-        public TerminalNode T_OPEN_P() {
-            return getToken(HplsqlParser.T_OPEN_P, 0);
-        }
-
-        public Write_stmt_stringContext write_stmt_string() {
-            return getRuleContext(Write_stmt_stringContext.class, 0);
-        }
-
-        public TerminalNode T_CLOSE_P() {
-            return getToken(HplsqlParser.T_CLOSE_P, 0);
-        }
-
-        public TerminalNode T_SEMICOLON() {
-            return getToken(HplsqlParser.T_SEMICOLON, 0);
-        }
-
-        public Write_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_write_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterWrite_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitWrite_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitWrite_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Int_numberContext int_number() throws RecognitionException {
@@ -26037,7 +17109,7 @@ public class HplsqlParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				}
+                }
             }
 
                 setState(2944);
@@ -26053,53 +17125,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Write_stmt_stringContext extends ParserRuleContext {
-        public List<StringContext> string() {
-            return getRuleContexts(StringContext.class);
-        }
-
-        public StringContext string(int i) {
-            return getRuleContext(StringContext.class, i);
-        }
-
-        public List<IdentContext> ident() {
-            return getRuleContexts(IdentContext.class);
-        }
-
-        public IdentContext ident(int i) {
-            return getRuleContext(IdentContext.class, i);
-        }
-
-        public List<TerminalNode> T_ADD() {
-            return getTokens(HplsqlParser.T_ADD);
-        }
-
-        public TerminalNode T_ADD(int i) {
-            return getToken(HplsqlParser.T_ADD, i);
-        }
-
-        public Write_stmt_stringContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_write_stmt_string; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterWrite_stmt_string(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitWrite_stmt_string(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitWrite_stmt_string(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Dec_numberContext dec_number() throws RecognitionException {
@@ -26124,7 +17149,7 @@ public class HplsqlParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				}
+                }
             }
 
                 setState(2949);
@@ -26140,37 +17165,6 @@ public class HplsqlParser extends Parser {
 			exitRule();
 		}
 		return _localctx;
-    }
-
-    public static class Date_literalContext extends ParserRuleContext {
-        public TerminalNode T_DATE() {
-            return getToken(HplsqlParser.T_DATE, 0);
-        }
-
-        public StringContext string() {
-            return getRuleContext(StringContext.class, 0);
-        }
-
-        public Date_literalContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_date_literal; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterDate_literal(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitDate_literal(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitDate_literal(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Bool_literalContext bool_literal() throws RecognitionException {
@@ -26203,37 +17197,6 @@ public class HplsqlParser extends Parser {
 		return _localctx;
     }
 
-    public static class Timestamp_literalContext extends ParserRuleContext {
-        public TerminalNode T_TIMESTAMP() {
-            return getToken(HplsqlParser.T_TIMESTAMP, 0);
-        }
-
-        public StringContext string() {
-            return getRuleContext(StringContext.class, 0);
-        }
-
-        public Timestamp_literalContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_timestamp_literal; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterTimestamp_literal(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitTimestamp_literal(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitTimestamp_literal(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
     public final Null_constContext null_const() throws RecognitionException {
         Null_constContext _localctx = new Null_constContext(_ctx, getState());
         enterRule(_localctx, 396, RULE_null_const);
@@ -26251,49 +17214,6 @@ public class HplsqlParser extends Parser {
             exitRule();
         }
         return _localctx;
-    }
-
-    public static class IdentContext extends ParserRuleContext {
-        public List<TerminalNode> L_ID() {
-            return getTokens(HplsqlParser.L_ID);
-        }
-
-        public TerminalNode L_ID(int i) {
-            return getToken(HplsqlParser.L_ID, i);
-        }
-
-        public List<Non_reserved_wordsContext> non_reserved_words() {
-            return getRuleContexts(Non_reserved_wordsContext.class);
-        }
-
-        public Non_reserved_wordsContext non_reserved_words(int i) {
-            return getRuleContext(Non_reserved_wordsContext.class, i);
-        }
-
-        public IdentContext(ParserRuleContext parent, int invokingState) {
-            super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_ident;
-        }
-
-        @Override
-        public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterIdent(this);
-        }
-
-        @Override
-        public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitIdent(this);
-        }
-
-        @Override
-        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitIdent(this);
-            else return visitor.visitChildren(this);
-        }
     }
 
     public final Non_reserved_wordsContext non_reserved_words() throws RecognitionException {
@@ -26323,78 +17243,6 @@ public class HplsqlParser extends Parser {
         return _localctx;
     }
 
-    public static class StringContext extends ParserRuleContext {
-        public StringContext(ParserRuleContext parent, int invokingState) {
-            super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_string;
-        }
-
-        public StringContext() {
-        }
-
-        public void copyFrom(StringContext ctx) {
-            super.copyFrom(ctx);
-        }
-    }
-
-    public static class Double_quotedStringContext extends StringContext {
-        public TerminalNode L_D_STRING() {
-            return getToken(HplsqlParser.L_D_STRING, 0);
-        }
-
-        public Double_quotedStringContext(StringContext ctx) {
-            copyFrom(ctx);
-        }
-
-        @Override
-        public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterDouble_quotedString(this);
-        }
-
-        @Override
-        public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitDouble_quotedString(this);
-        }
-
-        @Override
-        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitDouble_quotedString(this);
-            else return visitor.visitChildren(this);
-        }
-    }
-
-    public static class Single_quotedStringContext extends StringContext {
-        public TerminalNode L_S_STRING() {
-            return getToken(HplsqlParser.L_S_STRING, 0);
-        }
-
-        public Single_quotedStringContext(StringContext ctx) {
-            copyFrom(ctx);
-        }
-
-        @Override
-        public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterSingle_quotedString(this);
-        }
-
-        @Override
-        public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitSingle_quotedString(this);
-        }
-
-        @Override
-        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitSingle_quotedString(this);
-            else return visitor.visitChildren(this);
-        }
-    }
-
     public boolean sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
         switch (ruleIndex) {
             case 4:
@@ -26413,482 +17261,6 @@ public class HplsqlParser extends Parser {
                 return func_param_sempred((Func_paramContext) _localctx, predIndex);
         }
         return true;
-    }
-
-    public static class Int_numberContext extends ParserRuleContext {
-        public TerminalNode L_INT() {
-            return getToken(HplsqlParser.L_INT, 0);
-        }
-
-        public TerminalNode T_SUB() {
-            return getToken(HplsqlParser.T_SUB, 0);
-        }
-
-        public TerminalNode T_ADD() {
-            return getToken(HplsqlParser.T_ADD, 0);
-        }
-
-        public Int_numberContext(ParserRuleContext parent, int invokingState) {
-            super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_int_number;
-        }
-
-        @Override
-        public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterInt_number(this);
-        }
-
-        @Override
-        public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitInt_number(this);
-        }
-
-        @Override
-        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitInt_number(this);
-            else return visitor.visitChildren(this);
-        }
-    }
-
-    public static class Create_type_stmtContext extends ParserRuleContext {
-        public TerminalNode T_CREATE() {
-            return getToken(HplsqlParser.T_CREATE, 0);
-        }
-
-        public TerminalNode T_TYPE() {
-            return getToken(HplsqlParser.T_TYPE, 0);
-        }
-
-        public Table_nameContext table_name() {
-            return getRuleContext(Table_nameContext.class, 0);
-        }
-
-        public Create_type_definitionContext create_type_definition() {
-            return getRuleContext(Create_type_definitionContext.class, 0);
-        }
-
-        public Create_type_optionsContext create_type_options() {
-            return getRuleContext(Create_type_optionsContext.class, 0);
-        }
-
-        public Create_type_stmtContext(ParserRuleContext parent, int invokingState) {
-            super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_type_stmt;
-        }
-
-        @Override
-        public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_type_stmt(this);
-        }
-
-        @Override
-        public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_type_stmt(this);
-        }
-
-        @Override
-        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_type_stmt(this);
-            else return visitor.visitChildren(this);
-        }
-    }
-
-    public static class Dec_numberContext extends ParserRuleContext {
-        public TerminalNode L_DEC() {
-            return getToken(HplsqlParser.L_DEC, 0);
-        }
-
-        public TerminalNode T_SUB() {
-            return getToken(HplsqlParser.T_SUB, 0);
-        }
-
-        public TerminalNode T_ADD() {
-            return getToken(HplsqlParser.T_ADD, 0);
-        }
-
-        public Dec_numberContext(ParserRuleContext parent, int invokingState) {
-            super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_dec_number;
-        }
-
-        @Override
-        public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterDec_number(this);
-        }
-
-        @Override
-        public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitDec_number(this);
-        }
-
-        @Override
-        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitDec_number(this);
-            else return visitor.visitChildren(this);
-        }
-    }
-
-    public static class Create_type_optionsContext extends ParserRuleContext {
-        public Create_type_optionsContext(ParserRuleContext parent, int invokingState) {
-            super(parent, invokingState);
-        }
-
-        public List<Create_type_optionContext> create_type_option() {
-            return getRuleContexts(Create_type_optionContext.class);
-        }
-
-        public Create_type_optionContext create_type_option(int i) {
-            return getRuleContext(Create_type_optionContext.class, i);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_type_options;
-        }
-
-        @Override
-        public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_type_options(this);
-        }
-
-        @Override
-        public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_type_options(this);
-        }
-
-        @Override
-        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_type_options(this);
-            else return visitor.visitChildren(this);
-        }
-    }
-
-    public static class Bool_literalContext extends ParserRuleContext {
-        public TerminalNode T_TRUE() {
-            return getToken(HplsqlParser.T_TRUE, 0);
-        }
-
-        public TerminalNode T_FALSE() {
-            return getToken(HplsqlParser.T_FALSE, 0);
-        }
-
-        public Bool_literalContext(ParserRuleContext parent, int invokingState) {
-            super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_bool_literal;
-        }
-
-        @Override
-        public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterBool_literal(this);
-        }
-
-        @Override
-        public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitBool_literal(this);
-        }
-
-        @Override
-        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitBool_literal(this);
-            else return visitor.visitChildren(this);
-        }
-    }
-
-    public static class Create_type_optionContext extends ParserRuleContext {
-        public Create_type_optionContext(ParserRuleContext parent, int invokingState) {
-            super(parent, invokingState);
-        }
-
-        public Create_type_store_locationContext create_type_store_location() {
-            return getRuleContext(Create_type_store_locationContext.class, 0);
-        }
-
-        public Create_type_delemiterContext create_type_delemiter() {
-            return getRuleContext(Create_type_delemiterContext.class, 0);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_type_option;
-        }
-
-        @Override
-        public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_type_option(this);
-        }
-
-        @Override
-        public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_type_option(this);
-        }
-
-        @Override
-        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_type_option(this);
-            else return visitor.visitChildren(this);
-        }
-    }
-
-    public static class Null_constContext extends ParserRuleContext {
-        public TerminalNode T_NULL() {
-            return getToken(HplsqlParser.T_NULL, 0);
-        }
-
-        public Null_constContext(ParserRuleContext parent, int invokingState) {
-            super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_null_const;
-        }
-
-        @Override
-        public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterNull_const(this);
-        }
-
-        @Override
-        public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitNull_const(this);
-        }
-
-        @Override
-        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitNull_const(this);
-            else return visitor.visitChildren(this);
-        }
-    }
-
-    public static class Create_type_store_locationContext extends ParserRuleContext {
-        public Create_type_store_locationContext(ParserRuleContext parent, int invokingState) {
-            super(parent, invokingState);
-        }
-
-        public TerminalNode T_LOCATION() {
-            return getToken(HplsqlParser.T_LOCATION, 0);
-        }
-
-        public List<StringContext> string() {
-            return getRuleContexts(StringContext.class);
-        }
-
-        public StringContext string(int i) {
-            return getRuleContext(StringContext.class, i);
-        }
-
-        public List<TerminalNode> T_COMMA() {
-            return getTokens(HplsqlParser.T_COMMA);
-        }
-
-        public TerminalNode T_COMMA(int i) {
-            return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_type_store_location;
-        }
-
-        @Override
-        public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_type_store_location(this);
-        }
-
-        @Override
-        public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_type_store_location(this);
-        }
-
-        @Override
-        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_type_store_location(this);
-            else return visitor.visitChildren(this);
-        }
-    }
-
-    public static class Create_type_delemiterContext extends ParserRuleContext {
-        public Create_type_delemiterContext(ParserRuleContext parent, int invokingState) {
-            super(parent, invokingState);
-        }
-
-        public TerminalNode T_DELIMITED() {
-            return getToken(HplsqlParser.T_DELIMITED, 0);
-        }
-
-        public StringContext string() {
-            return getRuleContext(StringContext.class, 0);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_type_delemiter;
-        }
-
-        @Override
-        public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_type_delemiter(this);
-        }
-
-        @Override
-        public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_type_delemiter(this);
-        }
-
-        @Override
-        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_type_delemiter(this);
-            else return visitor.visitChildren(this);
-        }
-    }
-
-    public static class Create_table_options_itemContext extends ParserRuleContext {
-        public TerminalNode T_ON() {
-            return getToken(HplsqlParser.T_ON, 0);
-        }
-
-        public TerminalNode T_COMMIT() {
-            return getToken(HplsqlParser.T_COMMIT, 0);
-        }
-
-        public TerminalNode T_ROWS() {
-            return getToken(HplsqlParser.T_ROWS, 0);
-        }
-
-        public TerminalNode T_DELETE() {
-            return getToken(HplsqlParser.T_DELETE, 0);
-        }
-
-        public TerminalNode T_PRESERVE() {
-            return getToken(HplsqlParser.T_PRESERVE, 0);
-        }
-
-        public Create_table_options_ora_itemContext create_table_options_ora_item() {
-            return getRuleContext(Create_table_options_ora_itemContext.class, 0);
-        }
-
-        public Create_table_options_db2_itemContext create_table_options_db2_item() {
-            return getRuleContext(Create_table_options_db2_itemContext.class, 0);
-        }
-
-        public Create_table_options_td_itemContext create_table_options_td_item() {
-            return getRuleContext(Create_table_options_td_itemContext.class, 0);
-        }
-
-        public Create_table_options_hive_itemContext create_table_options_hive_item() {
-            return getRuleContext(Create_table_options_hive_itemContext.class, 0);
-        }
-
-        public Create_table_options_mssql_itemContext create_table_options_mssql_item() {
-            return getRuleContext(Create_table_options_mssql_itemContext.class, 0);
-        }
-
-        public Create_table_options_mysql_itemContext create_table_options_mysql_item() {
-            return getRuleContext(Create_table_options_mysql_itemContext.class, 0);
-        }
-
-        public Create_table_store_locationContext create_table_store_location() {
-            return getRuleContext(Create_table_store_locationContext.class, 0);
-        }
-
-        public Create_table_delemiterContext create_table_delemiter() {
-            return getRuleContext(Create_table_delemiterContext.class, 0);
-        }
-
-        public Create_table_options_itemContext(ParserRuleContext parent, int invokingState) {
-            super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_table_options_item;
-        }
-
-        @Override
-        public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_options_item(this);
-        }
-
-        @Override
-        public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_options_item(this);
-        }
-
-        @Override
-        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_options_item(this);
-            else return visitor.visitChildren(this);
-        }
-    }
-
-    public static class Create_table_store_locationContext extends ParserRuleContext {
-        public TerminalNode T_LOCATION() {
-            return getToken(HplsqlParser.T_LOCATION, 0);
-        }
-
-        public List<StringContext> string() {
-            return getRuleContexts(StringContext.class);
-        }
-
-        public StringContext string(int i) {
-            return getRuleContext(StringContext.class, i);
-        }
-
-        public List<TerminalNode> T_COMMA() {
-            return getTokens(HplsqlParser.T_COMMA);
-        }
-
-        public TerminalNode T_COMMA(int i) {
-            return getToken(HplsqlParser.T_COMMA, i);
-        }
-
-        public Create_table_store_locationContext(ParserRuleContext parent, int invokingState) {
-            super(parent, invokingState);
-        }
-
-        @Override
-        public int getRuleIndex() {
-            return RULE_create_table_store_location;
-        }
-
-        @Override
-        public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_store_location(this);
-        }
-
-        @Override
-        public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_store_location(this);
-        }
-
-        @Override
-        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-            if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_store_location(this);
-            else return visitor.visitChildren(this);
-        }
     }
 
     private boolean block_end_sempred(Block_endContext _localctx, int predIndex) {
@@ -26960,10 +17332,2273 @@ public class HplsqlParser extends Parser {
         return true;
     }
 
-    private static final int _serializedATNSegments = 2;
+    public static class ProgramContext extends ParserRuleContext {
+        public ProgramContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
 
-    public static class Create_table_delemiterContext extends ParserRuleContext {
-        public Create_table_delemiterContext(ParserRuleContext parent, int invokingState) {
+        public BlockContext block() {
+            return getRuleContext(BlockContext.class, 0);
+        }
+
+        public TerminalNode EOF() {
+            return getToken(HplsqlParser.EOF, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_program;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterProgram(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitProgram(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitProgram(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class BlockContext extends ParserRuleContext {
+        public BlockContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<Begin_end_blockContext> begin_end_block() {
+            return getRuleContexts(Begin_end_blockContext.class);
+        }
+
+        public Begin_end_blockContext begin_end_block(int i) {
+            return getRuleContext(Begin_end_blockContext.class, i);
+        }
+
+        public List<StmtContext> stmt() {
+            return getRuleContexts(StmtContext.class);
+        }
+
+        public StmtContext stmt(int i) {
+            return getRuleContext(StmtContext.class, i);
+        }
+
+        public List<TerminalNode> T_GO() {
+            return getTokens(HplsqlParser.T_GO);
+        }
+
+        public TerminalNode T_GO(int i) {
+            return getToken(HplsqlParser.T_GO, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_block;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterBlock(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitBlock(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitBlock(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Begin_end_blockContext extends ParserRuleContext {
+        public Begin_end_blockContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_BEGIN() {
+            return getToken(HplsqlParser.T_BEGIN, 0);
+        }
+
+        public BlockContext block() {
+            return getRuleContext(BlockContext.class, 0);
+        }
+
+        public Block_endContext block_end() {
+            return getRuleContext(Block_endContext.class, 0);
+        }
+
+        public Declare_blockContext declare_block() {
+            return getRuleContext(Declare_blockContext.class, 0);
+        }
+
+        public Exception_blockContext exception_block() {
+            return getRuleContext(Exception_blockContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_begin_end_block;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterBegin_end_block(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitBegin_end_block(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitBegin_end_block(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Single_block_stmtContext extends ParserRuleContext {
+        public Single_block_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_BEGIN() {
+            return getToken(HplsqlParser.T_BEGIN, 0);
+        }
+
+        public BlockContext block() {
+            return getRuleContext(BlockContext.class, 0);
+        }
+
+        public Block_endContext block_end() {
+            return getRuleContext(Block_endContext.class, 0);
+        }
+
+        public Exception_blockContext exception_block() {
+            return getRuleContext(Exception_blockContext.class, 0);
+        }
+
+        public StmtContext stmt() {
+            return getRuleContext(StmtContext.class, 0);
+        }
+
+        public TerminalNode T_SEMICOLON() {
+            return getToken(HplsqlParser.T_SEMICOLON, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_single_block_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterSingle_block_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitSingle_block_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitSingle_block_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Block_endContext extends ParserRuleContext {
+        public Block_endContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_END() {
+            return getToken(HplsqlParser.T_END, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_block_end;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterBlock_end(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitBlock_end(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitBlock_end(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Proc_blockContext extends ParserRuleContext {
+        public Proc_blockContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public Begin_end_blockContext begin_end_block() {
+            return getRuleContext(Begin_end_blockContext.class, 0);
+        }
+
+        public List<StmtContext> stmt() {
+            return getRuleContexts(StmtContext.class);
+        }
+
+        public StmtContext stmt(int i) {
+            return getRuleContext(StmtContext.class, i);
+        }
+
+        public TerminalNode T_GO() {
+            return getToken(HplsqlParser.T_GO, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_proc_block;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterProc_block(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitProc_block(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitProc_block(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class StmtContext extends ParserRuleContext {
+        public StmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public Assignment_stmtContext assignment_stmt() {
+            return getRuleContext(Assignment_stmtContext.class, 0);
+        }
+
+        public Associate_locator_stmtContext associate_locator_stmt() {
+            return getRuleContext(Associate_locator_stmtContext.class, 0);
+        }
+
+        public Break_stmtContext break_stmt() {
+            return getRuleContext(Break_stmtContext.class, 0);
+        }
+
+        public Call_stmtContext call_stmt() {
+            return getRuleContext(Call_stmtContext.class, 0);
+        }
+
+        public Close_stmtContext close_stmt() {
+            return getRuleContext(Close_stmtContext.class, 0);
+        }
+
+        public Cmp_stmtContext cmp_stmt() {
+            return getRuleContext(Cmp_stmtContext.class, 0);
+        }
+
+        public Create_database_stmtContext create_database_stmt() {
+            return getRuleContext(Create_database_stmtContext.class, 0);
+        }
+
+        public Create_function_stmtContext create_function_stmt() {
+            return getRuleContext(Create_function_stmtContext.class, 0);
+        }
+
+        public Create_index_stmtContext create_index_stmt() {
+            return getRuleContext(Create_index_stmtContext.class, 0);
+        }
+
+        public Create_local_temp_table_stmtContext create_local_temp_table_stmt() {
+            return getRuleContext(Create_local_temp_table_stmtContext.class, 0);
+        }
+
+        public Create_package_stmtContext create_package_stmt() {
+            return getRuleContext(Create_package_stmtContext.class, 0);
+        }
+
+        public Create_package_body_stmtContext create_package_body_stmt() {
+            return getRuleContext(Create_package_body_stmtContext.class, 0);
+        }
+
+        public Create_procedure_stmtContext create_procedure_stmt() {
+            return getRuleContext(Create_procedure_stmtContext.class, 0);
+        }
+
+        public Create_table_stmtContext create_table_stmt() {
+            return getRuleContext(Create_table_stmtContext.class, 0);
+        }
+
+        public Create_type_stmtContext create_type_stmt() {
+            return getRuleContext(Create_type_stmtContext.class, 0);
+        }
+
+        public Declare_stmtContext declare_stmt() {
+            return getRuleContext(Declare_stmtContext.class, 0);
+        }
+
+        public Exec_stmtContext exec_stmt() {
+            return getRuleContext(Exec_stmtContext.class, 0);
+        }
+
+        public Exit_stmtContext exit_stmt() {
+            return getRuleContext(Exit_stmtContext.class, 0);
+        }
+
+        public For_range_stmtContext for_range_stmt() {
+            return getRuleContext(For_range_stmtContext.class, 0);
+        }
+
+        public If_stmtContext if_stmt() {
+            return getRuleContext(If_stmtContext.class, 0);
+        }
+
+        public Leave_stmtContext leave_stmt() {
+            return getRuleContext(Leave_stmtContext.class, 0);
+        }
+
+        public Quit_stmtContext quit_stmt() {
+            return getRuleContext(Quit_stmtContext.class, 0);
+        }
+
+        public Return_stmtContext return_stmt() {
+            return getRuleContext(Return_stmtContext.class, 0);
+        }
+
+        public Select_stmtContext select_stmt() {
+            return getRuleContext(Select_stmtContext.class, 0);
+        }
+
+        public While_stmtContext while_stmt() {
+            return getRuleContext(While_stmtContext.class, 0);
+        }
+
+        public Cpp_stmtContext cpp_stmt() {
+            return getRuleContext(Cpp_stmtContext.class, 0);
+        }
+
+        public Error_stmtContext error_stmt() {
+            return getRuleContext(Error_stmtContext.class, 0);
+        }
+
+        public LabelContext label() {
+            return getRuleContext(LabelContext.class, 0);
+        }
+
+        public Null_stmtContext null_stmt() {
+            return getRuleContext(Null_stmtContext.class, 0);
+        }
+
+        public Expr_stmtContext expr_stmt() {
+            return getRuleContext(Expr_stmtContext.class, 0);
+        }
+
+        public Semicolon_stmtContext semicolon_stmt() {
+            return getRuleContext(Semicolon_stmtContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterStmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitStmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitStmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Error_stmtContext extends ParserRuleContext {
+        public Error_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public Invalid_selectContext invalid_select() {
+            return getRuleContext(Invalid_selectContext.class, 0);
+        }
+
+        public Invalid_bool_exprContext invalid_bool_expr() {
+            return getRuleContext(Invalid_bool_exprContext.class, 0);
+        }
+
+        public Invalid_cpp_function_stmtContext invalid_cpp_function_stmt() {
+            return getRuleContext(Invalid_cpp_function_stmtContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_error_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterError_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitError_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitError_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Invalid_selectContext extends ParserRuleContext {
+        public Invalid_selectContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public Select_listContext select_list() {
+            return getRuleContext(Select_listContext.class, 0);
+        }
+
+        public TerminalNode T_SELECT() {
+            return getToken(HplsqlParser.T_SELECT, 0);
+        }
+
+        public TerminalNode T_SEL() {
+            return getToken(HplsqlParser.T_SEL, 0);
+        }
+
+        public Into_clauseContext into_clause() {
+            return getRuleContext(Into_clauseContext.class, 0);
+        }
+
+        public From_clauseContext from_clause() {
+            return getRuleContext(From_clauseContext.class, 0);
+        }
+
+        public Invalid_from_clauseContext invalid_from_clause() {
+            return getRuleContext(Invalid_from_clauseContext.class, 0);
+        }
+
+        public Where_clauseContext where_clause() {
+            return getRuleContext(Where_clauseContext.class, 0);
+        }
+
+        public Invalid_where_clauseContext invalid_where_clause() {
+            return getRuleContext(Invalid_where_clauseContext.class, 0);
+        }
+
+        public Group_by_clauseContext group_by_clause() {
+            return getRuleContext(Group_by_clauseContext.class, 0);
+        }
+
+        public Having_clauseContext having_clause() {
+            return getRuleContext(Having_clauseContext.class, 0);
+        }
+
+        public Qualify_clauseContext qualify_clause() {
+            return getRuleContext(Qualify_clauseContext.class, 0);
+        }
+
+        public Order_by_clauseContext order_by_clause() {
+            return getRuleContext(Order_by_clauseContext.class, 0);
+        }
+
+        public Select_optionsContext select_options() {
+            return getRuleContext(Select_optionsContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_invalid_select;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterInvalid_select(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitInvalid_select(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitInvalid_select(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Invalid_where_clauseContext extends ParserRuleContext {
+        public Invalid_where_clauseContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public Bool_exprContext bool_expr() {
+            return getRuleContext(Bool_exprContext.class, 0);
+        }
+
+        public TerminalNode T_WHERE() {
+            return getToken(HplsqlParser.T_WHERE, 0);
+        }
+
+        public Invalid_bool_exprContext invalid_bool_expr() {
+            return getRuleContext(Invalid_bool_exprContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_invalid_where_clause;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterInvalid_where_clause(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitInvalid_where_clause(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitInvalid_where_clause(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Invalid_from_clauseContext extends ParserRuleContext {
+        public Invalid_from_clauseContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public From_table_clauseContext from_table_clause() {
+            return getRuleContext(From_table_clauseContext.class, 0);
+        }
+
+        public List<From_join_clauseContext> from_join_clause() {
+            return getRuleContexts(From_join_clauseContext.class);
+        }
+
+        public From_join_clauseContext from_join_clause(int i) {
+            return getRuleContext(From_join_clauseContext.class, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_invalid_from_clause;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterInvalid_from_clause(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitInvalid_from_clause(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitInvalid_from_clause(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Invalid_bool_exprContext extends ParserRuleContext {
+        public Invalid_bool_exprContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public Bool_exprContext bool_expr() {
+            return getRuleContext(Bool_exprContext.class, 0);
+        }
+
+        public List<TerminalNode> T_CLOSE_P() {
+            return getTokens(HplsqlParser.T_CLOSE_P);
+        }
+
+        public TerminalNode T_CLOSE_P(int i) {
+            return getToken(HplsqlParser.T_CLOSE_P, i);
+        }
+
+        public TerminalNode T_NOT() {
+            return getToken(HplsqlParser.T_NOT, 0);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public Invalid_bool_expr_atomContext invalid_bool_expr_atom() {
+            return getRuleContext(Invalid_bool_expr_atomContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_invalid_bool_expr;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterInvalid_bool_expr(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitInvalid_bool_expr(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitInvalid_bool_expr(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Invalid_bool_expr_atomContext extends ParserRuleContext {
+        public Invalid_bool_expr_atomContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public Invalid_bool_expr_binaryContext invalid_bool_expr_binary() {
+            return getRuleContext(Invalid_bool_expr_binaryContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_invalid_bool_expr_atom;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterInvalid_bool_expr_atom(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitInvalid_bool_expr_atom(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitInvalid_bool_expr_atom(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Invalid_bool_expr_binaryContext extends ParserRuleContext {
+        public Invalid_bool_expr_binaryContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<ExprContext> expr() {
+            return getRuleContexts(ExprContext.class);
+        }
+
+        public ExprContext expr(int i) {
+            return getRuleContext(ExprContext.class, i);
+        }
+
+        public Invalid_bool_expr_binary_operatorContext invalid_bool_expr_binary_operator() {
+            return getRuleContext(Invalid_bool_expr_binary_operatorContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_invalid_bool_expr_binary;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterInvalid_bool_expr_binary(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitInvalid_bool_expr_binary(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitInvalid_bool_expr_binary(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Invalid_bool_expr_binary_operatorContext extends ParserRuleContext {
+        public Invalid_bool_expr_binary_operatorContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_invalid_bool_expr_binary_operator;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener)
+                ((HplsqlListener) listener).enterInvalid_bool_expr_binary_operator(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener)
+                ((HplsqlListener) listener).exitInvalid_bool_expr_binary_operator(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitInvalid_bool_expr_binary_operator(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Invalid_cpp_function_stmtContext extends ParserRuleContext {
+        public Invalid_cpp_function_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public Invalid_cpp_function_headerContext invalid_cpp_function_header() {
+            return getRuleContext(Invalid_cpp_function_headerContext.class, 0);
+        }
+
+        public Cpp_function_bodyContext cpp_function_body() {
+            return getRuleContext(Cpp_function_bodyContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_invalid_cpp_function_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterInvalid_cpp_function_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitInvalid_cpp_function_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitInvalid_cpp_function_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Invalid_cpp_function_headerContext extends ParserRuleContext {
+        public Invalid_cpp_function_headerContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        public Cpp_function_params_clauseContext cpp_function_params_clause() {
+            return getRuleContext(Cpp_function_params_clauseContext.class, 0);
+        }
+
+        public Invalid_cpp_function_params_clauseContext invalid_cpp_function_params_clause() {
+            return getRuleContext(Invalid_cpp_function_params_clauseContext.class, 0);
+        }
+
+        public DtypeContext dtype() {
+            return getRuleContext(DtypeContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_invalid_cpp_function_header;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterInvalid_cpp_function_header(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitInvalid_cpp_function_header(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitInvalid_cpp_function_header(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Invalid_cpp_function_params_clauseContext extends ParserRuleContext {
+        public Invalid_cpp_function_params_clauseContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        public List<Invalid_cpp_function_paramContext> invalid_cpp_function_param() {
+            return getRuleContexts(Invalid_cpp_function_paramContext.class);
+        }
+
+        public Invalid_cpp_function_paramContext invalid_cpp_function_param(int i) {
+            return getRuleContext(Invalid_cpp_function_paramContext.class, i);
+        }
+
+        public List<Cpp_function_paramContext> cpp_function_param() {
+            return getRuleContexts(Cpp_function_paramContext.class);
+        }
+
+        public Cpp_function_paramContext cpp_function_param(int i) {
+            return getRuleContext(Cpp_function_paramContext.class, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_invalid_cpp_function_params_clause;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener)
+                ((HplsqlListener) listener).enterInvalid_cpp_function_params_clause(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener)
+                ((HplsqlListener) listener).exitInvalid_cpp_function_params_clause(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitInvalid_cpp_function_params_clause(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Invalid_cpp_function_paramContext extends ParserRuleContext {
+        public Invalid_cpp_function_paramContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_invalid_cpp_function_param;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterInvalid_cpp_function_param(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitInvalid_cpp_function_param(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitInvalid_cpp_function_param(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Exception_blockContext extends ParserRuleContext {
+        public Exception_blockContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_EXCEPTION() {
+            return getToken(HplsqlParser.T_EXCEPTION, 0);
+        }
+
+        public List<Exception_block_itemContext> exception_block_item() {
+            return getRuleContexts(Exception_block_itemContext.class);
+        }
+
+        public Exception_block_itemContext exception_block_item(int i) {
+            return getRuleContext(Exception_block_itemContext.class, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_exception_block;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterException_block(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitException_block(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitException_block(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Exception_block_itemContext extends ParserRuleContext {
+        public Exception_block_itemContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<TerminalNode> T_WHEN() {
+            return getTokens(HplsqlParser.T_WHEN);
+        }
+
+        public TerminalNode T_WHEN(int i) {
+            return getToken(HplsqlParser.T_WHEN, i);
+        }
+
+        public TerminalNode L_ID() {
+            return getToken(HplsqlParser.L_ID, 0);
+        }
+
+        public TerminalNode T_THEN() {
+            return getToken(HplsqlParser.T_THEN, 0);
+        }
+
+        public BlockContext block() {
+            return getRuleContext(BlockContext.class, 0);
+        }
+
+        public TerminalNode T_END() {
+            return getToken(HplsqlParser.T_END, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_exception_block_item;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterException_block_item(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitException_block_item(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitException_block_item(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Semicolon_stmtContext extends ParserRuleContext {
+        public Semicolon_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_SEMICOLON() {
+            return getToken(HplsqlParser.T_SEMICOLON, 0);
+        }
+
+        public TerminalNode T_DIV() {
+            return getToken(HplsqlParser.T_DIV, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_semicolon_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterSemicolon_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitSemicolon_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitSemicolon_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Null_stmtContext extends ParserRuleContext {
+        public Null_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_NULL() {
+            return getToken(HplsqlParser.T_NULL, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_null_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterNull_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitNull_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitNull_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Expr_stmtContext extends ParserRuleContext {
+        public Expr_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public ExprContext expr() {
+            return getRuleContext(ExprContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_expr_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExpr_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitExpr_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Assignment_stmtContext extends ParserRuleContext {
+        public Assignment_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<Assignment_stmt_itemContext> assignment_stmt_item() {
+            return getRuleContexts(Assignment_stmt_itemContext.class);
+        }
+
+        public Assignment_stmt_itemContext assignment_stmt_item(int i) {
+            return getRuleContext(Assignment_stmt_itemContext.class, i);
+        }
+
+        public TerminalNode T_SET() {
+            return getToken(HplsqlParser.T_SET, 0);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_assignment_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterAssignment_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitAssignment_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitAssignment_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Assignment_stmt_itemContext extends ParserRuleContext {
+        public Assignment_stmt_itemContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public Assignment_stmt_single_itemContext assignment_stmt_single_item() {
+            return getRuleContext(Assignment_stmt_single_itemContext.class, 0);
+        }
+
+        public Assignment_stmt_multiple_itemContext assignment_stmt_multiple_item() {
+            return getRuleContext(Assignment_stmt_multiple_itemContext.class, 0);
+        }
+
+        public Assignment_stmt_select_itemContext assignment_stmt_select_item() {
+            return getRuleContext(Assignment_stmt_select_itemContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_assignment_stmt_item;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterAssignment_stmt_item(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitAssignment_stmt_item(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitAssignment_stmt_item(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Assignment_stmt_single_itemContext extends ParserRuleContext {
+        public Assignment_stmt_single_itemContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        public TerminalNode T_EQUAL() {
+            return getToken(HplsqlParser.T_EQUAL, 0);
+        }
+
+        public ExprContext expr() {
+            return getRuleContext(ExprContext.class, 0);
+        }
+
+        public TerminalNode T_COLON() {
+            return getToken(HplsqlParser.T_COLON, 0);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_assignment_stmt_single_item;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterAssignment_stmt_single_item(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitAssignment_stmt_single_item(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitAssignment_stmt_single_item(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Assignment_stmt_multiple_itemContext extends ParserRuleContext {
+        public Assignment_stmt_multiple_itemContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<TerminalNode> T_OPEN_P() {
+            return getTokens(HplsqlParser.T_OPEN_P);
+        }
+
+        public List<IdentContext> ident() {
+            return getRuleContexts(IdentContext.class);
+        }
+
+        public TerminalNode T_OPEN_P(int i) {
+            return getToken(HplsqlParser.T_OPEN_P, i);
+        }
+
+        public IdentContext ident(int i) {
+            return getRuleContext(IdentContext.class, i);
+        }
+
+        public List<TerminalNode> T_CLOSE_P() {
+            return getTokens(HplsqlParser.T_CLOSE_P);
+        }
+
+        public TerminalNode T_CLOSE_P(int i) {
+            return getToken(HplsqlParser.T_CLOSE_P, i);
+        }
+
+        public TerminalNode T_EQUAL() {
+            return getToken(HplsqlParser.T_EQUAL, 0);
+        }
+
+        public List<ExprContext> expr() {
+            return getRuleContexts(ExprContext.class);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public ExprContext expr(int i) {
+            return getRuleContext(ExprContext.class, i);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        public TerminalNode T_COLON() {
+            return getToken(HplsqlParser.T_COLON, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_assignment_stmt_multiple_item;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener)
+                ((HplsqlListener) listener).enterAssignment_stmt_multiple_item(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitAssignment_stmt_multiple_item(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitAssignment_stmt_multiple_item(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Assignment_stmt_select_itemContext extends ParserRuleContext {
+        public Assignment_stmt_select_itemContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_EQUAL() {
+            return getToken(HplsqlParser.T_EQUAL, 0);
+        }
+
+        public List<TerminalNode> T_OPEN_P() {
+            return getTokens(HplsqlParser.T_OPEN_P);
+        }
+
+        public TerminalNode T_OPEN_P(int i) {
+            return getToken(HplsqlParser.T_OPEN_P, i);
+        }
+
+        public Select_stmtContext select_stmt() {
+            return getRuleContext(Select_stmtContext.class, 0);
+        }
+
+        public List<TerminalNode> T_CLOSE_P() {
+            return getTokens(HplsqlParser.T_CLOSE_P);
+        }
+
+        public TerminalNode T_CLOSE_P(int i) {
+            return getToken(HplsqlParser.T_CLOSE_P, i);
+        }
+
+        public List<IdentContext> ident() {
+            return getRuleContexts(IdentContext.class);
+        }
+
+        public IdentContext ident(int i) {
+            return getRuleContext(IdentContext.class, i);
+        }
+
+        public TerminalNode T_COLON() {
+            return getToken(HplsqlParser.T_COLON, 0);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_assignment_stmt_select_item;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterAssignment_stmt_select_item(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitAssignment_stmt_select_item(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitAssignment_stmt_select_item(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Associate_locator_stmtContext extends ParserRuleContext {
+        public Associate_locator_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public TerminalNode T_ASSOCIATE() {
+            return getToken(HplsqlParser.T_ASSOCIATE, 0);
+        }
+
+        public List<IdentContext> ident() {
+            return getRuleContexts(IdentContext.class);
+        }
+
+        public IdentContext ident(int i) {
+            return getRuleContext(IdentContext.class, i);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        public TerminalNode T_WITH() {
+            return getToken(HplsqlParser.T_WITH, 0);
+        }
+
+        public TerminalNode T_PROCEDURE() {
+            return getToken(HplsqlParser.T_PROCEDURE, 0);
+        }
+
+        public TerminalNode T_LOCATOR() {
+            return getToken(HplsqlParser.T_LOCATOR, 0);
+        }
+
+        public TerminalNode T_LOCATORS() {
+            return getToken(HplsqlParser.T_LOCATORS, 0);
+        }
+
+        public TerminalNode T_RESULT() {
+            return getToken(HplsqlParser.T_RESULT, 0);
+        }
+
+        public TerminalNode T_SET() {
+            return getToken(HplsqlParser.T_SET, 0);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_associate_locator_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterAssociate_locator_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitAssociate_locator_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitAssociate_locator_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Break_stmtContext extends ParserRuleContext {
+        public Break_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_BREAK() {
+            return getToken(HplsqlParser.T_BREAK, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_break_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterBreak_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitBreak_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitBreak_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Call_stmtContext extends ParserRuleContext {
+        public Call_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_CALL() {
+            return getToken(HplsqlParser.T_CALL, 0);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        public Expr_func_paramsContext expr_func_params() {
+            return getRuleContext(Expr_func_paramsContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_call_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCall_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCall_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitCall_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Close_stmtContext extends ParserRuleContext {
+        public Close_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_CLOSE() {
+            return getToken(HplsqlParser.T_CLOSE, 0);
+        }
+
+        public TerminalNode L_ID() {
+            return getToken(HplsqlParser.L_ID, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_close_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterClose_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitClose_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitClose_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Declare_stmtContext extends ParserRuleContext {
+        public Declare_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<Declare_stmt_itemContext> declare_stmt_item() {
+            return getRuleContexts(Declare_stmt_itemContext.class);
+        }
+
+        public TerminalNode T_DECLARE() {
+            return getToken(HplsqlParser.T_DECLARE, 0);
+        }
+
+        public Declare_stmt_itemContext declare_stmt_item(int i) {
+            return getRuleContext(Declare_stmt_itemContext.class, i);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_declare_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterDeclare_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitDeclare_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitDeclare_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Declare_blockContext extends ParserRuleContext {
+        public Declare_blockContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_DECLARE() {
+            return getToken(HplsqlParser.T_DECLARE, 0);
+        }
+
+        public List<Declare_stmt_itemContext> declare_stmt_item() {
+            return getRuleContexts(Declare_stmt_itemContext.class);
+        }
+
+        public Declare_stmt_itemContext declare_stmt_item(int i) {
+            return getRuleContext(Declare_stmt_itemContext.class, i);
+        }
+
+        public List<TerminalNode> T_SEMICOLON() {
+            return getTokens(HplsqlParser.T_SEMICOLON);
+        }
+
+        public TerminalNode T_SEMICOLON(int i) {
+            return getToken(HplsqlParser.T_SEMICOLON, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_declare_block;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterDeclare_block(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitDeclare_block(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitDeclare_block(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Declare_block_inplaceContext extends ParserRuleContext {
+        public Declare_block_inplaceContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<Declare_stmt_itemContext> declare_stmt_item() {
+            return getRuleContexts(Declare_stmt_itemContext.class);
+        }
+
+        public Declare_stmt_itemContext declare_stmt_item(int i) {
+            return getRuleContext(Declare_stmt_itemContext.class, i);
+        }
+
+        public List<TerminalNode> T_SEMICOLON() {
+            return getTokens(HplsqlParser.T_SEMICOLON);
+        }
+
+        public TerminalNode T_SEMICOLON(int i) {
+            return getToken(HplsqlParser.T_SEMICOLON, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_declare_block_inplace;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterDeclare_block_inplace(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitDeclare_block_inplace(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitDeclare_block_inplace(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Declare_stmt_itemContext extends ParserRuleContext {
+        public Declare_stmt_itemContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public Declare_condition_itemContext declare_condition_item() {
+            return getRuleContext(Declare_condition_itemContext.class, 0);
+        }
+
+        public Declare_handler_itemContext declare_handler_item() {
+            return getRuleContext(Declare_handler_itemContext.class, 0);
+        }
+
+        public Declare_var_itemContext declare_var_item() {
+            return getRuleContext(Declare_var_itemContext.class, 0);
+        }
+
+        public Declare_temporary_table_itemContext declare_temporary_table_item() {
+            return getRuleContext(Declare_temporary_table_itemContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_declare_stmt_item;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterDeclare_stmt_item(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitDeclare_stmt_item(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitDeclare_stmt_item(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Declare_var_itemContext extends ParserRuleContext {
+        public Declare_var_itemContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<IdentContext> ident() {
+            return getRuleContexts(IdentContext.class);
+        }
+
+        public IdentContext ident(int i) {
+            return getRuleContext(IdentContext.class, i);
+        }
+
+        public DtypeContext dtype() {
+            return getRuleContext(DtypeContext.class, 0);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        public TerminalNode T_AS() {
+            return getToken(HplsqlParser.T_AS, 0);
+        }
+
+        public Dtype_lenContext dtype_len() {
+            return getRuleContext(Dtype_lenContext.class, 0);
+        }
+
+        public List<Dtype_attrContext> dtype_attr() {
+            return getRuleContexts(Dtype_attrContext.class);
+        }
+
+        public Dtype_attrContext dtype_attr(int i) {
+            return getRuleContext(Dtype_attrContext.class, i);
+        }
+
+        public Dtype_defaultContext dtype_default() {
+            return getRuleContext(Dtype_defaultContext.class, 0);
+        }
+
+        public TerminalNode T_CONSTANT() {
+            return getToken(HplsqlParser.T_CONSTANT, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_declare_var_item;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterDeclare_var_item(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitDeclare_var_item(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitDeclare_var_item(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Declare_condition_itemContext extends ParserRuleContext {
+        public Declare_condition_itemContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        public TerminalNode T_CONDITION() {
+            return getToken(HplsqlParser.T_CONDITION, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_declare_condition_item;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterDeclare_condition_item(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitDeclare_condition_item(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitDeclare_condition_item(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Declare_handler_itemContext extends ParserRuleContext {
+        public Declare_handler_itemContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_HANDLER() {
+            return getToken(HplsqlParser.T_HANDLER, 0);
+        }
+
+        public TerminalNode T_FOR() {
+            return getToken(HplsqlParser.T_FOR, 0);
+        }
+
+        public Single_block_stmtContext single_block_stmt() {
+            return getRuleContext(Single_block_stmtContext.class, 0);
+        }
+
+        public TerminalNode T_CONTINUE() {
+            return getToken(HplsqlParser.T_CONTINUE, 0);
+        }
+
+        public TerminalNode T_EXIT() {
+            return getToken(HplsqlParser.T_EXIT, 0);
+        }
+
+        public TerminalNode T_SQLEXCEPTION() {
+            return getToken(HplsqlParser.T_SQLEXCEPTION, 0);
+        }
+
+        public TerminalNode T_SQLWARNING() {
+            return getToken(HplsqlParser.T_SQLWARNING, 0);
+        }
+
+        public TerminalNode T_NOT() {
+            return getToken(HplsqlParser.T_NOT, 0);
+        }
+
+        public TerminalNode T_FOUND() {
+            return getToken(HplsqlParser.T_FOUND, 0);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_declare_handler_item;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterDeclare_handler_item(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitDeclare_handler_item(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitDeclare_handler_item(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_type_stmtContext extends ParserRuleContext {
+        public Create_type_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_CREATE() {
+            return getToken(HplsqlParser.T_CREATE, 0);
+        }
+
+        public TerminalNode T_TYPE() {
+            return getToken(HplsqlParser.T_TYPE, 0);
+        }
+
+        public Table_nameContext table_name() {
+            return getRuleContext(Table_nameContext.class, 0);
+        }
+
+        public Create_type_definitionContext create_type_definition() {
+            return getRuleContext(Create_type_definitionContext.class, 0);
+        }
+
+        public Create_type_optionsContext create_type_options() {
+            return getRuleContext(Create_type_optionsContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_type_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_type_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_type_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_type_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_type_definitionContext extends ParserRuleContext {
+        public Create_type_definitionContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public Create_type_itemsContext create_type_items() {
+            return getRuleContext(Create_type_itemsContext.class, 0);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_type_definition;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_type_definition(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_type_definition(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_type_definition(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_type_itemsContext extends ParserRuleContext {
+        public Create_type_itemsContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<Create_type_items_itemContext> create_type_items_item() {
+            return getRuleContexts(Create_type_items_itemContext.class);
+        }
+
+        public Create_type_items_itemContext create_type_items_item(int i) {
+            return getRuleContext(Create_type_items_itemContext.class, i);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_type_items;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_type_items(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_type_items(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_type_items(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_type_items_itemContext extends ParserRuleContext {
+        public Create_type_items_itemContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<IdentContext> ident() {
+            return getRuleContexts(IdentContext.class);
+        }
+
+        public IdentContext ident(int i) {
+            return getRuleContext(IdentContext.class, i);
+        }
+
+        public TerminalNode T_COLON() {
+            return getToken(HplsqlParser.T_COLON, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_type_items_item;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_type_items_item(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_type_items_item(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_type_items_item(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_type_optionsContext extends ParserRuleContext {
+        public Create_type_optionsContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<Create_type_optionContext> create_type_option() {
+            return getRuleContexts(Create_type_optionContext.class);
+        }
+
+        public Create_type_optionContext create_type_option(int i) {
+            return getRuleContext(Create_type_optionContext.class, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_type_options;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_type_options(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_type_options(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_type_options(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_type_optionContext extends ParserRuleContext {
+        public Create_type_optionContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public Create_type_store_locationContext create_type_store_location() {
+            return getRuleContext(Create_type_store_locationContext.class, 0);
+        }
+
+        public Create_type_delimiterContext create_type_delimiter() {
+            return getRuleContext(Create_type_delimiterContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_type_option;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_type_option(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_type_option(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_type_option(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_type_store_locationContext extends ParserRuleContext {
+        public Create_type_store_locationContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_LOCATION() {
+            return getToken(HplsqlParser.T_LOCATION, 0);
+        }
+
+        public List<StringContext> string() {
+            return getRuleContexts(StringContext.class);
+        }
+
+        public StringContext string(int i) {
+            return getRuleContext(StringContext.class, i);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_type_store_location;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_type_store_location(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_type_store_location(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_type_store_location(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_type_delimiterContext extends ParserRuleContext {
+        public Create_type_delimiterContext(ParserRuleContext parent, int invokingState) {
             super(parent, invokingState);
         }
 
@@ -26977,26 +19612,8272 @@ public class HplsqlParser extends Parser {
 
         @Override
         public int getRuleIndex() {
-            return RULE_create_table_delemiter;
+            return RULE_create_type_delimiter;
         }
 
         @Override
         public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_delemiter(this);
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_type_delimiter(this);
         }
 
         @Override
         public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_delemiter(this);
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_type_delimiter(this);
         }
 
         @Override
         public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
             if (visitor instanceof HplsqlVisitor)
-                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_delemiter(this);
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_type_delimiter(this);
             else return visitor.visitChildren(this);
         }
     }
+
+    public static class Declare_temporary_table_itemContext extends ParserRuleContext {
+        public Declare_temporary_table_itemContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_TEMPORARY() {
+            return getToken(HplsqlParser.T_TEMPORARY, 0);
+        }
+
+        public TerminalNode T_TABLE() {
+            return getToken(HplsqlParser.T_TABLE, 0);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        public Create_table_definitionContext create_table_definition() {
+            return getRuleContext(Create_table_definitionContext.class, 0);
+        }
+
+        public TerminalNode T_GLOBAL() {
+            return getToken(HplsqlParser.T_GLOBAL, 0);
+        }
+
+        public Create_table_preoptionsContext create_table_preoptions() {
+            return getRuleContext(Create_table_preoptionsContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_declare_temporary_table_item;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterDeclare_temporary_table_item(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitDeclare_temporary_table_item(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitDeclare_temporary_table_item(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_table_stmtContext extends ParserRuleContext {
+        public Create_table_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_CREATE() {
+            return getToken(HplsqlParser.T_CREATE, 0);
+        }
+
+        public TerminalNode T_TABLE() {
+            return getToken(HplsqlParser.T_TABLE, 0);
+        }
+
+        public Table_nameContext table_name() {
+            return getRuleContext(Table_nameContext.class, 0);
+        }
+
+        public Create_table_definitionContext create_table_definition() {
+            return getRuleContext(Create_table_definitionContext.class, 0);
+        }
+
+        public TerminalNode T_IF() {
+            return getToken(HplsqlParser.T_IF, 0);
+        }
+
+        public TerminalNode T_NOT() {
+            return getToken(HplsqlParser.T_NOT, 0);
+        }
+
+        public TerminalNode T_EXISTS() {
+            return getToken(HplsqlParser.T_EXISTS, 0);
+        }
+
+        public Create_table_preoptionsContext create_table_preoptions() {
+            return getRuleContext(Create_table_preoptionsContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_table_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_local_temp_table_stmtContext extends ParserRuleContext {
+        public Create_local_temp_table_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_CREATE() {
+            return getToken(HplsqlParser.T_CREATE, 0);
+        }
+
+        public TerminalNode T_TABLE() {
+            return getToken(HplsqlParser.T_TABLE, 0);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        public Create_table_definitionContext create_table_definition() {
+            return getRuleContext(Create_table_definitionContext.class, 0);
+        }
+
+        public TerminalNode T_LOCAL() {
+            return getToken(HplsqlParser.T_LOCAL, 0);
+        }
+
+        public TerminalNode T_TEMPORARY() {
+            return getToken(HplsqlParser.T_TEMPORARY, 0);
+        }
+
+        public TerminalNode T_VOLATILE() {
+            return getToken(HplsqlParser.T_VOLATILE, 0);
+        }
+
+        public Create_table_preoptionsContext create_table_preoptions() {
+            return getRuleContext(Create_table_preoptionsContext.class, 0);
+        }
+
+        public TerminalNode T_SET() {
+            return getToken(HplsqlParser.T_SET, 0);
+        }
+
+        public TerminalNode T_MULTISET() {
+            return getToken(HplsqlParser.T_MULTISET, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_local_temp_table_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_local_temp_table_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_local_temp_table_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_local_temp_table_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_table_definitionContext extends ParserRuleContext {
+        public Create_table_definitionContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public Select_stmtContext select_stmt() {
+            return getRuleContext(Select_stmtContext.class, 0);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        public Create_table_columnsContext create_table_columns() {
+            return getRuleContext(Create_table_columnsContext.class, 0);
+        }
+
+        public Create_table_optionsContext create_table_options() {
+            return getRuleContext(Create_table_optionsContext.class, 0);
+        }
+
+        public TerminalNode T_AS() {
+            return getToken(HplsqlParser.T_AS, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_table_definition;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_definition(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_definition(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_definition(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_table_columnsContext extends ParserRuleContext {
+        public Create_table_columnsContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<Create_table_columns_itemContext> create_table_columns_item() {
+            return getRuleContexts(Create_table_columns_itemContext.class);
+        }
+
+        public Create_table_columns_itemContext create_table_columns_item(int i) {
+            return getRuleContext(Create_table_columns_itemContext.class, i);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_table_columns;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_columns(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_columns(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_columns(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_table_columns_itemContext extends ParserRuleContext {
+        public Create_table_columns_itemContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public Column_nameContext column_name() {
+            return getRuleContext(Column_nameContext.class, 0);
+        }
+
+        public DtypeContext dtype() {
+            return getRuleContext(DtypeContext.class, 0);
+        }
+
+        public Dtype_lenContext dtype_len() {
+            return getRuleContext(Dtype_lenContext.class, 0);
+        }
+
+        public List<Dtype_attrContext> dtype_attr() {
+            return getRuleContexts(Dtype_attrContext.class);
+        }
+
+        public Dtype_attrContext dtype_attr(int i) {
+            return getRuleContext(Dtype_attrContext.class, i);
+        }
+
+        public List<Create_table_column_inline_consContext> create_table_column_inline_cons() {
+            return getRuleContexts(Create_table_column_inline_consContext.class);
+        }
+
+        public Create_table_column_inline_consContext create_table_column_inline_cons(int i) {
+            return getRuleContext(Create_table_column_inline_consContext.class, i);
+        }
+
+        public Create_table_column_consContext create_table_column_cons() {
+            return getRuleContext(Create_table_column_consContext.class, 0);
+        }
+
+        public TerminalNode T_CONSTRAINT() {
+            return getToken(HplsqlParser.T_CONSTRAINT, 0);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_table_columns_item;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_columns_item(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_columns_item(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_columns_item(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Column_nameContext extends ParserRuleContext {
+        public Column_nameContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_column_name;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterColumn_name(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitColumn_name(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitColumn_name(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_table_column_inline_consContext extends ParserRuleContext {
+        public Create_table_column_inline_consContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public Dtype_defaultContext dtype_default() {
+            return getRuleContext(Dtype_defaultContext.class, 0);
+        }
+
+        public TerminalNode T_NULL() {
+            return getToken(HplsqlParser.T_NULL, 0);
+        }
+
+        public TerminalNode T_NOT() {
+            return getToken(HplsqlParser.T_NOT, 0);
+        }
+
+        public TerminalNode T_PRIMARY() {
+            return getToken(HplsqlParser.T_PRIMARY, 0);
+        }
+
+        public TerminalNode T_KEY() {
+            return getToken(HplsqlParser.T_KEY, 0);
+        }
+
+        public TerminalNode T_UNIQUE() {
+            return getToken(HplsqlParser.T_UNIQUE, 0);
+        }
+
+        public TerminalNode T_REFERENCES() {
+            return getToken(HplsqlParser.T_REFERENCES, 0);
+        }
+
+        public Table_nameContext table_name() {
+            return getRuleContext(Table_nameContext.class, 0);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        public List<Create_table_fk_actionContext> create_table_fk_action() {
+            return getRuleContexts(Create_table_fk_actionContext.class);
+        }
+
+        public Create_table_fk_actionContext create_table_fk_action(int i) {
+            return getRuleContext(Create_table_fk_actionContext.class, i);
+        }
+
+        public TerminalNode T_IDENTITY() {
+            return getToken(HplsqlParser.T_IDENTITY, 0);
+        }
+
+        public List<TerminalNode> L_INT() {
+            return getTokens(HplsqlParser.L_INT);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public TerminalNode L_INT(int i) {
+            return getToken(HplsqlParser.L_INT, i);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        public TerminalNode T_AUTO_INCREMENT() {
+            return getToken(HplsqlParser.T_AUTO_INCREMENT, 0);
+        }
+
+        public TerminalNode T_ENABLE() {
+            return getToken(HplsqlParser.T_ENABLE, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_table_column_inline_cons;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener)
+                ((HplsqlListener) listener).enterCreate_table_column_inline_cons(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener)
+                ((HplsqlListener) listener).exitCreate_table_column_inline_cons(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_column_inline_cons(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_table_column_consContext extends ParserRuleContext {
+        public Create_table_column_consContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_PRIMARY() {
+            return getToken(HplsqlParser.T_PRIMARY, 0);
+        }
+
+        public TerminalNode T_KEY() {
+            return getToken(HplsqlParser.T_KEY, 0);
+        }
+
+        public List<TerminalNode> T_OPEN_P() {
+            return getTokens(HplsqlParser.T_OPEN_P);
+        }
+
+        public TerminalNode T_OPEN_P(int i) {
+            return getToken(HplsqlParser.T_OPEN_P, i);
+        }
+
+        public List<IdentContext> ident() {
+            return getRuleContexts(IdentContext.class);
+        }
+
+        public IdentContext ident(int i) {
+            return getRuleContext(IdentContext.class, i);
+        }
+
+        public List<TerminalNode> T_CLOSE_P() {
+            return getTokens(HplsqlParser.T_CLOSE_P);
+        }
+
+        public TerminalNode T_CLOSE_P(int i) {
+            return getToken(HplsqlParser.T_CLOSE_P, i);
+        }
+
+        public TerminalNode T_CLUSTERED() {
+            return getToken(HplsqlParser.T_CLUSTERED, 0);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        public TerminalNode T_ENABLE() {
+            return getToken(HplsqlParser.T_ENABLE, 0);
+        }
+
+        public Index_storage_clauseContext index_storage_clause() {
+            return getRuleContext(Index_storage_clauseContext.class, 0);
+        }
+
+        public List<TerminalNode> T_ASC() {
+            return getTokens(HplsqlParser.T_ASC);
+        }
+
+        public TerminalNode T_ASC(int i) {
+            return getToken(HplsqlParser.T_ASC, i);
+        }
+
+        public List<TerminalNode> T_DESC() {
+            return getTokens(HplsqlParser.T_DESC);
+        }
+
+        public TerminalNode T_DESC(int i) {
+            return getToken(HplsqlParser.T_DESC, i);
+        }
+
+        public TerminalNode T_FOREIGN() {
+            return getToken(HplsqlParser.T_FOREIGN, 0);
+        }
+
+        public TerminalNode T_REFERENCES() {
+            return getToken(HplsqlParser.T_REFERENCES, 0);
+        }
+
+        public Table_nameContext table_name() {
+            return getRuleContext(Table_nameContext.class, 0);
+        }
+
+        public List<Create_table_fk_actionContext> create_table_fk_action() {
+            return getRuleContexts(Create_table_fk_actionContext.class);
+        }
+
+        public Create_table_fk_actionContext create_table_fk_action(int i) {
+            return getRuleContext(Create_table_fk_actionContext.class, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_table_column_cons;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_column_cons(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_column_cons(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_column_cons(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_table_fk_actionContext extends ParserRuleContext {
+        public Create_table_fk_actionContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_ON() {
+            return getToken(HplsqlParser.T_ON, 0);
+        }
+
+        public TerminalNode T_UPDATE() {
+            return getToken(HplsqlParser.T_UPDATE, 0);
+        }
+
+        public TerminalNode T_DELETE() {
+            return getToken(HplsqlParser.T_DELETE, 0);
+        }
+
+        public TerminalNode T_NO() {
+            return getToken(HplsqlParser.T_NO, 0);
+        }
+
+        public TerminalNode T_ACTION() {
+            return getToken(HplsqlParser.T_ACTION, 0);
+        }
+
+        public TerminalNode T_RESTRICT() {
+            return getToken(HplsqlParser.T_RESTRICT, 0);
+        }
+
+        public TerminalNode T_SET() {
+            return getToken(HplsqlParser.T_SET, 0);
+        }
+
+        public TerminalNode T_NULL() {
+            return getToken(HplsqlParser.T_NULL, 0);
+        }
+
+        public TerminalNode T_DEFAULT() {
+            return getToken(HplsqlParser.T_DEFAULT, 0);
+        }
+
+        public TerminalNode T_CASCADE() {
+            return getToken(HplsqlParser.T_CASCADE, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_table_fk_action;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_fk_action(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_fk_action(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_fk_action(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_table_preoptionsContext extends ParserRuleContext {
+        public Create_table_preoptionsContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<Create_table_preoptions_itemContext> create_table_preoptions_item() {
+            return getRuleContexts(Create_table_preoptions_itemContext.class);
+        }
+
+        public Create_table_preoptions_itemContext create_table_preoptions_item(int i) {
+            return getRuleContext(Create_table_preoptions_itemContext.class, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_table_preoptions;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_preoptions(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_preoptions(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_preoptions(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_table_preoptions_itemContext extends ParserRuleContext {
+        public Create_table_preoptions_itemContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_COMMA() {
+            return getToken(HplsqlParser.T_COMMA, 0);
+        }
+
+        public Create_table_preoptions_td_itemContext create_table_preoptions_td_item() {
+            return getRuleContext(Create_table_preoptions_td_itemContext.class, 0);
+        }
+
+        public Create_table_options_hive_itemContext create_table_options_hive_item() {
+            return getRuleContext(Create_table_options_hive_itemContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_table_preoptions_item;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_preoptions_item(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_preoptions_item(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_preoptions_item(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_table_preoptions_td_itemContext extends ParserRuleContext {
+        public Create_table_preoptions_td_itemContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_LOG() {
+            return getToken(HplsqlParser.T_LOG, 0);
+        }
+
+        public TerminalNode T_FALLBACK() {
+            return getToken(HplsqlParser.T_FALLBACK, 0);
+        }
+
+        public TerminalNode T_NO() {
+            return getToken(HplsqlParser.T_NO, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_table_preoptions_td_item;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener)
+                ((HplsqlListener) listener).enterCreate_table_preoptions_td_item(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener)
+                ((HplsqlListener) listener).exitCreate_table_preoptions_td_item(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_preoptions_td_item(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_table_optionsContext extends ParserRuleContext {
+        public Create_table_optionsContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<Create_table_options_itemContext> create_table_options_item() {
+            return getRuleContexts(Create_table_options_itemContext.class);
+        }
+
+        public Create_table_options_itemContext create_table_options_item(int i) {
+            return getRuleContext(Create_table_options_itemContext.class, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_table_options;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_options(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_options(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_options(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_table_options_itemContext extends ParserRuleContext {
+        public Create_table_options_itemContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_ON() {
+            return getToken(HplsqlParser.T_ON, 0);
+        }
+
+        public TerminalNode T_COMMIT() {
+            return getToken(HplsqlParser.T_COMMIT, 0);
+        }
+
+        public TerminalNode T_ROWS() {
+            return getToken(HplsqlParser.T_ROWS, 0);
+        }
+
+        public TerminalNode T_DELETE() {
+            return getToken(HplsqlParser.T_DELETE, 0);
+        }
+
+        public TerminalNode T_PRESERVE() {
+            return getToken(HplsqlParser.T_PRESERVE, 0);
+        }
+
+        public Create_table_options_ora_itemContext create_table_options_ora_item() {
+            return getRuleContext(Create_table_options_ora_itemContext.class, 0);
+        }
+
+        public Create_table_options_db2_itemContext create_table_options_db2_item() {
+            return getRuleContext(Create_table_options_db2_itemContext.class, 0);
+        }
+
+        public Create_table_options_td_itemContext create_table_options_td_item() {
+            return getRuleContext(Create_table_options_td_itemContext.class, 0);
+        }
+
+        public Create_table_options_hive_itemContext create_table_options_hive_item() {
+            return getRuleContext(Create_table_options_hive_itemContext.class, 0);
+        }
+
+        public Create_table_options_mssql_itemContext create_table_options_mssql_item() {
+            return getRuleContext(Create_table_options_mssql_itemContext.class, 0);
+        }
+
+        public Create_table_options_mysql_itemContext create_table_options_mysql_item() {
+            return getRuleContext(Create_table_options_mysql_itemContext.class, 0);
+        }
+
+        public Create_table_store_locationContext create_table_store_location() {
+            return getRuleContext(Create_table_store_locationContext.class, 0);
+        }
+
+        public Create_table_delimiterContext create_table_delimiter() {
+            return getRuleContext(Create_table_delimiterContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_table_options_item;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_options_item(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_options_item(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_options_item(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_table_options_ora_itemContext extends ParserRuleContext {
+        public Create_table_options_ora_itemContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_SEGMENT() {
+            return getToken(HplsqlParser.T_SEGMENT, 0);
+        }
+
+        public TerminalNode T_CREATION() {
+            return getToken(HplsqlParser.T_CREATION, 0);
+        }
+
+        public TerminalNode T_IMMEDIATE() {
+            return getToken(HplsqlParser.T_IMMEDIATE, 0);
+        }
+
+        public TerminalNode T_DEFERRED() {
+            return getToken(HplsqlParser.T_DEFERRED, 0);
+        }
+
+        public List<TerminalNode> L_INT() {
+            return getTokens(HplsqlParser.L_INT);
+        }
+
+        public TerminalNode L_INT(int i) {
+            return getToken(HplsqlParser.L_INT, i);
+        }
+
+        public TerminalNode T_PCTFREE() {
+            return getToken(HplsqlParser.T_PCTFREE, 0);
+        }
+
+        public TerminalNode T_PCTUSED() {
+            return getToken(HplsqlParser.T_PCTUSED, 0);
+        }
+
+        public TerminalNode T_INITRANS() {
+            return getToken(HplsqlParser.T_INITRANS, 0);
+        }
+
+        public TerminalNode T_MAXTRANS() {
+            return getToken(HplsqlParser.T_MAXTRANS, 0);
+        }
+
+        public TerminalNode T_NOCOMPRESS() {
+            return getToken(HplsqlParser.T_NOCOMPRESS, 0);
+        }
+
+        public TerminalNode T_LOGGING() {
+            return getToken(HplsqlParser.T_LOGGING, 0);
+        }
+
+        public TerminalNode T_NOLOGGING() {
+            return getToken(HplsqlParser.T_NOLOGGING, 0);
+        }
+
+        public TerminalNode T_STORAGE() {
+            return getToken(HplsqlParser.T_STORAGE, 0);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        public List<IdentContext> ident() {
+            return getRuleContexts(IdentContext.class);
+        }
+
+        public IdentContext ident(int i) {
+            return getRuleContext(IdentContext.class, i);
+        }
+
+        public TerminalNode T_TABLESPACE() {
+            return getToken(HplsqlParser.T_TABLESPACE, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_table_options_ora_item;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener)
+                ((HplsqlListener) listener).enterCreate_table_options_ora_item(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_options_ora_item(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_options_ora_item(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_table_options_db2_itemContext extends ParserRuleContext {
+        public Create_table_options_db2_itemContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_IN() {
+            return getToken(HplsqlParser.T_IN, 0);
+        }
+
+        public List<IdentContext> ident() {
+            return getRuleContexts(IdentContext.class);
+        }
+
+        public IdentContext ident(int i) {
+            return getRuleContext(IdentContext.class, i);
+        }
+
+        public TerminalNode T_INDEX() {
+            return getToken(HplsqlParser.T_INDEX, 0);
+        }
+
+        public TerminalNode T_WITH() {
+            return getToken(HplsqlParser.T_WITH, 0);
+        }
+
+        public TerminalNode T_REPLACE() {
+            return getToken(HplsqlParser.T_REPLACE, 0);
+        }
+
+        public TerminalNode T_DISTRIBUTE() {
+            return getToken(HplsqlParser.T_DISTRIBUTE, 0);
+        }
+
+        public TerminalNode T_BY() {
+            return getToken(HplsqlParser.T_BY, 0);
+        }
+
+        public TerminalNode T_HASH() {
+            return getToken(HplsqlParser.T_HASH, 0);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        public TerminalNode T_LOGGED() {
+            return getToken(HplsqlParser.T_LOGGED, 0);
+        }
+
+        public TerminalNode T_NOT() {
+            return getToken(HplsqlParser.T_NOT, 0);
+        }
+
+        public TerminalNode T_COMPRESS() {
+            return getToken(HplsqlParser.T_COMPRESS, 0);
+        }
+
+        public TerminalNode T_YES() {
+            return getToken(HplsqlParser.T_YES, 0);
+        }
+
+        public TerminalNode T_NO() {
+            return getToken(HplsqlParser.T_NO, 0);
+        }
+
+        public TerminalNode T_DEFINITION() {
+            return getToken(HplsqlParser.T_DEFINITION, 0);
+        }
+
+        public TerminalNode T_ONLY() {
+            return getToken(HplsqlParser.T_ONLY, 0);
+        }
+
+        public TerminalNode T_RESTRICT() {
+            return getToken(HplsqlParser.T_RESTRICT, 0);
+        }
+
+        public TerminalNode T_ON() {
+            return getToken(HplsqlParser.T_ON, 0);
+        }
+
+        public TerminalNode T_DROP() {
+            return getToken(HplsqlParser.T_DROP, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_table_options_db2_item;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener)
+                ((HplsqlListener) listener).enterCreate_table_options_db2_item(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_options_db2_item(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_options_db2_item(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_table_options_td_itemContext extends ParserRuleContext {
+        public Create_table_options_td_itemContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_PRIMARY() {
+            return getToken(HplsqlParser.T_PRIMARY, 0);
+        }
+
+        public TerminalNode T_INDEX() {
+            return getToken(HplsqlParser.T_INDEX, 0);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public List<IdentContext> ident() {
+            return getRuleContexts(IdentContext.class);
+        }
+
+        public IdentContext ident(int i) {
+            return getRuleContext(IdentContext.class, i);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        public TerminalNode T_UNIQUE() {
+            return getToken(HplsqlParser.T_UNIQUE, 0);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        public TerminalNode T_WITH() {
+            return getToken(HplsqlParser.T_WITH, 0);
+        }
+
+        public TerminalNode T_DATA() {
+            return getToken(HplsqlParser.T_DATA, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_table_options_td_item;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_options_td_item(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_options_td_item(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_options_td_item(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_table_options_hive_itemContext extends ParserRuleContext {
+        public Create_table_options_hive_itemContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public Create_table_hive_row_formatContext create_table_hive_row_format() {
+            return getRuleContext(Create_table_hive_row_formatContext.class, 0);
+        }
+
+        public TerminalNode T_STORED() {
+            return getToken(HplsqlParser.T_STORED, 0);
+        }
+
+        public TerminalNode T_AS() {
+            return getToken(HplsqlParser.T_AS, 0);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_table_options_hive_item;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener)
+                ((HplsqlListener) listener).enterCreate_table_options_hive_item(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener)
+                ((HplsqlListener) listener).exitCreate_table_options_hive_item(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_options_hive_item(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_table_store_locationContext extends ParserRuleContext {
+        public Create_table_store_locationContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_LOCATION() {
+            return getToken(HplsqlParser.T_LOCATION, 0);
+        }
+
+        public List<StringContext> string() {
+            return getRuleContexts(StringContext.class);
+        }
+
+        public StringContext string(int i) {
+            return getRuleContext(StringContext.class, i);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_table_store_location;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_store_location(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_store_location(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_store_location(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_table_delimiterContext extends ParserRuleContext {
+        public Create_table_delimiterContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_DELIMITED() {
+            return getToken(HplsqlParser.T_DELIMITED, 0);
+        }
+
+        public StringContext string() {
+            return getRuleContext(StringContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_table_delimiter;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_delimiter(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_delimiter(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_delimiter(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_table_hive_row_formatContext extends ParserRuleContext {
+        public Create_table_hive_row_formatContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_ROW() {
+            return getToken(HplsqlParser.T_ROW, 0);
+        }
+
+        public TerminalNode T_FORMAT() {
+            return getToken(HplsqlParser.T_FORMAT, 0);
+        }
+
+        public TerminalNode T_DELIMITED() {
+            return getToken(HplsqlParser.T_DELIMITED, 0);
+        }
+
+        public List<Create_table_hive_row_format_fieldsContext> create_table_hive_row_format_fields() {
+            return getRuleContexts(Create_table_hive_row_format_fieldsContext.class);
+        }
+
+        public Create_table_hive_row_format_fieldsContext create_table_hive_row_format_fields(int i) {
+            return getRuleContext(Create_table_hive_row_format_fieldsContext.class, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_table_hive_row_format;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_table_hive_row_format(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_table_hive_row_format(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_hive_row_format(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_table_hive_row_format_fieldsContext extends ParserRuleContext {
+        public Create_table_hive_row_format_fieldsContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_FIELDS() {
+            return getToken(HplsqlParser.T_FIELDS, 0);
+        }
+
+        public TerminalNode T_TERMINATED() {
+            return getToken(HplsqlParser.T_TERMINATED, 0);
+        }
+
+        public List<TerminalNode> T_BY() {
+            return getTokens(HplsqlParser.T_BY);
+        }
+
+        public TerminalNode T_BY(int i) {
+            return getToken(HplsqlParser.T_BY, i);
+        }
+
+        public List<ExprContext> expr() {
+            return getRuleContexts(ExprContext.class);
+        }
+
+        public ExprContext expr(int i) {
+            return getRuleContext(ExprContext.class, i);
+        }
+
+        public TerminalNode T_ESCAPED() {
+            return getToken(HplsqlParser.T_ESCAPED, 0);
+        }
+
+        public TerminalNode T_COLLECTION() {
+            return getToken(HplsqlParser.T_COLLECTION, 0);
+        }
+
+        public TerminalNode T_ITEMS() {
+            return getToken(HplsqlParser.T_ITEMS, 0);
+        }
+
+        public TerminalNode T_MAP() {
+            return getToken(HplsqlParser.T_MAP, 0);
+        }
+
+        public TerminalNode T_KEYS() {
+            return getToken(HplsqlParser.T_KEYS, 0);
+        }
+
+        public TerminalNode T_LINES() {
+            return getToken(HplsqlParser.T_LINES, 0);
+        }
+
+        public TerminalNode T_NULL() {
+            return getToken(HplsqlParser.T_NULL, 0);
+        }
+
+        public TerminalNode T_DEFINED() {
+            return getToken(HplsqlParser.T_DEFINED, 0);
+        }
+
+        public TerminalNode T_AS() {
+            return getToken(HplsqlParser.T_AS, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_table_hive_row_format_fields;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener)
+                ((HplsqlListener) listener).enterCreate_table_hive_row_format_fields(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener)
+                ((HplsqlListener) listener).exitCreate_table_hive_row_format_fields(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_hive_row_format_fields(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_table_options_mssql_itemContext extends ParserRuleContext {
+        public Create_table_options_mssql_itemContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_ON() {
+            return getToken(HplsqlParser.T_ON, 0);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        public TerminalNode T_TEXTIMAGE_ON() {
+            return getToken(HplsqlParser.T_TEXTIMAGE_ON, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_table_options_mssql_item;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener)
+                ((HplsqlListener) listener).enterCreate_table_options_mssql_item(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener)
+                ((HplsqlListener) listener).exitCreate_table_options_mssql_item(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_options_mssql_item(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_table_options_mysql_itemContext extends ParserRuleContext {
+        public Create_table_options_mysql_itemContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_AUTO_INCREMENT() {
+            return getToken(HplsqlParser.T_AUTO_INCREMENT, 0);
+        }
+
+        public ExprContext expr() {
+            return getRuleContext(ExprContext.class, 0);
+        }
+
+        public TerminalNode T_EQUAL() {
+            return getToken(HplsqlParser.T_EQUAL, 0);
+        }
+
+        public TerminalNode T_COMMENT() {
+            return getToken(HplsqlParser.T_COMMENT, 0);
+        }
+
+        public TerminalNode T_CHARACTER() {
+            return getToken(HplsqlParser.T_CHARACTER, 0);
+        }
+
+        public TerminalNode T_SET() {
+            return getToken(HplsqlParser.T_SET, 0);
+        }
+
+        public TerminalNode T_CHARSET() {
+            return getToken(HplsqlParser.T_CHARSET, 0);
+        }
+
+        public TerminalNode T_DEFAULT() {
+            return getToken(HplsqlParser.T_DEFAULT, 0);
+        }
+
+        public TerminalNode T_ENGINE() {
+            return getToken(HplsqlParser.T_ENGINE, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_table_options_mysql_item;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener)
+                ((HplsqlListener) listener).enterCreate_table_options_mysql_item(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener)
+                ((HplsqlListener) listener).exitCreate_table_options_mysql_item(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_table_options_mysql_item(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class DtypeContext extends ParserRuleContext {
+        public DtypeContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_CHAR() {
+            return getToken(HplsqlParser.T_CHAR, 0);
+        }
+
+        public TerminalNode T_BIGINT() {
+            return getToken(HplsqlParser.T_BIGINT, 0);
+        }
+
+        public TerminalNode T_BINARY_DOUBLE() {
+            return getToken(HplsqlParser.T_BINARY_DOUBLE, 0);
+        }
+
+        public TerminalNode T_BINARY_FLOAT() {
+            return getToken(HplsqlParser.T_BINARY_FLOAT, 0);
+        }
+
+        public TerminalNode T_BINARY_INTEGER() {
+            return getToken(HplsqlParser.T_BINARY_INTEGER, 0);
+        }
+
+        public TerminalNode T_BIT() {
+            return getToken(HplsqlParser.T_BIT, 0);
+        }
+
+        public TerminalNode T_DATE() {
+            return getToken(HplsqlParser.T_DATE, 0);
+        }
+
+        public TerminalNode T_DATETIME() {
+            return getToken(HplsqlParser.T_DATETIME, 0);
+        }
+
+        public TerminalNode T_DEC() {
+            return getToken(HplsqlParser.T_DEC, 0);
+        }
+
+        public TerminalNode T_DECIMAL() {
+            return getToken(HplsqlParser.T_DECIMAL, 0);
+        }
+
+        public TerminalNode T_DOUBLE() {
+            return getToken(HplsqlParser.T_DOUBLE, 0);
+        }
+
+        public TerminalNode T_PRECISION() {
+            return getToken(HplsqlParser.T_PRECISION, 0);
+        }
+
+        public TerminalNode T_FLOAT() {
+            return getToken(HplsqlParser.T_FLOAT, 0);
+        }
+
+        public TerminalNode T_INT() {
+            return getToken(HplsqlParser.T_INT, 0);
+        }
+
+        public TerminalNode T_INT2() {
+            return getToken(HplsqlParser.T_INT2, 0);
+        }
+
+        public TerminalNode T_INT4() {
+            return getToken(HplsqlParser.T_INT4, 0);
+        }
+
+        public TerminalNode T_INT8() {
+            return getToken(HplsqlParser.T_INT8, 0);
+        }
+
+        public TerminalNode T_INTEGER() {
+            return getToken(HplsqlParser.T_INTEGER, 0);
+        }
+
+        public TerminalNode T_NCHAR() {
+            return getToken(HplsqlParser.T_NCHAR, 0);
+        }
+
+        public TerminalNode T_NVARCHAR() {
+            return getToken(HplsqlParser.T_NVARCHAR, 0);
+        }
+
+        public TerminalNode T_NUMBER() {
+            return getToken(HplsqlParser.T_NUMBER, 0);
+        }
+
+        public TerminalNode T_NUMERIC() {
+            return getToken(HplsqlParser.T_NUMERIC, 0);
+        }
+
+        public TerminalNode T_PLS_INTEGER() {
+            return getToken(HplsqlParser.T_PLS_INTEGER, 0);
+        }
+
+        public TerminalNode T_REAL() {
+            return getToken(HplsqlParser.T_REAL, 0);
+        }
+
+        public TerminalNode T_RESULT_SET_LOCATOR() {
+            return getToken(HplsqlParser.T_RESULT_SET_LOCATOR, 0);
+        }
+
+        public TerminalNode T_VARYING() {
+            return getToken(HplsqlParser.T_VARYING, 0);
+        }
+
+        public TerminalNode T_SIMPLE_FLOAT() {
+            return getToken(HplsqlParser.T_SIMPLE_FLOAT, 0);
+        }
+
+        public TerminalNode T_SIMPLE_DOUBLE() {
+            return getToken(HplsqlParser.T_SIMPLE_DOUBLE, 0);
+        }
+
+        public TerminalNode T_SIMPLE_INTEGER() {
+            return getToken(HplsqlParser.T_SIMPLE_INTEGER, 0);
+        }
+
+        public TerminalNode T_SMALLINT() {
+            return getToken(HplsqlParser.T_SMALLINT, 0);
+        }
+
+        public TerminalNode T_SMALLDATETIME() {
+            return getToken(HplsqlParser.T_SMALLDATETIME, 0);
+        }
+
+        public TerminalNode T_STRING() {
+            return getToken(HplsqlParser.T_STRING, 0);
+        }
+
+        public TerminalNode T_SYS_REFCURSOR() {
+            return getToken(HplsqlParser.T_SYS_REFCURSOR, 0);
+        }
+
+        public TerminalNode T_TIMESTAMP() {
+            return getToken(HplsqlParser.T_TIMESTAMP, 0);
+        }
+
+        public TerminalNode T_TINYINT() {
+            return getToken(HplsqlParser.T_TINYINT, 0);
+        }
+
+        public TerminalNode T_VARCHAR() {
+            return getToken(HplsqlParser.T_VARCHAR, 0);
+        }
+
+        public TerminalNode T_VARCHAR2() {
+            return getToken(HplsqlParser.T_VARCHAR2, 0);
+        }
+
+        public TerminalNode T_XML() {
+            return getToken(HplsqlParser.T_XML, 0);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        public TerminalNode T_TYPE() {
+            return getToken(HplsqlParser.T_TYPE, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_dtype;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterDtype(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitDtype(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitDtype(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Dtype_lenContext extends ParserRuleContext {
+        public Dtype_lenContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        public List<TerminalNode> L_INT() {
+            return getTokens(HplsqlParser.L_INT);
+        }
+
+        public TerminalNode L_INT(int i) {
+            return getToken(HplsqlParser.L_INT, i);
+        }
+
+        public TerminalNode T_MAX() {
+            return getToken(HplsqlParser.T_MAX, 0);
+        }
+
+        public TerminalNode T_COMMA() {
+            return getToken(HplsqlParser.T_COMMA, 0);
+        }
+
+        public TerminalNode T_CHAR() {
+            return getToken(HplsqlParser.T_CHAR, 0);
+        }
+
+        public TerminalNode T_BYTE() {
+            return getToken(HplsqlParser.T_BYTE, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_dtype_len;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterDtype_len(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitDtype_len(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitDtype_len(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Dtype_attrContext extends ParserRuleContext {
+        public Dtype_attrContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_NULL() {
+            return getToken(HplsqlParser.T_NULL, 0);
+        }
+
+        public TerminalNode T_NOT() {
+            return getToken(HplsqlParser.T_NOT, 0);
+        }
+
+        public TerminalNode T_CHARACTER() {
+            return getToken(HplsqlParser.T_CHARACTER, 0);
+        }
+
+        public TerminalNode T_SET() {
+            return getToken(HplsqlParser.T_SET, 0);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        public TerminalNode T_CASESPECIFIC() {
+            return getToken(HplsqlParser.T_CASESPECIFIC, 0);
+        }
+
+        public TerminalNode T_CS() {
+            return getToken(HplsqlParser.T_CS, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_dtype_attr;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterDtype_attr(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitDtype_attr(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitDtype_attr(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Dtype_defaultContext extends ParserRuleContext {
+        public Dtype_defaultContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_EQUAL() {
+            return getToken(HplsqlParser.T_EQUAL, 0);
+        }
+
+        public ExprContext expr() {
+            return getRuleContext(ExprContext.class, 0);
+        }
+
+        public TerminalNode T_COLON() {
+            return getToken(HplsqlParser.T_COLON, 0);
+        }
+
+        public TerminalNode T_DEFAULT() {
+            return getToken(HplsqlParser.T_DEFAULT, 0);
+        }
+
+        public TerminalNode T_WITH() {
+            return getToken(HplsqlParser.T_WITH, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_dtype_default;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterDtype_default(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitDtype_default(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitDtype_default(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_database_stmtContext extends ParserRuleContext {
+        public Create_database_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_CREATE() {
+            return getToken(HplsqlParser.T_CREATE, 0);
+        }
+
+        public ExprContext expr() {
+            return getRuleContext(ExprContext.class, 0);
+        }
+
+        public TerminalNode T_DATABASE() {
+            return getToken(HplsqlParser.T_DATABASE, 0);
+        }
+
+        public TerminalNode T_SCHEMA() {
+            return getToken(HplsqlParser.T_SCHEMA, 0);
+        }
+
+        public TerminalNode T_IF() {
+            return getToken(HplsqlParser.T_IF, 0);
+        }
+
+        public TerminalNode T_NOT() {
+            return getToken(HplsqlParser.T_NOT, 0);
+        }
+
+        public TerminalNode T_EXISTS() {
+            return getToken(HplsqlParser.T_EXISTS, 0);
+        }
+
+        public List<Create_database_optionContext> create_database_option() {
+            return getRuleContexts(Create_database_optionContext.class);
+        }
+
+        public Create_database_optionContext create_database_option(int i) {
+            return getRuleContext(Create_database_optionContext.class, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_database_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_database_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_database_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_database_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_database_optionContext extends ParserRuleContext {
+        public Create_database_optionContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_COMMENT() {
+            return getToken(HplsqlParser.T_COMMENT, 0);
+        }
+
+        public ExprContext expr() {
+            return getRuleContext(ExprContext.class, 0);
+        }
+
+        public TerminalNode T_LOCATION() {
+            return getToken(HplsqlParser.T_LOCATION, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_database_option;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_database_option(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_database_option(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_database_option(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_function_stmtContext extends ParserRuleContext {
+        public Create_function_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_FUNCTION() {
+            return getToken(HplsqlParser.T_FUNCTION, 0);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        public Create_function_returnContext create_function_return() {
+            return getRuleContext(Create_function_returnContext.class, 0);
+        }
+
+        public Single_block_stmtContext single_block_stmt() {
+            return getRuleContext(Single_block_stmtContext.class, 0);
+        }
+
+        public TerminalNode T_ALTER() {
+            return getToken(HplsqlParser.T_ALTER, 0);
+        }
+
+        public TerminalNode T_CREATE() {
+            return getToken(HplsqlParser.T_CREATE, 0);
+        }
+
+        public TerminalNode T_REPLACE() {
+            return getToken(HplsqlParser.T_REPLACE, 0);
+        }
+
+        public Create_routine_paramsContext create_routine_params() {
+            return getRuleContext(Create_routine_paramsContext.class, 0);
+        }
+
+        public Declare_block_inplaceContext declare_block_inplace() {
+            return getRuleContext(Declare_block_inplaceContext.class, 0);
+        }
+
+        public TerminalNode T_AS() {
+            return getToken(HplsqlParser.T_AS, 0);
+        }
+
+        public TerminalNode T_IS() {
+            return getToken(HplsqlParser.T_IS, 0);
+        }
+
+        public TerminalNode T_OR() {
+            return getToken(HplsqlParser.T_OR, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_function_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_function_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_function_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_function_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_function_returnContext extends ParserRuleContext {
+        public Create_function_returnContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public DtypeContext dtype() {
+            return getRuleContext(DtypeContext.class, 0);
+        }
+
+        public TerminalNode T_RETURN() {
+            return getToken(HplsqlParser.T_RETURN, 0);
+        }
+
+        public TerminalNode T_RETURNS() {
+            return getToken(HplsqlParser.T_RETURNS, 0);
+        }
+
+        public Dtype_lenContext dtype_len() {
+            return getRuleContext(Dtype_lenContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_function_return;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_function_return(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_function_return(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_function_return(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_package_stmtContext extends ParserRuleContext {
+        public Create_package_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_PACKAGE() {
+            return getToken(HplsqlParser.T_PACKAGE, 0);
+        }
+
+        public List<IdentContext> ident() {
+            return getRuleContexts(IdentContext.class);
+        }
+
+        public IdentContext ident(int i) {
+            return getRuleContext(IdentContext.class, i);
+        }
+
+        public Package_specContext package_spec() {
+            return getRuleContext(Package_specContext.class, 0);
+        }
+
+        public TerminalNode T_END() {
+            return getToken(HplsqlParser.T_END, 0);
+        }
+
+        public TerminalNode T_AS() {
+            return getToken(HplsqlParser.T_AS, 0);
+        }
+
+        public TerminalNode T_IS() {
+            return getToken(HplsqlParser.T_IS, 0);
+        }
+
+        public TerminalNode T_ALTER() {
+            return getToken(HplsqlParser.T_ALTER, 0);
+        }
+
+        public TerminalNode T_CREATE() {
+            return getToken(HplsqlParser.T_CREATE, 0);
+        }
+
+        public TerminalNode T_REPLACE() {
+            return getToken(HplsqlParser.T_REPLACE, 0);
+        }
+
+        public TerminalNode T_SEMICOLON() {
+            return getToken(HplsqlParser.T_SEMICOLON, 0);
+        }
+
+        public TerminalNode T_OR() {
+            return getToken(HplsqlParser.T_OR, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_package_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_package_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_package_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_package_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Package_specContext extends ParserRuleContext {
+        public Package_specContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<Package_spec_itemContext> package_spec_item() {
+            return getRuleContexts(Package_spec_itemContext.class);
+        }
+
+        public Package_spec_itemContext package_spec_item(int i) {
+            return getRuleContext(Package_spec_itemContext.class, i);
+        }
+
+        public List<TerminalNode> T_SEMICOLON() {
+            return getTokens(HplsqlParser.T_SEMICOLON);
+        }
+
+        public TerminalNode T_SEMICOLON(int i) {
+            return getToken(HplsqlParser.T_SEMICOLON, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_package_spec;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterPackage_spec(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitPackage_spec(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitPackage_spec(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Package_spec_itemContext extends ParserRuleContext {
+        public Package_spec_itemContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public Declare_stmt_itemContext declare_stmt_item() {
+            return getRuleContext(Declare_stmt_itemContext.class, 0);
+        }
+
+        public TerminalNode T_FUNCTION() {
+            return getToken(HplsqlParser.T_FUNCTION, 0);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        public Create_function_returnContext create_function_return() {
+            return getRuleContext(Create_function_returnContext.class, 0);
+        }
+
+        public Create_routine_paramsContext create_routine_params() {
+            return getRuleContext(Create_routine_paramsContext.class, 0);
+        }
+
+        public TerminalNode T_PROCEDURE() {
+            return getToken(HplsqlParser.T_PROCEDURE, 0);
+        }
+
+        public TerminalNode T_PROC() {
+            return getToken(HplsqlParser.T_PROC, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_package_spec_item;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterPackage_spec_item(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitPackage_spec_item(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitPackage_spec_item(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_package_body_stmtContext extends ParserRuleContext {
+        public Create_package_body_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_PACKAGE() {
+            return getToken(HplsqlParser.T_PACKAGE, 0);
+        }
+
+        public TerminalNode T_BODY() {
+            return getToken(HplsqlParser.T_BODY, 0);
+        }
+
+        public List<IdentContext> ident() {
+            return getRuleContexts(IdentContext.class);
+        }
+
+        public IdentContext ident(int i) {
+            return getRuleContext(IdentContext.class, i);
+        }
+
+        public Package_bodyContext package_body() {
+            return getRuleContext(Package_bodyContext.class, 0);
+        }
+
+        public TerminalNode T_END() {
+            return getToken(HplsqlParser.T_END, 0);
+        }
+
+        public TerminalNode T_AS() {
+            return getToken(HplsqlParser.T_AS, 0);
+        }
+
+        public TerminalNode T_IS() {
+            return getToken(HplsqlParser.T_IS, 0);
+        }
+
+        public TerminalNode T_ALTER() {
+            return getToken(HplsqlParser.T_ALTER, 0);
+        }
+
+        public TerminalNode T_CREATE() {
+            return getToken(HplsqlParser.T_CREATE, 0);
+        }
+
+        public TerminalNode T_REPLACE() {
+            return getToken(HplsqlParser.T_REPLACE, 0);
+        }
+
+        public TerminalNode T_SEMICOLON() {
+            return getToken(HplsqlParser.T_SEMICOLON, 0);
+        }
+
+        public TerminalNode T_OR() {
+            return getToken(HplsqlParser.T_OR, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_package_body_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_package_body_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_package_body_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_package_body_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Package_bodyContext extends ParserRuleContext {
+        public Package_bodyContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<Package_body_itemContext> package_body_item() {
+            return getRuleContexts(Package_body_itemContext.class);
+        }
+
+        public Package_body_itemContext package_body_item(int i) {
+            return getRuleContext(Package_body_itemContext.class, i);
+        }
+
+        public List<TerminalNode> T_SEMICOLON() {
+            return getTokens(HplsqlParser.T_SEMICOLON);
+        }
+
+        public TerminalNode T_SEMICOLON(int i) {
+            return getToken(HplsqlParser.T_SEMICOLON, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_package_body;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterPackage_body(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitPackage_body(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitPackage_body(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Package_body_itemContext extends ParserRuleContext {
+        public Package_body_itemContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public Declare_stmt_itemContext declare_stmt_item() {
+            return getRuleContext(Declare_stmt_itemContext.class, 0);
+        }
+
+        public Create_function_stmtContext create_function_stmt() {
+            return getRuleContext(Create_function_stmtContext.class, 0);
+        }
+
+        public Create_procedure_stmtContext create_procedure_stmt() {
+            return getRuleContext(Create_procedure_stmtContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_package_body_item;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterPackage_body_item(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitPackage_body_item(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitPackage_body_item(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_procedure_stmtContext extends ParserRuleContext {
+        public List<IdentContext> ident() {
+            return getRuleContexts(IdentContext.class);
+        }
+
+        public Create_procedure_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public IdentContext ident(int i) {
+            return getRuleContext(IdentContext.class, i);
+        }
+
+        public Proc_blockContext proc_block() {
+            return getRuleContext(Proc_blockContext.class, 0);
+        }
+
+        public TerminalNode T_PROCEDURE() {
+            return getToken(HplsqlParser.T_PROCEDURE, 0);
+        }
+
+        public TerminalNode T_ALTER() {
+            return getToken(HplsqlParser.T_ALTER, 0);
+        }
+
+        public TerminalNode T_CREATE() {
+            return getToken(HplsqlParser.T_CREATE, 0);
+        }
+
+        public TerminalNode T_REPLACE() {
+            return getToken(HplsqlParser.T_REPLACE, 0);
+        }
+
+        public TerminalNode T_PROC() {
+            return getToken(HplsqlParser.T_PROC, 0);
+        }
+
+        public Create_routine_paramsContext create_routine_params() {
+            return getRuleContext(Create_routine_paramsContext.class, 0);
+        }
+
+        public Create_routine_optionsContext create_routine_options() {
+            return getRuleContext(Create_routine_optionsContext.class, 0);
+        }
+
+        public Declare_block_inplaceContext declare_block_inplace() {
+            return getRuleContext(Declare_block_inplaceContext.class, 0);
+        }
+
+        public TerminalNode T_SEMICOLON() {
+            return getToken(HplsqlParser.T_SEMICOLON, 0);
+        }
+
+        public LabelContext label() {
+            return getRuleContext(LabelContext.class, 0);
+        }
+
+        public TerminalNode T_AS() {
+            return getToken(HplsqlParser.T_AS, 0);
+        }
+
+        public TerminalNode T_IS() {
+            return getToken(HplsqlParser.T_IS, 0);
+        }
+
+        public TerminalNode T_OR() {
+            return getToken(HplsqlParser.T_OR, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_procedure_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_procedure_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_procedure_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_procedure_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_routine_paramsContext extends ParserRuleContext {
+        public Create_routine_paramsContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        public List<Create_routine_param_itemContext> create_routine_param_item() {
+            return getRuleContexts(Create_routine_param_itemContext.class);
+        }
+
+        public Create_routine_param_itemContext create_routine_param_item(int i) {
+            return getRuleContext(Create_routine_param_itemContext.class, i);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_routine_params;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_routine_params(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_routine_params(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_routine_params(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_routine_param_itemContext extends ParserRuleContext {
+        public Create_routine_param_itemContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        public DtypeContext dtype() {
+            return getRuleContext(DtypeContext.class, 0);
+        }
+
+        public TerminalNode T_IN() {
+            return getToken(HplsqlParser.T_IN, 0);
+        }
+
+        public TerminalNode T_OUT() {
+            return getToken(HplsqlParser.T_OUT, 0);
+        }
+
+        public TerminalNode T_INOUT() {
+            return getToken(HplsqlParser.T_INOUT, 0);
+        }
+
+        public Dtype_lenContext dtype_len() {
+            return getRuleContext(Dtype_lenContext.class, 0);
+        }
+
+        public List<Dtype_attrContext> dtype_attr() {
+            return getRuleContexts(Dtype_attrContext.class);
+        }
+
+        public Dtype_attrContext dtype_attr(int i) {
+            return getRuleContext(Dtype_attrContext.class, i);
+        }
+
+        public Dtype_defaultContext dtype_default() {
+            return getRuleContext(Dtype_defaultContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_routine_param_item;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_routine_param_item(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_routine_param_item(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_routine_param_item(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_routine_optionsContext extends ParserRuleContext {
+        public Create_routine_optionsContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<Create_routine_optionContext> create_routine_option() {
+            return getRuleContexts(Create_routine_optionContext.class);
+        }
+
+        public Create_routine_optionContext create_routine_option(int i) {
+            return getRuleContext(Create_routine_optionContext.class, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_routine_options;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_routine_options(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_routine_options(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_routine_options(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_routine_optionContext extends ParserRuleContext {
+        public Create_routine_optionContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_LANGUAGE() {
+            return getToken(HplsqlParser.T_LANGUAGE, 0);
+        }
+
+        public TerminalNode T_SQL() {
+            return getToken(HplsqlParser.T_SQL, 0);
+        }
+
+        public TerminalNode T_SECURITY() {
+            return getToken(HplsqlParser.T_SECURITY, 0);
+        }
+
+        public TerminalNode T_CREATOR() {
+            return getToken(HplsqlParser.T_CREATOR, 0);
+        }
+
+        public TerminalNode T_DEFINER() {
+            return getToken(HplsqlParser.T_DEFINER, 0);
+        }
+
+        public TerminalNode T_INVOKER() {
+            return getToken(HplsqlParser.T_INVOKER, 0);
+        }
+
+        public TerminalNode T_OWNER() {
+            return getToken(HplsqlParser.T_OWNER, 0);
+        }
+
+        public TerminalNode T_RESULT() {
+            return getToken(HplsqlParser.T_RESULT, 0);
+        }
+
+        public TerminalNode T_SETS() {
+            return getToken(HplsqlParser.T_SETS, 0);
+        }
+
+        public TerminalNode L_INT() {
+            return getToken(HplsqlParser.L_INT, 0);
+        }
+
+        public TerminalNode T_DYNAMIC() {
+            return getToken(HplsqlParser.T_DYNAMIC, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_routine_option;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_routine_option(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_routine_option(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_routine_option(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Exec_stmtContext extends ParserRuleContext {
+        public Exec_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public ExprContext expr() {
+            return getRuleContext(ExprContext.class, 0);
+        }
+
+        public TerminalNode T_EXEC() {
+            return getToken(HplsqlParser.T_EXEC, 0);
+        }
+
+        public TerminalNode T_EXECUTE() {
+            return getToken(HplsqlParser.T_EXECUTE, 0);
+        }
+
+        public TerminalNode T_IMMEDIATE() {
+            return getToken(HplsqlParser.T_IMMEDIATE, 0);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public Expr_func_paramsContext expr_func_params() {
+            return getRuleContext(Expr_func_paramsContext.class, 0);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        public TerminalNode T_INTO() {
+            return getToken(HplsqlParser.T_INTO, 0);
+        }
+
+        public List<TerminalNode> L_ID() {
+            return getTokens(HplsqlParser.L_ID);
+        }
+
+        public TerminalNode L_ID(int i) {
+            return getToken(HplsqlParser.L_ID, i);
+        }
+
+        public Using_clauseContext using_clause() {
+            return getRuleContext(Using_clauseContext.class, 0);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_exec_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExec_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExec_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitExec_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class If_stmtContext extends ParserRuleContext {
+        public If_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public If_plsql_stmtContext if_plsql_stmt() {
+            return getRuleContext(If_plsql_stmtContext.class, 0);
+        }
+
+        public If_tsql_stmtContext if_tsql_stmt() {
+            return getRuleContext(If_tsql_stmtContext.class, 0);
+        }
+
+        public If_bteq_stmtContext if_bteq_stmt() {
+            return getRuleContext(If_bteq_stmtContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_if_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterIf_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitIf_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitIf_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class If_plsql_stmtContext extends ParserRuleContext {
+        public If_plsql_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<TerminalNode> T_IF() {
+            return getTokens(HplsqlParser.T_IF);
+        }
+
+        public TerminalNode T_IF(int i) {
+            return getToken(HplsqlParser.T_IF, i);
+        }
+
+        public Bool_exprContext bool_expr() {
+            return getRuleContext(Bool_exprContext.class, 0);
+        }
+
+        public TerminalNode T_THEN() {
+            return getToken(HplsqlParser.T_THEN, 0);
+        }
+
+        public BlockContext block() {
+            return getRuleContext(BlockContext.class, 0);
+        }
+
+        public TerminalNode T_END() {
+            return getToken(HplsqlParser.T_END, 0);
+        }
+
+        public List<Elseif_blockContext> elseif_block() {
+            return getRuleContexts(Elseif_blockContext.class);
+        }
+
+        public Elseif_blockContext elseif_block(int i) {
+            return getRuleContext(Elseif_blockContext.class, i);
+        }
+
+        public Else_blockContext else_block() {
+            return getRuleContext(Else_blockContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_if_plsql_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterIf_plsql_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitIf_plsql_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitIf_plsql_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class If_tsql_stmtContext extends ParserRuleContext {
+        public If_tsql_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_IF() {
+            return getToken(HplsqlParser.T_IF, 0);
+        }
+
+        public Bool_exprContext bool_expr() {
+            return getRuleContext(Bool_exprContext.class, 0);
+        }
+
+        public List<Single_block_stmtContext> single_block_stmt() {
+            return getRuleContexts(Single_block_stmtContext.class);
+        }
+
+        public Single_block_stmtContext single_block_stmt(int i) {
+            return getRuleContext(Single_block_stmtContext.class, i);
+        }
+
+        public TerminalNode T_ELSE() {
+            return getToken(HplsqlParser.T_ELSE, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_if_tsql_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterIf_tsql_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitIf_tsql_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitIf_tsql_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class If_bteq_stmtContext extends ParserRuleContext {
+        public If_bteq_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_IF() {
+            return getToken(HplsqlParser.T_IF, 0);
+        }
+
+        public Bool_exprContext bool_expr() {
+            return getRuleContext(Bool_exprContext.class, 0);
+        }
+
+        public TerminalNode T_THEN() {
+            return getToken(HplsqlParser.T_THEN, 0);
+        }
+
+        public Single_block_stmtContext single_block_stmt() {
+            return getRuleContext(Single_block_stmtContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_if_bteq_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterIf_bteq_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitIf_bteq_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitIf_bteq_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Elseif_blockContext extends ParserRuleContext {
+        public Elseif_blockContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public Bool_exprContext bool_expr() {
+            return getRuleContext(Bool_exprContext.class, 0);
+        }
+
+        public TerminalNode T_THEN() {
+            return getToken(HplsqlParser.T_THEN, 0);
+        }
+
+        public BlockContext block() {
+            return getRuleContext(BlockContext.class, 0);
+        }
+
+        public TerminalNode T_ELSIF() {
+            return getToken(HplsqlParser.T_ELSIF, 0);
+        }
+
+        public TerminalNode T_ELSEIF() {
+            return getToken(HplsqlParser.T_ELSEIF, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_elseif_block;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterElseif_block(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitElseif_block(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitElseif_block(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Else_blockContext extends ParserRuleContext {
+        public Else_blockContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_ELSE() {
+            return getToken(HplsqlParser.T_ELSE, 0);
+        }
+
+        public BlockContext block() {
+            return getRuleContext(BlockContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_else_block;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterElse_block(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitElse_block(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitElse_block(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Exit_stmtContext extends ParserRuleContext {
+        public Exit_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_EXIT() {
+            return getToken(HplsqlParser.T_EXIT, 0);
+        }
+
+        public TerminalNode L_ID() {
+            return getToken(HplsqlParser.L_ID, 0);
+        }
+
+        public TerminalNode T_WHEN() {
+            return getToken(HplsqlParser.T_WHEN, 0);
+        }
+
+        public Bool_exprContext bool_expr() {
+            return getRuleContext(Bool_exprContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_exit_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExit_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExit_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitExit_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Leave_stmtContext extends ParserRuleContext {
+        public Leave_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_LEAVE() {
+            return getToken(HplsqlParser.T_LEAVE, 0);
+        }
+
+        public TerminalNode L_ID() {
+            return getToken(HplsqlParser.L_ID, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_leave_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterLeave_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitLeave_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitLeave_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Cmp_stmtContext extends ParserRuleContext {
+        public Cmp_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_CMP() {
+            return getToken(HplsqlParser.T_CMP, 0);
+        }
+
+        public List<Cmp_sourceContext> cmp_source() {
+            return getRuleContexts(Cmp_sourceContext.class);
+        }
+
+        public Cmp_sourceContext cmp_source(int i) {
+            return getRuleContext(Cmp_sourceContext.class, i);
+        }
+
+        public TerminalNode T_COMMA() {
+            return getToken(HplsqlParser.T_COMMA, 0);
+        }
+
+        public TerminalNode T_ROW_COUNT() {
+            return getToken(HplsqlParser.T_ROW_COUNT, 0);
+        }
+
+        public TerminalNode T_SUM() {
+            return getToken(HplsqlParser.T_SUM, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_cmp_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCmp_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCmp_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitCmp_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Cmp_sourceContext extends ParserRuleContext {
+        public Cmp_sourceContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public Table_nameContext table_name() {
+            return getRuleContext(Table_nameContext.class, 0);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public Select_stmtContext select_stmt() {
+            return getRuleContext(Select_stmtContext.class, 0);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        public TerminalNode T_AT() {
+            return getToken(HplsqlParser.T_AT, 0);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        public Where_clauseContext where_clause() {
+            return getRuleContext(Where_clauseContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_cmp_source;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCmp_source(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCmp_source(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitCmp_source(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_index_stmtContext extends ParserRuleContext {
+        public Create_index_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_CREATE() {
+            return getToken(HplsqlParser.T_CREATE, 0);
+        }
+
+        public TerminalNode T_INDEX() {
+            return getToken(HplsqlParser.T_INDEX, 0);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        public TerminalNode T_ON() {
+            return getToken(HplsqlParser.T_ON, 0);
+        }
+
+        public Table_nameContext table_name() {
+            return getRuleContext(Table_nameContext.class, 0);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public List<Create_index_colContext> create_index_col() {
+            return getRuleContexts(Create_index_colContext.class);
+        }
+
+        public Create_index_colContext create_index_col(int i) {
+            return getRuleContext(Create_index_colContext.class, i);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        public TerminalNode T_UNIQUE() {
+            return getToken(HplsqlParser.T_UNIQUE, 0);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_index_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_index_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_index_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_index_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Create_index_colContext extends ParserRuleContext {
+        public Create_index_colContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        public TerminalNode T_ASC() {
+            return getToken(HplsqlParser.T_ASC, 0);
+        }
+
+        public TerminalNode T_DESC() {
+            return getToken(HplsqlParser.T_DESC, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_create_index_col;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCreate_index_col(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCreate_index_col(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCreate_index_col(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Index_storage_clauseContext extends ParserRuleContext {
+        public Index_storage_clauseContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public Index_mssql_storage_clauseContext index_mssql_storage_clause() {
+            return getRuleContext(Index_mssql_storage_clauseContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_index_storage_clause;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterIndex_storage_clause(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitIndex_storage_clause(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitIndex_storage_clause(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Index_mssql_storage_clauseContext extends ParserRuleContext {
+        public Index_mssql_storage_clauseContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_WITH() {
+            return getToken(HplsqlParser.T_WITH, 0);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public List<IdentContext> ident() {
+            return getRuleContexts(IdentContext.class);
+        }
+
+        public IdentContext ident(int i) {
+            return getRuleContext(IdentContext.class, i);
+        }
+
+        public List<TerminalNode> T_EQUAL() {
+            return getTokens(HplsqlParser.T_EQUAL);
+        }
+
+        public TerminalNode T_EQUAL(int i) {
+            return getToken(HplsqlParser.T_EQUAL, i);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        public List<Create_table_options_mssql_itemContext> create_table_options_mssql_item() {
+            return getRuleContexts(Create_table_options_mssql_itemContext.class);
+        }
+
+        public Create_table_options_mssql_itemContext create_table_options_mssql_item(int i) {
+            return getRuleContext(Create_table_options_mssql_itemContext.class, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_index_mssql_storage_clause;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterIndex_mssql_storage_clause(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitIndex_mssql_storage_clause(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitIndex_mssql_storage_clause(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Quit_stmtContext extends ParserRuleContext {
+        public Quit_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_QUIT() {
+            return getToken(HplsqlParser.T_QUIT, 0);
+        }
+
+        public ExprContext expr() {
+            return getRuleContext(ExprContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_quit_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterQuit_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitQuit_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitQuit_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Return_stmtContext extends ParserRuleContext {
+        public Return_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_RETURN() {
+            return getToken(HplsqlParser.T_RETURN, 0);
+        }
+
+        public ExprContext expr() {
+            return getRuleContext(ExprContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_return_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterReturn_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitReturn_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitReturn_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Cpp_stmtContext extends ParserRuleContext {
+        public Cpp_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public Cpp_function_stmtContext cpp_function_stmt() {
+            return getRuleContext(Cpp_function_stmtContext.class, 0);
+        }
+
+        public Cpp_for_stmtContext cpp_for_stmt() {
+            return getRuleContext(Cpp_for_stmtContext.class, 0);
+        }
+
+        public Cpp_if_stmtContext cpp_if_stmt() {
+            return getRuleContext(Cpp_if_stmtContext.class, 0);
+        }
+
+        public Cpp_declare_stmtContext cpp_declare_stmt() {
+            return getRuleContext(Cpp_declare_stmtContext.class, 0);
+        }
+
+        public Cpp_assignment_stmtContext cpp_assignment_stmt() {
+            return getRuleContext(Cpp_assignment_stmtContext.class, 0);
+        }
+
+        public Cpp_declare_assignment_stmtContext cpp_declare_assignment_stmt() {
+            return getRuleContext(Cpp_declare_assignment_stmtContext.class, 0);
+        }
+
+        public Cpp_return_stmtContext cpp_return_stmt() {
+            return getRuleContext(Cpp_return_stmtContext.class, 0);
+        }
+
+        public Write_stmtContext write_stmt() {
+            return getRuleContext(Write_stmtContext.class, 0);
+        }
+
+        public Create_table_stmtContext create_table_stmt() {
+            return getRuleContext(Create_table_stmtContext.class, 0);
+        }
+
+        public Create_type_stmtContext create_type_stmt() {
+            return getRuleContext(Create_type_stmtContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_cpp_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitCpp_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Cpp_function_stmtContext extends ParserRuleContext {
+        public Cpp_function_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public Cpp_function_headerContext cpp_function_header() {
+            return getRuleContext(Cpp_function_headerContext.class, 0);
+        }
+
+        public Cpp_function_bodyContext cpp_function_body() {
+            return getRuleContext(Cpp_function_bodyContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_cpp_function_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_function_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_function_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCpp_function_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Cpp_function_headerContext extends ParserRuleContext {
+        public Cpp_function_headerContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public DtypeContext dtype() {
+            return getRuleContext(DtypeContext.class, 0);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        public Cpp_function_params_clauseContext cpp_function_params_clause() {
+            return getRuleContext(Cpp_function_params_clauseContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_cpp_function_header;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_function_header(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_function_header(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCpp_function_header(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Cpp_function_params_clauseContext extends ParserRuleContext {
+        public Cpp_function_params_clauseContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<Cpp_function_paramContext> cpp_function_param() {
+            return getRuleContexts(Cpp_function_paramContext.class);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public Cpp_function_paramContext cpp_function_param(int i) {
+            return getRuleContext(Cpp_function_paramContext.class, i);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_cpp_function_params_clause;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_function_params_clause(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_function_params_clause(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCpp_function_params_clause(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Cpp_function_paramContext extends ParserRuleContext {
+        public Cpp_function_paramContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public DtypeContext dtype() {
+            return getRuleContext(DtypeContext.class, 0);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_cpp_function_param;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_function_param(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_function_param(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCpp_function_param(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Cpp_function_bodyContext extends ParserRuleContext {
+        public Cpp_function_bodyContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public Cpp_scopeContext cpp_scope() {
+            return getRuleContext(Cpp_scopeContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_cpp_function_body;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_function_body(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_function_body(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCpp_function_body(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Cpp_if_stmtContext extends ParserRuleContext {
+        public Cpp_if_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_IF() {
+            return getToken(HplsqlParser.T_IF, 0);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public Bool_exprContext bool_expr() {
+            return getRuleContext(Bool_exprContext.class, 0);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        public Cpp_for_stmt_bodyContext cpp_for_stmt_body() {
+            return getRuleContext(Cpp_for_stmt_bodyContext.class, 0);
+        }
+
+        public List<Cpp_elseif_clauseContext> cpp_elseif_clause() {
+            return getRuleContexts(Cpp_elseif_clauseContext.class);
+        }
+
+        public Cpp_elseif_clauseContext cpp_elseif_clause(int i) {
+            return getRuleContext(Cpp_elseif_clauseContext.class, i);
+        }
+
+        public Cpp_else_clauseContext cpp_else_clause() {
+            return getRuleContext(Cpp_else_clauseContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_cpp_if_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_if_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_if_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitCpp_if_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Cpp_elseif_clauseContext extends ParserRuleContext {
+        public Cpp_elseif_clauseContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public Bool_exprContext bool_expr() {
+            return getRuleContext(Bool_exprContext.class, 0);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        public Cpp_for_stmt_bodyContext cpp_for_stmt_body() {
+            return getRuleContext(Cpp_for_stmt_bodyContext.class, 0);
+        }
+
+        public TerminalNode T_ELSIF() {
+            return getToken(HplsqlParser.T_ELSIF, 0);
+        }
+
+        public TerminalNode T_ELSEIF() {
+            return getToken(HplsqlParser.T_ELSEIF, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_cpp_elseif_clause;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_elseif_clause(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_elseif_clause(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCpp_elseif_clause(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Cpp_else_clauseContext extends ParserRuleContext {
+        public Cpp_else_clauseContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_ELSE() {
+            return getToken(HplsqlParser.T_ELSE, 0);
+        }
+
+        public Cpp_for_stmt_bodyContext cpp_for_stmt_body() {
+            return getRuleContext(Cpp_for_stmt_bodyContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_cpp_else_clause;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_else_clause(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_else_clause(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCpp_else_clause(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Cpp_for_stmtContext extends ParserRuleContext {
+        public Cpp_for_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public Cpp_for_stmt_headerContext cpp_for_stmt_header() {
+            return getRuleContext(Cpp_for_stmt_headerContext.class, 0);
+        }
+
+        public Cpp_for_stmt_bodyContext cpp_for_stmt_body() {
+            return getRuleContext(Cpp_for_stmt_bodyContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_cpp_for_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_for_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_for_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitCpp_for_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Cpp_for_stmt_headerContext extends ParserRuleContext {
+        public Cpp_for_stmt_headerContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_FOR() {
+            return getToken(HplsqlParser.T_FOR, 0);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public Cpp_for_params_clauseContext cpp_for_params_clause() {
+            return getRuleContext(Cpp_for_params_clauseContext.class, 0);
+        }
+
+        public List<TerminalNode> T_SEMICOLON() {
+            return getTokens(HplsqlParser.T_SEMICOLON);
+        }
+
+        public TerminalNode T_SEMICOLON(int i) {
+            return getToken(HplsqlParser.T_SEMICOLON, i);
+        }
+
+        public Bool_exprContext bool_expr() {
+            return getRuleContext(Bool_exprContext.class, 0);
+        }
+
+        public Cpp_for_stmt_var_incr_caluseContext cpp_for_stmt_var_incr_caluse() {
+            return getRuleContext(Cpp_for_stmt_var_incr_caluseContext.class, 0);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_cpp_for_stmt_header;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_for_stmt_header(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_for_stmt_header(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCpp_for_stmt_header(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Cpp_for_params_clauseContext extends ParserRuleContext {
+        public Cpp_for_params_clauseContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<Cpp_for_paramContext> cpp_for_param() {
+            return getRuleContexts(Cpp_for_paramContext.class);
+        }
+
+        public Cpp_for_paramContext cpp_for_param(int i) {
+            return getRuleContext(Cpp_for_paramContext.class, i);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_cpp_for_params_clause;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_for_params_clause(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_for_params_clause(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCpp_for_params_clause(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Cpp_for_paramContext extends ParserRuleContext {
+        public Cpp_for_paramContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        public TerminalNode T_EQUAL() {
+            return getToken(HplsqlParser.T_EQUAL, 0);
+        }
+
+        public TerminalNode L_INT() {
+            return getToken(HplsqlParser.L_INT, 0);
+        }
+
+        public DtypeContext dtype() {
+            return getRuleContext(DtypeContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_cpp_for_param;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_for_param(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_for_param(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCpp_for_param(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Cpp_for_stmt_var_incr_caluseContext extends ParserRuleContext {
+        public Cpp_for_stmt_var_incr_caluseContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<Cpp_for_stmt_var_incrContext> cpp_for_stmt_var_incr() {
+            return getRuleContexts(Cpp_for_stmt_var_incrContext.class);
+        }
+
+        public Cpp_for_stmt_var_incrContext cpp_for_stmt_var_incr(int i) {
+            return getRuleContext(Cpp_for_stmt_var_incrContext.class, i);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_cpp_for_stmt_var_incr_caluse;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_for_stmt_var_incr_caluse(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_for_stmt_var_incr_caluse(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCpp_for_stmt_var_incr_caluse(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Cpp_for_stmt_var_incrContext extends ParserRuleContext {
+        public Cpp_for_stmt_var_incrContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<IdentContext> ident() {
+            return getRuleContexts(IdentContext.class);
+        }
+
+        public IdentContext ident(int i) {
+            return getRuleContext(IdentContext.class, i);
+        }
+
+        public List<TerminalNode> T_ADD() {
+            return getTokens(HplsqlParser.T_ADD);
+        }
+
+        public TerminalNode T_ADD(int i) {
+            return getToken(HplsqlParser.T_ADD, i);
+        }
+
+        public TerminalNode T_EQUAL() {
+            return getToken(HplsqlParser.T_EQUAL, 0);
+        }
+
+        public List<TerminalNode> T_SUB() {
+            return getTokens(HplsqlParser.T_SUB);
+        }
+
+        public TerminalNode T_SUB(int i) {
+            return getToken(HplsqlParser.T_SUB, i);
+        }
+
+        public List<TerminalNode> T_MUL() {
+            return getTokens(HplsqlParser.T_MUL);
+        }
+
+        public TerminalNode T_MUL(int i) {
+            return getToken(HplsqlParser.T_MUL, i);
+        }
+
+        public List<TerminalNode> T_DIV() {
+            return getTokens(HplsqlParser.T_DIV);
+        }
+
+        public TerminalNode T_DIV(int i) {
+            return getToken(HplsqlParser.T_DIV, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_cpp_for_stmt_var_incr;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_for_stmt_var_incr(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_for_stmt_var_incr(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCpp_for_stmt_var_incr(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Cpp_for_stmt_bodyContext extends ParserRuleContext {
+        public Cpp_for_stmt_bodyContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public Cpp_scopeContext cpp_scope() {
+            return getRuleContext(Cpp_scopeContext.class, 0);
+        }
+
+        public Cpp_stmtContext cpp_stmt() {
+            return getRuleContext(Cpp_stmtContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_cpp_for_stmt_body;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_for_stmt_body(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_for_stmt_body(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCpp_for_stmt_body(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Cpp_declare_assignment_stmtContext extends ParserRuleContext {
+        public Cpp_declare_assignment_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        public TerminalNode T_EQUAL() {
+            return getToken(HplsqlParser.T_EQUAL, 0);
+        }
+
+        public StmtContext stmt() {
+            return getRuleContext(StmtContext.class, 0);
+        }
+
+        public TerminalNode T_SEMICOLON() {
+            return getToken(HplsqlParser.T_SEMICOLON, 0);
+        }
+
+        public DtypeContext dtype() {
+            return getRuleContext(DtypeContext.class, 0);
+        }
+
+        public TerminalNode T_VAR() {
+            return getToken(HplsqlParser.T_VAR, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_cpp_declare_assignment_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_declare_assignment_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_declare_assignment_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCpp_declare_assignment_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Cpp_declare_stmtContext extends ParserRuleContext {
+        public Cpp_declare_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        public TerminalNode T_SEMICOLON() {
+            return getToken(HplsqlParser.T_SEMICOLON, 0);
+        }
+
+        public DtypeContext dtype() {
+            return getRuleContext(DtypeContext.class, 0);
+        }
+
+        public TerminalNode T_VAR() {
+            return getToken(HplsqlParser.T_VAR, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_cpp_declare_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_declare_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_declare_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCpp_declare_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Cpp_assignment_stmtContext extends ParserRuleContext {
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        public Cpp_assignment_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_EQUAL() {
+            return getToken(HplsqlParser.T_EQUAL, 0);
+        }
+
+        public StmtContext stmt() {
+            return getRuleContext(StmtContext.class, 0);
+        }
+
+        public TerminalNode T_SEMICOLON() {
+            return getToken(HplsqlParser.T_SEMICOLON, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_cpp_assignment_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_assignment_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_assignment_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCpp_assignment_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Cpp_return_stmtContext extends ParserRuleContext {
+        public Cpp_return_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_RETURN() {
+            return getToken(HplsqlParser.T_RETURN, 0);
+        }
+
+        public ExprContext expr() {
+            return getRuleContext(ExprContext.class, 0);
+        }
+
+        public TerminalNode T_SEMICOLON() {
+            return getToken(HplsqlParser.T_SEMICOLON, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_cpp_return_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_return_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_return_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitCpp_return_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Cpp_scopeContext extends ParserRuleContext {
+        public Cpp_scopeContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_OPEN_B() {
+            return getToken(HplsqlParser.T_OPEN_B, 0);
+        }
+
+        public TerminalNode T_CLOSE_B() {
+            return getToken(HplsqlParser.T_CLOSE_B, 0);
+        }
+
+        public List<Cpp_stmtContext> cpp_stmt() {
+            return getRuleContexts(Cpp_stmtContext.class);
+        }
+
+        public Cpp_stmtContext cpp_stmt(int i) {
+            return getRuleContext(Cpp_stmtContext.class, i);
+        }
+
+        public List<Cpp_scopeContext> cpp_scope() {
+            return getRuleContexts(Cpp_scopeContext.class);
+        }
+
+        public Cpp_scopeContext cpp_scope(int i) {
+            return getRuleContext(Cpp_scopeContext.class, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_cpp_scope;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterCpp_scope(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitCpp_scope(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitCpp_scope(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class While_stmtContext extends ParserRuleContext {
+        public While_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<TerminalNode> T_WHILE() {
+            return getTokens(HplsqlParser.T_WHILE);
+        }
+
+        public TerminalNode T_WHILE(int i) {
+            return getToken(HplsqlParser.T_WHILE, i);
+        }
+
+        public Bool_exprContext bool_expr() {
+            return getRuleContext(Bool_exprContext.class, 0);
+        }
+
+        public BlockContext block() {
+            return getRuleContext(BlockContext.class, 0);
+        }
+
+        public TerminalNode T_END() {
+            return getToken(HplsqlParser.T_END, 0);
+        }
+
+        public TerminalNode T_DO() {
+            return getToken(HplsqlParser.T_DO, 0);
+        }
+
+        public List<TerminalNode> T_LOOP() {
+            return getTokens(HplsqlParser.T_LOOP);
+        }
+
+        public TerminalNode T_LOOP(int i) {
+            return getToken(HplsqlParser.T_LOOP, i);
+        }
+
+        public TerminalNode T_THEN() {
+            return getToken(HplsqlParser.T_THEN, 0);
+        }
+
+        public TerminalNode T_BEGIN() {
+            return getToken(HplsqlParser.T_BEGIN, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_while_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterWhile_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitWhile_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitWhile_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class For_range_stmtContext extends ParserRuleContext {
+        public For_range_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_FOR() {
+            return getToken(HplsqlParser.T_FOR, 0);
+        }
+
+        public TerminalNode L_ID() {
+            return getToken(HplsqlParser.L_ID, 0);
+        }
+
+        public TerminalNode T_IN() {
+            return getToken(HplsqlParser.T_IN, 0);
+        }
+
+        public List<ExprContext> expr() {
+            return getRuleContexts(ExprContext.class);
+        }
+
+        public ExprContext expr(int i) {
+            return getRuleContext(ExprContext.class, i);
+        }
+
+        public TerminalNode T_DOT2() {
+            return getToken(HplsqlParser.T_DOT2, 0);
+        }
+
+        public List<TerminalNode> T_LOOP() {
+            return getTokens(HplsqlParser.T_LOOP);
+        }
+
+        public TerminalNode T_LOOP(int i) {
+            return getToken(HplsqlParser.T_LOOP, i);
+        }
+
+        public BlockContext block() {
+            return getRuleContext(BlockContext.class, 0);
+        }
+
+        public TerminalNode T_END() {
+            return getToken(HplsqlParser.T_END, 0);
+        }
+
+        public TerminalNode T_REVERSE() {
+            return getToken(HplsqlParser.T_REVERSE, 0);
+        }
+
+        public TerminalNode T_BY() {
+            return getToken(HplsqlParser.T_BY, 0);
+        }
+
+        public TerminalNode T_STEP() {
+            return getToken(HplsqlParser.T_STEP, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_for_range_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterFor_range_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitFor_range_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitFor_range_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class LabelContext extends ParserRuleContext {
+        public LabelContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode L_LABEL() {
+            return getToken(HplsqlParser.L_LABEL, 0);
+        }
+
+        public List<TerminalNode> T_LESS() {
+            return getTokens(HplsqlParser.T_LESS);
+        }
+
+        public TerminalNode T_LESS(int i) {
+            return getToken(HplsqlParser.T_LESS, i);
+        }
+
+        public TerminalNode L_ID() {
+            return getToken(HplsqlParser.L_ID, 0);
+        }
+
+        public List<TerminalNode> T_GREATER() {
+            return getTokens(HplsqlParser.T_GREATER);
+        }
+
+        public TerminalNode T_GREATER(int i) {
+            return getToken(HplsqlParser.T_GREATER, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_label;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterLabel(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitLabel(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitLabel(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Using_clauseContext extends ParserRuleContext {
+        public Using_clauseContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_USING() {
+            return getToken(HplsqlParser.T_USING, 0);
+        }
+
+        public List<ExprContext> expr() {
+            return getRuleContexts(ExprContext.class);
+        }
+
+        public ExprContext expr(int i) {
+            return getRuleContext(ExprContext.class, i);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_using_clause;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterUsing_clause(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitUsing_clause(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitUsing_clause(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Select_stmtContext extends ParserRuleContext {
+        public Select_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public Fullselect_stmtContext fullselect_stmt() {
+            return getRuleContext(Fullselect_stmtContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_select_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterSelect_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitSelect_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitSelect_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Fullselect_stmtContext extends ParserRuleContext {
+        public Fullselect_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<Fullselect_stmt_itemContext> fullselect_stmt_item() {
+            return getRuleContexts(Fullselect_stmt_itemContext.class);
+        }
+
+        public Fullselect_stmt_itemContext fullselect_stmt_item(int i) {
+            return getRuleContext(Fullselect_stmt_itemContext.class, i);
+        }
+
+        public List<Fullselect_set_clauseContext> fullselect_set_clause() {
+            return getRuleContexts(Fullselect_set_clauseContext.class);
+        }
+
+        public Fullselect_set_clauseContext fullselect_set_clause(int i) {
+            return getRuleContext(Fullselect_set_clauseContext.class, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_fullselect_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterFullselect_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitFullselect_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitFullselect_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Fullselect_stmt_itemContext extends ParserRuleContext {
+        public Fullselect_stmt_itemContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public Subselect_stmtContext subselect_stmt() {
+            return getRuleContext(Subselect_stmtContext.class, 0);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public Fullselect_stmtContext fullselect_stmt() {
+            return getRuleContext(Fullselect_stmtContext.class, 0);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_fullselect_stmt_item;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterFullselect_stmt_item(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitFullselect_stmt_item(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitFullselect_stmt_item(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Fullselect_set_clauseContext extends ParserRuleContext {
+        public Fullselect_set_clauseContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_UNION() {
+            return getToken(HplsqlParser.T_UNION, 0);
+        }
+
+        public TerminalNode T_ALL() {
+            return getToken(HplsqlParser.T_ALL, 0);
+        }
+
+        public TerminalNode T_EXCEPT() {
+            return getToken(HplsqlParser.T_EXCEPT, 0);
+        }
+
+        public TerminalNode T_INTERSECT() {
+            return getToken(HplsqlParser.T_INTERSECT, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_fullselect_set_clause;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterFullselect_set_clause(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitFullselect_set_clause(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitFullselect_set_clause(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Subselect_stmtContext extends ParserRuleContext {
+        public Subselect_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public Select_listContext select_list() {
+            return getRuleContext(Select_listContext.class, 0);
+        }
+
+        public TerminalNode T_SELECT() {
+            return getToken(HplsqlParser.T_SELECT, 0);
+        }
+
+        public TerminalNode T_SEL() {
+            return getToken(HplsqlParser.T_SEL, 0);
+        }
+
+        public Into_clauseContext into_clause() {
+            return getRuleContext(Into_clauseContext.class, 0);
+        }
+
+        public From_clauseContext from_clause() {
+            return getRuleContext(From_clauseContext.class, 0);
+        }
+
+        public Where_clauseContext where_clause() {
+            return getRuleContext(Where_clauseContext.class, 0);
+        }
+
+        public Group_by_clauseContext group_by_clause() {
+            return getRuleContext(Group_by_clauseContext.class, 0);
+        }
+
+        public Having_clauseContext having_clause() {
+            return getRuleContext(Having_clauseContext.class, 0);
+        }
+
+        public Qualify_clauseContext qualify_clause() {
+            return getRuleContext(Qualify_clauseContext.class, 0);
+        }
+
+        public Order_by_clauseContext order_by_clause() {
+            return getRuleContext(Order_by_clauseContext.class, 0);
+        }
+
+        public Select_optionsContext select_options() {
+            return getRuleContext(Select_optionsContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_subselect_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterSubselect_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitSubselect_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitSubselect_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Select_listContext extends ParserRuleContext {
+        public Select_listContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<Select_list_itemContext> select_list_item() {
+            return getRuleContexts(Select_list_itemContext.class);
+        }
+
+        public Select_list_itemContext select_list_item(int i) {
+            return getRuleContext(Select_list_itemContext.class, i);
+        }
+
+        public Select_list_setContext select_list_set() {
+            return getRuleContext(Select_list_setContext.class, 0);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public Select_list_limitContext select_list_limit() {
+            return getRuleContext(Select_list_limitContext.class, 0);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_select_list;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterSelect_list(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitSelect_list(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitSelect_list(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Select_list_setContext extends ParserRuleContext {
+        public Select_list_setContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_ALL() {
+            return getToken(HplsqlParser.T_ALL, 0);
+        }
+
+        public TerminalNode T_DISTINCT() {
+            return getToken(HplsqlParser.T_DISTINCT, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_select_list_set;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterSelect_list_set(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitSelect_list_set(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitSelect_list_set(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Select_list_limitContext extends ParserRuleContext {
+        public Select_list_limitContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_TOP() {
+            return getToken(HplsqlParser.T_TOP, 0);
+        }
+
+        public ExprContext expr() {
+            return getRuleContext(ExprContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_select_list_limit;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterSelect_list_limit(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitSelect_list_limit(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitSelect_list_limit(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Select_list_itemContext extends ParserRuleContext {
+        public Select_list_itemContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public ExprContext expr() {
+            return getRuleContext(ExprContext.class, 0);
+        }
+
+        public Select_list_asteriskContext select_list_asterisk() {
+            return getRuleContext(Select_list_asteriskContext.class, 0);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        public TerminalNode T_EQUAL() {
+            return getToken(HplsqlParser.T_EQUAL, 0);
+        }
+
+        public Select_list_aliasContext select_list_alias() {
+            return getRuleContext(Select_list_aliasContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_select_list_item;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterSelect_list_item(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitSelect_list_item(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitSelect_list_item(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Select_list_aliasContext extends ParserRuleContext {
+        public Select_list_aliasContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_AS() {
+            return getToken(HplsqlParser.T_AS, 0);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public TerminalNode T_TITLE() {
+            return getToken(HplsqlParser.T_TITLE, 0);
+        }
+
+        public TerminalNode L_S_STRING() {
+            return getToken(HplsqlParser.L_S_STRING, 0);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_select_list_alias;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterSelect_list_alias(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitSelect_list_alias(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitSelect_list_alias(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Select_list_asteriskContext extends ParserRuleContext {
+        public Select_list_asteriskContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_MUL() {
+            return getToken(HplsqlParser.T_MUL, 0);
+        }
+
+        public TerminalNode L_ID() {
+            return getToken(HplsqlParser.L_ID, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_select_list_asterisk;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterSelect_list_asterisk(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitSelect_list_asterisk(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitSelect_list_asterisk(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Into_clauseContext extends ParserRuleContext {
+        public Into_clauseContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_INTO() {
+            return getToken(HplsqlParser.T_INTO, 0);
+        }
+
+        public List<IdentContext> ident() {
+            return getRuleContexts(IdentContext.class);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public IdentContext ident(int i) {
+            return getRuleContext(IdentContext.class, i);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_into_clause;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterInto_clause(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitInto_clause(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitInto_clause(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class From_clauseContext extends ParserRuleContext {
+        public From_clauseContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_FROM() {
+            return getToken(HplsqlParser.T_FROM, 0);
+        }
+
+        public From_table_clauseContext from_table_clause() {
+            return getRuleContext(From_table_clauseContext.class, 0);
+        }
+
+        public List<From_join_clauseContext> from_join_clause() {
+            return getRuleContexts(From_join_clauseContext.class);
+        }
+
+        public From_join_clauseContext from_join_clause(int i) {
+            return getRuleContext(From_join_clauseContext.class, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_from_clause;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterFrom_clause(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitFrom_clause(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitFrom_clause(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class From_table_clauseContext extends ParserRuleContext {
+        public From_table_clauseContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public From_table_name_clauseContext from_table_name_clause() {
+            return getRuleContext(From_table_name_clauseContext.class, 0);
+        }
+
+        public From_subselect_clauseContext from_subselect_clause() {
+            return getRuleContext(From_subselect_clauseContext.class, 0);
+        }
+
+        public From_table_values_clauseContext from_table_values_clause() {
+            return getRuleContext(From_table_values_clauseContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_from_table_clause;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterFrom_table_clause(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitFrom_table_clause(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitFrom_table_clause(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class From_table_name_clauseContext extends ParserRuleContext {
+        public From_table_name_clauseContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public Table_nameContext table_name() {
+            return getRuleContext(Table_nameContext.class, 0);
+        }
+
+        public From_alias_clauseContext from_alias_clause() {
+            return getRuleContext(From_alias_clauseContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_from_table_name_clause;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterFrom_table_name_clause(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitFrom_table_name_clause(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitFrom_table_name_clause(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class From_subselect_clauseContext extends ParserRuleContext {
+        public From_subselect_clauseContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public Select_stmtContext select_stmt() {
+            return getRuleContext(Select_stmtContext.class, 0);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        public From_alias_clauseContext from_alias_clause() {
+            return getRuleContext(From_alias_clauseContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_from_subselect_clause;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterFrom_subselect_clause(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitFrom_subselect_clause(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitFrom_subselect_clause(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class From_join_clauseContext extends ParserRuleContext {
+        public From_join_clauseContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_COMMA() {
+            return getToken(HplsqlParser.T_COMMA, 0);
+        }
+
+        public From_table_clauseContext from_table_clause() {
+            return getRuleContext(From_table_clauseContext.class, 0);
+        }
+
+        public From_join_type_clauseContext from_join_type_clause() {
+            return getRuleContext(From_join_type_clauseContext.class, 0);
+        }
+
+        public TerminalNode T_ON() {
+            return getToken(HplsqlParser.T_ON, 0);
+        }
+
+        public Bool_exprContext bool_expr() {
+            return getRuleContext(Bool_exprContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_from_join_clause;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterFrom_join_clause(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitFrom_join_clause(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitFrom_join_clause(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class From_join_type_clauseContext extends ParserRuleContext {
+        public From_join_type_clauseContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_JOIN() {
+            return getToken(HplsqlParser.T_JOIN, 0);
+        }
+
+        public TerminalNode T_INNER() {
+            return getToken(HplsqlParser.T_INNER, 0);
+        }
+
+        public TerminalNode T_LEFT() {
+            return getToken(HplsqlParser.T_LEFT, 0);
+        }
+
+        public TerminalNode T_RIGHT() {
+            return getToken(HplsqlParser.T_RIGHT, 0);
+        }
+
+        public TerminalNode T_FULL() {
+            return getToken(HplsqlParser.T_FULL, 0);
+        }
+
+        public TerminalNode T_OUTER() {
+            return getToken(HplsqlParser.T_OUTER, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_from_join_type_clause;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterFrom_join_type_clause(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitFrom_join_type_clause(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitFrom_join_type_clause(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class From_table_values_clauseContext extends ParserRuleContext {
+        public From_table_values_clauseContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_TABLE() {
+            return getToken(HplsqlParser.T_TABLE, 0);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public TerminalNode T_VALUES() {
+            return getToken(HplsqlParser.T_VALUES, 0);
+        }
+
+        public List<From_table_values_rowContext> from_table_values_row() {
+            return getRuleContexts(From_table_values_rowContext.class);
+        }
+
+        public From_table_values_rowContext from_table_values_row(int i) {
+            return getRuleContext(From_table_values_rowContext.class, i);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        public From_alias_clauseContext from_alias_clause() {
+            return getRuleContext(From_alias_clauseContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_from_table_values_clause;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterFrom_table_values_clause(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitFrom_table_values_clause(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitFrom_table_values_clause(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class From_table_values_rowContext extends ParserRuleContext {
+        public From_table_values_rowContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<ExprContext> expr() {
+            return getRuleContexts(ExprContext.class);
+        }
+
+        public ExprContext expr(int i) {
+            return getRuleContext(ExprContext.class, i);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_from_table_values_row;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterFrom_table_values_row(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitFrom_table_values_row(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitFrom_table_values_row(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class From_alias_clauseContext extends ParserRuleContext {
+        public From_alias_clauseContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        public TerminalNode T_AS() {
+            return getToken(HplsqlParser.T_AS, 0);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public List<TerminalNode> L_ID() {
+            return getTokens(HplsqlParser.L_ID);
+        }
+
+        public TerminalNode L_ID(int i) {
+            return getToken(HplsqlParser.L_ID, i);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_from_alias_clause;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterFrom_alias_clause(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitFrom_alias_clause(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitFrom_alias_clause(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Table_nameContext extends ParserRuleContext {
+        public Table_nameContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_table_name;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterTable_name(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitTable_name(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitTable_name(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Where_clauseContext extends ParserRuleContext {
+        public Where_clauseContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_WHERE() {
+            return getToken(HplsqlParser.T_WHERE, 0);
+        }
+
+        public Bool_exprContext bool_expr() {
+            return getRuleContext(Bool_exprContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_where_clause;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterWhere_clause(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitWhere_clause(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitWhere_clause(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Group_by_clauseContext extends ParserRuleContext {
+        public Group_by_clauseContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_GROUP() {
+            return getToken(HplsqlParser.T_GROUP, 0);
+        }
+
+        public TerminalNode T_BY() {
+            return getToken(HplsqlParser.T_BY, 0);
+        }
+
+        public List<ExprContext> expr() {
+            return getRuleContexts(ExprContext.class);
+        }
+
+        public ExprContext expr(int i) {
+            return getRuleContext(ExprContext.class, i);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_group_by_clause;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterGroup_by_clause(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitGroup_by_clause(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitGroup_by_clause(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Having_clauseContext extends ParserRuleContext {
+        public Having_clauseContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_HAVING() {
+            return getToken(HplsqlParser.T_HAVING, 0);
+        }
+
+        public Bool_exprContext bool_expr() {
+            return getRuleContext(Bool_exprContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_having_clause;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterHaving_clause(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitHaving_clause(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitHaving_clause(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Qualify_clauseContext extends ParserRuleContext {
+        public Qualify_clauseContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_QUALIFY() {
+            return getToken(HplsqlParser.T_QUALIFY, 0);
+        }
+
+        public Bool_exprContext bool_expr() {
+            return getRuleContext(Bool_exprContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_qualify_clause;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterQualify_clause(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitQualify_clause(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitQualify_clause(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Order_by_clauseContext extends ParserRuleContext {
+        public Order_by_clauseContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_ORDER() {
+            return getToken(HplsqlParser.T_ORDER, 0);
+        }
+
+        public TerminalNode T_BY() {
+            return getToken(HplsqlParser.T_BY, 0);
+        }
+
+        public List<ExprContext> expr() {
+            return getRuleContexts(ExprContext.class);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public ExprContext expr(int i) {
+            return getRuleContext(ExprContext.class, i);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        public List<TerminalNode> T_ASC() {
+            return getTokens(HplsqlParser.T_ASC);
+        }
+
+        public TerminalNode T_ASC(int i) {
+            return getToken(HplsqlParser.T_ASC, i);
+        }
+
+        public List<TerminalNode> T_DESC() {
+            return getTokens(HplsqlParser.T_DESC);
+        }
+
+        public TerminalNode T_DESC(int i) {
+            return getToken(HplsqlParser.T_DESC, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_order_by_clause;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterOrder_by_clause(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitOrder_by_clause(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitOrder_by_clause(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Select_optionsContext extends ParserRuleContext {
+        public Select_optionsContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<Select_options_itemContext> select_options_item() {
+            return getRuleContexts(Select_options_itemContext.class);
+        }
+
+        public Select_options_itemContext select_options_item(int i) {
+            return getRuleContext(Select_options_itemContext.class, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_select_options;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterSelect_options(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitSelect_options(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitSelect_options(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Select_options_itemContext extends ParserRuleContext {
+        public Select_options_itemContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_LIMIT() {
+            return getToken(HplsqlParser.T_LIMIT, 0);
+        }
+
+        public ExprContext expr() {
+            return getRuleContext(ExprContext.class, 0);
+        }
+
+        public TerminalNode T_WITH() {
+            return getToken(HplsqlParser.T_WITH, 0);
+        }
+
+        public TerminalNode T_RR() {
+            return getToken(HplsqlParser.T_RR, 0);
+        }
+
+        public TerminalNode T_RS() {
+            return getToken(HplsqlParser.T_RS, 0);
+        }
+
+        public TerminalNode T_CS() {
+            return getToken(HplsqlParser.T_CS, 0);
+        }
+
+        public TerminalNode T_UR() {
+            return getToken(HplsqlParser.T_UR, 0);
+        }
+
+        public TerminalNode T_USE() {
+            return getToken(HplsqlParser.T_USE, 0);
+        }
+
+        public TerminalNode T_AND() {
+            return getToken(HplsqlParser.T_AND, 0);
+        }
+
+        public TerminalNode T_KEEP() {
+            return getToken(HplsqlParser.T_KEEP, 0);
+        }
+
+        public TerminalNode T_LOCKS() {
+            return getToken(HplsqlParser.T_LOCKS, 0);
+        }
+
+        public TerminalNode T_EXCLUSIVE() {
+            return getToken(HplsqlParser.T_EXCLUSIVE, 0);
+        }
+
+        public TerminalNode T_UPDATE() {
+            return getToken(HplsqlParser.T_UPDATE, 0);
+        }
+
+        public TerminalNode T_SHARE() {
+            return getToken(HplsqlParser.T_SHARE, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_select_options_item;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterSelect_options_item(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitSelect_options_item(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitSelect_options_item(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Bool_exprContext extends ParserRuleContext {
+        public Bool_exprContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public List<Bool_exprContext> bool_expr() {
+            return getRuleContexts(Bool_exprContext.class);
+        }
+
+        public Bool_exprContext bool_expr(int i) {
+            return getRuleContext(Bool_exprContext.class, i);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        public TerminalNode T_NOT() {
+            return getToken(HplsqlParser.T_NOT, 0);
+        }
+
+        public Bool_expr_atomContext bool_expr_atom() {
+            return getRuleContext(Bool_expr_atomContext.class, 0);
+        }
+
+        public Bool_expr_logical_operatorContext bool_expr_logical_operator() {
+            return getRuleContext(Bool_expr_logical_operatorContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_bool_expr;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterBool_expr(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitBool_expr(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitBool_expr(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Bool_expr_atomContext extends ParserRuleContext {
+        public Bool_expr_atomContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public Bool_expr_unaryContext bool_expr_unary() {
+            return getRuleContext(Bool_expr_unaryContext.class, 0);
+        }
+
+        public Bool_expr_binaryContext bool_expr_binary() {
+            return getRuleContext(Bool_expr_binaryContext.class, 0);
+        }
+
+        public ExprContext expr() {
+            return getRuleContext(ExprContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_bool_expr_atom;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterBool_expr_atom(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitBool_expr_atom(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitBool_expr_atom(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Bool_expr_unaryContext extends ParserRuleContext {
+        public Bool_expr_unaryContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<ExprContext> expr() {
+            return getRuleContexts(ExprContext.class);
+        }
+
+        public ExprContext expr(int i) {
+            return getRuleContext(ExprContext.class, i);
+        }
+
+        public TerminalNode T_IS() {
+            return getToken(HplsqlParser.T_IS, 0);
+        }
+
+        public TerminalNode T_NULL() {
+            return getToken(HplsqlParser.T_NULL, 0);
+        }
+
+        public TerminalNode T_NOT() {
+            return getToken(HplsqlParser.T_NOT, 0);
+        }
+
+        public TerminalNode T_BETWEEN() {
+            return getToken(HplsqlParser.T_BETWEEN, 0);
+        }
+
+        public TerminalNode T_AND() {
+            return getToken(HplsqlParser.T_AND, 0);
+        }
+
+        public TerminalNode T_EXISTS() {
+            return getToken(HplsqlParser.T_EXISTS, 0);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public Select_stmtContext select_stmt() {
+            return getRuleContext(Select_stmtContext.class, 0);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        public Bool_expr_single_inContext bool_expr_single_in() {
+            return getRuleContext(Bool_expr_single_inContext.class, 0);
+        }
+
+        public Bool_expr_multi_inContext bool_expr_multi_in() {
+            return getRuleContext(Bool_expr_multi_inContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_bool_expr_unary;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterBool_expr_unary(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitBool_expr_unary(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitBool_expr_unary(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Bool_expr_single_inContext extends ParserRuleContext {
+        public List<ExprContext> expr() {
+            return getRuleContexts(ExprContext.class);
+        }
+
+        public ExprContext expr(int i) {
+            return getRuleContext(ExprContext.class, i);
+        }
+
+        public Bool_expr_single_inContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_IN() {
+            return getToken(HplsqlParser.T_IN, 0);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        public Select_stmtContext select_stmt() {
+            return getRuleContext(Select_stmtContext.class, 0);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public TerminalNode T_NOT() {
+            return getToken(HplsqlParser.T_NOT, 0);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_bool_expr_single_in;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterBool_expr_single_in(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitBool_expr_single_in(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitBool_expr_single_in(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Bool_expr_multi_inContext extends ParserRuleContext {
+        public Bool_expr_multi_inContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<TerminalNode> T_OPEN_P() {
+            return getTokens(HplsqlParser.T_OPEN_P);
+        }
+
+        public TerminalNode T_OPEN_P(int i) {
+            return getToken(HplsqlParser.T_OPEN_P, i);
+        }
+
+        public List<ExprContext> expr() {
+            return getRuleContexts(ExprContext.class);
+        }
+
+        public ExprContext expr(int i) {
+            return getRuleContext(ExprContext.class, i);
+        }
+
+        public List<TerminalNode> T_CLOSE_P() {
+            return getTokens(HplsqlParser.T_CLOSE_P);
+        }
+
+        public TerminalNode T_CLOSE_P(int i) {
+            return getToken(HplsqlParser.T_CLOSE_P, i);
+        }
+
+        public TerminalNode T_IN() {
+            return getToken(HplsqlParser.T_IN, 0);
+        }
+
+        public Select_stmtContext select_stmt() {
+            return getRuleContext(Select_stmtContext.class, 0);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        public TerminalNode T_NOT() {
+            return getToken(HplsqlParser.T_NOT, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_bool_expr_multi_in;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterBool_expr_multi_in(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitBool_expr_multi_in(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitBool_expr_multi_in(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Bool_expr_binaryContext extends ParserRuleContext {
+        public Bool_expr_binaryContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<ExprContext> expr() {
+            return getRuleContexts(ExprContext.class);
+        }
+
+        public ExprContext expr(int i) {
+            return getRuleContext(ExprContext.class, i);
+        }
+
+        public Bool_expr_binary_operatorContext bool_expr_binary_operator() {
+            return getRuleContext(Bool_expr_binary_operatorContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_bool_expr_binary;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterBool_expr_binary(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitBool_expr_binary(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitBool_expr_binary(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Bool_expr_logical_operatorContext extends ParserRuleContext {
+        public Bool_expr_logical_operatorContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_AND() {
+            return getToken(HplsqlParser.T_AND, 0);
+        }
+
+        public TerminalNode T_OR() {
+            return getToken(HplsqlParser.T_OR, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_bool_expr_logical_operator;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterBool_expr_logical_operator(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitBool_expr_logical_operator(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitBool_expr_logical_operator(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Bool_expr_binary_operatorContext extends ParserRuleContext {
+        public Bool_expr_binary_operatorContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_EQUAL() {
+            return getToken(HplsqlParser.T_EQUAL, 0);
+        }
+
+        public TerminalNode T_EQUAL2() {
+            return getToken(HplsqlParser.T_EQUAL2, 0);
+        }
+
+        public TerminalNode T_NOTEQUAL() {
+            return getToken(HplsqlParser.T_NOTEQUAL, 0);
+        }
+
+        public TerminalNode T_NOTEQUAL2() {
+            return getToken(HplsqlParser.T_NOTEQUAL2, 0);
+        }
+
+        public TerminalNode T_LESS() {
+            return getToken(HplsqlParser.T_LESS, 0);
+        }
+
+        public TerminalNode T_LESSEQUAL() {
+            return getToken(HplsqlParser.T_LESSEQUAL, 0);
+        }
+
+        public TerminalNode T_GREATER() {
+            return getToken(HplsqlParser.T_GREATER, 0);
+        }
+
+        public TerminalNode T_GREATEREQUAL() {
+            return getToken(HplsqlParser.T_GREATEREQUAL, 0);
+        }
+
+        public TerminalNode T_LIKE() {
+            return getToken(HplsqlParser.T_LIKE, 0);
+        }
+
+        public TerminalNode T_RLIKE() {
+            return getToken(HplsqlParser.T_RLIKE, 0);
+        }
+
+        public TerminalNode T_REGEXP() {
+            return getToken(HplsqlParser.T_REGEXP, 0);
+        }
+
+        public TerminalNode T_NOT() {
+            return getToken(HplsqlParser.T_NOT, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_bool_expr_binary_operator;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterBool_expr_binary_operator(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitBool_expr_binary_operator(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitBool_expr_binary_operator(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class ExprContext extends ParserRuleContext {
+        public ExprContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public Select_stmtContext select_stmt() {
+            return getRuleContext(Select_stmtContext.class, 0);
+        }
+
+        public List<ExprContext> expr() {
+            return getRuleContexts(ExprContext.class);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        public ExprContext expr(int i) {
+            return getRuleContext(ExprContext.class, i);
+        }
+
+        public Expr_intervalContext expr_interval() {
+            return getRuleContext(Expr_intervalContext.class, 0);
+        }
+
+        public Expr_concatContext expr_concat() {
+            return getRuleContext(Expr_concatContext.class, 0);
+        }
+
+        public Expr_caseContext expr_case() {
+            return getRuleContext(Expr_caseContext.class, 0);
+        }
+
+        public Expr_cursor_attributeContext expr_cursor_attribute() {
+            return getRuleContext(Expr_cursor_attributeContext.class, 0);
+        }
+
+        public Expr_agg_window_funcContext expr_agg_window_func() {
+            return getRuleContext(Expr_agg_window_funcContext.class, 0);
+        }
+
+        public Expr_spec_funcContext expr_spec_func() {
+            return getRuleContext(Expr_spec_funcContext.class, 0);
+        }
+
+        public Expr_funcContext expr_func() {
+            return getRuleContext(Expr_funcContext.class, 0);
+        }
+
+        public Expr_atomContext expr_atom() {
+            return getRuleContext(Expr_atomContext.class, 0);
+        }
+
+        public TerminalNode T_MUL() {
+            return getToken(HplsqlParser.T_MUL, 0);
+        }
+
+        public TerminalNode T_DIV() {
+            return getToken(HplsqlParser.T_DIV, 0);
+        }
+
+        public TerminalNode T_ADD() {
+            return getToken(HplsqlParser.T_ADD, 0);
+        }
+
+        public TerminalNode T_SUB() {
+            return getToken(HplsqlParser.T_SUB, 0);
+        }
+
+        public Interval_itemContext interval_item() {
+            return getRuleContext(Interval_itemContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_expr;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExpr(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitExpr(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Expr_atomContext extends ParserRuleContext {
+        public Expr_atomContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public Date_literalContext date_literal() {
+            return getRuleContext(Date_literalContext.class, 0);
+        }
+
+        public Timestamp_literalContext timestamp_literal() {
+            return getRuleContext(Timestamp_literalContext.class, 0);
+        }
+
+        public Bool_literalContext bool_literal() {
+            return getRuleContext(Bool_literalContext.class, 0);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        public StringContext string() {
+            return getRuleContext(StringContext.class, 0);
+        }
+
+        public Dec_numberContext dec_number() {
+            return getRuleContext(Dec_numberContext.class, 0);
+        }
+
+        public Int_numberContext int_number() {
+            return getRuleContext(Int_numberContext.class, 0);
+        }
+
+        public Null_constContext null_const() {
+            return getRuleContext(Null_constContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_expr_atom;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExpr_atom(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr_atom(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitExpr_atom(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Expr_intervalContext extends ParserRuleContext {
+        public Expr_intervalContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_INTERVAL() {
+            return getToken(HplsqlParser.T_INTERVAL, 0);
+        }
+
+        public ExprContext expr() {
+            return getRuleContext(ExprContext.class, 0);
+        }
+
+        public Interval_itemContext interval_item() {
+            return getRuleContext(Interval_itemContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_expr_interval;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExpr_interval(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr_interval(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitExpr_interval(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Interval_itemContext extends ParserRuleContext {
+        public Interval_itemContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_DAY() {
+            return getToken(HplsqlParser.T_DAY, 0);
+        }
+
+        public TerminalNode T_DAYS() {
+            return getToken(HplsqlParser.T_DAYS, 0);
+        }
+
+        public TerminalNode T_MICROSECOND() {
+            return getToken(HplsqlParser.T_MICROSECOND, 0);
+        }
+
+        public TerminalNode T_MICROSECONDS() {
+            return getToken(HplsqlParser.T_MICROSECONDS, 0);
+        }
+
+        public TerminalNode T_SECOND() {
+            return getToken(HplsqlParser.T_SECOND, 0);
+        }
+
+        public TerminalNode T_SECONDS() {
+            return getToken(HplsqlParser.T_SECONDS, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_interval_item;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterInterval_item(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitInterval_item(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitInterval_item(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Expr_concatContext extends ParserRuleContext {
+        public Expr_concatContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<Expr_concat_itemContext> expr_concat_item() {
+            return getRuleContexts(Expr_concat_itemContext.class);
+        }
+
+        public Expr_concat_itemContext expr_concat_item(int i) {
+            return getRuleContext(Expr_concat_itemContext.class, i);
+        }
+
+        public List<TerminalNode> T_PIPE() {
+            return getTokens(HplsqlParser.T_PIPE);
+        }
+
+        public TerminalNode T_PIPE(int i) {
+            return getToken(HplsqlParser.T_PIPE, i);
+        }
+
+        public List<TerminalNode> T_CONCAT() {
+            return getTokens(HplsqlParser.T_CONCAT);
+        }
+
+        public TerminalNode T_CONCAT(int i) {
+            return getToken(HplsqlParser.T_CONCAT, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_expr_concat;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExpr_concat(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr_concat(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitExpr_concat(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Expr_concat_itemContext extends ParserRuleContext {
+        public Expr_concat_itemContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public ExprContext expr() {
+            return getRuleContext(ExprContext.class, 0);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        public Expr_caseContext expr_case() {
+            return getRuleContext(Expr_caseContext.class, 0);
+        }
+
+        public Expr_agg_window_funcContext expr_agg_window_func() {
+            return getRuleContext(Expr_agg_window_funcContext.class, 0);
+        }
+
+        public Expr_spec_funcContext expr_spec_func() {
+            return getRuleContext(Expr_spec_funcContext.class, 0);
+        }
+
+        public Expr_funcContext expr_func() {
+            return getRuleContext(Expr_funcContext.class, 0);
+        }
+
+        public Expr_atomContext expr_atom() {
+            return getRuleContext(Expr_atomContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_expr_concat_item;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExpr_concat_item(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr_concat_item(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitExpr_concat_item(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Expr_caseContext extends ParserRuleContext {
+        public Expr_caseContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public Expr_case_simpleContext expr_case_simple() {
+            return getRuleContext(Expr_case_simpleContext.class, 0);
+        }
+
+        public Expr_case_searchedContext expr_case_searched() {
+            return getRuleContext(Expr_case_searchedContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_expr_case;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExpr_case(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr_case(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitExpr_case(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Expr_case_simpleContext extends ParserRuleContext {
+        public Expr_case_simpleContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_CASE() {
+            return getToken(HplsqlParser.T_CASE, 0);
+        }
+
+        public List<ExprContext> expr() {
+            return getRuleContexts(ExprContext.class);
+        }
+
+        public ExprContext expr(int i) {
+            return getRuleContext(ExprContext.class, i);
+        }
+
+        public TerminalNode T_END() {
+            return getToken(HplsqlParser.T_END, 0);
+        }
+
+        public List<TerminalNode> T_WHEN() {
+            return getTokens(HplsqlParser.T_WHEN);
+        }
+
+        public TerminalNode T_WHEN(int i) {
+            return getToken(HplsqlParser.T_WHEN, i);
+        }
+
+        public List<TerminalNode> T_THEN() {
+            return getTokens(HplsqlParser.T_THEN);
+        }
+
+        public TerminalNode T_THEN(int i) {
+            return getToken(HplsqlParser.T_THEN, i);
+        }
+
+        public TerminalNode T_ELSE() {
+            return getToken(HplsqlParser.T_ELSE, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_expr_case_simple;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExpr_case_simple(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr_case_simple(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitExpr_case_simple(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Expr_case_searchedContext extends ParserRuleContext {
+        public Expr_case_searchedContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_CASE() {
+            return getToken(HplsqlParser.T_CASE, 0);
+        }
+
+        public TerminalNode T_END() {
+            return getToken(HplsqlParser.T_END, 0);
+        }
+
+        public List<TerminalNode> T_WHEN() {
+            return getTokens(HplsqlParser.T_WHEN);
+        }
+
+        public TerminalNode T_WHEN(int i) {
+            return getToken(HplsqlParser.T_WHEN, i);
+        }
+
+        public List<Bool_exprContext> bool_expr() {
+            return getRuleContexts(Bool_exprContext.class);
+        }
+
+        public Bool_exprContext bool_expr(int i) {
+            return getRuleContext(Bool_exprContext.class, i);
+        }
+
+        public List<TerminalNode> T_THEN() {
+            return getTokens(HplsqlParser.T_THEN);
+        }
+
+        public TerminalNode T_THEN(int i) {
+            return getToken(HplsqlParser.T_THEN, i);
+        }
+
+        public List<ExprContext> expr() {
+            return getRuleContexts(ExprContext.class);
+        }
+
+        public ExprContext expr(int i) {
+            return getRuleContext(ExprContext.class, i);
+        }
+
+        public TerminalNode T_ELSE() {
+            return getToken(HplsqlParser.T_ELSE, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_expr_case_searched;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExpr_case_searched(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr_case_searched(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitExpr_case_searched(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Expr_cursor_attributeContext extends ParserRuleContext {
+        public Expr_cursor_attributeContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        public TerminalNode T_ISOPEN() {
+            return getToken(HplsqlParser.T_ISOPEN, 0);
+        }
+
+        public TerminalNode T_FOUND() {
+            return getToken(HplsqlParser.T_FOUND, 0);
+        }
+
+        public TerminalNode T_NOTFOUND() {
+            return getToken(HplsqlParser.T_NOTFOUND, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_expr_cursor_attribute;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExpr_cursor_attribute(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr_cursor_attribute(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitExpr_cursor_attribute(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Expr_agg_window_funcContext extends ParserRuleContext {
+        public Expr_agg_window_funcContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_AVG() {
+            return getToken(HplsqlParser.T_AVG, 0);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public List<ExprContext> expr() {
+            return getRuleContexts(ExprContext.class);
+        }
+
+        public ExprContext expr(int i) {
+            return getRuleContext(ExprContext.class, i);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        public Expr_func_all_distinctContext expr_func_all_distinct() {
+            return getRuleContext(Expr_func_all_distinctContext.class, 0);
+        }
+
+        public Expr_func_over_clauseContext expr_func_over_clause() {
+            return getRuleContext(Expr_func_over_clauseContext.class, 0);
+        }
+
+        public TerminalNode T_COUNT() {
+            return getToken(HplsqlParser.T_COUNT, 0);
+        }
+
+        public TerminalNode T_MUL() {
+            return getToken(HplsqlParser.T_MUL, 0);
+        }
+
+        public TerminalNode T_COUNT_BIG() {
+            return getToken(HplsqlParser.T_COUNT_BIG, 0);
+        }
+
+        public TerminalNode T_CUME_DIST() {
+            return getToken(HplsqlParser.T_CUME_DIST, 0);
+        }
+
+        public TerminalNode T_DENSE_RANK() {
+            return getToken(HplsqlParser.T_DENSE_RANK, 0);
+        }
+
+        public TerminalNode T_FIRST_VALUE() {
+            return getToken(HplsqlParser.T_FIRST_VALUE, 0);
+        }
+
+        public TerminalNode T_LAG() {
+            return getToken(HplsqlParser.T_LAG, 0);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        public TerminalNode T_LAST_VALUE() {
+            return getToken(HplsqlParser.T_LAST_VALUE, 0);
+        }
+
+        public TerminalNode T_LEAD() {
+            return getToken(HplsqlParser.T_LEAD, 0);
+        }
+
+        public TerminalNode T_MAX() {
+            return getToken(HplsqlParser.T_MAX, 0);
+        }
+
+        public TerminalNode T_MIN() {
+            return getToken(HplsqlParser.T_MIN, 0);
+        }
+
+        public TerminalNode T_RANK() {
+            return getToken(HplsqlParser.T_RANK, 0);
+        }
+
+        public TerminalNode T_ROW_NUMBER() {
+            return getToken(HplsqlParser.T_ROW_NUMBER, 0);
+        }
+
+        public TerminalNode T_STDEV() {
+            return getToken(HplsqlParser.T_STDEV, 0);
+        }
+
+        public TerminalNode T_SUM() {
+            return getToken(HplsqlParser.T_SUM, 0);
+        }
+
+        public TerminalNode T_VAR() {
+            return getToken(HplsqlParser.T_VAR, 0);
+        }
+
+        public TerminalNode T_VARIANCE() {
+            return getToken(HplsqlParser.T_VARIANCE, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_expr_agg_window_func;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExpr_agg_window_func(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr_agg_window_func(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitExpr_agg_window_func(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Expr_func_all_distinctContext extends ParserRuleContext {
+        public Expr_func_all_distinctContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_ALL() {
+            return getToken(HplsqlParser.T_ALL, 0);
+        }
+
+        public TerminalNode T_DISTINCT() {
+            return getToken(HplsqlParser.T_DISTINCT, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_expr_func_all_distinct;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExpr_func_all_distinct(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr_func_all_distinct(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitExpr_func_all_distinct(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Expr_func_over_clauseContext extends ParserRuleContext {
+        public Expr_func_over_clauseContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_OVER() {
+            return getToken(HplsqlParser.T_OVER, 0);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        public Expr_func_partition_by_clauseContext expr_func_partition_by_clause() {
+            return getRuleContext(Expr_func_partition_by_clauseContext.class, 0);
+        }
+
+        public Order_by_clauseContext order_by_clause() {
+            return getRuleContext(Order_by_clauseContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_expr_func_over_clause;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExpr_func_over_clause(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr_func_over_clause(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitExpr_func_over_clause(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Expr_func_partition_by_clauseContext extends ParserRuleContext {
+        public Expr_func_partition_by_clauseContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_PARTITION() {
+            return getToken(HplsqlParser.T_PARTITION, 0);
+        }
+
+        public List<ExprContext> expr() {
+            return getRuleContexts(ExprContext.class);
+        }
+
+        public TerminalNode T_BY() {
+            return getToken(HplsqlParser.T_BY, 0);
+        }
+
+        public ExprContext expr(int i) {
+            return getRuleContext(ExprContext.class, i);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_expr_func_partition_by_clause;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener)
+                ((HplsqlListener) listener).enterExpr_func_partition_by_clause(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr_func_partition_by_clause(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitExpr_func_partition_by_clause(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Expr_spec_funcContext extends ParserRuleContext {
+        public Expr_spec_funcContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_ACTIVITY_COUNT() {
+            return getToken(HplsqlParser.T_ACTIVITY_COUNT, 0);
+        }
+
+        public TerminalNode T_CAST() {
+            return getToken(HplsqlParser.T_CAST, 0);
+        }
+
+        public List<ExprContext> expr() {
+            return getRuleContexts(ExprContext.class);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public ExprContext expr(int i) {
+            return getRuleContext(ExprContext.class, i);
+        }
+
+        public TerminalNode T_AS() {
+            return getToken(HplsqlParser.T_AS, 0);
+        }
+
+        public DtypeContext dtype() {
+            return getRuleContext(DtypeContext.class, 0);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        public Dtype_lenContext dtype_len() {
+            return getRuleContext(Dtype_lenContext.class, 0);
+        }
+
+        public TerminalNode T_COUNT() {
+            return getToken(HplsqlParser.T_COUNT, 0);
+        }
+
+        public TerminalNode T_MUL() {
+            return getToken(HplsqlParser.T_MUL, 0);
+        }
+
+        public TerminalNode T_CURRENT_DATE() {
+            return getToken(HplsqlParser.T_CURRENT_DATE, 0);
+        }
+
+        public TerminalNode T_CURRENT() {
+            return getToken(HplsqlParser.T_CURRENT, 0);
+        }
+
+        public TerminalNode T_DATE() {
+            return getToken(HplsqlParser.T_DATE, 0);
+        }
+
+        public TerminalNode T_CURRENT_TIMESTAMP() {
+            return getToken(HplsqlParser.T_CURRENT_TIMESTAMP, 0);
+        }
+
+        public TerminalNode T_TIMESTAMP() {
+            return getToken(HplsqlParser.T_TIMESTAMP, 0);
+        }
+
+        public TerminalNode T_CURRENT_USER() {
+            return getToken(HplsqlParser.T_CURRENT_USER, 0);
+        }
+
+        public TerminalNode T_USER() {
+            return getToken(HplsqlParser.T_USER, 0);
+        }
+
+        public TerminalNode T_MAX_PART_STRING() {
+            return getToken(HplsqlParser.T_MAX_PART_STRING, 0);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        public List<TerminalNode> T_EQUAL() {
+            return getTokens(HplsqlParser.T_EQUAL);
+        }
+
+        public TerminalNode T_EQUAL(int i) {
+            return getToken(HplsqlParser.T_EQUAL, i);
+        }
+
+        public TerminalNode T_MIN_PART_STRING() {
+            return getToken(HplsqlParser.T_MIN_PART_STRING, 0);
+        }
+
+        public TerminalNode T_MAX_PART_INT() {
+            return getToken(HplsqlParser.T_MAX_PART_INT, 0);
+        }
+
+        public TerminalNode T_MIN_PART_INT() {
+            return getToken(HplsqlParser.T_MIN_PART_INT, 0);
+        }
+
+        public TerminalNode T_MAX_PART_DATE() {
+            return getToken(HplsqlParser.T_MAX_PART_DATE, 0);
+        }
+
+        public TerminalNode T_MIN_PART_DATE() {
+            return getToken(HplsqlParser.T_MIN_PART_DATE, 0);
+        }
+
+        public TerminalNode T_PART_COUNT() {
+            return getToken(HplsqlParser.T_PART_COUNT, 0);
+        }
+
+        public TerminalNode T_PART_LOC() {
+            return getToken(HplsqlParser.T_PART_LOC, 0);
+        }
+
+        public TerminalNode T_TRIM() {
+            return getToken(HplsqlParser.T_TRIM, 0);
+        }
+
+        public TerminalNode T_SUBSTRING() {
+            return getToken(HplsqlParser.T_SUBSTRING, 0);
+        }
+
+        public TerminalNode T_FROM() {
+            return getToken(HplsqlParser.T_FROM, 0);
+        }
+
+        public TerminalNode T_FOR() {
+            return getToken(HplsqlParser.T_FOR, 0);
+        }
+
+        public TerminalNode T_SYSDATE() {
+            return getToken(HplsqlParser.T_SYSDATE, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_expr_spec_func;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExpr_spec_func(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr_spec_func(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitExpr_spec_func(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Expr_funcContext extends ParserRuleContext {
+        public Expr_funcContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        public Expr_func_paramsContext expr_func_params() {
+            return getRuleContext(Expr_func_paramsContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_expr_func;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExpr_func(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr_func(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitExpr_func(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Expr_func_paramsContext extends ParserRuleContext {
+        public Expr_func_paramsContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<Func_paramContext> func_param() {
+            return getRuleContexts(Func_paramContext.class);
+        }
+
+        public List<TerminalNode> T_COMMA() {
+            return getTokens(HplsqlParser.T_COMMA);
+        }
+
+        public Func_paramContext func_param(int i) {
+            return getRuleContext(Func_paramContext.class, i);
+        }
+
+        public TerminalNode T_COMMA(int i) {
+            return getToken(HplsqlParser.T_COMMA, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_expr_func_params;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterExpr_func_params(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitExpr_func_params(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitExpr_func_params(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Func_paramContext extends ParserRuleContext {
+        public Func_paramContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public ExprContext expr() {
+            return getRuleContext(ExprContext.class, 0);
+        }
+
+        public IdentContext ident() {
+            return getRuleContext(IdentContext.class, 0);
+        }
+
+        public TerminalNode T_EQUAL() {
+            return getToken(HplsqlParser.T_EQUAL, 0);
+        }
+
+        public TerminalNode T_GREATER() {
+            return getToken(HplsqlParser.T_GREATER, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_func_param;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterFunc_param(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitFunc_param(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitFunc_param(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Write_stmtContext extends ParserRuleContext {
+        public Write_stmtContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_OPEN_P() {
+            return getToken(HplsqlParser.T_OPEN_P, 0);
+        }
+
+        public TerminalNode T_WRITE() {
+            return getToken(HplsqlParser.T_WRITE, 0);
+        }
+
+        public Write_stmt_stringContext write_stmt_string() {
+            return getRuleContext(Write_stmt_stringContext.class, 0);
+        }
+
+        public TerminalNode T_CLOSE_P() {
+            return getToken(HplsqlParser.T_CLOSE_P, 0);
+        }
+
+        public TerminalNode T_SEMICOLON() {
+            return getToken(HplsqlParser.T_SEMICOLON, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_write_stmt;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterWrite_stmt(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitWrite_stmt(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitWrite_stmt(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Write_stmt_stringContext extends ParserRuleContext {
+        public Write_stmt_stringContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<StringContext> string() {
+            return getRuleContexts(StringContext.class);
+        }
+
+        public StringContext string(int i) {
+            return getRuleContext(StringContext.class, i);
+        }
+
+        public List<IdentContext> ident() {
+            return getRuleContexts(IdentContext.class);
+        }
+
+        public IdentContext ident(int i) {
+            return getRuleContext(IdentContext.class, i);
+        }
+
+        public List<TerminalNode> T_ADD() {
+            return getTokens(HplsqlParser.T_ADD);
+        }
+
+        public TerminalNode T_ADD(int i) {
+            return getToken(HplsqlParser.T_ADD, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_write_stmt_string;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterWrite_stmt_string(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitWrite_stmt_string(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitWrite_stmt_string(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Date_literalContext extends ParserRuleContext {
+        public Date_literalContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_DATE() {
+            return getToken(HplsqlParser.T_DATE, 0);
+        }
+
+        public StringContext string() {
+            return getRuleContext(StringContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_date_literal;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterDate_literal(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitDate_literal(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitDate_literal(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Timestamp_literalContext extends ParserRuleContext {
+        public Timestamp_literalContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_TIMESTAMP() {
+            return getToken(HplsqlParser.T_TIMESTAMP, 0);
+        }
+
+        public StringContext string() {
+            return getRuleContext(StringContext.class, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_timestamp_literal;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterTimestamp_literal(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitTimestamp_literal(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitTimestamp_literal(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class IdentContext extends ParserRuleContext {
+        public IdentContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public List<TerminalNode> L_ID() {
+            return getTokens(HplsqlParser.L_ID);
+        }
+
+        public TerminalNode L_ID(int i) {
+            return getToken(HplsqlParser.L_ID, i);
+        }
+
+        public List<Non_reserved_wordsContext> non_reserved_words() {
+            return getRuleContexts(Non_reserved_wordsContext.class);
+        }
+
+        public Non_reserved_wordsContext non_reserved_words(int i) {
+            return getRuleContext(Non_reserved_wordsContext.class, i);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_ident;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterIdent(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitIdent(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitIdent(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class StringContext extends ParserRuleContext {
+        public StringContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public StringContext() {
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_string;
+        }
+
+        public void copyFrom(StringContext ctx) {
+            super.copyFrom(ctx);
+        }
+    }
+
+    public static class Double_quotedStringContext extends StringContext {
+        public Double_quotedStringContext(StringContext ctx) {
+            copyFrom(ctx);
+        }
+
+        public TerminalNode L_D_STRING() {
+            return getToken(HplsqlParser.L_D_STRING, 0);
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterDouble_quotedString(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitDouble_quotedString(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitDouble_quotedString(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Single_quotedStringContext extends StringContext {
+        public Single_quotedStringContext(StringContext ctx) {
+            copyFrom(ctx);
+        }
+
+        public TerminalNode L_S_STRING() {
+            return getToken(HplsqlParser.L_S_STRING, 0);
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterSingle_quotedString(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitSingle_quotedString(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor)
+                return ((HplsqlVisitor<? extends T>) visitor).visitSingle_quotedString(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Int_numberContext extends ParserRuleContext {
+        public Int_numberContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode L_INT() {
+            return getToken(HplsqlParser.L_INT, 0);
+        }
+
+        public TerminalNode T_SUB() {
+            return getToken(HplsqlParser.T_SUB, 0);
+        }
+
+        public TerminalNode T_ADD() {
+            return getToken(HplsqlParser.T_ADD, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_int_number;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterInt_number(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitInt_number(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitInt_number(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Dec_numberContext extends ParserRuleContext {
+        public Dec_numberContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode L_DEC() {
+            return getToken(HplsqlParser.L_DEC, 0);
+        }
+
+        public TerminalNode T_SUB() {
+            return getToken(HplsqlParser.T_SUB, 0);
+        }
+
+        public TerminalNode T_ADD() {
+            return getToken(HplsqlParser.T_ADD, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_dec_number;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterDec_number(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitDec_number(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitDec_number(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Bool_literalContext extends ParserRuleContext {
+        public Bool_literalContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_TRUE() {
+            return getToken(HplsqlParser.T_TRUE, 0);
+        }
+
+        public TerminalNode T_FALSE() {
+            return getToken(HplsqlParser.T_FALSE, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_bool_literal;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterBool_literal(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitBool_literal(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitBool_literal(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public static class Null_constContext extends ParserRuleContext {
+        public Null_constContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        public TerminalNode T_NULL() {
+            return getToken(HplsqlParser.T_NULL, 0);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_null_const;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).enterNull_const(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof HplsqlListener) ((HplsqlListener) listener).exitNull_const(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof HplsqlVisitor) return ((HplsqlVisitor<? extends T>) visitor).visitNull_const(this);
+            else return visitor.visitChildren(this);
+        }
+	}
 
 	public static class Non_reserved_wordsContext extends ParserRuleContext {
 		public TerminalNode T_ACTION() { return getToken(HplsqlParser.T_ACTION, 0); }
@@ -27061,9 +27942,11 @@ public class HplsqlParser extends Parser {
 		public TerminalNode T_DEFERRED() { return getToken(HplsqlParser.T_DEFERRED, 0); }
 		public TerminalNode T_DEFINED() { return getToken(HplsqlParser.T_DEFINED, 0); }
 		public TerminalNode T_DEFINER() { return getToken(HplsqlParser.T_DEFINER, 0); }
-		public TerminalNode T_DEFINITION() { return getToken(HplsqlParser.T_DEFINITION, 0); }
+		public TerminalNode T_DEFINITION() { return getToken(HplsqlParser.T_DEFINITION, 0);
+        }
 
-        public TerminalNode T_DELETE() { return getToken(HplsqlParser.T_DELETE, 0);
+        public TerminalNode T_DELETE() {
+            return getToken(HplsqlParser.T_DELETE, 0);
         }
 
         public TerminalNode T_DELEMITER() {

@@ -26,8 +26,8 @@ public class HplsqlLexer extends Lexer {
 		T_COLLECTION=38, T_COMMENT=39, T_CONSTANT=40, T_COMMIT=41, T_COMPRESS=42, 
 		T_CONCAT=43, T_CONDITION=44, T_CONSTRAINT=45, T_CONTINUE=46, T_COUNT=47, 
 		T_COUNT_BIG=48, T_CREATE=49, T_CREATION=50, T_CREATOR=51, T_CS=52, T_CURRENT=53, 
-		T_DATABASE=54, T_DATA=55, T_DATE=56, T_DATETIME=57, T_DAY=58, T_DAYS=59, 
-		T_DEC=60, T_DECIMAL=61, T_DECLARE=62, T_DEFAULT=63, T_DEFERRED=64, T_DEFINED=65,
+		T_DATABASE=54, T_DATA=55, T_DATE=56, T_DATETIME=57, T_DAY=58, T_DAYS=59,
+            T_DEC = 60, T_DECIMAL = 61, T_DECLARE = 62, T_DEFAULT = 63, T_DEFERRED = 64, T_DEFINED = 65,
             T_DEFINER = 66, T_DEFINITION = 67, T_DELETE = 68, T_DELEMITER = 69, T_DELIMITED = 70,
             T_DESC = 71, T_DIR = 72, T_DIRECTORY = 73, T_DISTINCT = 74, T_DISTRIBUTE = 75, T_DO = 76,
             T_DOUBLE = 77, T_DROP = 78, T_DYNAMIC = 79, T_ELSE = 80, T_ELSEIF = 81, T_ELSIF = 82,
@@ -84,6 +84,16 @@ public class HplsqlLexer extends Lexer {
 	public static String[] modeNames = {
 		"DEFAULT_MODE"
 	};
+    public static final String[] ruleNames = makeRuleNames();
+    /**
+     * @deprecated Use {@link #VOCABULARY} instead.
+     */
+    @Deprecated
+    public static final String[] tokenNames;
+    private static final String[] _LITERAL_NAMES = makeLiteralNames();
+    private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
+    public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
+    private static final int _serializedATNSegments = 2;
     private static final String _serializedATNSegment0 =
             "\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\2\u0147\u0c3a\b\1\4" +
                     "\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n" +
@@ -1252,7 +1262,6 @@ public class HplsqlLexer extends Lexer {
                     "\u02a5\u0153\2\u099f\u09a0\5\u02b1\u0159\2\u09a0\u09a1\5\u02af\u0158\2" +
                     "\u09a1\u01f2\3\2\2\2\u09a2\u09a3\5\u02bd\u015f\2\u09a3\u09a4\5\u02af\u0158" +
                     "\2\u09a4\u09a5\5\u02a5\u0153\2\u09a5\u09a6\5";
-    public static final String[] ruleNames = makeRuleNames();
     private static final String _serializedATNSegment1 =
             "\u02b5\u015b\2\u09a6\u09a7\5\u02bd\u015f\2\u09a7\u09a8\5\u029d\u014f\2" +
                     "\u09a8\u01f4\3\2\2\2\u09a9\u09aa\5\u02bd\u015f\2\u09aa\u09ab\5\u02b3\u015a" +
@@ -1490,10 +1499,28 @@ public class HplsqlLexer extends Lexer {
                     "\u0b5e\u0b66\u0b68\u0b70\u0b75\u0b7c\u0b83\u0b85\u0b8a\u0b94\u0ba0\u0ba5" +
                     "\u0ba9\u0bb2\u0bb4\u0bbb\u0bc1\u0bc3\u0bcc\u0bce\u0bd6\u0bde\u0be0\u0be6" +
                     "\u0bee\u0bf6\u0bfa\u0c00\4\b\2\2\2\3\2";
-    private static final String[] _LITERAL_NAMES = makeLiteralNames();
+
+    static {
+        tokenNames = new String[_SYMBOLIC_NAMES.length];
+        for (int i = 0; i < tokenNames.length; i++) {
+            tokenNames[i] = VOCABULARY.getLiteralName(i);
+            if (tokenNames[i] == null) {
+                tokenNames[i] = VOCABULARY.getSymbolicName(i);
+            }
+
+            if (tokenNames[i] == null) {
+                tokenNames[i] = "<INVALID>";
+            }
+        }
+    }
+
+    public HplsqlLexer(CharStream input) {
+        super(input);
+        _interp = new LexerATNSimulator(this, _ATN, _decisionToDFA, _sharedContextCache);
+    }
 
 	private static String[] makeRuleNames() {
-		return new String[] {
+		return new String[]{
                 "T__0", "T__1", "T__2", "T__3", "T_ACTION", "T_ALL", "T_ALTER", "T_AND",
                 "T_AS", "T_ASC", "T_ASSOCIATE", "T_AT", "T_AUTO_INCREMENT", "T_AVG",
                 "T_BEGIN", "T_BETWEEN", "T_BIGINT", "T_BINARY_DOUBLE", "T_BINARY_FLOAT",
@@ -1553,81 +1580,8 @@ public class HplsqlLexer extends Lexer {
 		};
 	}
 
-    private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
-    public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
-
-    /**
-     * @deprecated Use {@link #VOCABULARY} instead.
-     */
-    @Deprecated
-    public static final String[] tokenNames;
-
-    static {
-        tokenNames = new String[_SYMBOLIC_NAMES.length];
-        for (int i = 0; i < tokenNames.length; i++) {
-            tokenNames[i] = VOCABULARY.getLiteralName(i);
-            if (tokenNames[i] == null) {
-                tokenNames[i] = VOCABULARY.getSymbolicName(i);
-            }
-
-            if (tokenNames[i] == null) {
-                tokenNames[i] = "<INVALID>";
-            }
-        }
-    }
-
-    @Override
-    @Deprecated
-    public String[] getTokenNames() {
-        return tokenNames;
-    }
-
-    @Override
-
-    public Vocabulary getVocabulary() {
-        return VOCABULARY;
-    }
-
-
-    public HplsqlLexer(CharStream input) {
-        super(input);
-        _interp = new LexerATNSimulator(this, _ATN, _decisionToDFA, _sharedContextCache);
-    }
-
-    @Override
-    public String getGrammarFileName() {
-        return "Hplsql.g4";
-    }
-
-    @Override
-    public String[] getRuleNames() {
-        return ruleNames;
-    }
-
-    @Override
-    public String getSerializedATN() {
-        return _serializedATN;
-    }
-
-    @Override
-    public String[] getChannelNames() {
-        return channelNames;
-    }
-
-    @Override
-    public String[] getModeNames() {
-        return modeNames;
-    }
-
-    @Override
-    public ATN getATN() {
-        return _ATN;
-    }
-
-    private static final int _serializedATNSegments = 2;
-
 	private static String[] makeLiteralNames() {
-		return new String[]{
+        return new String[]{
                 null, "'@'", "'#'", "'%'", "'.'", null, null, null, null, null, null,
                 null, null, null, null, null, null, null, null, null, null, null, null,
                 null, null, null, null, null, null, null, null, null, null, null, null,
@@ -1658,8 +1612,8 @@ public class HplsqlLexer extends Lexer {
 		};
 	}
 
-	private static String[] makeSymbolicNames() {
-		return new String[]{
+    private static String[] makeSymbolicNames() {
+        return new String[]{
                 null, null, null, null, null, "T_ACTION", "T_ALL", "T_ALTER", "T_AND",
                 "T_AS", "T_ASC", "T_ASSOCIATE", "T_AT", "T_AUTO_INCREMENT", "T_AVG",
                 "T_BEGIN", "T_BETWEEN", "T_BIGINT", "T_BINARY_DOUBLE", "T_BINARY_FLOAT",
@@ -1712,9 +1666,50 @@ public class HplsqlLexer extends Lexer {
                 "T_NOTEQUAL2", "T_GREATER", "T_GREATEREQUAL", "T_LESS", "T_LESSEQUAL",
                 "T_MUL", "T_OPEN_B", "T_OPEN_P", "T_OPEN_SB", "T_CLOSE_B", "T_CLOSE_P",
                 "T_CLOSE_SB", "T_SEMICOLON", "T_SUB", "L_ID", "L_S_STRING", "L_D_STRING",
-			"L_INT", "L_DEC", "L_WS", "L_M_COMMENT", "L_S_COMMENT", "L_FILE", "L_LABEL"
-		};
-	}
+                "L_INT", "L_DEC", "L_WS", "L_M_COMMENT", "L_S_COMMENT", "L_FILE", "L_LABEL"
+        };
+    }
+
+    @Override
+    @Deprecated
+    public String[] getTokenNames() {
+        return tokenNames;
+    }
+
+    @Override
+
+    public Vocabulary getVocabulary() {
+        return VOCABULARY;
+    }
+
+    @Override
+    public String getGrammarFileName() {
+        return "Hplsql.g4";
+    }
+
+    @Override
+    public String[] getRuleNames() {
+        return ruleNames;
+    }
+
+    @Override
+    public String getSerializedATN() {
+        return _serializedATN;
+    }
+
+    @Override
+    public String[] getChannelNames() {
+        return channelNames;
+    }
+
+    @Override
+    public String[] getModeNames() {
+        return modeNames;
+    }
+
+    @Override
+    public ATN getATN() {
+        return _ATN; }
 	public static final String _serializedATN = Utils.join(
 		new String[] {
 			_serializedATNSegment0,

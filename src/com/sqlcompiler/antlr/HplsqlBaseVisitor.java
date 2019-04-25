@@ -359,7 +359,7 @@ public class HplsqlBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
      * {@link #visitChildren} on {@code ctx}.</p>
      */
     @Override
-    public T visitCreate_type_delemiter(HplsqlParser.Create_type_delemiterContext ctx) {
+    public T visitCreate_type_delimiter(HplsqlParser.Create_type_delimiterContext ctx) {
         return visitChildren(ctx);
     }
 
@@ -369,7 +369,10 @@ public class HplsqlBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
      * <p>The default implementation returns the result of calling
      * {@link #visitChildren} on {@code ctx}.</p>
      */
-    @Override public T visitDeclare_temporary_table_item(HplsqlParser.Declare_temporary_table_itemContext ctx) { return visitChildren(ctx); }
+    @Override
+    public T visitDeclare_temporary_table_item(HplsqlParser.Declare_temporary_table_itemContext ctx) {
+        return visitChildren(ctx);
+    }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -500,9 +503,10 @@ public class HplsqlBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-    @Override public T visitCreate_table_store_location(HplsqlParser.Create_table_store_locationContext ctx) {
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitCreate_table_store_location(HplsqlParser.Create_table_store_locationContext ctx) {
         return visitChildren(ctx);
     }
 
@@ -513,7 +517,7 @@ public class HplsqlBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
      * {@link #visitChildren} on {@code ctx}.</p>
      */
     @Override
-    public T visitCreate_table_delemiter(HplsqlParser.Create_table_delemiterContext ctx) { return visitChildren(ctx); }
+    public T visitCreate_table_delimiter(HplsqlParser.Create_table_delimiterContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

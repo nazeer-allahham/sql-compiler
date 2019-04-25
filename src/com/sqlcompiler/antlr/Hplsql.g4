@@ -241,13 +241,13 @@ create_type_options:
 
 create_type_option:
         create_type_store_location
-    |   create_type_delemiter
+    |   create_type_delimiter
     ;
 
 create_type_store_location:
         T_LOCATION string (T_COMMA string)*;
 
-create_type_delemiter:
+create_type_delimiter:
         T_DELIMITED string;
 
 // DECLARE TEMPORARY TABLE statement
@@ -326,7 +326,7 @@ create_table_options_item :
     |   create_table_options_mssql_item
     |   create_table_options_mysql_item
     |   create_table_store_location
-    |   create_table_delemiter
+    |   create_table_delimiter
     ;
 
 create_table_options_ora_item :
@@ -361,7 +361,7 @@ create_table_options_hive_item :
 create_table_store_location:
         T_LOCATION string (T_COMMA string)*;
 
-create_table_delemiter:
+create_table_delimiter:
         T_DELIMITED string;
 
 create_table_hive_row_format :

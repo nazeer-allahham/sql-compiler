@@ -298,12 +298,12 @@ public interface HplsqlVisitor<T> extends ParseTreeVisitor<T> {
     T visitCreate_type_store_location(HplsqlParser.Create_type_store_locationContext ctx);
 
     /**
-     * Visit a parse tree produced by {@link HplsqlParser#create_type_delemiter}.
+     * Visit a parse tree produced by {@link HplsqlParser#create_type_delimiter}.
      *
      * @param ctx the parse tree
      * @return the visitor result
      */
-    T visitCreate_type_delemiter(HplsqlParser.Create_type_delemiterContext ctx);
+    T visitCreate_type_delimiter(HplsqlParser.Create_type_delimiterContext ctx);
 
     /**
 	 * Visit a parse tree produced by {@link HplsqlParser#declare_temporary_table_item}.
@@ -427,12 +427,12 @@ public interface HplsqlVisitor<T> extends ParseTreeVisitor<T> {
 	T visitCreate_table_store_location(HplsqlParser.Create_table_store_locationContext ctx);
 
     /**
-     * Visit a parse tree produced by {@link HplsqlParser#create_table_delemiter}.
+     * Visit a parse tree produced by {@link HplsqlParser#create_table_delimiter}.
      *
      * @param ctx the parse tree
      * @return the visitor result
      */
-    T visitCreate_table_delemiter(HplsqlParser.Create_table_delemiterContext ctx);
+    T visitCreate_table_delimiter(HplsqlParser.Create_table_delimiterContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link HplsqlParser#create_table_hive_row_format}.
 	 * @param ctx the parse tree

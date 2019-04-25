@@ -702,7 +702,7 @@ create_type_items_item
 create_type_options
 create_type_option
 create_type_store_location
-create_type_delemiter
+create_type_delimiter
 declare_temporary_table_item
 create_table_stmt
 create_local_temp_table_stmt
@@ -723,7 +723,7 @@ create_table_options_db2_item
 create_table_options_td_item
 create_table_options_hive_item
 create_table_store_location
-create_table_delemiter
+create_table_delimiter
 create_table_hive_row_format
 create_table_hive_row_format_fields
 create_table_options_mssql_item

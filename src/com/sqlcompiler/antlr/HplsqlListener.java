@@ -489,18 +489,18 @@ public interface HplsqlListener extends ParseTreeListener {
     void exitCreate_type_store_location(HplsqlParser.Create_type_store_locationContext ctx);
 
     /**
-     * Enter a parse tree produced by {@link HplsqlParser#create_type_delemiter}.
+     * Enter a parse tree produced by {@link HplsqlParser#create_type_delimiter}.
      *
      * @param ctx the parse tree
      */
-    void enterCreate_type_delemiter(HplsqlParser.Create_type_delemiterContext ctx);
+    void enterCreate_type_delimiter(HplsqlParser.Create_type_delimiterContext ctx);
 
     /**
-     * Exit a parse tree produced by {@link HplsqlParser#create_type_delemiter}.
+     * Exit a parse tree produced by {@link HplsqlParser#create_type_delimiter}.
      *
      * @param ctx the parse tree
      */
-    void exitCreate_type_delemiter(HplsqlParser.Create_type_delemiterContext ctx);
+    void exitCreate_type_delimiter(HplsqlParser.Create_type_delimiterContext ctx);
 
     /**
 	 * Enter a parse tree produced by {@link HplsqlParser#declare_temporary_table_item}.
@@ -698,23 +698,23 @@ public interface HplsqlListener extends ParseTreeListener {
 	 */
 	void enterCreate_table_store_location(HplsqlParser.Create_table_store_locationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link HplsqlParser#create_table_store_location}.
-	 * @param ctx the parse tree
+     * Exit a parse tree produced by {@link HplsqlParser#create_table_store_location}.
+     * @param ctx the parse tree
      */
     void exitCreate_table_store_location(HplsqlParser.Create_table_store_locationContext ctx);
 
     /**
-     * Enter a parse tree produced by {@link HplsqlParser#create_table_delemiter}.
+     * Enter a parse tree produced by {@link HplsqlParser#create_table_delimiter}.
      *
      * @param ctx the parse tree
      */
-    void enterCreate_table_delemiter(HplsqlParser.Create_table_delemiterContext ctx);
+    void enterCreate_table_delimiter(HplsqlParser.Create_table_delimiterContext ctx);
 
     /**
-     * Exit a parse tree produced by {@link HplsqlParser#create_table_delemiter}.
+     * Exit a parse tree produced by {@link HplsqlParser#create_table_delimiter}.
      * @param ctx the parse tree
-     */
-    void exitCreate_table_delemiter(HplsqlParser.Create_table_delemiterContext ctx);
+	 */
+	void exitCreate_table_delimiter(HplsqlParser.Create_table_delimiterContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link HplsqlParser#create_table_hive_row_format}.
 	 * @param ctx the parse tree
