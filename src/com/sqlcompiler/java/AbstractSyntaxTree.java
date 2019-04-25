@@ -63,8 +63,8 @@ class AbstractSyntaxTree {
                     break;
                 case HplsqlParser.RULE_create_table_delimiter:
                 case HplsqlParser.RULE_create_type_delimiter:
-                    System.out.println(ctx.getChild(1).getText());
-                    DataTypes.setDelimiter(ctx.getChild(1).getText());
+                    System.out.println(ctx.getChild(2).getText());
+                    DataTypes.setDelimiter(ctx.getChild(2).getText());
                     break;
 
                 case HplsqlParser.RULE_create_type_stmt:

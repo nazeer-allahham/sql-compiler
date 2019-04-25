@@ -220,7 +220,7 @@ declare_handler_item :
 
 // Create or define type statement
 create_type_stmt:
-        T_CREATE T_TYPE table_name create_type_definition
+        T_CREATE T_TYPE table_name create_type_definition create_type_options
     ;
 
 create_type_definition:
@@ -235,6 +235,10 @@ create_type_items_item:
         ident T_COLON (ident | string)
     ;
 
+create_type_options:
+        create_type_option*
+    ;
+
 create_type_option:
         create_type_store_location
     |   create_type_delimiter
@@ -244,7 +248,7 @@ create_type_store_location:
         T_LOCATION string (T_COMMA string)*;
 
 create_type_delimiter:
-        T_DELIMITED string;
+        T_DELIMITED T_BY string;
 
 // DECLARE TEMPORARY TABLE statement
 declare_temporary_table_item :
@@ -358,7 +362,7 @@ create_table_store_location:
         T_LOCATION string (T_COMMA string)*;
 
 create_table_delimiter:
-        T_DELIMITED string;
+        T_DELIMITED T_BY string;
 
 create_table_hive_row_format :
         T_ROW T_FORMAT T_DELIMITED create_table_hive_row_format_fields*
