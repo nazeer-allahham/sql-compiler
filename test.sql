@@ -1,6 +1,5 @@
-int f(boolean x, string s)
-{
 
-}
-boolean b=false;
-int v=f("" ,4);
+SELECT id, name,count(*)
+FROM c
+
+GROUP BY id, name,f,sum(id);

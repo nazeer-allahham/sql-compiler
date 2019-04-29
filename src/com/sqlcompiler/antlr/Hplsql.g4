@@ -755,7 +755,7 @@ select_list_item :
 
 select_list_alias :
         {!_input.LT(1).getText().equalsIgnoreCase("INTO") &&
-         !_input.LT(1).getText().equalsIgnoreCase("FROM")}? T_AS? ident
+         !_input.LT(1).getText().equalsIgnoreCase("FROM")}? T_AS ident
     |   T_OPEN_P T_TITLE L_S_STRING T_CLOSE_P
     ;
 
@@ -805,7 +805,7 @@ from_table_values_row:
     ;
 
 from_alias_clause :
-    T_AS? ident (T_OPEN_P L_ID (T_COMMA L_ID)* T_CLOSE_P)?
+    T_AS ident (T_OPEN_P L_ID (T_COMMA L_ID)* T_CLOSE_P)?
     ;
 
 table_name :

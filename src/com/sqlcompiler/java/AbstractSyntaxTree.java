@@ -21,7 +21,7 @@ class AbstractSyntaxTree {
     private Integer lnCount = 1;
     private ParserRuleContext root = null;
     private LinkedList<Field> ColumnsCreateTable = null;
-    ArrayList<String> columnsSelectStmt = new ArrayList<>();
+    ArrayList<String> columnsSelectStmt = new ArrayList<>(), columnsGroupBy = new ArrayList<>();
     ArrayList<Field> cppFunctionParam = null;
     private String nameField, typeField, nameTable, typeCppFunction;
 
@@ -90,8 +90,15 @@ class AbstractSyntaxTree {
                             "table"), false);
                     break;
                 case HplsqlParser.RULE_select_list_item:
-                    columnsSelectStmt.add(ctx.getText());
-                    //System.out.println(ctx.parent.getText()+"______________");
+                    if (ctx.getChild(0).getChild(0).getChildCount() == 1) {
+                        columnsSelectStmt.add(ctx.getText());
+                        if (!columnsGroupBy.contains(ctx.getText()))
+                            System.err.println("missing " + ctx.getText() + " in group by list");
+                    } else if (ctx.getChild(0).getChild(0).getChildCount() == 2) {
+                        columnsSelectStmt.add(ctx.getChild(0).getText());
+                        if (!columnsGroupBy.contains(ctx.getChild(0).getText()))
+                            System.err.println("missing " + ctx.getChild(0).getText() + " in group by list");
+                    }
                     break;
                 case HplsqlParser.RULE_cpp_scope:
                 case HplsqlParser.RULE_begin_end_block:
@@ -175,7 +182,7 @@ class AbstractSyntaxTree {
                     // get parameter function
                     cppFunctionParam = new ArrayList<>();
                     for (int i = 0; i < ctx.getChild(0).getChild(3).getChildCount(); i++) {
-                        if (i % 2 == 0){
+                        if (i % 2 == 0) {
                             cppFunctionParam.add(
                                     new Field(ctx.getChild(0).getChild(3).getChild(i).getChild(1).getText(),
                                             ctx.getChild(0).getChild(3).getChild(i).getChild(0).getText()));
@@ -183,14 +190,14 @@ class AbstractSyntaxTree {
                     }
                     typeCppFunction = ctx.getChild(0).getChild(0).getText();
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(0).getChild(1).getText(),
-                            ctx.getChild(0).getChild(0).getText(), "function",cppFunctionParam), true);
+                            ctx.getChild(0).getChild(0).getText(), "function", cppFunctionParam), true);
                     break;
                 case HplsqlParser.RULE_expr_func_params:
-                    for (int i = 0; i <ctx.getChildCount(); i++) {
-                        if (i%2==0) {
+                    for (int i = 0; i < ctx.getChildCount(); i++) {
+                        if (i % 2 == 0) {
                             if (!symbolTable.checkParampetersFunctionCpp(
                                     ctx.parent.getChild(0).getText(),
-                                    ctx.getChild(i).getText(), i/2)){
+                                    ctx.getChild(i).getText(), i / 2)) {
                                 System.err.println("Error functions calls ");
                             }
                         }
@@ -199,6 +206,16 @@ class AbstractSyntaxTree {
                 case HplsqlParser.RULE_cpp_return_stmt:
                     if (!symbolTable.isTypeCompatible(typeCppFunction, ctx.getChild(1).getText())) {
                         System.err.println("Error  return ");
+                    }
+                    break;
+                case HplsqlParser.RULE_group_by_clause:
+                    for (int i = 2; i < ctx.getChildCount(); i++) {
+                        if (i % 2 == 0) {
+                            if (ctx.getChild(i).getChild(0).getChildCount() > 1)
+                                System.err.println("don't allow aggregate function in group by");
+                            else
+                                columnsGroupBy.add(ctx.getChild(i).getText());
+                        }
                     }
                     break;
                 case HplsqlParser.RULE_select_stmt:
