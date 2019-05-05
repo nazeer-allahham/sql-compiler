@@ -21,9 +21,10 @@ class AbstractSyntaxTree {
     private Integer lnCount = 1;
     private ParserRuleContext root = null;
     private LinkedList<Field> ColumnsCreateTable = null;
-    ArrayList<String> columnsSelectStmt = new ArrayList<>(), columnsGroupBy = new ArrayList<>();
+    ArrayList<String> columnsSelectStmt = new ArrayList<>(), columnsGroupBy;
+    ArrayList<String> tablesSelectStmt = new ArrayList<>();
     ArrayList<Field> cppFunctionParam = null;
-    private String nameField, typeField, nameTable, typeCppFunction;
+    private String nameField, typeField, nameCreateTable, typeCppFunction;
 
     void build(RuleContext ctx) {
         root = (ParserRuleContext) ctx;
@@ -74,7 +75,7 @@ class AbstractSyntaxTree {
                 /*___create table __*/
                 case HplsqlParser.RULE_create_table_stmt:
                     DataTypes.initialize(SECONDARY_DATA_TYPE, ctx.getChild(2).getText());
-                    nameTable = ctx.getChild(2).getText();
+                    nameCreateTable = ctx.getChild(2).getText();
                     ColumnsCreateTable = new LinkedList<>();
 
                     for (int i = 0; i < ctx.getChild(3).getChild(1).getChildCount(); i++) {
@@ -84,21 +85,36 @@ class AbstractSyntaxTree {
                             ColumnsCreateTable.add(new Field(nameField, typeField));
                         }
                     }
-                    DataTypes.createSecondaryDataType(nameTable, ColumnsCreateTable);
+                    DataTypes.createSecondaryDataType(nameCreateTable, ColumnsCreateTable);
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(2).getText(),
                             "Table",
                             "table"), false);
                     break;
                 case HplsqlParser.RULE_select_list_item:
-                    if (ctx.getChild(0).getChild(0).getChildCount() == 1) {
-                        columnsSelectStmt.add(ctx.getText());
-                        if (!columnsGroupBy.contains(ctx.getText()))
-                            System.err.println("missing " + ctx.getText() + " in group by list");
-                    } else if (ctx.getChild(0).getChild(0).getChildCount() == 2) {
+                    if (ctx.getChildCount() == 1) {
+                        if (ctx.getChild(0).getChild(0).getChildCount() == 1) { //normal column
+                            columnsSelectStmt.add(ctx.getText());
+                            if (columnsGroupBy != null && !columnsGroupBy.contains(ctx.getText()))
+                                System.err.println("missing " + ctx.getText() + " in group by list");
+                        } else if (ctx.getChild(0).getChild(0).getChildCount() > 3) { // aggregate function
+                            columnsSelectStmt.add(ctx.getChild(0).getText());
+                            if (columnsGroupBy != null && !columnsGroupBy.contains(ctx.getChild(0).getText()))
+                                System.err.println("missing " + ctx.getChild(0).getText() + " in group by list");
+                        } else {// nameTable.column
+                            columnsSelectStmt.add(ctx.getText());
+                        }
+                    } else if (ctx.getChild(1).getText().equalsIgnoreCase("=")) {//subselect
                         columnsSelectStmt.add(ctx.getChild(0).getText());
-                        if (!columnsGroupBy.contains(ctx.getChild(0).getText()))
-                            System.err.println("missing " + ctx.getChild(0).getText() + " in group by list");
+                        //TODO subquery
+
+                    } else { // Alias name
+                        //Table.column.alias
+                        //column.alias
+                        columnsSelectStmt.add(ctx.getChild(0).getText()
+                                + "." +
+                                ctx.getChild(1).getChild(1).getText());
                     }
+                    System.err.println(columnsSelectStmt.toString());
                     break;
                 case HplsqlParser.RULE_cpp_scope:
                 case HplsqlParser.RULE_begin_end_block:
@@ -144,7 +160,7 @@ class AbstractSyntaxTree {
                     DataType dataType = DataTypes.get(ctx.getText());
                     SymbolTable.Symbol symbol;
                     if (dataType == null) {
-                        System.err.println("Semantic error : variable " + ctx.getChild(0).getChild(0).getText() + " used before it's declared");
+                        System.err.println("Semantic error : Table " + ctx.getChild(0).getChild(0).getText() + " used before it's declared");
                         System.exit(1);
                     }
                     if ((columnsSelectStmt = dataType.isContainColumns(columnsSelectStmt)) != null) {
@@ -152,8 +168,9 @@ class AbstractSyntaxTree {
                             System.err.println("Semantic error columns  " + columnsSelectStmt.toString() + "  doesn't exist in table");
                         else
                             System.err.println("Semantic error column  " + columnsSelectStmt.toString() + "  doesn't exist in table");
-
+                        System.exit(1);
                     }
+                    tablesSelectStmt.add(ctx.getText());
                     break;
                 case HplsqlParser.RULE_cpp_assignment_stmt:
                 case HplsqlParser.RULE_assignment_stmt_single_item:
@@ -209,6 +226,7 @@ class AbstractSyntaxTree {
                     }
                     break;
                 case HplsqlParser.RULE_group_by_clause:
+                    columnsGroupBy = new ArrayList<>();
                     for (int i = 2; i < ctx.getChildCount(); i++) {
                         if (i % 2 == 0) {
                             if (ctx.getChild(i).getChild(0).getChildCount() > 1)
@@ -231,6 +249,7 @@ class AbstractSyntaxTree {
                         e.printStackTrace();
                     }
                     break;
+
             }
 
             if (ctx.getChildCount() == 1) {
