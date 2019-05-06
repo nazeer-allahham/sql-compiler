@@ -7,6 +7,9 @@ import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.jetbrains.annotations.NotNull;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -24,7 +27,7 @@ class AbstractSyntaxTree {
     ArrayList<String> columnsSelectStmt = new ArrayList<>(), columnsGroupBy;
     ArrayList<String> tablesSelectStmt = new ArrayList<>();
     ArrayList<Field> cppFunctionParam = null;
-    private String nameField, typeField, nameCreateTable, typeCppFunction;
+    private String nameField, typeField, nameCreateTable, typeCppFunction, expr;
 
     void build(RuleContext ctx) {
         root = (ParserRuleContext) ctx;
@@ -149,7 +152,7 @@ class AbstractSyntaxTree {
                             ctx.getChild(3).getText(), true), false);
                     try {
                         if (!symbolTable.checkCasting(ctx.getChild(0).getText(), symbolTable.AllSymbol.get(ctx.getChild(3).getText()).getType())) {
-                            System.err.println("checkCasting");
+                            System.err.println("Invalid Casting");
                         }
                     } catch (Exception e) {
                     }
@@ -236,6 +239,40 @@ class AbstractSyntaxTree {
                         }
                     }
                     break;
+                //Boolean semantic check
+                case HplsqlParser.RULE_cpp_if_stmt:
+                    expr = ctx.getChild(2).getText();
+                    if (!isValidBooleanExpression(expr)) {
+                        System.err.println("Invalid Boolean Expression");
+                    }
+                    break;
+                case HplsqlParser.RULE_cpp_for_stmt_header:
+                    expr = ctx.getChild(4).getText();
+                    if (!isValidBooleanExpression(expr)) {
+                        System.err.println("Invalid Boolean Expression");
+                    }
+                    break;
+                case HplsqlParser.RULE_having_clause:
+                case HplsqlParser.RULE_where_clause:
+                    expr = ctx.getChild(1).getText();
+                    if (!isValidBooleanExpression(expr)) {
+                        System.err.println("Invalid Boolean Expression");
+                    }
+                    break;
+
+                case HplsqlParser.RULE_cpp_for_param:
+                    symbolTable.nameSymbols.add(ctx.getChild(1).getText());
+                    symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
+                            ctx.getChild(0).getText(), "",
+                            ctx.getChild(3).getText(), true), false);
+                    break;
+                case HplsqlParser.RULE_ident:
+                    symbol = symbolTable.lookup(ctx.getText());
+                    if (symbol == null) {
+                        System.err.println("Semantic error : variable " + ctx.getChild(0).getText() + " used before it's declared");
+                        //System.exit(1);
+                    }
+                    break;
                 case HplsqlParser.RULE_select_stmt:
 //                    DataTypes.get(ctx.getChild(0).getText()).getPath();
                     try {
@@ -306,5 +343,39 @@ class AbstractSyntaxTree {
                 System.out.println("  " + ws + element.getText());
             }
         }
+    }
+
+    private boolean isValidBooleanExpression(String exp) {
+        try {
+            ScriptEngineManager sem = new ScriptEngineManager();
+            ScriptEngine se = sem.getEngineByName("JavaScript");
+            exp = exp.replaceAll("and", "&&");
+            exp = exp.replaceAll("or", "||");
+            exp = exp.replaceAll("not", "!");
+            exp = exp.replaceAll("max|Max", " ");
+            exp = exp.replaceAll("min|Min", " ");
+            exp = exp.replaceAll("avg|Avg", " ");
+            exp = exp.replaceAll("sum|Sum", " ");
+            exp = exp.replaceAll("Countbig|countbig", " ");
+            exp = exp.replaceAll("Cume_Dist|cume_dist", " ");
+            exp = exp.replaceAll("Dense_Rang|dense_rang", " ");
+            exp = exp.replaceAll("First_Value|first_value", " ");
+            exp = exp.replaceAll("Lag|lag", " ");
+            exp = exp.replaceAll("Last_Value|last_value", " ");
+            exp = exp.replaceAll("lead|Lead", " ");
+            exp = exp.replaceAll("Rank|rank", " ");
+            exp = exp.replaceAll("Row_Number|row_number", " ");
+            exp = exp.replaceAll("Stdev|stdev", " ");
+            exp = exp.replaceAll("Var|var", " ");
+            exp = exp.replaceAll("Variance|variance", " ");
+            exp = exp.replaceAll("Like|like", "==");
+            exp = exp.replaceAll("count|Count", " ");
+            exp = exp.replaceAll("[a-z]|[A-Z]", "1");
+            se.eval(exp);
+            System.err.println(exp);
+        } catch (ScriptException e) {
+            return false;
+        }
+        return true;
     }
 }

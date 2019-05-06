@@ -1,5 +1,3 @@
+for(int i=0 ;i <7 and (i)>3 ;i++){
 
-SELECT id, name,count(*)
-FROM c
-
-GROUP BY id, name,f,sum(id);
+}
