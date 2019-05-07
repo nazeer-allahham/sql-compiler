@@ -54,8 +54,7 @@ public class DataType implements Serializable {
     }
 
     void addField(Field field) {
-        if (this.fields != null)
-        {
+        if (this.fields != null) {
             this.fields.add(field);
         }
     }
@@ -121,6 +120,7 @@ public class DataType implements Serializable {
                 result.add(column);
             }
         }
+        if (columns.size() == 1 && columns.get(0).equalsIgnoreCase("*")) result.clear();
         return result.size() != 0 ? result : null;
     }
 
@@ -131,10 +131,8 @@ public class DataType implements Serializable {
     }
 
     String toJson(int mode) {
-        if(mode == DATA_TYPE_TO_STRING)
-        {
-            if (this.rank == DataType.PRIMARY_DATA_TYPE)
-            {
+        if (mode == DATA_TYPE_TO_STRING) {
+            if (this.rank == DataType.PRIMARY_DATA_TYPE) {
                 return this.fields.get(0).toString();
             }
             StringBuilder mString = new StringBuilder("{ ");
@@ -143,11 +141,8 @@ public class DataType implements Serializable {
             }
             mString.append(" }");
             return mString.toString();
-        }
-        else
-        {
-            if (this.rank == DataType.PRIMARY_DATA_TYPE)
-            {
+        } else {
+            if (this.rank == DataType.PRIMARY_DATA_TYPE) {
                 return this.fields.get(0).toJson(DATA_TYPE_TO_STRING_FLAT);
             }
             StringBuilder mString = new StringBuilder("{ ");

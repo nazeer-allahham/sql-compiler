@@ -243,36 +243,43 @@ class AbstractSyntaxTree {
                 case HplsqlParser.RULE_cpp_if_stmt:
                     expr = ctx.getChild(2).getText();
                     if (!isValidBooleanExpression(expr)) {
-                        System.err.println("Invalid Boolean Expression");
+                        System.err.println("Invalid Boolean Expression if clause");
                     }
                     break;
                 case HplsqlParser.RULE_cpp_for_stmt_header:
                     expr = ctx.getChild(4).getText();
                     if (!isValidBooleanExpression(expr)) {
-                        System.err.println("Invalid Boolean Expression");
+                        System.err.println("Invalid Boolean Expression for clause");
                     }
                     break;
-                case HplsqlParser.RULE_having_clause:
                 case HplsqlParser.RULE_where_clause:
                     expr = ctx.getChild(1).getText();
                     if (!isValidBooleanExpression(expr)) {
-                        System.err.println("Invalid Boolean Expression");
+                        System.err.println("Invalid Boolean Expression where clause");
                     }
                     break;
-
+                case HplsqlParser.RULE_having_clause:
+                    expr = ctx.getChild(1).getText();
+                    if (!isValidBooleanExpression(expr)) {
+                        System.err.println("Invalid Boolean Expression Having clause");
+                    }
+                    if (!isHavingContainAggFun(expr)) {
+                        System.err.println("Having should contain only aggregation function");
+                    }
+                    break;
                 case HplsqlParser.RULE_cpp_for_param:
                     symbolTable.nameSymbols.add(ctx.getChild(1).getText());
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
                             ctx.getChild(0).getText(), "",
                             ctx.getChild(3).getText(), true), false);
                     break;
-                case HplsqlParser.RULE_ident:
+                /*case HplsqlParser.RULE_ident:
                     symbol = symbolTable.lookup(ctx.getText());
                     if (symbol == null) {
-                        System.err.println("Semantic error : variable " + ctx.getChild(0).getText() + " used before it's declared");
+                        System.err.println("Semantic error : variable " + ctx.getText() + " used before it's declared");
                         //System.exit(1);
                     }
-                    break;
+                    break;*/
                 case HplsqlParser.RULE_select_stmt:
 //                    DataTypes.get(ctx.getChild(0).getText()).getPath();
                     try {
@@ -356,7 +363,7 @@ class AbstractSyntaxTree {
             exp = exp.replaceAll("min|Min", " ");
             exp = exp.replaceAll("avg|Avg", " ");
             exp = exp.replaceAll("sum|Sum", " ");
-            exp = exp.replaceAll("Countbig|countbig", " ");
+            exp = exp.replaceAll("Count_Big|count_big", " ");
             exp = exp.replaceAll("Cume_Dist|cume_dist", " ");
             exp = exp.replaceAll("Dense_Rang|dense_rang", " ");
             exp = exp.replaceAll("First_Value|first_value", " ");
@@ -372,9 +379,33 @@ class AbstractSyntaxTree {
             exp = exp.replaceAll("count|Count", " ");
             exp = exp.replaceAll("[a-z]|[A-Z]", "1");
             se.eval(exp);
-            System.err.println(exp);
+            //System.err.println(exp);
         } catch (ScriptException e) {
             return false;
+        }
+        return true;
+    }
+
+    private boolean isHavingContainAggFun(String exp) {
+        boolean okay = false;
+        String[] sAnd = exp.split("and");
+        for (String sa : sAnd) {
+            String[] sOr = sa.split("or");
+            for (String so : sOr) {
+                if (so.contains("not(")) okay = true;
+                if (so.contains("max(")) okay = true;
+                if (so.contains("min(")) okay = true;
+                if (so.contains("avg(")) okay = true;
+                if (so.contains("sum(")) okay = true;
+                if (so.contains("Count_Big(")) okay = true;
+                if (so.contains("Cume_Dist(")) okay = true;
+                if (so.contains("Dense_Rang(")) okay = true;
+                if (so.contains("First_Value(")) okay = true;
+                if (so.contains("Lag(")) okay = true;
+                if (so.contains("count(")) okay = true;
+            }
+            if (!okay) return false;
+            okay = false;
         }
         return true;
     }
