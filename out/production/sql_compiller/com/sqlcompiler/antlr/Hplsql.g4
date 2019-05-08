@@ -220,7 +220,7 @@ declare_handler_item :
 
 // Create or define type statement
 create_type_stmt:
-        T_CREATE T_TYPE table_name create_type_definition
+        T_CREATE T_TYPE table_name create_type_definition create_type_options
     ;
 
 create_type_definition:
@@ -234,6 +234,21 @@ create_type_items:
 create_type_items_item:
         ident T_COLON (ident | string)
     ;
+
+create_type_options:
+        create_type_option*
+    ;
+
+create_type_option:
+        create_type_store_location
+    |   create_type_delimiter
+    ;
+
+create_type_store_location:
+        T_LOCATION string (T_COMMA string)*;
+
+create_type_delimiter:
+        T_DELIMITED T_BY string;
 
 // DECLARE TEMPORARY TABLE statement
 declare_temporary_table_item :
@@ -311,6 +326,7 @@ create_table_options_item :
     |   create_table_options_mssql_item
     |   create_table_options_mysql_item
     |   create_table_store_location
+    |   create_table_delimiter
     ;
 
 create_table_options_ora_item :
@@ -343,7 +359,10 @@ create_table_options_hive_item :
     ;
 
 create_table_store_location:
-        T_LOCATION string;
+        T_LOCATION string (T_COMMA string)*;
+
+create_table_delimiter:
+        T_DELIMITED T_BY string;
 
 create_table_hive_row_format :
         T_ROW T_FORMAT T_DELIMITED create_table_hive_row_format_fields*
@@ -786,7 +805,7 @@ from_table_values_row:
     ;
 
 from_alias_clause :
-    T_AS? ident (T_OPEN_P L_ID (T_COMMA L_ID)* T_CLOSE_P)?
+    T_AS ident (T_OPEN_P L_ID (T_COMMA L_ID)* T_CLOSE_P)?
     ;
 
 table_name :
@@ -836,11 +855,23 @@ bool_expr_atom :
     ;
 
 bool_expr_unary :
-        expr T_IS T_NOT? T_NULL
-    |   expr T_BETWEEN expr T_AND expr
-    |   T_NOT? T_EXISTS T_OPEN_P select_stmt T_CLOSE_P
+        bool_expr_is_not_null
+    |   bool_expr_between
+    |   bool_expr_exists
     |   bool_expr_single_in
     |   bool_expr_multi_in
+    ;
+
+bool_expr_is_not_null:
+        expr T_IS T_NOT? T_NULL
+    ;
+
+bool_expr_between:
+        expr T_BETWEEN expr T_AND expr
+    ;
+
+bool_expr_exists:
+        T_NOT? T_EXISTS T_OPEN_P select_stmt T_CLOSE_P
     ;
 
 bool_expr_single_in :
