@@ -57,7 +57,7 @@ object Handler {
         dataType.locations.forEach { location ->
             locations.add(location)
         }
-        return Table(dataType.name, cols, locations)
+        return Table(dataType.name, cols, locations, dataType.delimiter)
     }
 
     fun createTable(table: Table) {
@@ -84,7 +84,7 @@ object Handler {
         Console.log("Table created successfully")
     }
 
-    fun select(tables: ArrayList<Table>,
+    /*fun select(tables: ArrayList<Table>,
                condition: Pair<String, ArrayList<String>>) {
         var (header, rows) = this.readTable(tables[0])
 
@@ -98,21 +98,27 @@ object Handler {
         rows = rows.filter { row -> getRowStatus(header, row, condition.first, condition.second) } as ArrayList<Row>
 
         Console.output(header, rows)
-    }
+    }*/
 
-    fun select1(names: ArrayList<String>,
-                conditions: Pair<String, ArrayList<String>>,
-                desiredColumns: ArrayList<String>,
-                orderBy: ArrayList<String>) {
+    fun select(names: ArrayList<String>,
+               desiredColumns: ArrayList<DesiredColumn>,
+               conditions: Pair<String, ArrayList<String>>,
+               groupBy: ArrayList<String>,
+               orderBy: ArrayList<String>): String {
+        Console.log(conditions.first)
         val directory = File(Environment.OUTPUT_FILE_NAME)
         directory.mkdirs()
 
         val tables = restoreTables(names)
-        Reducer.reduce(directory, Shuffler.shuffle(directory, orderBy, Mapper.map(directory, tables[0], conditions)), desiredColumns)
+        if (groupBy.size > 0) {
+            return Reducer.groupByReduce(directory, Shuffler.shuffle(directory, orderBy, groupBy, Mapper.map(directory, tables, conditions)), desiredColumns).second
+        } else {
+            return Reducer.basicReduce(directory, Shuffler.shuffle(directory, orderBy, groupBy, Mapper.map(directory, tables, conditions)), desiredColumns).second
+        }
     }
 
     private fun restoreTables(names: ArrayList<String>): List<Table> {
-        val type = object : TypeToken<java.util.HashMap<String, DataType>>() {}.type
+        val type = object : TypeToken<HashMap<String, DataType>>() {}.type
         val types: HashMap<String, DataType> = Gson().fromJson(FileReader(Environment.DATA_TYPES_PATH), type)
 
         val tables = ArrayList<Table>()
@@ -127,10 +133,10 @@ object Handler {
         params.forEach { param ->
             expr = expr.define(param, row.fields[header.find(param)])
         }
-        return expr.eval(condition) != BigDecimal(0)
+        return if (condition.isNotEmpty()) expr.eval(condition) != BigDecimal(0) else true
     }
 
-    private fun joinTable(rows: ArrayList<Row>, table: Table): Pair<Row, ArrayList<Row>> {
+    fun joinTable(rows: ArrayList<Row>, table: Table): Pair<Row, ArrayList<Row>> {
         val result = ArrayList<Row>()
         val (header2, rows2) = this.readTable(table)
 

@@ -855,11 +855,23 @@ bool_expr_atom :
     ;
 
 bool_expr_unary :
-        expr T_IS T_NOT? T_NULL
-    |   expr T_BETWEEN expr T_AND expr
-    |   T_NOT? T_EXISTS T_OPEN_P select_stmt T_CLOSE_P
+        bool_expr_is_not_null
+    |   bool_expr_between
+    |   bool_expr_exists
     |   bool_expr_single_in
     |   bool_expr_multi_in
+    ;
+
+bool_expr_is_not_null:
+        expr T_IS T_NOT? T_NULL
+    ;
+
+bool_expr_between:
+        expr T_BETWEEN expr T_AND expr
+    ;
+
+bool_expr_exists:
+        T_NOT? T_EXISTS T_OPEN_P select_stmt T_CLOSE_P
     ;
 
 bool_expr_single_in :

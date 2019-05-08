@@ -6,6 +6,7 @@ public class Environment {
     public static String ANTLR = "src\\com\\sqlcompiler\\antlr\\";
     public static String JAVA = "src\\com\\sqlcompiler\\java\\";
     public static String KOTLIN = "src\\com\\sqlcompiler\\kotlin\\";
+    public static String STRINGTEMPLATES = "src\\com\\sqlcompiler\\stringtemplates\\";
 
     public static String INPUT_PATH = "test.sql";
 

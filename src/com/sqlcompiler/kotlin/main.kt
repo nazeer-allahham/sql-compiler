@@ -20,20 +20,24 @@ fun main() {
             arrayListOf("tables\\c\\c1.csv",
                     "tables\\c\\c2.csv")))
     */
-//
-//    Handler.select(
-//            arrayListOf(Table("devices",
-//                    arrayListOf(Column("id", "int"),
-//                            Column("name", "string"),
-//                            Column("price", "int")),
-//                    Environment.TABLES_PATH + "devices.csv")),
-//            "devices_id < 10 && devices_price == 1111" to arrayListOf("devices_id", "devices_price")
-//    )
 
-    Handler.select1(
-            arrayListOf("c"),
-            "c_id >= 2 && c_id <= 5" to arrayListOf("c_id", "c_salary"),
-            arrayListOf("c_id", "c_name"),
-            arrayListOf("c_name", "c_id")
+    /*
+    Handler.select(
+            arrayListOf(Table("devices",
+                    arrayListOf(Column("id", "int"),
+                            Column("name", "string"),
+                            Column("price", "int")),
+                    Environment.TABLES_PATH + "devices.csv")),
+            "devices_id < 10 && devices_price == 1111" to arrayListOf("devices_id", "devices_price")
     )
+    */
+    Handler.select(names = arrayListOf("c"),
+            desiredColumns = arrayListOf(DesiredColumn("c_name"), DesiredColumn("c_id")),
+            conditions = "c_id < 5" + Utils.smartSplit("c_id", Handler.select(names = arrayListOf("c"),
+                    desiredColumns = arrayListOf(DesiredColumn("c_id")),
+                    conditions = "" to arrayListOf(),
+                    groupBy = arrayListOf(),
+                    orderBy = arrayListOf())) to arrayListOf("c_id"),
+            groupBy = arrayListOf(),
+            orderBy = arrayListOf())
 }

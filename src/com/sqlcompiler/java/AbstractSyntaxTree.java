@@ -2,6 +2,8 @@ package com.sqlcompiler.java;
 
 import com.sqlcompiler.Environment;
 import com.sqlcompiler.antlr.HplsqlParser;
+import com.sqlcompiler.stringtemplates.Templates;
+import javaslang.Tuple2;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -13,18 +15,25 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Stack;
 
 import static com.sqlcompiler.java.DataType.SECONDARY_DATA_TYPE;
 
 class AbstractSyntaxTree {
     SymbolTable symbolTable = new SymbolTable();
-    private Integer lnCount = 1;
     private ParserRuleContext root = null;
-    private LinkedList<Field> ColumnsCreateTable = null;
-    ArrayList<String> columnsSelectStmt = new ArrayList<>(), columnsGroupBy;
-    ArrayList<String> tablesSelectStmt = new ArrayList<>();
-    ArrayList<Field> cppFunctionParam = null;
-    private String nameField, typeField, nameCreateTable, typeCppFunction;
+
+    private int lastRule;
+    private Stack<Status> statements = new Stack<>();
+    private Status current;
+
+    private ArrayList<Field> cppFunctionParam = null;
+    private String typeCppFunction;
+
+    private int currentDepth;
+
+    private Templates templates = new Templates();
+    private String lastSingleInColumnsName;
 
     void build(RuleContext ctx) {
         root = (ParserRuleContext) ctx;
@@ -36,153 +45,225 @@ class AbstractSyntaxTree {
     private void buildHelper(@NotNull RuleContext start) {
         LinkedList<RuleContext> queue = new LinkedList<>();
         queue.add(start);
-        int currentDepth = start.depth();
-
-        File file = new File(Environment.KOTLIN + "main.kt");
-        DataOutputStream stream = null;
-
-
-        try {
-            file.createNewFile();
-            stream = new DataOutputStream(new FileOutputStream(file));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        currentDepth = start.depth();
 
         while (!queue.isEmpty()) {
             RuleContext ctx = queue.pop();
 
             switch (ctx.getRuleIndex()) {
+                // Create type
+                case HplsqlParser.RULE_create_type_stmt:
+                    if (!this.statements.empty())
+                        this.flush();
+                    this.lastRule = HplsqlParser.RULE_create_table_stmt;
+                    this.current = new CreateTypeStatus(null, this.templates.initCreateType(), SECONDARY_DATA_TYPE, ctx.getChild(2).getText());
+                    this.statements.add(this.current);
+
+                    DataTypes.initialize(SECONDARY_DATA_TYPE, ctx.getChild(2).getText());
+                    ((CreateTypeStatus) this.current).setName(ctx.getChild(2).getText());
+                    break;
+
+                // Create table
+                case HplsqlParser.RULE_create_table_stmt:
+                    if (!this.statements.empty())
+                        this.flush();
+                    this.lastRule = HplsqlParser.RULE_create_table_stmt;
+                    this.current = new CreateTypeStatus(null, this.templates.initCreateType(), SECONDARY_DATA_TYPE, ctx.getChild(2).getText());
+                    this.statements.add(this.current);
+
+                    DataTypes.initialize(SECONDARY_DATA_TYPE, ctx.getChild(2).getText());
+                    ((CreateTypeStatus) this.current).setName(ctx.getChild(2).getText());
+
+                    for (int i = 0; i < ctx.getChild(3).getChild(1).getChildCount(); i++) {
+                        if (i % 2 == 0) {
+                            String nameField = ctx.getChild(3).getChild(1).getChild(i).getChild(0).getText();
+                            String typeField = ctx.getChild(3).getChild(1).getChild(i).getChild(1).getText();
+                            ((CreateTypeStatus) this.current).addField(new Field(nameField, typeField));
+                        }
+                    }
+                    DataTypes.createSecondaryDataType(((CreateTypeStatus) this.current).getName(), ((CreateTypeStatus) this.current).getFields());
+                    symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(2).getText(),
+                            "Table",
+                            "table"), false);
+                    break;
+
                 case HplsqlParser.RULE_create_type_items_item:
                     DataTypes.addField(ctx.getChild(0).getText(), ctx.getChild(2).getText());
+                    ((CreateTypeStatus) this.current).addField(new Field(ctx.getChild(0).getText(), ctx.getChild(2).getText()));
                     break;
 
                 case HplsqlParser.RULE_create_table_store_location:
                     System.out.println(ctx.getChildCount() / 2);
-                    for (int i = 1; i < ctx.getChildCount(); i += 2)
+                    for (int i = 1; i < ctx.getChildCount(); i += 2) {
                         DataTypes.addLocation(ctx.getChild(i).getText());
+                        ((CreateTypeStatus) this.current).addLocation(ctx.getChild(i).getText());
+                    }
                     break;
                 case HplsqlParser.RULE_create_table_delimiter:
                 case HplsqlParser.RULE_create_type_delimiter:
                     System.out.println(ctx.getChild(2).getText());
                     DataTypes.setDelimiter(ctx.getChild(2).getText());
                     break;
+                // End create table & type
 
-                case HplsqlParser.RULE_create_type_stmt:
-                    DataTypes.initialize(SECONDARY_DATA_TYPE, ctx.getChild(2).getText());
-                    break;
-
-                /*___create table __*/
-                case HplsqlParser.RULE_create_table_stmt:
-                    DataTypes.initialize(SECONDARY_DATA_TYPE, ctx.getChild(2).getText());
-                    nameCreateTable = ctx.getChild(2).getText();
-                    ColumnsCreateTable = new LinkedList<>();
-
-                    for (int i = 0; i < ctx.getChild(3).getChild(1).getChildCount(); i++) {
-                        if (i % 2 == 0) {
-                            nameField = ctx.getChild(3).getChild(1).getChild(i).getChild(0).getText();
-                            typeField = ctx.getChild(3).getChild(1).getChild(i).getChild(1).getText();
-                            ColumnsCreateTable.add(new Field(nameField, typeField));
-                        }
+                // Select statement
+                case HplsqlParser.RULE_select_stmt:
+                    System.out.println("RULE_select_stmt");
+                    if (isSubquery()) {
+                        System.out.println("sss");
+                    } else if (!this.statements.empty()) {
+                        this.flush();
                     }
-                    DataTypes.createSecondaryDataType(nameCreateTable, ColumnsCreateTable);
-                    symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(2).getText(),
-                            "Table",
-                            "table"), false);
+                    this.lastRule = HplsqlParser.RULE_select_stmt;
+
+                    this.current = new SelectStatus(this.current, this.templates.initSelect(), this.lastSingleInColumnsName);
+                    this.statements.add(this.current);
                     break;
+
+                case HplsqlParser.RULE_fullselect_stmt:
+                    break;
+
+                case HplsqlParser.RULE_fullselect_stmt_item:
+                    break;
+
+                case HplsqlParser.RULE_fullselect_set_clause:
+                    break;
+
+                case HplsqlParser.RULE_subselect_stmt:
+                    break;
+
+                case HplsqlParser.RULE_select_list:
+                    handleSelectList(ctx);
+                    break;
+                /*
                 case HplsqlParser.RULE_select_list_item:
-                    if (ctx.getChildCount() == 1) {
-                        if (ctx.getChild(0).getChild(0).getChildCount() == 1) { //normal column
-                            columnsSelectStmt.add(ctx.getText());
-                            if (columnsGroupBy != null && !columnsGroupBy.contains(ctx.getText()))
-                                System.err.println("missing " + ctx.getText() + " in group by list");
-                        } else if (ctx.getChild(0).getChild(0).getChildCount() > 3) { // aggregate function
-                            columnsSelectStmt.add(ctx.getChild(0).getText());
-                            if (columnsGroupBy != null && !columnsGroupBy.contains(ctx.getChild(0).getText()))
-                                System.err.println("missing " + ctx.getChild(0).getText() + " in group by list");
-                        } else {// nameTable.column
-                            columnsSelectStmt.add(ctx.getText());
-                        }
-                    } else if (ctx.getChild(1).getText().equalsIgnoreCase("=")) {//subselect
-                        columnsSelectStmt.add(ctx.getChild(0).getText());
-                        //TODO subquery
-
-                    } else { // Alias name
-                        //Table.column.alias
-                        //column.alias
-                        columnsSelectStmt.add(ctx.getChild(0).getText()
-                                + "." +
-                                ctx.getChild(1).getChild(1).getText());
-                    }
-                    System.err.println(columnsSelectStmt.toString());
+                    handleSelectListItem(ctx);
                     break;
-                case HplsqlParser.RULE_cpp_scope:
-                case HplsqlParser.RULE_begin_end_block:
-                    symbolTable.allocate();
-                    currentDepth = ctx.depth();
-                    break;
-                case HplsqlParser.RULE_cpp_declare_stmt:
-                case HplsqlParser.RULE_declare_var_item:
-                    symbolTable.nameSymbols.add(ctx.getChild(1).getText());
-                    symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
-                            ctx.getChild(0).getText(),
-                            ""), false);
+                */
+                case HplsqlParser.RULE_select_list_alias:
                     break;
 
-
-                case HplsqlParser.RULE_cpp_function_param:
-                    symbolTable.nameSymbols.add(ctx.getChild(1).getText());
-                    symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
-                            ctx.getChild(0).getText(),
-                            "", true), false);
-                    break;
-                case HplsqlParser.RULE_expr_func:
-                    if (symbolTable.lookup(ctx.getChild(0).getText()) == null) {
-                        System.err.println("Error for calling undeclared method : " + ctx.getChild(0).getText());
-                    }
+                case HplsqlParser.RULE_select_list_asterisk:
                     break;
 
-                case HplsqlParser.RULE_cpp_declare_assignment_stmt:
-                    symbolTable.nameSymbols.add(ctx.getChild(1).getText());
-                    symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
-                            ctx.getChild(0).getText(), "",
-                            ctx.getChild(3).getText(), true), false);
-                    try {
-                        if (!symbolTable.checkCasting(ctx.getChild(0).getText(), symbolTable.AllSymbol.get(ctx.getChild(3).getText()).getType())) {
-                            System.err.println("checkCasting");
-                        }
-                    } catch (Exception e) {
-                    }
+                case HplsqlParser.RULE_into_clause:
+                    break;
 
+                case HplsqlParser.RULE_from_clause:
+                    break;
+
+                case HplsqlParser.RULE_from_table_clause:
                     break;
 
                 case HplsqlParser.RULE_from_table_name_clause:
-                    DataType dataType = DataTypes.get(ctx.getText());
-                    SymbolTable.Symbol symbol;
-                    if (dataType == null) {
-                        System.err.println("Semantic error : Table " + ctx.getChild(0).getChild(0).getText() + " used before it's declared");
-                        System.exit(1);
-                    }
-                    if ((columnsSelectStmt = dataType.isContainColumns(columnsSelectStmt)) != null) {
-                        if (columnsSelectStmt.size() > 1)
-                            System.err.println("Semantic error columns  " + columnsSelectStmt.toString() + "  doesn't exist in table");
-                        else
-                            System.err.println("Semantic error column  " + columnsSelectStmt.toString() + "  doesn't exist in table");
-                        System.exit(1);
-                    }
-                    tablesSelectStmt.add(ctx.getText());
+                    handleFromTableNameClause(ctx);
                     break;
+
+                case HplsqlParser.RULE_from_subselect_clause:
+                    break;
+
+                case HplsqlParser.RULE_from_join_clause:
+                    break;
+
+                case HplsqlParser.RULE_from_join_type_clause:
+                    break;
+
+                case HplsqlParser.RULE_from_table_values_clause:
+                    break;
+
+                case HplsqlParser.RULE_from_table_values_row:
+                    break;
+
+                case HplsqlParser.RULE_from_alias_clause:
+                    break;
+
+                case HplsqlParser.RULE_table_name:
+                    break;
+
+                /*
+                case HplsqlParser.RULE_where_clause:
+                    handleWhereClause(ctx);
+                    break;
+                */
+                case HplsqlParser.RULE_bool_expr_is_not_null:
+                    if (this.isCurrentStatementSelect()) {
+                        handleIsNotNullWhereClause(ctx);
+                    }
+                    break;
+                case HplsqlParser.RULE_bool_expr_between:
+                    if (this.isCurrentStatementSelect()) {
+                        handleBetweenWhereClause(ctx);
+                    }
+                    break;
+                case HplsqlParser.RULE_bool_expr_exists:
+                    if (this.isCurrentStatementSelect()) {
+                        handleExistsWhereClause(ctx);
+                    }
+                    break;
+                case HplsqlParser.RULE_bool_expr_single_in:
+                    this.lastRule = HplsqlParser.RULE_bool_expr_single_in;
+                    System.out.println("Ks 2m");
+                    if (this.isCurrentStatementSelect()) {
+                        handleSingleInWhereClause(ctx);
+                    }
+                    break;
+                case HplsqlParser.RULE_bool_expr_multi_in:
+                    if (this.isCurrentStatementSelect()) {
+//                        handleMultiInWhereClause(ctx);
+                    }
+                    break;
+                case HplsqlParser.RULE_bool_expr_binary:
+                    if (this.isCurrentStatementSelect()) {
+                        handleWhereClause(ctx);
+                    }
+                    break;
+
+                case HplsqlParser.RULE_group_by_clause:
+                    handleGroupByClause(ctx);
+                    break;
+
+                case HplsqlParser.RULE_having_clause:
+                    break;
+
+                case HplsqlParser.RULE_qualify_clause:
+                    break;
+
+                case HplsqlParser.RULE_order_by_clause:
+                    handleOrderByClause(ctx);
+                    break;
+
+                case HplsqlParser.RULE_select_options:
+                    break;
+
+                case HplsqlParser.RULE_select_options_item:
+                    break;
+                // End select statement
+
+                case HplsqlParser.RULE_cpp_scope:
+                case HplsqlParser.RULE_begin_end_block:
+                    handleNewScope(ctx);
+                    break;
+
+                case HplsqlParser.RULE_cpp_declare_stmt:
+                case HplsqlParser.RULE_declare_var_item:
+                    handleDeclareVariable(ctx);
+                    break;
+
+                case HplsqlParser.RULE_cpp_function_param:
+                    handleCPPFunctionParam(ctx);
+                    break;
+
+                case HplsqlParser.RULE_expr_func:
+                    handleExprFunc(ctx);
+                    break;
+
+                case HplsqlParser.RULE_cpp_declare_assignment_stmt:
+                    handleCPPDeclareAssignmentStmt(ctx);
+                    break;
+
                 case HplsqlParser.RULE_cpp_assignment_stmt:
                 case HplsqlParser.RULE_assignment_stmt_single_item:
-                    symbol = symbolTable.lookup(ctx.getChild(0).getText());
-                    if (symbol == null) {
-                        System.err.println("Semantic error : variable " + ctx.getChild(0).getText() + " used before it's declared");
-                        System.exit(1);
-                    }
-                    SymbolTable.Symbol newsymbol = new SymbolTable.Symbol(symbol);
-                    newsymbol.setAssigned(true);
-                    newsymbol.setValue(ctx.getChild(2).getText());
-                    symbolTable.AllSymbol.replace(symbol.getName(), symbol, newsymbol);
+                    handleAssignmentSingleItemStmt(ctx);
                     break;
 
                 case HplsqlParser.RULE_create_procedure_stmt:
@@ -225,31 +306,6 @@ class AbstractSyntaxTree {
                         System.err.println("Error  return ");
                     }
                     break;
-                case HplsqlParser.RULE_group_by_clause:
-                    columnsGroupBy = new ArrayList<>();
-                    for (int i = 2; i < ctx.getChildCount(); i++) {
-                        if (i % 2 == 0) {
-                            if (ctx.getChild(i).getChild(0).getChildCount() > 1)
-                                System.err.println("don't allow aggregate function in group by");
-                            else
-                                columnsGroupBy.add(ctx.getChild(i).getText());
-                        }
-                    }
-                    break;
-                case HplsqlParser.RULE_select_stmt:
-//                    DataTypes.get(ctx.getChild(0).getText()).getPath();
-                    try {
-                        assert stream != null;
-                        /*stream.writeBytes("package com.sqlcompiler.kotlin\n" +
-                                "\n" +
-                                "fun main() {\n" +
-                                "    Handler.select()\n" +
-                                "}");*/
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    break;
-
             }
 
             if (ctx.getChildCount() == 1) {
@@ -276,14 +332,249 @@ class AbstractSyntaxTree {
                     queue.add((RuleContext) element);
                 }
             }
+            //this.lastRule = ctx.getRuleIndex();
         }
+
+        while (!this.statements.isEmpty()) {
+            System.out.println("Flush");
+            flush();
+        }
+
+        File file = new File(Environment.KOTLIN + "main2.kt");
+        DataOutputStream stream = null;
         try {
+            file.createNewFile();
+            stream = new DataOutputStream(new FileOutputStream(file));
+            stream.writeUTF(this.templates.calculateAll());
             stream.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         symbolTable.isUnassignedVariable();
         DataTypes.save(Environment.DATA_TYPES_PATH);
+    }
+
+    private void handleOrderByClause(@NotNull RuleContext ctx) {
+        SelectStatus status = (SelectStatus) this.current;
+        for (int i = 2; i < ctx.getChildCount(); i += 2) {
+            status.columnsOrderBy.add(ctx.getChild(i).getText());
+        }
+    }
+
+    private void handleSingleInWhereClause(@NotNull RuleContext ctx) {
+        this.lastSingleInColumnsName = ctx.getChild(0).getText();
+    }
+
+    private void handleExistsWhereClause(RuleContext ctx) {
+        // TODO
+    }
+
+    private void handleBetweenWhereClause(@NotNull RuleContext ctx) {
+        String left = ctx.getChild(0).getText();
+        String e1 = ctx.getChild(2).getText();
+        String e2 = ctx.getChild(4).getText();
+
+        ((SelectStatus) this.current).columnsWhereClause.add(left);
+        ((SelectStatus) this.current).whereSelectStmt += left + " = " + e1 + " || " + left + " = " + e2;
+    }
+
+    private void handleIsNotNullWhereClause(@NotNull RuleContext ctx) {
+        String left = ctx.getChild(0).getText();
+        String op;
+        String right;
+
+        if (ctx.getChildCount() == 4) {
+            op = "!=";
+            right = "";
+        } else {
+            op = "=";
+            right = "";
+        }
+        ((SelectStatus) this.current).columnsWhereClause.add(left);
+        ((SelectStatus) this.current).whereSelectStmt += left + " " + op + " " + right;
+    }
+
+    private void handleWhereClause(@NotNull RuleContext ctx) {
+        String left = ctx.getChild(0).getText();
+        String op = ctx.getChild(1).getText();
+        String right = ctx.getChild(2).getText();
+
+        //TODO remove ! from the condition
+        if (!isColumnName(left)) {
+            ((SelectStatus) this.current).columnsWhereClause.add(left);
+        }
+        if (!isColumnName(right)) {
+            ((SelectStatus) this.current).columnsWhereClause.add(right);
+        }
+        ((SelectStatus) this.current).whereSelectStmt += left + " " + op + " " + right;
+    }
+
+    private boolean isColumnName(@NotNull String name) {
+        int dot = name.indexOf('.');
+        if (dot == -1) {
+            return false;
+        }
+        return name.length() >= 3 &&
+                dot < name.length() - 1 &&
+                Character.isAlphabetic(name.charAt(0)) &&
+                Character.isAlphabetic(name.charAt(dot + 1));
+    }
+
+    private boolean isCurrentStatementSelect() {
+        return this.statements.elementAt(0) instanceof SelectStatus;
+    }
+
+    private boolean isSubquery() {
+        return this.lastRule == HplsqlParser.RULE_bool_expr_single_in;
+    }
+
+    private void flush() {
+        this.current = this.statements.pop();
+
+        if (this.current instanceof SelectStatus) {
+            System.out.println("Flush select: <SelectStatus>");
+            SelectStatus status = (SelectStatus) this.current;
+            this.templates.flushSelectStatement(status.key,
+                    status.tablesSelectStmt,
+                    status.columnsSelectStmt,
+                    "\"" + status.whereSelectStmt + "\"" + calcWhereInSelectStmt(status),
+                    status.columnsWhereClause,
+                    status.columnsGroupBy,
+                    status.columnsOrderBy);
+        } else if (this.current instanceof CreateTypeStatus) {
+            System.out.println("Flush select: <CreateTypeStatus>");
+            CreateTypeStatus status = (CreateTypeStatus) this.current;
+            this.templates.flushCreateTypeStatement(status.key, status.getName(), status.getFields(), status.getLocations(), status.getDelimiter());
+        }
+    }
+
+    @NotNull
+    private String calcWhereInSelectStmt(@NotNull SelectStatus status) {
+        StringBuilder builder = new StringBuilder();
+
+        System.err.println("Sizeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" + status.key + " " + status.whereInKeys.size());
+        for (int i = 0; i < status.whereInKeys.size(); i++) {
+            Tuple2<String, String> w = status.whereInKeys.get(i);
+            builder.append(" + smartSplit(\"").append(w._1).append("\", ").append(this.templates.calculate(w._2)).append(") ");
+        }
+        return builder.toString();
+    }
+
+    private void handleAssignmentSingleItemStmt(@NotNull RuleContext ctx) {
+        SymbolTable.Symbol symbol = symbolTable.lookup(ctx.getChild(0).getText());
+        if (symbol == null) {
+            System.err.println("Semantic error : variable " + ctx.getChild(0).getText() + " used before it's declared");
+            System.exit(1);
+        }
+        SymbolTable.Symbol nSymbol = new SymbolTable.Symbol(symbol);
+        nSymbol.setAssigned(true);
+        nSymbol.setValue(ctx.getChild(2).getText());
+        symbolTable.AllSymbol.replace(symbol.getName(), symbol, nSymbol);
+    }
+
+    private void handleCPPDeclareAssignmentStmt(@NotNull RuleContext ctx) {
+        symbolTable.nameSymbols.add(ctx.getChild(1).getText());
+        symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
+                ctx.getChild(0).getText(), "",
+                ctx.getChild(3).getText(), true), false);
+        try {
+            if (!symbolTable.checkCasting(ctx.getChild(0).getText(), symbolTable.AllSymbol.get(ctx.getChild(3).getText()).getType())) {
+                System.err.println("checkCasting");
+            }
+        } catch (Exception ignored) {
+        }
+    }
+
+    private void handleExprFunc(@NotNull RuleContext ctx) {
+        if (symbolTable.lookup(ctx.getChild(0).getText()) == null) {
+            System.err.println("Error for calling undeclared method : " + ctx.getChild(0).getText());
+        }
+    }
+
+    private void handleCPPFunctionParam(@NotNull RuleContext ctx) {
+        symbolTable.nameSymbols.add(ctx.getChild(1).getText());
+        symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(), ctx.getChild(0).getText(), "", true), false);
+    }
+
+    private void handleDeclareVariable(@NotNull RuleContext ctx) {
+        symbolTable.nameSymbols.add(ctx.getChild(1).getText());
+        symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(), ctx.getChild(0).getText(), ""), false);
+    }
+
+    private void handleNewScope(@NotNull RuleContext ctx) {
+        symbolTable.allocate();
+        currentDepth = ctx.depth();
+    }
+
+    private void handleGroupByClause(@NotNull RuleContext ctx) {
+        SelectStatus status = (SelectStatus) this.current;
+        status.columnsGroupBy = new ArrayList<>();
+        for (int i = 2; i < ctx.getChildCount(); i++) {
+            if (i % 2 == 0) {
+                if (ctx.getChild(i).getChild(0).getChildCount() > 1)
+                    System.err.println("don't allow aggregate function in group by");
+                else
+                    status.columnsGroupBy.add(ctx.getChild(i).getText());
+            }
+        }
+    }
+
+    private void handleFromTableNameClause(@NotNull RuleContext ctx) {
+        DataType dataType = DataTypes.get(ctx.getText());
+        if (dataType == null) {
+            System.err.println("Semantic error : Table " + ctx.getChild(0).getChild(0).getText() + " used before it's declared");
+            System.exit(1);
+        }
+        ArrayList<String> res = dataType.isContainColumns(((SelectStatus) this.current).columnsSelectStmt);
+        if (res != null) {
+            if (res.size() > 1)
+                System.err.println("Semantic error columns  " + res.toString() + "  doesn't exist in table");
+            else
+                System.err.println("Semantic error column  " + res.toString() + "  doesn't exist in table");
+            System.exit(1);
+        }
+        ((SelectStatus) this.current).tablesSelectStmt.add(ctx.getText());
+    }
+
+    private void handleSelectList(@NotNull RuleContext ctx) {
+        if (ctx.getChildCount() > 1) {
+            for (int i = 0; i < ctx.getChildCount(); i += 2) {
+                handleSelectListItem((RuleContext) ctx.getChild(i));
+//                ((SelectStatus) this.current).columnsSelectStmt.add(handleSelectListItem((RuleContext) ctx.getChild(i)));
+            }
+            System.err.println(((SelectStatus) this.current).columnsSelectStmt.toString());
+        }
+    }
+
+    @NotNull
+    private String handleSelectListItem(@NotNull RuleContext ctx) {
+        if (ctx.getChildCount() == 1) {
+            if (ctx.getChild(0).getChild(0).getChildCount() == 1) { //normal column
+                ((SelectStatus) this.current).columnsSelectStmt.add(ctx.getText());
+                if (((SelectStatus) this.current).columnsGroupBy != null &&
+                        !((SelectStatus) this.current).columnsGroupBy.contains(ctx.getText()))
+                    System.err.println("missing " + ctx.getText() + " in group by list sss");
+            } else if (ctx.getChild(0).getChild(0).getChildCount() > 3) { // aggregate function
+                ((SelectStatus) this.current).columnsSelectStmt.add(ctx.getChild(0).getText());
+                if (((SelectStatus) this.current).columnsGroupBy != null && !((SelectStatus) this.current).columnsGroupBy.contains(ctx.getChild(0).getText()))
+                    System.err.println("missing " + ctx.getChild(0).getText() + " in group by list");
+            } else {// nameTable.column
+                ((SelectStatus) this.current).columnsSelectStmt.add(ctx.getText());
+            }
+        } else if (ctx.getChild(1).getText().equalsIgnoreCase("=")) {//subselect
+            ((SelectStatus) this.current).columnsSelectStmt.add(ctx.getChild(0).getText());
+            //TODO subQuery
+
+        } else { // Alias name
+            //Table.column.alias
+            //column.alias
+            ((SelectStatus) this.current).columnsSelectStmt.add(ctx.getChild(0).getText()
+                    + "." +
+                    ctx.getChild(1).getChild(1).getText());
+        }
+        return "";
+        //return "\"" + ((SelectStatus) this.current).columnsSelectStmt.get(((SelectStatus) this.current).columnsSelectStmt.size() - 1) + "\"";
     }
 
     void print() {

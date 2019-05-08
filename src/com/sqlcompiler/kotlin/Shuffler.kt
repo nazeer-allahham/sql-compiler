@@ -1,11 +1,13 @@
 package com.sqlcompiler.kotlin
 
+import org.jetbrains.kotlin.backend.common.push
 import java.io.File
 
 object Shuffler {
 
     fun shuffle(directory: File,
                 orderBy: ArrayList<String>,
+                groupBy: ArrayList<String>,
                 sources: ArrayList<String>): ArrayList<String> {
         val files: ArrayList<String> = ArrayList()
 
@@ -19,12 +21,34 @@ object Shuffler {
             rows.addAll(rows1)
         }
 
+        Console.log("${rows.size}")
         rows = sort(rows, Comparator { o1, o2 -> compare(header!!, orderBy, o1, o2) })
 
-        files.add(directory.path + File.separator + "shuffler.csv")
-        Handler.writeToFile(files[0], header!!, rows)
+        if (groupBy.size > 0) {
+            groupBy.forEach { term ->
+                val map = HashMap<String, ArrayList<Row>>()
+                rows.forEach { row ->
+                    val index = header!!.find(term)
+                    val key = row.fields[index]
+                    if (!map.containsKey(key)) {
+                        map[key] = ArrayList()
+                    }
+                    map[key]!!.push(row)
+                }
+                map.keys.forEach { key ->
+                    files.add(directory.path + File.separator + "shuffler_${term}_$key.csv")
+                    Handler.writeToFile(files[files.size - 1], header!!, map[key]!!)
+                }
+            }
 
-        ExecutionPlan.addStep("Shuffler", "")
+            ExecutionPlan.addStep("Shuffler", "Group by reducer")
+        } else {
+            files.add(directory.path + File.separator + "shuffler.csv")
+            Handler.writeToFile(files[0], header!!, rows)
+
+            ExecutionPlan.addStep("Shuffler", "Basic reducer")
+        }
+
         return files
     }
 

@@ -2,6 +2,7 @@
   "boolean": {
     "rank": 0,
     "name": "boolean",
+    "delimiter": ",",
     "locations": [],
     "fields": [
       {
@@ -13,6 +14,7 @@
   "c": {
     "rank": 1,
     "name": "c",
+    "delimiter": ",",
     "locations": [
       "tables\\c\\c1.csv",
       "tables\\c\\c2.csv"
@@ -39,6 +41,7 @@
   "string": {
     "rank": 0,
     "name": "string",
+    "delimiter": ",",
     "locations": [],
     "fields": [
       {
@@ -50,12 +53,53 @@
   "t": {
     "rank": 1,
     "name": "t",
+    "delimiter": ",",
     "locations": [],
     "fields": []
+  },
+  "ttt": {
+    "rank": 1,
+    "name": "ttt",
+    "locations": [],
+    "fields": [
+      {
+        "name": "id",
+        "type": "int"
+      },
+      {
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "name": "salary",
+        "type": "int"
+      }
+    ]
+  },
+  "typ": {
+    "rank": 1,
+    "name": "typ",
+    "delimiter": ",",
+    "locations": [],
+    "fields": [
+      {
+        "name": "id",
+        "type": "int"
+      },
+      {
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "name": "salary",
+        "type": "int"
+      }
+    ]
   },
   "real": {
     "rank": 0,
     "name": "real",
+    "delimiter": ",",
     "locations": [],
     "fields": [
       {
@@ -67,6 +111,7 @@
   "int": {
     "rank": 0,
     "name": "int",
+    "delimiter": ",",
     "locations": [],
     "fields": [
       {

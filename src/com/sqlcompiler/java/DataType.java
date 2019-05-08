@@ -108,6 +108,10 @@ public class DataType implements Serializable {
 
     public ArrayList<String> isContainColumns(ArrayList<String> columns) {
         boolean OK;
+        if (columns == null) {
+            return null;
+        }
+
         ArrayList<String> result = new ArrayList<>();
         for (String column : columns) {
             OK = false;

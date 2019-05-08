@@ -1,5 +1,1 @@
-
-SELECT id, name,count(*)
-FROM c
-
-GROUP BY id, name,f,sum(id);
+select * from c group by name order by xx
