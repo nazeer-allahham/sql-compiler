@@ -9,6 +9,9 @@ import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.jetbrains.annotations.NotNull;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -182,11 +185,11 @@ class AbstractSyntaxTree {
                 case HplsqlParser.RULE_table_name:
                     break;
 
-                /*
+
                 case HplsqlParser.RULE_where_clause:
                     handleWhereClause(ctx);
                     break;
-                */
+
                 case HplsqlParser.RULE_bool_expr_is_not_null:
                     if (this.isCurrentStatementSelect()) {
                         handleIsNotNullWhereClause(ctx);
@@ -225,6 +228,12 @@ class AbstractSyntaxTree {
                     break;
 
                 case HplsqlParser.RULE_having_clause:
+                    if (!isValidBooleanExpression(ctx.getChild(1).getText())) {
+                        System.err.println("Invalid Boolean Expression Having clause");
+                    }
+                    if (!isHavingContainAggFun(ctx.getChild(1).getText())) {
+                        System.err.println("Having should contain only aggregation function");
+                    }
                     break;
 
                 case HplsqlParser.RULE_qualify_clause:
@@ -308,6 +317,24 @@ class AbstractSyntaxTree {
                         System.err.println("Error  return ");
                     }
                     break;
+                //Boolean semantic check
+                case HplsqlParser.RULE_cpp_if_stmt:
+                    if (!isValidBooleanExpression(ctx.getChild(2).getText())) {
+                        System.err.println("Invalid Boolean Expression if clause");
+                    }
+                    break;
+                case HplsqlParser.RULE_cpp_for_stmt_header:
+                    if (!isValidBooleanExpression(ctx.getChild(4).getText())) {
+                        System.err.println("Invalid Boolean Expression for clause");
+                    }
+                    break;
+                case HplsqlParser.RULE_cpp_for_param:
+                    symbolTable.nameSymbols.add(ctx.getChild(1).getText());
+                    symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
+                            ctx.getChild(0).getText(), "",
+                            ctx.getChild(3).getText(), true), false);
+                    break;
+
             }
 
             if (ctx.getChildCount() == 1) {
@@ -398,7 +425,7 @@ class AbstractSyntaxTree {
     }
 
     private void handleWhereClause(@NotNull RuleContext ctx) {
-        String left = ctx.getChild(0).getText();
+        /*String left = ctx.getChild(0).getText();
         String op = ctx.getChild(1).getText();
         String right = ctx.getChild(2).getText();
 
@@ -409,7 +436,10 @@ class AbstractSyntaxTree {
         if (!isColumnName(right)) {
             ((SelectStatus) this.current).columnsWhereClause.add(right);
         }
-        ((SelectStatus) this.current).whereSelectStmt += left + " " + op + " " + right;
+        ((SelectStatus) this.current).whereSelectStmt += left + " " + op + " " + right;*/
+        if (!isValidBooleanExpression(ctx.getChild(1).getText())) {
+            System.err.println("Invalid Boolean Expression where clause");
+        }
     }
 
     private boolean isColumnName(@NotNull String name) {
@@ -549,6 +579,63 @@ class AbstractSyntaxTree {
         }
     }
 
+    private boolean isValidBooleanExpression(String exp) {
+        try {
+            ScriptEngineManager sem = new ScriptEngineManager();
+            ScriptEngine se = sem.getEngineByName("JavaScript");
+            exp = exp.replaceAll("and", "&&");
+            exp = exp.replaceAll("or", "||");
+            exp = exp.replaceAll("not", "!");
+            exp = exp.replaceAll("max|Max", " ");
+            exp = exp.replaceAll("min|Min", " ");
+            exp = exp.replaceAll("avg|Avg", " ");
+            exp = exp.replaceAll("sum|Sum", " ");
+            exp = exp.replaceAll("Count_Big|count_big", " ");
+            exp = exp.replaceAll("Cume_Dist|cume_dist", " ");
+            exp = exp.replaceAll("Dense_Rang|dense_rang", " ");
+            exp = exp.replaceAll("First_Value|first_value", " ");
+            exp = exp.replaceAll("Lag|lag", " ");
+            exp = exp.replaceAll("Last_Value|last_value", " ");
+            exp = exp.replaceAll("lead|Lead", " ");
+            exp = exp.replaceAll("Rank|rank", " ");
+            exp = exp.replaceAll("Row_Number|row_number", " ");
+            exp = exp.replaceAll("Stdev|stdev", " ");
+            exp = exp.replaceAll("Var|var", " ");
+            exp = exp.replaceAll("Variance|variance", " ");
+            exp = exp.replaceAll("Like|like", "==");
+            exp = exp.replaceAll("count|Count", " ");
+            exp = exp.replaceAll("[a-z]|[A-Z]", "1");
+            se.eval(exp);
+            //System.err.println(exp);
+        } catch (ScriptException e) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isHavingContainAggFun(@NotNull String exp) {
+        boolean okay = false;
+        String[] sAnd = exp.split("and");
+        for (String sa : sAnd) {
+            String[] sOr = sa.split("or");
+            for (String so : sOr) {
+                if (so.contains("not(")) okay = true;
+                if (so.contains("max(")) okay = true;
+                if (so.contains("min(")) okay = true;
+                if (so.contains("avg(")) okay = true;
+                if (so.contains("sum(")) okay = true;
+                if (so.contains("Count_Big(")) okay = true;
+                if (so.contains("Cume_Dist(")) okay = true;
+                if (so.contains("Dense_Rang(")) okay = true;
+                if (so.contains("First_Value(")) okay = true;
+                if (so.contains("Lag(")) okay = true;
+                if (so.contains("count(")) okay = true;
+            }
+            if (!okay) return false;
+            okay = false;
+        }
+        return true;
+    }
     @NotNull
     private String handleSelectListItem(@NotNull RuleContext ctx) {
         if (ctx.getChildCount() == 1) {
