@@ -57,7 +57,7 @@ object Handler {
         dataType.locations.forEach { location ->
             locations.add(location)
         }
-        return Table(dataType.name, cols, locations, dataType.delimiter)
+        return Table(dataType.name, cols, locations, ",")
     }
 
     fun createTable(table: Table) {
@@ -110,10 +110,10 @@ object Handler {
         directory.mkdirs()
 
         val tables = restoreTables(names)
-        if (groupBy.size > 0) {
-            return Reducer.groupByReduce(directory, Shuffler.shuffle(directory, orderBy, groupBy, Mapper.map(directory, tables, conditions)), desiredColumns).second
+        return if (groupBy.size > 0) {
+            Reducer.groupByReduce(directory, Shuffler.shuffle(directory, orderBy, groupBy, mapper.map(directory, Fetcher.fetch(directory, tables), conditions)), desiredColumns).second
         } else {
-            return Reducer.basicReduce(directory, Shuffler.shuffle(directory, orderBy, groupBy, Mapper.map(directory, tables, conditions)), desiredColumns).second
+            Reducer.basicReduce(directory, Shuffler.shuffle(directory, orderBy, groupBy, mapper.map(directory, Fetcher.fetch(directory, tables), conditions)), desiredColumns).second
         }
     }
 

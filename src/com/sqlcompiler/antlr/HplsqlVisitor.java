@@ -1,6 +1,5 @@
 // Generated from E:/ite-fourth-year/compilers-1/projects/sql-compiler/src/com/sqlcompiler/antlr\Hplsql.g4 by ANTLR 4.7.2
 package com.sqlcompiler.antlr;
-
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -8,7 +7,7 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  * by {@link HplsqlParser}.
  *
  * @param <T> The return type of the visit operation. Use {@link Void} for
- *            operations with no return type.
+ * operations with no return type.
  */
 public interface HplsqlVisitor<T> extends ParseTreeVisitor<T> {
     /**

@@ -1,1 +1,1 @@
-select * from c group by name order by xx
+select min(id) , name from c  group by name

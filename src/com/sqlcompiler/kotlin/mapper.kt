@@ -2,29 +2,30 @@ package com.sqlcompiler.kotlin
 
 import java.io.File
 
-object Mapper {
+object mapper {
 
     fun map(directory: File,
-            tables: List<Table>,
+            sources: List<String>,
             conditions: Pair<String, ArrayList<String>>): ArrayList<String> {
         val files: ArrayList<String> = ArrayList()
 
-        var (header, rows) = Handler.readTable(tables[0])
+        var header: Row? = null
+        var rows = ArrayList<Row>()
 
-        if (tables.size > 1) {
-            for (i in 1 until tables.size) {
-                val j = Handler.joinTable(rows, tables[i])
-                header.addFields(j.first.fields)
-                rows = j.second
+        sources.forEachIndexed { index, source ->
+            val res = Handler.readFromFile(source)!!
+            if (index == 0) {
+                header = res.first
             }
+            rows.addAll(res.second)
         }
 
-        rows = rows.filter { row -> Handler.getRowStatus(header, row, conditions.first, conditions.second) } as ArrayList<Row>
+        rows = rows.filter { row -> Handler.getRowStatus(header!!, row, conditions.first, conditions.second) } as ArrayList<Row>
 
         files.add(directory.path + File.separator + "mapper.csv")
-        Handler.writeToFile(files[0], header, rows)
+        Handler.writeToFile(files[0], header!!, rows)
 
-        ExecutionPlan.addStep("Mapper", "read the rows")
+        ExecutionPlan.addStep("mapper", "read the rows")
         return files
     }
 }

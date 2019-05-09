@@ -16,7 +16,7 @@ public class DataType implements Serializable {
 
     private int rank;
     private String name;
-    private String delimiter;
+    private String delimiter = ",";
     private LinkedList<String> locations;
     private LinkedList<Field> fields;
 
@@ -98,7 +98,7 @@ public class DataType implements Serializable {
     }
 
     public void setDelimiter(String delimiter) {
-        this.delimiter = delimiter;
+        this.delimiter = toUnquotedString(delimiter);
     }
 
     public String getDelimiter() {

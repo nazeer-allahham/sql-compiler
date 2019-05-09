@@ -94,6 +94,10 @@ public class Templates {
                                          List<Field> columns,
                                          List<String> locations,
                                          String delimiter) {
+        System.out.println(name);
+        System.out.println(columns);
+        System.out.println(locations);
+        System.out.println(delimiter);
         name = "\"" + name + "\"";
         delimiter = "\"" + delimiter + "\"";
         for (int i = 0; i < locations.size(); i++) {

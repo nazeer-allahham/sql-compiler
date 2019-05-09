@@ -93,6 +93,7 @@ class AbstractSyntaxTree {
                     break;
 
                 case HplsqlParser.RULE_create_table_store_location:
+                case HplsqlParser.RULE_create_type_store_location:
                     System.out.println(ctx.getChildCount() / 2);
                     for (int i = 1; i < ctx.getChildCount(); i += 2) {
                         DataTypes.addLocation(ctx.getChild(i).getText());
@@ -103,6 +104,7 @@ class AbstractSyntaxTree {
                 case HplsqlParser.RULE_create_type_delimiter:
                     System.out.println(ctx.getChild(2).getText());
                     DataTypes.setDelimiter(ctx.getChild(2).getText());
+                    ((CreateTypeStatus) this.current).setDelimiter(ctx.getChild(2).getText());
                     break;
                 // End create table & type
 
