@@ -2,7 +2,7 @@ package com.sqlcompiler.kotlin
 
 import java.io.File
 
-object mapper {
+object Mapper {
 
     fun map(directory: File,
             sources: List<String>,
@@ -22,10 +22,10 @@ object mapper {
 
         rows = rows.filter { row -> Handler.getRowStatus(header!!, row, conditions.first, conditions.second) } as ArrayList<Row>
 
-        files.add(directory.path + File.separator + "mapper.csv")
+        files.add(directory.path + File.separator + "Mapper.csv")
         Handler.writeToFile(files[0], header!!, rows)
 
-        ExecutionPlan.addStep("mapper", "read the rows")
+        ExecutionPlan.addStep("Mapper", "read the rows")
         return files
     }
 }

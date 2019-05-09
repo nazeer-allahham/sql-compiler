@@ -425,21 +425,21 @@ class AbstractSyntaxTree {
     }
 
     private void handleWhereClause(@NotNull RuleContext ctx) {
-        /*String left = ctx.getChild(0).getText();
+        String left = ctx.getChild(0).getText();
         String op = ctx.getChild(1).getText();
         String right = ctx.getChild(2).getText();
 
-        //TODO remove ! from the condition
+        // TODO remove ! from the condition
         if (!isColumnName(left)) {
             ((SelectStatus) this.current).columnsWhereClause.add(left);
         }
         if (!isColumnName(right)) {
             ((SelectStatus) this.current).columnsWhereClause.add(right);
         }
-        ((SelectStatus) this.current).whereSelectStmt += left + " " + op + " " + right;*/
-        if (!isValidBooleanExpression(ctx.getChild(1).getText())) {
-            System.err.println("Invalid Boolean Expression where clause");
-        }
+        ((SelectStatus) this.current).whereSelectStmt += left + " " + op + " " + right;
+//        if (!isValidBooleanExpression(ctx.getChild(1).getText())) {
+//            System.err.println("Invalid Boolean Expression where clause");
+//        }
     }
 
     private boolean isColumnName(@NotNull String name) {

@@ -111,9 +111,9 @@ object Handler {
 
         val tables = restoreTables(names)
         return if (groupBy.size > 0) {
-            Reducer.groupByReduce(directory, Shuffler.shuffle(directory, orderBy, groupBy, mapper.map(directory, Fetcher.fetch(directory, tables), conditions)), desiredColumns).second
+            Reducer.groupByReduce(directory, Shuffler.shuffle(directory, orderBy, groupBy, Mapper.map(directory, Fetcher.fetch(directory, tables), conditions)), desiredColumns).second
         } else {
-            Reducer.basicReduce(directory, Shuffler.shuffle(directory, orderBy, groupBy, mapper.map(directory, Fetcher.fetch(directory, tables), conditions)), desiredColumns).second
+            Reducer.basicReduce(directory, Shuffler.shuffle(directory, orderBy, groupBy, Mapper.map(directory, Fetcher.fetch(directory, tables), conditions)), desiredColumns).second
         }
     }
 

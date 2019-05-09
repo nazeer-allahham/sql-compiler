@@ -2,8 +2,8 @@ package com.sqlcompiler.kotlin
 
 /**
  * IMPORTANT
- * mapper is just read from file(s) and then do <where condition> work and save the results.
- * Shuffler receive mapper results and partitions them into several files depending on the keys
+ * Mapper is just read from file(s) and then do <where condition> work and save the results.
+ * Shuffler receive Mapper results and partitions them into several files depending on the keys
  * the shuffler role is appearing when we are using group by in our query but in the other situations
  * there is no difference.
  * The sort operation doesn't need to perform in a separated process and we can do it implicitly
