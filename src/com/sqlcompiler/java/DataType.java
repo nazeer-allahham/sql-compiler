@@ -105,12 +105,15 @@ public class DataType implements Serializable {
         return delimiter;
     }
 
-    public ArrayList<String> isContainColumns(ArrayList<String> columns) {
-        boolean OK;
-        if (columns == null) {
+    public ArrayList<String> isContainColumns(ArrayList<DesiredColumn> desiredColumns) {
+        if (desiredColumns == null) {
             return null;
         }
-
+        ArrayList<String> columns = new ArrayList<>();
+        for (DesiredColumn dc : desiredColumns) {
+            columns.add(dc.getColumnName());
+        }
+        boolean OK;
         ArrayList<String> result = new ArrayList<>();
         for (String column : columns) {
             OK = false;

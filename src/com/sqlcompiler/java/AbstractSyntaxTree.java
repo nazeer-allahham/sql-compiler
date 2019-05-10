@@ -60,6 +60,7 @@ class AbstractSyntaxTree {
                         this.flush();
                     this.lastRule = HplsqlParser.RULE_create_table_stmt;
                     this.current = new CreateTypeStatus(null, this.templates.initCreateType(), SECONDARY_DATA_TYPE, ctx.getChild(2).getText());
+                    //this.current = new CreateTypeStatus(null, "", SECONDARY_DATA_TYPE, ctx.getChild(2).getText());
                     this.statements.add(this.current);
 
                     DataTypes.initialize(SECONDARY_DATA_TYPE, ctx.getChild(2).getText());
@@ -72,6 +73,7 @@ class AbstractSyntaxTree {
                         this.flush();
                     this.lastRule = HplsqlParser.RULE_create_table_stmt;
                     this.current = new CreateTypeStatus(null, this.templates.initCreateType(), SECONDARY_DATA_TYPE, ctx.getChild(2).getText());
+                    //this.current = new CreateTypeStatus(null, "", SECONDARY_DATA_TYPE, ctx.getChild(2).getText());
                     this.statements.add(this.current);
 
                     DataTypes.initialize(SECONDARY_DATA_TYPE, ctx.getChild(2).getText());
@@ -122,6 +124,7 @@ class AbstractSyntaxTree {
                     this.lastRule = HplsqlParser.RULE_select_stmt;
 
                     this.current = new SelectStatus(this.current, this.templates.initSelect(), this.lastSingleInColumnsName);
+                    //this.current = new SelectStatus(this.current, "", this.lastSingleInColumnsName);
                     this.statements.add(this.current);
                     break;
 
@@ -558,7 +561,7 @@ class AbstractSyntaxTree {
             System.err.println("Semantic error : Table " + ctx.getChild(0).getChild(0).getText() + " used before it's declared");
             System.exit(1);
         }
-        ArrayList<String> res = dataType.isContainColumns(((SelectStatus) this.current).columnsSelectStmt);
+        ArrayList<String> res = dataType.isContainColumns(((SelectStatus) this.current).desiredColumns);
         if (res != null) {
             if (res.size() > 1)
                 System.err.println("Semantic error columns  " + res.toString() + "  doesn't exist in table");
@@ -576,7 +579,7 @@ class AbstractSyntaxTree {
                 handleSelectListItem((RuleContext) ctx.getChild(i));
 //                ((SelectStatus) this.current).columnsSelectStmt.add(handleSelectListItem((RuleContext) ctx.getChild(i)));
             }
-            System.err.println(((SelectStatus) this.current).columnsSelectStmt.toString());
+            //System.err.println(((SelectStatus) this.current).columnsSelectStmt.toString());
         }
     }
 
@@ -656,25 +659,32 @@ class AbstractSyntaxTree {
         if (ctx.getChildCount() == 1) {
             //normal column
             if (ctx.getChild(0).getChild(0).getChildCount() == 1) {
-                //TODO select t, g from tt join gg
-                ((SelectStatus) this.current).columnsSelectStmt.add(
-                        ((SelectStatus) this.current).nameTable + "_" + ctx.getText());
+                ((SelectStatus) this.current).desiredColumns.add(
+                        new DesiredColumn(ctx.getText(),
+                                "",
+                                ((SelectStatus) this.current).nameTable,
+                                ""));
                 if (((SelectStatus) this.current).columnsGroupBy != null &&
                         !((SelectStatus) this.current).columnsGroupBy.contains(ctx.getText()))
                     System.err.println("missing " + ctx.getText() + " in group by list sss");
             }
             // nameTable.column
             else if (ctx.getChild(0).getChild(0).getChildCount() == 3) {
-                ((SelectStatus) this.current).columnsSelectStmt
-                        .add(ctx.getText().replace('.', '_'));
+                ((SelectStatus) this.current).desiredColumns.add(
+                        new DesiredColumn(
+                                ctx.getChild(0).getChild(0).getChild(2).getText(),
+                                "",
+                                ((SelectStatus) this.current).nameTable,
+                                ""));
             }
             // aggregate function without alias
             else {
-                ((SelectStatus) this.current).columnsSelectStmt.add(
-                        ((SelectStatus) this.current).nameTable //name table
-                                + "_" + ctx.getChild(0).getChild(0).getChild(2).getText()//name column
-                                + "$" + ctx.getChild(0).getChild(0).getChild(0).getText()//name function
-                );
+                ((SelectStatus) this.current).desiredColumns.add(new DesiredColumn(
+                        ctx.getChild(0).getChild(0).getChild(2).getText(),
+                        ctx.getChild(0).getChild(0).getChild(0).getText(),
+                        ((SelectStatus) this.current).nameTable,
+                        ""
+                ));
                 if (((SelectStatus) this.current).columnsGroupBy != null && !((SelectStatus) this.current).columnsGroupBy.contains(ctx.getChild(0).getText()))
                     System.err.println("missing " + ctx.getChild(0).getText() + " in group by list");
             }
@@ -689,25 +699,30 @@ class AbstractSyntaxTree {
         else {
             // table.column as alias
             if (ctx.getChild(0).getChild(0).getChildCount() == 3) {
-                ((SelectStatus) this.current).columnsSelectStmt.add(
-                        ctx.getChild(0).getChild(0).getText().replace('.', '_')
-                                + "@" +
-                                ctx.getChild(1).getChild(1).getText());
+                ((SelectStatus) this.current).desiredColumns.add(new DesiredColumn(
+                        ctx.getChild(0).getText().split(".")[1],
+                        "",
+                        ctx.getChild(0).getText().split(".")[0],
+                        ctx.getChild(1).getChild(1).getText()
+                ));
             }
             //column as alias
             else if (ctx.getChild(0).getChild(0).getChildCount() == 1) {
-                ((SelectStatus) this.current).columnsSelectStmt.add(
-                        ((SelectStatus) this.current).nameTable + "_"
-                                + ctx.getChild(0).getText() + "@"
-                                + ctx.getChild(1).getChild(1).getText());
+                ((SelectStatus) this.current).desiredColumns.add(new DesiredColumn(
+                        ctx.getChild(0).getText(),
+                        "",
+                        ((SelectStatus) this.current).nameTable,
+                        ctx.getChild(1).getChild(1).getText()
+                ));
             }
             // function as alias
             else {
-                ((SelectStatus) this.current).columnsSelectStmt.add(
-                        ((SelectStatus) this.current).nameTable + "_"
-                                + ctx.getChild(0).getChild(0).getChild(2).getText() + "@"
-                                + ctx.getChild(1).getChild(1).getText() + "$"
-                                + ctx.getChild(0).getChild(0).getChild(0).getText());
+                ((SelectStatus) this.current).desiredColumns.add(new DesiredColumn(
+                        ctx.getChild(0).getChild(0).getChild(2).getText(),
+                        ctx.getChild(0).getChild(0).getChild(0).getText(),
+                        ((SelectStatus) this.current).nameTable,
+                        ctx.getChild(1).getChild(1).getText()
+                ));
             }
         }
         return "";

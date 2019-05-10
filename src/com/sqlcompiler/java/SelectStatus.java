@@ -9,6 +9,7 @@ class SelectStatus implements Status {
     String key;
     ArrayList<String> tablesSelectStmt;
     ArrayList<String> columnsSelectStmt;
+    ArrayList<DesiredColumn> desiredColumns;
     String whereSelectStmt;
     String nameTable;// change when we use alias name table
     ArrayList<String> columnsWhereClause;
@@ -26,6 +27,7 @@ class SelectStatus implements Status {
 
 //        this.columnsGroupBy = new ArrayList<>();
         this.columnsOrderBy = new ArrayList<>();
+        this.desiredColumns = new ArrayList<>();
         this.columnsSelectStmt = new ArrayList<>();
         this.columnsWhereClause = new ArrayList<>();
         this.key = statementKey;
