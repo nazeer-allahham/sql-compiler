@@ -174,6 +174,7 @@ class AbstractSyntaxTree {
                     break;
 
                 case HplsqlParser.RULE_from_join_type_clause:
+                    handleTypeJoin(ctx);
                     break;
 
                 case HplsqlParser.RULE_from_table_values_clause:
@@ -190,7 +191,7 @@ class AbstractSyntaxTree {
 
 
                 case HplsqlParser.RULE_where_clause:
-                    handleWhereClause(ctx);
+                    //handleWhereClause(ctx);
                     break;
 
                 case HplsqlParser.RULE_bool_expr_is_not_null:
@@ -387,6 +388,27 @@ class AbstractSyntaxTree {
         DataTypes.save(Environment.DATA_TYPES_PATH);
     }
 
+    private void handleTypeJoin(RuleContext ctx) {
+        //TODO For uncle MOUAZ
+        if (ctx.getChild(1).getText().equalsIgnoreCase("outer")) {
+            String leftColumn = ctx.parent.getChild(3).getChild(0).getChild(0).getChild(0).getText().replace('.', '_');
+            String rightColumn = ctx.parent.getChild(3).getChild(0).getChild(0).getChild(2).getText().replace('.', '_');
+            String condition = "";
+            if (ctx.getChild(0).getText().equalsIgnoreCase("left")) {
+                condition = leftColumn;
+                condition = condition + " > 0";
+            } else if (ctx.getChild(0).getText().equalsIgnoreCase("right")) {
+                condition = rightColumn;
+                condition = condition + " > 0";
+            } else if (ctx.getChild(0).getText().equalsIgnoreCase("full")) {
+                condition = leftColumn + " > 0 or " + rightColumn + " > 0 ";
+            }
+            ((SelectStatus) this.current).whereSelectStmt += condition + " or ";
+
+        }
+
+    }
+
     private void handleOrderByClause(@NotNull RuleContext ctx) {
         SelectStatus status = (SelectStatus) this.current;
         for (int i = 2; i < ctx.getChildCount(); i += 2) {
@@ -432,11 +454,12 @@ class AbstractSyntaxTree {
         String op = ctx.getChild(1).getText();
         String right = ctx.getChild(2).getText();
 
-        // TODO remove ! from the condition
-        if (!isColumnName(left)) {
+        if (isColumnName(left)) {
+            left = left.replace('.', '_');
             ((SelectStatus) this.current).columnsWhereClause.add(left);
         }
-        if (!isColumnName(right)) {
+        if (isColumnName(right)) {
+            right = right.replace('.', '_');
             ((SelectStatus) this.current).columnsWhereClause.add(right);
         }
         ((SelectStatus) this.current).whereSelectStmt += left + " " + op + " " + right;
@@ -472,7 +495,7 @@ class AbstractSyntaxTree {
             SelectStatus status = (SelectStatus) this.current;
             this.templates.flushSelectStatement(status.key,
                     status.tablesSelectStmt,
-                    status.columnsSelectStmt,
+                    status.desiredColumns,
                     "\"" + status.whereSelectStmt + "\"" + calcWhereInSelectStmt(status),
                     status.columnsWhereClause,
                     status.columnsGroupBy,
@@ -727,6 +750,14 @@ class AbstractSyntaxTree {
         }
         return "";
         //return "\"" + ((SelectStatus) this.current).columnsSelectStmt.get(((SelectStatus) this.current).columnsSelectStmt.size() - 1) + "\"";
+    }
+
+    private ArrayList<String> getColumnsName() {
+        ArrayList<String> columns = new ArrayList<>();
+        for (DesiredColumn dc : ((SelectStatus) this.current).desiredColumns) {
+            columns.add(dc.getColumnName());
+        }
+        return columns;
     }
 
     void print() {

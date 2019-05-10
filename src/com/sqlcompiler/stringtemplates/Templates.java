@@ -1,6 +1,7 @@
 package com.sqlcompiler.stringtemplates;
 
 import com.sqlcompiler.Environment;
+import com.sqlcompiler.java.DesiredColumn;
 import com.sqlcompiler.java.Field;
 import org.jetbrains.annotations.NotNull;
 import org.stringtemplate.v4.ST;
@@ -55,7 +56,7 @@ public class Templates {
 
     public void flushSelectStatement(String key,
                                      List<String> tables,
-                                     List<String> columns,
+                                     List<DesiredColumn> columns,
                                      String where,
                                      List<String> whereColumns,
                                      List<String> groupBy,
@@ -64,7 +65,10 @@ public class Templates {
             tables.set(i, "\"" + tables.get(i) + "\"");
         }
         for (int i = 0; i < columns.size(); i++) {
-            columns.set(i, "\"" + columns.get(i) + "\"");
+            columns.get(i).setColumnName("\"" + columns.get(i).getColumnName() + "\"");
+            columns.get(i).setFunctionName("\"" + columns.get(i).getFunctionName() + "\"");
+            columns.get(i).setNameAlias("\"" + columns.get(i).getNameAlias() + "\"");
+            //columns.set(i, "\"" + columns.get(i) + "\"");
         }
 //        where = "\"" + where + "\"";
         for (int i = 0; i < whereColumns.size(); i++) {
