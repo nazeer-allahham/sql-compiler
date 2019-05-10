@@ -47,7 +47,7 @@ object Handler {
         return null
     }
 
-    fun dataType2Table(dataType: DataType): Table {
+    private fun fromDataTypeToTable(dataType: DataType): Table {
         val cols = ArrayList<Column>()
         dataType.fields.forEach { field ->
             cols.add(Column(field.name, field.type))
@@ -60,18 +60,18 @@ object Handler {
         return Table(dataType.name, cols, locations, ",")
     }
 
-    fun createTable(table: Table) {
+    fun createTable(table: Table): String {
         table.locations.forEach { location ->
             val file = File(location)
 
             if (file.exists()) {
                 Console.log("Failed to execute create table file <File is already exist>")
-                return
+                return "_"
             }
 
             if (!file.createNewFile()) {
                 Console.log("Failed to execute create table file <Cannot use table url>")
-                return
+                return "_"
             }
 
             val writer = FileWriter(file)
@@ -82,6 +82,7 @@ object Handler {
             writer.close()
         }
         Console.log("Table created successfully")
+        return table.name
     }
 
     /*fun select(tables: ArrayList<Table>,
@@ -101,20 +102,19 @@ object Handler {
     }*/
 
     fun select(names: ArrayList<String>,
-               desiredColumns: ArrayList<DesiredColumn>,
-               conditions: Pair<String, ArrayList<String>>,
+               columns: ArrayList<DesiredColumn>,
+               where: Pair<String, ArrayList<String>>,
                groupBy: ArrayList<String>,
                orderBy: ArrayList<String>): String {
-        Console.log(conditions.first)
-        val directory = File(Environment.OUTPUT_FILE_NAME)
-        directory.mkdirs()
+//        Console.log(where.first)
 
+        val dir = Utils.createDirectory()
         val tables = restoreTables(names)
-        return if (groupBy.size > 0) {
-            Reducer.groupByReduce(directory, Shuffler.shuffle(directory, orderBy, groupBy, Mapper.map(directory, Fetcher.fetch(directory, tables), conditions)), desiredColumns).second
-        } else {
-            Reducer.basicReduce(directory, Shuffler.shuffle(directory, orderBy, groupBy, Mapper.map(directory, Fetcher.fetch(directory, tables), conditions)), desiredColumns).second
-        }
+
+
+        val result = Reducer.reduce(Shuffler.shuffle(Mapper.map(Fetcher.fetch(dir, tables, columns, where, groupBy, orderBy))))
+        Console.log(result.first, result.second)
+        return result.second
     }
 
     private fun restoreTables(names: ArrayList<String>): List<Table> {
@@ -123,7 +123,7 @@ object Handler {
 
         val tables = ArrayList<Table>()
         types.values.forEach {
-            tables.add(dataType2Table(it))
+            tables.add(fromDataTypeToTable(it))
         }
         return tables.filter { table -> names.contains(table.name) }
     }

@@ -44,4 +44,13 @@ data class Row(val fields: ArrayList<String> = ArrayList()) {
     fun get(key: String): String {
         return this.fields[this.find(key)]
     }
+
+    fun splice(from: Int, end: Int): ArrayList<String> {
+        val res = ArrayList<String>()
+        println("$from + $end + ${this.fields}")
+        for (i in from..end) {
+            res.add(this.fields[i])
+        }
+        return res
+    }
 }

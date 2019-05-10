@@ -1,55 +1,59 @@
 package com.sqlcompiler.kotlin
 
-import org.jetbrains.kotlin.backend.common.push
 import java.io.File
 
 object Shuffler {
 
-    fun shuffle(directory: File,
-                orderBy: ArrayList<String>,
-                groupBy: ArrayList<String>,
-                sources: ArrayList<String>): ArrayList<String> {
-        val files: ArrayList<String> = ArrayList()
+    fun shuffle(_in: Return): Return {
 
-        var header: Row? = null
-        var rows: ArrayList<Row> = ArrayList()
+        val data = _in["fetcher_files"] as ArrayList<String>
+        val groups = _in["mapper_files"] as ArrayList<String>
+        val orderBy = _in["order_by"] as ArrayList<String>
 
-        sources.forEach { source ->
-            val (h, rows1) = Handler.readFromFile(source) as Pair<Row, ArrayList<Row>>
-            if (header == null)
-                header = h
-            rows.addAll(rows1)
+        val data_files: ArrayList<String> = ArrayList()
+        val groups_files: ArrayList<String> = ArrayList()
+
+        data.forEach { i ->
+            var (header, rows) = Handler.readFromFile(i)!!
+
+            rows = sort(rows, Comparator { o1, o2 -> compare(header, orderBy, o1, o2) })
+
+            val key = i.substring(i.indexOf("fetch_") + 6, i.length - 4)
+            val path = "${(_in["directory"] as File).path}${File.separator}shuffler_${key}_data.csv"
+            Handler.writeToFile(path, header, rows)
+            data_files.add(path)
         }
 
-        Console.log("${rows.size}")
-        rows = sort(rows, Comparator { o1, o2 -> compare(header!!, orderBy, o1, o2) })
+        groups.forEach { group ->
+            val (header, rows) = Handler.readFromFile(group)!!
+            if (rows.isNotEmpty()) {
+                // rows[0].fields[1] is the name of the grouping function
+                when (rows[0].fields[1]) {
+                    "min" -> {
+                        rows.forEachIndexed { i, row ->
+                            var columns = row.splice(2, row.fields.size - 1)
+                            Console.log("$columns")
+                            columns = columns.sortedWith(Comparator { o1, o2 ->
+                                o1.compareTo(o2)
+                            }).filter { true } as ArrayList<String>
+                            columns.add(0, row.fields[0])
+                            columns.add(1, row.fields[1])
 
-        if (groupBy.size > 0) {
-            groupBy.forEach { term ->
-                val map = HashMap<String, ArrayList<Row>>()
-                rows.forEach { row ->
-                    val index = header!!.find(term)
-                    val key = row.fields[index]
-                    if (!map.containsKey(key)) {
-                        map[key] = ArrayList()
+                            rows[i] = Row(columns)
+                        }
                     }
-                    map[key]!!.push(row)
-                }
-                map.keys.forEach { key ->
-                    files.add(directory.path + File.separator + "shuffler_${term}_$key.csv")
-                    Handler.writeToFile(files[files.size - 1], header!!, map[key]!!)
                 }
             }
 
-            ExecutionPlan.addStep("Shuffler", "Group by reducer")
-        } else {
-            files.add(directory.path + File.separator + "shuffler.csv")
-            Handler.writeToFile(files[0], header!!, rows)
-
-            ExecutionPlan.addStep("Shuffler", "Basic reducer")
+            val key = group.substring(group.indexOf("mapper_"), group.length - 4)
+            val path = "${(_in["directory"] as File).path}${File.separator}shuffler_${key}_group.csv"
+            Handler.writeToFile(path, header, rows)
+            groups_files.add(path)
         }
 
-        return files
+        _in["shuffler_data_files"] = data_files
+        _in["shuffler_groups_files"] = groups_files
+        return _in
     }
 
     private fun compare(header: Row, orderBy: ArrayList<String>, o1: Row, o2: Row): Int {
