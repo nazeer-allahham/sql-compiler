@@ -10,6 +10,7 @@ class SelectStatus implements Status {
     ArrayList<String> tablesSelectStmt;
     ArrayList<String> columnsSelectStmt;
     String whereSelectStmt;
+    String nameTable;// change when we use alias name table
     ArrayList<String> columnsWhereClause;
     ArrayList<String> columnsGroupBy;
     ArrayList<String> columnsOrderBy;

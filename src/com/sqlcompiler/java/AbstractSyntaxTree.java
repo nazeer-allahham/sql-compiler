@@ -566,6 +566,7 @@ class AbstractSyntaxTree {
                 System.err.println("Semantic error column  " + res.toString() + "  doesn't exist in table");
             System.exit(1);
         }
+        ((SelectStatus) this.current).nameTable = ctx.getText();
         ((SelectStatus) this.current).tablesSelectStmt.add(ctx.getText());
     }
 
@@ -636,31 +637,78 @@ class AbstractSyntaxTree {
         }
         return true;
     }
+
     @NotNull
     private String handleSelectListItem(@NotNull RuleContext ctx) {
+        /*Example
+        select c1 , t.c2 ,
+        max(c3),min(c) as m,
+        t.c4 as alias1,
+        c5 as alias2,
+        c6=(select * from g)
+        from t
+         */
+        /***
+         * Table _ column @ alias
+         * Table _ column $ function
+         * Table _ column @ alias $ function
+         */
         if (ctx.getChildCount() == 1) {
-            if (ctx.getChild(0).getChild(0).getChildCount() == 1) { //normal column
-                ((SelectStatus) this.current).columnsSelectStmt.add(ctx.getText());
+            //normal column
+            if (ctx.getChild(0).getChild(0).getChildCount() == 1) {
+                //TODO select t, g from tt join gg
+                ((SelectStatus) this.current).columnsSelectStmt.add(
+                        ((SelectStatus) this.current).nameTable + "_" + ctx.getText());
                 if (((SelectStatus) this.current).columnsGroupBy != null &&
                         !((SelectStatus) this.current).columnsGroupBy.contains(ctx.getText()))
                     System.err.println("missing " + ctx.getText() + " in group by list sss");
-            } else if (ctx.getChild(0).getChild(0).getChildCount() > 3) { // aggregate function
-                ((SelectStatus) this.current).columnsSelectStmt.add(ctx.getChild(0).getText());
+            }
+            // nameTable.column
+            else if (ctx.getChild(0).getChild(0).getChildCount() == 3) {
+                ((SelectStatus) this.current).columnsSelectStmt
+                        .add(ctx.getText().replace('.', '_'));
+            }
+            // aggregate function without alias
+            else {
+                ((SelectStatus) this.current).columnsSelectStmt.add(
+                        ((SelectStatus) this.current).nameTable //name table
+                                + "_" + ctx.getChild(0).getChild(0).getChild(2).getText()//name column
+                                + "$" + ctx.getChild(0).getChild(0).getChild(0).getText()//name function
+                );
                 if (((SelectStatus) this.current).columnsGroupBy != null && !((SelectStatus) this.current).columnsGroupBy.contains(ctx.getChild(0).getText()))
                     System.err.println("missing " + ctx.getChild(0).getText() + " in group by list");
-            } else {// nameTable.column
-                ((SelectStatus) this.current).columnsSelectStmt.add(ctx.getText());
             }
-        } else if (ctx.getChild(1).getText().equalsIgnoreCase("=")) {//subselect
+        }
+        //subselect
+        else if (ctx.getChild(1).getText().equalsIgnoreCase("=")) {
             ((SelectStatus) this.current).columnsSelectStmt.add(ctx.getChild(0).getText());
             //TODO subQuery
 
-        } else { // Alias name
-            //Table.column.alias
-            //column.alias
-            ((SelectStatus) this.current).columnsSelectStmt.add(ctx.getChild(0).getText()
-                    + "." +
-                    ctx.getChild(1).getChild(1).getText());
+        }
+        // Alias name
+        else {
+            // table.column as alias
+            if (ctx.getChild(0).getChild(0).getChildCount() == 3) {
+                ((SelectStatus) this.current).columnsSelectStmt.add(
+                        ctx.getChild(0).getChild(0).getText().replace('.', '_')
+                                + "@" +
+                                ctx.getChild(1).getChild(1).getText());
+            }
+            //column as alias
+            else if (ctx.getChild(0).getChild(0).getChildCount() == 1) {
+                ((SelectStatus) this.current).columnsSelectStmt.add(
+                        ((SelectStatus) this.current).nameTable + "_"
+                                + ctx.getChild(0).getText() + "@"
+                                + ctx.getChild(1).getChild(1).getText());
+            }
+            // function as alias
+            else {
+                ((SelectStatus) this.current).columnsSelectStmt.add(
+                        ((SelectStatus) this.current).nameTable + "_"
+                                + ctx.getChild(0).getChild(0).getChild(2).getText() + "@"
+                                + ctx.getChild(1).getChild(1).getText() + "$"
+                                + ctx.getChild(0).getChild(0).getChild(0).getText());
+            }
         }
         return "";
         //return "\"" + ((SelectStatus) this.current).columnsSelectStmt.get(((SelectStatus) this.current).columnsSelectStmt.size() - 1) + "\"";
