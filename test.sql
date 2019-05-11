@@ -1,1 +1,1 @@
-int x;
+select min(id) , c.id from c  left  join ttt on c.id=ttt.id group by c.name

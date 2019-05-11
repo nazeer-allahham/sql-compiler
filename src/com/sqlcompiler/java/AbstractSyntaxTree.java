@@ -388,7 +388,7 @@ class AbstractSyntaxTree {
         try {
             file.createNewFile();
             stream = new DataOutputStream(new FileOutputStream(file));
-            //stream.writeUTF(this.templates.calculateAll());
+            stream.writeUTF(this.templates.calculateAll());
             stream.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -422,7 +422,28 @@ class AbstractSyntaxTree {
         /**
          * select * from c left join ttt on  ttt.id= c.id
          * */
-        if (ctx.getChild(1).getText().equalsIgnoreCase("outer")) {
+        if (ctx.getChildCount() == 1
+                && !ctx.getText().equalsIgnoreCase("join")) {
+            System.err.println("Error type \"" + ctx.getText() + "\" join");
+            System.exit(1);
+        } else if (ctx.getChildCount() == 2) {
+            if (!ctx.getChild(1).getText().equalsIgnoreCase("join")) {
+                System.err.println("Error type \"" + ctx.getChild(1).getText() + "\" join");
+                System.exit(1);
+            }
+            if (!ctx.getChild(0).getText().equalsIgnoreCase("inner") &&
+                    !ctx.getChild(0).getText().equalsIgnoreCase("left") &&
+                    !ctx.getChild(0).getText().equalsIgnoreCase("right") &&
+                    !ctx.getChild(0).getText().equalsIgnoreCase("full")
+            ) {
+                System.err.println("Error type \"" + ctx.getChild(0).getText() + "\" join");
+                System.exit(1);
+            }
+        } else if (ctx.getChildCount() == 3 &&
+                ctx.getChild(1).getText().equalsIgnoreCase("outer") &&
+                (ctx.getChild(0).getText().equalsIgnoreCase("left") ||
+                        ctx.getChild(0).getText().equalsIgnoreCase("right") ||
+                        ctx.getChild(0).getText().equalsIgnoreCase("full"))) {
             String leftColumn = ctx.parent.getChild(3).getChild(0).getChild(0).getChild(0).getText().replace('.', '_');
             String rightColumn = ctx.parent.getChild(3).getChild(0).getChild(0).getChild(2).getText().replace('.', '_');
             String condition = "";
@@ -572,7 +593,7 @@ class AbstractSyntaxTree {
                 ctx.getChild(3).getText(), true), false);
         try {
             if (!symbolTable.checkCasting(ctx.getChild(0).getText(), symbolTable.AllSymbol.get(ctx.getChild(3).getText()).getType())) {
-                System.err.println("checkCasting");
+                System.err.println("Check Casting");
             }
         } catch (Exception ignored) {
         }
@@ -717,7 +738,7 @@ class AbstractSyntaxTree {
          */
         if (ctx.getChildCount() == 1) {
             //normal column
-            if (ctx.getChild(0).getChild(0).getChildCount() == 1) {
+            if (ctx.getChild(0).getChild(0).getChild(0).getChildCount() == 1) {
                 ((SelectStatus) this.current).desiredColumns.add(
                         new DesiredColumn(ctx.getText(),
                                 "",
@@ -728,10 +749,10 @@ class AbstractSyntaxTree {
                     System.err.println("missing " + ctx.getText() + " in group by list sss");
             }
             // nameTable.column
-            else if (ctx.getChild(0).getChild(0).getChildCount() == 3) {
+            else if (ctx.getChild(0).getChild(0).getChild(0).getChildCount() == 3) {
                 ((SelectStatus) this.current).desiredColumns.add(
                         new DesiredColumn(
-                                ctx.getChild(0).getChild(0).getChild(2).getText(),
+                                ctx.getChild(0).getChild(0).getChild(0).getChild(2).getText(),
                                 "",
                                 ((SelectStatus) this.current).nameTable,
                                 ""));
