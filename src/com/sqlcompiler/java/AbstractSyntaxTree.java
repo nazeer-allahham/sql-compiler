@@ -37,6 +37,7 @@ class AbstractSyntaxTree {
 
     private Templates templates = new Templates();
     private String lastSingleInColumnsName;
+    private String lastSetClause;
 
     void build(RuleContext ctx) {
         root = (ParserRuleContext) ctx;
@@ -794,7 +795,7 @@ class AbstractSyntaxTree {
                     System.err.println("missing " + ctx.getChild(0).getText() + " in group by list");
                 else if (((SelectStatus) this.current).columnsGroupBy == null) {
                     System.err.println("Missing group by list");
-                    System.exit(1);
+                    //System.exit(1);
                 }
             }
         }
