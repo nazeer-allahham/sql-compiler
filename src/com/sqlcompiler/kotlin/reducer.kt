@@ -5,7 +5,20 @@ import java.io.File
 
 object Reducer {
 
-    fun reduce(_in: Return): Pair<String, String> {
+    const val PURPOSE_SELECT_NORMAL = 1
+    const val PURPOSE_SELECT_FROM_SUBQUERY = 2
+    const val PURPOSE_SELECT_WHERE_SUBQUERY = 4
+    const val PURPOSE_SELECT_ONE_VALUE = 8
+    const val PURPOSE_SELECT_COMBINE = 16
+
+    const val COMBINE_SELECT_UNION = "UNION"
+    const val COMBINE_SELECT_UNION_ALL = "UNION ALL"
+    const val COMBINE_SELECT_EXCEPT = "EXCEPT"
+    const val COMBINE_SELECT_EXCEPT_ALL = "EXCEPT ALL"
+    const val COMBINE_SELECT_INTERSECT = "INTERSECT"
+    const val COMBINE_SELECT_INTERSECT_ALL = "INTERSECT ALL"
+
+    fun reduce(_in: Return): Pair<String, Any> {
         val header = Row()
         val rows = ArrayList<Row>()
 
@@ -63,24 +76,88 @@ object Reducer {
             }
         }
 
+        if (_in.containsKey("combine")) {
+            val combine = _in["combine"] as Pair<String, ArrayList<Row>>
+            val right = combine.second
+
+            when (combine.first) {
+                COMBINE_SELECT_UNION -> {
+                    //val left = rows.toMutableList()
+                    //rows.clear()
+                    right.forEach { row ->
+                        if ((row !in rows))
+                            rows.add(row)
+                    }
+                }
+                COMBINE_SELECT_UNION_ALL -> {
+                    right.forEach { row ->
+                        rows.add(row)
+                    }
+                }
+                COMBINE_SELECT_EXCEPT -> {
+                    val left = rows.toMutableList()
+                    rows.clear()
+                    left.forEach { row ->
+                        if (row !in right && row !in rows)
+                            rows.add(row)
+                    }
+                }
+                COMBINE_SELECT_EXCEPT_ALL -> {
+                    val left = rows.toMutableList()
+                    rows.clear()
+                    left.forEach { row ->
+                        if (row !in right)
+                            rows.add(row)
+                    }
+                }
+                COMBINE_SELECT_INTERSECT -> {
+                    val left = rows.toMutableList()
+                    rows.clear()
+                    left.forEach { row ->
+                        if (row in right && row !in rows)
+                            rows.add(row)
+                    }
+                }
+                COMBINE_SELECT_INTERSECT_ALL -> {
+                    val left = rows.toMutableList()
+                    rows.clear()
+                    left.forEach { row ->
+                        if (row in right)
+                            rows.add(row)
+                    }
+                }
+            }
+        }
+
         Handler.writeToFile("${(_in["directory"] as File).path}${File.separator}reducer.csv", header, rows)
 
-        return if (header.fields.size == 1) {
-            return if (rows.size == 1) {
-                "value" to rows[0].fields[0]
-            } else {
+        return when (_in["purpose"] as Int) {
+            PURPOSE_SELECT_NORMAL -> {
+                "DONE" to "${rows.size} row(s) affected."
+            }
+            PURPOSE_SELECT_FROM_SUBQUERY -> {
+                val cols = ArrayList<Column>()
+                header.fields.forEach { field ->
+                    cols.add(Column(field.replace(Regex("[(]"), "_").replace(Regex("[)]"), ""), ""))
+                }
+                "TABLE" to Handler.createTable(Table("temp", cols, arrayListOf(Environment.TABLES_PATH + "temp.csv"), ","))
+            }
+            PURPOSE_SELECT_WHERE_SUBQUERY -> {
                 var res = ""
                 rows.forEachIndexed { index, row ->
                     res = res.plus(row.fields[0] + if (index != rows.size - 1) "," else "")
                 }
-                "array" to res
+                "ARRAY" to res
             }
-        } else {
-            val cols = ArrayList<Column>()
-            header.fields.forEach { field ->
-                cols.add(Column(field.replace(Regex("[(]"), "_").replace(Regex("[)]"), ""), ""))
+            PURPOSE_SELECT_ONE_VALUE -> {
+                "SINGLE_VALUE" to rows[0].fields[0]
             }
-            "table" to Handler.createTable(Table("temp", cols, arrayListOf(Environment.TABLES_PATH + "temp.csv"), ","))
+            PURPOSE_SELECT_COMBINE -> {
+                "COMBINE" to rows
+            }
+            else -> {
+                "BUG" to "Unknown purpose"
+            }
         }
     }
 }

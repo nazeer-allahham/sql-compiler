@@ -116,15 +116,15 @@ object Handler {
                columns: ArrayList<DesiredColumn>,
                where: Pair<String, ArrayList<String>>,
                groupBy: ArrayList<String>,
-               orderBy: ArrayList<String>): String {
-//        Console.log(where.first)
+               orderBy: ArrayList<String>,
+               combine: Pair<String, ArrayList<Row>> = Pair("", arrayListOf()),
+               purpose: Int): Any {
 
         val dir = Utils.createDirectory()
         val tables = restoreTables(names)
 
-
-        val result = Reducer.reduce(Shuffler.shuffle(Mapper.map(Fetcher.fetch(dir, tables, columns, where, groupBy, orderBy))))
-        Console.log(result.first, result.second)
+        val result = Reducer.reduce(Shuffler.shuffle(Mapper.map(Fetcher.fetch(dir, tables, columns, where, groupBy, orderBy, combine, purpose))))
+        Console.log(result.first, "${result.second}")
         return result.second
     }
 

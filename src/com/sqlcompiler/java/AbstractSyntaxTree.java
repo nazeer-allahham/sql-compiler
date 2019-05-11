@@ -120,27 +120,32 @@ class AbstractSyntaxTree {
                 // End create table & type
 
                 // Select statement
-                case HplsqlParser.RULE_select_stmt:
-                    System.out.println("RULE_select_stmt");
-                    if (isSubquery()) {
-                        System.out.println("sss");
-                    } else if (!this.statements.empty()) {
-                        this.flush();
+                case HplsqlParser.RULE_fullselect_stmt:
+                    if (isWhereSubquery()) {
+                        System.err.println("where sub query");
+                        this.current = new SelectStatus(this.current, this.templates.initSelect(), 4, this.lastSingleInColumnsName, null);
+                    } else if (isFromSubquery()) {
+                        System.err.println("from sub query");
+                        this.current = new SelectStatus(this.current, this.templates.initSelect(), 2, null, null);
+                    } else if (isCombineQuery()) {
+                        System.err.println("combine");
+                        this.current = new SelectStatus(this.current, this.templates.initSelect(), 16, null, this.lastSetClause);
+                    } else {
+                        if (!this.statements.empty()) {
+                            this.flush();
+                        }
+                        this.current = new SelectStatus(this.current, this.templates.initSelect(), 1, null, null);
                     }
                     this.lastRule = HplsqlParser.RULE_select_stmt;
-
-                    this.current = new SelectStatus(this.current, this.templates.initSelect(), this.lastSingleInColumnsName);
-                    //this.current = new SelectStatus(this.current, "", this.lastSingleInColumnsName);
-                    this.statements.add(this.current);
-                    break;
-
-                case HplsqlParser.RULE_fullselect_stmt:
+                    this.statements.push(this.current);
                     break;
 
                 case HplsqlParser.RULE_fullselect_stmt_item:
                     break;
 
                 case HplsqlParser.RULE_fullselect_set_clause:
+                    this.lastRule = HplsqlParser.RULE_fullselect_set_clause;
+                    handleSelectSetClause(ctx);
                     break;
 
                 case HplsqlParser.RULE_subselect_stmt:
@@ -174,6 +179,7 @@ class AbstractSyntaxTree {
                     break;
 
                 case HplsqlParser.RULE_from_subselect_clause:
+                    this.lastRule = HplsqlParser.RULE_from_subselect_clause;
                     break;
 
                 case HplsqlParser.RULE_from_join_clause:
@@ -462,6 +468,14 @@ class AbstractSyntaxTree {
 
     }
 
+    private void handleSelectSetClause(@NotNull RuleContext ctx) {
+        String type = ctx.getChild(0).getText();
+        if (ctx.getChildCount() == 2) {
+            type += " " + ctx.getChild(1).getText();
+        }
+        this.lastSetClause = type;
+    }
+
     private void handleOrderByClause(@NotNull RuleContext ctx) {
         SelectStatus status = (SelectStatus) this.current;
         for (int i = 2; i < ctx.getChildCount(); i += 2) {
@@ -538,8 +552,16 @@ class AbstractSyntaxTree {
         else return false;
     }
 
-    private boolean isSubquery() {
+    private boolean isWhereSubquery() {
         return this.lastRule == HplsqlParser.RULE_bool_expr_single_in;
+    }
+
+    private boolean isFromSubquery() {
+        return this.lastRule == HplsqlParser.RULE_from_subselect_clause;
+    }
+
+    private boolean isCombineQuery() {
+        return this.lastRule == HplsqlParser.RULE_fullselect_set_clause;
     }
 
     private void flush() {
@@ -554,7 +576,10 @@ class AbstractSyntaxTree {
                     "\"" + status.whereSelectStmt + "\"" + calcWhereInSelectStmt(status),
                     status.columnsWhereClause,
                     status.columnsGroupBy,
-                    status.columnsOrderBy);
+                    status.columnsOrderBy,
+                    status.combineType,
+                    status.combineSource != null ? this.templates.calculate(status.combineSource) : null,
+                    status.purpose);
         } else if (this.current instanceof CreateTypeStatus) {
             System.out.println("Flush select: <CreateTypeStatus>");
             CreateTypeStatus status = (CreateTypeStatus) this.current;
@@ -566,7 +591,7 @@ class AbstractSyntaxTree {
     private String calcWhereInSelectStmt(@NotNull SelectStatus status) {
         StringBuilder builder = new StringBuilder();
 
-        System.err.println("Sizeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" + status.key + " " + status.whereInKeys.size());
+        System.err.println("Size" + status.key + " " + status.whereInKeys.size());
         for (int i = 0; i < status.whereInKeys.size(); i++) {
             Tuple2<String, String> w = status.whereInKeys.get(i);
             builder.append(" + smartSplit(\"").append(w._1).append("\", ").append(this.templates.calculate(w._2)).append(") ");

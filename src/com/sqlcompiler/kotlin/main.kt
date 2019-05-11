@@ -41,9 +41,22 @@ fun main() {
 //            groupBy = arrayListOf(),
 //            orderBy = arrayListOf())
 
-    Handler.select(arrayListOf("c"),
-            arrayListOf(DesiredColumn("id", "min"), DesiredColumn("name")),
-            "" to arrayListOf(),
-            arrayListOf("name"),
-            arrayListOf())
+//    Handler.select(arrayListOf("c"),
+//            arrayListOf(DesiredColumn("id", "min"), DesiredColumn("name")),
+//            "" to arrayListOf(),
+//            arrayListOf("name"),
+//            arrayListOf())
+
+    Handler.select(names = arrayListOf("c"),
+            columns = arrayListOf(),
+            where = "" to arrayListOf(),
+            groupBy = arrayListOf(),
+            orderBy = arrayListOf(),
+            combine = "UNION" to (Handler.select(names = arrayListOf("c"),
+                    columns = arrayListOf(),
+                    where = "" to arrayListOf(),
+                    groupBy = arrayListOf(),
+                    orderBy = arrayListOf(),
+                    purpose = 16) as ArrayList<Row>),
+            purpose = 1)
 }

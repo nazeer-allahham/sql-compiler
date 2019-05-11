@@ -60,7 +60,21 @@ public class Templates {
                                      String where,
                                      List<String> whereColumns,
                                      List<String> groupBy,
-                                     List<String> orderBy) {
+                                     List<String> orderBy,
+                                     String combineType,
+                                     String combineSource,
+                                     Integer purpose) {
+        System.out.println(key);
+        System.out.println(tables);
+        System.out.println(columns);
+        System.out.println(where);
+        System.out.println(whereColumns);
+        System.out.println(groupBy);
+        System.out.println(orderBy);
+        System.out.println(combineType);
+        System.out.println(combineSource);
+        System.out.println(purpose);
+
         for (int i = 0; i < tables.size(); i++) {
             tables.set(i, "\"" + tables.get(i) + "\"");
         }
@@ -91,6 +105,14 @@ public class Templates {
         this.add(key, "conditions", whereColumns);
         this.add(key, "groupBy", groupBy);
         this.add(key, "orderBy", orderBy);
+        if (combineType != null && combineSource != null) {
+            combineType = "\"" + combineType + "\"";
+//            combineSource = "\"" + combineSource + "\"";
+
+            this.add(key, "combineType", combineType);
+            this.add(key, "combineSource", combineSource);
+        }
+        this.add(key, "purpose", purpose);
     }
 
     public void flushCreateTypeStatement(String key,
