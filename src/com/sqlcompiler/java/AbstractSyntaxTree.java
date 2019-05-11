@@ -767,6 +767,10 @@ class AbstractSyntaxTree {
                 ));
                 if (((SelectStatus) this.current).columnsGroupBy != null && !((SelectStatus) this.current).columnsGroupBy.contains(ctx.getChild(0).getText()))
                     System.err.println("missing " + ctx.getChild(0).getText() + " in group by list");
+                else if (((SelectStatus) this.current).columnsGroupBy == null) {
+                    System.err.println("Missing group by list");
+                    System.exit(1);
+                }
             }
         }
         //subselect
@@ -803,6 +807,10 @@ class AbstractSyntaxTree {
                         ((SelectStatus) this.current).nameTable,
                         ctx.getChild(1).getChild(1).getText()
                 ));
+                if (((SelectStatus) this.current).columnsGroupBy == null) {
+                    System.err.println("Missing group by list");
+                    System.exit(1);
+                }
             }
         }
         return "";
