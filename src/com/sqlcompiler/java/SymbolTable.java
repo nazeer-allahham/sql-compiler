@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 class SymbolTable {
     private Scope currentScope;
@@ -28,7 +29,7 @@ class SymbolTable {
         } catch (Exception e) {
         }
         if (isVariable(value)) {
-           return isTypeCompatible(type, AllSymbol.get(value).getValue());
+            return isTypeCompatible(type, AllSymbol.get(value).getValue());
         }
         try {
             switch (type) {
@@ -42,7 +43,7 @@ class SymbolTable {
                     return value.startsWith("\"") && value.endsWith("\"");
                 case "boolean":
                     return value.equalsIgnoreCase("true")
-                            ||value.equalsIgnoreCase("false");
+                            || value.equalsIgnoreCase("false");
             }
         } catch (Exception e) {
             return false;
@@ -56,14 +57,17 @@ class SymbolTable {
 
 
     boolean checkCasting(String type1, String type2) {
-        if (type2 == null) return true;
+        if (type2 == null)
+            return true;
         return type1.charAt(0) >= type2.charAt(0);
     }
 
     void isUnassignedVariable() {
-        for (String sname : nameSymbols)
-            if (!AllSymbol.get(sname).isAssigned)
-                System.err.println("Warring unassigned variable " + sname);
+        for (Map.Entry<String, Symbol> symbolEntry : AllSymbol.entrySet()) {
+            if (!symbolEntry.getValue().isAssigned && symbolEntry.getValue().getAttribute().equalsIgnoreCase("")) {
+                System.err.println("Warring unassigned variable : " + symbolEntry.getValue().getName());
+            }
+        }
 
     }
 
@@ -79,6 +83,14 @@ class SymbolTable {
             temp = temp.parent;
         } while (temp != null);
         return null;
+    }
+
+    public Scope getCurrentScope() {
+        return currentScope;
+    }
+
+    public void setCurrentScope(Scope currentScope) {
+        this.currentScope = currentScope;
     }
 
     void insert(Symbol symbol, boolean state) {
@@ -105,26 +117,27 @@ class SymbolTable {
         }
     }
 
-    public boolean checkParampetersFunctionCpp(String nameFunction, String parameter ,int indexParameter) {
+    public boolean checkParampetersFunctionCpp(String nameFunction, String parameter, int indexParameter) {
         try {
-            Field field=AllSymbol.get(nameFunction).getLocalField().get(indexParameter);
-            if(!isTypeCompatible(field.getType(),parameter)){
+            Field field = AllSymbol.get(nameFunction).getLocalField().get(indexParameter);
+            if (!isTypeCompatible(field.getType(), parameter)) {
                 if (isVariable(parameter)) {
                     parameter = AllSymbol.get(parameter).type;
-                    return checkCasting(field.getType(),parameter);
-                }
-                else {
+                    return checkCasting(field.getType(), parameter);
+                } else {
                     try {
                         Integer.parseInt(parameter);
-                        return checkCasting(field.getType(),"int");
-                    }catch (Exception e){}
+                        return checkCasting(field.getType(), "int");
+                    } catch (Exception e) {
+                    }
                     try {
                         Float.parseFloat(parameter);
-                        return checkCasting(field.getType(),"real");
-                    }catch (Exception e){}
-                    if((parameter.equalsIgnoreCase("true")
-                            ||parameter.equalsIgnoreCase("false"))
-                            &&field.getType().equalsIgnoreCase("boolean")){
+                        return checkCasting(field.getType(), "real");
+                    } catch (Exception e) {
+                    }
+                    if ((parameter.equalsIgnoreCase("true")
+                            || parameter.equalsIgnoreCase("false"))
+                            && field.getType().equalsIgnoreCase("boolean")) {
                         return true;
                     }
                     return parameter.startsWith("\"") && parameter.endsWith("\"")
@@ -132,7 +145,7 @@ class SymbolTable {
 
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;//over parameter
         }
         return true;
