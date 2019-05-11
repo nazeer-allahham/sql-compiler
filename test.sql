@@ -1,1 +1,1 @@
-select min(id) , name from c  group by name
+select id, name from c where id < 2 group by name

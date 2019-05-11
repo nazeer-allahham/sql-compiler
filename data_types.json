@@ -61,28 +61,6 @@
       }
     ]
   },
-  "users": {
-    "rank": 1,
-    "name": "users",
-    "delimiter": ",",
-    "locations": [
-      "tables\\users.csv"
-    ],
-    "fields": [
-      {
-        "name": "name",
-        "type": "string"
-      },
-      {
-        "name": "age",
-        "type": "int"
-      },
-      {
-        "name": "gender",
-        "type": "string"
-      }
-    ]
-  },
   "string": {
     "rank": 0,
     "name": "string",
@@ -189,6 +167,28 @@
       {
         "name": "real",
         "type": "real"
+      }
+    ]
+  },
+  "users": {
+    "rank": 1,
+    "name": "users",
+    "delimiter": ",",
+    "locations": [
+      "tables\\users.csv"
+    ],
+    "fields": [
+      {
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "name": "age",
+        "type": "int"
+      },
+      {
+        "name": "gender",
+        "type": "string"
       }
     ]
   },

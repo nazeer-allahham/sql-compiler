@@ -17,13 +17,14 @@ class SelectStatus implements Status {
     ArrayList<String> columnsOrderBy;
     ArrayList<Tuple2<String, String>> whereInKeys;
 
+    String combineType;
+    String combineSource;
+    Integer purpose;
+
     Status parent;
 
-    SelectStatus(Status parent, String statementKey, String columnName) {
+    SelectStatus(Status parent, String statementKey) {
         this.parent = parent;
-        if (parent != null) {
-            ((SelectStatus) this.parent).addWhereInKey(columnName, statementKey);
-        }
 
 //        this.columnsGroupBy = new ArrayList<>();
         this.columnsOrderBy = new ArrayList<>();
@@ -34,10 +35,33 @@ class SelectStatus implements Status {
         this.tablesSelectStmt = new ArrayList<>();
         this.whereSelectStmt = "";
         this.whereInKeys = new ArrayList<>();
+        this.purpose = 1;
     }
 
+    SelectStatus(Status parent, String statementKey, Integer purpose, String columnName, String combineType) {
+        this(parent, statementKey);
+
+        if (parent != null && columnName != null) {
+            ((SelectStatus) this.parent).addWhereInKey(columnName, statementKey);
+        }
+
+        if (parent != null && combineType != null) {
+            ((SelectStatus) this.parent).setCombineData(combineType, statementKey);
+        }
+
+        if (purpose != null) {
+            this.purpose = purpose;
+        }
+    }
+
+    private void setCombineData(String combineType, String statementKey) {
+        System.out.println(combineType + "\t" + statementKey);
+        this.combineType = combineType;
+        this.combineSource = statementKey;
+    }
+
+
     private void addWhereInKey(String columnName, String statementKey) {
-        System.err.println("XSXSXSXSXSXSXSXSXSXSXSXSXSXSXSXSSXSXSXSXSXSX" + this.key + " " + columnName + "  " + statementKey);
         this.whereInKeys.add(Tuple.of(columnName, statementKey));
     }
 

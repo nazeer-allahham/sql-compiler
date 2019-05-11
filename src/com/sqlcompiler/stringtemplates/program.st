@@ -1,10 +1,6 @@
 program (instructions) ::=
 <<
-import com.sqlcompiler.kotlin.Column
-import com.sqlcompiler.kotlin.DesiredColumn;
-import com.sqlcompiler.kotlin.Handler;
-import com.sqlcompiler.kotlin.Utils.smartSplit;
-import com.sqlcompiler.kotlin.Table;
+import com.sqlcompiler.kotlin.*;
 
 fun main() {
 <instructions : {instruction | <instruction>}; separator=";\n">

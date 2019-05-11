@@ -12,7 +12,9 @@ object Fetcher {
               columns: ArrayList<DesiredColumn>,
               where: Pair<String, ArrayList<String>>,
               groupBy: ArrayList<String>,
-              orderBy: ArrayList<String>): Return {
+              orderBy: ArrayList<String>,
+              combine: Pair<String, ArrayList<Row>> = Pair("", arrayListOf()),
+              purpose: Int): Return {
         val result = Return()
         // These values will be used later from (Mapper, Shuffler, Reducer)
         result["directory"] = directory
@@ -21,6 +23,8 @@ object Fetcher {
         result["where_columns"] = where.second
         result["group_by"] = groupBy
         result["order_by"] = orderBy
+        result["combine"] = combine
+        result["purpose"] = purpose
 
         var (header, rows) = Handler.readTable(tables[0])
 
