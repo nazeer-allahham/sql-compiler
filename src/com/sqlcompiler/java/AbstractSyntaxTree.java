@@ -388,7 +388,7 @@ class AbstractSyntaxTree {
         try {
             file.createNewFile();
             stream = new DataOutputStream(new FileOutputStream(file));
-            stream.writeUTF(this.templates.calculateAll());
+            stream.writeBytes(this.templates.calculateAll());
             stream.close();
         } catch (IOException e) {
             e.printStackTrace();
