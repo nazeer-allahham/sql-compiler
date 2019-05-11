@@ -258,10 +258,14 @@ class AbstractSyntaxTree {
                 case HplsqlParser.RULE_begin_end_block:
                     handleNewScope(ctx);
                     break;
-
-                case HplsqlParser.RULE_cpp_declare_stmt:
+                case HplsqlParser.RULE_block_end:
+                    symbolTable.setCurrentScope(symbolTable.getCurrentScope().parent);
+                    break;
                 case HplsqlParser.RULE_declare_var_item:
                     handleDeclareVariable(ctx);
+                    break;
+                case HplsqlParser.RULE_cpp_declare_stmt:
+                    handleDeclareCppVariable(ctx);
                     break;
 
                 case HplsqlParser.RULE_cpp_function_param:
@@ -388,6 +392,19 @@ class AbstractSyntaxTree {
         DataTypes.save(Environment.DATA_TYPES_PATH);
     }
 
+    private void handleDeclareVariable(RuleContext ctx) {
+        if (ctx.getChildCount() == 3) {
+            symbolTable.nameSymbols.add(ctx.getChild(0).getText());
+            symbolTable.insert(new SymbolTable.Symbol(
+                    ctx.getChild(0).getText(),
+                    ctx.getChild(1).getText().replaceAll("number", "int"),
+                    "", ctx.getChild(2).getChild(2).getText(), true), false);
+        } else {
+            symbolTable.nameSymbols.add(ctx.getChild(0).getText());
+            symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(0).getText(), ctx.getChild(1).getText().replaceAll("number", "int"), ""), false);
+        }
+    }
+
     private void handleTypeJoin(RuleContext ctx) {
         //TODO For uncle MOUAZ
         if (ctx.getChild(1).getText().equalsIgnoreCase("outer")) {
@@ -480,7 +497,9 @@ class AbstractSyntaxTree {
     }
 
     private boolean isCurrentStatementSelect() {
-        return this.statements.elementAt(0) instanceof SelectStatus;
+        if (this.statements.size() > 0)
+            return this.statements.elementAt(0) instanceof SelectStatus;
+        else return false;
     }
 
     private boolean isSubquery() {
@@ -555,9 +574,11 @@ class AbstractSyntaxTree {
         symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(), ctx.getChild(0).getText(), "", true), false);
     }
 
-    private void handleDeclareVariable(@NotNull RuleContext ctx) {
-        symbolTable.nameSymbols.add(ctx.getChild(1).getText());
-        symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(), ctx.getChild(0).getText(), ""), false);
+    private void handleDeclareCppVariable(@NotNull RuleContext ctx) {
+        if (!ctx.getChild(0).getText().equalsIgnoreCase("begin")) {
+            symbolTable.nameSymbols.add(ctx.getChild(1).getText());
+            symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(), ctx.getChild(0).getText(), ""), false);
+        }
     }
 
     private void handleNewScope(@NotNull RuleContext ctx) {

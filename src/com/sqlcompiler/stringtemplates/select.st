@@ -5,7 +5,7 @@ select(tables,
        groupBy,
        orderBy) ::=
 <<
-Handler.select(names = arrayListOf(<tables>),
+Handler.select(names = arrayListOf(<tables: {item | <item>}; separator=",">),
                columns = arrayListOf(<columns : {column | DesiredColumn(<column.columnName > ,<column.functionName>,<column.nameAlias>)}; separator=",">),
                where = <where> to arrayListOf(<conditions : {condition | <condition>}; separator=",">),
                groupBy = arrayListOf(<groupBy : {item | <item>}; separator=",">),
