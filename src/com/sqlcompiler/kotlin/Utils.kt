@@ -17,6 +17,18 @@ object Utils {
         return builder.toString()
     }
 
+    fun smartConcatenate(token: String, vararg strings: String): String {
+        val builder = StringBuilder()
+
+        strings.forEachIndexed { index, string ->
+            builder.append(string)
+            if (index < strings.size - 1) {
+                builder.append(token)
+            }
+        }
+        return builder.toString()
+    }
+
     fun createDirectory(): File {
         val file = File(Environment.OUTPUT_FILE_NAME)
         file.mkdirs()

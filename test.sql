@@ -1,1 +1,3 @@
-select min(id) , name from c  group by name
+if(i>2k){
+
+}

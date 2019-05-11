@@ -25,6 +25,17 @@ object Handler {
         writer.close()
     }
 
+    fun writeToFile(path: String, header: Row, data: HashMap<String, Row>) {
+        val file = File(path)
+        if (!file.exists())
+            file.createNewFile()
+        val writer = FileWriter(file)
+
+        writer.append(header.toString())
+        data.values.forEach { row -> writer.append(row.toString()) }
+        writer.close()
+    }
+
     fun readFromFile(path: String): Pair<Row, ArrayList<Row>>? {
         val file = File(path)
         if (!file.exists()) {

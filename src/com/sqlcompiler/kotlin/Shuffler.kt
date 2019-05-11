@@ -6,53 +6,61 @@ object Shuffler {
 
     fun shuffle(_in: Return): Return {
 
-        val data = _in["fetcher_files"] as ArrayList<String>
         val groups = _in["mapper_files"] as ArrayList<String>
         val orderBy = _in["order_by"] as ArrayList<String>
 
-        val data_files: ArrayList<String> = ArrayList()
-        val groups_files: ArrayList<String> = ArrayList()
+        val files: ArrayList<String> = ArrayList()
 
-        data.forEach { i ->
-            var (header, rows) = Handler.readFromFile(i)!!
+        if (groups.size > 0) {
+            _in["grouping"] = true
+            groups.forEach { group ->
+                val (header, rows) = Handler.readFromFile(group)!!
+                val head = Row()
+                var body = HashMap<String, Row>()
+                var title = ""
+
+                // Find value because we named the value column with <value>
+                val index = header.find("value")
+
+                for (i in 0 until index) {
+                    title += "${header.fields[i]}${if (i < index - 1) "_" else ""}"
+                    head.addField(header.fields[i])
+                }
+                head.addField("key")
+                head.addField("values")
+                rows.forEach { row ->
+                    Console.log(row.fields[index])
+                    val row1 = Row()
+                    // Generating the key
+                    var key = ""
+                    for (i in 0 until index) {
+                        key += "${row.fields[i]}${if (i < index - 1) "_" else ""}"
+                        row1.addField(row.fields[i])
+                    }
+                    row1.fields.add(key)
+
+                    if (!body.containsKey(key)) {
+                        body[key] = row1
+                    }
+                    body[key]!!.addField(row.fields[index])
+                }
+
+                val path = "${(_in["directory"] as File).path}${File.separator}shuffle_$title.csv"
+                Handler.writeToFile(path, head, body)
+                files.add(path)
+            }
+        } else {
+            _in["grouping"] = false
+            var (header, rows) = Handler.readFromFile((_in["fetcher_files"] as ArrayList<String>)[0])!!
 
             rows = sort(rows, Comparator { o1, o2 -> compare(header, orderBy, o1, o2) })
 
-            val key = i.substring(i.indexOf("fetch_") + 6, i.length - 4)
-            val path = "${(_in["directory"] as File).path}${File.separator}shuffler_${key}_data.csv"
+            val path = "${(_in["directory"] as File).path}${File.separator}shuffle_ordered_rows.csv"
             Handler.writeToFile(path, header, rows)
-            data_files.add(path)
+            files.add(path)
         }
 
-        groups.forEach { group ->
-            val (header, rows) = Handler.readFromFile(group)!!
-            if (rows.isNotEmpty()) {
-                // rows[0].fields[1] is the name of the grouping function
-                when (rows[0].fields[1]) {
-                    "min" -> {
-                        rows.forEachIndexed { i, row ->
-                            var columns = row.splice(2, row.fields.size - 1)
-                            Console.log("$columns")
-                            columns = columns.sortedWith(Comparator { o1, o2 ->
-                                o1.compareTo(o2)
-                            }).filter { true } as ArrayList<String>
-                            columns.add(0, row.fields[0])
-                            columns.add(1, row.fields[1])
-
-                            rows[i] = Row(columns)
-                        }
-                    }
-                }
-            }
-
-            val key = group.substring(group.indexOf("mapper_"), group.length - 4)
-            val path = "${(_in["directory"] as File).path}${File.separator}shuffler_${key}_group.csv"
-            Handler.writeToFile(path, header, rows)
-            groups_files.add(path)
-        }
-
-        _in["shuffler_data_files"] = data_files
-        _in["shuffler_groups_files"] = groups_files
+        _in["shuffler_files"] = files
         return _in
     }
 

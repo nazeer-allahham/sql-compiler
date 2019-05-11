@@ -9,47 +9,55 @@ object Reducer {
         val header = Row()
         val rows = ArrayList<Row>()
 
+        val flag = _in["grouping"] as Boolean
+        val sources = _in["shuffler_files"] as ArrayList<String>
         val columns = _in["desired_columns"] as ArrayList<DesiredColumn>
 
-        var flag = false
-        columns.forEach { column ->
-            header.addField(column.fullName())
-            flag = flag || column.hasGroupingFunction()
-        }
+        columns.forEach { column -> header.addField(column.title()) }
 
         if (!flag) {
-            val sources = _in["shuffler_data_files"] as ArrayList<String>
-            val cols: ArrayList<Int> = header.filter(columns)
-            sources.forEach { source ->
-                val (_, rows1) = Handler.readFromFile(source)!!
-
-                rows1.forEach { row1 ->
-                    rows.add(row1.map(cols))
-//                    rows.add(row1)
+            if (columns.size > 0) {
+                sources.forEach { source ->
+                    val (head, body) = Handler.readFromFile(source)!!
+                    val indexes = head.filter(columns)
+                    body.forEach { row ->
+                        rows.add(row.map(indexes))
+                    }
+                }
+            } else {
+                sources.forEach { source ->
+                    val (head, body) = Handler.readFromFile(source)!!
+                    if (header.fields.size == 0) {
+                        head.fields.forEach { field -> header.addField(field) }
+                    }
+                    body.forEach { row ->
+                        rows.add(row)
+                    }
                 }
             }
         } else {
-            val groups = _in["shuffler_groups_files"] as ArrayList<String>
-            groups.forEach { group ->
-                val (header1, rows1) = Handler.readFromFile(group)!!
-                rows1.forEach { row1 ->
-                    val row = Row()
-                    columns.forEach { column ->
-                        if (column.hasGroupingFunction()) {
-                            row.addField(row1.fields[2])
-                        }
+            var h: Row? = null
+            var data: ArrayList<Row>? = null
+            sources.forEachIndexed { i, source ->
+                val (header1, rows1) = Handler.readFromFile(source)!!
+                val index = header1.find("values")
+                if (i == 0) {
+                    h = header1
+                    data = rows1
+                    rows1.forEach { _ ->
+                        rows.add(Row())
                     }
-                    rows.add(row)
+                }
+                rows.forEachIndexed { i2, row ->
+                    row.addField(rows1[i2].fields[index])
                 }
             }
 
-            val sources = _in["shuffler_data_files"] as ArrayList<String>
-            sources.forEachIndexed { i, source ->
-                val (header1, rows1) = Handler.readFromFile(source)!!
-
-                columns.forEach { column ->
-                    if (!column.hasGroupingFunction()) {
-                        rows[i].fields.add(rows1[0].fields[header1.find(column.columnName)])
+            columns.forEach { column ->
+                if (!column.hasGroupingFunction()) {
+                    val index = h!!.find(column.columnName)
+                    rows.forEachIndexed { i, row ->
+                        row.addField(data!![i].fields[index])
                     }
                 }
             }
@@ -70,7 +78,7 @@ object Reducer {
         } else {
             val cols = ArrayList<Column>()
             header.fields.forEach { field ->
-                cols.add(Column(field.split("_")[1], ""))
+                cols.add(Column(field.replace(Regex("[(]"), "_").replace(Regex("[)]"), ""), ""))
             }
             "table" to Handler.createTable(Table("temp", cols, arrayListOf(Environment.TABLES_PATH + "temp.csv"), ","))
         }

@@ -22,9 +22,6 @@ object Fetcher {
         result["group_by"] = groupBy
         result["order_by"] = orderBy
 
-        // values declared by Fetcher
-        result["fetcher_files"] = ArrayList<String>()
-
         var (header, rows) = Handler.readTable(tables[0])
 
         // in Join case
@@ -39,30 +36,12 @@ object Fetcher {
         // Eliminate rows which are not compatible with where condition
         rows = filter(rows, header, where.first, where.second)
 
-        // Grouping the data
-        var groups = HashMap<String, ArrayList<Row>>()
-        groups["all"] = rows
+        // Files created by fetcher
+        result["fetcher_files"] = ArrayList<String>()
 
-        groupBy.forEach { term ->
-            groups = this.groupBy(header.find(term), groups)
-        }
-
-        // Save the groups into separated files
-        groups.keys.forEach { key ->
-            val path = directory.path + File.separator + "fetch_$key.csv"
-            Handler.writeToFile(path, header, groups[key]!!)
-            (result["fetcher_files"] as ArrayList<String>).add(path)
-        }
-
-        // Schedule mapping process for each grouping function (one mapper if there is no grouping functions)
-        if (groupBy.isNotEmpty()) {
-            result["mapper_jobs"] = columns.filter { column -> column.hasGroupingFunction() }
-        }
-        if (!result.containsKey("mapper_jobs")) // if group by was empty
-        {
-            result["mapper_jobs"] = ArrayList<DesiredColumn>()
-        }
-        (result["mapper_jobs"] as ArrayList<DesiredColumn>).add(DesiredColumn("_", "_"))
+        val path = directory.path + File.separator + "fetch.csv"
+        Handler.writeToFile(path, header, rows)
+        (result["fetcher_files"] as ArrayList<String>).add(path)
 
         return result
     }

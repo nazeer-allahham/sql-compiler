@@ -6,36 +6,47 @@ object Mapper {
 
     fun map(_in: Return): Return {
 
-        val jobs = _in["mapper_jobs"] as ArrayList<DesiredColumn>
-        val sources = _in["fetcher_files"] as ArrayList<String>
+        val source = (_in["fetcher_files"] as ArrayList<String>)[0]
+        val columns = _in["desired_columns"] as ArrayList<DesiredColumn>
+        val keys = _in["group_by"] as ArrayList<String>
+
+        val (header, rows) = Handler.readFromFile(source)!!
 
         val files = ArrayList<String>()
 
-        jobs.forEach { job ->
-            // If the job is default then there no need to do any thing
-            // and the data we can read it from _in["fetcher_files"]
-            // Else new file will be generated <key, values...>
-            if (!job.isDefault()) {
-                val head = Row(arrayListOf("key", "function_name", "values"))
+        // Mapper
+        columns.forEach { column ->
+            if (column.hasGroupingFunction()) {
+                val indexes = ArrayList<Int>()
+                val head = Row()
                 val body = ArrayList<Row>()
-                sources.forEachIndexed { i, source ->
-                    val (header, rows) = Handler.readFromFile(source)!!
 
-                    val index = header.find(job.columnName)
-                    // source.indexOf("fetch_") because in fetcher path named with fetch_ prefix
-                    val key = source.substring(source.indexOf("fetch_") + 6, source.length - 4)
-                    body.add(Row())
-                    body[i].addField(key)
-                    body[i].addField(job.functionName)
-                    rows.forEach { row ->
-                        body[i].addField(row.fields[index])
-                    }
+                keys.forEach { key ->
+                    head.addField(key)
+                    indexes.add(header.find(key))
                 }
-                val path = "${(_in["directory"] as File).path}${File.separator}mapper_$job.csv"
+
+                head.addField("function_name")
+                head.addField("value")
+
+                val index = header.find(column.columnName)
+
+                rows.forEach { row ->
+                    val row1 = Row()
+
+                    indexes.forEach { index -> row1.addField(row.fields[index]) }
+                    row1.addField(column.functionName)
+                    row1.addField(row.fields[index])
+
+                    body.add(row1)
+                }
+
+                val path = "${(_in["directory"] as File).path}${File.separator}map_${column.functionName}_${column.columnName}.csv"
                 Handler.writeToFile(path, head, body)
                 files.add(path)
             }
         }
+
         _in["mapper_files"] = files
         return _in
     }

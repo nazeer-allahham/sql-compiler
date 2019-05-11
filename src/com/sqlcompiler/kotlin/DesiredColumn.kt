@@ -1,8 +1,12 @@
 package com.sqlcompiler.kotlin
 
-class DesiredColumn(val columnName: String, val functionName: String = "") {
-    fun get(): Unit {
-
+class DesiredColumn(val columnName: String, val functionName: String = "", val columnAlias: String = "") {
+    val title = fun(): String {
+        return when {
+            columnAlias !== "" -> columnAlias
+            functionName !== "" -> "$functionName ($columnName)"
+            else -> columnName
+        }
     }
 
     fun hasGroupingFunction(): Boolean {
@@ -15,13 +19,5 @@ class DesiredColumn(val columnName: String, val functionName: String = "") {
 
     override fun toString(): String {
         return "${columnName}_$functionName"
-    }
-
-    fun fullName(): String {
-        if (this.functionName == "") {
-            return this.columnName
-        } else {
-            return "$functionName($columnName)"
-        }
     }
 }

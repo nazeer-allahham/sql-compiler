@@ -174,6 +174,7 @@ class AbstractSyntaxTree {
                     break;
 
                 case HplsqlParser.RULE_from_join_type_clause:
+                    handleTypeJoin(ctx);
                     break;
 
                 case HplsqlParser.RULE_from_table_values_clause:
@@ -190,7 +191,7 @@ class AbstractSyntaxTree {
 
 
                 case HplsqlParser.RULE_where_clause:
-                    handleWhereClause(ctx);
+                    //handleWhereClause(ctx);
                     break;
 
                 case HplsqlParser.RULE_bool_expr_is_not_null:
@@ -257,10 +258,14 @@ class AbstractSyntaxTree {
                 case HplsqlParser.RULE_begin_end_block:
                     handleNewScope(ctx);
                     break;
-
-                case HplsqlParser.RULE_cpp_declare_stmt:
+                case HplsqlParser.RULE_block_end:
+                    symbolTable.setCurrentScope(symbolTable.getCurrentScope().parent);
+                    break;
                 case HplsqlParser.RULE_declare_var_item:
                     handleDeclareVariable(ctx);
+                    break;
+                case HplsqlParser.RULE_cpp_declare_stmt:
+                    handleDeclareCppVariable(ctx);
                     break;
 
                 case HplsqlParser.RULE_cpp_function_param:
@@ -387,6 +392,40 @@ class AbstractSyntaxTree {
         DataTypes.save(Environment.DATA_TYPES_PATH);
     }
 
+    private void handleDeclareVariable(RuleContext ctx) {
+        if (ctx.getChildCount() == 3) {
+            symbolTable.nameSymbols.add(ctx.getChild(0).getText());
+            symbolTable.insert(new SymbolTable.Symbol(
+                    ctx.getChild(0).getText(),
+                    ctx.getChild(1).getText().replaceAll("number", "int"),
+                    "", ctx.getChild(2).getChild(2).getText(), true), false);
+        } else {
+            symbolTable.nameSymbols.add(ctx.getChild(0).getText());
+            symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(0).getText(), ctx.getChild(1).getText().replaceAll("number", "int"), ""), false);
+        }
+    }
+
+    private void handleTypeJoin(RuleContext ctx) {
+        //TODO For uncle MOUAZ
+        if (ctx.getChild(1).getText().equalsIgnoreCase("outer")) {
+            String leftColumn = ctx.parent.getChild(3).getChild(0).getChild(0).getChild(0).getText().replace('.', '_');
+            String rightColumn = ctx.parent.getChild(3).getChild(0).getChild(0).getChild(2).getText().replace('.', '_');
+            String condition = "";
+            if (ctx.getChild(0).getText().equalsIgnoreCase("left")) {
+                condition = leftColumn;
+                condition = condition + " > 0";
+            } else if (ctx.getChild(0).getText().equalsIgnoreCase("right")) {
+                condition = rightColumn;
+                condition = condition + " > 0";
+            } else if (ctx.getChild(0).getText().equalsIgnoreCase("full")) {
+                condition = leftColumn + " > 0 or " + rightColumn + " > 0 ";
+            }
+            ((SelectStatus) this.current).whereSelectStmt += condition + " or ";
+
+        }
+
+    }
+
     private void handleOrderByClause(@NotNull RuleContext ctx) {
         SelectStatus status = (SelectStatus) this.current;
         for (int i = 2; i < ctx.getChildCount(); i += 2) {
@@ -432,11 +471,12 @@ class AbstractSyntaxTree {
         String op = ctx.getChild(1).getText();
         String right = ctx.getChild(2).getText();
 
-        // TODO remove ! from the condition
-        if (!isColumnName(left)) {
+        if (isColumnName(left)) {
+            left = left.replace('.', '_');
             ((SelectStatus) this.current).columnsWhereClause.add(left);
         }
-        if (!isColumnName(right)) {
+        if (isColumnName(right)) {
+            right = right.replace('.', '_');
             ((SelectStatus) this.current).columnsWhereClause.add(right);
         }
         ((SelectStatus) this.current).whereSelectStmt += left + " " + op + " " + right;
@@ -457,7 +497,9 @@ class AbstractSyntaxTree {
     }
 
     private boolean isCurrentStatementSelect() {
-        return this.statements.elementAt(0) instanceof SelectStatus;
+        if (this.statements.size() > 0)
+            return this.statements.elementAt(0) instanceof SelectStatus;
+        else return false;
     }
 
     private boolean isSubquery() {
@@ -472,7 +514,7 @@ class AbstractSyntaxTree {
             SelectStatus status = (SelectStatus) this.current;
             this.templates.flushSelectStatement(status.key,
                     status.tablesSelectStmt,
-                    status.columnsSelectStmt,
+                    status.desiredColumns,
                     "\"" + status.whereSelectStmt + "\"" + calcWhereInSelectStmt(status),
                     status.columnsWhereClause,
                     status.columnsGroupBy,
@@ -532,9 +574,11 @@ class AbstractSyntaxTree {
         symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(), ctx.getChild(0).getText(), "", true), false);
     }
 
-    private void handleDeclareVariable(@NotNull RuleContext ctx) {
-        symbolTable.nameSymbols.add(ctx.getChild(1).getText());
-        symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(), ctx.getChild(0).getText(), ""), false);
+    private void handleDeclareCppVariable(@NotNull RuleContext ctx) {
+        if (!ctx.getChild(0).getText().equalsIgnoreCase("begin")) {
+            symbolTable.nameSymbols.add(ctx.getChild(1).getText());
+            symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(), ctx.getChild(0).getText(), ""), false);
+        }
     }
 
     private void handleNewScope(@NotNull RuleContext ctx) {
@@ -727,6 +771,14 @@ class AbstractSyntaxTree {
         }
         return "";
         //return "\"" + ((SelectStatus) this.current).columnsSelectStmt.get(((SelectStatus) this.current).columnsSelectStmt.size() - 1) + "\"";
+    }
+
+    private ArrayList<String> getColumnsName() {
+        ArrayList<String> columns = new ArrayList<>();
+        for (DesiredColumn dc : ((SelectStatus) this.current).desiredColumns) {
+            columns.add(dc.getColumnName());
+        }
+        return columns;
     }
 
     void print() {
