@@ -57,13 +57,14 @@ class SymbolTable {
 
 
     boolean checkCasting(String type1, String type2) {
-        if (type2 == null) return true;
+        if (type2 == null)
+            return true;
         return type1.charAt(0) >= type2.charAt(0);
     }
 
     void isUnassignedVariable() {
         for (Map.Entry<String, Symbol> symbolEntry : AllSymbol.entrySet()) {
-            if (!symbolEntry.getValue().isAssigned) {
+            if (!symbolEntry.getValue().isAssigned && symbolEntry.getValue().getAttribute().equalsIgnoreCase("")) {
                 System.err.println("Warring unassigned variable : " + symbolEntry.getValue().getName());
             }
         }

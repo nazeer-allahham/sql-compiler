@@ -68,6 +68,12 @@ class AbstractSyntaxTree {
                     break;
 
                 // Create table
+                case HplsqlParser.RULE_create_table_columns_item:
+                    if (DataTypes.get(ctx.getChild(1).getText()) == null) {
+                        System.err.println("Type " + ctx.getChild(1).getText() + " undefined");
+                        System.exit(1);
+                    }
+                    break;
                 case HplsqlParser.RULE_create_table_stmt:
                     if (!this.statements.empty())
                         this.flush();
@@ -382,7 +388,7 @@ class AbstractSyntaxTree {
         try {
             file.createNewFile();
             stream = new DataOutputStream(new FileOutputStream(file));
-            stream.writeUTF(this.templates.calculateAll());
+            //stream.writeUTF(this.templates.calculateAll());
             stream.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -395,9 +401,15 @@ class AbstractSyntaxTree {
     private void handleDeclareVariable(RuleContext ctx) {
         if (ctx.getChildCount() == 3) {
             symbolTable.nameSymbols.add(ctx.getChild(0).getText());
+            String type = ctx.getChild(1).getText();
+            if (type.equalsIgnoreCase("number")) type = "int";
+            else if (type.equalsIgnoreCase("varchar")) type = "string";
+            else if (type.equalsIgnoreCase("varchar2")) type = "string";
+            else if (type.equalsIgnoreCase("date")) type = "string";
+            else if (type.equalsIgnoreCase("char")) type = "string";
             symbolTable.insert(new SymbolTable.Symbol(
                     ctx.getChild(0).getText(),
-                    ctx.getChild(1).getText().replaceAll("number", "int"),
+                    type,
                     "", ctx.getChild(2).getChild(2).getText(), true), false);
         } else {
             symbolTable.nameSymbols.add(ctx.getChild(0).getText());
@@ -407,6 +419,9 @@ class AbstractSyntaxTree {
 
     private void handleTypeJoin(RuleContext ctx) {
         //TODO For uncle MOUAZ
+        /**
+         * select * from c left join ttt on  ttt.id= c.id
+         * */
         if (ctx.getChild(1).getText().equalsIgnoreCase("outer")) {
             String leftColumn = ctx.parent.getChild(3).getChild(0).getChild(0).getChild(0).getText().replace('.', '_');
             String rightColumn = ctx.parent.getChild(3).getChild(0).getChild(0).getChild(2).getText().replace('.', '_');

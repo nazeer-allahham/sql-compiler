@@ -134,7 +134,8 @@ public class DataType implements Serializable {
 
     @Override
     public String toString() {
-        return this.toJson(DATA_TYPE_TO_STRING);
+        return "";
+        //return this.toJson(DATA_TYPE_TO_STRING);
     }
 
     String toJson(int mode) {
