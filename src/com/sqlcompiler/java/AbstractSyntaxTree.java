@@ -651,14 +651,27 @@ class AbstractSyntaxTree {
     private void handleGroupByClause(@NotNull RuleContext ctx) {
         SelectStatus status = (SelectStatus) this.current;
         status.columnsGroupBy = new ArrayList<>();
+        ArrayList<String> selectColumnTemp = new ArrayList<>();
+        String col;
+        for (DesiredColumn desiredColumn : status.desiredColumns) {
+            if (desiredColumn.getFunctionName().equalsIgnoreCase(""))
+                selectColumnTemp.add(desiredColumn.getColumnName());
+        }
         for (int i = 2; i < ctx.getChildCount(); i++) {
             if (i % 2 == 0) {
+                col = ctx.getChild(i).getText();
                 if (ctx.getChild(i).getChild(0).getChildCount() > 1)
                     System.err.println("don't allow aggregate function in group by");
-                else
-                    status.columnsGroupBy.add(ctx.getChild(i).getText());
+                else {
+                    status.columnsGroupBy.add(col);
+                    if (col.contains("."))
+                        col = col.split("\\.")[1];
+                    selectColumnTemp.remove(col);
+                }
             }
         }
+        if (selectColumnTemp.size() > 0)
+            System.err.println("Missing group by list " + selectColumnTemp);
     }
 
     private void handleFromTableNameClause(@NotNull RuleContext ctx) {
@@ -770,9 +783,9 @@ class AbstractSyntaxTree {
                                 "",
                                 ((SelectStatus) this.current).nameTable,
                                 ""));
-                if (((SelectStatus) this.current).columnsGroupBy != null &&
-                        !((SelectStatus) this.current).columnsGroupBy.contains(ctx.getText()))
-                    System.err.println("missing " + ctx.getText() + " in group by list sss");
+                /**if (((SelectStatus) this.current).columnsGroupBy != null &&
+                 !((SelectStatus) this.current).columnsGroupBy.contains(ctx.getText()))
+                 System.err.println("missing " + ctx.getText() + " in group by list sss");*/
             }
             // nameTable.column
             else if (ctx.getChild(0).getChild(0).getChild(0).getChildCount() == 3) {
@@ -790,13 +803,13 @@ class AbstractSyntaxTree {
                         ctx.getChild(0).getChild(0).getChild(0).getText(),
                         ((SelectStatus) this.current).nameTable,
                         ""
-                ));
-                if (((SelectStatus) this.current).columnsGroupBy != null && !((SelectStatus) this.current).columnsGroupBy.contains(ctx.getChild(0).getText()))
-                    System.err.println("missing " + ctx.getChild(0).getText() + " in group by list");
-                else if (((SelectStatus) this.current).columnsGroupBy == null) {
-                    System.err.println("Missing group by list");
-                    //System.exit(1);
-                }
+                ));/**
+                 if (((SelectStatus) this.current).columnsGroupBy != null && !((SelectStatus) this.current).columnsGroupBy.contains(ctx.getChild(0).getText()))
+                 System.err.println("missing " + ctx.getChild(0).getText() + " in group by list");
+                 else if (((SelectStatus) this.current).columnsGroupBy == null) {
+                 System.err.println("Missing group by list");
+                 //System.exit(1);
+                 }*/
             }
         }
         //subselect
@@ -832,11 +845,11 @@ class AbstractSyntaxTree {
                         ctx.getChild(0).getChild(0).getChild(0).getText(),
                         ((SelectStatus) this.current).nameTable,
                         ctx.getChild(1).getChild(1).getText()
-                ));
-                if (((SelectStatus) this.current).columnsGroupBy == null) {
-                    System.err.println("Missing group by list");
-                    System.exit(1);
-                }
+                ));/**
+                 if (((SelectStatus) this.current).columnsGroupBy == null) {
+                 System.err.println("Missing group by list");
+                 System.exit(1);
+                 }*/
             }
         }
         return "";
