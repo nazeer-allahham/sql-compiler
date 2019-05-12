@@ -79,7 +79,8 @@ public class Templates {
             tables.set(i, "\"" + tables.get(i) + "\"");
         }
         for (int i = 0; i < columns.size(); i++) {
-            columns.get(i).setColumnName("\"" + columns.get(i).getColumnName() + "\"");
+            columns.get(i).setColumnName("\"" + columns.get(i).getNameTable() + "_" +
+                    columns.get(i).getColumnName() + "\"");
             columns.get(i).setFunctionName("\"" + columns.get(i).getFunctionName() + "\"");
             columns.get(i).setNameAlias("\"" + columns.get(i).getNameAlias() + "\"");
             //columns.set(i, "\"" + columns.get(i) + "\"");
@@ -90,12 +91,12 @@ public class Templates {
         }
         if (groupBy != null) {
             for (int i = 0; i < groupBy.size(); i++) {
-                groupBy.set(i, "\"" + groupBy.get(i) + "\"");
+                groupBy.set(i, "\"" + groupBy.get(i).replace('.', '_') + "\"");
             }
         }
         if (orderBy != null) {
             for (int i = 0; i < orderBy.size(); i++) {
-                orderBy.set(i, "\"" + orderBy.get(i) + "\"");
+                orderBy.set(i, "\"" + orderBy.get(i).replace('.', '_') + "\"");
             }
         }
 

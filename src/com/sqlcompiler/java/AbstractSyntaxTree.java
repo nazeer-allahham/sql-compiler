@@ -831,7 +831,7 @@ class AbstractSyntaxTree {
                         new DesiredColumn(
                                 ctx.getChild(0).getChild(0).getChild(0).getChild(2).getText(),
                                 "",
-                                ((SelectStatus) this.current).nameTable,
+                                ctx.getChild(0).getChild(0).getChild(0).getChild(0).getText(),
                                 ""));
             }
             // aggregate function without alias
@@ -842,15 +842,9 @@ class AbstractSyntaxTree {
                 ((SelectStatus) this.current).desiredColumns.add(new DesiredColumn(
                         column,
                         ctx.getChild(0).getChild(0).getChild(0).getText(),
-                        ((SelectStatus) this.current).nameTable,
+                        ctx.getChild(0).getChild(0).getChild(2).getChild(0).getChild(0).getChild(0).getText(),
                         ""
-                ));/**
-                 if (((SelectStatus) this.current).columnsGroupBy != null && !((SelectStatus) this.current).columnsGroupBy.contains(ctx.getChild(0).getText()))
-                 System.err.println("missing " + ctx.getChild(0).getText() + " in group by list");
-                 else if (((SelectStatus) this.current).columnsGroupBy == null) {
-                 System.err.println("Missing group by list");
-                 //System.exit(1);
-                 }*/
+                ));
             }
         }
         //subselect
@@ -882,9 +876,9 @@ class AbstractSyntaxTree {
             // function as alias
             else {
                 ((SelectStatus) this.current).desiredColumns.add(new DesiredColumn(
-                        ctx.getChild(0).getChild(0).getChild(2).getText(),
+                        ctx.getChild(0).getChild(0).getChild(0).getChild(2).getText(),
                         ctx.getChild(0).getChild(0).getChild(0).getText(),
-                        ((SelectStatus) this.current).nameTable,
+                        ctx.getChild(0).getChild(0).getChild(0).getChild(0).getText(),
                         ctx.getChild(1).getChild(1).getText()
                 ));/**
                  if (((SelectStatus) this.current).columnsGroupBy == null) {

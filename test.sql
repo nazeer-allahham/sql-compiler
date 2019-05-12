@@ -1,7 +1,5 @@
-create function f1(x number ,v number )return number 
-is
-begin
-    null;
-    return "";
-end;
-int x = f1(2,3);
+select min(c.id) , c.name
+from c
+group by c.name
+having max(c.id)>2
+order by c.id
