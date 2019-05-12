@@ -302,9 +302,23 @@ class AbstractSyntaxTree {
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(2).getText(), "", ctx.getChild(1).getText().toLowerCase()), true);
                     break;
                 case HplsqlParser.RULE_create_function_stmt:
-                    symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(2).getText(),
-                            // substring start from 7  to get the actual type value (miss return)
-                            ctx.getChild(4).getText().substring(7),
+                    String type;
+                    ArrayList<Field> fields = new ArrayList<>();
+                    if (ctx.getChild(3).getChildCount() > 2) {
+                        for (int i = 1; i < ctx.getChild(3).getChildCount(); i += 2) {
+                            type = ctx.getChild(3).getChild(i).getChild(1).getText();
+                            type = plsql2Cpp(type);
+                            fields.add(new Field(
+                                    ctx.getChild(3).getChild(i).getChild(0).getText()
+                                    , type));
+                        }
+                        symbolTable.insert(new SymbolTable.Symbol(
+                                ctx.getChild(2).getText(),
+                                ctx.getChild(4).getChild(1).getText(),
+                                ctx.getChild(1).getText().toLowerCase(), fields), true);
+                    } else symbolTable.insert(new SymbolTable.Symbol(
+                            ctx.getChild(2).getText(),
+                            ctx.getChild(3).getChild(1).getText(),
                             ctx.getChild(1).getText().toLowerCase()), true);
                     break;
 
@@ -323,19 +337,32 @@ class AbstractSyntaxTree {
                             ctx.getChild(0).getChild(0).getText(), "function", cppFunctionParam), true);
                     break;
                 case HplsqlParser.RULE_expr_func_params:
+                    boolean okay = true;
                     for (int i = 0; i < ctx.getChildCount(); i++) {
                         if (i % 2 == 0) {
                             if (!symbolTable.checkParampetersFunctionCpp(
                                     ctx.parent.getChild(0).getText(),
                                     ctx.getChild(i).getText(), i / 2)) {
-                                System.err.println("Error functions calls ");
+                                System.err.println("Error in the method's parameters ");
+                                okay = false;
                             }
                         }
                     }
+                    if (okay) {
+                        int coutnParameters = ctx.getChildCount() + 1 / 2;
+                        if (symbolTable.AllSymbol.get(
+                                ctx.parent.getChild(0).getText()).getLocalField().size()
+                                > coutnParameters) {
+                            System.err.println("Error in the method's parameters ");
+                        }
+
+                    }
                     break;
                 case HplsqlParser.RULE_cpp_return_stmt:
-                    if (!symbolTable.isTypeCompatible(typeCppFunction, ctx.getChild(1).getText())) {
-                        System.err.println("Error  return ");
+                    try {
+                        symbolTable.getValueWithCasting(ctx.getChild(1).getText(), typeCppFunction);
+                    } catch (Exception e) {
+                        System.err.println("Error  return type doesn't match ");
                     }
                     break;
                 //Boolean semantic check
@@ -405,22 +432,31 @@ class AbstractSyntaxTree {
         DataTypes.save(Environment.DATA_TYPES_PATH);
     }
 
+    private String plsql2Cpp(String type) {
+        if (type.equalsIgnoreCase("number")) type = "int";
+        else if (type.equalsIgnoreCase("varchar")) type = "string";
+        else if (type.equalsIgnoreCase("varchar2")) type = "string";
+        else if (type.equalsIgnoreCase("date")) type = "string";
+        else if (type.equalsIgnoreCase("char")) type = "string";
+        return type;
+    }
+
     private void handleDeclareVariable(RuleContext ctx) {
+        String type = ctx.getChild(1).getText();
+        type = plsql2Cpp(type);
         if (ctx.getChildCount() == 3) {
             symbolTable.nameSymbols.add(ctx.getChild(0).getText());
-            String type = ctx.getChild(1).getText();
-            if (type.equalsIgnoreCase("number")) type = "int";
-            else if (type.equalsIgnoreCase("varchar")) type = "string";
-            else if (type.equalsIgnoreCase("varchar2")) type = "string";
-            else if (type.equalsIgnoreCase("date")) type = "string";
-            else if (type.equalsIgnoreCase("char")) type = "string";
             symbolTable.insert(new SymbolTable.Symbol(
                     ctx.getChild(0).getText(),
                     type,
-                    "", ctx.getChild(2).getChild(2).getText(), true), false);
+                    "",
+                    symbolTable.getValueWithCasting(ctx.getChild(2).getChild(2).getText(), type),
+                    true), false);
         } else {
             symbolTable.nameSymbols.add(ctx.getChild(0).getText());
-            symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(0).getText(), ctx.getChild(1).getText().replaceAll("number", "int"), ""), false);
+            symbolTable.insert(new SymbolTable.Symbol(
+                    ctx.getChild(0).getText(),
+                    type, ""), false);
         }
     }
 
@@ -626,7 +662,7 @@ class AbstractSyntaxTree {
     }
 
     private void handleExprFunc(@NotNull RuleContext ctx) {
-        if (symbolTable.lookup(ctx.getChild(0).getText()) == null) {
+        if (symbolTable.AllSymbol.get(ctx.getChild(0).getText()) == null) {
             System.err.println("Error for calling undeclared method : " + ctx.getChild(0).getText());
         }
     }
@@ -639,7 +675,9 @@ class AbstractSyntaxTree {
     private void handleDeclareCppVariable(@NotNull RuleContext ctx) {
         if (!ctx.getChild(0).getText().equalsIgnoreCase("begin")) {
             symbolTable.nameSymbols.add(ctx.getChild(1).getText());
-            symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(), ctx.getChild(0).getText(), ""), false);
+            symbolTable.insert(new SymbolTable.Symbol(
+                    ctx.getChild(1).getText(),
+                    ctx.getChild(0).getText(), ""), false);
         }
     }
 
@@ -661,7 +699,7 @@ class AbstractSyntaxTree {
             if (i % 2 == 0) {
                 col = ctx.getChild(i).getText();
                 if (ctx.getChild(i).getChild(0).getChildCount() > 1)
-                    System.err.println("don't allow aggregate function in group by");
+                    System.err.println("Error: group by clause can't contain grouping functions ");
                 else {
                     status.columnsGroupBy.add(col);
                     if (col.contains("."))
@@ -798,8 +836,11 @@ class AbstractSyntaxTree {
             }
             // aggregate function without alias
             else {
+                String column = ctx.getChild(0).getChild(0).getChild(2).getText();
+                if (column.contains("."))
+                    column = column.split("\\.")[1];
                 ((SelectStatus) this.current).desiredColumns.add(new DesiredColumn(
-                        ctx.getChild(0).getChild(0).getChild(2).getText(),
+                        column,
                         ctx.getChild(0).getChild(0).getChild(0).getText(),
                         ((SelectStatus) this.current).nameTable,
                         ""

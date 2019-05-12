@@ -110,7 +110,7 @@ class SymbolTable {
 
     void isUnassignedVariable() {
         for (Map.Entry<String, Symbol> symbolEntry : AllSymbol.entrySet()) {
-            if (!symbolEntry.getValue().isAssigned && symbolEntry.getValue().getAttribute().equalsIgnoreCase("")) {
+            if (!symbolEntry.getValue().isAssigned && symbolEntry.getValue().getAttribute().equalsIgnoreCase("variable")) {
                 System.err.println("Warring unassigned variable : " + symbolEntry.getValue().getName());
             }
         }
@@ -172,34 +172,6 @@ class SymbolTable {
             } catch (Exception e) {
             }
             parameter = getValueWithCasting(parameter, field.getType());
-            /*
-            if (!isTypeCompatible(field.getType(), parameter)) {
-                if (isVariable(parameter)) {
-                    parameter = AllSymbol.get(parameter).type;
-                    return checkCasting(field.getType(), parameter);
-                } else {
-                    try {
-                        Integer.parseInt(parameter);
-                        return checkCasting(field.getType(), "int");
-                    } catch (Exception e) {
-                    }
-                    try {
-                        Float.parseFloat(parameter);
-                        return checkCasting(field.getType(), "real");
-                    } catch (Exception e) {
-                    }
-                    if ((parameter.equalsIgnoreCase("true")
-                            || parameter.equalsIgnoreCase("false"))
-                            && field.getType().equalsIgnoreCase("boolean")) {
-                        return true;
-                    }
-                    return parameter.startsWith("\"") && parameter.endsWith("\"")
-                            && field.getType().equalsIgnoreCase("string");
-
-                }
-            }
-
-             */
         } catch (Exception e) {
             return false;//over parameter
         }
