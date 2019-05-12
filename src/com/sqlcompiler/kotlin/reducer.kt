@@ -5,67 +5,29 @@ import java.io.File
 
 object Reducer {
 
-    fun reduce(_in: Return): Pair<String, String> {
-        val header = Row()
-        val rows = ArrayList<Row>()
+    fun basicReduce(directory: File,
+                    sources: ArrayList<String>,
+                    desiredColumns: ArrayList<DesiredColumn>): Pair<String, String> {
+        var header: Row? = null
+        var rows: ArrayList<Row> = ArrayList()
 
-        val flag = _in["grouping"] as Boolean
-        val sources = _in["shuffler_files"] as ArrayList<String>
-        val columns = _in["desired_columns"] as ArrayList<DesiredColumn>
-
-        columns.forEach { column -> header.addField(column.title()) }
-
-        if (!flag) {
-            if (columns.size > 0) {
-                sources.forEach { source ->
-                    val (head, body) = Handler.readFromFile(source)!!
-                    val indexes = head.filter(columns)
-                    body.forEach { row ->
-                        rows.add(row.map(indexes))
-                    }
-                }
-            } else {
-                sources.forEach { source ->
-                    val (head, body) = Handler.readFromFile(source)!!
-                    if (header.fields.size == 0) {
-                        head.fields.forEach { field -> header.addField(field) }
-                    }
-                    body.forEach { row ->
-                        rows.add(row)
-                    }
-                }
-            }
-        } else {
-            var h: Row? = null
-            var data: ArrayList<Row>? = null
-            sources.forEachIndexed { i, source ->
-                val (header1, rows1) = Handler.readFromFile(source)!!
-                val index = header1.find("values")
-                if (i == 0) {
-                    h = header1
-                    data = rows1
-                    rows1.forEach { _ ->
-                        rows.add(Row())
-                    }
-                }
-                rows.forEachIndexed { i2, row ->
-                    row.addField(rows1[i2].fields[index])
-                }
-            }
-
-            columns.forEach { column ->
-                if (!column.hasGroupingFunction()) {
-                    val index = h!!.find(column.columnName)
-                    rows.forEachIndexed { i, row ->
-                        row.addField(data!![i].fields[index])
-                    }
-                }
-            }
+        sources.forEach { source ->
+            val (h, rows1) = Handler.readFromFile(source) as Pair<Row, ArrayList<Row>>
+            if (header == null)
+                header = h
+            rows.addAll(rows1)
         }
 
-        Handler.writeToFile("${(_in["directory"] as File).path}${File.separator}reducer.csv", header, rows)
+        if (desiredColumns.size > 0) {
+            val columns: ArrayList<Int> = header!!.filter(desiredColumns)
+            header = header!!.map(columns)
+            rows = rows.map { row -> row.map(columns) } as ArrayList<Row>
+        }
 
-        return if (header.fields.size == 1) {
+        Handler.writeToFile(directory.path + File.separator + "reducer.csv", header!!, rows)
+        ExecutionPlan.addStep("Basic Reducer", "Do you love me?")
+
+        return if (header!!.fields.size == 1) {
             return if (rows.size == 1) {
                 "value" to rows[0].fields[0]
             } else {
@@ -76,11 +38,45 @@ object Reducer {
                 "array" to res
             }
         } else {
-            val cols = ArrayList<Column>()
-            header.fields.forEach { field ->
-                cols.add(Column(field.replace(Regex("[(]"), "_").replace(Regex("[)]"), ""), ""))
+            val columns = ArrayList<Column>()
+            header!!.fields.forEach { field ->
+                columns.add(Column(field.split("_")[1], ""))
             }
-            "table" to Handler.createTable(Table("temp", cols, arrayListOf(Environment.TABLES_PATH + "temp.csv"), ","))
+            Handler.createTable(Table("TEMPORARY", columns, arrayListOf(Environment.TABLES_PATH + "TEMPORARY.csv"), ","))
+            "table" to "TEMPORARY"
         }
+    }
+
+    fun groupByReduce(directory: File,
+                      sources: ArrayList<String>,
+                      desiredColumns: ArrayList<DesiredColumn>): Pair<String, String> {
+        var header: Row? = null
+        var rows: ArrayList<Row> = ArrayList()
+
+        sources.forEach { source ->
+            val (h, rows1) = Handler.readFromFile(source) as Pair<Row, ArrayList<Row>>
+            if (header == null)
+                header = h
+
+            if (desiredColumns.size > 0) {
+                val columns: ArrayList<Int> = header!!.filter(desiredColumns)
+                header = header!!.map(columns)
+
+                val row = Row()
+                desiredColumns.forEachIndexed { index, value ->
+                    when (value.functionName) {
+                        "min" -> {
+                            row.addField(rows1.minBy { f -> f.fields[index] }!!.fields[index])
+                        }
+                    }
+                }
+                rows.add(row)
+            }
+        }
+
+        Handler.writeToFile(directory.path + File.separator + "reducer.csv", header!!, rows)
+        ExecutionPlan.addStep("Reducer", "Do you Do you")
+
+        return if (header!!.fields.size == 1 && rows.size == 1) "value" to rows[0].fields[0] else "table" to ""
     }
 }
