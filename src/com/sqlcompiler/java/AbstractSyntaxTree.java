@@ -613,16 +613,16 @@ class AbstractSyntaxTree {
     }
 
     private void handleCPPDeclareAssignmentStmt(@NotNull RuleContext ctx) {
+        String value = ctx.getChild(3).getText();
+        String type = ctx.getChild(0).getText();
+        if (ctx.getChild(3).getChild(0).getChild(0).getChild(0).getChildCount() > 1) {
+            value = "";
+        } else
+            value = symbolTable.getValueWithCasting(value, type);
         symbolTable.nameSymbols.add(ctx.getChild(1).getText());
         symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
-                ctx.getChild(0).getText(), "",
-                ctx.getChild(3).getText(), true), false);
-        try {
-            if (!symbolTable.checkCasting(ctx.getChild(0).getText(), symbolTable.AllSymbol.get(ctx.getChild(3).getText()).getType())) {
-                System.err.println("Check Casting");
-            }
-        } catch (Exception ignored) {
-        }
+                type, "",
+                value, true), false);
     }
 
     private void handleExprFunc(@NotNull RuleContext ctx) {

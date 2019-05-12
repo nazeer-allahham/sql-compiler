@@ -62,6 +62,52 @@ class SymbolTable {
         return type1.charAt(0) >= type2.charAt(0);
     }
 
+    String getValueWithCasting(String value, String type) {
+
+        try {
+            switch (type) {
+                case "int":
+                    if (value.startsWith("\"") && value.endsWith("\"")) {
+                        value = value.replace("\"", "");
+                        if (value.contains(".")) {
+                            value = value.split("\\.")[0];
+                        }
+
+                    } else if (value.contains(".")) {
+                        Float.parseFloat(value);
+                        value = value.split("\\.")[0];
+                    }
+                    Integer.parseInt(value);
+                    break;
+
+                case "string":
+                    if (!value.startsWith("\"")) {
+                        value = "\"" + value;
+                    }
+                    if (!value.endsWith("\"")) {
+                        value = value + "\"";
+                    }
+                    break;
+                case "real":
+                    value = value.replaceAll("\"", "");
+                    Float.parseFloat(value);
+                    if (!value.contains(".")) value = value + ".0";
+                    break;
+                case "boolean":
+                    if (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")) break;
+                    value = value.replaceAll("\"", "");
+                    value = value.split("\\.")[0];
+                    Integer.parseInt(value);
+                    if (value.matches("[1-9]")) value = "true";
+                    else value = "false";
+                    break;
+            }
+        } catch (Exception e) {
+            System.err.println("Error: value = " + value + " can't be Casted to " + type);
+        }
+        return value;
+    }
+
     void isUnassignedVariable() {
         for (Map.Entry<String, Symbol> symbolEntry : AllSymbol.entrySet()) {
             if (!symbolEntry.getValue().isAssigned && symbolEntry.getValue().getAttribute().equalsIgnoreCase("")) {
@@ -120,6 +166,13 @@ class SymbolTable {
     public boolean checkParampetersFunctionCpp(String nameFunction, String parameter, int indexParameter) {
         try {
             Field field = AllSymbol.get(nameFunction).getLocalField().get(indexParameter);
+            try {
+                Symbol symbol = AllSymbol.get(parameter);
+                parameter = symbol.getValue();
+            } catch (Exception e) {
+            }
+            parameter = getValueWithCasting(parameter, field.getType());
+            /*
             if (!isTypeCompatible(field.getType(), parameter)) {
                 if (isVariable(parameter)) {
                     parameter = AllSymbol.get(parameter).type;
@@ -145,6 +198,8 @@ class SymbolTable {
 
                 }
             }
+
+             */
         } catch (Exception e) {
             return false;//over parameter
         }

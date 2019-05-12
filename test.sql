@@ -1,1 +1,5 @@
-select min(id) , c.id from c  left  join ttt on c.id=ttt.id
+int f(int x , string s,boolean b){
+
+}
+
+int x = f(2,34,3);
