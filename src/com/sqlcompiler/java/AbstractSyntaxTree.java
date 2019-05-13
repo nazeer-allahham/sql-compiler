@@ -63,7 +63,6 @@ class AbstractSyntaxTree {
                     this.current = new CreateTypeStatus(null, this.templates.initCreateType(), SECONDARY_DATA_TYPE, ctx.getChild(2).getText());
                     //this.current = new CreateTypeStatus(null, "", SECONDARY_DATA_TYPE, ctx.getChild(2).getText());
                     this.statements.add(this.current);
-
                     DataTypes.initialize(SECONDARY_DATA_TYPE, ctx.getChild(2).getText());
                     ((CreateTypeStatus) this.current).setName(ctx.getChild(2).getText());
                     break;
