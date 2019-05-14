@@ -1,3 +1,1 @@
-select c.id from c
-inner join c on c.id = c.id
-full outer join c on c.id = c.id
+select c.id as "sss", min(distinct name) from c group by c.name

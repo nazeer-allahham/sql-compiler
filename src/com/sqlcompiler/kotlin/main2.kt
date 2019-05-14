@@ -1,14 +1,12 @@
+import com.sqlcompiler.kotlin.DesiredColumn
 import com.sqlcompiler.kotlin.Handler
-import com.sqlcompiler.kotlin.Join
 
 fun main() {
     Handler.select(name = "c",
-            columns = arrayListOf(),
+            columns = arrayListOf(DesiredColumn("c_id", "", "sss", false), DesiredColumn("_name", "min", "", true)),
             where = "" to arrayListOf(),
-            join = arrayListOf(
-                    Join("innerjoin", "c", "", "", arrayListOf("c_id", "c_id", "c_id", "c_id")),
-                    Join("fullouterjoin", "c", "", "c_id = c_id c_id = c_id", arrayListOf("c_id", "c_id", "c_id", "c_id"))),
-            groupBy = arrayListOf(),
+            join = arrayListOf(),
+            groupBy = arrayListOf("c_name"),
             orderBy = arrayListOf(),
             distinct = false,
             purpose = 1)

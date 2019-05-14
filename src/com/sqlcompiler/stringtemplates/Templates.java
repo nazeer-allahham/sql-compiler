@@ -80,26 +80,9 @@ public class Templates {
 //                distinct.toString(),
 //                purpose.toString());
 
-        table = "\"" + table + "\"";
         for (DesiredColumn column : columns) {
-            column.setColumnName("\"" + column.getNameTable() + "_" +
-                    column.getColumnName() + "\"");
-            column.setFunctionName("\"" + column.getFunctionName() + "\"");
-            column.setNameAlias("\"" + column.getNameAlias() + "\"");
-            //columns.set(i, "\"" + columns.get(i) + "\"");
+            column.setColumnName(column.getNameTable() + "_" + column.getColumnName());
         }
-//        where = "\"" + where + "\"";
-        for (int i = 0; i < whereColumns.size(); i++) {
-            whereColumns.set(i, "\"" + whereColumns.get(i) + "\"");
-        }
-        for (int i = 0; i < groupBy.size(); i++) {
-            groupBy.set(i, "\"" + groupBy.get(i).replace('.', '_') + "\"");
-        }
-        for (int i = 0; i < orderBy.size(); i++) {
-            orderBy.set(i, "\"" + orderBy.get(i).replace('.', '_') + "\"");
-        }
-        combineType = "\"" + combineType + "\"";
-//            combineSource = "\"" + combineSource + "\"";
 
         this.add(key, "table", table);
         this.add(key, "columns", columns);
