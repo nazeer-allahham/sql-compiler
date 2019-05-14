@@ -23,6 +23,17 @@ public class Field implements Serializable {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof String) {
+            System.out.println("Hello " + obj);
+            return this.name.equalsIgnoreCase((String) obj);
+        } else {
+            Field field = (Field) obj;
+            return this.name.equalsIgnoreCase(field.name) && this.type.equalsIgnoreCase(field.type);
+        }
+    }
+
+    @Override
     public String toString() {
         return this.toJson(DataType.DATA_TYPE_TO_STRING);
     }

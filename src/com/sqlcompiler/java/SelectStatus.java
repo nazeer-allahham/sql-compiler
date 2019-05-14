@@ -24,9 +24,11 @@ class SelectStatus implements Status {
     Boolean distinct;
     Integer purpose;
 
+
+    DataType dataType = null;
     Status parent;
 
-    SelectStatus(Status parent, String statementKey) {
+    private SelectStatus(Status parent, String statementKey) {
         this.parent = parent;
 
         this.columnsGroupBy = new ArrayList<>();
@@ -73,5 +75,17 @@ class SelectStatus implements Status {
     @Override
     public Status parent() {
         return this.parent;
+    }
+
+    String columnsNamesToString() {
+        StringBuilder builder = new StringBuilder("[");
+        for (int i = 0; i < this.desiredColumns.size(); i++) {
+            builder.append(this.desiredColumns.get(i).getColumnName());
+            if (i < this.desiredColumns.size() - 1) {
+                builder.append(", ");
+            }
+        }
+        builder.append("]");
+        return builder.toString();
     }
 }
