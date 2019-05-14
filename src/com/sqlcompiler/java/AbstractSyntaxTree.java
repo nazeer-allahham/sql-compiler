@@ -230,12 +230,7 @@ class AbstractSyntaxTree {
                     ((SelectStatus) this.current).whereSelectStmt = ((SelectStatus) this.current).
                             whereSelectStmt.replace(ctx.getText().replace('.', '_'), "");
 
-                    ((SelectStatus) this.current).whereSelectStmt = ((SelectStatus) this.current).
-                            whereSelectStmt.replaceAll("or", " or ");
-                    ((SelectStatus) this.current).whereSelectStmt = ((SelectStatus) this.current).
-                            whereSelectStmt.replaceAll("and", " and ");
                     this.lastRule = HplsqlParser.RULE_bool_expr_single_in;
-                    System.out.println("Ks 2m");
                     if (this.isCurrentStatementSelect()) {
                         handleSingleInWhereClause(ctx);
                     }
@@ -685,8 +680,26 @@ class AbstractSyntaxTree {
                 status.joins.add(this.join);
                 this.join = null;
             }
+
+            if (status.whereSelectStmt.contains("orand")) {
+                status.whereSelectStmt = status.whereSelectStmt.replaceAll("orand", "and");
+                status.whereSelectStmt += "or";
+            }
+            if (status.whereSelectStmt.contains("andor")) {
+                status.whereSelectStmt = status.whereSelectStmt.replaceAll("andor", "or");
+                status.whereSelectStmt += "and";
+            }
+            if (status.whereSelectStmt.contains("andand")) {
+                status.whereSelectStmt = status.whereSelectStmt.replaceAll("andand", "and");
+            }
+            if (status.whereSelectStmt.contains("oror")) {
+                status.whereSelectStmt = status.whereSelectStmt.replaceAll("oror", "or");
+                status.whereSelectStmt += "or";
+            }
+
             status.whereSelectStmt = status.whereSelectStmt.replaceAll("or", " or ");
             status.whereSelectStmt = status.whereSelectStmt.replaceAll("and", " and ");
+
             this.templates.flushSelectStatement(status.key,
                     status.tableSelectStmt,
                     status.desiredColumns,
