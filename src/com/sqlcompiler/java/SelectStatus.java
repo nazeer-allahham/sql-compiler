@@ -1,5 +1,6 @@
 package com.sqlcompiler.java;
 
+import com.sqlcompiler.kotlin.Join;
 import javaslang.Tuple;
 import javaslang.Tuple2;
 
@@ -7,9 +8,10 @@ import java.util.ArrayList;
 
 class SelectStatus implements Status {
     String key;
-    ArrayList<String> tablesSelectStmt;
+    String tableSelectStmt;
     ArrayList<String> columnsSelectStmt;
     ArrayList<DesiredColumn> desiredColumns;
+    ArrayList<Join> joins;
     String whereSelectStmt;
     String nameTable;// change when we use alias name table
     ArrayList<String> columnsWhereClause;
@@ -17,27 +19,54 @@ class SelectStatus implements Status {
     ArrayList<String> columnsOrderBy;
     ArrayList<Tuple2<String, String>> whereInKeys;
 
+    String combineType;
+    String combineSource;
+    Boolean distinct;
+    Integer purpose;
+
     Status parent;
 
-    SelectStatus(Status parent, String statementKey, String columnName) {
+    SelectStatus(Status parent, String statementKey) {
         this.parent = parent;
-        if (parent != null) {
-            ((SelectStatus) this.parent).addWhereInKey(columnName, statementKey);
-        }
 
-//        this.columnsGroupBy = new ArrayList<>();
+        this.columnsGroupBy = new ArrayList<>();
         this.columnsOrderBy = new ArrayList<>();
         this.desiredColumns = new ArrayList<>();
         this.columnsSelectStmt = new ArrayList<>();
         this.columnsWhereClause = new ArrayList<>();
         this.key = statementKey;
-        this.tablesSelectStmt = new ArrayList<>();
+        this.tableSelectStmt = "";
         this.whereSelectStmt = "";
         this.whereInKeys = new ArrayList<>();
+        this.purpose = 1;
+        this.distinct = false;
+        this.joins = new ArrayList<>();
     }
 
+    SelectStatus(Status parent, String statementKey, Integer purpose, String columnName, String combineType) {
+        this(parent, statementKey);
+
+        if (parent != null && columnName != null) {
+            ((SelectStatus) this.parent).addWhereInKey(columnName, statementKey);
+        }
+
+        if (parent != null && combineType != null) {
+            ((SelectStatus) this.parent).setCombineData(combineType, statementKey);
+        }
+
+        if (purpose != null) {
+            this.purpose = purpose;
+        }
+    }
+
+    private void setCombineData(String combineType, String statementKey) {
+        System.out.println(combineType + "\t" + statementKey);
+        this.combineType = combineType;
+        this.combineSource = statementKey;
+    }
+
+
     private void addWhereInKey(String columnName, String statementKey) {
-        System.err.println("XSXSXSXSXSXSXSXSXSXSXSXSXSXSXSXSSXSXSXSXSXSX" + this.key + " " + columnName + "  " + statementKey);
         this.whereInKeys.add(Tuple.of(columnName, statementKey));
     }
 

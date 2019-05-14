@@ -57,13 +57,60 @@ class SymbolTable {
 
 
     boolean checkCasting(String type1, String type2) {
-        if (type2 == null) return true;
+        if (type2 == null)
+            return true;
         return type1.charAt(0) >= type2.charAt(0);
+    }
+
+    String getValueWithCasting(String value, String type) {
+
+        try {
+            switch (type) {
+                case "int":
+                    if (value.startsWith("\"") && value.endsWith("\"")) {
+                        value = value.replace("\"", "");
+                        if (value.contains(".")) {
+                            value = value.split("\\.")[0];
+                        }
+
+                    } else if (value.contains(".")) {
+                        Float.parseFloat(value);
+                        value = value.split("\\.")[0];
+                    }
+                    Integer.parseInt(value);
+                    break;
+
+                case "string":
+                    if (!value.startsWith("\"")) {
+                        value = "\"" + value;
+                    }
+                    if (!value.endsWith("\"")) {
+                        value = value + "\"";
+                    }
+                    break;
+                case "real":
+                    value = value.replaceAll("\"", "");
+                    Float.parseFloat(value);
+                    if (!value.contains(".")) value = value + ".0";
+                    break;
+                case "boolean":
+                    if (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")) break;
+                    value = value.replaceAll("\"", "");
+                    value = value.split("\\.")[0];
+                    Integer.parseInt(value);
+                    if (value.matches("[1-9]")) value = "true";
+                    else value = "false";
+                    break;
+            }
+        } catch (Exception e) {
+            System.err.println("Error: value = " + value + " can't be Casted to " + type);
+        }
+        return value;
     }
 
     void isUnassignedVariable() {
         for (Map.Entry<String, Symbol> symbolEntry : AllSymbol.entrySet()) {
-            if (!symbolEntry.getValue().isAssigned) {
+            if (!symbolEntry.getValue().isAssigned && symbolEntry.getValue().getAttribute().equalsIgnoreCase("variable")) {
                 System.err.println("Warring unassigned variable : " + symbolEntry.getValue().getName());
             }
         }
@@ -119,31 +166,12 @@ class SymbolTable {
     public boolean checkParampetersFunctionCpp(String nameFunction, String parameter, int indexParameter) {
         try {
             Field field = AllSymbol.get(nameFunction).getLocalField().get(indexParameter);
-            if (!isTypeCompatible(field.getType(), parameter)) {
-                if (isVariable(parameter)) {
-                    parameter = AllSymbol.get(parameter).type;
-                    return checkCasting(field.getType(), parameter);
-                } else {
-                    try {
-                        Integer.parseInt(parameter);
-                        return checkCasting(field.getType(), "int");
-                    } catch (Exception e) {
-                    }
-                    try {
-                        Float.parseFloat(parameter);
-                        return checkCasting(field.getType(), "real");
-                    } catch (Exception e) {
-                    }
-                    if ((parameter.equalsIgnoreCase("true")
-                            || parameter.equalsIgnoreCase("false"))
-                            && field.getType().equalsIgnoreCase("boolean")) {
-                        return true;
-                    }
-                    return parameter.startsWith("\"") && parameter.endsWith("\"")
-                            && field.getType().equalsIgnoreCase("string");
-
-                }
+            try {
+                Symbol symbol = AllSymbol.get(parameter);
+                parameter = symbol.getValue();
+            } catch (Exception e) {
             }
+            parameter = getValueWithCasting(parameter, field.getType());
         } catch (Exception e) {
             return false;//over parameter
         }

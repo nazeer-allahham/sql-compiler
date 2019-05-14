@@ -1,21 +1,15 @@
 import com.sqlcompiler.kotlin.Handler
+import com.sqlcompiler.kotlin.Join
 
 fun main() {
-    /*Handler.select(names = arrayListOf("c", "users"),
+    Handler.select(name = "c",
             columns = arrayListOf(),
             where = "" to arrayListOf(),
+            join = arrayListOf(
+                    Join("innerjoin", "c", "", "", arrayListOf("c_id", "c_id", "c_id", "c_id")),
+                    Join("fullouterjoin", "c", "", "c_id = c_id c_id = c_id", arrayListOf("c_id", "c_id", "c_id", "c_id"))),
             groupBy = arrayListOf(),
-            orderBy = arrayListOf())*/
-
-/*    Handler.select(names = arrayListOf("c"),
-            columns = arrayListOf(DesiredColumn("c_id", "min"), DesiredColumn("c_name")),
-            where = "" to arrayListOf(),
-            groupBy = arrayListOf("c_name"),
-            orderBy = arrayListOf())*/
-
-    Handler.select(names = arrayListOf("c"),
-            columns = arrayListOf(),
-            where = "" to arrayListOf(),
-            groupBy = arrayListOf(),
-            orderBy = arrayListOf())
+            orderBy = arrayListOf(),
+            distinct = false,
+            purpose = 1)
 }

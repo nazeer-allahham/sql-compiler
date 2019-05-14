@@ -79,7 +79,6 @@ class Compiler {
             // Process p = runtime.exec("cmd /c \"cd src\\com\\sqlcompiler\\ && C:\\lib\\kotlin\\kotlinc\\bin\\kotlinc ./Environment.java ./kotlin/Handler.kt ./kotlin/main.kt -include-runtime -d ./jar/main.jar && java -jar ./jar/main.jar\"");
             // p.waitFor();
 
-
         } catch (Exception e) {
             e.printStackTrace();
         }
