@@ -207,7 +207,8 @@ class AbstractSyntaxTree {
 
 
                 case HplsqlParser.RULE_where_clause:
-                    //handleWhereClause(ctx);
+                    handleWhereClause(ctx);
+
                     break;
 
                 case HplsqlParser.RULE_bool_expr_is_not_null:
@@ -222,10 +223,17 @@ class AbstractSyntaxTree {
                     break;
                 case HplsqlParser.RULE_bool_expr_exists:
                     if (this.isCurrentStatementSelect()) {
-                        handleExistsWhereClause(ctx);
+                        // handleExistsWhereClause(ctx);
                     }
                     break;
                 case HplsqlParser.RULE_bool_expr_single_in:
+                    ((SelectStatus) this.current).whereSelectStmt = ((SelectStatus) this.current).
+                            whereSelectStmt.replace(ctx.getText().replace('.', '_'), "");
+
+                    ((SelectStatus) this.current).whereSelectStmt = ((SelectStatus) this.current).
+                            whereSelectStmt.replaceAll("or", " or ");
+                    ((SelectStatus) this.current).whereSelectStmt = ((SelectStatus) this.current).
+                            whereSelectStmt.replaceAll("and", " and ");
                     this.lastRule = HplsqlParser.RULE_bool_expr_single_in;
                     System.out.println("Ks 2m");
                     if (this.isCurrentStatementSelect()) {
@@ -239,17 +247,17 @@ class AbstractSyntaxTree {
                     break;
                 case HplsqlParser.RULE_bool_expr_binary:
                     if (this.isCurrentStatementSelect()) {
-                        if (this.isWhereSubquery()) {
-                            handleWhereClause(ctx);
-                        } else if (this.isJoinWhereCondition()) {
+                        if (this.isJoinWhereCondition()) {
                             handleJoinWhereCondition(ctx);
+                        } else {
+                            //handleWhereClause(ctx);
                         }
                     }
                     break;
 
                 case HplsqlParser.RULE_bool_expr_logical_operator:
                     if (this.isCurrentStatementSelect()) {
-                        handleLogicalOperator(ctx);
+                        //handleLogicalOperator(ctx);
                     }
                     break;
 
@@ -580,7 +588,7 @@ class AbstractSyntaxTree {
     }
 
     private void handleSingleInWhereClause(@NotNull RuleContext ctx) {
-        this.lastSingleInColumnsName = ctx.getChild(0).getText();
+        this.lastSingleInColumnsName = ctx.getChild(0).getText().replace('.', '_');
     }
 
     private void handleExistsWhereClause(RuleContext ctx) {
@@ -591,7 +599,8 @@ class AbstractSyntaxTree {
         String left = ctx.getChild(0).getText();
         String e1 = ctx.getChild(2).getText();
         String e2 = ctx.getChild(4).getText();
-
+        ((SelectStatus) this.current).whereSelectStmt =
+                ((SelectStatus) this.current).whereSelectStmt.replaceAll(ctx.getText(), "");
         ((SelectStatus) this.current).columnsWhereClause.add(left);
         ((SelectStatus) this.current).whereSelectStmt += left + " = " + e1 + " || " + left + " = " + e2;
     }
@@ -613,7 +622,7 @@ class AbstractSyntaxTree {
     }
 
     private void handleWhereClause(@NotNull RuleContext ctx) {
-        String left = ctx.getChild(0).getText();
+        /*String left = ctx.getChild(0).getText();
         String op = ctx.getChild(1).getText();
         String right = ctx.getChild(2).getText();
 
@@ -628,7 +637,10 @@ class AbstractSyntaxTree {
         ((SelectStatus) this.current).whereSelectStmt += left + " " + op + " " + right;
 //        if (!isValidBooleanExpression(ctx.getChild(1).getText())) {
 //            System.err.println("Invalid Boolean Expression where clause");
-//        }
+//        }*/
+        String condition = ctx.getChild(1).getText();
+        condition = condition.replace('.', '_');
+        ((SelectStatus) this.current).whereSelectStmt = condition;
     }
 
     private boolean isColumnName(@NotNull String name) {
@@ -673,7 +685,8 @@ class AbstractSyntaxTree {
                 status.joins.add(this.join);
                 this.join = null;
             }
-
+            status.whereSelectStmt = status.whereSelectStmt.replaceAll("or", " or ");
+            status.whereSelectStmt = status.whereSelectStmt.replaceAll("and", " and ");
             this.templates.flushSelectStatement(status.key,
                     status.tableSelectStmt,
                     status.desiredColumns,
