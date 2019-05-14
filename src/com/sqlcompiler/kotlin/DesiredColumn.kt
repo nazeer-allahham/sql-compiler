@@ -1,6 +1,10 @@
 package com.sqlcompiler.kotlin
 
-class DesiredColumn(val columnName: String, val functionName: String = "", val columnAlias: String = "") {
+class DesiredColumn(val columnName: String,
+                    val functionName: String = "",
+                    private val columnAlias: String = "",
+                    private val distinct: Boolean = false) {
+
     val title = fun(): String {
         return when {
             columnAlias !== "" -> columnAlias
@@ -15,6 +19,10 @@ class DesiredColumn(val columnName: String, val functionName: String = "", val c
 
     fun isDefault(): Boolean {
         return this.columnName == "_" && this.functionName == "_"
+    }
+
+    fun isDistinct(): Boolean {
+        return this.distinct
     }
 
     override fun toString(): String {

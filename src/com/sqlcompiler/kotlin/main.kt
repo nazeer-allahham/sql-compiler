@@ -47,16 +47,16 @@ fun main() {
 //            arrayListOf("name"),
 //            arrayListOf())
 
-    Handler.select(names = arrayListOf("c"),
-            columns = arrayListOf(),
-            where = "" to arrayListOf(),
-            groupBy = arrayListOf(),
-            orderBy = arrayListOf(),
-            combine = "UNION" to (Handler.select(names = arrayListOf("c"),
-                    columns = arrayListOf(),
-                    where = "" to arrayListOf(),
-                    groupBy = arrayListOf(),
-                    orderBy = arrayListOf(),
-                    purpose = 16) as ArrayList<Row>),
-            purpose = 1)
+//    Handler.select(name = "c",
+//            columns = arrayListOf(),
+//            where = "" to arrayListOf(),
+//            groupBy = arrayListOf(),
+//            orderBy = arrayListOf(),
+//            combine = "UNION" to (Handler.select(name = "c",
+//                    columns = arrayListOf(),
+//                    where = "" to arrayListOf(),
+//                    groupBy = arrayListOf(),
+//                    orderBy = arrayListOf(),
+//                    purpose = 16) as ArrayList<Row>),
+//            purpose = 1)
 }

@@ -20,7 +20,7 @@ object Reducer {
 
     fun reduce(_in: Return): Pair<String, Any> {
         val header = Row()
-        val rows = ArrayList<Row>()
+        var rows = ArrayList<Row>()
 
         val flag = _in["grouping"] as Boolean
         val sources = _in["shuffler_files"] as ArrayList<String>
@@ -129,6 +129,12 @@ object Reducer {
             }
         }
 
+
+        columns.forEachIndexed { i, column ->
+            if (column.isDistinct())
+                rows = makeColumnDistinct(rows, i)
+        }
+
         Handler.writeToFile("${(_in["directory"] as File).path}${File.separator}reducer.csv", header, rows)
 
         return when (_in["purpose"] as Int) {
@@ -159,5 +165,19 @@ object Reducer {
                 "BUG" to "Unknown purpose"
             }
         }
+    }
+
+    private fun makeColumnDistinct(rows: ArrayList<Row>, id: Int): ArrayList<Row> {
+        val res = ArrayList<Row>()
+        val toggle = HashSet<String>()
+
+        rows.forEach { row ->
+            val key = row.fields[id]
+            if (!toggle.contains(key)) {
+                res.add(row)
+                toggle.add(key)
+            }
+        }
+        return res
     }
 }
