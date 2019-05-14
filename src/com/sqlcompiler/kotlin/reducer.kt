@@ -4,7 +4,6 @@ import com.sqlcompiler.Environment
 import java.io.File
 
 object Reducer {
-
     const val PURPOSE_SELECT_NORMAL = 1
     const val PURPOSE_SELECT_FROM_SUBQUERY = 2
     const val PURPOSE_SELECT_WHERE_SUBQUERY = 4

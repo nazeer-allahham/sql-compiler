@@ -25,7 +25,6 @@ object Fetcher {
         val names = joins.map { j -> j.tableName } as ArrayList<String>
         names.add(0, name)
         val tables = restoreTables(names)
-
         val result = Return()
         // These values will be used later from (Mapper, Shuffler, Reducer)
         result["directory"] = directory
@@ -112,7 +111,7 @@ object Fetcher {
             }
         }
 
-        if (join.joinType == "FULL_OUTER" || join.joinType == "LEFT_OUTER") {
+        if (join.type == "fullouterjoin" || join.type == "leftouterjoin") {
             val ids = header1.filterStrings(join.conditionColumns)
             rows1.forEach { row ->
                 if (m.find { row1 -> row1.contains(row, ids) } == null) {
@@ -120,7 +119,7 @@ object Fetcher {
                 }
             }
         }
-        if (join.joinType == "FULL_OUTER" || join.joinType == "RIGHT_OUTER") {
+        if (join.type == "fullouterjoin" || join.type == "rightouterjoin") {
             val ids = header2.filterStrings(join.conditionColumns)
             rows2.forEach { row ->
                 if (m.indexOfFirst { row1 -> row.contains(row1, ids) } == -1) {

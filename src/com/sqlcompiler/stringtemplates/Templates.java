@@ -3,6 +3,7 @@ package com.sqlcompiler.stringtemplates;
 import com.sqlcompiler.Environment;
 import com.sqlcompiler.java.DesiredColumn;
 import com.sqlcompiler.java.Field;
+import com.sqlcompiler.kotlin.Join;
 import org.jetbrains.annotations.NotNull;
 import org.stringtemplate.v4.ST;
 import org.stringtemplate.v4.STGroup;
@@ -55,64 +56,61 @@ public class Templates {
     }
 
     public void flushSelectStatement(String key,
-                                     List<String> tables,
+                                     String table,
                                      List<DesiredColumn> columns,
                                      String where,
                                      List<String> whereColumns,
+                                     List<Join> joins,
                                      List<String> groupBy,
                                      List<String> orderBy,
                                      String combineType,
                                      String combineSource,
+                                     Boolean distinct,
                                      Integer purpose) {
-        System.out.println(key);
-        System.out.println(tables);
-        System.out.println(columns);
-        System.out.println(where);
-        System.out.println(whereColumns);
-        System.out.println(groupBy);
-        System.out.println(orderBy);
-        System.out.println(combineType);
-        System.out.println(combineSource);
-        System.out.println(purpose);
+//        Console.INSTANCE.log(key,
+//                table,
+//                columns.toString(),
+//                where,
+//                whereColumns.toString(),
+//                joins.toString(),
+//                groupBy.toString(),
+//                orderBy.toString(),
+//                combineType,
+//                combineSource,
+//                distinct.toString(),
+//                purpose.toString());
 
-        for (int i = 0; i < tables.size(); i++) {
-            tables.set(i, "\"" + tables.get(i) + "\"");
-        }
-        for (int i = 0; i < columns.size(); i++) {
-            columns.get(i).setColumnName("\"" + columns.get(i).getNameTable() + "_" +
-                    columns.get(i).getColumnName() + "\"");
-            columns.get(i).setFunctionName("\"" + columns.get(i).getFunctionName() + "\"");
-            columns.get(i).setNameAlias("\"" + columns.get(i).getNameAlias() + "\"");
+        table = "\"" + table + "\"";
+        for (DesiredColumn column : columns) {
+            column.setColumnName("\"" + column.getNameTable() + "_" +
+                    column.getColumnName() + "\"");
+            column.setFunctionName("\"" + column.getFunctionName() + "\"");
+            column.setNameAlias("\"" + column.getNameAlias() + "\"");
             //columns.set(i, "\"" + columns.get(i) + "\"");
         }
 //        where = "\"" + where + "\"";
         for (int i = 0; i < whereColumns.size(); i++) {
             whereColumns.set(i, "\"" + whereColumns.get(i) + "\"");
         }
-        if (groupBy != null) {
-            for (int i = 0; i < groupBy.size(); i++) {
-                groupBy.set(i, "\"" + groupBy.get(i).replace('.', '_') + "\"");
-            }
+        for (int i = 0; i < groupBy.size(); i++) {
+            groupBy.set(i, "\"" + groupBy.get(i).replace('.', '_') + "\"");
         }
-        if (orderBy != null) {
-            for (int i = 0; i < orderBy.size(); i++) {
-                orderBy.set(i, "\"" + orderBy.get(i).replace('.', '_') + "\"");
-            }
+        for (int i = 0; i < orderBy.size(); i++) {
+            orderBy.set(i, "\"" + orderBy.get(i).replace('.', '_') + "\"");
         }
+        combineType = "\"" + combineType + "\"";
+//            combineSource = "\"" + combineSource + "\"";
 
-        this.add(key, "tables", tables);
+        this.add(key, "table", table);
         this.add(key, "columns", columns);
         this.add(key, "where", where);
         this.add(key, "conditions", whereColumns);
+        this.add(key, "joins", joins);
         this.add(key, "groupBy", groupBy);
         this.add(key, "orderBy", orderBy);
-        if (combineType != null && combineSource != null) {
-            combineType = "\"" + combineType + "\"";
-//            combineSource = "\"" + combineSource + "\"";
-
-            this.add(key, "combineType", combineType);
-            this.add(key, "combineSource", combineSource);
-        }
+        this.add(key, "combineType", combineType);
+        this.add(key, "combineSource", combineSource);
+        this.add(key, "distinct", distinct);
         this.add(key, "purpose", purpose);
     }
 

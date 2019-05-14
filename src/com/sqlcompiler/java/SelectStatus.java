@@ -1,5 +1,6 @@
 package com.sqlcompiler.java;
 
+import com.sqlcompiler.kotlin.Join;
 import javaslang.Tuple;
 import javaslang.Tuple2;
 
@@ -7,9 +8,10 @@ import java.util.ArrayList;
 
 class SelectStatus implements Status {
     String key;
-    ArrayList<String> tablesSelectStmt;
+    String tableSelectStmt;
     ArrayList<String> columnsSelectStmt;
     ArrayList<DesiredColumn> desiredColumns;
+    ArrayList<Join> joins;
     String whereSelectStmt;
     String nameTable;// change when we use alias name table
     ArrayList<String> columnsWhereClause;
@@ -19,6 +21,7 @@ class SelectStatus implements Status {
 
     String combineType;
     String combineSource;
+    Boolean distinct;
     Integer purpose;
 
     Status parent;
@@ -26,16 +29,18 @@ class SelectStatus implements Status {
     SelectStatus(Status parent, String statementKey) {
         this.parent = parent;
 
-//        this.columnsGroupBy = new ArrayList<>();
+        this.columnsGroupBy = new ArrayList<>();
         this.columnsOrderBy = new ArrayList<>();
         this.desiredColumns = new ArrayList<>();
         this.columnsSelectStmt = new ArrayList<>();
         this.columnsWhereClause = new ArrayList<>();
         this.key = statementKey;
-        this.tablesSelectStmt = new ArrayList<>();
+        this.tableSelectStmt = "";
         this.whereSelectStmt = "";
         this.whereInKeys = new ArrayList<>();
         this.purpose = 1;
+        this.distinct = false;
+        this.joins = new ArrayList<>();
     }
 
     SelectStatus(Status parent, String statementKey, Integer purpose, String columnName, String combineType) {

@@ -2,6 +2,7 @@ package com.sqlcompiler.java;
 
 import com.sqlcompiler.Environment;
 import com.sqlcompiler.antlr.HplsqlParser;
+import com.sqlcompiler.kotlin.Join;
 import com.sqlcompiler.stringtemplates.Templates;
 import javaslang.Tuple2;
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -38,6 +39,9 @@ class AbstractSyntaxTree {
     private Templates templates = new Templates();
     private String lastSingleInColumnsName;
     private String lastSetClause;
+    private ArrayList<String> joinConditionColumns = new ArrayList<>();
+    private String joinCondition = "";
+    private Join join;
 
     void build(RuleContext ctx) {
         root = (ParserRuleContext) ctx;
@@ -183,10 +187,12 @@ class AbstractSyntaxTree {
                     break;
 
                 case HplsqlParser.RULE_from_join_clause:
+                    this.lastRule = HplsqlParser.RULE_from_join_clause;
+                    handleFromJoinClause(ctx);
                     break;
 
                 case HplsqlParser.RULE_from_join_type_clause:
-                    handleTypeJoin(ctx);
+                    // handleTypeJoin(ctx);
                     break;
 
                 case HplsqlParser.RULE_from_table_values_clause:
@@ -235,7 +241,17 @@ class AbstractSyntaxTree {
                     break;
                 case HplsqlParser.RULE_bool_expr_binary:
                     if (this.isCurrentStatementSelect()) {
-                        handleWhereClause(ctx);
+                        if (this.isWhereSubquery()) {
+                            handleWhereClause(ctx);
+                        } else if (this.isJoinWhereCondition()) {
+                            handleJoinWhereCondition(ctx);
+                        }
+                    }
+                    break;
+
+                case HplsqlParser.RULE_bool_expr_logical_operator:
+                    if (this.isCurrentStatementSelect()) {
+                        handleLogicalOperator(ctx);
                     }
                     break;
 
@@ -431,6 +447,51 @@ class AbstractSyntaxTree {
         DataTypes.save(Environment.DATA_TYPES_PATH);
     }
 
+    private void handleJoinWhereCondition(RuleContext ctx) {
+        String left = ctx.getChild(0).getText();
+        String op = ctx.getChild(1).getText();
+        String right = ctx.getChild(2).getText();
+
+        if (isColumnName(left)) {
+            left = left.replace('.', '_');
+            this.joinConditionColumns.add(left);
+        }
+        if (isColumnName(right)) {
+            right = right.replace('.', '_');
+            this.joinConditionColumns.add(right);
+        }
+        this.joinCondition += left + " " + op + " " + right;
+    }
+
+    private boolean isJoinWhereCondition() {
+        return this.lastRule == HplsqlParser.RULE_from_join_clause;
+    }
+
+    private void handleLogicalOperator(@NotNull RuleContext ctx) {
+        ((SelectStatus) this.current).whereSelectStmt += ctx.getText();
+    }
+
+    private void handleFromJoinClause(@NotNull RuleContext ctx) {
+        if (this.join != null) {
+            this.join.setCondition(this.joinCondition);
+            this.join.setConditionColumns(this.joinConditionColumns);
+            ((SelectStatus) this.current).joins.add(this.join);
+            this.join = null;
+        }
+
+        String type = ctx.getChild(0).getText();
+        String tableName;
+        String tableAlias = "";
+        {
+            RuleContext context = (RuleContext) ctx.getChild(1).getChild(0);
+            tableName = context.getChild(0).getText();
+            if (context.getChildCount() == 2) {
+                tableAlias = context.getChild(1).getText();
+            }
+        }
+        this.join = new Join(type, tableName, tableAlias, "", this.joinConditionColumns);
+    }
+
     private String plsql2Cpp(String type) {
         if (type.equalsIgnoreCase("number")) type = "int";
         else if (type.equalsIgnoreCase("varchar")) type = "string";
@@ -606,15 +667,25 @@ class AbstractSyntaxTree {
         if (this.current instanceof SelectStatus) {
             System.out.println("Flush select: <SelectStatus>");
             SelectStatus status = (SelectStatus) this.current;
+
+            if (this.join != null) {
+                this.join.setCondition(this.joinCondition);
+                this.join.setConditionColumns(this.joinConditionColumns);
+                status.joins.add(this.join);
+                this.join = null;
+            }
+
             this.templates.flushSelectStatement(status.key,
-                    status.tablesSelectStmt,
+                    status.tableSelectStmt,
                     status.desiredColumns,
                     "\"" + status.whereSelectStmt + "\"" + calcWhereInSelectStmt(status),
                     status.columnsWhereClause,
+                    status.joins,
                     status.columnsGroupBy,
                     status.columnsOrderBy,
                     status.combineType,
                     status.combineSource != null ? this.templates.calculate(status.combineSource) : null,
+                    status.distinct,
                     status.purpose);
         } else if (this.current instanceof CreateTypeStatus) {
             System.out.println("Flush select: <CreateTypeStatus>");
@@ -630,7 +701,7 @@ class AbstractSyntaxTree {
         System.err.println("Size" + status.key + " " + status.whereInKeys.size());
         for (int i = 0; i < status.whereInKeys.size(); i++) {
             Tuple2<String, String> w = status.whereInKeys.get(i);
-            builder.append(" + smartSplit(\"").append(w._1).append("\", ").append(this.templates.calculate(w._2)).append(") ");
+            builder.append(" + smartSplit(\"").append(w._1).append("\", ").append(this.templates.calculate(w._2)).append("as String )");
         }
         return builder.toString();
     }
@@ -726,7 +797,7 @@ class AbstractSyntaxTree {
             System.exit(1);
         }
         ((SelectStatus) this.current).nameTable = ctx.getText();
-        ((SelectStatus) this.current).tablesSelectStmt.add(ctx.getText());
+        ((SelectStatus) this.current).tableSelectStmt = ctx.getText();
     }
 
     private void handleSelectList(@NotNull RuleContext ctx) {
