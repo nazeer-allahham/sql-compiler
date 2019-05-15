@@ -108,19 +108,18 @@ public class DataType implements Serializable {
         return delimiter;
     }
 
-    String checkColumnsStatus(ArrayList<DesiredColumn> columns) {
+    String checkColumnsStatus(ArrayList<DesiredColumn> columns, String nameTable) {
         if (columns == null) {
             return null;
         }
         boolean flag = false;
         StringBuilder result = new StringBuilder("[");
         for (DesiredColumn column : columns) {
-            if (!this.contains(column)) {
+            if (column.getNameTable().equalsIgnoreCase(nameTable) && !this.contains(column)) {
                 result.append(column.getColumnName()).append(", ");
                 flag = true;
             }
         }
-        // result.deleteCharAt(result.lastIndexOf(", "));
         result.append("]");
         return flag ? result.toString() : null;
     }
@@ -157,10 +156,10 @@ public class DataType implements Serializable {
     }
 
     boolean contains(DesiredColumn column) {
-        if (!column.getNameTable().equals("") && !column.getNameTable().equalsIgnoreCase(this.name)) {
-            System.out.println("false mother fucker");
+        /*if (!column.getNameTable().equals("") && !column.getNameTable().equalsIgnoreCase(this.name)) {
+            System.out.println("false ");
             return false;
-        }
+        }*/
         if (column.getColumnName().equals("*")) {
             return true;
         }

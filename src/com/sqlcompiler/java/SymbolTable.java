@@ -13,6 +13,7 @@ class SymbolTable {
     public ArrayList<String> nameSymbols = new ArrayList<>();
 
     SymbolTable() {
+        AllSymbol.put("summarize", new Symbol("summarize", "summarize", "summarize"));
         currentScope = new Scope(null);
     }
 
@@ -302,7 +303,8 @@ class SymbolTable {
 
         @Override
         public String toString() {
-            return String.format("Symbol { name => %s, type => %s, attribute => %s }", this.name, this.type, this.attribute);
+            return "";
+            //return String.format("Symbol { name => %s, type => %s, attribute => %s }", this.name, this.type, this.attribute);
         }
     }
 }

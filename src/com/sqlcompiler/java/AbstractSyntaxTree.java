@@ -227,12 +227,17 @@ class AbstractSyntaxTree {
                     }
                     break;
                 case HplsqlParser.RULE_bool_expr_single_in:
-                    ((SelectStatus) this.current).whereSelectStmt = ((SelectStatus) this.current).
-                            whereSelectStmt.replace(ctx.getText().replace('.', '_'), "");
-
                     this.lastRule = HplsqlParser.RULE_bool_expr_single_in;
                     if (this.isCurrentStatementSelect()) {
                         handleSingleInWhereClause(ctx);
+                    }
+                    if (((RuleContext) ctx.getChild(3)).getRuleIndex() != HplsqlParser.RULE_select_stmt) {
+                        ((SelectStatus) this.current).whereSelectStmt = ((SelectStatus) this.current).
+                                whereSelectStmt.replace(ctx.getText().replace('.', '_'),
+                                inWithoutSubSelect(ctx));
+                    } else {
+                        ((SelectStatus) this.current).whereSelectStmt = ((SelectStatus) this.current).
+                                whereSelectStmt.replace(ctx.getText().replace('.', '_'), "");
                     }
                     break;
                 case HplsqlParser.RULE_bool_expr_multi_in:
@@ -244,8 +249,6 @@ class AbstractSyntaxTree {
                     if (this.isCurrentStatementSelect()) {
                         if (this.isJoinWhereCondition()) {
                             handleJoinWhereCondition(ctx);
-                        } else {
-                            //handleWhereClause(ctx);
                         }
                     }
                     break;
@@ -353,25 +356,27 @@ class AbstractSyntaxTree {
                             ctx.getChild(0).getChild(0).getText(), "function", cppFunctionParam), true);
                     break;
                 case HplsqlParser.RULE_expr_func_params:
-                    boolean okay = true;
-                    for (int i = 0; i < ctx.getChildCount(); i++) {
-                        if (i % 2 == 0) {
-                            if (!symbolTable.checkParampetersFunctionCpp(
-                                    ctx.parent.getChild(0).getText(),
-                                    ctx.getChild(i).getText(), i / 2)) {
-                                System.err.println("Error in the method's parameters ");
-                                okay = false;
+                    if (!ctx.parent.getChild(0).getText().equalsIgnoreCase("summarize")) {
+                        boolean okay = true;
+                        for (int i = 0; i < ctx.getChildCount(); i++) {
+                            if (i % 2 == 0) {
+                                if (!symbolTable.checkParampetersFunctionCpp(
+                                        ctx.parent.getChild(0).getText(),
+                                        ctx.getChild(i).getText(), i / 2)) {
+                                    System.err.println("Error in the method's parameters ");
+                                    okay = false;
+                                }
                             }
                         }
-                    }
-                    if (okay) {
-                        int coutnParameters = ctx.getChildCount() + 1 / 2;
-                        if (symbolTable.AllSymbol.get(
-                                ctx.parent.getChild(0).getText()).getLocalField().size()
-                                > coutnParameters) {
-                            System.err.println("Error in the method's parameters ");
-                        }
+                        if (okay) {
+                            int coutnParameters = ctx.getChildCount() + 1 / 2;
+                            if (symbolTable.AllSymbol.get(
+                                    ctx.parent.getChild(0).getText()).getLocalField().size()
+                                    > coutnParameters) {
+                                System.err.println("Error in the method's parameters ");
+                            }
 
+                        }
                     }
                     break;
                 case HplsqlParser.RULE_cpp_return_stmt:
@@ -397,6 +402,9 @@ class AbstractSyntaxTree {
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
                             ctx.getChild(0).getText(), "",
                             ctx.getChild(3).getText(), true), false);
+                    break;
+                case HplsqlParser.RULE_expr_agg_window_func:
+
                     break;
 
             }
@@ -446,9 +454,49 @@ class AbstractSyntaxTree {
 
         symbolTable.isUnassignedVariable();
         DataTypes.save(Environment.DATA_TYPES_PATH);
+        checkExistGroupBy();
+    }
+
+    private String inWithoutSubSelect(RuleContext ctx) {
+        /**SelectStatus status = ((SelectStatus) this.current);
+         if (status.whereSelectStmt.contains("orand")) {
+         status.whereSelectStmt = status.whereSelectStmt.replaceAll("orand", "and");
+         } else if (status.whereSelectStmt.contains("andor")) {
+         status.whereSelectStmt = status.whereSelectStmt.replaceAll("andor", "or");
+         } else if (status.whereSelectStmt.contains("andand")) {
+         status.whereSelectStmt = status.whereSelectStmt.replaceAll("andand", "and");
+         } else if (status.whereSelectStmt.contains("oror")) {
+         status.whereSelectStmt = status.whereSelectStmt.replaceAll("oror", "or");
+         }
+         if (ctx.parent.parent.parent.getChildCount() == 3) {
+         status.whereSelectStmt += ctx.parent.parent.parent.getChild(1).getText();
+         }*/
+        String res = "";
+        String column = ctx.getChild(0).getText();
+        column = column.replace('.', '_');
+        res += "( ";
+        for (int i = 3; i < ctx.getChildCount() - 1; i += 2) {
+            res += column + "=" + ctx.getChild(i).getText() + " ";
+            if (i != ctx.getChildCount() - 2) {
+                res += "or";
+            }
+        }
+        res += " )";
+        return res;
+
+    }
+
+    private void checkExistGroupBy() {
+        if (!((SelectStatus) this.current).isExistGroupBy
+                && ((SelectStatus) this.current).isColWithoutFun
+                && ((SelectStatus) this.current).isExistAggregationFun) {
+            System.err.println("Semantic Error doesn't exist group by");
+            System.exit(1);
+        }
     }
 
     private void handleJoinWhereCondition(RuleContext ctx) {
+        if (ctx.parent.parent.getRuleIndex() != HplsqlParser.RULE_from_join_clause) return;
         String left = ctx.getChild(0).getText();
         String op = ctx.getChild(1).getText();
         String right = ctx.getChild(2).getText();
@@ -594,10 +642,13 @@ class AbstractSyntaxTree {
         String left = ctx.getChild(0).getText();
         String e1 = ctx.getChild(2).getText();
         String e2 = ctx.getChild(4).getText();
+        if (ctx.parent.parent.parent.getChildCount() == 3)
+            ((SelectStatus) this.current).whereSelectStmt += ctx.parent.parent.parent.getChild(1).getText();
+
         ((SelectStatus) this.current).whereSelectStmt =
                 ((SelectStatus) this.current).whereSelectStmt.replaceAll(ctx.getText(), "");
         ((SelectStatus) this.current).columnsWhereClause.add(left);
-        ((SelectStatus) this.current).whereSelectStmt += left + " = " + e1 + " || " + left + " = " + e2;
+        ((SelectStatus) this.current).whereSelectStmt += "( " + left + " >= " + e1 + " and " + left + " <= " + e2 + " )";
     }
 
     private void handleIsNotNullWhereClause(@NotNull RuleContext ctx) {
@@ -671,7 +722,7 @@ class AbstractSyntaxTree {
         this.current = this.statements.pop();
 
         if (this.current instanceof SelectStatus) {
-            System.out.println("Flush select: <SelectStatus>");
+            //System.out.println("Flush select: <SelectStatus>");
             SelectStatus status = (SelectStatus) this.current;
 
             if (this.join != null) {
@@ -684,18 +735,21 @@ class AbstractSyntaxTree {
             if (status.whereSelectStmt.contains("orand")) {
                 status.whereSelectStmt = status.whereSelectStmt.replaceAll("orand", "and");
                 status.whereSelectStmt += "or";
-            }
-            if (status.whereSelectStmt.contains("andor")) {
+            } else if (status.whereSelectStmt.contains("andor")) {
                 status.whereSelectStmt = status.whereSelectStmt.replaceAll("andor", "or");
                 status.whereSelectStmt += "and";
-            }
-            if (status.whereSelectStmt.contains("andand")) {
+            } else if (status.whereSelectStmt.contains("andand")) {
                 status.whereSelectStmt = status.whereSelectStmt.replaceAll("andand", "and");
-            }
-            if (status.whereSelectStmt.contains("oror")) {
+                status.whereSelectStmt += "and";
+            } else if (status.whereSelectStmt.contains("oror")) {
                 status.whereSelectStmt = status.whereSelectStmt.replaceAll("oror", "or");
                 status.whereSelectStmt += "or";
             }
+            if (status.whereSelectStmt.startsWith("or"))
+                status.whereSelectStmt = status.whereSelectStmt.substring(2);
+            if (status.whereSelectStmt.startsWith("and"))
+                status.whereSelectStmt = status.whereSelectStmt.substring(3);
+
 
             status.whereSelectStmt = status.whereSelectStmt.replaceAll("or", " or ");
             status.whereSelectStmt = status.whereSelectStmt.replaceAll("and", " and ");
@@ -783,6 +837,7 @@ class AbstractSyntaxTree {
 
     private void handleGroupByClause(@NotNull RuleContext ctx) {
         SelectStatus status = (SelectStatus) this.current;
+        status.isExistGroupBy = true;
         status.columnsGroupBy = new ArrayList<>();
         ArrayList<String> selectColumnTemp = new ArrayList<>();
         String col;
@@ -810,7 +865,6 @@ class AbstractSyntaxTree {
     private void handleFromTableNameClause(@NotNull RuleContext ctx) {
         SelectStatus status = (SelectStatus) this.current;
 
-        status.nameTable = ctx.getText();
         status.tableSelectStmt = ctx.getText();
         status.dataType = DataTypes.get(ctx.getText());
         if (status.dataType == null) {
@@ -818,10 +872,18 @@ class AbstractSyntaxTree {
             System.exit(1);
         }
 
-        String result = status.dataType.checkColumnsStatus(status.desiredColumns);
+        String result = status.dataType.checkColumnsStatus(status.desiredColumns, status.tableSelectStmt);
         if (result != null) {
             System.err.println("Semantic error column " + status.columnsNamesToString() + " doesn't exist in table");
             System.exit(1);
+        }
+        if (status.AllColumns) {
+            for (Field field : status.dataType.getFields()) {
+                status.desiredColumns.add(new DesiredColumn(
+                        field.getName(), "", status.tableSelectStmt, "", false));
+            }
+
+
         }
     }
 
@@ -901,7 +963,15 @@ class AbstractSyntaxTree {
         switch (ctx.getChildCount()) {
             // Column without alias
             case 1:
-                handleListItemColumnAndFunction((RuleContext) ctx.getChild(0).getChild(0), column);
+                if (ctx.getChild(0).getChild(0).getChildCount() == 4 &&
+                        ctx.getChild(0).getChild(0).getChild(0).getText().equalsIgnoreCase("summarize")) {
+                    handleSummarize(ctx);
+                    status.isExistAggregationFun = true;
+                } else if (ctx.getChild(0).getChild(0).getText().equalsIgnoreCase("*")) {
+                    handleAllColumn();
+                    status.isColWithoutFun = true;
+                } else
+                    handleListItemColumnAndFunction((RuleContext) ctx.getChild(0).getChild(0), column);
                 break;
             // Column with alias
             case 2:
@@ -935,13 +1005,42 @@ class AbstractSyntaxTree {
                 handleListItemColumnAlias((RuleContext) ctx.getChild(3), column);
                 break;
         }
-        status.desiredColumns.add(column);
+        if (!column.getColumnName().equalsIgnoreCase(""))
+            status.desiredColumns.add(column);
         /*
         if (!status.dataType.contains(column)) {
             System.err.println("Semantic error column " + column.getColumnName() + " doesn't exist in table");
             System.exit(1);
         }
         */
+    }
+
+    private void handleAllColumn() {
+        ((SelectStatus) this.current).AllColumns = true;
+    }
+
+    private void handleSummarize(RuleContext ctx) {
+        String name = ctx.getChild(0).getChild(0).getChild(2).getText();
+
+        String colname;
+        String tablename = "";
+        if (name.contains(".")) {
+            colname = (name.split("\\.")[1]);
+            tablename = (name.split("\\.")[0]);
+        } else colname = name;
+        ArrayList<DesiredColumn> column = new ArrayList<>();
+        column.add(new DesiredColumn(colname, "max", tablename, "", false));
+        column.add(new DesiredColumn(colname, "min", tablename, "", false));
+        column.add(new DesiredColumn(colname, "avg", tablename, "", false));
+        column.add(new DesiredColumn(colname, "std", tablename, "", false));
+        column.add(new DesiredColumn(colname, "count", tablename, "", false));
+        column.add(new DesiredColumn(colname, "Q2", tablename, "", false));
+        column.add(new DesiredColumn(colname, "Q3", tablename, "", false));
+        column.add(new DesiredColumn(colname, "mode", tablename, "", false));
+        column.add(new DesiredColumn(colname, "mean", tablename, "", false));
+        column.add(new DesiredColumn(colname, "median", tablename, "", false));
+
+        ((SelectStatus) this.current).desiredColumns.addAll(column);
     }
 
     private void handleListItemColumnAndFunction(@NotNull RuleContext ctx, DesiredColumn column) {
@@ -952,10 +1051,12 @@ class AbstractSyntaxTree {
                 column.setColumnName(context.getChild(0).getText());
             } else // ColumnName with TableName
             {
+                ((SelectStatus) this.current).isColWithoutFun = true;
                 column.setNameTable(context.getChild(0).getText());
                 column.setColumnName(context.getChild(2).getText());
             }
         } else if (ctx.getChildCount() == 4) { // Column has grouping function
+            ((SelectStatus) this.current).isExistAggregationFun = true;
             column.setFunctionName(ctx.getChild(0).getText());
 
             RuleContext context = (RuleContext) ctx.getChild(2).getChild(0).getChild(0);
@@ -968,7 +1069,7 @@ class AbstractSyntaxTree {
         } else if (ctx.getChildCount() == 5) { // Column has grouping function and distinct
             column.setFunctionName(ctx.getChild(0).getText());
             column.setDistinct(true);
-
+            ((SelectStatus) this.current).isExistAggregationFun = true;
             RuleContext context = (RuleContext) ctx.getChild(3).getChild(0).getChild(0);
             if (context.getChildCount() == 1) {
                 column.setColumnName(context.getChild(0).getText());
@@ -981,6 +1082,7 @@ class AbstractSyntaxTree {
 
     private void handleListItemColumnAlias(@NotNull RuleContext ctx, @NotNull DesiredColumn column) {
         column.setNameAlias(ctx.getChild(1).getText());
+        ((SelectStatus) this.current).isColWithoutFun = true;
     }
 
     private ArrayList<String> getColumnsName() {
@@ -993,7 +1095,7 @@ class AbstractSyntaxTree {
 
     void print() {
         RuleContext ctx = root;
-        explore(ctx, 0);
+        //explore(ctx, 0);
     }
 
     private void explore(@NotNull RuleContext ctx, int indentation) {

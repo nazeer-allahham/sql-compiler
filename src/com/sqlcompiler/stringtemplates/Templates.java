@@ -120,8 +120,8 @@ public class Templates {
 
     public void add(String name, String key, Object value) {
         ST template = this.templates.get(name);
-        System.out.println("template" + template);
-        System.out.println(key);
+        //System.out.println("template" + template);
+        //System.out.println(key);
         if (template.getAttribute(key) == null) {
             template.add(key, value);
         } else {

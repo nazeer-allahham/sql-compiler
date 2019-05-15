@@ -82,7 +82,7 @@ class DataTypes {
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(stream, Charset.forName("UTF-8")));
             writer.write(gson.toJson(types));
             writer.close();
-            Console.log("Data types save is completed successfully!");
+            //Console.log("Data types save is completed successfully!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -98,7 +98,7 @@ class DataTypes {
             HashMap<String, DataType> temp = gson.fromJson(new InputStreamReader(new FileInputStream(new File(path))), type);
             if (temp != null)
                 types = temp;
-            Console.log("Data types restore is completed successfully.");
+            //Console.log("Data types restore is completed successfully.");
         } catch (JsonSyntaxException | IOException e) {
             //e.printStackTrace();
         }
@@ -106,11 +106,11 @@ class DataTypes {
     }
 
     static void print() {
-        Console.log(Console.open);
+        /*Console.log(Console.open);
         for (String key : types.keySet()) {
             Console.log(types.get(key).toJson(DataType.DATA_TYPE_TO_STRING_FLAT));
         }
-        Console.log(Console.close);
+        Console.log(Console.close);*/
     }
 
     static void setDelimiter(String delimiter) {
