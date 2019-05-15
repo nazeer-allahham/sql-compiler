@@ -1,12 +1,12 @@
-import com.sqlcompiler.kotlin.*
-import com.sqlcompiler.kotlin.Utils.smartSplit
+import com.sqlcompiler.kotlin.DesiredColumn
+import com.sqlcompiler.kotlin.Handler
 
 fun main() {
     Handler.select(name = "c",
-            columns = arrayListOf(),
-            where = "c_id = 1" to arrayListOf("c_id"),
+            columns = arrayListOf(DesiredColumn("c_id", "", "sss", false), DesiredColumn("_name", "min", "", true)),
+            where = "" to arrayListOf(),
             join = arrayListOf(),
-            groupBy = arrayListOf(),
+            groupBy = arrayListOf("c_name"),
             orderBy = arrayListOf(),
             distinct = false,
             purpose = 1)

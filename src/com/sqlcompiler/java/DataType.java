@@ -45,6 +45,9 @@ public class DataType implements Serializable {
     }
 
     static String toUnquotedString(@NotNull String string) {
+        if (string.isEmpty()) {
+            return "";
+        }
         char first = string.charAt(0);
         char last = string.charAt(string.length() - 1);
 
@@ -101,34 +104,24 @@ public class DataType implements Serializable {
         this.delimiter = toUnquotedString(delimiter);
     }
 
-    public String getDelimiter() {
+    String getDelimiter() {
         return delimiter;
     }
 
-    public ArrayList<String> isContainColumns(ArrayList<DesiredColumn> desiredColumns) {
-        if (desiredColumns == null) {
+    String checkColumnsStatus(ArrayList<DesiredColumn> columns, String nameTable) {
+        if (columns == null) {
             return null;
         }
-        ArrayList<String> columns = new ArrayList<>();
-        for (DesiredColumn dc : desiredColumns) {
-            columns.add(dc.getColumnName());
-        }
-        boolean OK;
-        ArrayList<String> result = new ArrayList<>();
-        for (String column : columns) {
-            OK = false;
-            for (Field it : this.fields) {
-                if (it.getName().equalsIgnoreCase(column)) {
-                    OK = true;
-                    break;
-                }
-            }
-            if (!OK) {
-                result.add(column);
+        boolean flag = false;
+        StringBuilder result = new StringBuilder("[");
+        for (DesiredColumn column : columns) {
+            if (column.getNameTable().equalsIgnoreCase(nameTable) && !this.contains(column)) {
+                result.append(column.getColumnName()).append(", ");
+                flag = true;
             }
         }
-        if (columns.size() == 1 && columns.get(0).equalsIgnoreCase("*")) result.clear();
-        return result.size() != 0 ? result : null;
+        result.append("]");
+        return flag ? result.toString() : null;
     }
 
 
@@ -160,5 +153,22 @@ public class DataType implements Serializable {
             mString.append(" }");
             return mString.toString();
         }
+    }
+
+    boolean contains(DesiredColumn column) {
+        /*if (!column.getNameTable().equals("") && !column.getNameTable().equalsIgnoreCase(this.name)) {
+            System.out.println("false ");
+            return false;
+        }*/
+        if (column.getColumnName().equals("*")) {
+            return true;
+        }
+        String name = column.getColumnName();
+        for (Field field : this.fields) {
+            if (field.getName().equalsIgnoreCase(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

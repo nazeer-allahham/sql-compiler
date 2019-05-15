@@ -156,13 +156,11 @@ class AbstractSyntaxTree {
                     break;
 
                 case HplsqlParser.RULE_select_list:
-                    handleSelectList(ctx);
+                    // handleSelectList(ctx);
                     break;
-                /*
                 case HplsqlParser.RULE_select_list_item:
                     handleSelectListItem(ctx);
                     break;
-                */
                 case HplsqlParser.RULE_select_list_alias:
                     break;
 
@@ -209,7 +207,8 @@ class AbstractSyntaxTree {
 
 
                 case HplsqlParser.RULE_where_clause:
-                    //handleWhereClause(ctx);
+                    handleWhereClause(ctx);
+
                     break;
 
                 case HplsqlParser.RULE_bool_expr_is_not_null:
@@ -224,12 +223,14 @@ class AbstractSyntaxTree {
                     break;
                 case HplsqlParser.RULE_bool_expr_exists:
                     if (this.isCurrentStatementSelect()) {
-                        handleExistsWhereClause(ctx);
+                        // handleExistsWhereClause(ctx);
                     }
                     break;
                 case HplsqlParser.RULE_bool_expr_single_in:
+                    ((SelectStatus) this.current).whereSelectStmt = ((SelectStatus) this.current).
+                            whereSelectStmt.replace(ctx.getText().replace('.', '_'), "");
+
                     this.lastRule = HplsqlParser.RULE_bool_expr_single_in;
-                    System.out.println("Ks 2m");
                     if (this.isCurrentStatementSelect()) {
                         handleSingleInWhereClause(ctx);
                     }
@@ -241,9 +242,7 @@ class AbstractSyntaxTree {
                     break;
                 case HplsqlParser.RULE_bool_expr_binary:
                     if (this.isCurrentStatementSelect()) {
-                        if (this.isWhereSubquery()) {
-                            handleWhereClause(ctx);
-                        } else if (this.isJoinWhereCondition()) {
+                        if (this.isJoinWhereCondition()) {
                             handleJoinWhereCondition(ctx);
                         }
                     }
@@ -251,7 +250,7 @@ class AbstractSyntaxTree {
 
                 case HplsqlParser.RULE_bool_expr_logical_operator:
                     if (this.isCurrentStatementSelect()) {
-                        handleLogicalOperator(ctx);
+                        //handleLogicalOperator(ctx);
                     }
                     break;
 
@@ -260,7 +259,7 @@ class AbstractSyntaxTree {
                     break;
 
                 case HplsqlParser.RULE_having_clause:
-                    if (!isValidBooleanExpression(ctx.getChild(1).getText())) {
+                    if (isValidBooleanExpression(ctx.getChild(1).getText())) {
                         System.err.println("Invalid Boolean Expression Having clause");
                     }
                     if (!isHavingContainAggFun(ctx.getChild(1).getText())) {
@@ -352,25 +351,27 @@ class AbstractSyntaxTree {
                             ctx.getChild(0).getChild(0).getText(), "function", cppFunctionParam), true);
                     break;
                 case HplsqlParser.RULE_expr_func_params:
-                    boolean okay = true;
-                    for (int i = 0; i < ctx.getChildCount(); i++) {
-                        if (i % 2 == 0) {
-                            if (!symbolTable.checkParampetersFunctionCpp(
-                                    ctx.parent.getChild(0).getText(),
-                                    ctx.getChild(i).getText(), i / 2)) {
-                                System.err.println("Error in the method's parameters ");
-                                okay = false;
+                    if (!ctx.parent.getChild(0).getText().equalsIgnoreCase("summarize")) {
+                        boolean okay = true;
+                        for (int i = 0; i < ctx.getChildCount(); i++) {
+                            if (i % 2 == 0) {
+                                if (!symbolTable.checkParampetersFunctionCpp(
+                                        ctx.parent.getChild(0).getText(),
+                                        ctx.getChild(i).getText(), i / 2)) {
+                                    System.err.println("Error in the method's parameters ");
+                                    okay = false;
+                                }
                             }
                         }
-                    }
-                    if (okay) {
-                        int coutnParameters = ctx.getChildCount() + 1 / 2;
-                        if (symbolTable.AllSymbol.get(
-                                ctx.parent.getChild(0).getText()).getLocalField().size()
-                                > coutnParameters) {
-                            System.err.println("Error in the method's parameters ");
-                        }
+                        if (okay) {
+                            int coutnParameters = ctx.getChildCount() + 1 / 2;
+                            if (symbolTable.AllSymbol.get(
+                                    ctx.parent.getChild(0).getText()).getLocalField().size()
+                                    > coutnParameters) {
+                                System.err.println("Error in the method's parameters ");
+                            }
 
+                        }
                     }
                     break;
                 case HplsqlParser.RULE_cpp_return_stmt:
@@ -382,12 +383,12 @@ class AbstractSyntaxTree {
                     break;
                 //Boolean semantic check
                 case HplsqlParser.RULE_cpp_if_stmt:
-                    if (!isValidBooleanExpression(ctx.getChild(2).getText())) {
+                    if (isValidBooleanExpression(ctx.getChild(2).getText())) {
                         System.err.println("Invalid Boolean Expression if clause");
                     }
                     break;
                 case HplsqlParser.RULE_cpp_for_stmt_header:
-                    if (!isValidBooleanExpression(ctx.getChild(4).getText())) {
+                    if (isValidBooleanExpression(ctx.getChild(4).getText())) {
                         System.err.println("Invalid Boolean Expression for clause");
                     }
                     break;
@@ -396,6 +397,9 @@ class AbstractSyntaxTree {
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
                             ctx.getChild(0).getText(), "",
                             ctx.getChild(3).getText(), true), false);
+                    break;
+                case HplsqlParser.RULE_expr_agg_window_func:
+
                     break;
 
             }
@@ -448,6 +452,7 @@ class AbstractSyntaxTree {
     }
 
     private void handleJoinWhereCondition(RuleContext ctx) {
+        if (ctx.parent.parent.getRuleIndex() != HplsqlParser.RULE_from_join_clause) return;
         String left = ctx.getChild(0).getText();
         String op = ctx.getChild(1).getText();
         String right = ctx.getChild(2).getText();
@@ -492,16 +497,17 @@ class AbstractSyntaxTree {
         this.join = new Join(type, tableName, tableAlias, "", this.joinConditionColumns);
     }
 
-    private String plsql2Cpp(String type) {
+    private String plsql2Cpp(@NotNull String type) {
         if (type.equalsIgnoreCase("number")) type = "int";
         else if (type.equalsIgnoreCase("varchar")) type = "string";
         else if (type.equalsIgnoreCase("varchar2")) type = "string";
         else if (type.equalsIgnoreCase("date")) type = "string";
         else if (type.equalsIgnoreCase("char")) type = "string";
+        else if (type.equalsIgnoreCase("char")) type = "string";
         return type;
     }
 
-    private void handleDeclareVariable(RuleContext ctx) {
+    private void handleDeclareVariable(@NotNull RuleContext ctx) {
         String type = ctx.getChild(1).getText();
         type = plsql2Cpp(type);
         if (ctx.getChildCount() == 3) {
@@ -581,7 +587,7 @@ class AbstractSyntaxTree {
     }
 
     private void handleSingleInWhereClause(@NotNull RuleContext ctx) {
-        this.lastSingleInColumnsName = ctx.getChild(0).getText();
+        this.lastSingleInColumnsName = ctx.getChild(0).getText().replace('.', '_');
     }
 
     private void handleExistsWhereClause(RuleContext ctx) {
@@ -592,7 +598,8 @@ class AbstractSyntaxTree {
         String left = ctx.getChild(0).getText();
         String e1 = ctx.getChild(2).getText();
         String e2 = ctx.getChild(4).getText();
-
+        ((SelectStatus) this.current).whereSelectStmt =
+                ((SelectStatus) this.current).whereSelectStmt.replaceAll(ctx.getText(), "");
         ((SelectStatus) this.current).columnsWhereClause.add(left);
         ((SelectStatus) this.current).whereSelectStmt += left + " = " + e1 + " || " + left + " = " + e2;
     }
@@ -614,7 +621,7 @@ class AbstractSyntaxTree {
     }
 
     private void handleWhereClause(@NotNull RuleContext ctx) {
-        String left = ctx.getChild(0).getText();
+        /*String left = ctx.getChild(0).getText();
         String op = ctx.getChild(1).getText();
         String right = ctx.getChild(2).getText();
 
@@ -629,7 +636,10 @@ class AbstractSyntaxTree {
         ((SelectStatus) this.current).whereSelectStmt += left + " " + op + " " + right;
 //        if (!isValidBooleanExpression(ctx.getChild(1).getText())) {
 //            System.err.println("Invalid Boolean Expression where clause");
-//        }
+//        }*/
+        String condition = ctx.getChild(1).getText();
+        condition = condition.replace('.', '_');
+        ((SelectStatus) this.current).whereSelectStmt = condition;
     }
 
     private boolean isColumnName(@NotNull String name) {
@@ -674,6 +684,25 @@ class AbstractSyntaxTree {
                 status.joins.add(this.join);
                 this.join = null;
             }
+
+            if (status.whereSelectStmt.contains("orand")) {
+                status.whereSelectStmt = status.whereSelectStmt.replaceAll("orand", "and");
+                status.whereSelectStmt += "or";
+            }
+            if (status.whereSelectStmt.contains("andor")) {
+                status.whereSelectStmt = status.whereSelectStmt.replaceAll("andor", "or");
+                status.whereSelectStmt += "and";
+            }
+            if (status.whereSelectStmt.contains("andand")) {
+                status.whereSelectStmt = status.whereSelectStmt.replaceAll("andand", "and");
+            }
+            if (status.whereSelectStmt.contains("oror")) {
+                status.whereSelectStmt = status.whereSelectStmt.replaceAll("oror", "or");
+                status.whereSelectStmt += "or";
+            }
+
+            status.whereSelectStmt = status.whereSelectStmt.replaceAll("or", " or ");
+            status.whereSelectStmt = status.whereSelectStmt.replaceAll("and", " and ");
 
             this.templates.flushSelectStatement(status.key,
                     status.tableSelectStmt,
@@ -771,7 +800,7 @@ class AbstractSyntaxTree {
                 if (ctx.getChild(i).getChild(0).getChildCount() > 1)
                     System.err.println("Error: group by clause can't contain grouping functions ");
                 else {
-                    status.columnsGroupBy.add(col);
+                    status.columnsGroupBy.add(col.replace('.', '_'));
                     if (col.contains("."))
                         col = col.split("\\.")[1];
                     selectColumnTemp.remove(col);
@@ -783,30 +812,27 @@ class AbstractSyntaxTree {
     }
 
     private void handleFromTableNameClause(@NotNull RuleContext ctx) {
-        DataType dataType = DataTypes.get(ctx.getText());
-        if (dataType == null) {
+        SelectStatus status = (SelectStatus) this.current;
+
+        status.tableSelectStmt = ctx.getText();
+        status.dataType = DataTypes.get(ctx.getText());
+        if (status.dataType == null) {
             System.err.println("Semantic error : Table " + ctx.getChild(0).getChild(0).getText() + " used before it's declared");
             System.exit(1);
         }
-        ArrayList<String> res = dataType.isContainColumns(((SelectStatus) this.current).desiredColumns);
-        if (res != null) {
-            if (res.size() > 1)
-                System.err.println("Semantic error columns  " + res.toString() + "  doesn't exist in table");
-            else
-                System.err.println("Semantic error column  " + res.toString() + "  doesn't exist in table");
+
+        String result = status.dataType.checkColumnsStatus(status.desiredColumns, status.tableSelectStmt);
+        if (result != null) {
+            System.err.println("Semantic error column " + status.columnsNamesToString() + " doesn't exist in table");
             System.exit(1);
         }
-        ((SelectStatus) this.current).nameTable = ctx.getText();
-        ((SelectStatus) this.current).tableSelectStmt = ctx.getText();
-    }
-
-    private void handleSelectList(@NotNull RuleContext ctx) {
-        if (ctx.getChildCount() > 1) {
-            for (int i = 0; i < ctx.getChildCount(); i += 2) {
-                handleSelectListItem((RuleContext) ctx.getChild(i));
-//                ((SelectStatus) this.current).columnsSelectStmt.add(handleSelectListItem((RuleContext) ctx.getChild(i)));
+        if (status.AllColumns) {
+            for (Field field : status.dataType.getFields()) {
+                status.desiredColumns.add(new DesiredColumn(
+                        field.getName(), "", status.tableSelectStmt, "", false));
             }
-            //System.err.println(((SelectStatus) this.current).columnsSelectStmt.toString());
+
+
         }
     }
 
@@ -839,9 +865,9 @@ class AbstractSyntaxTree {
             se.eval(exp);
             //System.err.println(exp);
         } catch (ScriptException e) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     private boolean isHavingContainAggFun(@NotNull String exp) {
@@ -868,97 +894,140 @@ class AbstractSyntaxTree {
         return true;
     }
 
-    @NotNull
-    private String handleSelectListItem(@NotNull RuleContext ctx) {
-        /*Example
-        select c1 , t.c2 ,
-        max(c3),min(c) as m,
-        t.c4 as alias1,
-        c5 as alias2,
-        c6=(select * from g)
-        from t
-         */
-        /***
-         * Table _ column @ alias
-         * Table _ column $ function
-         * Table _ column @ alias $ function
-         */
-        if (ctx.getChildCount() == 1) {
-            //normal column
-            if (ctx.getChild(0).getChild(0).getChild(0).getChildCount() == 1) {
-                ((SelectStatus) this.current).desiredColumns.add(
-                        new DesiredColumn(ctx.getText(),
-                                "",
-                                ((SelectStatus) this.current).nameTable,
-                                ""));
-                /**if (((SelectStatus) this.current).columnsGroupBy != null &&
-                 !((SelectStatus) this.current).columnsGroupBy.contains(ctx.getText()))
-                 System.err.println("missing " + ctx.getText() + " in group by list sss");*/
-            }
-            // nameTable.column
-            else if (ctx.getChild(0).getChild(0).getChild(0).getChildCount() == 3) {
-                ((SelectStatus) this.current).desiredColumns.add(
-                        new DesiredColumn(
-                                ctx.getChild(0).getChild(0).getChild(0).getChild(2).getText(),
-                                "",
-                                ctx.getChild(0).getChild(0).getChild(0).getChild(0).getText(),
-                                ""));
-            }
-            // aggregate function without alias
-            else {
-                String column = ctx.getChild(0).getChild(0).getChild(2).getText();
-                if (column.contains("."))
-                    column = column.split("\\.")[1];
-                ((SelectStatus) this.current).desiredColumns.add(new DesiredColumn(
-                        column,
-                        ctx.getChild(0).getChild(0).getChild(0).getText(),
-                        ctx.getChild(0).getChild(0).getChild(2).getChild(0).getChild(0).getChild(0).getText(),
-                        ""
-                ));
-            }
-        }
-        //subselect
-        else if (ctx.getChild(1).getText().equalsIgnoreCase("=")) {
-            ((SelectStatus) this.current).columnsSelectStmt.add(ctx.getChild(0).getText());
-            //TODO subQuery
+    private void handleSelectListItem(@NotNull RuleContext ctx) {
+        /*
+        Example
+        select c1, t.c2, max(c3), min(c) as m, t.c4 as alias1, c5 as alias2, c6=(select * from g) from t
+        */
+        /**
+         * tableName_columnName as alias
+         * tableName_columnName on function
+         * tableName_columnName as alias && on function
+         **/
+        SelectStatus status = (SelectStatus) this.current;
+        DesiredColumn column = new DesiredColumn();
 
+        RuleContext context;
+
+        switch (ctx.getChildCount()) {
+            // Column without alias
+            case 1:
+                if (ctx.getChild(0).getChild(0).getChildCount() == 4 &&
+                        ctx.getChild(0).getChild(0).getChild(0).getText().equalsIgnoreCase("summarize")) {
+                    handleSummarize(ctx);
+                } else if (ctx.getChild(0).getChild(0).getText().equalsIgnoreCase("*")) {
+                    handleAllColumn();
+                } else
+                    handleListItemColumnAndFunction((RuleContext) ctx.getChild(0).getChild(0), column);
+                break;
+            // Column with alias
+            case 2:
+                handleListItemColumnAndFunction((RuleContext) ctx.getChild(0).getChild(0), column);
+                handleListItemColumnAlias((RuleContext) ctx.getChild(1), column);
+                break;
+            // Column subquery without alias
+            case 3:
+                context = (RuleContext) ctx.getChild(0);
+                if (context.getChildCount() == 1) // ColumnName without TableName
+                {
+                    column.setColumnName(context.getChild(0).getText());
+                } else // ColumnName with TableName
+                {
+                    column.setNameTable(context.getChild(0).getText());
+                    column.setColumnName(context.getChild(2).getText());
+                }
+                // TODO subquery
+                break;
+            // Column subquery with alias
+            case 4:
+                context = (RuleContext) ctx.getChild(0);
+                if (context.getChildCount() == 1) // ColumnName without TableName
+                {
+                    column.setColumnName(context.getChild(0).getText());
+                } else // ColumnName with TableName
+                {
+                    column.setNameTable(context.getChild(0).getText());
+                    column.setColumnName(context.getChild(2).getText());
+                }
+                handleListItemColumnAlias((RuleContext) ctx.getChild(3), column);
+                break;
         }
-        // Alias name
-        else {
-            // table.column as alias
-            if (ctx.getChild(0).getChild(0).getChildCount() == 3) {
-                ((SelectStatus) this.current).desiredColumns.add(new DesiredColumn(
-                        ctx.getChild(0).getText().split(".")[1],
-                        "",
-                        ctx.getChild(0).getText().split(".")[0],
-                        ctx.getChild(1).getChild(1).getText()
-                ));
+        if (!column.getColumnName().equalsIgnoreCase(""))
+            status.desiredColumns.add(column);
+        /*
+        if (!status.dataType.contains(column)) {
+            System.err.println("Semantic error column " + column.getColumnName() + " doesn't exist in table");
+            System.exit(1);
+        }
+        */
+    }
+
+    private void handleAllColumn() {
+        ((SelectStatus) this.current).AllColumns = true;
+        System.out.println();
+    }
+
+    private void handleSummarize(RuleContext ctx) {
+        String name = ctx.getChild(0).getChild(0).getChild(2).getText();
+
+        String colname;
+        String tablename = "";
+        if (name.contains(".")) {
+            colname = (name.split("\\.")[1]);
+            tablename = (name.split("\\.")[0]);
+        } else colname = name;
+        ArrayList<DesiredColumn> column = new ArrayList<>();
+        column.add(new DesiredColumn(colname, "max", tablename, "", false));
+        column.add(new DesiredColumn(colname, "min", tablename, "", false));
+        column.add(new DesiredColumn(colname, "avg", tablename, "", false));
+        column.add(new DesiredColumn(colname, "std", tablename, "", false));
+        column.add(new DesiredColumn(colname, "count", tablename, "", false));
+        column.add(new DesiredColumn(colname, "Q2", tablename, "", false));
+        column.add(new DesiredColumn(colname, "Q3", tablename, "", false));
+        column.add(new DesiredColumn(colname, "mode", tablename, "", false));
+        column.add(new DesiredColumn(colname, "mean", tablename, "", false));
+        column.add(new DesiredColumn(colname, "median", tablename, "", false));
+
+        ((SelectStatus) this.current).desiredColumns.addAll(column);
+    }
+
+    private void handleListItemColumnAndFunction(@NotNull RuleContext ctx, DesiredColumn column) {
+        if (ctx.getChildCount() == 1) { // Column doesn't has grouping function
+            RuleContext context = (RuleContext) ctx.getChild(0);
+            if (context.getChildCount() == 1) // ColumnName without TableName
+            {
+                column.setColumnName(context.getChild(0).getText());
+            } else // ColumnName with TableName
+            {
+                column.setNameTable(context.getChild(0).getText());
+                column.setColumnName(context.getChild(2).getText());
             }
-            //column as alias
-            else if (ctx.getChild(0).getChild(0).getChildCount() == 1) {
-                ((SelectStatus) this.current).desiredColumns.add(new DesiredColumn(
-                        ctx.getChild(0).getText(),
-                        "",
-                        ((SelectStatus) this.current).nameTable,
-                        ctx.getChild(1).getChild(1).getText()
-                ));
+        } else if (ctx.getChildCount() == 4) { // Column has grouping function
+            column.setFunctionName(ctx.getChild(0).getText());
+
+            RuleContext context = (RuleContext) ctx.getChild(2).getChild(0).getChild(0);
+            if (context.getChildCount() == 1) {
+                column.setColumnName(context.getChild(0).getText());
+            } else {
+                column.setNameTable(context.getChild(0).getText());
+                column.setColumnName(context.getChild(2).getText());
             }
-            // function as alias
-            else {
-                ((SelectStatus) this.current).desiredColumns.add(new DesiredColumn(
-                        ctx.getChild(0).getChild(0).getChild(0).getChild(2).getText(),
-                        ctx.getChild(0).getChild(0).getChild(0).getText(),
-                        ctx.getChild(0).getChild(0).getChild(0).getChild(0).getText(),
-                        ctx.getChild(1).getChild(1).getText()
-                ));/**
-                 if (((SelectStatus) this.current).columnsGroupBy == null) {
-                 System.err.println("Missing group by list");
-                 System.exit(1);
-                 }*/
+        } else if (ctx.getChildCount() == 5) { // Column has grouping function and distinct
+            column.setFunctionName(ctx.getChild(0).getText());
+            column.setDistinct(true);
+
+            RuleContext context = (RuleContext) ctx.getChild(3).getChild(0).getChild(0);
+            if (context.getChildCount() == 1) {
+                column.setColumnName(context.getChild(0).getText());
+            } else {
+                column.setNameTable(context.getChild(0).getText());
+                column.setColumnName(context.getChild(2).getText());
             }
         }
-        return "";
-        //return "\"" + ((SelectStatus) this.current).columnsSelectStmt.get(((SelectStatus) this.current).columnsSelectStmt.size() - 1) + "\"";
+    }
+
+    private void handleListItemColumnAlias(@NotNull RuleContext ctx, @NotNull DesiredColumn column) {
+        column.setNameAlias(ctx.getChild(1).getText());
     }
 
     private ArrayList<String> getColumnsName() {

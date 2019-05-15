@@ -13,7 +13,6 @@ class SelectStatus implements Status {
     ArrayList<DesiredColumn> desiredColumns;
     ArrayList<Join> joins;
     String whereSelectStmt;
-    String nameTable;// change when we use alias name table
     ArrayList<String> columnsWhereClause;
     ArrayList<String> columnsGroupBy;
     ArrayList<String> columnsOrderBy;
@@ -22,13 +21,16 @@ class SelectStatus implements Status {
     String combineType;
     String combineSource;
     Boolean distinct;
+    Boolean AllColumns;
     Integer purpose;
 
+
+    DataType dataType = null;
     Status parent;
 
-    SelectStatus(Status parent, String statementKey) {
+    private SelectStatus(Status parent, String statementKey) {
         this.parent = parent;
-
+        this.AllColumns = false;
         this.columnsGroupBy = new ArrayList<>();
         this.columnsOrderBy = new ArrayList<>();
         this.desiredColumns = new ArrayList<>();
@@ -73,5 +75,17 @@ class SelectStatus implements Status {
     @Override
     public Status parent() {
         return this.parent;
+    }
+
+    String columnsNamesToString() {
+        StringBuilder builder = new StringBuilder("[");
+        for (int i = 0; i < this.desiredColumns.size(); i++) {
+            builder.append(this.desiredColumns.get(i).getColumnName());
+            if (i < this.desiredColumns.size() - 1) {
+                builder.append(", ");
+            }
+        }
+        builder.append("]");
+        return builder.toString();
     }
 }

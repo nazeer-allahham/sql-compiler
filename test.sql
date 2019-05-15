@@ -1,3 +1,3 @@
-select c.id from c
-inner join c on c.id = c.id
-full outer join c on c.id = c.id
+select summarize(c.id),ttt.salary
+from c join ttt on c.id = ttt.id
+where c.id >2 and ttt.id >3
