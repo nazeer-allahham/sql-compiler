@@ -11,7 +11,7 @@ select(table,
        purpose) ::=
 <<
 Handler.select(name = "<table>",
-               columns = arrayListOf(<columns: {column | DesiredColumn("<column.columnName>" ,"<column.functionName>", "<column.nameAlias>",<column.distinct>)}; separator=",">),
+               columns = arrayListOf(<columns: {column | DesiredColumn("<column.columnName>" ,"<column.functionName>", "<column.nameAlias>",<column.distinct>)}; separator=",\n\t\t\t\t\t">),
                where = <where> to arrayListOf(<conditions: {condition | "<condition>"}; separator=",">),
                join = arrayListOf(<joins: {join | Join("<join.type>", "<join.tableName>", "<join.tableAlias>", "<join.condition>", arrayListOf(<join.conditionColumns: {column | "<column>" }; separator=",">))}; separator=",">),
                groupBy = arrayListOf(<groupBy: {item | "<item>"}; separator=",">),

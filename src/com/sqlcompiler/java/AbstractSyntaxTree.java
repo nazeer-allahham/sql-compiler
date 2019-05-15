@@ -814,7 +814,6 @@ class AbstractSyntaxTree {
     private void handleFromTableNameClause(@NotNull RuleContext ctx) {
         SelectStatus status = (SelectStatus) this.current;
 
-        status.nameTable = ctx.getText();
         status.tableSelectStmt = ctx.getText();
         status.dataType = DataTypes.get(ctx.getText());
         if (status.dataType == null) {
@@ -822,10 +821,18 @@ class AbstractSyntaxTree {
             System.exit(1);
         }
 
-        String result = status.dataType.checkColumnsStatus(status.desiredColumns);
+        String result = status.dataType.checkColumnsStatus(status.desiredColumns, status.tableSelectStmt);
         if (result != null) {
             System.err.println("Semantic error column " + status.columnsNamesToString() + " doesn't exist in table");
             System.exit(1);
+        }
+        if (status.AllColumns) {
+            for (Field field : status.dataType.getFields()) {
+                status.desiredColumns.add(new DesiredColumn(
+                        field.getName(), "", status.tableSelectStmt, "", false));
+            }
+
+
         }
     }
 
@@ -908,6 +915,8 @@ class AbstractSyntaxTree {
                 if (ctx.getChild(0).getChild(0).getChildCount() == 4 &&
                         ctx.getChild(0).getChild(0).getChild(0).getText().equalsIgnoreCase("summarize")) {
                     handleSummarize(ctx);
+                } else if (ctx.getChild(0).getChild(0).getText().equalsIgnoreCase("*")) {
+                    handleAllColumn();
                 } else
                     handleListItemColumnAndFunction((RuleContext) ctx.getChild(0).getChild(0), column);
                 break;
@@ -951,6 +960,11 @@ class AbstractSyntaxTree {
             System.exit(1);
         }
         */
+    }
+
+    private void handleAllColumn() {
+        ((SelectStatus) this.current).AllColumns = true;
+        System.out.println();
     }
 
     private void handleSummarize(RuleContext ctx) {
