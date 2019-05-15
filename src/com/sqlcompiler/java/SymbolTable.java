@@ -303,7 +303,8 @@ class SymbolTable {
 
         @Override
         public String toString() {
-            return String.format("Symbol { name => %s, type => %s, attribute => %s }", this.name, this.type, this.attribute);
+            return "";
+            //return String.format("Symbol { name => %s, type => %s, attribute => %s }", this.name, this.type, this.attribute);
         }
     }
 }

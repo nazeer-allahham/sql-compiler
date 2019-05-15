@@ -22,6 +22,9 @@ class SelectStatus implements Status {
     String combineSource;
     Boolean distinct;
     Boolean AllColumns;
+    Boolean isExistGroupBy;
+    Boolean isExistAggregationFun;
+    Boolean isColWithoutFun;
     Integer purpose;
 
 
@@ -31,6 +34,9 @@ class SelectStatus implements Status {
     private SelectStatus(Status parent, String statementKey) {
         this.parent = parent;
         this.AllColumns = false;
+        this.isExistGroupBy = false;
+        this.isExistAggregationFun = false;
+        this.isColWithoutFun = false;
         this.columnsGroupBy = new ArrayList<>();
         this.columnsOrderBy = new ArrayList<>();
         this.desiredColumns = new ArrayList<>();

@@ -234,6 +234,8 @@ class AbstractSyntaxTree {
                     if (this.isCurrentStatementSelect()) {
                         handleSingleInWhereClause(ctx);
                     }
+                    if (((RuleContext) ctx.getChild(3)).getRuleIndex() != HplsqlParser.RULE_select_stmt)
+                        inWithoutSubSelect(ctx);
                     break;
                 case HplsqlParser.RULE_bool_expr_multi_in:
                     if (this.isCurrentStatementSelect()) {
@@ -449,6 +451,27 @@ class AbstractSyntaxTree {
 
         symbolTable.isUnassignedVariable();
         DataTypes.save(Environment.DATA_TYPES_PATH);
+        checkExistGroupBy();
+    }
+
+    private void inWithoutSubSelect(RuleContext ctx) {
+        SelectStatus status = ((SelectStatus) this.current);
+        String column = ctx.getChild(0).getText();
+        column = column.replace('.', '_');
+        for (int i = 3; i < ctx.getChildCount() - 1; i += 2) {
+            status.whereSelectStmt += column + "=" + ctx.getChild(i).getText() + " ";
+            if (i != ctx.getChildCount() - 2)
+                status.whereSelectStmt += "or";
+        }
+    }
+
+    private void checkExistGroupBy() {
+        if (!((SelectStatus) this.current).isExistGroupBy
+                && ((SelectStatus) this.current).isColWithoutFun
+                && ((SelectStatus) this.current).isExistAggregationFun) {
+            System.err.println("Semantic Error doesn't exist group by");
+            System.exit(1);
+        }
     }
 
     private void handleJoinWhereCondition(RuleContext ctx) {
@@ -675,7 +698,7 @@ class AbstractSyntaxTree {
         this.current = this.statements.pop();
 
         if (this.current instanceof SelectStatus) {
-            System.out.println("Flush select: <SelectStatus>");
+            //System.out.println("Flush select: <SelectStatus>");
             SelectStatus status = (SelectStatus) this.current;
 
             if (this.join != null) {
@@ -688,18 +711,20 @@ class AbstractSyntaxTree {
             if (status.whereSelectStmt.contains("orand")) {
                 status.whereSelectStmt = status.whereSelectStmt.replaceAll("orand", "and");
                 status.whereSelectStmt += "or";
-            }
-            if (status.whereSelectStmt.contains("andor")) {
+            } else if (status.whereSelectStmt.contains("andor")) {
                 status.whereSelectStmt = status.whereSelectStmt.replaceAll("andor", "or");
                 status.whereSelectStmt += "and";
-            }
-            if (status.whereSelectStmt.contains("andand")) {
+            } else if (status.whereSelectStmt.contains("andand")) {
                 status.whereSelectStmt = status.whereSelectStmt.replaceAll("andand", "and");
-            }
-            if (status.whereSelectStmt.contains("oror")) {
+            } else if (status.whereSelectStmt.contains("oror")) {
                 status.whereSelectStmt = status.whereSelectStmt.replaceAll("oror", "or");
                 status.whereSelectStmt += "or";
             }
+            if (status.whereSelectStmt.startsWith("or"))
+                status.whereSelectStmt = status.whereSelectStmt.substring(2);
+            if (status.whereSelectStmt.startsWith("and"))
+                status.whereSelectStmt = status.whereSelectStmt.substring(3);
+
 
             status.whereSelectStmt = status.whereSelectStmt.replaceAll("or", " or ");
             status.whereSelectStmt = status.whereSelectStmt.replaceAll("and", " and ");
@@ -787,6 +812,7 @@ class AbstractSyntaxTree {
 
     private void handleGroupByClause(@NotNull RuleContext ctx) {
         SelectStatus status = (SelectStatus) this.current;
+        status.isExistGroupBy = true;
         status.columnsGroupBy = new ArrayList<>();
         ArrayList<String> selectColumnTemp = new ArrayList<>();
         String col;
@@ -915,8 +941,10 @@ class AbstractSyntaxTree {
                 if (ctx.getChild(0).getChild(0).getChildCount() == 4 &&
                         ctx.getChild(0).getChild(0).getChild(0).getText().equalsIgnoreCase("summarize")) {
                     handleSummarize(ctx);
+                    status.isExistAggregationFun = true;
                 } else if (ctx.getChild(0).getChild(0).getText().equalsIgnoreCase("*")) {
                     handleAllColumn();
+                    status.isColWithoutFun = true;
                 } else
                     handleListItemColumnAndFunction((RuleContext) ctx.getChild(0).getChild(0), column);
                 break;
@@ -964,7 +992,6 @@ class AbstractSyntaxTree {
 
     private void handleAllColumn() {
         ((SelectStatus) this.current).AllColumns = true;
-        System.out.println();
     }
 
     private void handleSummarize(RuleContext ctx) {
@@ -999,10 +1026,12 @@ class AbstractSyntaxTree {
                 column.setColumnName(context.getChild(0).getText());
             } else // ColumnName with TableName
             {
+                ((SelectStatus) this.current).isColWithoutFun = true;
                 column.setNameTable(context.getChild(0).getText());
                 column.setColumnName(context.getChild(2).getText());
             }
         } else if (ctx.getChildCount() == 4) { // Column has grouping function
+            ((SelectStatus) this.current).isExistAggregationFun = true;
             column.setFunctionName(ctx.getChild(0).getText());
 
             RuleContext context = (RuleContext) ctx.getChild(2).getChild(0).getChild(0);
@@ -1015,7 +1044,7 @@ class AbstractSyntaxTree {
         } else if (ctx.getChildCount() == 5) { // Column has grouping function and distinct
             column.setFunctionName(ctx.getChild(0).getText());
             column.setDistinct(true);
-
+            ((SelectStatus) this.current).isExistAggregationFun = true;
             RuleContext context = (RuleContext) ctx.getChild(3).getChild(0).getChild(0);
             if (context.getChildCount() == 1) {
                 column.setColumnName(context.getChild(0).getText());
@@ -1028,6 +1057,7 @@ class AbstractSyntaxTree {
 
     private void handleListItemColumnAlias(@NotNull RuleContext ctx, @NotNull DesiredColumn column) {
         column.setNameAlias(ctx.getChild(1).getText());
+        ((SelectStatus) this.current).isColWithoutFun = true;
     }
 
     private ArrayList<String> getColumnsName() {
@@ -1040,7 +1070,7 @@ class AbstractSyntaxTree {
 
     void print() {
         RuleContext ctx = root;
-        explore(ctx, 0);
+        //explore(ctx, 0);
     }
 
     private void explore(@NotNull RuleContext ctx, int indentation) {
