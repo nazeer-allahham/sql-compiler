@@ -104,8 +104,10 @@ object Handler {
                distinct: Boolean,
                purpose: Int): Any {
 
+        ExecutionPlan.addStep("Query Execution Plan", "Start the process")
         val result = Reducer.reduce(Shuffler.shuffle(Mapper.map(Fetcher.fetch(Utils.createDirectory(), name, columns, where, join, groupBy, orderBy, combine, distinct, purpose))))
         Console.log(result.first, "${result.second}")
+        ExecutionPlan.addStep("Query Execution Plan", "End of the process")
         return result.second
     }
 }

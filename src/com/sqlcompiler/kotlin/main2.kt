@@ -1,13 +1,11 @@
-import com.sqlcompiler.kotlin.Handler
-import com.sqlcompiler.kotlin.Join
+import com.sqlcompiler.kotlin.*
+import com.sqlcompiler.kotlin.Utils.smartSplit
 
 fun main() {
     Handler.select(name = "c",
             columns = arrayListOf(),
-            where = "" to arrayListOf(),
-            join = arrayListOf(
-                    Join("innerjoin", "c", "", "", arrayListOf("c_id", "c_id", "c_id", "c_id")),
-                    Join("fullouterjoin", "c", "", "c_id = c_id c_id = c_id", arrayListOf("c_id", "c_id", "c_id", "c_id"))),
+            where = "c_id = 1" to arrayListOf("c_id"),
+            join = arrayListOf(),
             groupBy = arrayListOf(),
             orderBy = arrayListOf(),
             distinct = false,

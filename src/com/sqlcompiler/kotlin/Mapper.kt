@@ -15,6 +15,7 @@ object Mapper {
         val files = ArrayList<String>()
 
         // Mapper
+        ExecutionPlan.addStep("Mapper", "start the Mapper")
         columns.forEach { column ->
             if (column.hasGroupingFunction()) {
                 val indexes = ArrayList<Int>()
@@ -48,6 +49,7 @@ object Mapper {
         }
 
         _in["mapper_files"] = files
+        ExecutionPlan.addStep("Mapper", "End of the Mapper")
         return _in
     }
 }
