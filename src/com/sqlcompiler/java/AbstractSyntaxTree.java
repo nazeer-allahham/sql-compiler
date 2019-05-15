@@ -244,8 +244,6 @@ class AbstractSyntaxTree {
                     if (this.isCurrentStatementSelect()) {
                         if (this.isJoinWhereCondition()) {
                             handleJoinWhereCondition(ctx);
-                        } else {
-                            //handleWhereClause(ctx);
                         }
                     }
                     break;
@@ -454,6 +452,7 @@ class AbstractSyntaxTree {
     }
 
     private void handleJoinWhereCondition(RuleContext ctx) {
+        if (ctx.parent.parent.getRuleIndex() != HplsqlParser.RULE_from_join_clause) return;
         String left = ctx.getChild(0).getText();
         String op = ctx.getChild(1).getText();
         String right = ctx.getChild(2).getText();

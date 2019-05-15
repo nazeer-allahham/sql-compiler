@@ -157,10 +157,10 @@ public class DataType implements Serializable {
     }
 
     boolean contains(DesiredColumn column) {
-        if (!column.getNameTable().equals("") && !column.getNameTable().equalsIgnoreCase(this.name)) {
+        /*if (!column.getNameTable().equals("") && !column.getNameTable().equalsIgnoreCase(this.name)) {
             System.out.println("false ");
             return false;
-        }
+        }*/
         if (column.getColumnName().equals("*")) {
             return true;
         }
