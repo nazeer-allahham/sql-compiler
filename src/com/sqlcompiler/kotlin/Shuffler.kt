@@ -11,6 +11,8 @@ object Shuffler {
 
         val files: ArrayList<String> = ArrayList()
 
+        ExecutionPlan.addStep("Shuffler", "Start shuffling")
+        ExecutionPlan.addStep("Shuffler", "shuffling " + groups.size + " groups")
         if (groups.size > 0) {
             _in["grouping"] = true
             groups.forEach { group ->
@@ -60,6 +62,7 @@ object Shuffler {
             files.add(path)
         }
 
+        ExecutionPlan.addStep("Shuffler", "End of shuffling")
         _in["shuffler_files"] = files
         return _in
     }
@@ -81,6 +84,7 @@ object Shuffler {
     }
 
     private fun sort(rows: ArrayList<Row>, comparator: Comparator<Row>): ArrayList<Row> {
+        ExecutionPlan.addStep("Shuffler Sort", "Sorting data")
         return rows.sortedWith(comparator).filter { true } as ArrayList<Row>
     }
 }

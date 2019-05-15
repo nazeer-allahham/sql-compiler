@@ -14,6 +14,8 @@ object Utils {
     fun smartSplit(column: String, result: String): String {
         val builder = StringBuilder(" && (")
         val split = result.split(",")
+
+        ExecutionPlan.addStep("Utils Smart Split", "Splitting data")
         split.forEachIndexed { index, r ->
             builder.append("$column == $r")
             if (index != split.size - 1) {
@@ -27,6 +29,7 @@ object Utils {
     fun smartConcatenate(token: String, vararg strings: String): String {
         val builder = StringBuilder()
 
+        ExecutionPlan.addStep("Utils Smart Concatenate", "Concatenating data")
         strings.forEachIndexed { index, string ->
             builder.append(string)
             if (index < strings.size - 1) {
@@ -38,6 +41,7 @@ object Utils {
 
     fun createDirectory(): File {
         val file = File(Environment.OUTPUT_FILE_NAME)
+        ExecutionPlan.addStep("Utils Create Directory", "Creating Directory")
         file.mkdirs()
         return file
     }
@@ -45,8 +49,9 @@ object Utils {
     fun restoreTables(names: List<String>): List<Table> {
         val type = object : TypeToken<HashMap<String, DataType>>() {}.type
         val types: HashMap<String, DataType> = Gson().fromJson(FileReader(Environment.DATA_TYPES_PATH), type)
-
         val tables = ArrayList<Table>()
+
+        ExecutionPlan.addStep("Utils Restore Tables", "Restoring Tables")
         types.values.forEach {
             tables.add(fromDataType2Table(it))
         }
@@ -70,6 +75,8 @@ object Utils {
         var header: Row? = null
         val rows = ArrayList<Row>()
 
+
+        ExecutionPlan.addStep("Utils Read Table", "Reading Table")
         table.locations.forEach { location ->
             val file = File(location)
             if (!file.exists()) {

@@ -22,6 +22,7 @@ object Fetcher {
               distinct: Boolean,
               purpose: Int): Return {
 
+        ExecutionPlan.addStep("Fetcher", "Start fetching process")
         val names = joins.map { j -> j.tableName } as ArrayList<String>
         names.add(0, name)
         val tables = restoreTables(names)
@@ -57,12 +58,15 @@ object Fetcher {
 
         val path = directory.path + File.separator + "fetch.csv"
         Handler.writeToFile(path, header, rows)
+        ExecutionPlan.addStep("Fetcher create file", "add the chosen data to the new file: $path")
         (result["fetcher_files"] as ArrayList<String>).add(path)
 
+        ExecutionPlan.addStep("Fetcher", "done fetching process")
         return result
     }
 
     private fun filter(rows: ArrayList<Row>, header: Row, where: String, columns: ArrayList<String>): ArrayList<Row> {
+        ExecutionPlan.addStep("Filter Rows", "Eliminate rows which are not compatible with where condition")
         return rows.filter { row ->
             getRowStatus(header, row, where, columns)
         } as ArrayList<Row>
@@ -70,6 +74,7 @@ object Fetcher {
 
     private fun groupBy(index: Int, groups: HashMap<String, ArrayList<Row>>): HashMap<String, ArrayList<Row>> {
         val map = HashMap<String, ArrayList<Row>>()
+        ExecutionPlan.addStep("Fetcher group by", "Start Grouping")
         groups.keys.forEach { i ->
             groups[i]!!.forEach { row ->
                 val value = "${i}_${row.fields[index]}"
@@ -101,6 +106,7 @@ object Fetcher {
         val indexes = header.filterStrings(join.conditionColumns)
         val m = ArrayList<Row>()
 
+        ExecutionPlan.addStep("Fetcher Joining", "Joining Tables")
         rows1.forEach { row1 ->
             rows2.forEach { row2 ->
                 val row = row1.concatenate(row2)
