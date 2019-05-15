@@ -27,7 +27,6 @@ class SelectStatus implements Status {
     Boolean isColWithoutFun;
     Integer purpose;
 
-
     DataType dataType = null;
     Status parent;
 

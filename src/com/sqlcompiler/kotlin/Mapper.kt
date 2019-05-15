@@ -12,7 +12,7 @@ object Mapper {
 
         val (header, rows) = Handler.readFromFile(source)!!
 
-        val files = ArrayList<String>()
+        val processes = ArrayList<Pair<String, String>>()
 
         // Mapper
         ExecutionPlan.addStep("Mapper", "start the Mapper")
@@ -44,11 +44,11 @@ object Mapper {
 
                 val path = "${(_in["directory"] as File).path}${File.separator}map_${column.functionName}_${column.columnName}.csv"
                 Handler.writeToFile(path, head, body)
-                files.add(path)
+                processes.add(column.functionName to path)
             }
         }
 
-        _in["mapper_files"] = files
+        _in["mapper_processes"] = processes
         ExecutionPlan.addStep("Mapper", "End of the Mapper")
         return _in
     }

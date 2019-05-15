@@ -6,7 +6,7 @@ object Shuffler {
 
     fun shuffle(_in: Return): Return {
 
-        val groups = _in["mapper_files"] as ArrayList<String>
+        val groups = _in["mapper_processes"] as ArrayList<Pair<String, String>>
         val orderBy = _in["order_by"] as ArrayList<String>
 
         val files: ArrayList<String> = ArrayList()
@@ -16,30 +16,28 @@ object Shuffler {
         if (groups.size > 0) {
             _in["grouping"] = true
             groups.forEach { group ->
-                val (header, rows) = Handler.readFromFile(group)!!
+                //println(group)
+                val (header, rows) = Handler.readFromFile(group.second)!!
                 val head = Row()
-                var body = HashMap<String, Row>()
-                var title = ""
+                val body = HashMap<String, Row>()
 
                 // Find value because we named the value column with <value>
                 val index = header.find("value")
 
-                for (i in 0 until index) {
-                    title += "${header.fields[i]}${if (i < index - 1) "_" else ""}"
+                for (i in 0 until index - 1) {
                     head.addField(header.fields[i])
                 }
-                head.addField("key")
                 head.addField("values")
+
                 rows.forEach { row ->
                     Console.log(row.fields[index])
                     val row1 = Row()
                     // Generating the key
                     var key = ""
-                    for (i in 0 until index) {
-                        key += "${row.fields[i]}${if (i < index - 1) "_" else ""}"
+                    for (i in 0 until index - 1) {
+                        key += "${row.fields[i]}${if (i < index - 2) "_" else ""}"
                         row1.addField(row.fields[i])
                     }
-                    row1.fields.add(key)
 
                     if (!body.containsKey(key)) {
                         body[key] = row1
@@ -47,7 +45,9 @@ object Shuffler {
                     body[key]!!.addField(row.fields[index])
                 }
 
-                val path = "${(_in["directory"] as File).path}${File.separator}shuffle_$title.csv"
+                body.forEach { (_, u) -> u.sort(group.first, index - 1) }
+
+                val path = group.second.replace("map", "shuffle")
                 Handler.writeToFile(path, head, body)
                 files.add(path)
             }

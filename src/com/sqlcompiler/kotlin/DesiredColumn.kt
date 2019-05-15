@@ -14,6 +14,7 @@ class DesiredColumn(val columnName: String,
     }
 
     fun hasGroupingFunction(): Boolean {
+        println(this.columnName + " " + this.functionName.isNotEmpty())
         return this.functionName.isNotEmpty()
     }
 

@@ -24,15 +24,6 @@ public class Templates {
         this.templates = new HashMap<>();
     }
 
-    @NotNull
-    public static <T> String IterableToString(@NotNull List<T> iterable) {
-        StringBuilder builder = new StringBuilder();
-        for (T e : iterable) {
-            builder.append(e.toString());
-        }
-        return builder.toString();
-    }
-
     private void clear() {
         this.templates.clear();
     }

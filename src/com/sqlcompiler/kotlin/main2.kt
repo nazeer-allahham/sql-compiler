@@ -3,7 +3,7 @@ import com.sqlcompiler.kotlin.Handler
 
 fun main() {
     Handler.select(name = "c",
-            columns = arrayListOf(DesiredColumn("c_id", "", "sss", false), DesiredColumn("_name", "min", "", true)),
+            columns = arrayListOf(DesiredColumn("c_name"), DesiredColumn("c_id", "min", "ID")),
             where = "" to arrayListOf(),
             join = arrayListOf(),
             groupBy = arrayListOf("c_name"),

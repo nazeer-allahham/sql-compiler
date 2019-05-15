@@ -5,6 +5,10 @@ data class Row(val fields: ArrayList<String> = ArrayList()) {
         this.fields.add(field)
     }
 
+    fun addField(position: Int, field: String) {
+        this.fields.add(position, field)
+    }
+
     fun addFields(fields: ArrayList<String>) {
         for (field in fields) {
             this.fields.add(field)
@@ -101,5 +105,46 @@ data class Row(val fields: ArrayList<String> = ArrayList()) {
                 return false
         }
         return true
+    }
+
+    fun sort(functionName: String, start: Int) {
+        when (functionName) {
+            "min" -> {
+                var min = fields[start]
+                for (i in start + 1 until fields.size)
+                    if (fields[i] < min) {
+                        min = fields[i]
+                    }
+                fields.add(start, min)
+            }
+            "max" -> {
+                for (i in start until fields.size)
+                    for (j in i + 1 until fields.size)
+                        if (fields[i] < fields[j]) {
+                            swap(i, j)
+                        }
+            }
+            "count" -> {
+                this.fields.add(start, "${this.fields.size - start}")
+            }
+            "sum" -> {
+                var sum = 0
+                for (i in start until this.fields.size)
+                    sum += fields[i].toInt()
+                this.fields.add(start, "$sum")
+            }
+            "avg" -> {
+                var sum = 0
+                for (i in start until this.fields.size)
+                    sum += fields[i].toInt()
+                this.fields.add(start, "${sum * 1.0 / (this.fields.size - start)}")
+            }
+        }
+    }
+
+    private fun swap(i: Int, j: Int) {
+        val temp = this.fields[i]
+        this.fields[i] = this.fields[j]
+        this.fields[j] = temp
     }
 }
