@@ -227,15 +227,18 @@ class AbstractSyntaxTree {
                     }
                     break;
                 case HplsqlParser.RULE_bool_expr_single_in:
-                    ((SelectStatus) this.current).whereSelectStmt = ((SelectStatus) this.current).
-                            whereSelectStmt.replace(ctx.getText().replace('.', '_'), "");
-
                     this.lastRule = HplsqlParser.RULE_bool_expr_single_in;
                     if (this.isCurrentStatementSelect()) {
                         handleSingleInWhereClause(ctx);
                     }
-                    if (((RuleContext) ctx.getChild(3)).getRuleIndex() != HplsqlParser.RULE_select_stmt)
-                        inWithoutSubSelect(ctx);
+                    if (((RuleContext) ctx.getChild(3)).getRuleIndex() != HplsqlParser.RULE_select_stmt) {
+                        ((SelectStatus) this.current).whereSelectStmt = ((SelectStatus) this.current).
+                                whereSelectStmt.replace(ctx.getText().replace('.', '_'),
+                                inWithoutSubSelect(ctx));
+                    } else {
+                        ((SelectStatus) this.current).whereSelectStmt = ((SelectStatus) this.current).
+                                whereSelectStmt.replace(ctx.getText().replace('.', '_'), "");
+                    }
                     break;
                 case HplsqlParser.RULE_bool_expr_multi_in:
                     if (this.isCurrentStatementSelect()) {
@@ -454,15 +457,33 @@ class AbstractSyntaxTree {
         checkExistGroupBy();
     }
 
-    private void inWithoutSubSelect(RuleContext ctx) {
-        SelectStatus status = ((SelectStatus) this.current);
+    private String inWithoutSubSelect(RuleContext ctx) {
+        /**SelectStatus status = ((SelectStatus) this.current);
+         if (status.whereSelectStmt.contains("orand")) {
+         status.whereSelectStmt = status.whereSelectStmt.replaceAll("orand", "and");
+         } else if (status.whereSelectStmt.contains("andor")) {
+         status.whereSelectStmt = status.whereSelectStmt.replaceAll("andor", "or");
+         } else if (status.whereSelectStmt.contains("andand")) {
+         status.whereSelectStmt = status.whereSelectStmt.replaceAll("andand", "and");
+         } else if (status.whereSelectStmt.contains("oror")) {
+         status.whereSelectStmt = status.whereSelectStmt.replaceAll("oror", "or");
+         }
+         if (ctx.parent.parent.parent.getChildCount() == 3) {
+         status.whereSelectStmt += ctx.parent.parent.parent.getChild(1).getText();
+         }*/
+        String res = "";
         String column = ctx.getChild(0).getText();
         column = column.replace('.', '_');
+        res += "( ";
         for (int i = 3; i < ctx.getChildCount() - 1; i += 2) {
-            status.whereSelectStmt += column + "=" + ctx.getChild(i).getText() + " ";
-            if (i != ctx.getChildCount() - 2)
-                status.whereSelectStmt += "or";
+            res += column + "=" + ctx.getChild(i).getText() + " ";
+            if (i != ctx.getChildCount() - 2) {
+                res += "or";
+            }
         }
+        res += " )";
+        return res;
+
     }
 
     private void checkExistGroupBy() {
@@ -621,10 +642,13 @@ class AbstractSyntaxTree {
         String left = ctx.getChild(0).getText();
         String e1 = ctx.getChild(2).getText();
         String e2 = ctx.getChild(4).getText();
+        if (ctx.parent.parent.parent.getChildCount() == 3)
+            ((SelectStatus) this.current).whereSelectStmt += ctx.parent.parent.parent.getChild(1).getText();
+
         ((SelectStatus) this.current).whereSelectStmt =
                 ((SelectStatus) this.current).whereSelectStmt.replaceAll(ctx.getText(), "");
         ((SelectStatus) this.current).columnsWhereClause.add(left);
-        ((SelectStatus) this.current).whereSelectStmt += left + " = " + e1 + " || " + left + " = " + e2;
+        ((SelectStatus) this.current).whereSelectStmt += "( " + left + " >= " + e1 + " and " + left + " <= " + e2 + " )";
     }
 
     private void handleIsNotNullWhereClause(@NotNull RuleContext ctx) {
@@ -716,6 +740,7 @@ class AbstractSyntaxTree {
                 status.whereSelectStmt += "and";
             } else if (status.whereSelectStmt.contains("andand")) {
                 status.whereSelectStmt = status.whereSelectStmt.replaceAll("andand", "and");
+                status.whereSelectStmt += "and";
             } else if (status.whereSelectStmt.contains("oror")) {
                 status.whereSelectStmt = status.whereSelectStmt.replaceAll("oror", "or");
                 status.whereSelectStmt += "or";
