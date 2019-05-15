@@ -13,6 +13,7 @@ class SymbolTable {
     public ArrayList<String> nameSymbols = new ArrayList<>();
 
     SymbolTable() {
+        AllSymbol.put("summarize", new Symbol("summarize", "summarize", "summarize"));
         currentScope = new Scope(null);
     }
 

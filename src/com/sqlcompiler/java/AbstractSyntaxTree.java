@@ -353,25 +353,27 @@ class AbstractSyntaxTree {
                             ctx.getChild(0).getChild(0).getText(), "function", cppFunctionParam), true);
                     break;
                 case HplsqlParser.RULE_expr_func_params:
-                    boolean okay = true;
-                    for (int i = 0; i < ctx.getChildCount(); i++) {
-                        if (i % 2 == 0) {
-                            if (!symbolTable.checkParampetersFunctionCpp(
-                                    ctx.parent.getChild(0).getText(),
-                                    ctx.getChild(i).getText(), i / 2)) {
-                                System.err.println("Error in the method's parameters ");
-                                okay = false;
+                    if (!ctx.parent.getChild(0).getText().equalsIgnoreCase("summarize")) {
+                        boolean okay = true;
+                        for (int i = 0; i < ctx.getChildCount(); i++) {
+                            if (i % 2 == 0) {
+                                if (!symbolTable.checkParampetersFunctionCpp(
+                                        ctx.parent.getChild(0).getText(),
+                                        ctx.getChild(i).getText(), i / 2)) {
+                                    System.err.println("Error in the method's parameters ");
+                                    okay = false;
+                                }
                             }
                         }
-                    }
-                    if (okay) {
-                        int coutnParameters = ctx.getChildCount() + 1 / 2;
-                        if (symbolTable.AllSymbol.get(
-                                ctx.parent.getChild(0).getText()).getLocalField().size()
-                                > coutnParameters) {
-                            System.err.println("Error in the method's parameters ");
-                        }
+                        if (okay) {
+                            int coutnParameters = ctx.getChildCount() + 1 / 2;
+                            if (symbolTable.AllSymbol.get(
+                                    ctx.parent.getChild(0).getText()).getLocalField().size()
+                                    > coutnParameters) {
+                                System.err.println("Error in the method's parameters ");
+                            }
 
+                        }
                     }
                     break;
                 case HplsqlParser.RULE_cpp_return_stmt:
@@ -397,6 +399,9 @@ class AbstractSyntaxTree {
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
                             ctx.getChild(0).getText(), "",
                             ctx.getChild(3).getText(), true), false);
+                    break;
+                case HplsqlParser.RULE_expr_agg_window_func:
+
                     break;
 
             }
@@ -901,7 +906,11 @@ class AbstractSyntaxTree {
         switch (ctx.getChildCount()) {
             // Column without alias
             case 1:
-                handleListItemColumnAndFunction((RuleContext) ctx.getChild(0).getChild(0), column);
+                if (ctx.getChild(0).getChild(0).getChildCount() == 4 &&
+                        ctx.getChild(0).getChild(0).getChild(0).getText().equalsIgnoreCase("summarize")) {
+                    handleSummarize(ctx);
+                } else
+                    handleListItemColumnAndFunction((RuleContext) ctx.getChild(0).getChild(0), column);
                 break;
             // Column with alias
             case 2:
@@ -935,13 +944,38 @@ class AbstractSyntaxTree {
                 handleListItemColumnAlias((RuleContext) ctx.getChild(3), column);
                 break;
         }
-        status.desiredColumns.add(column);
+        if (!column.getColumnName().equalsIgnoreCase(""))
+            status.desiredColumns.add(column);
         /*
         if (!status.dataType.contains(column)) {
             System.err.println("Semantic error column " + column.getColumnName() + " doesn't exist in table");
             System.exit(1);
         }
         */
+    }
+
+    private void handleSummarize(RuleContext ctx) {
+        String name = ctx.getChild(0).getChild(0).getChild(2).getText();
+
+        String colname;
+        String tablename = "";
+        if (name.contains(".")) {
+            colname = (name.split("\\.")[1]);
+            tablename = (name.split("\\.")[0]);
+        } else colname = name;
+        ArrayList<DesiredColumn> column = new ArrayList<>();
+        column.add(new DesiredColumn(colname, "max", tablename, "", false));
+        column.add(new DesiredColumn(colname, "min", tablename, "", false));
+        column.add(new DesiredColumn(colname, "avg", tablename, "", false));
+        column.add(new DesiredColumn(colname, "std", tablename, "", false));
+        column.add(new DesiredColumn(colname, "count", tablename, "", false));
+        column.add(new DesiredColumn(colname, "Q2", tablename, "", false));
+        column.add(new DesiredColumn(colname, "Q3", tablename, "", false));
+        column.add(new DesiredColumn(colname, "mode", tablename, "", false));
+        column.add(new DesiredColumn(colname, "mean", tablename, "", false));
+        column.add(new DesiredColumn(colname, "median", tablename, "", false));
+
+        ((SelectStatus) this.current).desiredColumns.addAll(column);
     }
 
     private void handleListItemColumnAndFunction(@NotNull RuleContext ctx, DesiredColumn column) {

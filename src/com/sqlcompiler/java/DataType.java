@@ -158,7 +158,7 @@ public class DataType implements Serializable {
 
     boolean contains(DesiredColumn column) {
         if (!column.getNameTable().equals("") && !column.getNameTable().equalsIgnoreCase(this.name)) {
-            System.out.println("false mother fucker");
+            System.out.println("false ");
             return false;
         }
         if (column.getColumnName().equals("*")) {
