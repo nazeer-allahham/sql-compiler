@@ -1,1 +1,1 @@
-select * from (select * c)
+select * from c where c.id in (select users.id from users)

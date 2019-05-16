@@ -14,7 +14,7 @@ object Fetcher {
     fun fetch(directory: File,
               name: String,
               columns: ArrayList<DesiredColumn>,
-              where: Pair<String, ArrayList<String>>,
+              where: Triple<String, ArrayList<String>, ArrayList<String>>,
               joins: ArrayList<Join>,
               groupBy: ArrayList<String>,
               orderBy: ArrayList<String>,
@@ -47,11 +47,11 @@ object Fetcher {
         joins.forEachIndexed { index, join ->
             val j = joinTable(distinct, header, rows, tables[index + 1], join)
             header = j.first
-            rows = filter(j.second, header, join.condition, join.conditionColumns)
+            rows = filter(j.second, header, join.condition, join.conditionColumns, join.stringsColumns)
         }
 
         // Eliminate rows which are not compatible with where condition
-        rows = filter(rows, header, where.first, where.second)
+        rows = filter(rows, header, where.first, where.second, where.third)
 
         // Files created by fetcher
         result["fetcher_files"] = ArrayList<String>()
@@ -65,10 +65,10 @@ object Fetcher {
         return result
     }
 
-    private fun filter(rows: ArrayList<Row>, header: Row, where: String, columns: ArrayList<String>): ArrayList<Row> {
+    private fun filter(rows: ArrayList<Row>, header: Row, where: String, columns: ArrayList<String>, strings: ArrayList<String>): ArrayList<Row> {
         ExecutionPlan.addStep("Filter Rows", "Eliminate rows which are not compatible with where condition")
         return rows.filter { row ->
-            getRowStatus(header, row, where, columns)
+            getRowStatus(header, row, where, columns, strings)
         } as ArrayList<Row>
     }
 
@@ -87,13 +87,19 @@ object Fetcher {
         return map
     }
 
-    private fun getRowStatus(header: Row, row: Row, condition: String, params: ArrayList<String>): Boolean {
+    private fun getRowStatus(header: Row, row: Row, condition: String, params: ArrayList<String>, strings: ArrayList<String>): Boolean {
         var expr = Expressions()
         params.forEach { param ->
             // TODO p here is set to "0" and that is wrong
             val p = row.fields[header.find(param)]
             if (p == "") return true
             expr = expr.define(param, p)
+        }
+        var i = 0
+        while (i < strings.size) {
+            val value = row.fields[header.find(strings[i + 1])]
+            expr = expr.define(strings[i], if (value.compareTo(strings[i + 2]).toBigDecimal() == BigDecimal(0)) BigDecimal(1) else BigDecimal(0))
+            i += 3
         }
         return if (condition.isNotEmpty()) expr.eval(condition) != BigDecimal(0) else true
     }
@@ -110,7 +116,7 @@ object Fetcher {
         rows1.forEach { row1 ->
             rows2.forEach { row2 ->
                 val row = row1.concatenate(row2)
-                if (getRowStatus(header, row, join.condition, join.conditionColumns)) {
+                if (getRowStatus(header, row, join.condition, join.conditionColumns, join.stringsColumns)) {
                     result.add(row)
                     m.add(row.map(indexes))
                 }

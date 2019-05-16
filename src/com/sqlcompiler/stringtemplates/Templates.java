@@ -4,7 +4,6 @@ import com.sqlcompiler.Environment;
 import com.sqlcompiler.java.DesiredColumn;
 import com.sqlcompiler.java.Field;
 import com.sqlcompiler.kotlin.Join;
-import org.jetbrains.annotations.NotNull;
 import org.stringtemplate.v4.ST;
 import org.stringtemplate.v4.STGroup;
 import org.stringtemplate.v4.STGroupDir;
@@ -12,6 +11,7 @@ import org.stringtemplate.v4.STGroupDir;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Stack;
 
 public class Templates {
     private int selectID = 0;
@@ -140,6 +140,17 @@ public class Templates {
 
         ArrayList<String> instructions = new ArrayList<>();
         for (String key : this.templates.keySet()) {
+            instructions.add(this.calculate(key));
+        }
+
+        ST program = this.group.getInstanceOf("program");
+        program.add("instructions", instructions);
+        return program.render();
+    }
+
+    public String calculateAll(Stack<String> keys) {
+        ArrayList<String> instructions = new ArrayList<>();
+        for (String key : keys) {
             instructions.add(this.calculate(key));
         }
 
