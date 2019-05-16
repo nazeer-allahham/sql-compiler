@@ -12,7 +12,7 @@ import kotlin.system.exitProcess
 
 object Utils {
     fun smartSplit(column: String, result: String): String {
-        val builder = StringBuilder(" && (")
+        val builder = StringBuilder(" (")
         val split = result.split(",")
 
         ExecutionPlan.addStep("Utils Smart Split", "Splitting data")

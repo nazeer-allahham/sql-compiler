@@ -1,8 +1,14 @@
 package com.sqlcompiler.kotlin
 
+import kotlin.math.roundToInt
+
 data class Row(val fields: ArrayList<String> = ArrayList()) {
     fun addField(field: String) {
         this.fields.add(field)
+    }
+
+    fun addField(position: Int, field: String) {
+        this.fields.add(position, field)
     }
 
     fun addFields(fields: ArrayList<String>) {
@@ -101,5 +107,133 @@ data class Row(val fields: ArrayList<String> = ArrayList()) {
                 return false
         }
         return true
+    }
+
+    fun sort(functionName: String, start: Int) {
+        when (functionName) {
+            "min" -> {
+                fields.add(start, min(start))
+            }
+            "max" -> {
+                fields.add(start, max(start))
+            }
+            "count" -> {
+                this.fields.add(start, count(start))
+            }
+            "sum" -> {
+                this.fields.add(start, sum(start).roundToInt().toString())
+            }
+            "avg" -> {
+                this.fields.add(start, avg(start).toString())
+            }
+            "std" -> {
+                this.fields.add(start, std(start).toString())
+            }
+            "Q2" -> {
+                this.fields.add(start, q2(start).toString())
+            }
+            "Q3" -> {
+                this.fields.add(start, q3(start).toString())
+            }
+            "mode" -> {
+                this.fields.add(start, mode(start))
+            }
+            "mean" -> {
+                this.fields.add(start, mean(start).toString())
+            }
+            "median" -> {
+                this.fields.add(start, median(start).toString())
+            }
+        }
+    }
+
+    fun max(start: Int): String {
+        var max = fields[start]
+        for (i in start + 1 until fields.size)
+            if (fields[i] > max) {
+                max = fields[i]
+            }
+        return max
+    }
+
+    fun min(start: Int): String {
+        var min = fields[start]
+        for (i in start + 1 until fields.size)
+            if (fields[i] < min) {
+                min = fields[i]
+            }
+        return min
+    }
+
+    fun count(start: Int): String {
+        return "${this.fields.size - start}"
+    }
+
+    fun sum(start: Int): Double {
+        var sum = 0.0
+        for (i in start until this.fields.size)
+            sum += fields[i].toDouble()
+        return sum
+    }
+
+    fun avg(start: Int): Double {
+        return sum(start) * 1.0 / (this.fields.size - start)
+    }
+
+    fun std(start: Int): Double {
+        var std = 0.0
+        val mean = mean(start)
+
+        for (i in start until fields.size) {
+            std += Math.pow(fields[i].toDouble() - mean, 2.0)
+        }
+        return Math.sqrt(std / (fields.size - start))
+    }
+
+    fun q2(start: Int): Double {
+        return -1.0
+    }
+
+    fun q3(start: Int): Double {
+        return -1.0
+    }
+
+    fun mode(start: Int): String {
+        var maxValue = ""
+        var maxCount = 0
+
+        for (i in start until fields.size) {
+            var count = 0
+            for (j in i + 1 until fields.size)
+                if (fields[i] == fields[j]) count++
+            if (count > maxCount) {
+                maxValue = fields[i]
+                maxCount = count
+            }
+        }
+        return maxValue
+    }
+
+    fun mean(start: Int): Double {
+        return sum(start) * 1.0 / (this.fields.size - start)
+    }
+
+    fun median(start: Int): Double {
+        val length = fields.size - start
+        val middle = length / 2
+        return if (length % 2 == 1)
+            fields[middle].toDouble()
+        else
+            (fields[middle - 1].toDouble() + fields[middle].toDouble()) / 2.0
+    }
+
+    fun swap(i: Int, j: Int) {
+        val temp = this.fields[i]
+        this.fields[i] = this.fields[j]
+        this.fields[j] = temp
+    }
+
+    override fun hashCode(): Int {
+        return fields.hashCode()
     }
 }

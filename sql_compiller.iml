@@ -19,6 +19,8 @@
     </orderEntry>
     <orderEntry type="library" exported="" name="antlr-runtime-4.7.2" level="application" />
     <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
-    <orderEntry type="library" name="compiler" level="project" />
+    <orderEntry type="library" name="gson-2.8.5" level="project" />
+    <orderEntry type="library" name="stringtemplate-3.2.1" level="project" />
+    <orderEntry type="library" name="antlr-4.7.1-complete" level="project" />
   </component>
 </module>

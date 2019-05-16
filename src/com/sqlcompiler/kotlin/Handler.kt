@@ -96,14 +96,13 @@ object Handler {
 
     fun select(name: String,
                columns: ArrayList<DesiredColumn>,
-               where: Pair<String, ArrayList<String>>,
+               where: Triple<String, ArrayList<String>, ArrayList<String>>,
                join: ArrayList<Join>,
                groupBy: ArrayList<String>,
                orderBy: ArrayList<String>,
                combine: Pair<String, ArrayList<Row>> = Pair("", arrayListOf()),
                distinct: Boolean,
                purpose: Int): Any {
-
         ExecutionPlan.addStep("Query Execution Plan", "Start the process")
         val result = Reducer.reduce(Shuffler.shuffle(Mapper.map(Fetcher.fetch(Utils.createDirectory(), name, columns, where, join, groupBy, orderBy, combine, distinct, purpose))))
         Console.log(result.first, "${result.second}")
