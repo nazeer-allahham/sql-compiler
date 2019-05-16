@@ -3,6 +3,7 @@ package com.sqlcompiler.stringtemplates;
 import com.sqlcompiler.Environment;
 import com.sqlcompiler.java.DesiredColumn;
 import com.sqlcompiler.java.Field;
+import com.sqlcompiler.kotlin.Condition;
 import com.sqlcompiler.kotlin.Join;
 import org.stringtemplate.v4.ST;
 import org.stringtemplate.v4.STGroup;
@@ -50,7 +51,7 @@ public class Templates {
                                      String table,
                                      List<DesiredColumn> columns,
                                      String where,
-                                     List<String> whereColumns,
+                                     List<Condition> whereColumns,
                                      List<Join> joins,
                                      List<String> groupBy,
                                      List<String> orderBy,

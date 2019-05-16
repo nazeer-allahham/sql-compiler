@@ -20,6 +20,7 @@ class DataTypes {
         createPrimaryDataType("real", "real");
         createPrimaryDataType("string", "string");
         createPrimaryDataType("boolean", "boolean");
+        createPrimaryDataType("var", "var");
     }
 
     static void createPrimaryDataType(String name, String type) {

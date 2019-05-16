@@ -1,5 +1,6 @@
 package com.sqlcompiler.java;
 
+import com.sqlcompiler.kotlin.Condition;
 import com.sqlcompiler.kotlin.Join;
 import javaslang.Tuple;
 import javaslang.Tuple2;
@@ -7,13 +8,14 @@ import javaslang.Tuple2;
 import java.util.ArrayList;
 
 class SelectStatus implements Status {
+    String joinConditionString;
     String key;
     String tableSelectStmt;
     ArrayList<String> columnsSelectStmt;
     ArrayList<DesiredColumn> desiredColumns;
     ArrayList<Join> joins;
     String whereSelectStmt;
-    ArrayList<String> columnsWhereClause;
+    ArrayList<Condition> columnsWhereClause;
     ArrayList<String> columnsGroupBy;
     ArrayList<String> columnsOrderBy;
     ArrayList<Tuple2<String, String>> whereInKeys;
@@ -43,6 +45,7 @@ class SelectStatus implements Status {
         this.columnsWhereClause = new ArrayList<>();
         this.key = statementKey;
         this.tableSelectStmt = "";
+        this.joinConditionString = "";
         this.whereSelectStmt = "";
         this.whereInKeys = new ArrayList<>();
         this.purpose = 1;
