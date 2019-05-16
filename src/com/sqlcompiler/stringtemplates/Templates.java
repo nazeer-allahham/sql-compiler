@@ -1,8 +1,9 @@
 package com.sqlcompiler.stringtemplates;
 
 import com.sqlcompiler.Environment;
-import com.sqlcompiler.java.DesiredColumn;
 import com.sqlcompiler.java.Field;
+import com.sqlcompiler.kotlin.Condition;
+import com.sqlcompiler.kotlin.DesiredColumn;
 import com.sqlcompiler.kotlin.Condition;
 import com.sqlcompiler.kotlin.Join;
 import org.stringtemplate.v4.ST;
@@ -73,7 +74,7 @@ public class Templates {
 //                purpose.toString());
 
         for (DesiredColumn column : columns) {
-            column.setColumnName(column.getNameTable() + "_" + column.getColumnName());
+            column.setColumnName(column.getTableName() + "_" + column.getColumnName());
         }
 
         this.add(key, "table", table);

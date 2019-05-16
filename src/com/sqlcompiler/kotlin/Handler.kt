@@ -96,7 +96,7 @@ object Handler {
 
     fun select(name: String,
                columns: ArrayList<DesiredColumn>,
-               where: Triple<String, ArrayList<String>, ArrayList<String>>,
+               where: Pair<String, ArrayList<Condition>>,
                join: ArrayList<Join>,
                groupBy: ArrayList<String>,
                orderBy: ArrayList<String>,

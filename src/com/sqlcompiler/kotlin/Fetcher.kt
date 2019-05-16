@@ -14,7 +14,7 @@ object Fetcher {
     fun fetch(directory: File,
               name: String,
               columns: ArrayList<DesiredColumn>,
-              where: Triple<String, ArrayList<String>, ArrayList<String>>,
+              where: Pair<String, ArrayList<Condition>>,
               joins: ArrayList<Join>,
               groupBy: ArrayList<String>,
               orderBy: ArrayList<String>,
@@ -47,11 +47,223 @@ object Fetcher {
         joins.forEachIndexed { index, join ->
             val j = joinTable(distinct, header, rows, tables[index + 1], join)
             header = j.first
-            rows = filter(j.second, header, join.condition, join.conditionColumns, join.stringsColumns)
+            rows = filter(j.second, header, join.condition, join.definitions)
+        }
+
+        // Handle row functions
+        columns.forEach { column ->
+            if (column.transforms.isNotEmpty()) {
+                val index = header.find(column.columnName)
+                rows.forEach { row ->
+                    column.transforms.forEach { transform ->
+                        when (transform.name.toLowerCase()) {
+                            "upper" -> {
+                                row.fields[index] = row.fields[index].toUpperCase()
+                            }
+                            "lower" -> {
+                                row.fields[index] = row.fields[index].toLowerCase()
+                            }
+                            "abs" -> {
+                                val value: String =
+                                        if (transform.params[0].startsWith("[A-Za-z]"))
+                                            row.fields[header.find(transform.params[0])]
+                                        else
+                                            transform.params[0]
+                                row.fields[index] = Math.abs(value.toDouble()).toString()
+                            }
+                            "acos" -> {
+                                val value: String =
+                                        if (transform.params[0].startsWith("[A-Za-z]"))
+                                            row.fields[header.find(transform.params[0])]
+                                        else
+                                            transform.params[0]
+                                row.fields[index] = Math.acos(value.toDouble()).toString()
+                            }
+                            "asin" -> {
+                                val value: String =
+                                        if (transform.params[0].startsWith("[A-Za-z]"))
+                                            row.fields[header.find(transform.params[0])]
+                                        else
+                                            transform.params[0]
+                                row.fields[index] = Math.abs(value.toDouble()).toString()
+                            }
+                            "atan2" -> {
+                                val value1 =
+                                        if (transform.params[0].startsWith("[A-Za-z]"))
+                                            row.fields[header.find(transform.params[0])]
+                                        else transform.params[0]
+                                val value2 =
+                                        if (transform.params[1].startsWith("[A-Za-z]"))
+                                            row.fields[header.find(transform.params[1])]
+                                        else transform.params[1]
+                                row.fields[index] = Math.atan2(value1.toDouble(), value2.toDouble()).toString()
+                            }
+                            "bitand" -> {
+
+                            }
+                            "ceil" -> {
+                                val value: String =
+                                        if (transform.params[0].startsWith("[A-Za-z]"))
+                                            row.fields[header.find(transform.params[0])]
+                                        else
+                                            transform.params[0]
+                                row.fields[index] = Math.ceil(value.toDouble()).toString()
+                            }
+                            "cos" -> {
+                                val value: String =
+                                        if (transform.params[0].startsWith("[A-Za-z]"))
+                                            row.fields[header.find(transform.params[0])]
+                                        else
+                                            transform.params[0]
+                                row.fields[index] = Math.cos(value.toDouble()).toString()
+                            }
+                            "cosh" -> {
+                                val value: String =
+                                        if (transform.params[0].startsWith("[A-Za-z]"))
+                                            row.fields[header.find(transform.params[0])]
+                                        else
+                                            transform.params[0]
+                                row.fields[index] = Math.cosh(value.toDouble()).toString()
+                            }
+                            "exp" -> {
+                                val value: String =
+                                        if (transform.params[0].startsWith("[A-Za-z]"))
+                                            row.fields[header.find(transform.params[0])]
+                                        else
+                                            transform.params[0]
+                                row.fields[index] = Math.exp(value.toDouble()).toString()
+                            }
+                            "floor" -> {
+                                val value: String =
+                                        if (transform.params[0].startsWith("[A-Za-z]"))
+                                            row.fields[header.find(transform.params[0])]
+                                        else
+                                            transform.params[0]
+                                row.fields[index] = Math.floor(value.toDouble()).toString()
+                            }
+                            "ln" -> {
+                                val value: String =
+                                        if (transform.params[0].startsWith("[A-Za-z]"))
+                                            row.fields[header.find(transform.params[0])]
+                                        else
+                                            transform.params[0]
+                                row.fields[index] = Math.log(value.toDouble()).toString()
+                            }
+                            "log" -> {
+                                val value: String =
+                                        if (transform.params[0].startsWith("[A-Za-z]"))
+                                            row.fields[header.find(transform.params[0])]
+                                        else
+                                            transform.params[0]
+                                row.fields[index] = Math.log(value.toDouble()).toString()
+                            }
+                            "mod" -> {
+                                val value1 =
+                                        if (transform.params[0].startsWith("[A-Za-z]"))
+                                            row.fields[header.find(transform.params[0])]
+                                        else transform.params[0]
+                                val value2 =
+                                        if (transform.params[1].startsWith("[A-Za-z]"))
+                                            row.fields[header.find(transform.params[1])]
+                                        else transform.params[1]
+                                row.fields[index] = Math.floorMod(value1.toInt(), value2.toInt()).toString()
+                            }
+                            "nanvl" -> {
+
+                            }
+                            "power" -> {
+                                val value1 =
+                                        if (transform.params[0].startsWith("[A-Za-z]"))
+                                            row.fields[header.find(transform.params[0])]
+                                        else transform.params[0]
+                                val value2 =
+                                        if (transform.params[1].startsWith("[A-Za-z]"))
+                                            row.fields[header.find(transform.params[1])]
+                                        else transform.params[1]
+                                row.fields[index] = Math.pow(value1.toDouble(), value2.toDouble()).toString()
+                            }
+                            "remainder" -> {
+
+                            }
+                            "round" -> {
+                                val value: String =
+                                        if (transform.params[0].startsWith("[A-Za-z]"))
+                                            row.fields[header.find(transform.params[0])]
+                                        else
+                                            transform.params[0]
+                                row.fields[index] = Math.round(value.toDouble()).toString()
+                            }
+                            "sign" -> {
+                                val value: String =
+                                        if (transform.params[0].startsWith("[A-Za-z]"))
+                                            row.fields[header.find(transform.params[0])]
+                                        else
+                                            transform.params[0]
+                                row.fields[index] = Math.signum(value.toDouble()).toString()
+                            }
+                            "sin" -> {
+                                val value: String =
+                                        if (transform.params[0].startsWith("[A-Za-z]"))
+                                            row.fields[header.find(transform.params[0])]
+                                        else
+                                            transform.params[0]
+                                row.fields[index] = Math.sin(value.toDouble()).toString()
+                            }
+                            "sinh" -> {
+                                val value: String =
+                                        if (transform.params[0].startsWith("[A-Za-z]"))
+                                            row.fields[header.find(transform.params[0])]
+                                        else
+                                            transform.params[0]
+                                row.fields[index] = Math.sinh(value.toDouble()).toString()
+                            }
+                            "sqrt" -> {
+                                val value: String =
+                                        if (transform.params[0].startsWith("[A-Za-z]"))
+                                            row.fields[header.find(transform.params[0])]
+                                        else
+                                            transform.params[0]
+                                row.fields[index] = Math.sqrt(value.toDouble()).toString()
+                            }
+                            "tan" -> {
+                                val value: String =
+                                        if (transform.params[0].startsWith("[A-Za-z]"))
+                                            row.fields[header.find(transform.params[0])]
+                                        else
+                                            transform.params[0]
+                                row.fields[index] = Math.tan(value.toDouble()).toString()
+                            }
+                            "tanh" -> {
+                                val value: String =
+                                        if (transform.params[0].startsWith("[A-Za-z]"))
+                                            row.fields[header.find(transform.params[0])]
+                                        else
+                                            transform.params[0]
+                                row.fields[index] = Math.tanh(value.toDouble()).toString()
+                            }
+                            "trunc" -> {
+
+                            }
+                            "width_bucket" -> {
+
+                            }
+                            "type_cast" -> {
+                                val value1 = row.fields[header.find(transform.params[0])].toDouble()
+                                val value2 = transform.params[1]
+                                when (value2.toLowerCase()) {
+                                    "int" -> row.fields[header.find(transform.params[0])] = value1.toInt().toString()
+                                    "float" -> row.fields[header.find(transform.params[0])] = value1.toFloat().toString()
+                                    "double" -> row.fields[header.find(transform.params[0])] = value1.toDouble().toString()
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         // Eliminate rows which are not compatible with where condition
-        rows = filter(rows, header, where.first, where.second, where.third)
+        rows = filter(rows, header, where.first, where.second)
 
         // Files created by fetcher
         result["fetcher_files"] = ArrayList<String>()
@@ -65,10 +277,10 @@ object Fetcher {
         return result
     }
 
-    private fun filter(rows: ArrayList<Row>, header: Row, where: String, columns: ArrayList<String>, strings: ArrayList<String>): ArrayList<Row> {
+    private fun filter(rows: ArrayList<Row>, header: Row, where: String, definitions: ArrayList<Condition>): ArrayList<Row> {
         ExecutionPlan.addStep("Filter Rows", "Eliminate rows which are not compatible with where condition")
         return rows.filter { row ->
-            getRowStatus(header, row, where, columns, strings)
+            getRowStatus(header, row, where, definitions)
         } as ArrayList<Row>
     }
 
@@ -87,19 +299,39 @@ object Fetcher {
         return map
     }
 
-    private fun getRowStatus(header: Row, row: Row, condition: String, params: ArrayList<String>, strings: ArrayList<String>): Boolean {
+    private fun firstORsecond(first: String, second: String): String {
+        return when {
+            first.startsWith("[A-Za-z]") -> second
+            second.startsWith("['\"]") -> first.substring(0, first.length - 1)
+            else -> first
+        }
+    }
+
+    private fun getRowStatus(header: Row, row: Row, condition: String, params: ArrayList<Condition>): Boolean {
         var expr = Expressions()
         params.forEach { param ->
-            // TODO p here is set to "0" and that is wrong
-            val p = row.fields[header.find(param)]
-            if (p == "") return true
-            expr = expr.define(param, p)
-        }
-        var i = 0
-        while (i < strings.size) {
-            val value = row.fields[header.find(strings[i + 1])]
-            expr = expr.define(strings[i], if (value.compareTo(strings[i + 2]).toBigDecimal() == BigDecimal(0)) BigDecimal(1) else BigDecimal(0))
-            i += 3
+            val left: String = firstORsecond(param.left, row.fields[header.find(param.left)])
+            val right: String = firstORsecond(param.right, row.fields[header.find(param.right)])
+            val res: Boolean
+
+            if (param.type === "string") {
+                res = when (param.operator) {
+                    "<" -> left.compareTo(right) == -1
+                    ">" -> right.compareTo(left) == -1
+                    "==" -> left.compareTo(right) == 0
+                    "!=" -> left.compareTo(right) != 0
+                    else -> false
+                }
+            } else {
+                res = when (param.operator) {
+                    "<" -> left.toDouble() < right.toDouble()
+                    ">" -> left.toDouble() > right.toDouble()
+                    "==" -> left.toDouble() == right.toDouble()
+                    "!=" -> left.toDouble() != right.toDouble()
+                    else -> false
+                }
+            }
+            expr = expr.define(param.variable, BigDecimal(if (res) 1 else 0))
         }
         return if (condition.isNotEmpty()) expr.eval(condition) != BigDecimal(0) else true
     }
@@ -109,14 +341,14 @@ object Fetcher {
         val header = header1.concatenate(header2)
         val result = ArrayList<Row>()
 
-        val indexes = header.filterStrings(join.conditionColumns)
+        val indexes = header.filterStrings(join.definitions.map { definition -> definition.left } as ArrayList<String>)
         val m = ArrayList<Row>()
 
         ExecutionPlan.addStep("Fetcher Joining", "Joining Tables")
         rows1.forEach { row1 ->
             rows2.forEach { row2 ->
                 val row = row1.concatenate(row2)
-                if (getRowStatus(header, row, join.condition, join.conditionColumns, join.stringsColumns)) {
+                if (getRowStatus(header, row, join.condition, join.definitions)) {
                     result.add(row)
                     m.add(row.map(indexes))
                 }
@@ -124,7 +356,7 @@ object Fetcher {
         }
 
         if (join.type == "fullouterjoin" || join.type == "leftouterjoin") {
-            val ids = header1.filterStrings(join.conditionColumns)
+            val ids = header1.filterStrings(join.definitions.map { definition -> definition.left } as ArrayList<String>)
             rows1.forEach { row ->
                 if (m.find { row1 -> row1.contains(row, ids) } == null) {
                     result.add(row.concatenate(header2.fields.size, ""))
@@ -132,7 +364,7 @@ object Fetcher {
             }
         }
         if (join.type == "fullouterjoin" || join.type == "rightouterjoin") {
-            val ids = header2.filterStrings(join.conditionColumns)
+            val ids = header2.filterStrings(join.definitions.map { definition -> definition.left } as ArrayList<String>)
             rows2.forEach { row ->
                 if (m.indexOfFirst { row1 -> row.contains(row1, ids) } == -1) {
                     result.add(row.concatenate(header1.fields.size, "", 0))

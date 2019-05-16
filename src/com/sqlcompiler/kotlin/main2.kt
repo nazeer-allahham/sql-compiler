@@ -1,23 +1,17 @@
-import com.sqlcompiler.kotlin.*
-import com.sqlcompiler.kotlin.Utils.smartSplit
+import com.sqlcompiler.kotlin.DesiredColumn
+import com.sqlcompiler.kotlin.Handler
+import com.sqlcompiler.kotlin.Transform
 
 fun main() {
     Handler.select(name = "c",
-            columns = arrayListOf(DesiredColumn("c_id", "", "", false),
-                    DesiredColumn("c_name", "", "", false),
-                    DesiredColumn("c_salary", "", "", false),
-                    DesiredColumn("c_birth_year", "", "", false)),
-            where = Triple("" + smartSplit("c_id", Handler.select(name = "users",
-                    columns = arrayListOf(DesiredColumn("users_id", "", "", false)),
-                    where = Triple("", arrayListOf(), arrayListOf()),
-                    join = arrayListOf(),
-                    groupBy = arrayListOf(),
-                    orderBy = arrayListOf(),
-                    distinct = false,
-                    purpose = 4) as String), arrayListOf(), arrayListOf()),
+            columns = arrayListOf(DesiredColumn("c_salary", "c", "", "", false, arrayListOf(Transform("type_cast", arrayListOf("c_salary", "int")))),
+                    DesiredColumn("c_id", "c", "", "", false, arrayListOf()),
+                    DesiredColumn("c_name", "c", "", "", false, arrayListOf())),
+            where = Pair("", arrayListOf()),
             join = arrayListOf(),
             groupBy = arrayListOf(),
             orderBy = arrayListOf(),
             distinct = false,
             purpose = 1)
+
 }

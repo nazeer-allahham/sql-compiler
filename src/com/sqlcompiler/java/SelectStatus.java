@@ -2,6 +2,7 @@ package com.sqlcompiler.java;
 
 import com.sqlcompiler.kotlin.Condition;
 import com.sqlcompiler.kotlin.Join;
+import com.sqlcompiler.kotlin.DesiredColumn;
 import javaslang.Tuple;
 import javaslang.Tuple2;
 

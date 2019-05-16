@@ -1,11 +1,14 @@
 package com.sqlcompiler.java;
 
+import java.util.ArrayList;
+
 public class DesiredColumn {
-    private String columnName;
-    private String functionName;
-    private String nameTable;
-    private String nameAlias;
-    private Boolean distinct;
+    String columnName;
+    String functionName;
+    String nameTable;
+    String nameAlias;
+    Boolean distinct;
+    ArrayList<String> transforms;
 
     public DesiredColumn() {
         this.columnName = "";
@@ -13,14 +16,16 @@ public class DesiredColumn {
         this.nameTable = "";
         this.nameAlias = "";
         this.distinct = false;
+        this.transforms = new ArrayList<>();
     }
 
-    public DesiredColumn(String columnName, String functionName, String nameTable, String nameAlias, Boolean distinct) {
+    public DesiredColumn(String columnName, String functionName, String nameTable, String nameAlias, Boolean distinct, ArrayList<String> transforms) {
         this.columnName = columnName;
         this.functionName = functionName;
         this.nameTable = nameTable;
         this.nameAlias = nameAlias;
         this.distinct = distinct;
+        this.transforms = transforms;
     }
 
     public String getColumnName() {
@@ -59,12 +64,34 @@ public class DesiredColumn {
         return distinct;
     }
 
-    @Override
-    public String toString() {
-        return columnName;
+    void addTransform(String transform) {
+        System.out.println(transform);
+        this.transforms.add(transform);
     }
 
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("\"").append(this.columnName).append("\"")
+                .append(", \"")
+                .append(this.functionName)
+                .append("\", \"")
+                .append(this.nameAlias)
+                .append("\", ")
+                .append(this.distinct)
+                .append(", arrayListOf(");
+        for (int i = 0; i < this.transforms.size(); i++) {
+            builder.append("\"").append(this.transforms.get(i)).append("\"");
+            if (i < this.transforms.size() - 1) {
+                builder.append(", ");
+            }
+        }
+
+        builder.append(")");
+        return builder.toString();
     }
 }

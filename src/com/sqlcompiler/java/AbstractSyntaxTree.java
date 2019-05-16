@@ -4,6 +4,8 @@ import com.sqlcompiler.Environment;
 import com.sqlcompiler.antlr.HplsqlParser;
 import com.sqlcompiler.kotlin.Condition;
 import com.sqlcompiler.kotlin.Join;
+import com.sqlcompiler.kotlin.DesiredColumn;
+import com.sqlcompiler.kotlin.Transform;
 import com.sqlcompiler.stringtemplates.Templates;
 import javaslang.Tuple2;
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -41,7 +43,8 @@ class AbstractSyntaxTree {
     private String lastSingleInColumnsName;
     private String lastSetClause;
     private ArrayList<String> joinConditionColumns = new ArrayList<>();
-    private ArrayList<Condition> joinCondition;
+    private ArrayList<Condition> joinConditionColumns = new ArrayList<>();
+    private String joinCondition = "";
     private Join join;
 
     void build(RuleContext ctx) {
@@ -242,7 +245,7 @@ class AbstractSyntaxTree {
                     // normal in
                     else {
                         String col = ctx.getChild(0).getText().replace('.', '_');
-                        ((SelectStatus) this.current).columnsWhereClause.add(col);
+                        // ((SelectStatus) this.current).columnsWhereClause.add(col);
                         ((SelectStatus) this.current).whereSelectStmt += "( ";
                         for (int i = 3; i < ctx.getChildCount() - 1; i += 2) {
                             ((SelectStatus) this.current).whereSelectStmt += col + "==" + ctx.getChild(i).getText();
@@ -724,6 +727,7 @@ class AbstractSyntaxTree {
             right = "";
         }
         //((SelectStatus) this.current).columnsWhereClause.add(left.replace('.', '_'));
+        // ((SelectStatus) this.current).columnsWhereClause.add(left.replace('.', '_'));
         ((SelectStatus) this.current).whereSelectStmt += left + " " + op + " " + right;
     }
 
@@ -751,9 +755,11 @@ class AbstractSyntaxTree {
         } else if (right.startsWith("\"") || right.startsWith("\'")) type = "string";
         if (isColumnName(left)) {
             left = left.replace('.', '_');
+            //  ((SelectStatus) this.current).columnsWhereClause.add(left);
         }
         if (isColumnName(right)) {
             right = right.replace('.', '_');
+            //  ((SelectStatus) this.current).columnsWhereClause.add(right);
         }
         if (type.equalsIgnoreCase("")) type = "number";
         String x = "x" + (status.columnsWhereClause.size() + 1);
@@ -829,7 +835,6 @@ class AbstractSyntaxTree {
 
             status.whereSelectStmt = status.whereSelectStmt.replaceAll("or", " || ");
             status.whereSelectStmt = status.whereSelectStmt.replaceAll("and", " && ");
-            status.whereSelectStmt = status.whereSelectStmt;
             this.templates.flushSelectStatement(status.key,
                     status.tableSelectStmt,
                     status.desiredColumns,
@@ -955,11 +960,8 @@ class AbstractSyntaxTree {
         }
         if (status.AllColumns) {
             for (Field field : status.dataType.getFields()) {
-                status.desiredColumns.add(new DesiredColumn(
-                        field.getName(), "", ctx.getText(), "", false));
+                status.desiredColumns.add(new DesiredColumn(field.getName(), status.dataType.getName(), "", "", false, new ArrayList<>()));
             }
-
-
         }
     }
 
@@ -1062,7 +1064,7 @@ class AbstractSyntaxTree {
                     column.setColumnName(context.getChild(0).getText());
                 } else // ColumnName with TableName
                 {
-                    column.setNameTable(context.getChild(0).getText());
+                    column.setTableName(context.getChild(0).getText());
                     column.setColumnName(context.getChild(2).getText());
                 }
                 // TODO subquery
@@ -1075,7 +1077,7 @@ class AbstractSyntaxTree {
                     column.setColumnName(context.getChild(0).getText());
                 } else // ColumnName with TableName
                 {
-                    column.setNameTable(context.getChild(0).getText());
+                    column.setTableName(context.getChild(0).getText());
                     column.setColumnName(context.getChild(2).getText());
                 }
                 handleListItemColumnAlias((RuleContext) ctx.getChild(3), column);
@@ -1105,21 +1107,34 @@ class AbstractSyntaxTree {
             tablename = (name.split("\\.")[0]);
         } else colname = name;
         ArrayList<DesiredColumn> column = new ArrayList<>();
-        column.add(new DesiredColumn(colname, "max", tablename, "", false));
-        column.add(new DesiredColumn(colname, "min", tablename, "", false));
-        column.add(new DesiredColumn(colname, "avg", tablename, "", false));
-        column.add(new DesiredColumn(colname, "std", tablename, "", false));
-        column.add(new DesiredColumn(colname, "count", tablename, "", false));
-        column.add(new DesiredColumn(colname, "Q2", tablename, "", false));
-        column.add(new DesiredColumn(colname, "Q3", tablename, "", false));
-        column.add(new DesiredColumn(colname, "mode", tablename, "", false));
-        column.add(new DesiredColumn(colname, "mean", tablename, "", false));
-        column.add(new DesiredColumn(colname, "median", tablename, "", false));
+        column.add(new DesiredColumn(colname, "max", tablename, "", false, null));
+        column.add(new DesiredColumn(colname, "min", tablename, "", false, null));
+        column.add(new DesiredColumn(colname, "avg", tablename, "", false, null));
+        column.add(new DesiredColumn(colname, "std", tablename, "", false, null));
+        column.add(new DesiredColumn(colname, "count", tablename, "", false, null));
+        column.add(new DesiredColumn(colname, "Q2", tablename, "", false, null));
+        column.add(new DesiredColumn(colname, "Q3", tablename, "", false, null));
+        column.add(new DesiredColumn(colname, "mode", tablename, "", false, null));
+        column.add(new DesiredColumn(colname, "mean", tablename, "", false, null));
+        column.add(new DesiredColumn(colname, "median", tablename, "", false, null));
 
         ((SelectStatus) this.current).desiredColumns.addAll(column);
     }
 
+    private void handleFunctionParams(ArrayList<String> params, @NotNull RuleContext ctx) {
+        for (int i = 0; i < ctx.getChildCount(); i += 2)
+            params.add(ctx.getChild(i).getText().replace(".", "_"));
+    }
+
     private void handleListItemColumnAndFunction(@NotNull RuleContext ctx, DesiredColumn column) {
+        while (ctx.getChildCount() == 4 && ctx.getRuleIndex() == HplsqlParser.RULE_expr_func) {
+            ArrayList<String> params = new ArrayList<>();
+            handleFunctionParams(params, (RuleContext) ctx.getChild(2));
+
+            column.addTransform(new Transform(ctx.getChild(0).getText(), params));
+            ctx = (RuleContext) ctx.getChild(2).getChild(0).getChild(0).getChild(0);
+        }
+
         if (ctx.getChildCount() == 1) { // Column doesn't has grouping function
             RuleContext context = (RuleContext) ctx.getChild(0);
             if (context.getChildCount() == 1) // ColumnName without TableName
@@ -1128,7 +1143,7 @@ class AbstractSyntaxTree {
             } else // ColumnName with TableName
             {
                 ((SelectStatus) this.current).isColWithoutFun = true;
-                column.setNameTable(context.getChild(0).getText());
+                column.setTableName(context.getChild(0).getText());
                 column.setColumnName(context.getChild(2).getText());
             }
         } else if (ctx.getChildCount() == 4) { // Column has grouping function
@@ -1139,7 +1154,7 @@ class AbstractSyntaxTree {
             if (context.getChildCount() == 1) {
                 column.setColumnName(context.getChild(0).getText());
             } else {
-                column.setNameTable(context.getChild(0).getText());
+                column.setTableName(context.getChild(0).getText());
                 column.setColumnName(context.getChild(2).getText());
             }
         } else if (ctx.getChildCount() == 5) { // Column has grouping function and distinct
@@ -1150,14 +1165,14 @@ class AbstractSyntaxTree {
             if (context.getChildCount() == 1) {
                 column.setColumnName(context.getChild(0).getText());
             } else {
-                column.setNameTable(context.getChild(0).getText());
+                column.setTableName(context.getChild(0).getText());
                 column.setColumnName(context.getChild(2).getText());
             }
         }
     }
 
     private void handleListItemColumnAlias(@NotNull RuleContext ctx, @NotNull DesiredColumn column) {
-        column.setNameAlias(ctx.getChild(1).getText());
+        column.setColumnAlias(ctx.getChild(1).getText());
         ((SelectStatus) this.current).isColWithoutFun = true;
     }
 
