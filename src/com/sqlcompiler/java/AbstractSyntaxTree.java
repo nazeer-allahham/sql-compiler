@@ -3,8 +3,8 @@ package com.sqlcompiler.java;
 import com.sqlcompiler.Environment;
 import com.sqlcompiler.antlr.HplsqlParser;
 import com.sqlcompiler.kotlin.Condition;
-import com.sqlcompiler.kotlin.Join;
 import com.sqlcompiler.kotlin.DesiredColumn;
+import com.sqlcompiler.kotlin.Join;
 import com.sqlcompiler.kotlin.Transform;
 import com.sqlcompiler.stringtemplates.Templates;
 import javaslang.Tuple2;
@@ -42,9 +42,9 @@ class AbstractSyntaxTree {
     private Templates templates = new Templates();
     private String lastSingleInColumnsName;
     private String lastSetClause;
-    private ArrayList<String> joinConditionColumns = new ArrayList<>();
     private ArrayList<Condition> joinConditionColumns = new ArrayList<>();
-    private String joinCondition = "";
+    private ArrayList<String> joinCondition;
+    private String joinSequence;
     private Join join;
 
     void build(RuleContext ctx) {
