@@ -1,14 +1,17 @@
 package com.sqlcompiler.kotlin
 
-class DesiredColumn(val columnName: String,
-                    val functionName: String = "",
-                    private val columnAlias: String = "",
-                    private val distinct: Boolean = false) {
+class DesiredColumn(var columnName: String = "",
+                    var tableName: String = "",
+                    var columnAlias: String = "",
+                    var functionName: String = "",
+                    var distinct: Boolean = false,
+                    var transforms: ArrayList<Transform> = ArrayList()) {
 
     val title = fun(): String {
         return when {
             columnAlias !== "" -> columnAlias
             functionName !== "" -> "$functionName ($columnName)"
+            //else -> "${tableName}_$columnName"
             else -> columnName
         }
     }
@@ -24,6 +27,14 @@ class DesiredColumn(val columnName: String,
 
     fun isDistinct(): Boolean {
         return this.distinct
+    }
+
+    fun hasRowFunctions(): Boolean {
+        return this.transforms.isNotEmpty()
+    }
+
+    fun addTransform(transform: Transform) {
+        this.transforms.add(transform)
     }
 
     override fun toString(): String {

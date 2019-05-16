@@ -1,5 +1,6 @@
 package com.sqlcompiler.java;
 
+import com.sqlcompiler.kotlin.DesiredColumn;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
@@ -115,7 +116,7 @@ public class DataType implements Serializable {
         boolean flag = false;
         StringBuilder result = new StringBuilder("[");
         for (DesiredColumn column : columns) {
-            if (column.getNameTable().equalsIgnoreCase(nameTable) && !this.contains(column)) {
+            if (column.getTableName().equalsIgnoreCase(nameTable) && !this.contains(column)) {
                 result.append(column.getColumnName()).append(", ");
                 flag = true;
             }

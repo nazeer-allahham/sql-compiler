@@ -1,6 +1,8 @@
 package com.sqlcompiler.java;
 
+import com.sqlcompiler.kotlin.Condition;
 import com.sqlcompiler.kotlin.Join;
+import com.sqlcompiler.kotlin.DesiredColumn;
 import javaslang.Tuple;
 import javaslang.Tuple2;
 
@@ -13,7 +15,7 @@ class SelectStatus implements Status {
     ArrayList<DesiredColumn> desiredColumns;
     ArrayList<Join> joins;
     String whereSelectStmt;
-    ArrayList<String> columnsWhereClause;
+    ArrayList<Condition> columnsWhereClause;
     ArrayList<String> columnsGroupBy;
     ArrayList<String> columnsOrderBy;
     ArrayList<Tuple2<String, String>> whereInKeys;
