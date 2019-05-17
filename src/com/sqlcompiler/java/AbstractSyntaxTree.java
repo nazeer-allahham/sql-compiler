@@ -7,7 +7,8 @@ import com.sqlcompiler.kotlin.DesiredColumn;
 import com.sqlcompiler.kotlin.Join;
 import com.sqlcompiler.kotlin.Transform;
 import com.sqlcompiler.stringtemplates.Templates;
-import javaslang.Tuple2;
+import javafx.util.Pair;
+import javaslang.Tuple3;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -38,13 +39,11 @@ class AbstractSyntaxTree {
     private String typeCppFunction;
 
     private int currentDepth;
-    Boolean isJoinStmt = false;
-    Boolean isWhere = false;
+    private Boolean isJoinStmt = false;
+    private Boolean isWhere = false;
     private Templates templates = new Templates();
-    private String lastSingleInColumnsName;
+    private Pair<String, String> lastSingleIn; // column name, column type
     private String lastSetClause;
-    private ArrayList<Condition> joinConditionColumns = new ArrayList<>();
-    private ArrayList<String> joinCondition;
     private String joinSequence;
     private Join join;
 
@@ -132,18 +131,18 @@ class AbstractSyntaxTree {
                 case HplsqlParser.RULE_fullselect_stmt:
                     if (isWhereSubquery()) {
                         System.err.println("where sub query");
-                        this.current = new SelectStatus(this.current, this.templates.initSelect(), 4, this.lastSingleInColumnsName, null);
+                        this.current = new SelectStatus(this.current, this.templates.initSelect(), 4, this.lastSingleIn.getKey(), this.lastSingleIn.getValue(), null);
                     } else if (isFromSubquery()) {
                         System.err.println("from sub query");
-                        this.current = new SelectStatus(this.current, this.templates.initSelect(), 2, null, null);
+                        this.current = new SelectStatus(this.current, this.templates.initSelect(), 2, null, null, null);
                     } else if (isCombineQuery()) {
                         System.err.println("combine");
-                        this.current = new SelectStatus(this.current, this.templates.initSelect(), 16, null, this.lastSetClause);
+                        this.current = new SelectStatus(this.current, this.templates.initSelect(), 16, null, null, this.lastSetClause);
                     } else {
                         if (!this.states.empty()) {
                             this.flush();
                         }
-                        this.current = new SelectStatus(this.current, this.templates.initSelect(), 1, null, null);
+                        this.current = new SelectStatus(this.current, this.templates.initSelect(), 1, null, null, null);
                     }
                     this.lastRule = HplsqlParser.RULE_select_stmt;
                     this.states.push(this.current);
@@ -236,9 +235,10 @@ class AbstractSyntaxTree {
                     break;
                 case HplsqlParser.RULE_bool_expr_single_in:
                     this.lastRule = HplsqlParser.RULE_bool_expr_single_in;
-                    /*if (this.isCurrentStatementSelect()) {
+                    if (this.isCurrentStatementSelect()) {
                         handleSingleInWhereClause(ctx);
                     }
+                    /*
                     // in with subquery
                     if (((RuleContext) ctx.getChild(3)).getRuleIndex() == HplsqlParser.RULE_select_stmt) {
 
@@ -579,8 +579,7 @@ class AbstractSyntaxTree {
                     new ArrayList<>());
         } else {
             ((SelectStatus) this.current).joins.add(this.join);
-            this.joinConditionColumns = new ArrayList<>();
-            this.joinCondition = new ArrayList<>();
+            ArrayList<String> joinCondition = new ArrayList<>();
             this.join = new Join(type, tableName, tableAlias, "", new ArrayList<>());
         }
 
@@ -695,7 +694,9 @@ class AbstractSyntaxTree {
     }
 
     private void handleSingleInWhereClause(@NotNull RuleContext ctx) {
-        this.lastSingleInColumnsName = ctx.getChild(0).getText().replace('.', '_');
+        String name = ctx.getChild(0).getText().replace('.', '_');
+        String type = ((SelectStatus) this.current).dataType.getFieldType(name);
+        this.lastSingleIn = new Pair<>(name, type);
     }
 
     private void handleExistsWhereClause(RuleContext ctx) {
@@ -727,7 +728,7 @@ class AbstractSyntaxTree {
             op = "=";
             right = "";
         }
-        //((SelectStatus) this.current).columnsWhereClause.add(left.replace('.', '_'));
+        // ((SelectStatus) this.current).columnsWhereClause.add(left.replace('.', '_'));
         // ((SelectStatus) this.current).columnsWhereClause.add(left.replace('.', '_'));
         ((SelectStatus) this.current).whereSelectStmt += left + " " + op + " " + right;
     }
@@ -839,11 +840,14 @@ class AbstractSyntaxTree {
 
             status.whereSelectStmt = status.whereSelectStmt.replaceAll("or", " || ");
             status.whereSelectStmt = status.whereSelectStmt.replaceAll("and", " && ");
+
+            status.wheres.add(new Pair<>(status.whereSelectStmt, status.columnsWhereClause));
+
             this.templates.flushSelectStatement(status.key,
-                    status.tableSelectStmt,
+                    status.sourceKey != null ? this.templates.calculate(status.sourceKey) + " as String" : "\"" + status.tableSelectStmt + "\"",
                     status.desiredColumns,
-                    "\"" + status.whereSelectStmt.replace('.', '_') + "\"" + calcWhereInSelectStmt(status).replace('.', '_'),
-                    status.columnsWhereClause,
+                    status.wheres,
+                    calcWhereInSelectStmt(status),
                     status.joins,
                     status.columnsGroupBy,
                     status.columnsOrderBy,
@@ -862,11 +866,20 @@ class AbstractSyntaxTree {
     private String calcWhereInSelectStmt(@NotNull SelectStatus status) {
         StringBuilder builder = new StringBuilder();
 
-        System.err.println("Size" + status.key + " " + status.whereInKeys.size());
         for (int i = 0; i < status.whereInKeys.size(); i++) {
-            Tuple2<String, String> w = status.whereInKeys.get(i);
-            builder.append(" + smartSplit(\"").append(w._1).append("\", ").append(this.templates.calculate(w._2)).append("as String )");
+            Tuple3<String, String, String> w = status.whereInKeys.get(i);
+            builder.append("smartSplit(\"")
+                    .append(w._1)
+                    .append("\", \"")
+                    .append(w._2)
+                    .append("\", ")
+                    .append(this.templates.calculate(w._3))
+                    .append("as String )");
+            if (i != status.whereInKeys.size() - 1) {
+                builder.append(", ");
+            }
         }
+
         return builder.toString();
     }
 

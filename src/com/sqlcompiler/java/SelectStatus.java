@@ -1,25 +1,26 @@
 package com.sqlcompiler.java;
 
 import com.sqlcompiler.kotlin.Condition;
-import com.sqlcompiler.kotlin.Join;
 import com.sqlcompiler.kotlin.DesiredColumn;
+import com.sqlcompiler.kotlin.Join;
+import javafx.util.Pair;
 import javaslang.Tuple;
-import javaslang.Tuple2;
+import javaslang.Tuple3;
 
 import java.util.ArrayList;
 
 class SelectStatus implements Status {
-    String joinConditionString;
     String key;
     String tableSelectStmt;
-    ArrayList<String> columnsSelectStmt;
+    String sourceKey;
     ArrayList<DesiredColumn> desiredColumns;
+    ArrayList<Pair<String, ArrayList<Condition>>> wheres;
     ArrayList<Join> joins;
     String whereSelectStmt;
     ArrayList<Condition> columnsWhereClause;
     ArrayList<String> columnsGroupBy;
     ArrayList<String> columnsOrderBy;
-    ArrayList<Tuple2<String, String>> whereInKeys;
+    ArrayList<Tuple3<String, String, String>> whereInKeys;
 
     String combineType;
     String combineSource;
@@ -31,7 +32,7 @@ class SelectStatus implements Status {
     Integer purpose;
 
     DataType dataType = null;
-    Status parent;
+    private Status parent;
 
     private SelectStatus(Status parent, String statementKey) {
         this.parent = parent;
@@ -42,23 +43,27 @@ class SelectStatus implements Status {
         this.columnsGroupBy = new ArrayList<>();
         this.columnsOrderBy = new ArrayList<>();
         this.desiredColumns = new ArrayList<>();
-        this.columnsSelectStmt = new ArrayList<>();
         this.columnsWhereClause = new ArrayList<>();
         this.key = statementKey;
         this.tableSelectStmt = "";
-        this.joinConditionString = "";
         this.whereSelectStmt = "";
         this.whereInKeys = new ArrayList<>();
         this.purpose = 1;
         this.distinct = false;
         this.joins = new ArrayList<>();
+        this.wheres = new ArrayList<>();
     }
 
-    SelectStatus(Status parent, String statementKey, Integer purpose, String columnName, String combineType) {
+    SelectStatus(Status parent, String statementKey, Integer purpose, String columnName, String columnType, String combineType) {
         this(parent, statementKey);
 
         if (parent != null && columnName != null) {
-            ((SelectStatus) this.parent).addWhereInKey(columnName, statementKey);
+            ((SelectStatus) this.parent).addWhereInKey(columnName, columnType, statementKey);
+        }
+
+        if (parent != null && purpose == 2) {
+            ((SelectStatus) this.parent).sourceKey = statementKey;
+            ((SelectStatus) this.parent).tableSelectStmt = null;
         }
 
         if (parent != null && combineType != null) {
@@ -77,8 +82,8 @@ class SelectStatus implements Status {
     }
 
 
-    private void addWhereInKey(String columnName, String statementKey) {
-        this.whereInKeys.add(Tuple.of(columnName, statementKey));
+    private void addWhereInKey(String columnName, String columnType, String statementKey) {
+        this.whereInKeys.add(Tuple.of(columnName, columnType, statementKey));
     }
 
     @Override

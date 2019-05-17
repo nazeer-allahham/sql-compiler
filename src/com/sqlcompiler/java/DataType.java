@@ -172,4 +172,14 @@ public class DataType implements Serializable {
         }
         return false;
     }
+
+    String getFieldType(String name) {// xc_id
+        name = name.substring(name.indexOf(this.name + "_") + 1 + this.name.length());
+
+        for (Field field : fields) {
+            if (field.getName().compareTo(name) == 0)
+                return field.getType();
+        }
+        return "-1";
+    }
 }

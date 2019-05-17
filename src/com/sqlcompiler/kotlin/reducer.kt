@@ -2,6 +2,7 @@ package com.sqlcompiler.kotlin
 
 import com.sqlcompiler.Environment
 import java.io.File
+import kotlin.random.Random
 
 object Reducer {
     const val PURPOSE_SELECT_NORMAL = 1
@@ -147,7 +148,13 @@ object Reducer {
                 header.fields.forEach { field ->
                     cols.add(Column(field.replace(Regex("[(]"), "_").replace(Regex("[)]"), ""), ""))
                 }
-                "TABLE" to Handler.createTable(Table("temp", cols, arrayListOf(Environment.TABLES_PATH + "temp.csv"), ","))
+
+                val tableID = Math.abs(Random(100).nextInt())
+                "TABLE" to
+                        Handler.createTable(
+                                Table("temp_$tableID",
+                                        cols,
+                                        arrayListOf(Environment.TABLES_PATH + "temp_$tableID.csv"), "\t"), rows) as Table
             }
             PURPOSE_SELECT_WHERE_SUBQUERY -> {
                 var res = ""

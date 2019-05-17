@@ -12,7 +12,7 @@ object Fetcher {
      *
      * */
     fun fetch(directory: File,
-              name: String,
+              table: Any,
               columns: ArrayList<DesiredColumn>,
               where: Pair<String, ArrayList<Condition>>,
               joins: ArrayList<Join>,
@@ -24,12 +24,14 @@ object Fetcher {
 
         ExecutionPlan.addStep("Fetcher", "Start fetching process")
         val names = joins.map { j -> j.tableName } as ArrayList<String>
-        names.add(0, name)
-        val tables = restoreTables(names)
+
+        names.add(0, if (table is String) table else (table as Table).name)
+        val tables = restoreTables(names, if (table is Table) table else null)
+
         val result = Return()
         // These values will be used later from (Mapper, Shuffler, Reducer)
         result["directory"] = directory
-        result["name"] = name
+        result["table"] = table
         result["table"] = tables
         result["desired_columns"] = columns
         result["where_clause"] = where.first

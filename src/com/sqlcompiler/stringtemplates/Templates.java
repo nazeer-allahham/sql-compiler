@@ -5,6 +5,7 @@ import com.sqlcompiler.java.Field;
 import com.sqlcompiler.kotlin.Condition;
 import com.sqlcompiler.kotlin.DesiredColumn;
 import com.sqlcompiler.kotlin.Join;
+import javafx.util.Pair;
 import org.stringtemplate.v4.ST;
 import org.stringtemplate.v4.STGroup;
 import org.stringtemplate.v4.STGroupDir;
@@ -50,8 +51,8 @@ public class Templates {
     public void flushSelectStatement(String key,
                                      String table,
                                      List<DesiredColumn> columns,
-                                     String where,
-                                     List<Condition> whereColumns,
+                                     List<Pair<String, ArrayList<Condition>>> wheres,
+                                     String subWheres,
                                      List<Join> joins,
                                      List<String> groupBy,
                                      List<String> orderBy,
@@ -79,8 +80,9 @@ public class Templates {
 
         this.add(key, "table", table);
         this.add(key, "columns", columns);
-        this.add(key, "where", where);
-        this.add(key, "conditions", whereColumns);
+        this.add(key, "wheres", wheres);
+        if (!subWheres.isEmpty())
+            this.add(key, "subWheres", subWheres);
         this.add(key, "joins", joins);
         this.add(key, "groupBy", groupBy);
         this.add(key, "orderBy", orderBy);

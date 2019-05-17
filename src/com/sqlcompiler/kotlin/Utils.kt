@@ -11,19 +11,24 @@ import kotlin.collections.ArrayList
 import kotlin.system.exitProcess
 
 object Utils {
-    fun smartSplit(column: String, result: String): String {
-        val builder = StringBuilder(" (")
+    private var splitUsage = 0
+
+    fun smartSplit(columnName: String, columnType: String, result: String): Pair<String, ArrayList<Condition>> {
+        val condition = StringBuilder(" (")
+        val definitions = ArrayList<Condition>()
         val split = result.split(",")
 
         ExecutionPlan.addStep("Utils Smart Split", "Splitting data")
         split.forEachIndexed { index, r ->
-            builder.append("$column == $r")
+            condition.append("ssp$splitUsage")
+            definitions.add(Condition("ssp$splitUsage", columnName, r, "=", columnType))
             if (index != split.size - 1) {
-                builder.append(" || ")
+                condition.append(" || ")
             }
+            splitUsage++
         }
-        builder.append(") ")
-        return builder.toString()
+        condition.append(") ")
+        return condition.toString() to definitions
     }
 
     fun smartConcatenate(token: String, vararg strings: String): String {
@@ -46,12 +51,14 @@ object Utils {
         return file
     }
 
-    fun restoreTables(names: List<String>): List<Table> {
+    fun restoreTables(names: List<String>, toAdd: Table?): List<Table> {
         val type = object : TypeToken<HashMap<String, DataType>>() {}.type
         val types: HashMap<String, DataType> = Gson().fromJson(FileReader(Environment.DATA_TYPES_PATH), type)
         val tables = ArrayList<Table>()
 
         ExecutionPlan.addStep("Utils Restore Tables", "Restoring Tables")
+        if (toAdd is Table)
+            tables.add(toAdd)
         types.values.forEach {
             tables.add(fromDataType2Table(it))
         }
@@ -115,7 +122,7 @@ object Utils {
                         header = Row()
                         fields.forEach { field -> header?.addField(table.name + "_" + field) }
                     } else {
-                        rows.add(Row(fields as ArrayList<String>))
+                        rows.add(Row(fields.filter { true } as ArrayList<String>))
                     }
                 }
             }

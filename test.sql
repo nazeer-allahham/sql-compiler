@@ -1,2 +1,1 @@
-select * from c join users on c.id = users.id
-where c.name = "mhd"
+select * from (select c.id from c)

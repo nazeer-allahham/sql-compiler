@@ -43,7 +43,7 @@ object Handler {
                     header = Row()
                     fields.forEach { field -> header?.addField(field) }
                 } else {
-                    rows.add(Row(fields as ArrayList<String>))
+                    rows.add(Row(fields.filter { true } as ArrayList<String>))
                 }
             }
             return header!! to rows
@@ -51,29 +51,32 @@ object Handler {
         return null
     }
 
-    fun createTable(table: Table): String {
+    fun createTable(table: Table, rows: ArrayList<Row>? = null): Table? {
         table.locations.forEach { location ->
             val file = File(location)
 
             if (file.exists()) {
                 Console.log("Failed to execute create table file <File is already exist>")
-                return "_"
+                return null
             }
 
             if (!file.createNewFile()) {
                 Console.log("Failed to execute create table file <Cannot use table url>")
-                return "_"
+                return null
             }
-
-            val writer = FileWriter(file)
-
-            table.columns.forEachIndexed { i, column ->
-                writer.append(column.name.plus(if (i == table.columns.size - 1) '\n' else ','))
-            }
-            writer.close()
         }
+
+        val writer = FileWriter(File(table.locations.first()))
+        table.columns.forEachIndexed { i, column ->
+            writer.append(column.name.plus(if (i == table.columns.size - 1) '\n' else ','))
+        }
+        rows?.forEach { row ->
+            writer.append("$row")
+        }
+        writer.close()
+
         Console.log("Table created successfully")
-        return table.name
+        return table
     }
 
     /*
@@ -94,9 +97,9 @@ object Handler {
     }
     */
 
-    fun select(name: String,
+    fun select(table: Any,
                columns: ArrayList<DesiredColumn>,
-               where: Pair<String, ArrayList<Condition>>,
+               wheres: ArrayList<Pair<String, ArrayList<Condition>>>,
                join: ArrayList<Join>,
                groupBy: ArrayList<String>,
                orderBy: ArrayList<String>,
@@ -104,7 +107,27 @@ object Handler {
                distinct: Boolean,
                purpose: Int): Any {
         ExecutionPlan.addStep("Query Execution Plan", "Start the process")
-        val result = Reducer.reduce(Shuffler.shuffle(Mapper.map(Fetcher.fetch(Utils.createDirectory(), name, columns, where, join, groupBy, orderBy, combine, distinct, purpose))))
+
+        var condition = ""
+        val definitions = arrayListOf<Condition>()
+
+        wheres.forEach { i ->
+            condition += i.first
+            definitions.addAll(i.second)
+        }
+        val result = Reducer.reduce(
+                Shuffler.shuffle(
+                        Mapper.map(
+                                Fetcher.fetch(Utils.createDirectory(),
+                                        table,
+                                        columns,
+                                        condition to definitions,
+                                        join,
+                                        groupBy,
+                                        orderBy,
+                                        combine,
+                                        distinct,
+                                        purpose))))
         Console.log(result.first, "${result.second}")
         ExecutionPlan.addStep("Query Execution Plan", "End of the process")
         return result.second
