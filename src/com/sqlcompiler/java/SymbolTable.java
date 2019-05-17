@@ -171,14 +171,14 @@ class SymbolTable {
     }
 
     public Pair<String, String> typeof(RuleContext start) {
-        String exp = start.getText();
+        String exp = start.getChild(2).getText();
         // String
         if (exp.contains("||")) {
-            String[] strings = exp.split("||");
+            String[] strings = exp.split("\\|\\|");
             String value = "";
             for (String s : strings) {
                 if (isVariable(s))
-                    value += AllSymbol.get(s).getValue();
+                    value += AllSymbol.get(s).getValue().replaceAll("\"", "");
                 else value += s.replaceAll("\"", "");
             }
             return new Pair<>("string", value);
