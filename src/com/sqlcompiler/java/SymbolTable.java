@@ -1,20 +1,57 @@
 package com.sqlcompiler.java;
 
+import javafx.util.Pair;
+import org.antlr.v4.runtime.RuleContext;
+import org.antlr.v4.runtime.tree.ParseTree;
 import org.jetbrains.annotations.NotNull;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 class SymbolTable {
     private Scope currentScope;
     private boolean state;
     public HashMap<String, Symbol> AllSymbol = new HashMap<>();
     public ArrayList<String> nameSymbols = new ArrayList<>();
+    public ArrayList<String> rowFunction = new ArrayList<>();
 
     SymbolTable() {
         AllSymbol.put("summarize", new Symbol("summarize", "summarize", "summarize"));
         currentScope = new Scope(null);
+        rowFunction.add("upper");
+        rowFunction.add("lower");
+        rowFunction.add("abs");
+        rowFunction.add("acos");
+        rowFunction.add("summarize");
+        rowFunction.add("asin");
+        rowFunction.add("atan2");
+        rowFunction.add("bitand");
+        rowFunction.add("ceil");
+        rowFunction.add("cos");
+        rowFunction.add("cosh");
+        rowFunction.add("exp");
+        rowFunction.add("floor");
+        rowFunction.add("ln");
+        rowFunction.add("log");
+        rowFunction.add("mod");
+        rowFunction.add("nanvl");
+        rowFunction.add("power");
+        rowFunction.add("remainder");
+        rowFunction.add("round");
+        rowFunction.add("sign");
+        rowFunction.add("sin");
+        rowFunction.add("sinh");
+        rowFunction.add("sqrt");
+        rowFunction.add("tan");
+        rowFunction.add("tanh");
+        rowFunction.add("trunc");
+        rowFunction.add("width_bucket");
+        rowFunction.add("type_cast");
     }
 
     void allocate() {
@@ -118,6 +155,7 @@ class SymbolTable {
 
     }
 
+
     void free() {
         currentScope = currentScope.parent;
     }
@@ -130,6 +168,72 @@ class SymbolTable {
             temp = temp.parent;
         } while (temp != null);
         return null;
+    }
+
+    public Pair<String, String> typeof(RuleContext start) {
+        String exp = start.getChild(2).getText();
+        // String
+        if (exp.contains("||")) {
+            String[] strings = exp.split("\\|\\|");
+            String value = "";
+            for (String s : strings) {
+                if (isVariable(s))
+                    value += AllSymbol.get(s).getValue().replaceAll("\"", "");
+                else value += s.replaceAll("\"", "");
+            }
+            return new Pair<>("string", value);
+        }
+
+        //Number
+        String type;
+        String value;
+        if (start.getChild(2) instanceof RuleContext)
+            value = getValue((RuleContext) start.getChild(2));
+        else {
+            value = start.getChild(2).getText();
+            if (AllSymbol.get(value) != null) {
+                value = AllSymbol.get(value).getValue();
+            }
+        }
+        if (value.contains(".")) type = "real";
+        if (value.contains("true") || value.contains("false")) type = "boolean";
+        else type = "int";
+
+        ScriptEngineManager mgr = new ScriptEngineManager();
+        ScriptEngine engine = mgr.getEngineByName("JavaScript");
+        try {
+            value = "" + engine.eval(value);
+        } catch (ScriptException ex) {
+            System.out.println("Error occured .");
+        }
+        return new Pair<>(type, value);
+    }
+
+    private String getValue(RuleContext start) {
+        Stack<RuleContext> queue = new Stack<>();
+        ArrayList<String> operator = new ArrayList<>();
+        queue.add(start);
+        while (!queue.isEmpty()) {
+            RuleContext ctx = null;
+            if (queue.firstElement().getChildCount() != 0)
+                ctx = queue.pop();
+            if (ctx != null)
+                for (int i = 0; i < ctx.getChildCount(); i++) {
+                    ParseTree element = ctx.getChild(i);
+                    if (element instanceof RuleContext) {
+                        queue.add((RuleContext) element);
+                    } else operator.add(ctx.getChild(i).getText());
+                }
+        }
+        String res = start.getText();
+        for (String s : operator) {
+            if (isVariable(s)) {
+                res = res.replace(s, AllSymbol.get(s).getValue().replaceAll("\"", ""));
+            }
+        }
+        res = res.replaceAll("or", " || ");
+        res = res.replaceAll("and", " && ");
+        return res;
     }
 
     public Scope getCurrentScope() {
