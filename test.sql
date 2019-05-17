@@ -1,1 +1,1 @@
-select * from (select c.id from c)
+select * from (select c.id from c) as x where x.id in (select users_id from users)
