@@ -1,31 +1,20 @@
+import com.sqlcompiler.kotlin.Condition
 import com.sqlcompiler.kotlin.DesiredColumn
 import com.sqlcompiler.kotlin.Handler
-import com.sqlcompiler.kotlin.Utils.smartSplit
+import com.sqlcompiler.kotlin.Join
 
 fun main() {
-    Handler.select(table = Handler.select(table = "c",
-            columns = arrayListOf(DesiredColumn("c_id", "c", "", "", false, arrayListOf())),
-            wheres = arrayListOf(
-                    Pair("", arrayListOf()), smartSplit("x_id", "-1", Handler.select(table = "users",
-                    columns = arrayListOf(DesiredColumn("_users_id", "", "", "", false, arrayListOf())),
-                    wheres = arrayListOf(
-                            Pair("", arrayListOf())),
-                    join = arrayListOf(),
-                    groupBy = arrayListOf(),
-                    orderBy = arrayListOf(),
-                    distinct = false,
-                    purpose = 4) as String)),
-            join = arrayListOf(),
-            groupBy = arrayListOf(),
-            orderBy = arrayListOf(),
-            distinct = false,
-            purpose = 2) as String,
-            columns = arrayListOf(),
+    Handler.select(table = "c",
+            columns = arrayListOf(
+                    DesiredColumn("c_name", "c", "", "", false, arrayListOf()),
+                    DesiredColumn("c_id", "c", "", "COUNT", true, arrayListOf()),
+                    DesiredColumn("c_id", "c", "", "SUM", false, arrayListOf())),
             wheres = arrayListOf(
                     Pair("", arrayListOf())),
-            join = arrayListOf(),
-            groupBy = arrayListOf(),
-            orderBy = arrayListOf(),
+            join = arrayListOf(
+                    Join("FULLOUTERJOIN", "users", "", "x1", arrayListOf(Condition("x1", "c_id", "users_id", "=", "number")))),
+            groupBy = arrayListOf("c_name"),
+            orderBy = arrayListOf("1"),
             distinct = false,
             purpose = 1)
 }

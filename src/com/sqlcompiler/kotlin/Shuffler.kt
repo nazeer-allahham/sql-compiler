@@ -30,7 +30,6 @@ object Shuffler {
                 head.addField("values")
 
                 rows.forEach { row ->
-                    Console.log(row.fields[index])
                     val row1 = Row()
                     // Generating the key
                     var key = ""

@@ -52,10 +52,10 @@ object Fetcher {
             rows = filter(j.second, header, join.condition, join.definitions)
         }
 
-
         // Handle row functions
         columns.forEach { column ->
             if (column.transforms.isNotEmpty()) {
+                Console.log("Transform is not empty")
                 val index = header.find(column.columnName)
                 rows.forEach { row ->
                     column.transforms.forEach { transform ->
@@ -281,6 +281,9 @@ object Fetcher {
     }
 
     private fun filter(rows: ArrayList<Row>, header: Row, where: String, definitions: ArrayList<Condition>): ArrayList<Row> {
+        if (where.isEmpty() || definitions.isEmpty()) {
+            return rows
+        }
         ExecutionPlan.addStep("Filter Rows", "Eliminate rows which are not compatible with where condition")
         return rows.filter { row ->
             getRowStatus(header, row, where, definitions)
@@ -328,7 +331,6 @@ object Fetcher {
                     else -> false
                 }
             } else {
-                Console.log("${left.toDouble()} ${right.toDouble()}")
                 res = when (param.operator) {
                     "<" -> left.toDouble() < right.toDouble()
                     ">" -> left.toDouble() > right.toDouble()

@@ -116,7 +116,7 @@ data class Row(val fields: ArrayList<String> = ArrayList()) {
     }
 
     fun sort(functionName: String, start: Int) {
-        when (functionName) {
+        when (functionName.toLowerCase()) {
             "min" -> {
                 fields.add(start, min(start))
             }
