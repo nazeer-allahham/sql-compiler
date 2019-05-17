@@ -30,7 +30,8 @@ class AbstractSyntaxTree {
     private ParserRuleContext root = null;
 
     private int lastRule;
-    private Stack<Status> statements = new Stack<>();
+    private Stack<String> statements = new Stack<>();
+    private Stack<Status> states = new Stack<>();
     private Status current;
 
     private ArrayList<Field> cppFunctionParam = null;
@@ -65,12 +66,12 @@ class AbstractSyntaxTree {
             switch (ctx.getRuleIndex()) {
                 // Create type
                 case HplsqlParser.RULE_create_type_stmt:
-                    if (!this.statements.empty())
+                    if (!this.states.empty())
                         this.flush();
                     this.lastRule = HplsqlParser.RULE_create_table_stmt;
                     this.current = new CreateTypeStatus(null, this.templates.initCreateType(), SECONDARY_DATA_TYPE, ctx.getChild(2).getText());
                     //this.current = new CreateTypeStatus(null, "", SECONDARY_DATA_TYPE, ctx.getChild(2).getText());
-                    this.statements.add(this.current);
+                    this.states.add(this.current);
                     DataTypes.initialize(SECONDARY_DATA_TYPE, ctx.getChild(2).getText());
                     ((CreateTypeStatus) this.current).setName(ctx.getChild(2).getText());
                     break;
@@ -83,12 +84,12 @@ class AbstractSyntaxTree {
                     }
                     break;
                 case HplsqlParser.RULE_create_table_stmt:
-                    if (!this.statements.empty())
+                    if (!this.states.empty())
                         this.flush();
                     this.lastRule = HplsqlParser.RULE_create_table_stmt;
                     this.current = new CreateTypeStatus(null, this.templates.initCreateType(), SECONDARY_DATA_TYPE, ctx.getChild(2).getText());
                     //this.current = new CreateTypeStatus(null, "", SECONDARY_DATA_TYPE, ctx.getChild(2).getText());
-                    this.statements.add(this.current);
+                    this.states.add(this.current);
 
                     DataTypes.initialize(SECONDARY_DATA_TYPE, ctx.getChild(2).getText());
                     ((CreateTypeStatus) this.current).setName(ctx.getChild(2).getText());
@@ -139,13 +140,13 @@ class AbstractSyntaxTree {
                         System.err.println("combine");
                         this.current = new SelectStatus(this.current, this.templates.initSelect(), 16, null, this.lastSetClause);
                     } else {
-                        if (!this.statements.empty()) {
+                        if (!this.states.empty()) {
                             this.flush();
                         }
                         this.current = new SelectStatus(this.current, this.templates.initSelect(), 1, null, null);
                     }
                     this.lastRule = HplsqlParser.RULE_select_stmt;
-                    this.statements.push(this.current);
+                    this.states.push(this.current);
                     break;
 
                 case HplsqlParser.RULE_fullselect_stmt_item:
@@ -454,7 +455,7 @@ class AbstractSyntaxTree {
             //this.lastRule = ctx.getRuleIndex();
         }
 
-        while (!this.statements.isEmpty()) {
+        while (!this.states.isEmpty()) {
             System.out.println("Flush");
             flush();
         }
@@ -464,7 +465,7 @@ class AbstractSyntaxTree {
         try {
             file.createNewFile();
             stream = new DataOutputStream(new FileOutputStream(file));
-            stream.writeBytes(this.templates.calculateAll());
+            stream.writeBytes(this.templates.calculateAll(this.statements));
             stream.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -785,8 +786,8 @@ class AbstractSyntaxTree {
     }
 
     private boolean isCurrentStatementSelect() {
-        if (this.statements.size() > 0)
-            return this.statements.elementAt(0) instanceof SelectStatus;
+        if (this.states.size() > 0)
+            return this.states.elementAt(0) instanceof SelectStatus;
         else return false;
     }
 
@@ -803,12 +804,15 @@ class AbstractSyntaxTree {
     }
 
     private void flush() {
-        this.current = this.statements.pop();
+        this.current = this.states.pop();
 
         if (this.current instanceof SelectStatus) {
             //System.out.println("Flush select: <SelectStatus>");
             SelectStatus status = (SelectStatus) this.current;
 
+            if (status.purpose == 1 || status.purpose == 8) {
+                this.statements.add(status.key);
+            }
 
             if (this.join != null) {
                 status.joins.add(this.join);

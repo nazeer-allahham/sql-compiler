@@ -50,6 +50,7 @@ object Fetcher {
             rows = filter(j.second, header, join.condition, join.definitions)
         }
 
+
         // Handle row functions
         columns.forEach { column ->
             if (column.transforms.isNotEmpty()) {
@@ -301,8 +302,9 @@ object Fetcher {
 
     private fun firstORsecond(first: String, second: String): String {
         return when {
-            first.startsWith("[A-Za-z]") -> second
-            second.startsWith("['\"]") -> first.substring(0, first.length - 1)
+            first.matches(Regex("[A-Za-z ][A-Za-z_ ]*")) -> second
+            second.matches(Regex("[\"'][\\w]*['\"]")) -> first.substring(0, first.length - 1)
+            second == "" -> first
             else -> first
         }
     }
@@ -310,23 +312,26 @@ object Fetcher {
     private fun getRowStatus(header: Row, row: Row, condition: String, params: ArrayList<Condition>): Boolean {
         var expr = Expressions()
         params.forEach { param ->
-            val left: String = firstORsecond(param.left, row.fields[header.find(param.left)])
-            val right: String = firstORsecond(param.right, row.fields[header.find(param.right)])
+            val left: String = firstORsecond(param.left, row.get(header.find(param.left)))
+            val right: String = firstORsecond(param.right, row.get(header.find(param.right)))
             val res: Boolean
 
-            if (param.type === "string") {
+            if (param.type == "string") {
                 res = when (param.operator) {
                     "<" -> left.compareTo(right) == -1
                     ">" -> right.compareTo(left) == -1
                     "==" -> left.compareTo(right) == 0
+                    "=" -> left.compareTo(right) == 0
                     "!=" -> left.compareTo(right) != 0
                     else -> false
                 }
             } else {
+                Console.log("${left.toDouble()} ${right.toDouble()}")
                 res = when (param.operator) {
                     "<" -> left.toDouble() < right.toDouble()
                     ">" -> left.toDouble() > right.toDouble()
                     "==" -> left.toDouble() == right.toDouble()
+                    "=" -> left.toDouble() == right.toDouble()
                     "!=" -> left.toDouble() != right.toDouble()
                     else -> false
                 }

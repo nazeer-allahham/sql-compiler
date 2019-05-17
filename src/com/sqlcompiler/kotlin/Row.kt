@@ -57,6 +57,12 @@ data class Row(val fields: ArrayList<String> = ArrayList()) {
         return this.fields[this.find(key)]
     }
 
+    fun get(index: Int): String {
+        if (index < 0 || index >= this.fields.size)
+            return ""
+        return this.fields[index]
+    }
+
     fun splice(from: Int, end: Int): ArrayList<String> {
         val res = ArrayList<String>()
         println("$from + $end + ${this.fields}")
