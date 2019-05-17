@@ -21,6 +21,8 @@ class DataTypes {
         createPrimaryDataType("string", "string");
         createPrimaryDataType("boolean", "boolean");
         createPrimaryDataType("var", "var");
+        createPrimaryDataType("query", "query");
+        createPrimaryDataType("query_result", "query_result");
     }
 
     static void createPrimaryDataType(String name, String type) {

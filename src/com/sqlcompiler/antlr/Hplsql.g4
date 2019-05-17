@@ -49,6 +49,7 @@ stmt :
     | return_stmt
     | select_stmt
     | while_stmt
+    | typeof
     | cpp_stmt
     | error_stmt
     | label
@@ -57,6 +58,9 @@ stmt :
     | semicolon_stmt
     ;
 
+typeof:
+    T_TYPEOF T_OPEN_P (expr|bool_expr) T_CLOSE_P
+;
 error_stmt:
        invalid_select
     |  invalid_bool_expr
@@ -1653,6 +1657,7 @@ T_SYSDATE              : S Y S D A T E ;
 T_VARIANCE             : V A R I A N C E ;
 T_USER                 : U S E R;
 T_WRITE                : W R I T E;
+T_TYPEOF               : T Y P E O F;
 
 
 T_ADD          : '+' ;

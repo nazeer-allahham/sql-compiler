@@ -34,6 +34,7 @@ class AbstractSyntaxTree {
     private Stack<String> statements = new Stack<>();
     private Stack<Status> states = new Stack<>();
     private Status current;
+    private Pair<String, String> typeVar;
 
     private ArrayList<Field> cppFunctionParam = null;
     private String typeCppFunction;
@@ -330,6 +331,9 @@ class AbstractSyntaxTree {
                     break;
 
                 case HplsqlParser.RULE_cpp_declare_assignment_stmt:
+                    if (ctx.getChild(0).getText().equalsIgnoreCase("var")) {
+                        typeVar = symbolTable.typeof((RuleContext) ctx.getChild(3).getChild(0));
+                    }
                     handleCPPDeclareAssignmentStmt(ctx);
                     break;
 
@@ -377,7 +381,7 @@ class AbstractSyntaxTree {
                             ctx.getChild(0).getChild(0).getText(), "function", cppFunctionParam), true);
                     break;
                 case HplsqlParser.RULE_expr_func_params:
-                    if (!ctx.parent.getChild(0).getText().equalsIgnoreCase("summarize")) {
+                    if (!symbolTable.rowFunction.contains(ctx.parent.getChild(0).getText())) {
                         boolean okay = true;
                         for (int i = 0; i < ctx.getChildCount(); i++) {
                             if (i % 2 == 0) {
@@ -508,12 +512,13 @@ class AbstractSyntaxTree {
     }
 
     private void checkExistGroupBy() {
-        if (!((SelectStatus) this.current).isExistGroupBy
-                && ((SelectStatus) this.current).isColWithoutFun
-                && ((SelectStatus) this.current).isExistAggregationFun) {
-            System.err.println("Semantic Error doesn't exist group by");
-            System.exit(1);
-        }
+        if ((this.current) != null)
+            if (!((SelectStatus) this.current).isExistGroupBy
+                    && ((SelectStatus) this.current).isColWithoutFun
+                    && ((SelectStatus) this.current).isExistAggregationFun) {
+                System.err.println("Semantic Error doesn't exist group by");
+                System.exit(1);
+            }
     }
 
     private void handleJoinWhereCondition(RuleContext ctx) {
@@ -898,18 +903,39 @@ class AbstractSyntaxTree {
     private void handleCPPDeclareAssignmentStmt(@NotNull RuleContext ctx) {
         String value = ctx.getChild(3).getText();
         String type = ctx.getChild(0).getText();
-        if (ctx.getChild(3).getChild(0).getChild(0).getChild(0).getChildCount() > 1) {
-            value = "";
-        } else
-            value = symbolTable.getValueWithCasting(value, type);
-        symbolTable.nameSymbols.add(ctx.getChild(1).getText());
-        symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
-                type, "",
-                value, true), false);
+        if (type.equalsIgnoreCase("query")) {
+            symbolTable.nameSymbols.add(ctx.getChild(1).getText());
+            symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
+                    type, "",
+                    value, true), false);
+        } else if (type.equalsIgnoreCase("query_result")) {
+            value = value.replaceAll("exe\\(", "");
+            value = value.replaceAll("\\)", "");
+            symbolTable.nameSymbols.add(ctx.getChild(1).getText());
+            symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
+                    type, "",
+                    value, true), false);
+        } else if (type.equalsIgnoreCase("var")) {
+            type = typeVar.getKey();
+            value = typeVar.getValue();
+            symbolTable.nameSymbols.add(ctx.getChild(1).getText());
+            symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
+                    type, "",
+                    value, true), false);
+        } else {
+            if (ctx.getChild(3).getChild(0).getChild(0).getChildCount() > 0 && ctx.getChild(3).getChild(0).getChild(0).getChild(0).getChildCount() > 1) {
+                value = "";
+            } else
+                value = symbolTable.getValueWithCasting(value, type);
+            symbolTable.nameSymbols.add(ctx.getChild(1).getText());
+            symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(1).getText(),
+                    type, "",
+                    value, true), false);
+        }
     }
 
     private void handleExprFunc(@NotNull RuleContext ctx) {
-        if (symbolTable.AllSymbol.get(ctx.getChild(0).getText()) == null) {
+        if (symbolTable.AllSymbol.get(ctx.getChild(0).getText()) == null && !symbolTable.rowFunction.contains(ctx.getChild(0).getText())) {
             System.err.println("Error for calling undeclared method : " + ctx.getChild(0).getText());
         }
     }

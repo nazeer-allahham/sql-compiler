@@ -1,1 +1,3 @@
-select * from (select c.id from c) as x where x.id in (select users_id from users)
+boolean b1=true;
+boolean b2=false ;
+var x =typeof(b1 and b2 or true);
