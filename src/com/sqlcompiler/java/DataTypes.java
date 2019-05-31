@@ -65,6 +65,7 @@ class DataTypes {
 
     static void addLocation(String location) {
         currentType.addLocation(location);
+        types.replace(currentType.getName(), currentType);
     }
 
     static int count() {
@@ -118,5 +119,6 @@ class DataTypes {
 
     static void setDelimiter(String delimiter) {
         currentType.setDelimiter(delimiter);
+        types.replace(currentType.getName(), currentType);
     }
 }

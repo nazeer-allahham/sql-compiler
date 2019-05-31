@@ -53,8 +53,6 @@ class AbstractSyntaxTree {
         buildHelper(ctx);
     }
 
-    // TODO Left and Right outer join must add to where conditions (Left / Right) table id >=0 && < 0
-    // TODO Full outer join must add to where conditions always true
     private void buildHelper(@NotNull RuleContext start) {
         Stack<RuleContext> queue = new Stack<>();
         queue.add(start);
@@ -114,7 +112,6 @@ class AbstractSyntaxTree {
 
                 case HplsqlParser.RULE_create_table_store_location:
                 case HplsqlParser.RULE_create_type_store_location:
-                    System.out.println(ctx.getChildCount() / 2);
                     for (int i = 1; i < ctx.getChildCount(); i += 2) {
                         DataTypes.addLocation(ctx.getChild(i).getText());
                         ((CreateTypeStatus) this.current).addLocation(ctx.getChild(i).getText());
@@ -239,25 +236,6 @@ class AbstractSyntaxTree {
                     if (this.isCurrentStatementSelect()) {
                         handleSingleInWhereClause(ctx);
                     }
-                    /*
-                    // in with subquery
-                    if (((RuleContext) ctx.getChild(3)).getRuleIndex() == HplsqlParser.RULE_select_stmt) {
-
-                    }
-                    // normal in
-                    else {
-                        String col = ctx.getChild(0).getText().replace('.', '_');
-                        // ((SelectStatus) this.current).columnsWhereClause.add(col);
-                        ((SelectStatus) this.current).whereSelectStmt += "( ";
-                        for (int i = 3; i < ctx.getChildCount() - 1; i += 2) {
-                            ((SelectStatus) this.current).whereSelectStmt += col + "==" + ctx.getChild(i).getText();
-                            if (i != ctx.getChildCount() - 2)
-                                ((SelectStatus) this.current).whereSelectStmt += " || ";
-                        }
-                        ((SelectStatus) this.current).whereSelectStmt += " )";
-
-
-                    }*/
                     break;
                 case HplsqlParser.RULE_bool_expr_multi_in:
                     if (this.isCurrentStatementSelect()) {
@@ -271,6 +249,7 @@ class AbstractSyntaxTree {
                     if (isWhere) {
                         handleWhereClause(ctx);
                     }
+                    //TODO isHaving
                     break;
 
                 case HplsqlParser.RULE_bool_expr_logical_operator:
@@ -286,6 +265,7 @@ class AbstractSyntaxTree {
                     break;
 
                 case HplsqlParser.RULE_having_clause:
+                    isWhere = true;
                     if (isValidBooleanExpression(ctx.getChild(1).getText())) {
                         System.err.println("Invalid Boolean Expression Having clause");
                     }
@@ -513,7 +493,7 @@ class AbstractSyntaxTree {
 
     private void checkExistGroupBy() {
         if ((this.current) != null)
-            if (!((SelectStatus) this.current).isExistGroupBy
+            if (this.current instanceof SelectStatus && !((SelectStatus) this.current).isExistGroupBy
                     && ((SelectStatus) this.current).isColWithoutFun
                     && ((SelectStatus) this.current).isExistAggregationFun) {
                 System.err.println("Semantic Error doesn't exist group by");
@@ -628,7 +608,7 @@ class AbstractSyntaxTree {
                     ctx.getChild(0).getText(),
                     type,
                     "",
-                    symbolTable.getValueWithCasting(ctx.getChild(2).getChild(2).getText(), type),
+                    symbolTable.getValueWithCasting(ctx.getChild(2).getChild(1).getText(), type),
                     true), false);
         } else {
             symbolTable.nameSymbols.add(ctx.getChild(0).getText());
@@ -639,7 +619,6 @@ class AbstractSyntaxTree {
     }
 
     private void handleTypeJoin(RuleContext ctx) {
-        //TODO For uncle MOUAZ
         /**
          * select * from c left join ttt on  ttt.id= c.id
          * */
@@ -770,7 +749,7 @@ class AbstractSyntaxTree {
         }
         if (type.equalsIgnoreCase("")) type = "number";
         String x = "x" + (status.columnsWhereClause.size() + 1);
-        status.whereSelectStmt += " x" + status.columnsWhereClause.size() + " ";
+        status.whereSelectStmt += " x" + (status.columnsWhereClause.size() + 1) + " ";
         status.columnsWhereClause.add(new Condition(
                 x,
                 left,
