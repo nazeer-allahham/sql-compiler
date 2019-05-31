@@ -1,6 +1,8 @@
-SELECT c.name, COUNT(DISTINCT c.id), SUM(c.id)
-FROM c
-FULL OUTER JOIN users
-ON c.id = users.id
-GROUP BY c.name
-ORDER BY 1;
+select * from c
+inner join users
+on c.id = users.id
+where c.id > 2 and users.id >= 3
+
+declare x query = (select * from c where c.id in ( select users.id from users));
+
+execute_query (x)

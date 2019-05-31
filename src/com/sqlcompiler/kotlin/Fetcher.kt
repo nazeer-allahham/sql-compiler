@@ -326,6 +326,8 @@ object Fetcher {
                     "<" -> left.compareTo(right) == -1
                     ">" -> right.compareTo(left) == -1
                     "==" -> left.compareTo(right) == 0
+                    ">=" -> right.compareTo(left) == -1 || left.compareTo(right) == 0
+                    "<=" -> left.compareTo(right) == -1 || left.compareTo(right) == 0
                     "=" -> left.compareTo(right) == 0
                     "!=" -> left.compareTo(right) != 0
                     else -> false
@@ -335,6 +337,8 @@ object Fetcher {
                     "<" -> left.toDouble() < right.toDouble()
                     ">" -> left.toDouble() > right.toDouble()
                     "==" -> left.toDouble() == right.toDouble()
+                    ">=" -> left.toDouble() >= right.toDouble()
+                    "<=" -> left.toDouble() <= right.toDouble()
                     "=" -> left.toDouble() == right.toDouble()
                     "!=" -> left.toDouble() != right.toDouble()
                     else -> false

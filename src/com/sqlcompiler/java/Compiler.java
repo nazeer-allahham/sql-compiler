@@ -43,7 +43,7 @@ class Compiler {
         }
     }
 
-    void lexical_analyzer() {
+    void lexicalAnalyzer() {
         this.lexer = new HplsqlLexer(input);
         this.commonTokenStream = new CommonTokenStream(lexer);
     }
@@ -52,7 +52,7 @@ class Compiler {
         this.parser = new HplsqlParser(commonTokenStream);
     }
 
-    void semantic_analyzer() {
+    void semanticAnalyzer() {
 //        MyListener listener = new MyListener();
 //        ParseTreeWalker walker = new ParseTreeWalker();
 //        walker.walk(listener, parser.program());
@@ -71,7 +71,7 @@ class Compiler {
         DataTypes.save(Environment.DATA_TYPES_PATH);
     }
 
-    void code_generation() {
+    void codeGeneration() {
         Console.log(Console.open, "Generating the code...");
 
         Runtime runtime = Runtime.getRuntime();

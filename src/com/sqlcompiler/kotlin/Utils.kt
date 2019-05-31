@@ -13,7 +13,7 @@ import kotlin.system.exitProcess
 object Utils {
     private var splitUsage = 0
 
-    fun smartSplit(columnName: String, columnType: String, result: String): Pair<String, ArrayList<Condition>> {
+    fun smartSplit(columnName: String, columnType: String, result: String): Where {
         val condition = StringBuilder(" (")
         val definitions = ArrayList<Condition>()
         val split = result.split(",")
@@ -28,7 +28,7 @@ object Utils {
             splitUsage++
         }
         condition.append(") ")
-        return condition.toString() to definitions
+        return Where(condition.toString(), definitions)
     }
 
     fun smartConcatenate(token: String, vararg strings: String): String {
@@ -75,7 +75,7 @@ object Utils {
         type.locations.forEach { location ->
             locations.add(location)
         }
-        return Table(type.name, cols, locations, ",")
+        return Table(type.name, cols, locations, type.delimiter)
     }
 
     fun readTable(table: Table, distinct: Boolean): Pair<Row, ArrayList<Row>> {
@@ -93,7 +93,7 @@ object Utils {
 
             if (distinct) {
                 FileReader(file).readLines().forEachIndexed { index, row ->
-                    val fields = row.split(",")
+                    val fields = row.split(table.delimiter)
 
                     if (fields.size != table.columns.size) {
                         Console.error("Error: Fields count of row=$index from table=${table.name} is not as the expected!")
@@ -111,7 +111,7 @@ object Utils {
                 }
             } else {
                 FileReader(file).readLines().forEachIndexed { index, row ->
-                    val fields = row.split(",")
+                    val fields = row.split(table.delimiter)
 
                     if (fields.size != table.columns.size) {
                         Console.error("Error: Fields count of row=$index from table=${table.name} is not as the expected!")

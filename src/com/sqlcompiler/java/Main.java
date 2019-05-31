@@ -25,16 +25,16 @@ public class Main {
         Compiler compiler = new Compiler(Compiler.COMPILE + Compiler.RETRIEVE_TYPES);
 
         // Lexical analysis
-        compiler.lexical_analyzer();
+        compiler.lexicalAnalyzer();
 
         // Parsing
         compiler.parse();
 
         // Semantic analysis
-        compiler.semantic_analyzer();
+        compiler.semanticAnalyzer();
 
         // Code generation
-        compiler.code_generation();
+        compiler.codeGeneration();
 
         // Print the results
         compiler.print();

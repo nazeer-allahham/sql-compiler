@@ -68,7 +68,7 @@ object Handler {
 
         val writer = FileWriter(File(table.locations.first()))
         table.columns.forEachIndexed { i, column ->
-            writer.append(column.name.plus(if (i == table.columns.size - 1) '\n' else ','))
+            writer.append(column.name.plus(if (i == table.columns.size - 1) "\n" else table.delimiter))
         }
         rows?.forEach { row ->
             writer.append("$row")
@@ -99,7 +99,7 @@ object Handler {
 
     fun select(table: Any,
                columns: ArrayList<DesiredColumn>,
-               wheres: ArrayList<Pair<String, ArrayList<Condition>>>,
+               wheres: ArrayList<Where>,
                join: ArrayList<Join>,
                groupBy: ArrayList<String>,
                orderBy: ArrayList<String>,
@@ -112,8 +112,8 @@ object Handler {
         val definitions = arrayListOf<Condition>()
 
         wheres.forEach { i ->
-            condition += i.first
-            definitions.addAll(i.second)
+            condition += i.expression
+            definitions.addAll(i.definitions)
         }
         val result = Reducer.reduce(
                 Shuffler.shuffle(

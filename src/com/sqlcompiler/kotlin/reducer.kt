@@ -10,6 +10,7 @@ object Reducer {
     const val PURPOSE_SELECT_WHERE_SUBQUERY = 4
     const val PURPOSE_SELECT_ONE_VALUE = 8
     const val PURPOSE_SELECT_COMBINE = 16
+    const val PURPOSE_SELECT_RESULT = 32
 
     const val COMBINE_SELECT_UNION = "UNION"
     const val COMBINE_SELECT_UNION_ALL = "UNION ALL"
@@ -168,6 +169,9 @@ object Reducer {
             }
             PURPOSE_SELECT_COMBINE -> {
                 "COMBINE" to rows
+            }
+            PURPOSE_SELECT_RESULT -> {
+                "RESULT" to rows
             }
             else -> {
                 "BUG" to "Unknown purpose"

@@ -105,7 +105,7 @@ public class DataType implements Serializable {
         this.delimiter = toUnquotedString(delimiter);
     }
 
-    String getDelimiter() {
+    public String getDelimiter() {
         return delimiter;
     }
 

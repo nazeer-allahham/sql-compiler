@@ -2,10 +2,8 @@ package com.sqlcompiler.java;
 
 import com.sqlcompiler.Environment;
 import com.sqlcompiler.antlr.HplsqlParser;
-import com.sqlcompiler.kotlin.Condition;
+import com.sqlcompiler.kotlin.*;
 import com.sqlcompiler.kotlin.DesiredColumn;
-import com.sqlcompiler.kotlin.Join;
-import com.sqlcompiler.kotlin.Transform;
 import com.sqlcompiler.stringtemplates.Templates;
 import javafx.util.Pair;
 import javaslang.Tuple3;
@@ -33,6 +31,7 @@ class AbstractSyntaxTree {
     private int lastRule;
     private Stack<String> statements = new Stack<>();
     private Stack<Status> states = new Stack<>();
+    private ArrayList<Pair<String, String>> queries = new ArrayList<>();
     private Status current;
     private Pair<String, String> typeVar;
 
@@ -45,8 +44,6 @@ class AbstractSyntaxTree {
     private Templates templates = new Templates();
     private Pair<String, String> lastSingleIn; // column name, column type
     private String lastSetClause;
-    private String joinSequence;
-    private Join join;
 
     void build(RuleContext ctx) {
         root = (ParserRuleContext) ctx;
@@ -57,7 +54,7 @@ class AbstractSyntaxTree {
     // TODO Full outer join must add to where conditions always true
     private void buildHelper(@NotNull RuleContext start) {
         Stack<RuleContext> queue = new Stack<>();
-        queue.add(start);
+        queue.push(start);
         currentDepth = start.depth();
 
         while (!queue.isEmpty()) {
@@ -131,14 +128,16 @@ class AbstractSyntaxTree {
                 // Select statement
                 case HplsqlParser.RULE_fullselect_stmt:
                     if (isWhereSubquery()) {
-                        System.err.println("where sub query");
+                        Console.log("where sub query");
                         this.current = new SelectStatus(this.current, this.templates.initSelect(), 4, this.lastSingleIn.getKey(), this.lastSingleIn.getValue(), null);
                     } else if (isFromSubquery()) {
-                        System.err.println("from sub query");
+                        Console.log("from sub query");
                         this.current = new SelectStatus(this.current, this.templates.initSelect(), 2, null, null, null);
                     } else if (isCombineQuery()) {
-                        System.err.println("combine");
+                        Console.log("combine");
                         this.current = new SelectStatus(this.current, this.templates.initSelect(), 16, null, null, this.lastSetClause);
+                    } else if (isDeclareStatement() || isAssignmentStatement()) {
+                        this.current = new SelectStatus(this.current, this.templates.initSelect(), 32, null, null, null);
                     } else {
                         if (!this.states.empty()) {
                             this.flush();
@@ -277,7 +276,8 @@ class AbstractSyntaxTree {
                     if (this.lastRule == HplsqlParser.RULE_where_clause) {
                         handleLogicalOperator(ctx);
                     } else if (lastRule == HplsqlParser.RULE_from_join_clause) {
-                        this.join.setCondition(join.getCondition() + ctx.getText());
+                        Join first = ((SelectStatus) this.current).joins.firstElement();
+                        first.setCondition(first.getCondition() + ctx.getText());
                     }
                     break;
 
@@ -316,6 +316,13 @@ class AbstractSyntaxTree {
                     symbolTable.setCurrentScope(symbolTable.getCurrentScope().parent);
                     break;
                 case HplsqlParser.RULE_declare_var_item:
+                    if (!this.states.empty()) {
+                        this.flush();
+                    }
+                    this.lastRule = HplsqlParser.RULE_declare_var_item;
+                    this.current = new QueryStatus(null, this.templates.initDeclareQuery(), ctx.getChild(0).getText(), "declare", "ArrayList<Row>");
+                    this.states.push(this.current);
+
                     handleDeclareVariable(ctx);
                     break;
                 case HplsqlParser.RULE_cpp_declare_stmt:
@@ -339,6 +346,13 @@ class AbstractSyntaxTree {
 
                 case HplsqlParser.RULE_cpp_assignment_stmt:
                 case HplsqlParser.RULE_assignment_stmt_single_item:
+                    if (!this.states.empty()) {
+                        this.flush();
+                    }
+                    this.lastRule = HplsqlParser.RULE_assignment_stmt_single_item;
+                    this.current = new QueryStatus(null, this.templates.initDeclareQuery(), ctx.getChild(0).getText(), "assign", "ArrayList<Row>");
+                    this.states.push(this.current);
+
                     handleAssignmentSingleItemStmt(ctx);
                     break;
 
@@ -431,6 +445,31 @@ class AbstractSyntaxTree {
                 case HplsqlParser.RULE_expr_agg_window_func:
 
                     break;
+                case HplsqlParser.RULE_parenthesis_close:
+                    if (this.current instanceof SelectStatus) {
+                        if (((SelectStatus) this.current).purpose == 4) {
+                            Console.log("Flush subquery purpose 4");
+                            //System.out.println("nazeer" + this.current);
+                            this.flush();
+                            this.current = this.current.parent();
+                        }
+                    }
+                    break;
+                case HplsqlParser.RULE_execute_query_stmt:
+                    if (!this.states.empty()) {
+                        flush();
+                    }
+                    String variableName = ctx.getChild(2).getText();
+                    String query = "";
+                    for (Pair<String, String> p : this.queries) {
+                        if (p.getKey().equals(variableName)) {
+                            query = p.getValue();
+                            break;
+                        }
+                    }
+                    this.current = new QueryResultStatus(this.current, this.templates.initQueryResult(), variableName, query, "ArrayList<Row>");
+                    this.states.push(this.current);
+                    break;
             }
 
             if (ctx.getChildCount() == 1) {
@@ -453,19 +492,19 @@ class AbstractSyntaxTree {
             for (int i = ctx.getChildCount() - 1; i >= 0; i--) {
                 ParseTree element = ctx.getChild(i);
                 if (element instanceof RuleContext) {
-                    queue.add((RuleContext) element);
+                    queue.push((RuleContext) element);
                 }
             }
             //this.lastRule = ctx.getRuleIndex();
         }
 
         while (!this.states.isEmpty()) {
-            System.out.println("Flush");
+            Console.log("Flush");
             flush();
         }
 
         File file = new File(Environment.KOTLIN + "main2.kt");
-        DataOutputStream stream = null;
+        DataOutputStream stream;
         try {
             file.createNewFile();
             stream = new DataOutputStream(new FileOutputStream(file));
@@ -476,10 +515,6 @@ class AbstractSyntaxTree {
         }
 
         symbolTable.isUnassignedVariable();
-        DataTypes.save(Environment.DATA_TYPES_PATH);
-        checkExistGroupBy();
-        if (isJoinStmt)
-            ((SelectStatus) this.current).joins.add(this.join);
     }
 
     private String inWithoutSubSelect(RuleContext ctx) {
@@ -554,9 +589,10 @@ class AbstractSyntaxTree {
         }
         if (type.equalsIgnoreCase("")) type = "number";
 
-        String x = " x" + (this.join.getDefinitions().size() + 1);
-        this.join.setCondition(this.join.getCondition() + x + " ");
-        this.join.getDefinitions().add(new Condition(x, left, right, op, type));
+        Join first = ((SelectStatus) this.current).joins.firstElement();
+        String x = " x" + (first.getDefinitions().size() + 1);
+        first.setCondition(first.getCondition() + x + " ");
+        first.getDefinitions().add(new Condition(x, left, right, op, type));
     }
 
     private boolean isJoinWhereCondition() {
@@ -568,6 +604,7 @@ class AbstractSyntaxTree {
     }
 
     private void handleFromJoinClause(@NotNull RuleContext ctx) {
+        Console.log("From Join");
         String type = ctx.getChild(0).getText();
         String tableName;
         String tableAlias = "";
@@ -578,14 +615,13 @@ class AbstractSyntaxTree {
                 tableAlias = context.getChild(1).getText();
             }
         }
-        if (isJoinStmt == false) {
+        if (!isJoinStmt) {
             isJoinStmt = true;
-            this.join = new Join(type, tableName, tableAlias, "",
-                    new ArrayList<>());
+            ((SelectStatus) this.current).joins.push(new Join(type, tableName, tableAlias, "",
+                    new ArrayList<>()));
         } else {
-            ((SelectStatus) this.current).joins.add(this.join);
-            ArrayList<String> joinCondition = new ArrayList<>();
-            this.join = new Join(type, tableName, tableAlias, "", new ArrayList<>());
+            //((SelectStatus) this.current).joins.add(this.join);
+            //this.join = new Join(type, tableName, tableAlias, "", new ArrayList<>());
         }
 
         /*
@@ -615,7 +651,6 @@ class AbstractSyntaxTree {
         else if (type.equalsIgnoreCase("varchar2")) type = "string";
         else if (type.equalsIgnoreCase("date")) type = "string";
         else if (type.equalsIgnoreCase("char")) type = "string";
-        else if (type.equalsIgnoreCase("char")) type = "string";
         return type;
     }
 
@@ -628,7 +663,7 @@ class AbstractSyntaxTree {
                     ctx.getChild(0).getText(),
                     type,
                     "",
-                    symbolTable.getValueWithCasting(ctx.getChild(2).getChild(2).getText(), type),
+                    symbolTable.getValueWithCasting(ctx.getChild(2).getChild(1).getText(), type),
                     true), false);
         } else {
             symbolTable.nameSymbols.add(ctx.getChild(0).getText());
@@ -700,7 +735,7 @@ class AbstractSyntaxTree {
 
     private void handleSingleInWhereClause(@NotNull RuleContext ctx) {
         String name = ctx.getChild(0).getText().replace('.', '_');
-        String type = ((SelectStatus) this.current).dataType.getFieldType(name);
+        String type = ((SelectStatus) this.current).getDataType(name.substring(0, name.indexOf('_'))).getFieldType(name);
         this.lastSingleIn = new Pair<>(name, type);
     }
 
@@ -793,7 +828,7 @@ class AbstractSyntaxTree {
 
     private boolean isCurrentStatementSelect() {
         if (this.states.size() > 0)
-            return this.states.elementAt(0) instanceof SelectStatus;
+            return this.states.lastElement() instanceof SelectStatus;
         else return false;
     }
 
@@ -809,6 +844,14 @@ class AbstractSyntaxTree {
         return this.lastRule == HplsqlParser.RULE_fullselect_set_clause;
     }
 
+    private boolean isDeclareStatement() {
+        return this.lastRule == HplsqlParser.RULE_declare_var_item;
+    }
+
+    private boolean isAssignmentStatement() {
+        return this.lastRule == HplsqlParser.RULE_assignment_stmt_single_item;
+    }
+
     private void flush() {
         this.current = this.states.pop();
 
@@ -816,13 +859,12 @@ class AbstractSyntaxTree {
             //System.out.println("Flush select: <SelectStatus>");
             SelectStatus status = (SelectStatus) this.current;
 
-            if (status.purpose == 1 || status.purpose == 8) {
-                this.statements.add(status.key);
-            }
+            checkExistGroupBy();
 
-            if (this.join != null) {
-                status.joins.add(this.join);
-            }
+//            if (this.join != null) {
+//                status.joins.add(this.join);
+//                this.join = null;
+//            }
 
             if (status.whereSelectStmt.contains("orand")) {
                 status.whereSelectStmt = status.whereSelectStmt.replaceAll("orand", "and");
@@ -846,7 +888,7 @@ class AbstractSyntaxTree {
             status.whereSelectStmt = status.whereSelectStmt.replaceAll("or", " || ");
             status.whereSelectStmt = status.whereSelectStmt.replaceAll("and", " && ");
 
-            status.wheres.add(new Pair<>(status.whereSelectStmt, status.columnsWhereClause));
+            status.wheres.add(new Where(status.whereSelectStmt, status.columnsWhereClause));
 
             this.templates.flushSelectStatement(status.key,
                     status.sourceKey != null ? this.templates.calculate(status.sourceKey) + " as String" : "\"" + status.tableSelectStmt + "\"",
@@ -860,10 +902,36 @@ class AbstractSyntaxTree {
                     status.combineSource != null ? this.templates.calculate(status.combineSource) : null,
                     status.distinct,
                     status.purpose);
+
+            if (status.purpose == 1 || status.purpose == 8) {
+                this.statements.add(status.key);
+            } else {
+                if (status.parent() instanceof QueryStatus)
+                    this.flush();
+            }
         } else if (this.current instanceof CreateTypeStatus) {
-            System.out.println("Flush select: <CreateTypeStatus>");
+            System.out.println("Flush statement: <CreateTypeStatus>");
             CreateTypeStatus status = (CreateTypeStatus) this.current;
+
+            this.statements.push(status.key);
+
             this.templates.flushCreateTypeStatement(status.key, status.getName(), status.getFields(), status.getLocations(), status.getDelimiter());
+        } else if (this.current instanceof QueryStatus) {
+            System.out.println("Flush statement: <QueryStatus>");
+            QueryStatus status = (QueryStatus) this.current;
+
+            //this.statements.push(status.getKey());
+
+            this.templates.flushQueryStatement(status.getKey(), status.getMode(), status.getVariableName(), this.templates.calculate(status.getQuery()), status.getType());
+
+            this.queries.add(new Pair<>(status.getVariableName(), status.getQuery()));
+        } else if (this.current instanceof QueryResultStatus) {
+            System.out.println("Flush statement: <QueryResultStatus>");
+            QueryResultStatus status = (QueryResultStatus) this.current;
+
+            this.statements.push(status.getKey());
+
+            this.templates.flushQueryResultStatement(status.getKey(), status.getVariable(), this.templates.calculate(status.getQuery()), status.getType());
         }
     }
 
@@ -990,20 +1058,22 @@ class AbstractSyntaxTree {
         SelectStatus status = (SelectStatus) this.current;
         if (status.tableSelectStmt.equalsIgnoreCase(""))
             status.tableSelectStmt = ctx.getText();
-        status.dataType = DataTypes.get(ctx.getText());
-        if (status.dataType == null) {
+
+        DataType type = DataTypes.get(ctx.getText());
+        if (type == null) {
             System.err.println("Semantic error : Table " + ctx.getChild(0).getChild(0).getText() + " used before it's declared");
             System.exit(1);
         }
+        status.dataTypes.add(type);
 
-        String result = status.dataType.checkColumnsStatus(status.desiredColumns, ctx.getText());
+        String result = type.checkColumnsStatus(status.desiredColumns, ctx.getText());
         if (result != null) {
             System.err.println("Semantic error column " + status.columnsNamesToString() + " doesn't exist in table");
             System.exit(1);
         }
         if (status.AllColumns) {
-            for (Field field : status.dataType.getFields()) {
-                status.desiredColumns.add(new DesiredColumn(field.getName(), status.dataType.getName(), "", "", false, new ArrayList<>()));
+            for (Field field : type.getFields()) {
+                status.desiredColumns.add(new DesiredColumn(field.getName(), type.getName(), "", "", false, new ArrayList<>()));
             }
         }
     }

@@ -2,10 +2,9 @@ package com.sqlcompiler.stringtemplates;
 
 import com.sqlcompiler.Environment;
 import com.sqlcompiler.java.Field;
-import com.sqlcompiler.kotlin.Condition;
 import com.sqlcompiler.kotlin.DesiredColumn;
 import com.sqlcompiler.kotlin.Join;
-import javafx.util.Pair;
+import com.sqlcompiler.kotlin.Where;
 import org.stringtemplate.v4.ST;
 import org.stringtemplate.v4.STGroup;
 import org.stringtemplate.v4.STGroupDir;
@@ -17,6 +16,9 @@ import java.util.Stack;
 
 public class Templates {
     private int selectID = 0;
+    private int create_typeID = 0;
+    private int queryID = 0;
+    private int query_resultID = 0;
 
     private STGroup group;
     private HashMap<String, ST> templates;
@@ -43,15 +45,27 @@ public class Templates {
     }
 
     public String initCreateType() {
-        String KEY = "create_type_" + (++selectID);
+        String KEY = "create_type_" + (++create_typeID);
         this.templates.put(KEY, this.group.getInstanceOf("create"));
+        return KEY;
+    }
+
+    public String initDeclareQuery() {
+        String KEY = "query_" + (++queryID);
+        this.templates.put(KEY, this.group.getInstanceOf("query"));
+        return KEY;
+    }
+
+    public String initQueryResult() {
+        String KEY = "query_" + (++query_resultID);
+        this.templates.put(KEY, this.group.getInstanceOf("query_result"));
         return KEY;
     }
 
     public void flushSelectStatement(String key,
                                      String table,
                                      List<DesiredColumn> columns,
-                                     List<Pair<String, ArrayList<Condition>>> wheres,
+                                     List<Where> wheres,
                                      String subWheres,
                                      List<Join> joins,
                                      List<String> groupBy,
@@ -76,7 +90,6 @@ public class Templates {
         for (DesiredColumn column : columns) {
             column.setColumnName(column.getTableName() + "_" + column.getColumnName());
         }
-
 
         this.add(key, "table", table);
         this.add(key, "columns", columns);
@@ -113,17 +126,33 @@ public class Templates {
         this.add(key, "delimiter", delimiter);
     }
 
+    public void flushQueryStatement(String key,
+                                    String mode,
+                                    String variable,
+                                    String query,
+                                    String type) {
+        if (mode.equals("declare")) {
+            this.add(key, "declare", "declare");
+        }
+        this.add(key, "variable", variable);
+        this.add(key, "query", query);
+        this.add(key, "type", type);
+    }
+
+    public void flushQueryResultStatement(String key,
+                                          String variable,
+                                          String query,
+                                          String type) {
+        this.add(key, "variable", variable);
+        this.add(key, "query", query);
+        this.add(key, "type", type);
+    }
+
     public void add(String name, String key, Object value) {
         ST template = this.templates.get(name);
         //System.out.println("template" + template);
         //System.out.println(key);
-        if (template.getAttribute(key) == null) {
-            template.add(key, value);
-        } else {
-            String oldValue = (String) template.getAttribute(key);
-            template.remove(key);
-            template.add(key, oldValue + ", " + value);
-        }
+        template.add(key, value);
     }
 
     public void addColumns(ArrayList<String> columns) {

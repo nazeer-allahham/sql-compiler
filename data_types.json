@@ -22,18 +22,6 @@
       }
     ]
   },
-  "boolean": {
-    "rank": 0,
-    "name": "boolean",
-    "delimiter": ",",
-    "locations": [],
-    "fields": [
-      {
-        "name": "boolean",
-        "type": "boolean"
-      }
-    ]
-  },
   "c": {
     "rank": 1,
     "name": "c",
@@ -73,17 +61,14 @@
       }
     ]
   },
-  "t": {
+  "tx": {
     "rank": 1,
-    "name": "t",
-    "delimiter": ",",
-    "locations": [],
-    "fields": []
-  },
-  "ttt": {
-    "rank": 1,
-    "name": "ttt",
-    "locations": [],
+    "name": "tx",
+    "delimiter": "w",
+    "locations": [
+      "E:\\\\ite-fourth-year\\\\compilers-1\\\\projects\\\\sql-compiler\\\\tables\\\\tx\\\\p1.csv",
+      "E:\\\\ite-fourth-year\\\\compilers-1\\\\projects\\\\sql-compiler\\\\tables\\\\tx\\\\p2.csv"
+    ],
     "fields": [
       {
         "name": "id",
@@ -94,47 +79,30 @@
         "type": "string"
       },
       {
-        "name": "salary",
+        "name": "price",
         "type": "int"
       }
     ]
   },
-  "test_02": {
+  "devices": {
     "rank": 1,
-    "name": "test_02",
+    "name": "devices",
     "delimiter": ",",
-    "locations": [],
+    "locations": [
+      "tables\\devices.csv"
+    ],
     "fields": [
       {
         "name": "id",
         "type": "int"
       },
       {
-        "name": "title",
+        "name": "name",
         "type": "string"
       },
       {
-        "name": "rate",
-        "type": "real"
-      }
-    ]
-  },
-  "test_01": {
-    "rank": 1,
-    "name": "test_01",
-    "locations": [],
-    "fields": [
-      {
-        "name": "id",
+        "name": "price",
         "type": "int"
-      },
-      {
-        "name": "title",
-        "type": "string"
-      },
-      {
-        "name": "rate",
-        "type": "real"
       }
     ]
   },
@@ -205,6 +173,83 @@
       {
         "name": "int",
         "type": "int"
+      }
+    ]
+  },
+  "boolean": {
+    "rank": 0,
+    "name": "boolean",
+    "delimiter": ",",
+    "locations": [],
+    "fields": [
+      {
+        "name": "boolean",
+        "type": "boolean"
+      }
+    ]
+  },
+  "t": {
+    "rank": 1,
+    "name": "t",
+    "delimiter": ",",
+    "locations": [],
+    "fields": []
+  },
+  "ttt": {
+    "rank": 1,
+    "name": "ttt",
+    "locations": [],
+    "fields": [
+      {
+        "name": "id",
+        "type": "int"
+      },
+      {
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "name": "salary",
+        "type": "int"
+      }
+    ]
+  },
+  "test_02": {
+    "rank": 1,
+    "name": "test_02",
+    "delimiter": ",",
+    "locations": [],
+    "fields": [
+      {
+        "name": "id",
+        "type": "int"
+      },
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "rate",
+        "type": "real"
+      }
+    ]
+  },
+  "test_01": {
+    "rank": 1,
+    "name": "test_01",
+    "locations": [],
+    "fields": [
+      {
+        "name": "id",
+        "type": "int"
+      },
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "rate",
+        "type": "real"
       }
     ]
   }
