@@ -27,6 +27,7 @@ object Reducer {
         val sources = _in["shuffler_files"] as ArrayList<String>
         val columns = _in["desired_columns"] as ArrayList<DesiredColumn>
 
+        val start = System.currentTimeMillis()
         ExecutionPlan.addStep("Reducer", "Begin Reducing")
         columns.forEach { column -> header.addField(column.title()) }
 
@@ -138,7 +139,7 @@ object Reducer {
         }
 
         Handler.writeToFile("${(_in["directory"] as File).path}${File.separator}reducer.csv", header, rows)
-        ExecutionPlan.addStep("Reducer", "End of Reducing")
+        ExecutionPlan.addStep("Reducer", "End of Reducing", start)
 
         return when (_in["purpose"] as Int) {
             PURPOSE_SELECT_NORMAL -> {
