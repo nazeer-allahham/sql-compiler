@@ -49,6 +49,42 @@
       }
     ]
   },
+  "address": {
+    "rank": 1,
+    "name": "address",
+    "delimiter": ",",
+    "locations": [
+      "tables/address.csv"
+    ],
+    "fields": [
+      {
+        "name": "id",
+        "type": "int"
+      },
+      {
+        "name": "name",
+        "type": "string"
+      }
+    ]
+  },
+  "personAddress": {
+    "rank": 1,
+    "name": "personAddres",
+    "delimiter": ",",
+    "locations": [
+      "tables/personAddress.csv"
+    ],
+    "fields": [
+      {
+        "name": "uid",
+        "type": "int"
+      },
+      {
+        "name": "aid",
+        "type": "int"
+      }
+    ]
+  },
   "string": {
     "rank": 0,
     "name": "string",
@@ -211,6 +247,40 @@
       {
         "name": "salary",
         "type": "int"
+      }
+    ]
+  },
+  "person": {
+    "rank": 1,
+    "name": "person",
+    "delimiter": ",",
+    "locations": [
+      "tables/person.csv"
+    ],
+    "fields": [
+      {
+        "name": "id",
+        "type": "int"
+      },
+      {
+        "name": "first_name",
+        "type": "int"
+      },
+      {
+        "name": "last_name",
+        "type": "string"
+      },
+      {
+        "name": "email",
+        "type": "string"
+      },
+      {
+        "name": "gender",
+        "type": "string"
+      },
+      {
+        "name": "ip_address",
+        "type": "string"
       }
     ]
   },

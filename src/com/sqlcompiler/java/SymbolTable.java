@@ -245,6 +245,7 @@ class SymbolTable {
     }
 
     void insert(Symbol symbol, boolean state) {
+        if (currentScope == null) currentScope = new Scope(null);
         if (symbol.attribute.equals("variable") && DataTypes.get(symbol.type) == null) {
             System.err.println(String.format("Type already undefined: %s", symbol.type));
             System.exit(1);
