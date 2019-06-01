@@ -2,6 +2,7 @@ package com.sqlcompiler.kotlin
 
 import com.sqlcompiler.Environment
 import java.io.File
+import kotlin.random.Random
 
 object Reducer {
     const val PURPOSE_SELECT_NORMAL = 1
@@ -9,6 +10,7 @@ object Reducer {
     const val PURPOSE_SELECT_WHERE_SUBQUERY = 4
     const val PURPOSE_SELECT_ONE_VALUE = 8
     const val PURPOSE_SELECT_COMBINE = 16
+    const val PURPOSE_SELECT_RESULT = 32
 
     const val COMBINE_SELECT_UNION = "UNION"
     const val COMBINE_SELECT_UNION_ALL = "UNION ALL"
@@ -25,6 +27,7 @@ object Reducer {
         val sources = _in["shuffler_files"] as ArrayList<String>
         val columns = _in["desired_columns"] as ArrayList<DesiredColumn>
 
+        val start = System.currentTimeMillis()
         ExecutionPlan.addStep("Reducer", "Begin Reducing")
         columns.forEach { column -> header.addField(column.title()) }
 
@@ -66,11 +69,11 @@ object Reducer {
                 }
             }
 
-            columns.forEach { column ->
+            columns.forEachIndexed { I, column ->
                 if (!column.hasGroupingFunction()) {
                     val index = h!!.find(column.columnName)
                     rows.forEachIndexed { i, row ->
-                        row.addField(data!![i].fields[index])
+                        row.addField(I, data!![i].fields[index])
                     }
                 }
             }
@@ -147,7 +150,13 @@ object Reducer {
                 header.fields.forEach { field ->
                     cols.add(Column(field.replace(Regex("[(]"), "_").replace(Regex("[)]"), ""), ""))
                 }
-                "TABLE" to Handler.createTable(Table("temp", cols, arrayListOf(Environment.TABLES_PATH + "temp.csv"), ","))
+
+                val tableID = Math.abs(Random(100).nextInt())
+                "TABLE" to
+                        Handler.createTable(
+                                Table("temp_$tableID",
+                                        cols,
+                                        arrayListOf(Environment.TABLES_PATH + "temp_$tableID.csv"), "\t"), rows) as Table
             }
             PURPOSE_SELECT_WHERE_SUBQUERY -> {
                 var res = ""
@@ -161,6 +170,9 @@ object Reducer {
             }
             PURPOSE_SELECT_COMBINE -> {
                 "COMBINE" to rows
+            }
+            PURPOSE_SELECT_RESULT -> {
+                "RESULT" to rows
             }
             else -> {
                 "BUG" to "Unknown purpose"

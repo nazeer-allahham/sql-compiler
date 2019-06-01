@@ -6,10 +6,23 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cbd17289-3488-4531-bbea-02b9d1cfb778" name="Default Changelist" comment="Hello">
+    <list default="true" id="38b7aabf-97b7-47bc-92b4-45ba4c075a9b" name="Revert: " comment="Checkout and move on">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/sql_compiller_jar/sql_compiller.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sql_compiller/com/sqlcompiler/antlr/Hplsql.g4" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sql_compiller/com/sqlcompiler/antlr/Hplsql.g4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sql_compiller/com/sqlcompiler/java/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sql_compiller/com/sqlcompiler/java/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/Hplsql.interp" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/Hplsql.interp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/HplsqlBaseVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/HplsqlBaseVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/HplsqlLexer.interp" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/HplsqlLexer.interp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/HplsqlLexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/HplsqlLexer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/HplsqlListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/HplsqlListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/HplsqlParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/HplsqlParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/HplsqlVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/HplsqlVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/sqlcompiler/kotlin/Reducer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sqlcompiler/kotlin/Reducer.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/sqlcompiler/kotlin/main2.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sqlcompiler/kotlin/main2.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.sql" beforeDir="false" afterPath="$PROJECT_DIR$/test.sql" afterDir="false" />
     </list>
+    <list id="cbd17289-3488-4531-bbea-02b9d1cfb778" name="Default Changelist" comment="Hello" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,19 +50,133 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/kotlin/Reducer.kt">
+        <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/antlr/Hplsql.g4">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1092">
-              <caret line="53" column="47" selection-start-line="53" selection-start-column="47" selection-end-line="53" selection-end-column="47" />
+            <state relative-caret-position="420">
+              <caret line="20" column="12" lean-forward="true" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/kotlin/main2.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="334">
+              <caret line="34" column="36" lean-forward="true" selection-start-line="34" selection-start-column="36" selection-end-line="34" selection-end-column="36" />
+              <folding>
+                <element signature="e#0#80#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/kotlin/Where.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="42">
+              <caret line="2" column="74" selection-start-line="2" selection-start-column="74" selection-end-line="2" selection-end-column="74" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/kotlin/Utils.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="231">
+              <caret line="29" column="30" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
+              <folding>
+                <element signature="e#32#312#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/kotlin/Fetcher.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="147">
+              <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+              <folding>
+                <element signature="e#32#218#0" expanded="true" />
+                <element signature="e#1992#14537#2" />
+                <element signature="e#2052#14527#1" />
+                <element signature="e#2196#14513#2" />
+                <element signature="e#2251#14495#2" />
+                <element signature="e#2367#2482#0" />
+                <element signature="e#2522#2637#0" />
+                <element signature="e#2675#3134#0" />
+                <element signature="e#3173#3633#0" />
+                <element signature="e#3672#4131#0" />
+                <element signature="e#4171#4888#0" />
+                <element signature="e#4929#4961#0" />
+                <element signature="e#5000#5460#0" />
+                <element signature="e#5498#5957#0" />
+                <element signature="e#5996#6456#0" />
+                <element signature="e#6494#6953#0" />
+                <element signature="e#6993#7454#0" />
+                <element signature="e#7491#7950#0" />
+                <element signature="e#7988#8447#0" />
+                <element signature="e#8485#9199#0" />
+                <element signature="e#9239#9271#0" />
+                <element signature="e#9311#10026#0" />
+                <element signature="e#10070#10102#0" />
+                <element signature="e#10142#10603#0" />
+                <element signature="e#10642#11104#0" />
+                <element signature="e#11142#11601#0" />
+                <element signature="e#11640#12100#0" />
+                <element signature="e#12139#12599#0" />
+                <element signature="e#12637#13096#0" />
+                <element signature="e#13135#13595#0" />
+                <element signature="e#13635#13667#0" />
+                <element signature="e#13714#13746#0" />
+                <element signature="e#13790#14447#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="5" column="97" selection-start-line="5" selection-start-column="97" selection-end-line="5" selection-end-column="97" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/kotlin/Mapper.kt">
+        <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/kotlin/reducer.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="8" column="43" selection-start-line="8" selection-start-column="43" selection-end-line="8" selection-end-column="43" />
+            <state relative-caret-position="231">
+              <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
+              <folding>
+                <element signature="e#32#86#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/kotlin/Handler.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="462">
+              <caret line="110" column="26" selection-start-line="110" selection-start-column="26" selection-end-line="110" selection-end-column="26" />
+              <folding>
+                <element signature="e#32#164#0" expanded="true" />
+                <element signature="n#!!block;n#writeToFile#0;n#!!block;n#Handler#0" />
+                <element signature="n#!!block;n#writeToFile#1;n#!!block;n#Handler#0" />
+                <element signature="n#!!block;n#readFromFile#0;n#!!block;n#Handler#0" />
+                <element signature="n#!!block;n#createTable#0;n#!!block;n#Handler#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/kotlin/Join.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="231">
+              <caret line="11" column="1" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -150,7 +277,6 @@
         <option value="$PROJECT_DIR$/src/com/sqlcompiler/stringtemplates/createtable.st" />
         <option value="$PROJECT_DIR$/src/com/sqlcompiler/stringtemplates/program.st" />
         <option value="$PROJECT_DIR$/output/output_wed_may_08_13_34_44_eest_2019/reducer.csv" />
-        <option value="$PROJECT_DIR$/src/com/sqlcompiler/kotlin/reducer.kt" />
         <option value="$PROJECT_DIR$/src/com/sqlcompiler/kotlin/Utils.kt" />
         <option value="$PROJECT_DIR$/src/com/sqlcompiler/stringtemplates/create.st" />
         <option value="$PROJECT_DIR$/src/com/sqlcompiler/java/SelectStatus.java" />
@@ -159,18 +285,19 @@
         <option value="$PROJECT_DIR$/src/com/sqlcompiler/java/AbstractSyntaxTree.java" />
         <option value="$PROJECT_DIR$/src/com/sqlcompiler/java/DataType.java" />
         <option value="$PROJECT_DIR$/tables/c/c2.csv" />
-        <option value="$PROJECT_DIR$/test.sql" />
         <option value="$PROJECT_DIR$/src/com/sqlcompiler/kotlin/main.kt" />
         <option value="$PROJECT_DIR$/data_types.json" />
         <option value="$PROJECT_DIR$/src/com/sqlcompiler/kotlin/ExecutionPlan.kt" />
         <option value="$PROJECT_DIR$/tables/c/c1.csv" />
-        <option value="$PROJECT_DIR$/src/com/sqlcompiler/kotlin/Fetcher.kt" />
         <option value="$PROJECT_DIR$/src/com/sqlcompiler/kotlin/Handler.kt" />
-        <option value="$PROJECT_DIR$/src/com/sqlcompiler/kotlin/main2.kt" />
         <option value="$PROJECT_DIR$/output/output_thu_may_09_21_13_07_eest_2019/fetcher.csv" />
         <option value="$PROJECT_DIR$/src/com/sqlcompiler/kotlin/mapper.kt" />
         <option value="$PROJECT_DIR$/src/com/sqlcompiler/kotlin/Mapper.kt" />
         <option value="$PROJECT_DIR$/src/com/sqlcompiler/kotlin/Reducer.kt" />
+        <option value="$PROJECT_DIR$/src/com/sqlcompiler/kotlin/Fetcher.kt" />
+        <option value="$PROJECT_DIR$/test.sql" />
+        <option value="$PROJECT_DIR$/src/com/sqlcompiler/kotlin/main2.kt" />
+        <option value="$PROJECT_DIR$/src/com/sqlcompiler/kotlin/reducer.kt" />
       </list>
     </option>
   </component>
@@ -197,6 +324,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -207,25 +335,12 @@
             <path>
               <item name="sql-compiler" type="b2602c69:ProjectViewProjectNode" />
               <item name="sql-compiler" type="462c0819:PsiDirectoryNode" />
-              <item name="output" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="sql-compiler" type="b2602c69:ProjectViewProjectNode" />
               <item name="sql-compiler" type="462c0819:PsiDirectoryNode" />
               <item name="output" type="462c0819:PsiDirectoryNode" />
-              <item name="output_tue_may_14_01_46_36_eest_2019" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sql-compiler" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sql-compiler" type="462c0819:PsiDirectoryNode" />
-              <item name="output" type="462c0819:PsiDirectoryNode" />
-              <item name="output_tue_may_14_01_56_57_eest_2019" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sql-compiler" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sql-compiler" type="462c0819:PsiDirectoryNode" />
-              <item name="output" type="462c0819:PsiDirectoryNode" />
-              <item name="output_tue_may_14_01_58_31_eest_2019" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="sql-compiler" type="b2602c69:ProjectViewProjectNode" />
@@ -237,6 +352,13 @@
               <item name="sql-compiler" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="com" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sql-compiler" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sql-compiler" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="exprk" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="sql-compiler" type="b2602c69:ProjectViewProjectNode" />
@@ -244,6 +366,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="com" type="462c0819:PsiDirectoryNode" />
               <item name="sqlcompiler" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sql-compiler" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sql-compiler" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="sqlcompiler" type="462c0819:PsiDirectoryNode" />
+              <item name="antlr" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="sql-compiler" type="b2602c69:ProjectViewProjectNode" />
@@ -269,26 +399,10 @@
               <item name="sqlcompiler" type="462c0819:PsiDirectoryNode" />
               <item name="stringtemplates" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="sql-compiler" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sql-compiler" type="462c0819:PsiDirectoryNode" />
-              <item name="tables" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sql-compiler" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sql-compiler" type="462c0819:PsiDirectoryNode" />
-              <item name="tables" type="462c0819:PsiDirectoryNode" />
-              <item name="c" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sql-compiler" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -342,7 +456,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Kotlin.Main2Kt">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.sqlcompiler.java.Main" />
       <module name="sql_compiller" />
@@ -417,9 +531,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="Kotlin.com.sqlcompiler.kotlin.MainKt" />
         <item itemvalue="Kotlin.Main2Kt" />
-        <item itemvalue="Application.Main" />
         <item itemvalue="Kotlin.MainKt" />
       </list>
     </recent_temporary>
@@ -632,7 +746,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="436005000" />
+    <option name="totallyTimeSpent" value="436299000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -647,7 +761,7 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20414993" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22356091" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -669,7 +783,7 @@
       <window_info anchor="bottom" id="Terminal" order="12" weight="0.4047955" />
       <window_info anchor="bottom" id="Event Log" order="13" side_tool="true" weight="0.32863188" />
       <window_info anchor="bottom" id="Tool Output" order="14" weight="0.32722145" />
-      <window_info anchor="bottom" id="Messages" order="15" visible="true" weight="0.32863188" />
+      <window_info anchor="bottom" id="Messages" order="15" weight="0.40056416" />
       <window_info anchor="bottom" id="ANTLR Preview" order="16" weight="0.55430186" />
       <window_info anchor="bottom" id="Flutter Performance" order="17" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -754,7 +868,8 @@
     <MESSAGE value="Start using fetcher" />
     <MESSAGE value="M2000" />
     <MESSAGE value="M200" />
-    <option name="LAST_COMMIT_MESSAGE" value="M200" />
+    <MESSAGE value="Checkout and move on" />
+    <option name="LAST_COMMIT_MESSAGE" value="Checkout and move on" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -781,8 +896,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/output/output_mon_apr_22_16_05_01_eest_2019/shuffler_c_name_mhd.csv" />
-    <entry file="file://$PROJECT_DIR$/output/output_mon_apr_22_16_05_01_eest_2019/shuffler_c_name_hmz.csv" />
     <entry file="file://$PROJECT_DIR$/output/output_mon_apr_22_16_05_01_eest_2019/reducer.csv" />
     <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/kotlin/Templates.kt" />
     <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/kotlin/Row.kt">
@@ -902,11 +1015,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tables/TEMPORARY.csv">
-      <provider editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="1" />
-        </state>
-      </provider>
       <provider selected="true" editor-type-id="csv-text-editor">
         <state relative-caret-position="21">
           <caret line="1" selection-start-line="1" selection-end-line="1" />
@@ -914,6 +1022,11 @@
       </provider>
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="1" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/stringtemplates/Templates.java">
@@ -975,17 +1088,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/kotlin/Utils.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" column="35" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="35" />
+        <state relative-caret-position="231">
+          <caret line="29" column="30" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
+          <folding>
+            <element signature="e#32#312#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tables/c/c2.csv">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="3" column="16" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
-        </state>
-      </provider>
       <provider selected="true" editor-type-id="csv-text-editor">
         <state relative-caret-position="63">
           <caret line="3" column="3" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="6" />
@@ -993,6 +1104,11 @@
       </provider>
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="3" column="16" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data_types.json">
@@ -1029,19 +1145,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="59" selection-start-column="59" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tables/c/c1.csv">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-        </state>
-      </provider>
       <provider selected="true" editor-type-id="csv-text-editor">
         <state relative-caret-position="42">
           <caret line="2" column="12" lean-forward="true" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
@@ -1050,24 +1154,13 @@
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/kotlin/Operator.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/kotlin/main2.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="8" column="44" selection-start-line="8" selection-start-column="44" selection-end-line="8" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#81#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/kotlin/Operator.kt" />
     <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/kotlin/main.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-189">
@@ -1075,36 +1168,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/kotlin/Fetcher.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="17" column="9" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/output/output_thu_may_09_21_13_07_eest_2019/fetcher.csv">
-      <provider selected="true" editor-type-id="csv-text-editor">
-        <state relative-caret-position="126">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/kotlin/Handler.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="523">
-          <caret line="110" selection-start-line="110" selection-end-line="110" />
-          <folding>
-            <element signature="n#!!block;n#writeToFile#0;n#!!block;n#Handler#0" />
-            <element signature="n#!!block;n#writeToFile#1;n#!!block;n#Handler#0" />
-            <element signature="n#!!block;n#readFromFile#0;n#!!block;n#Handler#0" />
-            <element signature="n#!!block;n#createTable#0;n#!!block;n#Handler#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/output/output_thu_may_09_21_13_07_eest_2019/fetcher.csv" />
     <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="137">
@@ -1116,44 +1180,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="411">
           <caret line="63" column="26" selection-start-line="63" selection-start-column="26" selection-end-line="63" selection-end-column="26" />
-          <folding>
-            <element signature="e#481#482#0" expanded="true" />
-            <element signature="e#514#515#0" expanded="true" />
-            <element signature="e#566#567#0" expanded="true" />
-            <element signature="e#610#611#0" expanded="true" />
-            <element signature="e#649#650#0" expanded="true" />
-            <element signature="e#684#685#0" expanded="true" />
-            <element signature="e#740#741#0" expanded="true" />
-            <element signature="e#788#789#0" expanded="true" />
-            <element signature="e#824#825#0" expanded="true" />
-            <element signature="e#856#857#0" expanded="true" />
-            <element signature="e#906#907#0" expanded="true" />
-            <element signature="e#948#949#0" expanded="true" />
-            <element signature="e#984#985#0" expanded="true" />
-            <element signature="e#1016#1017#0" expanded="true" />
-            <element signature="e#1066#1067#0" expanded="true" />
-            <element signature="e#1108#1109#0" expanded="true" />
-            <element signature="e#1226#1227#0" expanded="true" />
-            <element signature="e#1257#1258#0" expanded="true" />
-            <element signature="e#1517#1518#0" expanded="true" />
-            <element signature="e#1550#1551#0" expanded="true" />
-            <element signature="e#1599#1600#0" expanded="true" />
-            <element signature="e#1639#1640#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/antlr/Hplsql.g4">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="62">
-          <caret line="756" column="31" selection-start-line="756" selection-start-column="31" selection-end-line="756" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/kotlin/Reducer.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1092">
-          <caret line="53" column="47" selection-start-line="53" selection-start-column="47" selection-end-line="53" selection-end-column="47" />
         </state>
       </provider>
     </entry>
@@ -1161,6 +1187,110 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
           <caret line="8" column="43" selection-start-line="8" selection-start-column="43" selection-end-line="8" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/kotlin/Join.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="11" column="1" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/antlr/Hplsql.g4">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="20" column="12" lean-forward="true" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/kotlin/Condition.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/kotlin/Fetcher.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+          <folding>
+            <element signature="e#32#218#0" expanded="true" />
+            <element signature="e#1992#14537#2" />
+            <element signature="e#2052#14527#1" />
+            <element signature="e#2196#14513#2" />
+            <element signature="e#2251#14495#2" />
+            <element signature="e#2367#2482#0" />
+            <element signature="e#2522#2637#0" />
+            <element signature="e#2675#3134#0" />
+            <element signature="e#3173#3633#0" />
+            <element signature="e#3672#4131#0" />
+            <element signature="e#4171#4888#0" />
+            <element signature="e#4929#4961#0" />
+            <element signature="e#5000#5460#0" />
+            <element signature="e#5498#5957#0" />
+            <element signature="e#5996#6456#0" />
+            <element signature="e#6494#6953#0" />
+            <element signature="e#6993#7454#0" />
+            <element signature="e#7491#7950#0" />
+            <element signature="e#7988#8447#0" />
+            <element signature="e#8485#9199#0" />
+            <element signature="e#9239#9271#0" />
+            <element signature="e#9311#10026#0" />
+            <element signature="e#10070#10102#0" />
+            <element signature="e#10142#10603#0" />
+            <element signature="e#10642#11104#0" />
+            <element signature="e#11142#11601#0" />
+            <element signature="e#11640#12100#0" />
+            <element signature="e#12139#12599#0" />
+            <element signature="e#12637#13096#0" />
+            <element signature="e#13135#13595#0" />
+            <element signature="e#13635#13667#0" />
+            <element signature="e#13714#13746#0" />
+            <element signature="e#13790#14447#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="5" column="97" selection-start-line="5" selection-start-column="97" selection-end-line="5" selection-end-column="97" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/kotlin/main2.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="334">
+          <caret line="34" column="36" lean-forward="true" selection-start-line="34" selection-start-column="36" selection-end-line="34" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#80#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/kotlin/Handler.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="110" column="26" selection-start-line="110" selection-start-column="26" selection-end-line="110" selection-end-column="26" />
+          <folding>
+            <element signature="e#32#164#0" expanded="true" />
+            <element signature="n#!!block;n#writeToFile#0;n#!!block;n#Handler#0" />
+            <element signature="n#!!block;n#writeToFile#1;n#!!block;n#Handler#0" />
+            <element signature="n#!!block;n#readFromFile#0;n#!!block;n#Handler#0" />
+            <element signature="n#!!block;n#createTable#0;n#!!block;n#Handler#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/kotlin/reducer.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
+          <folding>
+            <element signature="e#32#86#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1224,7 +1354,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
@@ -1232,7 +1361,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>stringtemplate-3.2.1</last-edited>
+          <last-edited>gson-2.8.5</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

@@ -49,7 +49,9 @@ stmt :
     | return_stmt
     | select_stmt
     | while_stmt
+    | typeof
     | cpp_stmt
+    | execute_query_stmt
     | error_stmt
     | label
     | null_stmt
@@ -57,6 +59,9 @@ stmt :
     | semicolon_stmt
     ;
 
+typeof:
+    T_TYPEOF T_OPEN_P (expr|bool_expr) T_CLOSE_P
+;
 error_stmt:
        invalid_select
     |  invalid_bool_expr
@@ -150,6 +155,7 @@ assignment_stmt_item :
         assignment_stmt_single_item
     |   assignment_stmt_multiple_item
     |   assignment_stmt_select_item
+    |   assignment_query_stmt
     ;
 
 assignment_stmt_single_item :
@@ -163,6 +169,10 @@ assignment_stmt_multiple_item :
 
 assignment_stmt_select_item :
         (ident | (T_OPEN_P ident (T_COMMA ident)* T_CLOSE_P)) T_COLON? T_EQUAL T_OPEN_P select_stmt T_CLOSE_P
+    ;
+
+assignment_query_stmt :
+        select_stmt
     ;
 
 associate_locator_stmt :
@@ -426,6 +436,8 @@ dtype :
     |   T_VARCHAR
     |   T_VARCHAR2
     |   T_XML
+    |   T_QUERY
+    |   T_QUERY_RESULT
     |   ident ('%' (T_TYPE))?             // User-defined or derived data type
     ;
 
@@ -692,6 +704,11 @@ cpp_scope:
         T_OPEN_B (cpp_stmt | cpp_scope)* T_CLOSE_B
     ;
 
+//execute_stmt
+execute_query_stmt:
+        (ident '=')? T_EXECUTE_QUERY T_OPEN_P ident T_CLOSE_P
+    ;
+
 // WHILE loop statement
 while_stmt :
         T_WHILE bool_expr (T_DO | T_LOOP | T_THEN | T_BEGIN) block T_END (T_WHILE | T_LOOP)?
@@ -875,7 +892,7 @@ bool_expr_exists:
     ;
 
 bool_expr_single_in :
-        expr T_NOT? T_IN T_OPEN_P ((expr (T_COMMA expr)*) | select_stmt) T_CLOSE_P
+        expr T_NOT? T_IN parenthesis_open ((expr (T_COMMA expr)*) | select_stmt) parenthesis_close
     ;
 
 bool_expr_multi_in :
@@ -1059,6 +1076,14 @@ date_literal :
 // TIMESTAMP 'YYYY-MM-DD HH:MI:SS.FFF' literal
 timestamp_literal :
         T_TIMESTAMP string
+    ;
+
+parenthesis_open:
+        T_OPEN_P
+    ;
+
+parenthesis_close:
+        T_CLOSE_P
     ;
 
 ident :
@@ -1653,6 +1678,10 @@ T_SYSDATE              : S Y S D A T E ;
 T_VARIANCE             : V A R I A N C E ;
 T_USER                 : U S E R;
 T_WRITE                : W R I T E;
+T_TYPEOF               : T Y P E O F;
+T_QUERY                : Q U E R Y;
+T_QUERY_RESULT         : Q U E R Y '_' R E S U L T;
+T_EXECUTE_QUERY        : E X E C U T E '_' Q U E R Y;
 
 
 T_ADD          : '+' ;

@@ -5,7 +5,7 @@ fun main() {
     Handler.select(table = "c",
             columns = arrayListOf(DesiredColumn("c_id", "c", "", "", false, arrayListOf()), DesiredColumn("c_name", "c", "", "", false, arrayListOf()), DesiredColumn("c_salary", "c", "", "", false, arrayListOf()), DesiredColumn("c_birth_year", "c", "", "", false, arrayListOf()), DesiredColumn("users_id", "users", "", "", false, arrayListOf()), DesiredColumn("users_name", "users", "", "", false, arrayListOf()), DesiredColumn("users_age", "users", "", "", false, arrayListOf()), DesiredColumn("users_gender", "users", "", "", false, arrayListOf())),
             wheres = arrayListOf(
-                    Where(" x0  &&  x1 ", arrayListOf(Condition("x1", "c_id", "2", ">", "number")
+                    Where(" x1  &&  x2 ", arrayListOf(Condition("x1", "c_id", "2", ">", "number")
                             , Condition("x2", "users_id", "3", ">=", "number")
                     ))
 
@@ -26,7 +26,8 @@ fun main() {
                     , smartSplit("c_id", "int", Handler.select(table = "users",
                     columns = arrayListOf(DesiredColumn("users_id", "users", "", "", false, arrayListOf())),
                     wheres = arrayListOf(
-                            Where("", arrayListOf())
+                            Where(" x1 ", arrayListOf(Condition("x1", "users_id", "10", ">", "number")
+                            ))
 
                     ),
                     join = arrayListOf(),
