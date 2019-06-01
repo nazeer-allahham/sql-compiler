@@ -721,7 +721,29 @@ class AbstractSyntaxTree {
     private void handleSingleInWhereClause(@NotNull RuleContext ctx) {
         String name = ctx.getChild(0).getText().replace('.', '_');
         String type = ((SelectStatus) this.current).getDataType(name.substring(0, name.indexOf('_'))).getFieldType(name);
-        this.lastSingleIn = new Pair<>(name, type);
+
+        if (!(((RuleContext) ctx.getChild(3)).getRuleIndex() == HplsqlParser.RULE_select_stmt)) {
+            //normal in
+            SelectStatus status = ((SelectStatus) this.current);
+            status.whereSelectStmt += "(";
+            for (int i = 3; i < ctx.getChildCount() - 1; i += 2) {
+                String x = "x" + (status.columnsWhereClause.size() + 1);
+                status.whereSelectStmt += " x" + (status.columnsWhereClause.size() + 1) + " ";
+                if (i != ctx.getChildCount() - 2)
+                    status.whereSelectStmt += "||";
+                status.columnsWhereClause.add(new Condition(
+                        x,
+                        name,
+                        ctx.getChild(i).getText(),
+                        "=",
+                        type
+                ));
+            }
+            status.whereSelectStmt += ")";
+
+        } else {
+            this.lastSingleIn = new Pair<>(name, type);
+        }
     }
 
     private void handleExistsWhereClause(RuleContext ctx) {
@@ -742,9 +764,11 @@ class AbstractSyntaxTree {
     }
 
     private void handleIsNotNullWhereClause(@NotNull RuleContext ctx) {
-        String left = ctx.getChild(0).getText();
+        String left = ctx.getChild(0).getText().replace('.', '_');
         String op;
         String right;
+        String name = ctx.getChild(0).getText().replace('.', '_');
+        String type = ((SelectStatus) this.current).getDataType(name.substring(0, name.indexOf('_'))).getFieldType(name);
 
         if (ctx.getChildCount() == 4) {
             op = "!=";
@@ -753,9 +777,17 @@ class AbstractSyntaxTree {
             op = "=";
             right = "";
         }
-        // ((SelectStatus) this.current).columnsWhereClause.add(left.replace('.', '_'));
-        // ((SelectStatus) this.current).columnsWhereClause.add(left.replace('.', '_'));
-        ((SelectStatus) this.current).whereSelectStmt += left + " " + op + " " + right;
+        SelectStatus status = ((SelectStatus) this.current);
+        String x = "x" + (status.columnsWhereClause.size() + 1);
+        status.whereSelectStmt += " x" + (status.columnsWhereClause.size() + 1) + " ";
+        status.columnsWhereClause.add(new Condition(
+                x,
+                left,
+                right,
+                op,
+                type
+        ));
+        //((SelectStatus) this.current).whereSelectStmt += left + " " + op + " " + right;
     }
 
     private void handleWhereClause(@NotNull RuleContext ctx) {
