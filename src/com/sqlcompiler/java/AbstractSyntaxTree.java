@@ -2,8 +2,8 @@ package com.sqlcompiler.java;
 
 import com.sqlcompiler.Environment;
 import com.sqlcompiler.antlr.HplsqlParser;
-import com.sqlcompiler.kotlin.*;
 import com.sqlcompiler.kotlin.DesiredColumn;
+import com.sqlcompiler.kotlin.*;
 import com.sqlcompiler.stringtemplates.Templates;
 import javafx.util.Pair;
 import javaslang.Tuple3;
@@ -256,7 +256,9 @@ class AbstractSyntaxTree {
                         handleLogicalOperator(ctx);
                     } else if (lastRule == HplsqlParser.RULE_from_join_clause) {
                         Join first = ((SelectStatus) this.current).joins.firstElement();
-                        first.setCondition(first.getCondition() + ctx.getText());
+                        if (ctx.getText().equalsIgnoreCase("and"))
+                            first.setCondition(first.getCondition() + "&&");
+                        else first.setCondition(first.getCondition() + "||");
                     }
                     break;
 
@@ -571,6 +573,10 @@ class AbstractSyntaxTree {
 
         Join first = ((SelectStatus) this.current).joins.firstElement();
         String x = " x" + (first.getDefinitions().size() + 1);
+        String temp = " x" + (first.getDefinitions().size());
+        if (first.getDefinitions().size() > 0 && first.getCondition().endsWith(temp + " ")) {
+            x = "&&" + x;
+        }
         first.setCondition(first.getCondition() + x + " ");
         first.getDefinitions().add(new Condition(x, left, right, op, type));
     }
