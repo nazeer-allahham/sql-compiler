@@ -1,5 +1,4 @@
 import com.sqlcompiler.kotlin.*
-import com.sqlcompiler.kotlin.Utils.smartSplit
 
 fun main() {
     Handler.select(table = "person",
@@ -9,9 +8,12 @@ fun main() {
                     ))
 
             ),
-            join = arrayListOf(Join("join", "personAddress", "", " x1  x2 ",
-                    arrayListOf(Condition(" x1", "personAddress_uid", "person_id", "=", "number"),
-                            Condition(" x2", "personAddress_aid", "address_id", "=", "number")))),
+            join = arrayListOf(
+                    Join("join", "personAddress", "", "x1 ", arrayListOf(
+                            Condition("x1", "personAddress_uid", "person_id", "=", "number"))),
+                    Join("join", "address", "", "x1  && x2 ", arrayListOf(
+                            Condition("x1", "personAddress_aid", "address_id", "=", "number"),
+                            Condition("x2", "address_id", "2", ">", "number")))),
             groupBy = arrayListOf(),
             orderBy = arrayListOf(),
             distinct = false,

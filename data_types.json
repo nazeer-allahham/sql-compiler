@@ -69,7 +69,7 @@
   },
   "personAddress": {
     "rank": 1,
-    "name": "personAddres",
+    "name": "personAddress",
     "delimiter": ",",
     "locations": [
       "tables/personAddress.csv"
