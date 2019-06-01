@@ -147,7 +147,7 @@ object Reducer {
                 header.fields.forEach { field ->
                     cols.add(Column(field.replace(Regex("[(]"), "_").replace(Regex("[)]"), ""), ""))
                 }
-                "TABLE" to Handler.createTable(Table("temp", cols, arrayListOf(Environment.TABLES_PATH + "temp.csv"), ","))
+                "TABLE" to Handler.createTable(Table("temp", cols, arrayListOf(Environment.TABLES_PATH + "temp.csv"), ",")) as Table
             }
             PURPOSE_SELECT_WHERE_SUBQUERY -> {
                 var res = ""

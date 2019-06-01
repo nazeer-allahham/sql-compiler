@@ -188,6 +188,7 @@ class AbstractSyntaxTree {
 
                 case HplsqlParser.RULE_from_join_clause:
                     this.lastRule = HplsqlParser.RULE_from_join_clause;
+                    isJoinStmt = false;
                     handleFromJoinClause(ctx);
                     break;
 
@@ -256,10 +257,10 @@ class AbstractSyntaxTree {
                     if (this.lastRule == HplsqlParser.RULE_where_clause) {
                         handleLogicalOperator(ctx);
                     } else if (lastRule == HplsqlParser.RULE_from_join_clause) {
-                        Join first = ((SelectStatus) this.current).joins.firstElement();
+                        Join first = ((SelectStatus) this.current).joins.lastElement();
                         if (ctx.getText().equalsIgnoreCase("and"))
-                            first.setCondition(first.getCondition() + "&&");
-                        else first.setCondition(first.getCondition() + "||");
+                            first.setCondition(first.getCondition() + " && ");
+                        else first.setCondition(first.getCondition() + " || ");
                     }
                     break;
 
@@ -572,11 +573,11 @@ class AbstractSyntaxTree {
         }
         if (type.equalsIgnoreCase("")) type = "number";
 
-        Join first = ((SelectStatus) this.current).joins.firstElement();
-        String x = " x" + (first.getDefinitions().size() + 1);
+        Join first = ((SelectStatus) this.current).joins.lastElement();
+        String x = "x" + (first.getDefinitions().size() + 1);
         String temp = " x" + (first.getDefinitions().size());
-        if (first.getDefinitions().size() > 0 && first.getCondition().endsWith(temp + " ")) {
-            x = "&&" + x;
+        if (first.getDefinitions().size() > 0 && first.getCondition().endsWith(temp)) {
+            x = " && " + x;
         }
         first.setCondition(first.getCondition() + x + " ");
         first.getDefinitions().add(new Condition(x, left, right, op, type));

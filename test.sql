@@ -1,3 +1,7 @@
-select person.first_name
+select person.first_name , address.name
 from person
-where person.last_name is null and person.id <100 or person.id in(1,2,3)
+join personAddress on personAddress.uid = person.id
+
+join address on personAddress.aid = address.id and  address.id > 2
+
+where personAddress.uid < 100
