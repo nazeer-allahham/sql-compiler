@@ -59,10 +59,10 @@ object Utils {
         ExecutionPlan.addStep("Utils Restore Tables", "Restoring Tables")
         if (toAdd is Table)
             tables.add(toAdd)
-        types.values.forEach {
-            tables.add(fromDataType2Table(it))
+        names.forEach { name ->
+            tables.add(fromDataType2Table(types[name]!!))
         }
-        return tables.filter { table -> names.contains(table.name) }
+        return tables
     }
 
     private fun fromDataType2Table(type: DataType): Table {

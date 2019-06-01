@@ -2,8 +2,8 @@ package com.sqlcompiler.java;
 
 import com.sqlcompiler.Environment;
 import com.sqlcompiler.antlr.HplsqlParser;
-import com.sqlcompiler.kotlin.DesiredColumn;
 import com.sqlcompiler.kotlin.*;
+import com.sqlcompiler.kotlin.DesiredColumn;
 import com.sqlcompiler.stringtemplates.Templates;
 import javafx.util.Pair;
 import javaslang.Tuple3;
@@ -77,6 +77,7 @@ class AbstractSyntaxTree {
                         System.err.println("Type " + ctx.getChild(1).getText() + " undefined");
                         System.exit(1);
                     }
+                    DataTypes.addField(ctx.getChild(0).getText(), ctx.getChild(1).getText());
                     break;
                 case HplsqlParser.RULE_create_table_stmt:
                     if (!this.states.empty())
@@ -89,14 +90,14 @@ class AbstractSyntaxTree {
                     DataTypes.initialize(SECONDARY_DATA_TYPE, ctx.getChild(2).getText());
                     ((CreateTypeStatus) this.current).setName(ctx.getChild(2).getText());
 
-                    for (int i = 0; i < ctx.getChild(3).getChild(1).getChildCount(); i++) {
-                        if (i % 2 == 0) {
-                            String nameField = ctx.getChild(3).getChild(1).getChild(i).getChild(0).getText();
-                            String typeField = ctx.getChild(3).getChild(1).getChild(i).getChild(1).getText();
-                            ((CreateTypeStatus) this.current).addField(new Field(nameField, typeField));
-                        }
-                    }
-                    DataTypes.createSecondaryDataType(((CreateTypeStatus) this.current).getName(), ((CreateTypeStatus) this.current).getFields());
+//                    for (int i = 0; i < ctx.getChild(3).getChild(1).getChildCount(); i++) {
+//                        if (i % 2 == 0) {
+//                            String nameField = ctx.getChild(3).getChild(1).getChild(i).getChild(0).getText();
+//                            String typeField = ctx.getChild(3).getChild(1).getChild(i).getChild(1).getText();
+//                            ((CreateTypeStatus) this.current).addField(new Field(nameField, typeField));
+//                        }
+//                    }
+//                    DataTypes.createSecondaryDataType(((CreateTypeStatus) this.current).getName(), ((CreateTypeStatus) this.current).getFields());
                     symbolTable.insert(new SymbolTable.Symbol(ctx.getChild(2).getText(),
                             "Table",
                             "table"), false);
