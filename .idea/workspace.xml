@@ -7,20 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="38b7aabf-97b7-47bc-92b4-45ba4c075a9b" name="Revert: " comment="Checkout and move on">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/sql_compiller_jar/sql_compiller.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sql_compiller/com/sqlcompiler/antlr/Hplsql.g4" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sql_compiller/com/sqlcompiler/antlr/Hplsql.g4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sql_compiller/com/sqlcompiler/java/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sql_compiller/com/sqlcompiler/java/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/Hplsql.interp" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/Hplsql.interp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/HplsqlBaseVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/HplsqlBaseVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/HplsqlLexer.interp" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/HplsqlLexer.interp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/HplsqlLexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/HplsqlLexer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/HplsqlListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/HplsqlListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/HplsqlParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/HplsqlParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/HplsqlVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sqlcompiler/antlr/HplsqlVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/sqlcompiler/kotlin/Reducer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sqlcompiler/kotlin/Reducer.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/sqlcompiler/kotlin/main2.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sqlcompiler/kotlin/main2.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.sql" beforeDir="false" afterPath="$PROJECT_DIR$/test.sql" afterDir="false" />
     </list>
     <list id="cbd17289-3488-4531-bbea-02b9d1cfb778" name="Default Changelist" comment="Hello" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -147,10 +134,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/kotlin/reducer.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
+            <state relative-caret-position="148">
+              <caret line="96" column="35" selection-start-line="96" selection-start-column="35" selection-end-line="96" selection-end-column="35" />
               <folding>
-                <element signature="e#32#86#0" expanded="true" />
+                <element signature="e#32#114#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -746,7 +733,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="436299000" />
+    <option name="totallyTimeSpent" value="436546000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -780,7 +767,7 @@
       <window_info anchor="bottom" id="TODO" order="9" weight="0.32863188" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32863188" />
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="12" weight="0.4047955" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="12" visible="true" weight="0.4047955" />
       <window_info anchor="bottom" id="Event Log" order="13" side_tool="true" weight="0.32863188" />
       <window_info anchor="bottom" id="Tool Output" order="14" weight="0.32722145" />
       <window_info anchor="bottom" id="Messages" order="15" weight="0.40056416" />
@@ -793,10 +780,10 @@
       <window_info anchor="right" id="Theme Preview" order="4" />
       <window_info anchor="right" id="Palette&#9;" order="5" />
       <window_info anchor="right" id="Database" order="6" sideWeight="0.4992948" weight="0.32931727" />
-      <window_info anchor="right" id="Ant Build" order="7" sideWeight="0.50070524" side_tool="true" weight="0.21686748" />
-      <window_info anchor="right" id="Flutter Outline" order="8" weight="0.32931727" />
-      <window_info anchor="right" id="Maven Projects" order="9" sideWeight="0.4992948" weight="0.32931727" />
-      <window_info anchor="right" id="Flutter Inspector" order="10" />
+      <window_info anchor="right" id="Flutter Outline" order="7" weight="0.32931727" />
+      <window_info anchor="right" id="Maven Projects" order="8" sideWeight="0.4992948" weight="0.32931727" />
+      <window_info anchor="right" id="Flutter Inspector" order="9" />
+      <window_info anchor="right" id="Ant Build" order="10" sideWeight="0.50070524" side_tool="true" weight="0.21686748" />
     </layout>
     <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4979253" visible="true" weight="0.1961178" />
@@ -1286,10 +1273,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/sqlcompiler/kotlin/reducer.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
+        <state relative-caret-position="148">
+          <caret line="96" column="35" selection-start-line="96" selection-start-column="35" selection-end-line="96" selection-end-column="35" />
           <folding>
-            <element signature="e#32#86#0" expanded="true" />
+            <element signature="e#32#114#0" expanded="true" />
           </folding>
         </state>
       </provider>
