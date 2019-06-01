@@ -1,7 +1,3 @@
-select person.first_name , address.name
+select person.first_name
 from person
-join personAddress on personAddress.uid = person.id
-
-join address on personAddress.aid = address.id and  address.id > 2
-
-where personAddress.uid < 100
+where person.first_name not LIKE 'Orlando'

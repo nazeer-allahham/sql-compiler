@@ -2,8 +2,8 @@ package com.sqlcompiler.java;
 
 import com.sqlcompiler.Environment;
 import com.sqlcompiler.antlr.HplsqlParser;
-import com.sqlcompiler.kotlin.*;
 import com.sqlcompiler.kotlin.DesiredColumn;
+import com.sqlcompiler.kotlin.*;
 import com.sqlcompiler.stringtemplates.Templates;
 import javafx.util.Pair;
 import javaslang.Tuple3;
@@ -579,6 +579,8 @@ class AbstractSyntaxTree {
         if (first.getDefinitions().size() > 0 && first.getCondition().endsWith(temp)) {
             x = " && " + x;
         }
+        if (op.equalsIgnoreCase("like")) op = "=";
+        if (op.equalsIgnoreCase("notlike")) op = "!=";
         first.setCondition(first.getCondition() + x + " ");
         first.getDefinitions().add(new Condition(x, left, right, op, type));
     }
@@ -824,6 +826,8 @@ class AbstractSyntaxTree {
         }
         if (type.equalsIgnoreCase("")) type = "number";
         String x = "x" + (status.columnsWhereClause.size() + 1);
+        if (op.equalsIgnoreCase("like")) op = "=";
+        if (op.equalsIgnoreCase("notlike")) op = "!=";
         status.whereSelectStmt += " x" + (status.columnsWhereClause.size() + 1) + " ";
         status.columnsWhereClause.add(new Condition(
                 x,
