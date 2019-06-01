@@ -392,7 +392,7 @@ class AbstractSyntaxTree {
                             }
                         }
                         if (okay) {
-                            int coutnParameters = ctx.getChildCount() + 1 / 2;
+                            int coutnParameters = (ctx.getChildCount() + 1) / 2;
                             if (symbolTable.AllSymbol.get(
                                     ctx.parent.getChild(0).getText()).getLocalField().size()
                                     > coutnParameters) {

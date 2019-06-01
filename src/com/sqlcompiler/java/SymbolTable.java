@@ -105,9 +105,12 @@ class SymbolTable {
         try {
             switch (type) {
                 case "int":
+
                     if (value.startsWith("\"") && value.endsWith("\"")) {
                         value = value.replace("\"", "");
                         if (value.contains(".")) {
+                            if (value.matches(".*[a-zA-Z].*"))
+                                throw new Exception();
                             value = value.split("\\.")[0];
                         }
 
